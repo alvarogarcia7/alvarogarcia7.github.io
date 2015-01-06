@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hello World! - The long way through Software Craftsmanship</title>
+  <title>Talk: &#8216;Is TDD Dead? Of Course Not! But What´s All the Fuzz About Then?&#8217; by Emily Bache - The long way through Software Craftsmanship</title>
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="This is the obligatory &ldquo;Hello World!&rdquo; post To get here and create your own blog using octopress, follow the
-instructions below: Install &hellip;">
+  <meta name="description" content="I&rsquo;ve just seen this talk: Is TDD dead? Of course not! But what´s all the fuzz about then? by Emily Bache My notes: deliberate vs accidental &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ instructions below: Install &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2014/12/08/hello-world">
+  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
@@ -68,7 +67,7 @@ instructions below: Install &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Hello World!</h1>
+      <h1 class="entry-title">Talk: &#8216;Is TDD Dead? Of Course Not! But What´s All the Fuzz About Then?&#8217; by Emily Bache</h1>
     
     
       <p class="meta">
@@ -77,47 +76,61 @@ instructions below: Install &hellip;">
 
 
 
-<time class='entry-date' datetime='2014-12-08T17:20:59+01:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:20 pm</span></time>
+<time class='entry-date' datetime='2015-01-06T15:47:47+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:47 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>This is the obligatory &ldquo;Hello World!&rdquo; post</p>
+<div class="entry-content"><p>I&rsquo;ve just seen this talk: <a href="https://www.youtube.com/watch?v=PCEHRFHKZSk">Is TDD dead? Of course not! But what´s all the fuzz about then?</a> by <a href="https://twitter.com/emilybache">Emily Bache</a></p>
 
-<p>To get here and create your own blog using <a href="http://octopress.org/">octopress</a>, follow the
-instructions below:</p>
+<p>My notes:</p>
 
 <ul>
-<li>Install ruby, as explained on the guide
-<a href="http://octopress.org/docs/setup/">here</a></li>
-<li>I&rsquo;ve used Ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-(<code>ruby --version</code>)</li>
-<li>Configure your blog. See
-<a href="http://octopress.org/docs/configuring/">here</a></li>
-<li>Install octopress: <code>rake install</code></li>
-<li>Start the server with <code>rake preview</code>. You should see a basic
-template (CSS) with your blog name, the author, etcetera</li>
-<li>Create your first post.</li>
+<li>deliberate vs accidental learning (around minute 19)</li>
+<li><p>do not be an evangelist for tdd but rather &ldquo;come learn tdd, come at a dojo with us!&rdquo;</p></li>
+<li><p>points to <a href="https://twitter.com/tastapod">Dan North</a>&rsquo;s <a href="www.youtube.com/watch?v=SPj-23z-hQA">talk</a> (at the same foo café)</p></li>
+<li>points to her book - <a href="https://leanpub.com/codingdojohandbook">The Coding Dojo Handbook</a></li>
+<li><p>points to <a href="http://cyber-dojo.org/">cyber dojo</a></p></li>
+<li><p>design is hard whether you do TDD or not</p></li>
+<li><a href="https://twitter.com/dhh">dhh</a>: too much focus on unit test.</li>
 </ul>
 
 
-<pre><code class="`cmd">rake new_post["Hello World!"]
-</code></pre>
+<blockquote><p>I thought we got rid of best practices in agile</p></blockquote>
 
 <ul>
-<li>Refresh the browser and see the new post appear</li>
-<li>Edit the .markdown file in &ldquo;source\_posts&rdquo; using a markup editor</li>
-<li>Execute <code>rake preview</code> to see your first post (this)</li>
-<li>Execute <code>rake setup_github_pages</code> for every computer you want to
-publish from</li>
-<li><p>Execute <code>rake generate &amp;&amp; rake deploy</code>. After a few minutes, you
-should go to
-<username>.github.io to find your new blog in there</p></li>
-<li><p>Happy blogging!</p></li>
+<li>different kinds of advice for each kind of target (eg, based on experience level)</li>
+<li>points to self-testing code (by <a href="https://twitter.com/martinfowler">Martin Fowler</a>)</li>
+<li>problem: the test suite is no longer in sync with the production code</li>
+<li>points to approval testing:
+
+<ul>
+<li>code kata &ldquo;minesweeper&rdquo;</li>
+<li>test data + code produces output data</li>
+<li>I approve the data</li>
+<li>Useful for full features</li>
+<li>Useful for asserting on difficult parts like images</li>
+<li>realistic users to generate tests</li>
+<li>tool to manage these &ldquo;approval tests&rdquo;. Easy way of managing tests cases</li>
+<li><a href="http://texttest.org">TextTest</a> is one of these tools</li>
+</ul>
+</li>
 </ul>
 
+
+<p>Her conclusions:</p>
+
+<ul>
+<li>Watch out the fundamentalism</li>
+<li>TDD might take you to too many layers of indirection</li>
+<li>The share of each test (end to end, integration, unit) depends on each project / part</li>
+<li>Many TDD pieces of advice is directed to novices. When you&rsquo;re not, you should know when to stop listening</li>
+</ul>
+
+
+<p>PS: I&rsquo;ve first seen this video in <a href="http://garajeando.blogspot.com/2015/01/interesting-talk-is-tdd-dead-of-course.html">garajeando</a></p>
 </div>
 
 
@@ -133,12 +146,12 @@ should go to
 
 
 
-<time class='entry-date' datetime='2014-12-08T17:20:59+01:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:20 pm</span></time>
+<time class='entry-date' datetime='2015-01-06T15:47:47+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:47 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/hello-world/'>hello-world</a>
+    <a class='category' href='/blog/categories/design/'>design</a>, <a class='category' href='/blog/categories/dhh/'>dhh</a>, <a class='category' href='/blog/categories/emily-bache/'>emily-bache</a>, <a class='category' href='/blog/categories/notes/'>notes</a>, <a class='category' href='/blog/categories/talk/'>talk</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>, <a class='category' href='/blog/categories/video/'>video</a>
   
 </span>
 
@@ -147,7 +160,7 @@ should go to
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2014/12/08/hello-world/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2014/12/08/hello-world/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache/" >Tweet</a>
   
   
   
@@ -156,8 +169,8 @@ should go to
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/" title="Previous Post: Should we start the TDD cycle on refactor?">&laquo; Should we start the TDD cycle on refactor?</a>
       
-        <a class="basic-alignment right" href="/blog/2014/12/08/cas2014-wrap-up/" title="Next Post: CAS2014 Wrap up">CAS2014 Wrap up &raquo;</a>
       
     </p>
   </footer>
@@ -252,8 +265,8 @@ should go to
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2014/12/08/hello-world/';
-        var disqus_url = 'http://alvarogarcia7.github.io/blog/2014/12/08/hello-world/';
+        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache/';
+        var disqus_url = 'http://alvarogarcia7.github.io/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache/';
         var disqus_script = 'embed.js';
       
     (function () {
