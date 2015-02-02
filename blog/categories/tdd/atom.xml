@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tdd | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-01-27T22:23:38+01:00</updated>
+  <updated>2015-02-02T21:47:00+01:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Book: Diseño Ágil Con TDD (Spanish)]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish/"/>
+    <updated>2015-02-02T21:32:21+01:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve read this book <a href="http://www.carlosble.com/libro-tdd/">Diseño Ágil con TDD</a> (Spanish) by
+<a href="https://twitter.com/carlosble">Carlos Blé</a> from cover to cover,
+when previously I had only read the theoretical parts (Part I and Chapter 12 in Part II).</p>
+
+<p>It&rsquo;s worth noting that this is the first TDD book in Spanish (I haven&rsquo;t found any book in Spanish predating this one - also backed by the author; published in January 2010) and, as such, there are some translations that could be improved. Not that it makes it more difficult to read. Sometimes it&rsquo;s a good idea to roughly translate concepts into English and then you&rsquo;ll understand the point.</p>
+
+<h2>First part</h2>
+
+<p>The first part is very interesting, a theoretical introduction into TDD, ATDD and Agile methodologies. Points to some good books as a reference (e.g., Growing Object Oriented Software, Guided by Tests; Working Effectively with Legacy Code; Refactoring; etc)</p>
+
+<p>He explains the TDD algorithm (chapter 2) and the ATDD one (chapter 3). These two are maybe the two most important ones on the book. Should you read only a part of this book, I&rsquo;d recommend to read the motivational intro (the fable on the preface) and these two.</p>
+
+<p>He gives excellent pieces of advice who, correctly applied, would set the basis for good software development, such as SOLID, Object Oriented Design (OOD), Inversion of Control (IoC), etc. (See chapter 7, &ldquo;Diseño orientado a objetos&rdquo;).</p>
+
+<p>There&rsquo;s a chapter (number 6) on &ldquo;Mocks and other test doubles&rdquo; (translation is mine)</p>
+
+<h2>Second part</h2>
+
+<p>The second part, as many other books where the source code is printed, was dense for me. Other books, such as <a href="http://www.growing-object-oriented-software.com/">GOOS</a>, show differences in content with bold typeface, to ease the reader&rsquo;s task.  In my opinion, it would be useful to color the diffs, show them on the left and right, or even show the raw diff (e.g., <code>+++</code> <code>---</code>). I&rsquo;m envisioning a typing program as LaTeX where you could specify a commit with its parent and a range of lines to output.</p>
+
+<p>The second part is written in C# and python, to show a TDD session with him. Warning: it&rsquo;s much better in person than reading his book!</p>
+
+<p>The chapter 12 is a set of antipatterns you might find after starting with TDD. Even after you keep practicing TDD for a while, you will not get rid of these smells. Highly recommended.</p>
+
+<p>There&rsquo;s also an appendix on Continuous Integration, although there are better books for this.</p>
+
+<h2>Conclusion</h2>
+
+<p>Recommend this book if you are starting with TDD, or you are more advanced but it&rsquo;s difficult for you to read in English.</p>
+
+<p>Always good as a refresher to read the theoretical part and the antipatterns</p>
+
+<p>PS: This book is free to read, published under a Creative Commons license (don&rsquo;t know exactly which one)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bank Kata in Java]]></title>
@@ -84,62 +125,6 @@
 <p>Source: <a href="http://craftsmanship.sv.cmu.edu/katas/prime-factors-kata">http://craftsmanship.sv.cmu.edu/katas/prime-factors-kata</a></p>
 
 <p>Source: <a href="http://butunclebob.com/ArticleS.UncleBob.ThePrimeFactorsKata">http://butunclebob.com/ArticleS.UncleBob.ThePrimeFactorsKata</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Talk: 'Is TDD Dead? Of Course Not! But What´s All the Fuzz About Then?' by Emily Bache]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache/"/>
-    <updated>2015-01-06T15:47:47+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve just seen this talk: <a href="https://www.youtube.com/watch?v=PCEHRFHKZSk">Is TDD dead? Of course not! But what´s all the fuzz about then?</a> by <a href="https://twitter.com/emilybache">Emily Bache</a></p>
-
-<h3>My notes</h3>
-
-<ul>
-<li>deliberate vs accidental learning (around minute 19)</li>
-<li><p>do not be an evangelist for tdd but rather &ldquo;come learn tdd, come at a dojo with us!&rdquo;</p></li>
-<li><p>points to <a href="https://twitter.com/tastapod">Dan North</a>&rsquo;s <a href="www.youtube.com/watch?v=SPj-23z-hQA">talk</a> (at the same foo café)</p></li>
-<li>points to her book - <a href="https://leanpub.com/codingdojohandbook">The Coding Dojo Handbook</a></li>
-<li><p>points to <a href="http://cyber-dojo.org/">cyber dojo</a></p></li>
-<li><p>design is hard whether you do TDD or not</p></li>
-<li><a href="https://twitter.com/dhh">dhh</a>: too much focus on unit test.</li>
-</ul>
-
-
-<blockquote><p>I thought we got rid of best practices in agile</p></blockquote>
-
-<ul>
-<li>different kinds of advice for each kind of target (eg, based on experience level)</li>
-<li>points to self-testing code (by <a href="https://twitter.com/martinfowler">Martin Fowler</a>)</li>
-<li>problem: the test suite is no longer in sync with the production code</li>
-<li>points to approval testing:
-
-<ul>
-<li>code kata &ldquo;minesweeper&rdquo;</li>
-<li>test data + code produces output data</li>
-<li>I approve the data</li>
-<li>Useful for full features</li>
-<li>Useful for asserting on difficult parts like images</li>
-<li>realistic users to generate tests</li>
-<li>tool to manage these &ldquo;approval tests&rdquo;. Easy way of managing tests cases</li>
-<li><a href="http://texttest.org">TextTest</a> is one of these tools</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>Her conclusions</h3>
-
-<ul>
-<li>Watch out the fundamentalism</li>
-<li>TDD might take you to too many layers of indirection</li>
-<li>The share of each test (end to end, integration, unit) depends on each project / part</li>
-<li>Many TDD pieces of advice is directed to novices. When you&rsquo;re not, you should know when to stop listening</li>
-</ul>
-
-
-<p>PS: I&rsquo;ve first seen this video in <a href="http://garajeando.blogspot.com/2015/01/interesting-talk-is-tdd-dead-of-course.html">garajeando</a></p>
 ]]></content>
   </entry>
   
