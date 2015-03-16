@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Yesterday we organized a TDD meetup at the FIB - Barcelona School of Informatics UPC, within Barcelona Software Craftsmanship sponsored by the Junior &hellip;">
+  <meta name="description" content="Today we&rsquo;ve discussed about code reviews on this open space Notes These are my notes, in no particular order: reduce information silos all &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/16/open-space-code-reviews/">Open Space: Code Reviews</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-16T22:44:42+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today we&rsquo;ve discussed about code reviews on <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/events/220293683/">this open space</a></p>
+
+<h2>Notes</h2>
+
+<p>These are my notes, in no particular order:</p>
+
+<ul>
+<li>reduce information silos all around the company, as everyone [technical] can participate in these events</li>
+<li>raise the &ldquo;just arrived&rdquo; people&rsquo;s knowledge [Difficult to hit the ground up and running, but these code review sessions can help]</li>
+<li>invest one person as &lsquo;sheriff&rsquo; for the sprint: they will take care of static analysis tools (such as sonar) and continuous integration (CI; such as jenkins). They will make sure others follow the working agreements</li>
+<li>In the academic environment, some teams do share their patches via mailing lists and this makes it much slower to adapt and review changes [As compared to an on-line sharing system - like web-based interfaces to distributed version control systems] As this team doesn&rsquo;t have a CI tool, they must test it / try it manually before reviewing the code.</li>
+<li>Pair programming does not remove the need for code review [This has been surfaced twice]</li>
+<li>Your work is not more important than your team members&#8217; one. [Related to not having time to code review]</li>
+<li>Do code reviews include architecture? [We&rsquo;ve agreed that the architecture to some degree should be discussed before code reviews]</li>
+<li>&ldquo;Troll review&rdquo;</li>
+<li>Anyone can veto pull requests [By opening a question; do not allow for pull requests to be closed with open questions]</li>
+<li>A 15-minute time slot everyday to code review [As code hygiene; Done right after lunch,  breakfast or just before leaving, when you&rsquo;re tired]</li>
+<li>Code review tasks have higher priority than other tasks [Do not take other tasks if there are code reviews to do]</li>
+<li>Code reviews put a lot of pressure so people learn and the knowledge level equalizes across the team</li>
+</ul>
+
+
+<h2>Conclusions</h2>
+
+<p> My conclusions, even though some of them were not shared by everyone:</p>
+
+<ul>
+<li>Most of the people approve of code review practices: either they are doing them or are trying to apply them at their clients. (Warning: this was a code review meetup, so there&rsquo;s a bias: people not interested in them won&rsquo;t come). No one was against doing them.</li>
+<li>Code reviews have a cost, although it is beneficial to do them</li>
+<li>Should your teammates not want to participate in the code review after agreeing on doing them, appeal to their professionalism / accountability, then to their time (stated before), then troll them: after a few (healthy) trolling code review sessions, people will feel more comfortable reviewing and being reviewed. Special mention to Miguel who coined (?)<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> the term: troll review.</li>
+<li>Great way of equalizing the (technical) knowledge level within the team</li>
+<li>Great way of reduce information silos across the whole company</li>
+<li>They can be fun if you do them properly</li>
+<li>The need for code reviews do not disappear when pair programming: as long as you have a personal attachment to the code, you might not see its defects.</li>
+</ul>
+
+
+<h2>Your own</h2>
+
+<p>Should you have any conclusions to share, please add a pull request to this <a href="https://github.com/alvarogarcia7/blog_source">repository</a> or do it as a comment.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>after searching some ten minutes on the internet, there are only a couple of questions on meta.codereview stackoverflow, but not related to this.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -923,121 +999,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/15/open-discussion-behaviour-driven-development/">Open Discussion: Behaviour-Driven Development</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-15T02:30:38+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:30 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on requirements, via automatically tested specifications. For more information, see the <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">wikipedia&rsquo;s article on the subject</a></p>
-
-<p>I forgot to mention that this is the perfect start to TDD, as this is usually called the double-loop TDD. See a post on it on <a href="http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/">coding is like cooking</a></p>
-
-<p>In this double-loop TDD, the first thing is to create a BDD scenario, run it (red-1), create a unit test that reflects this red (red-2), pass it, refactor; go to red-1 as many times as you need, doing TDD cycles. When you think the feature is done, execute the BDD scenarios and go to green (outer layer) and refactor.</p>
-
-<h2>(Our) Common setting</h2>
-
-<p>Going back to BDD, a common scenario would be the following:</p>
-
-<p>Layers of software:</p>
-
-<ul>
-<li>Domain-Specific Language (DSL). See <a href="http://en.wikipedia.org/wiki/Domain-specific_language">wikipedia&rsquo;s article</a></li>
-<li>Test adapter: an interpreter for this DSL</li>
-<li>Test software: test fixtures, methods, structures to arrange, act, and assert on the sut</li>
-<li>Production software (system under test - SUT): thing being tested</li>
-</ul>
-
-
-<h2>A BDD test vs A TDD test</h2>
-
-<p>Let&rsquo;s imagine a BDD test for a <a href="http://en.wikipedia.org/wiki/Linked_list">linked list</a>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Given I have an empty list
-</span><span class='line'>When I add an element
-</span><span class='line'>Then I have an element on the list</span></code></pre></td></tr></table></div></figure>
-
-
-<p>now, the same test in TDD [using java, junit 4, hamcrest]</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add_an_element_to_an_empty_list</span><span class="o">(){</span>
-</span><span class='line'>  <span class="n">MyLinkedList</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MyLinkedList</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;something&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">linkedList</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In some aspects, a BDD and a TDD test are similar:</p>
-
-<ul>
-<li>the given is the arrange, i.e., the prerequisite</li>
-<li>the when is the act, i.e., the command</li>
-<li>the then is the assertion, i.e., the postcondition</li>
-</ul>
-
-
-<p>(for more information on this, see <a href="http://en.wikipedia.org/wiki/Hoare_logic">Hoare&rsquo;s triple</a>)</p>
-
-<p>But in others, they are not. In BDD you do not specify the APIs, methods, etc. You only care about behavior.</p>
-
-<h2>Conclusion</h2>
-
-<p>Benefits:</p>
-
-<ul>
-<li>everyone might involved in the specification by example workshops (source: <a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154">ATDD by example</a>)</li>
-<li>live specifications. managers can now understand the real state</li>
-<li><a href="http://en.wikipedia.org/wiki/Regression_testing">regression tests</a> are much cheaper (from automation)</li>
-</ul>
-
-
-<p>Gotchas:</p>
-
-<ul>
-<li>Test only the happy paths</li>
-<li>This has a cost, do not overdo it</li>
-<li>Doesn&rsquo;t remove manual tests</li>
-<li>How do you manage multiple scenarios</li>
-<li>How fast should it be?</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1053,6 +1014,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/16/open-space-code-reviews/">Open Space: Code Reviews</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/16/tdd-meetup-retrospective/">TDD Meetup Retrospective</a>
       </li>
     
@@ -1066,10 +1031,6 @@
     
       <li class="post">
         <a href="/blog/2015/03/03/mob-programming-string-calculator-kata/">Mob Programming String Calculator Kata</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/24/the-purple-wire/">The Purple Wire</a>
       </li>
     
   </ul>
