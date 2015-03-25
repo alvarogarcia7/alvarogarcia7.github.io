@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on &hellip;">
+  <meta name="description" content="I&rsquo;m currently reading the Apprenticeship patterns book, out of order (explained here: TODO). I&rsquo;m writing down the read chapters in a text &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,344 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/18/the-use-of-power-tools/">The Use of Power Tools</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-18T23:25:25+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:25 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;m currently reading the Apprenticeship patterns book, out of order (explained here: TODO).</p>
+
+<p>I&rsquo;m writing down the read chapters in a text file, to measure progress and also be able to backtrack if necessary. This also makes reading the book a &ldquo;choose your own adventure&rdquo;</p>
+
+<p>After reading approximately half the chapters, the navigation wasn&rsquo;t so easy using only the &ldquo;see also&rdquo; part. So I decided to break free from that constraint and start reading other chapters. But how do you know which chapters you have left to read? Knowing the whole set (<code>all</code>) and the read set (<code>read</code>) this is just the <code>all - read</code>.</p>
+
+<p>Coming to a more practical way, how to know this is an automated (non-manual) way? There are <code>m</code> in <code>read</code> and n in <code>all</code>, where m &lt;= n.</p>
+
+<p>The simplest approach would be:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for each current in read:
+</span><span class='line'>  remove current from all</span></code></pre></td></tr></table></div></figure>
+
+
+<p>as read is is no particular order, that would yield some <code>O(m*n)</code>, worst case scenario (<code>m==n</code>), <code>O(n^2)</code>.</p>
+
+<p>That is quite expensive, especially if you have to do it manually</p>
+
+<p>If we use the same algorithm but sort the <code>read</code> set (no longer a set, as sets have no order). Also, converting it to a <code>O(1)</code> lookup table (e.g., a map), that would yield some <code>O(n log2 n + m)</code> that is already better. Taking into account that the sorting can be automated by the computer, it would yield a &ldquo;manual O notation cost&rdquo; of <code>O(1 + m)</code>. So, relative to the amount of chapters you have read.</p>
+
+<p>But we can even do better in terms of this &ldquo;manual big o notation&rdquo;:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>read &lt;- sort read into a map ; cost O(1)
+</span><span class='line'>all &lt;- sort all into a map ; cost O(1)
+</span><span class='line'>
+</span><span class='line'>unread &lt;- all - intersection(all, read) ; cost O(1)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And this is where the power tools come into place: if we use <code>comm</code> or <code>diff</code>, the computer will create  the <code>unread</code> set for us, in &ldquo;manual&rdquo; cost of <code>O(1)</code></p>
+
+<h2>Example using vim, sort and diff</h2>
+
+<p>This is the <code>read</code> set (for the moment):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>the long road
+</span><span class='line'>draw your own map
+</span><span class='line'>find mentors
+</span><span class='line'>the deep end
+</span><span class='line'>create feedback loops
+</span><span class='line'>the white belt
+</span><span class='line'>practice, practice, practice
+</span><span class='line'>concrete skills
+</span><span class='line'>your first language
+</span><span class='line'>use the source
+</span><span class='line'>reflect as you work
+</span><span class='line'>record what you learn
+</span><span class='line'>kindred spirits
+</span><span class='line'>nurture your passion
+</span><span class='line'>study the classics
+</span><span class='line'>expose your ignorance
+</span><span class='line'>dig deeper
+</span><span class='line'>be the worst
+</span><span class='line'>rubbing elbows
+</span><span class='line'>unleash your enthusiasm</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and this is the all set (copy-paste from the book):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>INTRODUCTION 1 What Is Software Craftsmanship? 3 What Is Apprenticeship? 8 What Is an Apprenticeship Pattern? 9 Where Did the Patterns Come From? 9 Where Do We Go from Here? 10
+</span><span class='line'>2 EMPTYING THE CUP 11 Your First Language 13 The White Belt 18 Unleash Your Enthusiasm 22 Concrete Skills 24 Expose Your Ignorance 25 Confront Your Ignorance 28 The Deep End 30 Retreat into Competence 32 Wrapping Up 34
+</span><span class='line'>3 WALKING THE LONG ROAD 37 The Long Road 38 Craft over Art 40 Sustainable Motivations 43 Nurture Your Passion 45 Draw Your Own Map 47 Use Your Title 50 Stay in the Trenches 52 A Different Road 53 Wrapping Up 55
+</span><span class='line'>4 ACCURATE SELF-ASSESSMENT 57 Be the Worst 58 Find Mentors 61 Kindred Spirits 64 Rubbing Elbows 66 Sweep the Floor 68 Wrapping Up 71
+</span><span class='line'>5 PERPETUAL LEARNING 73 Expand Your Bandwidth 74 Practice, Practice, Practice 77 Breakable Toys 79 Use the Source 82 Reflect As You Work 85 Record What You Learn 87 Share What You Learn 89 Create Feedback Loops 91 Learn How You Fail 94 Wrapping Up 95
+</span><span class='line'>6 CONSTRUCT YOUR CURRICULUM 99 Reading List 100 Read Constantly 102 Study the Classics 104 Dig Deeper 105 Familiar Tools 109 Wrapping Up 111</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first line is not interesting to our purposes, so delete it with:</p>
+
+<p>go to first line (<code>1G</code>), then delete (<code>dd</code>)</p>
+
+<p>After a quick inspection, there&rsquo;s a number at the end of the desired line, so replace it with newline:</p>
+
+<p><code>%s/\d\+/\r/g</code> (a snippet below):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>EMPTYING THE CUP 
+</span><span class='line'> Your First Language
+</span><span class='line'> The White Belt 
+</span><span class='line'> Unleash Your Enthusiasm 
+</span><span class='line'> Concrete Skills 
+</span><span class='line'> Expose Your Ignorance
+</span><span class='line'> Confront Your Ignorance 
+</span><span class='line'> The Deep End 
+</span><span class='line'> Retreat into Competence 
+</span><span class='line'> Wrapping Up 
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'> WALKING THE LONG ROAD </span></code></pre></td></tr></table></div></figure>
+
+
+<p>The title lines are all uppercase, so delete them with <code>:%g/^\s*\u\u/d</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Your First Language 
+</span><span class='line'> The White Belt 
+</span><span class='line'> Unleash Your Enthusiasm
+</span><span class='line'> Concrete Skills 
+</span><span class='line'> Expose Your Ignorance
+</span><span class='line'> Confront Your Ignorance
+</span><span class='line'> The Deep End
+</span><span class='line'> Retreat into Competence
+</span><span class='line'> Wrapping Up 
+</span><span class='line'> 
+</span><span class='line'> 
+</span><span class='line'> The Long Road </span></code></pre></td></tr></table></div></figure>
+
+
+<p>explanation:</p>
+
+<ul>
+<li><code>:</code> : command</li>
+<li><code>%</code> : in all the file</li>
+<li><code>g</code> : do (I remember it as &lsquo;go&rsquo;)</li>
+<li><code>^</code> : starting at the beginning</li>
+<li><code>\s*</code>: whitsepace, as much a possible</li>
+<li><code>\u\u</code>: exactly to uppercase letters. Can also be expressed as <code>\u\{2}</code></li>
+<li><code>d</code> : delete</li>
+</ul>
+
+
+<p>for more information on vim&rsquo;s regex, go <a href="http://vimregex.com/">here</a></p>
+
+<p>but there are empty lines. Delete them with: <code>%g/^$/d</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Your First Language
+</span><span class='line'> The White Belt
+</span><span class='line'> Unleash Your Enthusiasm
+</span><span class='line'> Concrete Skills
+</span><span class='line'> Expose Your Ignorance 
+</span><span class='line'> Confront Your Ignorance
+</span><span class='line'> The Deep End 
+</span><span class='line'> Retreat into Competence
+</span><span class='line'> The Long Road</span></code></pre></td></tr></table></div></figure>
+
+
+<p>there is a space at the beginning of the line, delete it with <code>:%s/^ //</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Your First Language 
+</span><span class='line'>The White Belt 
+</span><span class='line'>Unleash Your Enthusiasm 
+</span><span class='line'>Concrete Skills 
+</span><span class='line'>Expose Your Ignorance  
+</span><span class='line'>Confront Your Ignorance 
+</span><span class='line'>The Deep End  
+</span><span class='line'>Retreat into Competence 
+</span><span class='line'>Wrapping Up  
+</span><span class='line'>The Long Road  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>there are upper and lowercase letters. You could find a way of doing it with vi, but I prefer something that I can remember: save the document, then process it with <code>awk</code> and <code>sort</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat all.txt <span class="p">|</span> awk <span class="s1">&#39;{print tolower($0)&#39;</span><span class="o">}</span><span class="p">|</span> sort &gt; all_sorted.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(snippet):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>a different road
+</span><span class='line'>be the worst
+</span><span class='line'>breakable toys
+</span><span class='line'>concrete skills
+</span><span class='line'>confront your ignorance
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If needed, sort and downcase the read.txt too.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat read.txt <span class="p">|</span> awk <span class="s1">&#39;{print tolower($0)&#39;</span><span class="o">}</span><span class="p">|</span> sort &gt; read_sorted.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tried using <code>comm</code>, but it wasn&rsquo;t so useful (because of whitespace).</p>
+
+<p>Tried <code>diff</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>diff read_sorted.txt all_sorted.txt  -bBw &gt; to_read.txt
+</span><span class='line'>
+</span><span class='line'>0a1
+</span><span class='line'>&gt; a different road
+</span><span class='line'>1a3
+</span><span class='line'>&gt; breakable toys
+</span><span class='line'>2a5,6
+</span><span class='line'>&gt; confront your ignorance
+</span><span class='line'>&gt; craft over art
+</span><span class='line'>5a10
+</span><span class='line'>&gt; expand your bandwidth
+</span><span class='line'>6a12
+</span><span class='line'>&gt; familiar tools
+</span><span class='line'>8a15
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to know which are the remain chapters:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat to_read.txt <span class="p">|</span> grep <span class="s2">&quot;&gt;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to count the number of remaining chapters:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat to_read.txt <span class="p">|</span> grep <span class="s2">&quot;&gt;&quot;</span> <span class="p">|</span> wc -l
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The lesson learned here is to master your tools. This would have cost me a few minutes if done manually as the list was short, too much time if long (>1000 lines).</p>
+
+<p>On a funny note, it has taken me approximately 2 min to do this processing but ~45 minutes to write this blog post. So I don&rsquo;t recommend you write as many posts as processings you do.</p>
+
+<p>To quote Apprenticeship patterns, <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch03.html#solution_id16">A different road</a>:</p>
+
+<blockquote><p>If you walk away from software development, you will find that the habit of rigorous thinking and automating tasks involving large volumes of data will still be useful wherever you go</p>
+
+<p>D Hoover, A Oshineye</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -610,47 +948,6 @@ through the book following the &ldquo;see also&rdquo;</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/12/gmaur-code-jam/">GMaur Code Jam 2015: 01 - Mini-Power Swapper</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-12T04:25:22+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:25 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last year we started the program 12 months, 12 katas (as inspired by this <a href="https://github.com/12meses12katas">repository</a>). This year we want to propose something different: an asynchronous code jam</p>
-
-<h2>New problem: Mini-Power Swapper</h2>
-
-<p>This post belongs to a series: <a href="/blog/categories/code-jam">code-jam</a></p>
-
-<p>Each month (or so) we at GMaur will publish a new problem (and announce it on <a href="https://twitter.com/gmaurcom">twitter</a>) and post a solution to the last problem.</p>
-
-<p>This month, the <a href="https://github.com/GMaur/code-jam-2015/tree/master/problem-01">Mini-Power Swapper</a></p>
-
-<p>You can fork the repo, commit there and send a pull request. We&rsquo;ll review the code (if you want) and merge the solution to a branch in &ldquo;solutions/&rdquo;.</p>
-
-<p>Happy katas and happy code jamming!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -668,6 +965,10 @@ through the book following the &ldquo;see also&rdquo;</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/25/meetup-cross-pollination/">Meetup Cross-pollination</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/16/open-space-code-reviews/">Open Space: Code Reviews</a>
       </li>
     
@@ -681,10 +982,6 @@ through the book following the &ldquo;see also&rdquo;</p>
     
       <li class="post">
         <a href="/blog/2015/03/05/kata-mars-rover-in-clojure/">Kata: Mars Rover in Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/03/mob-programming-string-calculator-kata/">Mob Programming String Calculator Kata</a>
       </li>
     
   </ul>
