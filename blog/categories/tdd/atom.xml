@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tdd | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-04-12T20:50:40+02:00</updated>
+  <updated>2015-04-14T00:26:48+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Redesign as a New TDD Phase]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/"/>
+    <updated>2015-04-13T22:00:45+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase</id>
+    <content type="html"><![CDATA[<p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
+
+<h2>Concept</h2>
+
+<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, it is a phase that might appear after refactor.</p>
+
+<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
+
+<h2>How I do redesign</h2>
+
+<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
+
+<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
+
+<h2>Other thoughts</h2>
+
+<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
+
+<blockquote><p>to change the design of (something)</p></blockquote>
+
+<p>or</p>
+
+<blockquote><p>to revise in appearance, function, or content</p></blockquote>
+
+<p>an example:</p>
+
+<blockquote><p>The book&rsquo;s cover has been redesigned for the new edition.</p></blockquote>
+
+<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
+
+<blockquote><p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p></blockquote>
+
+<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
+
+<h2>Other references</h2>
+
+<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
+
+<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
+
+<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Experience Report: Test-driven Development Intensive, by Jason Gorman]]></title>
@@ -414,47 +473,6 @@ A: Testing. Test for the purpose of testing, not TDD
 <p>For now, only the <code>add</code>, <code>contains</code> and <code>size</code> methods are implemented.</p>
 
 <p>If you have any comments or code review, please let me know</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Book: Diseño Ágil Con TDD (Spanish)]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish/"/>
-    <updated>2015-02-02T21:32:21+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve read this book <a href="http://www.carlosble.com/libro-tdd/">Diseño Ágil con TDD</a> (Spanish) by
-<a href="https://twitter.com/carlosble">Carlos Blé</a> from cover to cover,
-when previously I had only read the theoretical parts (Part I and Chapter 12 in Part II).</p>
-
-<p>It&rsquo;s worth noting that this is the first TDD book in Spanish (I haven&rsquo;t found any book in Spanish predating this one - also backed by the author; published in January 2010) and, as such, there are some translations that could be improved. Not that it makes it more difficult to read. Sometimes it&rsquo;s a good idea to roughly translate concepts into English and then you&rsquo;ll understand the point.</p>
-
-<h2>First part</h2>
-
-<p>The first part is very interesting, a theoretical introduction into TDD, ATDD and Agile methodologies. Points to some good books as a reference (e.g., Growing Object Oriented Software, Guided by Tests; Working Effectively with Legacy Code; Refactoring; etc)</p>
-
-<p>He explains the TDD algorithm (chapter 2) and the ATDD one (chapter 3). These two are maybe the two most important ones on the book. Should you read only a part of this book, I&rsquo;d recommend to read the motivational intro (the fable on the preface) and these two.</p>
-
-<p>He gives excellent pieces of advice who, correctly applied, would set the basis for good software development, such as SOLID, Object Oriented Design (OOD), Inversion of Control (IoC), etc. (See chapter 7, &ldquo;Diseño orientado a objetos&rdquo;).</p>
-
-<p>There&rsquo;s a chapter (number 6) on &ldquo;Mocks and other test doubles&rdquo; (translation is mine)</p>
-
-<h2>Second part</h2>
-
-<p>The second part, as many other books where the source code is printed, was dense for me. Other books, such as <a href="http://www.growing-object-oriented-software.com/">GOOS</a>, show differences in content with bold typeface, to ease the reader&rsquo;s task.  In my opinion, it would be useful to color the diffs, show them on the left and right, or even show the raw diff (e.g., <code>+++</code> <code>---</code>). I&rsquo;m envisioning a typing program as LaTeX where you could specify a commit with its parent and a range of lines to output.</p>
-
-<p>The second part is written in C# and python, to show a TDD session with him. Warning: it&rsquo;s much better in person than reading his book!</p>
-
-<p>The chapter 12 is a set of antipatterns you might find after starting with TDD. Even after you keep practicing TDD for a while, you will not get rid of these smells. Highly recommended.</p>
-
-<p>There&rsquo;s also an appendix on Continuous Integration, although there are better books for this.</p>
-
-<h2>Conclusion</h2>
-
-<p>Recommend this book if you are starting with TDD, or you are more advanced but it&rsquo;s difficult for you to read in English.</p>
-
-<p>Always good as a refresher to read the theoretical part and the antipatterns</p>
-
-<p>PS: This book is free to read, published under a Creative Commons license (don&rsquo;t know exactly which one)</p>
 ]]></content>
   </entry>
   
