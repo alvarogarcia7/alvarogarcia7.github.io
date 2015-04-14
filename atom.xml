@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-04-14T00:26:48+02:00</updated>
+  <updated>2015-04-14T23:53:18+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Inserting Clojure Code in Octopress]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress/"/>
+    <updated>2015-04-14T23:48:27+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress</id>
+    <content type="html"><![CDATA[<p>Inserting this code in the blog:</p>
+
+<pre><code>```clojure
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+```
+</code></pre>
+
+<p>the octopress processor throws the error:</p>
+
+<pre><code>Error: Pygments can't parse unknown language: clojure
+Error: Run jekyll build --trace for more information.
+</code></pre>
+
+<p>A solution would be to include it as lisp code:</p>
+
+<pre><code>```lisp
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+```
+</code></pre>
+
+<p>this is an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Destructuring as a Refactor in Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/"/>
+    <updated>2015-04-14T23:36:23+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure</id>
+    <content type="html"><![CDATA[<p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
+
+<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user=&gt; (def point {:x 5 :y 7})
+</span><span class='line'>#'user/point
+</span><span class='line'>
+</span><span class='line'>(let [{:keys [x y] :as the-point} point]
+</span><span class='line'>         (println "x:" x "y:" y "point:" the-point))
+</span><span class='line'>
+</span><span class='line'>x: 5 y: 7 point: {:x 5, :y 7}</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
+
+<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
+
+<p>This has been used for a method like this one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this has been refactored to this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Redesign as a New TDD Phase]]></title>
@@ -1379,92 +1484,6 @@
 <li>Quick and dirty proof of concept do not mix well with code reviews</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pairing With Junior Developers]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/02/03/pairing-with-junior-developers/"/>
-    <updated>2015-02-03T23:40:21+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/02/03/pairing-with-junior-developers</id>
-    <content type="html"><![CDATA[<p>After reading <a href="https://devmynd.com/blog/2015-1-pairing-with-junior-developers">this blog post</a>, here are my thoughts:</p>
-
-<p><strong>WARNING</strong>: the post was about how to do it, these reflections are on a more philosophical level</p>
-
-<p>This is a controversial topic, as:</p>
-
-<ul>
-<li>You cannot discern how much or little the other person knows more than you. I cannot find the reference anymore, but it was a to the tune of &ldquo;once the other person&rsquo;s level is higher than yours, you cannot know how much&rdquo;</li>
-<li>There are different knowledge areas. Yours and theirs might overlap on some areas, but not completely. So they may be experts on an area that is not useful to the technology you&rsquo;re currently using.</li>
-<li>Different people have different passions and motivators.</li>
-</ul>
-
-
-<p>When and where are you a junior and a senior?</p>
-
-<ul>
-<li>Does it depend on each job?</li>
-<li>Is it on each product you work?</li>
-<li>Is it on each team?</li>
-</ul>
-
-
-<blockquote><p>&ldquo;when you join a new project you are starting from square one&rdquo;</p>
-
-<p><cite> D. Hoover, A. Oshineye </cite> in the chapter <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch04.html#solution_id21">Sweep the floor</a>, <a href="http://chimera.labs.oreilly.com/books/1234000001813/index.html">Apprenticeship patterns</a></p></blockquote>
-
-<p>Related to the amount of senior people, is there only one senior per team?</p>
-
-<ul>
-<li>Can everybody be a senior? If we assert this is true, what about &ldquo;if everything matters, nothing matters&rdquo;. Does that mean that everyone is senior or there are different levels of seniority and we call &ldquo;the senior&rdquo; the one on the top of the list?</li>
-<li>Who choses the senior within the team? Is it self-organized, self-chosen? Do the people chose one? Is a shared responsibility, as each one masters a (possibly different) subject?</li>
-</ul>
-
-
-<p>Food for thought.</p>
-
-<p>What do you think about it?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Book: Diseño Ágil Con TDD (Spanish)]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish/"/>
-    <updated>2015-02-02T21:32:21+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve read this book <a href="http://www.carlosble.com/libro-tdd/">Diseño Ágil con TDD</a> (Spanish) by
-<a href="https://twitter.com/carlosble">Carlos Blé</a> from cover to cover,
-when previously I had only read the theoretical parts (Part I and Chapter 12 in Part II).</p>
-
-<p>It&rsquo;s worth noting that this is the first TDD book in Spanish (I haven&rsquo;t found any book in Spanish predating this one - also backed by the author; published in January 2010) and, as such, there are some translations that could be improved. Not that it makes it more difficult to read. Sometimes it&rsquo;s a good idea to roughly translate concepts into English and then you&rsquo;ll understand the point.</p>
-
-<h2>First part</h2>
-
-<p>The first part is very interesting, a theoretical introduction into TDD, ATDD and Agile methodologies. Points to some good books as a reference (e.g., Growing Object Oriented Software, Guided by Tests; Working Effectively with Legacy Code; Refactoring; etc)</p>
-
-<p>He explains the TDD algorithm (chapter 2) and the ATDD one (chapter 3). These two are maybe the two most important ones on the book. Should you read only a part of this book, I&rsquo;d recommend to read the motivational intro (the fable on the preface) and these two.</p>
-
-<p>He gives excellent pieces of advice who, correctly applied, would set the basis for good software development, such as SOLID, Object Oriented Design (OOD), Inversion of Control (IoC), etc. (See chapter 7, &ldquo;Diseño orientado a objetos&rdquo;).</p>
-
-<p>There&rsquo;s a chapter (number 6) on &ldquo;Mocks and other test doubles&rdquo; (translation is mine)</p>
-
-<h2>Second part</h2>
-
-<p>The second part, as many other books where the source code is printed, was dense for me. Other books, such as <a href="http://www.growing-object-oriented-software.com/">GOOS</a>, show differences in content with bold typeface, to ease the reader&rsquo;s task.  In my opinion, it would be useful to color the diffs, show them on the left and right, or even show the raw diff (e.g., <code>+++</code> <code>---</code>). I&rsquo;m envisioning a typing program as LaTeX where you could specify a commit with its parent and a range of lines to output.</p>
-
-<p>The second part is written in C# and python, to show a TDD session with him. Warning: it&rsquo;s much better in person than reading his book!</p>
-
-<p>The chapter 12 is a set of antipatterns you might find after starting with TDD. Even after you keep practicing TDD for a while, you will not get rid of these smells. Highly recommended.</p>
-
-<p>There&rsquo;s also an appendix on Continuous Integration, although there are better books for this.</p>
-
-<h2>Conclusion</h2>
-
-<p>Recommend this book if you are starting with TDD, or you are more advanced but it&rsquo;s difficult for you to read in English.</p>
-
-<p>Always good as a refresher to read the theoretical part and the antipatterns</p>
-
-<p>PS: This book is free to read, published under a Creative Commons license (don&rsquo;t know exactly which one)</p>
 ]]></content>
   </entry>
   
