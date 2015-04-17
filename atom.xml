@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-04-14T23:53:18+02:00</updated>
+  <updated>2015-04-17T23:12:37+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Guardian of the Source]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/17/the-guardian-of-the-source/"/>
+    <updated>2015-04-17T22:01:48+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/17/the-guardian-of-the-source</id>
+    <content type="html"><![CDATA[<p>Overheard today at the office, while they were discussing the approval of a pull request:</p>
+
+<blockquote><p>[Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this?</p>
+
+<p>[Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source</p>
+
+<p>[PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase.</p></blockquote>
+
+<p>This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;<a href="http://knowyourmeme.com/memes/you-shall-not-pass">you shall not pass</a>&rdquo; while on top of the bridge.</p>
+
+<p>This is part of the objectives of doing a pull request before merging code: stop the bad code<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> before it is merged to the codebase.</p>
+
+<p>Later, as you start having <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows</a> in your codebase, it is easier that you start introducing more. Exactly about this is the <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows theory</a>.</p>
+
+<p>On the other hand, if you try to block that bad code before it is merged, it is cheaper to remove it: nothing depends on it, you introduce no repetition, etc<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>This also connects with the idea present in <a href="http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501">Software Craftsmanship, now called The Software Craftsman</a>, about preserving value for investors and treat software as an investment (with positive ROI) rather than a sunk cost.</p>
+
+<p>It is being picky and, to the most of our possibilities, do not letting any defects nor bad code into the codebase. A hedge fund manager would not let any toxic or dubious asset into the managed funds. This would be counterproductive in the long run (maybe even in the short one) and would be not doing their job correctly. Why is it that some developers suggest or accept these toxic assets?</p>
+
+<p>So, at least for me, would be an honor to be called the &ldquo;Guardian of the Source&rdquo; by someone I respect, as long as this is a serious proposition (i.e., not a joke of some kind).</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Bad code can be expressed in many ways: long methods, bad naming, breaking design principles (e.g., SOLID, KISS, DRY - OAOO), code with defects, no tests or no coverage, etc.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>A source is <a href="http://c2.com/cgi/wiki?DiscoverDefectsEarly">Discover defects early</a>. Another is <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">this paper</a> that cites the ratio of fixing it later to 5:1 (five times more expensive).<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Inserting Clojure Code in Octopress]]></title>
@@ -1391,99 +1430,6 @@ Error: Run jekyll build --trace for more information.
 <p>This grunt job clicked with <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch04.html#solution_id21">Sweep the floor</a></p>
 
 <p>Let&rsquo;s see how the sprint goes and what are the pain points during this sprint</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Open Discussion: On Code Reviews]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/02/07/open-discussion-on-code-reviews/"/>
-    <updated>2015-02-07T18:54:54+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/02/07/open-discussion-on-code-reviews</id>
-    <content type="html"><![CDATA[<p>We had a great conversation yesterday about code reviews.</p>
-
-<p>The main idea was to discuss about it and share the ideas each one had. I didn&rsquo;t want it to turn into a masterclass (see <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch02.html#the_white_belt">the white belt</a>)</p>
-
-<h2>Benefits</h2>
-
-<p>These are the main benefits we saw in it:</p>
-
-<ul>
-<li>Increased trust</li>
-<li>Learning from others, other approaches</li>
-<li>Less defects, more quality</li>
-<li>Increased <a href="http://en.wikipedia.org/wiki/Bus_factor">bus factor</a>, decreased information silos</li>
-<li>Also:
-
-<ul>
-<li>Getting out of your comfort zone</li>
-<li>Communicating more often (code style, edge cases, complaining, etc)</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>Pair programming</h2>
-
-<p>Then we discussed about the topic of <a href="http://alvarogarcia7.github.io/blog/categories/code-review">code reviews</a> and <a href="http://alvarogarcia7.github.io/blog/categories/pair-programming/">pair programming</a>:</p>
-
-<ul>
-<li><p>How do they mix</p>
-
-<ul>
-<li>Is the need for code review reduced when doing pair programming?</li>
-<li>It is cheaper to catch defects when pairing than code review (e.g., less to modify, mental caches are hot, &hellip;), so why do code reviews? <a href="https://twitter.com/jbrains">J. B. Rainsberger</a> has an <a href="http://us2.campaign-archive2.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=acc77a0fb2&amp;e=4a925444f9">article</a> about it</li>
-</ul>
-</li>
-<li><p>Does it give you the same benefits?</p>
-
-<ul>
-<li>I argued that it does, some of my colleagues argued against as one is &ldquo;while doing&rdquo; and the other is after.</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>Practice, Practice, Practice</h2>
-
-<p>This is also a reference to a chapter by the same name (<a href="http://chimera.labs.oreilly.com/books/1234000001813/ch05.html#practice_comma_practice_comma_practice">here</a>)</p>
-
-<p>We proposed this problem:</p>
-
-<blockquote><p>Receive a list of numbers to a command-line (CLI) application and print their sum</p></blockquote>
-
-<p>I wrote simple code listing and we reviewed it. The code is <a href="https://gist.github.com/alvarogarcia7/258faea12cb9375539fe">here as a gist</a></p>
-
-<p>(Just in case, I wrote this listing with some defects / smells on purpose)</p>
-
-<p>Here are the comments:</p>
-
-<ul>
-<li>Not all parameters will be added, only the first three</li>
-<li>The parameters are out of order, overcomplicating things. Is it due to something? Should I be careful about it?</li>
-<li>There is duplication (i.e., parsing from string)</li>
-<li>Bad naming: what is <code>a</code>, <code>b</code>, <code>c</code>?</li>
-<li>There are no tests for it. No manual / javadoc either. Therefore, it&rsquo;s difficult to maintain</li>
-<li><p>Difficult to test: a smell for bad design?</p>
-
-<ul>
-<li>How to test the adding by itself? The output is to the console, so we have to capture it (at GMaur we published this tool: <a href="https://github.com/GMaur/legacyutils">legacyUtils</a>)</li>
-<li>How to test the parsing if there is no mock to be injected? Only via state tests, therefore &ldquo;end to end&rdquo; tests as it includes the adding</li>
-</ul>
-</li>
-<li><p>Mixed concerns / responsibilities. Parsing the numbers and adding them are different concerns and should not be together</p></li>
-</ul>
-
-
-<h2>Conclusion</h2>
-
-<ul>
-<li>No one was against it</li>
-<li>We all agreed that is important to do it even in time-constrained environments</li>
-<li>It is also important to review our code reviews to make the most of it. The article by <a href="http://us2.campaign-archive2.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=acc77a0fb2&amp;e=4a925444f9">J. B. Rainsberger</a> is quite useful for that</li>
-<li>Even small codes can be bad and need to be reviewed (as the example)</li>
-<li>Quick and dirty proof of concept do not mix well with code reviews</li>
-</ul>
-
 ]]></content>
   </entry>
   
