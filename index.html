@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Overheard today at the office, while they were discussing the approval of a pull request: [Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t &hellip;">
+  <meta name="description" content="I&rsquo;ve seen this video by Rich Hickey: &ldquo;Simplicity matters&rdquo;, taken from Manuel Rivero&rsquo;s google plus' site here are my notes: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,156 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity Matters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-18T14:44:06+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus&#8217; <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
+
+<p>here are my notes:</p>
+
+<ul>
+<li>the software is the elephant</li>
+<li>do more, do it differently, do it better</li>
+<li>complexity of the elephant is going to dominate what you can do</li>
+<li>your ability to reason about your program is critical</li>
+<li>design is about pulling things apart</li>
+<li>become familiar by learning, trying</li>
+<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
+</ul>
+
+
+<p>Complexity vs simplicity:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complexity     </th>
+<th> Simplicity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state, objects </td>
+<td> values</td>
+</tr>
+<tr>
+<td>methods </td>
+<td> functions, namespaces</td>
+</tr>
+<tr>
+<td>variables </td>
+<td> managed refs</td>
+</tr>
+<tr>
+<td>inheritance, switch, matching  </td>
+<td> polymorphism à la carte</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>imperative loops, fold </td>
+<td> set functions</td>
+</tr>
+<tr>
+<td>actors </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>ORM </td>
+<td> declarative data manipulation</td>
+</tr>
+<tr>
+<td>conditionals </td>
+<td> rules</td>
+</tr>
+<tr>
+<td>inconsistency </td>
+<td> consistency </td>
+</tr>
+</tbody>
+</table>
+
+
+<ul>
+<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
+<li>simplicity is not about you. simplicity is a lot of hard work
+
+<ul>
+<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
+</ul>
+</li>
+<li>simplicity is not an objective</li>
+</ul>
+
+
+<p>Order is all over the place:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complex  </th>
+<th> Simple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>positional arguments </td>
+<td> named arguments or map</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>product types  </td>
+<td> associate records</td>
+</tr>
+<tr>
+<td>imperative programs </td>
+<td> declarative programs</td>
+</tr>
+<tr>
+<td>prolog </td>
+<td> datalog</td>
+</tr>
+<tr>
+<td>call chains </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>XML </td>
+<td> JSON, Clojure literals</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -384,7 +534,7 @@ Error: Run jekyll build --trace for more information.
 
   <div class="entry-content"><p>This is an experience report on <a href="http://twitter.com/@jasongorman">Jason Gorman</a>&rsquo;s &ldquo;<a href="http://www.codemanship.co.uk/tdd.html">Test-driven development intensive workshop</a>&rdquo; on the April 11th, 2015</p>
 
-<p>I attended this training in the <a href="http://www.grenfell-housing.co.uk/">Greenfell housing &amp; training</a> in South Wimbledon, London SW19 1JZ.</p>
+<p>I attended this training in the <a href="http://www.grenfell-housing.co.uk/">Greenfell housing &amp; training</a> in South Wimbledon, London SW19 1JZ. The training spanned from 10:00 to 17:00 with a half an hour for lunch plus three or four 10-15 minute pauses. (7 - ,5 - 4 * 12/60 = ~5.7hours = 5 hours 45 minutes)</p>
 
 <h2>Introduction</h2>
 
@@ -899,142 +1049,6 @@ Error: Run jekyll build --trace for more information.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/16/tdd-meetup-retrospective/">TDD Meetup Retrospective</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-16T05:42:44+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:42 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Yesterday we organized a TDD meetup at the <a href="http://www.fib.upc.edu/fib.html">FIB - Barcelona School of Informatics UPC</a>, within <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship</a> sponsored by the <a href="http://jediupc.com/">Junior Empresa d&#8217;Informàtica</a>. The meetup started at 9:00 until 18:00, with a one-hour pause in the middle.</p>
-
-<h2>Where</h2>
-
-<ul>
-<li>Please make sure the meetup space (e.g., classroom, meeting room) is available and ready to be used at least 15 minutes before the meetup starts</li>
-<li>The organizer and the event host should be there in advance to prepare the physical environment (chairs, wifi, beamer, etc) as well as mentally: getting comfortable with the space, loading the presentation, prepare the speaker notes, etc.</li>
-<li>Plan for the worse and hope for the best: in this particular meetup, the beamer was not available, so the host gracefully lent us some 23 inch screen as a second monitor.</li>
-</ul>
-
-
-<h2>What</h2>
-
-<ul>
-<li>The speaker should have had already decided what they are going to cover on the meetup and not deviate much from this. Leave some empty buffer space at the end because you will cumulate some deviation during the day.</li>
-<li>Of course, have the slides ready if you plan on using them</li>
-<li>I prefer having more conversations during the meetup rather than a masterclass-style one. The organizer(s) should act as conversation moderators, often guiding the conversation where (they think) it is most useful. Sometimes, it is a good idea to interrupt the conversation when someone is getting bored or losing focus<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</li>
-<li>Be prepared to ask to your attendees what do they want: they are your target</li>
-<li>Please ask to your attendees to bring their laptop with git, dependency manager, IDE / editor, test double framework installed. Otherwise, most of the first session is invested in downloading / configuring these.</li>
-<li>Please try to be communicative / funny in some way. This makes the slides easier to understand</li>
-</ul>
-
-
-<h2>Meetup details</h2>
-
-<ul>
-<li><p>We did two sessions of slides:</p>
-
-<ul>
-<li>Introduction to TDD</li>
-<li>TDD on a daily basis: learn TDD for a greater good</li>
-</ul>
-</li>
-<li><p>We did three katas:</p>
-
-<ul>
-<li>LinkedList: <a href="http://codekata.com/kata/kata21-simple-lists/">source</a>. Originally by <a href="http://twitter.com/@pragdave">Dave &ldquo;Pragmatic Dave&rdquo; Thomas</a></li>
-<li>Password: <a href="https://gist.github.com/trikitrok/c031d6b621f28b85ce0d">source</a>. Taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>, also seen on a <a href="http://twitter.com/@carlosble">Carlos Blé</a> workshop</li>
-<li>Bank Kata: <a href="https://github.com/sandromancuso/Bank-kata">source</a>. Originally from <a href="http://twitter.com/@sandromancuso">Sandro Mancuso</a></li>
-</ul>
-</li>
-<li><p>The format was this: the first set of slides, the two first katas, some discussion, then lunch; coffee (mandatory); the second set of slides, the third kata (done by them), later done by me at the beamer, explaining the situation and my mental process.</p></li>
-</ul>
-
-
-<h2>Useful feedback</h2>
-
-<ul>
-<li><p>About the event:</p>
-
-<ul>
-<li>One 8-hour event is much more effective / efficient that 4 2-hour ones</li>
-<li>No one complained about the lack of beamer. So don&rsquo;t worry too much if your host doesn&rsquo;t have one, as long as everybody can get close to the (big) screen.</li>
-</ul>
-</li>
-<li><p>About the LinkedList kata:</p>
-
-<ul>
-<li>This, as a first TDD example was too complex. Getting into TDD with classes, and serveral functions at the same time might be difficult.</li>
-<li>Too academic. This is an example you will usually never implement yourself, as there are libraries who provide it. Therefore, not applicable.</li>
-</ul>
-</li>
-<li><p>About the Password kata:</p>
-
-<ul>
-<li>They graded this kata easier than the linkedList</li>
-<li>Start with this as it is only a function</li>
-<li>This has didactic value as there are some gotchas with this kata</li>
-<li>More likely to be implemented by yourself, as most systems require some kind of user authentication</li>
-</ul>
-</li>
-<li><p>About the Bank kata:</p>
-
-<ul>
-<li>More resembling of a day-to-day problem</li>
-<li>This is a difficult kata if you haven&rsquo;t learned about mocks / test doubles</li>
-<li>Interesting interactions between objects</li>
-</ul>
-</li>
-<li><p>For me:</p>
-
-<ul>
-<li>They liked both the format and the speaker (a.k.a., me)</li>
-<li>They thought this meetup was well prepared in advance</li>
-</ul>
-</li>
-<li><p>My own feedback:</p>
-
-<ul>
-<li>It is difficult to ask the attendees to rate their own level or for you to rate it. I thought the linkedlist example would be so easy they would finish it in half the allowed time<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>, but it wasn&rsquo;t this way</li>
-<li>The productivity level varies hugely from person to person. There were some pairs that dug thoroughly on the problem and others who got stuck (sometimes with the language). Even though both types of pairs were working hard on the proposed problem</li>
-<li>We still haven&rsquo;t solved the problem with reservations: many people book a seat on the event but later won&rsquo;t come. This makes other (interested) attendees to not have a seat.</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Should you want to, please share your feedback / comments via the comments section below or sending a pull request to this <a href="https://github.com/alvarogarcia7/blog_source">repository</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>a good indicator of this is body language or position and whether they are doodling on a paper sheet.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>I did prepare against this adding more possible requirements to the kata, although we finally didn&rsquo;t use them<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1050,6 +1064,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity Matters</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/17/the-guardian-of-the-source/">The Guardian of the Source</a>
       </li>
     
@@ -1063,10 +1081,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a New TDD Phase</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/">Experience Report: Test-driven Development Intensive, by Jason Gorman</a>
       </li>
     
   </ul>
