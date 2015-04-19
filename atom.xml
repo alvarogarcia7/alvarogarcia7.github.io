@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-04-18T17:54:01+02:00</updated>
+  <updated>2015-04-19T23:53:12+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Logging Is a Feature]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/"/>
+    <updated>2015-04-19T23:43:10+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature</id>
+    <content type="html"><![CDATA[<p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of <a href="http://www.splunk.com/">Splunk</a>.</p>
+
+<p>This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
+
+<p>Strategies for dealing with this:</p>
+
+<ul>
+<li>functional logger: no shared state
+
+<ul>
+<li>can only log information available in this scope: parameters, attributes, static information</li>
+</ul>
+</li>
+<li>stateful logger: information is added to the threadContext and logged whenever necessary
+
+<ul>
+<li>can log information in this scope plus any of the previous invokings.</li>
+<li>the problem is precisely sharing state: you have to control all the possible parents to know where this data comes from. A piece of information may come from any source.</li>
+<li>Lose the reference of who is invoking you, as there is no customization for this. (only using implementation)</li>
+<li>Speak two different languages: one for logging and one for business logic</li>
+</ul>
+</li>
+<li>mixed: mix and match the best of both worlds.
+
+<ul>
+<li>The problem with the shared state can be solved if no data is overwritten and any information is stored in a map where the key is the fully qualified (FQ) method name (or FQ class name + FQ method name)</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The GOOS book explains this very well on the 20th chapter, first half &ldquo;logging is a feature&rdquo;. If we log as described in chapters 19 and 20, some of the problems are reduced:</p>
+
+<ul>
+<li>multiple levels of abstraction</li>
+<li>indirect control over logging. decide in a single place whether to log exceptions of each kind or not</li>
+<li>remove &ldquo;implementation details&rdquo; such as &ldquo;log.isDebugEnabled&rdquo;</li>
+<li>remove performance issues: no need to build strings for logging every time, only need to pass objects. inside the logging layer, if the logger is enabled for that level, then spend the time building strings and print them</li>
+</ul>
+
+
+<p>We should remember that:</p>
+
+<ul>
+<li>Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.</li>
+<li>Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Talk: Simplicity Matters]]></title>
@@ -1448,101 +1504,6 @@ Error: Run jekyll build --trace for more information.
 <blockquote><p>If you walk away from software development, you will find that the habit of rigorous thinking and automating tasks involving large volumes of data will still be useful wherever you go</p>
 
 <p>D Hoover, A Oshineye</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Open Discussion: Behaviour-Driven Development]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/"/>
-    <updated>2015-02-15T02:30:38+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development</id>
-    <content type="html"><![CDATA[<p>This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on requirements, via automatically tested specifications. For more information, see the <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">wikipedia&rsquo;s article on the subject</a></p>
-
-<p>I forgot to mention that this is the perfect start to TDD, as this is usually called the double-loop TDD. See a post on it on <a href="http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/">coding is like cooking</a></p>
-
-<p>In this double-loop TDD, the first thing is to create a BDD scenario, run it (red-1), create a unit test that reflects this red (red-2), pass it, refactor; go to red-1 as many times as you need, doing TDD cycles. When you think the feature is done, execute the BDD scenarios and go to green (outer layer) and refactor.</p>
-
-<h2>(Our) Common setting</h2>
-
-<p>Going back to BDD, a common scenario would be the following:</p>
-
-<p>Layers of software:</p>
-
-<ul>
-<li>Domain-Specific Language (DSL). See <a href="http://en.wikipedia.org/wiki/Domain-specific_language">wikipedia&rsquo;s article</a></li>
-<li>Test adapter: an interpreter for this DSL</li>
-<li>Test software: test fixtures, methods, structures to arrange, act, and assert on the sut</li>
-<li>Production software (system under test - SUT): thing being tested</li>
-</ul>
-
-
-<h2>A BDD test vs A TDD test</h2>
-
-<p>Let&rsquo;s imagine a BDD test for a <a href="http://en.wikipedia.org/wiki/Linked_list">linked list</a>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Given I have an empty list
-</span><span class='line'>When I add an element
-</span><span class='line'>Then I have an element on the list</span></code></pre></td></tr></table></div></figure>
-
-
-<p>now, the same test in TDD [using java, junit 4, hamcrest]</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add_an_element_to_an_empty_list</span><span class="o">(){</span>
-</span><span class='line'>  <span class="n">MyLinkedList</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MyLinkedList</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;something&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">linkedList</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In some aspects, a BDD and a TDD test are similar:</p>
-
-<ul>
-<li>the given is the arrange, i.e., the prerequisite</li>
-<li>the when is the act, i.e., the command</li>
-<li>the then is the assertion, i.e., the postcondition</li>
-</ul>
-
-
-<p>(for more information on this, see <a href="http://en.wikipedia.org/wiki/Hoare_logic">Hoare&rsquo;s triple</a>)</p>
-
-<p>But in others, they are not. In BDD you do not specify the APIs, methods, etc. You only care about behavior.</p>
-
-<h2>Conclusion</h2>
-
-<p>Benefits:</p>
-
-<ul>
-<li>everyone might involved in the specification by example workshops (source: <a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154">ATDD by example</a>)</li>
-<li>live specifications. managers can now understand the real state</li>
-<li><a href="http://en.wikipedia.org/wiki/Regression_testing">regression tests</a> are much cheaper (from automation)</li>
-</ul>
-
-
-<p>Gotchas:</p>
-
-<ul>
-<li>Test only the happy paths</li>
-<li>This has a cost, do not overdo it</li>
-<li>Doesn&rsquo;t remove manual tests</li>
-<li>How do you manage multiple scenarios</li>
-<li>How fast should it be?</li>
-</ul>
-
 ]]></content>
   </entry>
   
