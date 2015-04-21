@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The &hellip;">
+  <meta name="description" content="I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it. The code provides a way of doing try|catch, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-21T07:23:23+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>7:23 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.</p>
+
+<p>The code provides a way of doing <code>try|catch</code>, specifying an exception to be caught.</p>
+
+<p>The source code is available <a href="https://github.com/alvarogarcia7/annotation-aspect-java">here</a></p>
+
+<h2>In the process</h2>
+
+<p>This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.</p>
+
+<p>If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t). The unmassaged code can be found <a href="https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e">here</a>. The massaged version is at the <a href="https://github.com/alvarogarcia7/annotation-aspect-java/">tip of the arrow</a></p>
+
+<h2>More information</h2>
+
+<p>Regarding <code>annotations</code> (like @Override):</p>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/annotations/">This official article</a> on annotations is useful.</li>
+<li><a href="http://www.vogella.com/tutorials/JavaAnnotations/article.html">This article</a> by Lars Vogel guides you step by step.</li>
+<li><a href="http://tutorials.jenkov.com/java/annotations.html">This article</a> by Jakov Jenkov is very nice.</li>
+<li><a href="http://crunchify.com/understanding-java-annotation-annotation-examples/">This article</a> helps you to understand what an annotation is and what to use it for.</li>
+</ul>
+
+
+<p>Regarding <code>aspect</code> (based on AspectJ):</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation">This question</a> has been my main source of information / inspiration for the spring + aspectj configuration</li>
+</ul>
+
+
+<h2>Conclusions</h2>
+
+<p>One of the drawbacks that I find to common examples or tutorials is that they&rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including <code>pom.xml</code> (dependencies) and tests.</p>
+
+<p>Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1009,47 +1073,6 @@ Error: Run jekyll build --trace for more information.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/25/meetup-cross-pollination/">Meetup Cross-pollination</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-25T23:50:23+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:50 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://twitter.com/adibolb">Adrian Bolboaca</a> has written a very interesting post on being a community bumble-bee. (Source can be found <a href="http://blog.adrianbolboaca.ro/2015/03/talk-agile-lean-europe-2014-being-a-community-bumble-bee/">here</a>)</p>
-
-<p>He goes on to explain how he has visited many meetups all over Europe and the big chunk of information and experience he has learned from them.</p>
-
-<p>He tells us about a selfish approach to organizing meetups:</p>
-
-<blockquote><p>When one teaches two learn</p>
-
-<p>(apparently attributed to) Robert Heinlein, <a href="http://www.math.niu.edu/~rusin/nonwork/quotes">source</a></p></blockquote>
-
-<p>I share this feeling of learning while teaching, as long as you reflect and analyze (e.g., <a href="http://en.wikipedia.org/wiki/Hansei">hansei</a> or <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch05.html#reflect_as_you_work">reflect as you work</a>). I also try to apply it to my meetups.</p>
-
-<p>As a funny note, he said this cross-pollination has crystallized in as many ideas as to fill three books.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1065,6 +1088,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/19/logging-is-a-feature/">Logging Is a Feature</a>
       </li>
     
@@ -1078,10 +1105,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting Clojure Code in Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a Refactor in Clojure</a>
       </li>
     
   </ul>

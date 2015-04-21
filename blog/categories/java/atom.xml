@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-04-19T23:53:12+02:00</updated>
+  <updated>2015-04-21T07:24:16+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Annotations and Aspects in Java]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/"/>
+    <updated>2015-04-21T07:23:23+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.</p>
+
+<p>The code provides a way of doing <code>try|catch</code>, specifying an exception to be caught.</p>
+
+<p>The source code is available <a href="https://github.com/alvarogarcia7/annotation-aspect-java">here</a></p>
+
+<h2>In the process</h2>
+
+<p>This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.</p>
+
+<p>If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t). The unmassaged code can be found <a href="https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e">here</a>. The massaged version is at the <a href="https://github.com/alvarogarcia7/annotation-aspect-java/">tip of the arrow</a></p>
+
+<h2>More information</h2>
+
+<p>Regarding <code>annotations</code> (like @Override):</p>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/annotations/">This official article</a> on annotations is useful.</li>
+<li><a href="http://www.vogella.com/tutorials/JavaAnnotations/article.html">This article</a> by Lars Vogel guides you step by step.</li>
+<li><a href="http://tutorials.jenkov.com/java/annotations.html">This article</a> by Jakov Jenkov is very nice.</li>
+<li><a href="http://crunchify.com/understanding-java-annotation-annotation-examples/">This article</a> helps you to understand what an annotation is and what to use it for.</li>
+</ul>
+
+
+<p>Regarding <code>aspect</code> (based on AspectJ):</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation">This question</a> has been my main source of information / inspiration for the spring + aspectj configuration</li>
+</ul>
+
+
+<h2>Conclusions</h2>
+
+<p>One of the drawbacks that I find to common examples or tutorials is that they&rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including <code>pom.xml</code> (dependencies) and tests.</p>
+
+<p>Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Maven Module Base for Cucumber in Java]]></title>
@@ -81,21 +125,6 @@ through the book following the &ldquo;see also&rdquo;</p>
 <p>The source code is on <a href="https://github.com/alvarogarcia7/bank-kata">github</a></p>
 
 <p>You can read Manuel&rsquo;s take on the kata on <a href="http://garajeando.blogspot.com.es/2015/01/kata-bank-account-in-java.html">his blog</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Kata: Reverse Polish Notation in Java]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/01/12/kata-reverse-polish-notation-in-java/"/>
-    <updated>2015-01-12T03:56:58+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/01/12/kata-reverse-polish-notation-in-java</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve written a <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">RPN</a> string calculator in java, using TDD with these: mockito, hamcrest, junit</p>
-
-<p>It&rsquo;s close to the <a href="http://osherove.com/tdd-kata-1/">String Calculator kata</a>, by <a href="https://twitter.com/RoyOsherove">Roy Osherove</a>. This RPN is using mocks (so more difficult than the String calculator)</p>
-
-<p>I&rsquo;ve tried to practice <a href="http://us2.campaign-archive1.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=42f9a0b66f&amp;e=6ca6702beb">&ldquo;Your tests are dragging you down&rdquo;</a> by <a href="https://twitter.com/jbrains">J.B Rainsberger</a> (mainly, to use something to write on). This behavior is also explained in the book <a href="http://www.carlosble.com/libro-tdd/">Dirigido por tests</a> (Spanish) by <a href="https://twitter.com/carlosble">Carlos Blé</a>.</p>
-
-<p>My solution is <a href="https://github.com/alvarogarcia7/kata-rpn-calculator-java">here</a>. Every step (red, green, refactor) has been saved.</p>
 ]]></content>
   </entry>
   
