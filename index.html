@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it. The code provides a way of doing try|catch, &hellip;">
+  <meta name="description" content="In his book Working effectively with legacy code, Michael Feathers describes: [&hellip;] legacy code as code without tests. It is a good working &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/21/what-legacy-code-is-about/">What Legacy Code Is About</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-21T22:09:54+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:09 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers">Michael Feathers</a> describes:</p>
+
+<blockquote><p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
+
+<p>M Feathers, in the preface of Working effectively with legacy code</p></blockquote>
+
+<p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
+
+<p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
+
+<p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
+
+<ul>
+<li>some test the test framework</li>
+<li>some the language</li>
+<li>some test a happy path that works by pure luck</li>
+<li>some functionalities are tested (not all happy paths)</li>
+<li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
+</ul>
+
+
+<p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
+
+<p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
+
+<p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
+
+<p>This is why I would like to update the definition:</p>
+
+<blockquote><p>Legacy code is code without tests that provide trust to all your stakeholders</p></blockquote>
+
+<p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
+
+<p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
+
+<p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -972,107 +1036,6 @@ Error: Run jekyll build --trace for more information.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/29/growing-software-according-to-the-season/">Growing Software According to the Season</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-29T18:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is the first post is of the <a href="/blog/categories/growing-software">growing-software series</a></p>
-
-<p>A few weeks ago, while reading the book <a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> by <a href="https://twitter.com/@natpryce">Nat Pryce</a> and <a href="https://twitter.com/@sf105">Steve Freeman</a>, I finally understood why the software needs to be grown and not built:</p>
-
-<blockquote class="twitter-tweet" lang="en"><p>.<a href="https://twitter.com/natpryce">@natpryce</a> <a href="https://twitter.com/sf105">@sf105</a> With the <a href="https://twitter.com/hashtag/goos?src=hash">#goos</a> book I finally grasped the importance of growing, not building software. Thanks for writing it</p>&mdash; Alvaro Garcia (@alvarobiz) <a href="https://twitter.com/alvarobiz/status/570835142136049664">February 26, 2015</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>A few days ago, I was thinking about new inspiration sources and this came to my mind:</p>
-
-<blockquote class="twitter-tweet" lang="en"><p>If we want to grow software instead of building it, should we start looking at gardening and agriculture for new inspiration? <a href="https://twitter.com/hashtag/goos?src=hash">#goos</a></p>&mdash; Alvaro Garcia (@alvarobiz) <a href="https://twitter.com/alvarobiz/status/581005906667687938">March 26, 2015</a></blockquote>
-
-
-<p>In agriculture, at least in this latitude, there are different seasons. Different plants have different temporal schedules: you need to plant, wait for it to bloom, produce fruits then collect. Maybe remove the plant and wait for the next time slot to appear.</p>
-
-<p>When growing software, things are different (or we think so):</p>
-
-<ul>
-<li>Do we need to plant? Yes, seed the project with resources</li>
-<li>Wait for it to bloom? Yes, from an outside actor perspective, there is no result for a while, even if it is one sprint</li>
-<li>Wait to produce fruits? Yes, usually some sprints past the minimum viable product (MVP) until the minimum lovable product (MLP)</li>
-<li>Do we need to collect it? Yes, usually the final tests (e.g., regression) and ship it to production to be used.</li>
-</ul>
-
-
-<p>After all, we might say that the process is not so different in both activities. Nothing to do related to tools or materials, etc.</p>
-
-<p>As in agriculture, seasons vary in productivity for a certain activity or crop: during the cold months, not many plants are able to produce fruits. Meanwhile, during the hot months, harvest is much higher. (This only applies to outdoors gardening.)</p>
-
-<p>When producing software, there might be seasons too:</p>
-
-<ul>
-<li>Seasons where productivity (harvest) varies
-
-<ul>
-<li>Lowers when a new team member joins (see the Mythical Man-Month), the pressure is too high, salaries are low, &hellip;</li>
-<li>Increases when there are no information silos, the bus factor is high, the team is not affected by external distractions, &hellip;</li>
-</ul>
-</li>
-<li>Seasons where different harvests can be planted, but a subset of them will be the most effective
-
-<ul>
-<li>A front-end developer can do back-end, but it won&rsquo;t be as productive. In this area, one can learn other disciplines and get as effective as other professionals.</li>
-<li>There are many tasks to be done but the prioritized ones are more effective</li>
-</ul>
-</li>
-<li>Some harvests are more intense on the fields than others. After that, there is a required rest so the next season is as productive as the previous one
-
-<ul>
-<li>Some projects produce burn-out so some slack time is more productive than getting to work again.</li>
-</ul>
-</li>
-</ul>
-
-
-<p>But there might be differences too:</p>
-
-<ul>
-<li>Geographical distribution: some crops cannot grow in certain conditions. I believe any geographic area (e.g., country) can produce any type of work (e.g., back-end, front-end, quality assurance, project management, etc)</li>
-<li>Quality distribution: same as before, many crops do not grow in Iceland (due to the harsh environment) or do it with lower quality as nearer to the Equator.</li>
-</ul>
-
-
-<p><a href="https://twitter.com/@XaV1uzz">Xavi Gost</a> responded to my tweet:</p>
-
-<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/alvarobiz">@alvarobiz</a> Conceptos como darle a las cosas su tiempo de crecer y madurar nos vendrian bien en la industria</p>&mdash; Xaviuzz (@XaV1uzz) <a href="https://twitter.com/XaV1uzz/status/581063149203394560">March 26, 2015</a></blockquote>
-
-
-<p>[Roughly translated: Concepts like allowing some time for things to grow and ripe would benefit the industry]</p>
-
-<p>Get the tools out of the tool-shed and start buying seeds for this spring.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1088,6 +1051,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/21/what-legacy-code-is-about/">What Legacy Code Is About</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a>
       </li>
     
@@ -1101,10 +1068,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/04/17/the-guardian-of-the-source/">The Guardian of the Source</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting Clojure Code in Octopress</a>
       </li>
     
   </ul>
