@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-04-25T14:05:57+02:00</updated>
+  <updated>2015-04-25T14:40:37+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Whose Fault Is This?]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/25/whose-fault-is-this/"/>
+    <updated>2015-04-25T14:10:31+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/25/whose-fault-is-this</id>
+    <content type="html"><![CDATA[<p>In the prologue of the book, while thanking everyone that has made the book possible:</p>
+
+<blockquote><p>[&hellip;], none of the people mentioned here would be responsible for any inaccuracy that might exist in the book, as this responsibility is exclusively mine</p>
+
+<p>Mihaly Csikszentmihalyi (translated)<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, prologue of &ldquo;<a href="http://www.amazon.com/Flow-The-Psychology-Optimal-Experience/dp/0061339202">Flow</a>&rdquo;</p></blockquote>
+
+<p>This connects with what <a href="http://twitter.com/@tastapod">Dan North</a> said in the Craft Conf about this idea of the &ldquo;I&rsquo;m the only one in the company producing good quality work, the rest&rdquo;. Of course, he was quoting greedy, selfish people who think this instead of attributing the success to the whole team.</p>
+
+<p>Regarding the whole team, if I recall correctly, it was <a href="http://twitter.com/@svenpet">Sven Peters</a> who explained that &ldquo;[&hellip;] either the team wins or looses. There are no individual wins [&hellip;]&rdquo; <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>In this sense, Csikszentmihalyi assumes all responsibility when quoting and reflecting on other&rsquo;s works. It was his idea to develop on top of others, so any imperfection is his.</p>
+
+<p>This is similar as when approving a pull request: you make sure that the code works and you stand by it. It is no longer the original owner&rsquo;s cause, but yours too, as you have signed this request. On the pull request, though, the code ownership is already distributed among the whole team, but approvals ensures the presence of the <a href="http://alvarogarcia7.github.io/blog/categories/guardian-of-the-source">guardian of the source</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>I had to translate the quote, because I did not borrow the book in English<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>When the talks are available, we will be able the ensure the correct attribution of this idea.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How I Read Apprenticeship Patterns]]></title>
@@ -1157,51 +1188,6 @@ Error: Run jekyll build --trace for more information.
 <ol>
 <li id="fn:1">
 <p><a href="https://twitter.com/jorgeavila_ss">Jorge Ávila</a>, <a href="https://twitter.com/jdiezc">Jesús Díez</a> and I<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mob Programming String Calculator Kata]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/03/03/mob-programming-string-calculator-kata/"/>
-    <updated>2015-03-03T04:46:48+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/03/03/mob-programming-string-calculator-kata</id>
-    <content type="html"><![CDATA[<p>Last Friday we did a kata<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> using a projector the string calculator <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> using pair programming, TDD and some mob-programming for the last refactoring.</p>
-
-<p>We used a projector (beamer) so everyone could see it. I tried to take really small baby steps but the adding part was done in ~6 cycles<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
-
-<p>We&rsquo;ve all learnt about shotcuts, live user templates for the IDE <sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>, TDD methodology, other ways of tackling the problem, how to refactor as a group, clean code, etc</p>
-
-<p>These sessions are necessary to share some knowledge among the teammates and have another chance of doing code review, releasing some pressure from daily practices or bad abstractions / designs (that will be taken care of in the future)</p>
-
-<p>We&rsquo;ve had such a great time, learning together, that would be a candidate for a weekly interaction.</p>
-
-<p><a href="http://en.wikipedia.org/wiki/Mob_programming">Mob programming</a> is such an eye opening practice. It forces you to reconsider your previous dogma and to understand the others&#8217; positions. Wikipedia reads &ldquo;early use of phrase [&hellip;] was made in &lsquo;Extreme Programming Perspectives&rsquo;&rdquo; but this practice is practiced by some, such as <a href="https://twitter.com/carlosble">Carlos Blé</a>, <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a> among others; also at the <a href="http://www.softwarecraftsmanshipbarcelona.org/">Software Craftsmanship Barcelona</a> <a href="https://twitter.com/hashtag/scbcn2013?src=hash">2013</a> and <a href="https://twitter.com/hashtag/SCBCN14?src=hash">2014</a> and the <a href="https://twitter.com/hashtag/socracan?src=hash">SoCra Canaries 2015</a></p>
-
-<h2>One goal</h2>
-
-<p>Our goal for this session was to practice TDD and baby steps, so the team can improve its ability on these skills.</p>
-
-<p>In any case, my objective for the katas (or deliberate practice) is not to get there as fast as we can but to improve our automated routines. This can affect our daily performance, as it becomes natural. It is not about the getting to the destination but enjoying the path along the way. In this manner, you are not so hurried up about a slow train but enjoy the views across the window.</p>
-
-<p>It was good that QA people in the team came to the session. He even participated with some tips / implementations during the refactors. Always fruitful to discuss (and learn) mixed skills (QA / dev) from the other side of the wall</p>
-
-<h2>Conclusion</h2>
-
-<p>I still haven&rsquo;t mastered the recipe (algorithm) for knowing when it is a scaffold and when it&rsquo;s time to refactor using &ldquo;replace algorithm&rdquo;. For know, I just use the three (3) rule and a bit of gut feeling on the side. The bad thing is that this can not be easily taught to someone else. Just learnt by osmosis and practice.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>matching none of the styles explained in <a href="http://johannesbrodwall.com/2011/12/18/how-to-start-a-coding-dojo/">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>This is a very good beginner&rsquo;s kata, created by <a href="https://twitter.com/royosherove">Roy Osherove</a>. Can be found <a href="http://osherove.com/tdd-kata-1/">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>One piece of feedback I received is that I talk too much while coding, as these 6 cycles took us about 45 minutes, total<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-<li id="fn:4">
-<p>There are some for <a href="https://www.jetbrains.com/idea/help/live-templates.html">IntelliJ IDEA</a>, <a href="http://stackoverflow.com/questions/4022367/what-is-the-eclipse-equivalent-of-intellij-live-templates">Eclipse</a> too<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
 
