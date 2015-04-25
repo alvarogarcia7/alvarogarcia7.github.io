@@ -9,7 +9,8 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="In his book Working effectively with legacy code, Michael Feathers describes: [&hellip;] legacy code as code without tests. It is a good working &hellip;">
+  <meta name="description" content="These are the talks I&rsquo;ve attended at the Craft Conf 2015: Thursday 23th Opening keynote by Dan North and Jessica Kerr
+Writing testable code - A &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/">Talks I Have Attended at the Craft Conf 2015</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T12:25:09+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:25 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>These are the talks I&rsquo;ve attended at the Craft Conf 2015:</p>
+
+<h2>Thursday 23th</h2>
+
+<ul>
+<li>Opening keynote by <a href="http://twitter.com/@tastapod">Dan North</a> and <a href="http://twitter.com/@jessitron">Jessica Kerr</a></li>
+<li>Writing testable code - A functional programming point of view, by <a href="http://twitter.com/@old_sound">Alvaro Videla</a></li>
+<li>Coding Culture, by <a href="http://twitter.com/@svenpet">Sven Peters</a></li>
+<li>OnConnectionLost: the life of an offline web application, by <a href="http://twitter.com/@sgrewenig">Stefanie Grewenig</a> and <a href="http://twitter.com/@jthoenes">Johannes Thönes</a></li>
+<li>Concurrency: It&rsquo;s harder (and easier) than you think, by <a href="http://twitter.com/@paulrabutcher">Paul Butcher</a></li>
+<li>Testing and Integration (the remix), by <a href="http://twitter.com/@randommood">Inés Sombra</a></li>
+<li>Beyond Features: Rethinking agile planning and tracking, by <a href="http://twitter.com/@tastapod">Dan North</a></li>
+<li>Closing keynote by <a href="http://twitter.com/@alfrehn">Alf Rehn</a></li>
+</ul>
+
+
+<h2>Friday 24th</h2>
+
+<ul>
+<li>Opening keynote: The New New Software development game: Containers, Microservices and Contract tests, by <a href="http://twitter.com/@mpoppendieck">Mary Poppendieck</a></li>
+<li>Apprenticeship patterns, revisited, by <a href="http://twitter.com/@davehoover">Dave Hoover</a></li>
+<li>Interaction Driven Design, by <a href="http://twitter.com/@sandromancuso">Sandro Mancuso</a></li>
+<li>The hidden dimension of refactoring, by <a href="http://twitter.com/@mfeathers">Michael Feathers</a></li>
+<li>Why is an API like a puppy, by <a href="http://twitter.com/@ade_oshineye">Adewale Oshineye</a></li>
+<li>Microservice antipatterns, by <a href="http://twitter.com/@tsaleh">Tammer Saleh</a></li>
+</ul>
+
+
+<p>I couldn&rsquo;t attend the last talk nor the keynote as I had to get to the airport</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -979,63 +1037,6 @@ Error: Run jekyll build --trace for more information.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/31/trimming-your-plants/">Trimming Your Plants</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-31T23:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post belongs to the <a href="/blog/categories/growing-software">growing-software series</a></p>
-
-<p>Imagine this situation: the code works. You are at <a href="https://github.com/alvarogarcia7/refactoring_a-first-example/commit/1ff7df4d45ee1ac5bc483b90da7ed1b68f27aef9">this stage</a></p>
-
-<p>Disregarding the tests, the production code is complete. Could be better, but it is ready if you are in a hurry.</p>
-
-<p>Now, picture your test as a plant in a plant pot: it might be healthy on the outside (external quality) but how are their roots (internal quality)?</p>
-
-<p>Do you imagine them in an ordered fashion or in a jungle of roots? Everything on the outside is connected to one or several roots? In case it is several, what / how much do they share?</p>
-
-<h2>Trimming the roots</h2>
-
-<p>Now, let&rsquo;s imagine you want to put the plant in a different plant pot. You don&rsquo;t want the plant to be altered in any way: keep producing fruits as it was before, as green and shiny, etc. Just alter the container for business reasons.</p>
-
-<p>The more tidy and organized the roots are related to the outside plant itself, the easier it is to reshape (or refactor) it.</p>
-
-<p>So this is exactly what refactoring is about: &ldquo;keeping the same external behaviour, modifying the internal structure&rdquo;. I like to explain as &ldquo;modify how it is done but not what it does&rdquo;.</p>
-
-<p>When you trim the roots but leave unaltered the top, you are making it cheaper to modify the internal shape without affecting the rest. The plant will continue to grow, requiring more and more nutrients from the ground. Small increases that do not warrant a bigger plant pot, as the current one can withstand the new requirements.</p>
-
-<p>This is where the analogy is no longer useful: when writing software, you&rsquo;re also making it easier to reuse, modify and maintain.</p>
-
-<h3>Conclusion</h3>
-
-<p>The more tidied up you have your plants, the cheaper to maintain and modify.</p>
-
-<p>Software implementation details are like roots: they expand to find any small hole where to expand. Even to scaffold expected behaviour</p>
-
-<p>Trim your plants early and often, always with the help of a test suite</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1051,6 +1052,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/">Talks I Have Attended at the Craft Conf 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/21/what-legacy-code-is-about/">What Legacy Code Is About</a>
       </li>
     
@@ -1064,10 +1069,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity Matters</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/17/the-guardian-of-the-source/">The Guardian of the Source</a>
       </li>
     
   </ul>
