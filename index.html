@@ -9,7 +9,8 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="In the prologue of the book, while thanking everyone that has made the book possible: [&hellip;], none of the people mentioned here would be &hellip;">
+  <meta name="description" content="I&rsquo;ve read this article on software craftsmanship, development bootcamps and passion by Ken Auer
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,35 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/04/post-software-craftsmanship-are-bootcamps-enough/">Post: Software Craftsmanship: Are Bootcamps Enough?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-04T00:55:02+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:55 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve read <a href="https://www.coursereport.com/blog/software-craftsmanship-are-bootcamps-enough">this article</a> on software craftsmanship, development bootcamps and passion by <a href="https://twitter.com/kauerrolemodel">Ken Auer</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -686,74 +716,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting Clojure Code in Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-14T23:48:27+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:48 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Inserting this code in the blog:</p>
-
-<pre><code>```clojure
-(defn all-access[k]
-    (let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-
-<p>the octopress processor throws the error:</p>
-
-<pre><code>Error: Pygments can't parse unknown language: clojure
-Error: Run jekyll build --trace for more information.
-</code></pre>
-
-<p>A solution would be to include it as lisp code:</p>
-
-<pre><code>```lisp
-(defn all-access[k]
-    (let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-
-<p>this is an example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -769,6 +731,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/04/post-software-craftsmanship-are-bootcamps-enough/">Post: Software Craftsmanship: Are Bootcamps Enough?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/25/whose-fault-is-this/">Whose Fault Is This?</a>
       </li>
     
@@ -782,10 +748,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/">Talks I Have Attended at the Craft Conf 2015</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/21/what-legacy-code-is-about/">What Legacy Code Is About</a>
       </li>
     
   </ul>
