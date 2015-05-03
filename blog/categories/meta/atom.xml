@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meta | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/meta/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-05-04T01:05:47+02:00</updated>
+  <updated>2015-05-04T01:06:40+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -25,36 +25,23 @@
     (let [{:keys [a b] :as k}]
         (do a)
         (do (:b k))))
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/code&gt;&lt;/pre&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;the octopress processor throws the error:&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;pre&gt;&lt;code&gt;Error: Pygments can't parse unknown language: clojure
-</span><span class='line'>Error: Run jekyll build --trace for more information.
-</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;A solution would be to include it as lisp code:&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;pre&gt;&lt;code&gt;```lisp
-</span><span class='line'>(defn all-access[k]
-</span><span class='line'>    (let [{:keys [a b] :as k}]
-</span><span class='line'>        (do a)
-</span><span class='line'>        (do (:b k))))</span></code></pre></td></tr></table></div></figure>
+```
+</code></pre>
+
+<p>the octopress processor throws the error:</p>
+
+<pre><code>Error: Pygments can't parse unknown language: clojure
+Error: Run jekyll build --trace for more information.
+</code></pre>
+
+<p>A solution would be to include it as lisp code:</p>
+
+<pre><code>```lisp
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+```
 </code></pre>
 
 <p>this is an example:</p>
