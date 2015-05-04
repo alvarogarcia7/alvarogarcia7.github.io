@@ -9,7 +9,8 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I have seen this video: Nothing is something by Sandi Metz, as I saw it recommended here In the video, she talks programming in this fashion: (it is &hellip;">
+  <meta name="description" content="I have found these values, written by Buffer, very interesting.
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,35 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/04/buffers-take-on-values/">Buffer&#8217;s Take on Values</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-04T08:54:13+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:54 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have found these <a href="http://www.slideshare.net/Bufferapp/buffer-culture-04">values</a>, written by Buffer, very interesting.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -528,82 +558,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/19/logging-is-a-feature/">Logging Is a Feature</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-19T23:43:10+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:43 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of <a href="http://www.splunk.com/">Splunk</a>.</p>
-
-<p>This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
-
-<p>Strategies for dealing with this:</p>
-
-<ul>
-<li>functional logger: no shared state
-
-<ul>
-<li>can only log information available in this scope: parameters, attributes, static information</li>
-</ul>
-</li>
-<li>stateful logger: information is added to the threadContext and logged whenever necessary
-
-<ul>
-<li>can log information in this scope plus any of the previous invokings.</li>
-<li>the problem is precisely sharing state: you have to control all the possible parents to know where this data comes from. A piece of information may come from any source.</li>
-<li>Lose the reference of who is invoking you, as there is no customization for this. (only using implementation)</li>
-<li>Speak two different languages: one for logging and one for business logic</li>
-</ul>
-</li>
-<li>mixed: mix and match the best of both worlds.
-
-<ul>
-<li>The problem with the shared state can be solved if no data is overwritten and any information is stored in a map where the key is the fully qualified (FQ) method name (or FQ class name + FQ method name)</li>
-</ul>
-</li>
-</ul>
-
-
-<p>The GOOS book explains this very well on the 20th chapter, first half &ldquo;logging is a feature&rdquo;. If we log as described in chapters 19 and 20, some of the problems are reduced:</p>
-
-<ul>
-<li>multiple levels of abstraction</li>
-<li>indirect control over logging. decide in a single place whether to log exceptions of each kind or not</li>
-<li>remove &ldquo;implementation details&rdquo; such as &ldquo;log.isDebugEnabled&rdquo;</li>
-<li>remove performance issues: no need to build strings for logging every time, only need to pass objects. inside the logging layer, if the logger is enabled for that level, then spend the time building strings and print them</li>
-</ul>
-
-
-<p>We should remember that:</p>
-
-<ul>
-<li>Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.</li>
-<li>Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -619,6 +573,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/04/buffers-take-on-values/">Buffer&#8217;s Take on Values</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/04/video-nothing-is-something/">Video: Nothing Is Something</a>
       </li>
     
@@ -632,10 +590,6 @@
     
       <li class="post">
         <a href="/blog/2015/04/25/whose-fault-is-this/">Whose Fault Is This?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/25/how-i-read-apprenticeship-patterns/">How I Read Apprenticeship Patterns</a>
       </li>
     
   </ul>

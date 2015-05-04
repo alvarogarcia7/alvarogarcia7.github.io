@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="This was a low-hanging fruit as a team member who specialises in QA complained about testing in the last moment during the last sprint&rsquo;s &hellip;">
+  <meta name="description" content="This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,121 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/15/open-discussion-behaviour-driven-development/">Open Discussion: Behaviour-Driven Development</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-15T02:30:38+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:30 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on requirements, via automatically tested specifications. For more information, see the <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">wikipedia&rsquo;s article on the subject</a></p>
+
+<p>I forgot to mention that this is the perfect start to TDD, as this is usually called the double-loop TDD. See a post on it on <a href="http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/">coding is like cooking</a></p>
+
+<p>In this double-loop TDD, the first thing is to create a BDD scenario, run it (red-1), create a unit test that reflects this red (red-2), pass it, refactor; go to red-1 as many times as you need, doing TDD cycles. When you think the feature is done, execute the BDD scenarios and go to green (outer layer) and refactor.</p>
+
+<h2>(Our) Common setting</h2>
+
+<p>Going back to BDD, a common scenario would be the following:</p>
+
+<p>Layers of software:</p>
+
+<ul>
+<li>Domain-Specific Language (DSL). See <a href="http://en.wikipedia.org/wiki/Domain-specific_language">wikipedia&rsquo;s article</a></li>
+<li>Test adapter: an interpreter for this DSL</li>
+<li>Test software: test fixtures, methods, structures to arrange, act, and assert on the sut</li>
+<li>Production software (system under test - SUT): thing being tested</li>
+</ul>
+
+
+<h2>A BDD test vs A TDD test</h2>
+
+<p>Let&rsquo;s imagine a BDD test for a <a href="http://en.wikipedia.org/wiki/Linked_list">linked list</a>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Given I have an empty list
+</span><span class='line'>When I add an element
+</span><span class='line'>Then I have an element on the list</span></code></pre></td></tr></table></div></figure>
+
+
+<p>now, the same test in TDD [using java, junit 4, hamcrest]</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add_an_element_to_an_empty_list</span><span class="o">(){</span>
+</span><span class='line'>  <span class="n">MyLinkedList</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MyLinkedList</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;something&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">linkedList</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In some aspects, a BDD and a TDD test are similar:</p>
+
+<ul>
+<li>the given is the arrange, i.e., the prerequisite</li>
+<li>the when is the act, i.e., the command</li>
+<li>the then is the assertion, i.e., the postcondition</li>
+</ul>
+
+
+<p>(for more information on this, see <a href="http://en.wikipedia.org/wiki/Hoare_logic">Hoare&rsquo;s triple</a>)</p>
+
+<p>But in others, they are not. In BDD you do not specify the APIs, methods, etc. You only care about behavior.</p>
+
+<h2>Conclusion</h2>
+
+<p>Benefits:</p>
+
+<ul>
+<li>everyone might involved in the specification by example workshops (source: <a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154">ATDD by example</a>)</li>
+<li>live specifications. managers can now understand the real state</li>
+<li><a href="http://en.wikipedia.org/wiki/Regression_testing">regression tests</a> are much cheaper (from automation)</li>
+</ul>
+
+
+<p>Gotchas:</p>
+
+<ul>
+<li>Test only the happy paths</li>
+<li>This has a cost, do not overdo it</li>
+<li>Doesn&rsquo;t remove manual tests</li>
+<li>How do you manage multiple scenarios</li>
+<li>How fast should it be?</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -546,41 +661,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/12/kata-reverse-polish-notation-in-java/">Kata: Reverse Polish Notation in Java</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-12T03:56:58+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:56 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve written a <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">RPN</a> string calculator in java, using TDD with these: mockito, hamcrest, junit</p>
-
-<p>It&rsquo;s close to the <a href="http://osherove.com/tdd-kata-1/">String Calculator kata</a>, by <a href="https://twitter.com/RoyOsherove">Roy Osherove</a>. This RPN is using mocks (so more difficult than the String calculator)</p>
-
-<p>I&rsquo;ve tried to practice <a href="http://us2.campaign-archive1.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=42f9a0b66f&amp;e=6ca6702beb">&ldquo;Your tests are dragging you down&rdquo;</a> by <a href="https://twitter.com/jbrains">J.B Rainsberger</a> (mainly, to use something to write on). This behavior is also explained in the book <a href="http://www.carlosble.com/libro-tdd/">Dirigido por tests</a> (Spanish) by <a href="https://twitter.com/carlosble">Carlos Blé</a>.</p>
-
-<p>My solution is <a href="https://github.com/alvarogarcia7/kata-rpn-calculator-java">here</a>. Every step (red, green, refactor) has been saved.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -598,6 +678,10 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/04/buffers-take-on-values/">Buffer&#8217;s Take on Values</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/04/video-nothing-is-something/">Video: Nothing Is Something</a>
       </li>
     
@@ -611,10 +695,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
     
       <li class="post">
         <a href="/blog/2015/04/25/whose-fault-is-this/">Whose Fault Is This?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/25/how-i-read-apprenticeship-patterns/">How I Read Apprenticeship Patterns</a>
       </li>
     
   </ul>
