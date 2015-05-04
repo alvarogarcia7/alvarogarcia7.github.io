@@ -9,8 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I&rsquo;ve read this article on why programmer passion could be negative. The title is similar to a paper by Dijkstra.
-">
+  <meta name="description" content="I have seen this video: Nothing is something by Sandi Metz, as I saw it recommended here In the video, she talks programming in this fashion: (it is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +84,75 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/05/04/video-nothing-is-something/">Video: Nothing Is Something</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-04T07:43:14+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:43 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have seen this video: <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A">Nothing is something</a> by <a href="https://twitter.com/@sandimetz">Sandi Metz</a>, as I saw it recommended <a href="http://garajeando.blogspot.com.es/2015/04/interesting-talk-nothing-is-something.html">here</a></p>
+
+<p>In the video, she talks programming in this fashion: (it is a stack, not an unordered list)</p>
+
+<ul>
+<li>Abstraction seeking</li>
+<li>Message centric</li>
+<li>Condition Averse</li>
+<li>Smalltalk Infected</li>
+</ul>
+
+
+<blockquote><p>Not here to change the language but change you</p></blockquote>
+
+<p>This is a pattern I&rsquo;ve also heard from <a href="https://twitter.com/@old_sound">Alvaro Videla</a>, where he said that other, more powerful languages can change your mind and help you bring some of those concepts to your own language. He was talking about Haskell, she, about Smalltalk.</p>
+
+<p>She shows how to smell the <code>null object pattern</code> (that she independently discovered herself too - can be improved studying the classics<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>), also called <code>active nothing</code>. Decorates the <code>Animal</code> with a wrapper, to call it <code>GuaranteedAnimal</code></p>
+
+<p>Later on, shows how to code an example on a &lsquo;tail&rsquo;, extending behaviour with inheritance and how to get rid of it: prefer composition versus inheritance. The importance of roles.</p>
+
+<blockquote><p>Inheritance is for specialization, not for sharing code</p></blockquote>
+
+<p>Steps to convert inheritance into composition:</p>
+
+<ol>
+<li> Isolate the difference</li>
+<li> Name the concept</li>
+<li> Define the role</li>
+<li> Inject the players</li>
+</ol>
+
+
+<p>This is a trick I discovered here: when you don&rsquo;t know what name put here, create a spreadsheet and ask yourself what name the row should have. There is an example <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A#t=1959">at this minute</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>a reference to a pattern by the same name at <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/05/04/post-programmer-passion-considered-harmful/">Post: Programmer Passion Considered Harmful</a></h1>
     
     
@@ -101,7 +169,7 @@
   </header>
 
 
-  <div class="entry-content"><p>I&rsquo;ve read <a href="https://medium.com/on-coding/programmer-passion-considered-harmful-5c5d4e3a9b28">this article</a> on why programmer passion could be negative. The title is similar to a paper by Dijkstra.</p>
+  <div class="entry-content"><p>I&rsquo;ve read <a href="https://medium.com/on-coding/programmer-passion-considered-harmful-5c5d4e3a9b28">this article</a> on why programmer passion could be negative. The title is similar to a paper by Dijkstrag .</p>
 </div>
   
   
@@ -536,156 +604,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity Matters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-18T14:44:06+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:44 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus&#8217; <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
-
-<p>here are my notes:</p>
-
-<ul>
-<li>the software is the elephant</li>
-<li>do more, do it differently, do it better</li>
-<li>complexity of the elephant is going to dominate what you can do</li>
-<li>your ability to reason about your program is critical</li>
-<li>design is about pulling things apart</li>
-<li>become familiar by learning, trying</li>
-<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
-</ul>
-
-
-<p>Complexity vs simplicity:</p>
-
-<table>
-<thead>
-<tr>
-<th>Complexity     </th>
-<th> Simplicity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>state, objects </td>
-<td> values</td>
-</tr>
-<tr>
-<td>methods </td>
-<td> functions, namespaces</td>
-</tr>
-<tr>
-<td>variables </td>
-<td> managed refs</td>
-</tr>
-<tr>
-<td>inheritance, switch, matching  </td>
-<td> polymorphism à la carte</td>
-</tr>
-<tr>
-<td>syntax </td>
-<td> data</td>
-</tr>
-<tr>
-<td>imperative loops, fold </td>
-<td> set functions</td>
-</tr>
-<tr>
-<td>actors </td>
-<td> queues</td>
-</tr>
-<tr>
-<td>ORM </td>
-<td> declarative data manipulation</td>
-</tr>
-<tr>
-<td>conditionals </td>
-<td> rules</td>
-</tr>
-<tr>
-<td>inconsistency </td>
-<td> consistency </td>
-</tr>
-</tbody>
-</table>
-
-
-<ul>
-<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
-<li>simplicity is not about you. simplicity is a lot of hard work
-
-<ul>
-<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
-</ul>
-</li>
-<li>simplicity is not an objective</li>
-</ul>
-
-
-<p>Order is all over the place:</p>
-
-<table>
-<thead>
-<tr>
-<th>Complex  </th>
-<th> Simple</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>positional arguments </td>
-<td> named arguments or map</td>
-</tr>
-<tr>
-<td>syntax </td>
-<td> data</td>
-</tr>
-<tr>
-<td>product types  </td>
-<td> associate records</td>
-</tr>
-<tr>
-<td>imperative programs </td>
-<td> declarative programs</td>
-</tr>
-<tr>
-<td>prolog </td>
-<td> datalog</td>
-</tr>
-<tr>
-<td>call chains </td>
-<td> queues</td>
-</tr>
-<tr>
-<td>XML </td>
-<td> JSON, Clojure literals</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -701,6 +619,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/04/video-nothing-is-something/">Video: Nothing Is Something</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/04/post-programmer-passion-considered-harmful/">Post: Programmer Passion Considered Harmful</a>
       </li>
     
@@ -714,10 +636,6 @@
     
       <li class="post">
         <a href="/blog/2015/04/25/how-i-read-apprenticeship-patterns/">How I Read Apprenticeship Patterns</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/25/demand-for-tdd-and-refactor/">Demand for TDD and Refactor</a>
       </li>
     
   </ul>
