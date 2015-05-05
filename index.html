@@ -9,8 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I have found these values, written by Buffer, very interesting.
-">
+  <meta name="description" content="I&rsquo;ve watched this video: &ldquo;Public, static void&rdquo; by Rob Pike. The slides can be found here My notes ​dynamic vs static typing &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/05/video-public-static-void/">Video: Public Static Void</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-05T22:30:12+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:30 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve watched this video: <a href="https://www.youtube.com/watch?v=5kj5ApnhPAE">&ldquo;Public, static void&rdquo;</a> by Rob Pike. The slides can be found <a href="http://www.oscon.com/oscon2010/public/schedule/detail/13423">here</a></p>
+
+<h2>My notes</h2>
+
+<p>​dynamic vs static typing
+language too verbose
+do not mix the two of them</p>
+
+<p>too much bureaucracy
+fighting the compiler</p>
+
+<p>a language niche:</p>
+
+<ul>
+<li>comprehensible</li>
+<li>statically typed</li>
+<li>light on the page</li>
+<li>fast to work in</li>
+<li>scales well</li>
+<li>doesn&rsquo;t require tools but supports them well</li>
+<li>good at networking and multiprocessing</li>
+</ul>
+
+
+<p>  (minute 10:09)​</p>
+
+<p>Go was born to fill this niche</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -494,70 +548,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-21T07:23:23+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>7:23 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.</p>
-
-<p>The code provides a way of doing <code>try|catch</code>, specifying an exception to be caught.</p>
-
-<p>The source code is available <a href="https://github.com/alvarogarcia7/annotation-aspect-java">here</a></p>
-
-<h2>In the process</h2>
-
-<p>This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.</p>
-
-<p>If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t). The unmassaged code can be found <a href="https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e">here</a>. The massaged version is at the <a href="https://github.com/alvarogarcia7/annotation-aspect-java/">tip of the arrow</a></p>
-
-<h2>More information</h2>
-
-<p>Regarding <code>annotations</code> (like @Override):</p>
-
-<ul>
-<li><a href="https://docs.oracle.com/javase/tutorial/java/annotations/">This official article</a> on annotations is useful.</li>
-<li><a href="http://www.vogella.com/tutorials/JavaAnnotations/article.html">This article</a> by Lars Vogel guides you step by step.</li>
-<li><a href="http://tutorials.jenkov.com/java/annotations.html">This article</a> by Jakov Jenkov is very nice.</li>
-<li><a href="http://crunchify.com/understanding-java-annotation-annotation-examples/">This article</a> helps you to understand what an annotation is and what to use it for.</li>
-</ul>
-
-
-<p>Regarding <code>aspect</code> (based on AspectJ):</p>
-
-<ul>
-<li><a href="http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation">This question</a> has been my main source of information / inspiration for the spring + aspectj configuration</li>
-</ul>
-
-
-<h2>Conclusions</h2>
-
-<p>One of the drawbacks that I find to common examples or tutorials is that they&rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including <code>pom.xml</code> (dependencies) and tests.</p>
-
-<p>Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -573,6 +563,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/05/video-public-static-void/">Video: Public Static Void</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/04/buffers-take-on-values/">Buffer&#8217;s Take on Values</a>
       </li>
     
@@ -586,10 +580,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/04/post-software-craftsmanship-are-bootcamps-enough/">Post: Software Craftsmanship: Are Bootcamps Enough?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/25/whose-fault-is-this/">Whose Fault Is This?</a>
       </li>
     
   </ul>
