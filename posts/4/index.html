@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I&rsquo;ve just written a new kata, about a persistent linked list. It is using the same project as for the linked list kata. For now, only the add, &hellip;">
+  <meta name="description" content="I&rsquo;m currently reading the Apprenticeship patterns book, out of order (explained here: TODO). I&rsquo;m writing down the read chapters in a text &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,187 +78,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/23/kata-persistent-linked-list/">Kata: Persistent Linked List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-23T23:19:57+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve just written a new kata, about a persistent linked list.</p>
-
-<p>It is using the same project as for the <a href="https://github.com/alvarogarcia7/kata-linkedlist">linked list kata</a>.</p>
-
-<p>For now, only the <code>add</code>, <code>contains</code> and <code>size</code> methods are implemented.</p>
-
-<p>If you have any comments or code review, please let me know</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/22/polishing-your-tools/">Polishing Your Tools</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-22T09:30:20+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:30 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>The toolsmith</h2>
-
-<p><a href="http://en.wikipedia.org/wiki/Fred_Brooks">Frederick P Brooks, Jr</a> quoted / explained a theory explained by Mills and Baker<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> around 1971-72:</p>
-
-<blockquote><p>Chapter 3: The Surgical Team</p>
-
-<p>[&hellip;] but the team be organized like a surgical team rather than a hog-butchering team. That is, instead of each member cutting away on the problem, one does the cutting and the others give him[her] every support that will enhance his[her] effectiveness and productivity.</p>
-
-<p>[&hellip;]</p>
-
-<p><quote> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team </quote></p></blockquote>
-
-<p>(Text between square brackets is mine)</p>
-
-<p>The author goes on to explain the job descriptions for the surgeon, copilot, administrator, editor, secretaries, program clerk, toolsmith, tester and the language lawyer.</p>
-
-<p>The one that will be covered in this post is the toolsmith:</p>
-
-<blockquote><p><strong>The toolsmith</strong>. File-editing, text-editing, and interactive debugging services are now readily available, so that a team will rarely need its own machine and machine-operating crew. But these services must be available with unquestionably satisfactory response and reliability; and the surgeon must be sole judge of the adequacy of the service available to him. He needs a toolsmith, responsible for ensuring this adequacy of the basic service and for constructing, maintaining, and upgrading special tools &ndash;mostly interactive computer services&ndash; needed by his team. Each team will need its own toolsmith, regardless of the excellence and reliability of any centrally provided service, for his job is to see to the tools needed or wanted by his surgeon, without regard to any other team&rsquo;s needs. The tool-builder will often construct specialized utilities, cataloged procedures, macro libraries.</p>
-
-<p><quote> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team </quote></p></blockquote>
-
-<p>Even though the chapter reads a bit outdated, especially with the part about genders and methodologies (i.e., waterfall), the part about roles is interesting. The surgical team, as the author presents will be composed by 9 &frac12; (nine and a half) as the language lawyer can be shared among two or three teams.</p>
-
-<h2>Day to day practices</h2>
-
-<p>So, one full-time job is to build tools to service the surgeon and the copilot (1:8,5 ratio), or approximately 12% of a full-time position.</p>
-
-<p>These tools can make the surgeon and the copilot more effective, ranging from a single digit percentage to orders of magnitude in other tasks.</p>
-
-<p>As agile teams no longer have a toolsmith and the scrum master is not necessarily a technical expert who can build tools for the whole team, the tasks of creating tools must be taken care by everyone. No one better than yourself can know your needs and tailor solutions for them.</p>
-
-<p>The only downside is you have to invest ~5h (for a full time position) per week into creating and polishing tools for your work: it is a need for achieving more productivity when working.</p>
-
-<p>Nowadays that IDEs are configurable, this time might be invested on learning more advanced features as other shortcuts, refactoring techniques, other design patterns, etc. I like having my own live templates (see <a href="https://www.jetbrains.com/idea/help/creating-and-editing-live-templates.html#d1333587e219">description</a>), especially for tests, as I saw on the <a href="https://skillsmatter.com/courses/503-sandro-mancuso-s-crafting-code-course#programme">Crafting Code workshop</a> by <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a></p>
-
-<p>It may also include other activities as setting up your bash alias, cleaning your desk, trying a new UML diagram modeler, etc. Anything that improves the productivity of your main task.</p>
-
-<p>If we consider our experience and knowledge part of our tools (as we are knowledge workers), training could be considered part of polishing our tools. Short, daily or weekly training sessions (even internal) can make a great impact on breadth (not depth) of knowledge among your teammates. This shallow knowledge can open doors for more knowledge to be gained outside of company time, or used to practice and test other methods.</p>
-
-<p>This training is so useful for everyone (&ldquo;when one teaches, two learn&rdquo;) that I recommend my clients to do it. This has helped them cope with changing technologies, knowledge transfer and even some team building.</p>
-
-<h2>Company provided or not?</h2>
-
-<p>Should the company provide for this time to improve? Although I don&rsquo;t know the answer, it would greatly affect the programmers&#8217; productivity to do so. I would say, provide this time as long as what is produced is useful. How do you measure useful? This is a subjective opinion, so it depends on each one.</p>
-
-<p>Some companies acknowledge that this is so important as to invest part of their resources (0-2 hours per week) into training.</p>
-
-<p>Either way, should your company provide it for your or not, you are the one in charge of your career (from Mancuso, <a href="https://leanpub.com/socra">Software Craftsmanship</a> - now called <a href="http://www.amazon.co.uk/Software-Craftsman-Professionalism-Pragmatism-Robert/dp/0134052501/ref=sr_1_1?ie=UTF8&amp;qid=1416521895&amp;sr=8-1&amp;keywords=the+software+craftsman">The Software Craftsman</a>). If you are not allowed to invest company time for your own benefit, you could use some of your personal time to do so. It is not required, but you will soon enjoy its profits.</p>
-
-<h2>Examples</h2>
-
-<ul>
-<li>Every sprint, one of my clients (as of 2015-05) wants to review the work done using some slides and a live demo. The &lsquo;sample&rsquo; slides with the format, layout is useful. Everything that should be replaced (timestamp, contents, etc) is marked with a TODO</li>
-<li>Every day, I commit plenty of times to the control version system (i.e., git). I have an alias for commit, diff, status, etc, that saves me some keystrokes on the most common commands</li>
-</ul>
-
-
-<hr />
-
-<p>Mills, H., &ldquo;Chief programmer teams, principles, and procedures,&rdquo; IBM Federal Systems Division Report FSC 715108, Gaithersburg, Md., 1971.</p>
-
-<p>Baker, F. T., &ldquo;Chief programmer team management of production programming,&rdquo; IBM Sys. J., 11, 1 (1972).</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Original references in &ldquo;The Mythical Man-Month&rdquo; (Notes and References, page 294) point to these:<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/21/a-legacy-code-introduction/">A Legacy Code Introduction</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-21T20:05:46+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:05 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is one of the best legacy code introductions I&rsquo;ve seen:</p>
-
-<blockquote><p>The Grand Redesign in the Sky</p>
-
-<p>Eventually the team rebels. They inform management that they cannot continue to develop in this odious code base. They demand a redesign. Management does not want to expend the resources on a whole new redesign of the project, but they cannot deny that productivity is terrible. Eventually they bend to the demands of the developers and authorize the grand redesign in the sky.</p>
-
-<p>A new tiger team is selected. Everyone wants to be on this team because it&rsquo;s a greenfield project. They get to start over and create something truly beautiful. But only the best and brightest are chosen for the tiger team. Everyone else must continue to maintain the current system.</p>
-
-<p>Now the two teams are in a race. The tiger team must build a new system that does everything that the old system does. Not only that, they have to keep up with the changes that are continuously being made to the old system. Management will not replace the old system until the new system can do everything that the old system does.</p>
-
-<p>This race can go on for a very long time. I&rsquo;ve seen it take 10 years. And by the time it&rsquo;s done, the original members of the tiger team are long gone, and the current members are demanding that the new system be redesigned because it&rsquo;s such a mess.</p>
-
-<p><cite> Robert C. Martin </cite> in the chapter 1: Clean Code from the book by <a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">the same name</a></p></blockquote>
-
-<p>Also, why should you estimate the new tiger team abilities better than the old tiger team? Is it because the language, tools, or just because they are &ldquo;plain better&rdquo;?</p>
-
-<p>What guarantees that the resulting software is going to be better than the old one?</p>
-
-<p>Another interesting definition of legacy code is Michael Feather&rsquo;s one (code without tests).</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1038,6 +857,107 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/24/podcast-basta-ya-de-picar-spanish/">Podcast: Basta Ya De Picar (Spanish)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-24T21:03:03+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:03 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some weeks ago I listened to some podcasts from <a href="http://www.bastayadepicar.com">BastaYaDePicar</a> (episodes 1 to 8) and now I&rsquo;m listening more (9 to 10). I really recommend these to you, and I imagine that the newer episodes (also new format) will be interesting too.</p>
+
+<p>They&rsquo;re in Spanish and narrated by <a href="https://twitter.com/sbastn">Sebastian Hermida</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/24/code-snippets-stash/">Code Snippets Stash</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-24T20:49:55+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Following a team member&rsquo;s recommendation, I recently started a repository to save all my useful snippets.</p>
+
+<p>I&rsquo;ve decided that the examples should be designed guided by tests or at least to have a working example exercised by tests. Also, that I should not reinvent the wheel and use as many open source libraries as possible, reducing the amount of code I have to write myself.</p>
+
+<p>Ideally, every snippet should be a maven project (where applicable) and be imported as a small library, therefore being able to reuse the functionality incrementally across projects.</p>
+
+<p>For the time being, I&rsquo;m saving my snippets into a private repository and later I might decide to publish it for common usage.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/22/bank-kata-in-java/">Bank Kata in Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-22T22:52:01+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>10:52 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://twitter.com/trikitrok">Manuel Rivero</a> and I did a subset of the <a href="https://github.com/sandromancuso/Bank-kata">bank kata</a>, proposed by <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a>.</p>
+
+<p>We&rsquo;ve used java (mockito, hamcrest, junit), outside-in TDD. The code is spread among several sessions. We have not committed after each step, only at the end of the session.</p>
+
+<p>The source code is on <a href="https://github.com/alvarogarcia7/bank-kata">github</a></p>
+
+<p>You can read Manuel&rsquo;s take on the kata on <a href="http://garajeando.blogspot.com.es/2015/01/kata-bank-account-in-java.html">his blog</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1055,6 +975,10 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/09/self-study-in-april-2015/">Self-study in April 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/06/what-versus-how/">What Versus How</a>
       </li>
     
@@ -1063,15 +987,11 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
       </li>
     
       <li class="post">
-        <a href="/blog/2015/05/05/video-public-static-void/">Video: Public Static Void</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/04/buffers-take-on-values/">Buffer&#8217;s Take on Values</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2015/05/04/video-nothing-is-something/">Video: Nothing Is Something</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/30/internal-training-introduction-to-angularjs/">Internal Training: Introduction to AngularJs</a>
       </li>
     
   </ul>
