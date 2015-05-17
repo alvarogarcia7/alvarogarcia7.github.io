@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-05-17T12:59:35+02:00</updated>
+  <updated>2015-05-17T21:23:17+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,63 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Books Read in 2014Q4]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/05/17/books-read-in-2014q4/"/>
-    <updated>2015-05-17T12:49:50+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/05/17/books-read-in-2014q4</id>
-    <content type="html"><![CDATA[<p>Books I&rsquo;ve read this quarter Q4 on 2014, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html">post</a>:</p>
-
-<ul>
-<li><a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154">ATDD by Example: A Practical Guide to Acceptance Test-Driven Development</a> by Markus Gärtner</li>
-<li><a href="http://shop.oreilly.com/product/9780596007126.do">Head First Design Patterns</a> by Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra</li>
-<li><a href="http://shop.oreilly.com/product/9780596518387.do">Apprenticeship Patterns, Guidance for the Aspiring Software Craftsman</a> by Dave Hoover, Adewale Oshineye</li>
-<li><a href="http://www.carlosble.com/libro-tdd/">Diseño ágil con TDD</a>, by Carlos Blé Jurado; again</li>
-<li><a href="http://www.amazon.com/The-Mythical-Man-Month-Anniversary-Edition-ebook/dp/B00B8USS14">The Mythical Man-Month, Anniversary Edition: Essays On Software Engineering</a> by Frederick P. Brooks Jr.</li>
-<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091">Implementation Patterns</a> by Kent Beck</li>
-</ul>
-
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li>do not remember if there were any</li>
-</ul>
-
-
-<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Books Read in 2015Q1]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/05/17/books-read-in-2015q1/"/>
-    <updated>2015-05-17T12:49:49+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/05/17/books-read-in-2015q1</id>
-    <content type="html"><![CDATA[<p>Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html">post</a>:</p>
-
-<ul>
-<li><a href="https://leanpub.com/50quickideas">Fifty Quick Ideas to Improve your User Stories</a>, by Gojko Adzic and David Evans</li>
-<li><a href="https://leanpub.com/funretrospectives">Fun retrospectives</a> by Taina Caetano and Paulo Caroli</li>
-<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091">Implementation patterns</a> by Kent Beck</li>
-<li><a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">Clean code</a> by Robert C. Martin;  again</li>
-</ul>
-
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a>, by Benjamin J. Evans and Martijn Verburg</li>
-<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>, by Martin Fowler, (with Kent Beck, John Brant, William Opdyke, and Don Roberts)</li>
-<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>, by Steve Freeman and Nat Pryce</li>
-<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a>, by Mihaly Csikszentmihalyi</li>
-</ul>
-
-
-<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Gardening Manifesto]]></title>
@@ -1018,6 +961,122 @@ Error: Run jekyll build --trace for more information.
 </span></code></pre></td></tr></table></div></figure>
 
 
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Destructuring as a Refactor in Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/"/>
+    <updated>2015-04-14T23:36:23+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure</id>
+    <content type="html"><![CDATA[<p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
+
+<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user=&gt; (def point {:x 5 :y 7})
+</span><span class='line'>#'user/point
+</span><span class='line'>
+</span><span class='line'>(let [{:keys [x y] :as the-point} point]
+</span><span class='line'>         (println "x:" x "y:" y "point:" the-point))
+</span><span class='line'>
+</span><span class='line'>x: 5 y: 7 point: {:x 5, :y 7}</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
+
+<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
+
+<p>This has been used for a method like this one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this has been refactored to this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Redesign as a New TDD Phase]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/"/>
+    <updated>2015-04-13T22:00:45+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase</id>
+    <content type="html"><![CDATA[<p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
+
+<h2>Concept</h2>
+
+<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, it is a phase that might appear after refactor.</p>
+
+<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
+
+<h2>How I do redesign</h2>
+
+<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
+
+<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
+
+<h2>Other thoughts</h2>
+
+<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
+
+<blockquote><p>to change the design of (something)</p></blockquote>
+
+<p>or</p>
+
+<blockquote><p>to revise in appearance, function, or content</p></blockquote>
+
+<p>an example:</p>
+
+<blockquote><p>The book&rsquo;s cover has been redesigned for the new edition.</p></blockquote>
+
+<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
+
+<blockquote><p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p></blockquote>
+
+<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
+
+<h2>Other references</h2>
+
+<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
+
+<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
+
+<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
 
 ]]></content>
   </entry>

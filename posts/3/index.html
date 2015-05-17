@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Manuel has taught us today about the default value while destructuring: The following example illustrates the use of an :as directive to bind a local &hellip;">
+  <meta name="description" content="This is an experience report on Jason Gorman&rsquo;s &ldquo;Test-driven development intensive workshop&rdquo; on the April 11th, 2015 I attended this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,162 +78,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a Refactor in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-14T23:36:23+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:36 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
-
-<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>user=&gt; (def point {:x 5 :y 7})
-</span><span class='line'>#'user/point
-</span><span class='line'>
-</span><span class='line'>(let [{:keys [x y] :as the-point} point]
-</span><span class='line'>         (println "x:" x "y:" y "point:" the-point))
-</span><span class='line'>
-</span><span class='line'>x: 5 y: 7 point: {:x 5, :y 7}</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
-
-<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
-
-<p>This has been used for a method like this one:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>this has been refactored to this</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a New TDD Phase</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-13T22:00:45+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:00 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
-
-<h2>Concept</h2>
-
-<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, it is a phase that might appear after refactor.</p>
-
-<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
-
-<h2>How I do redesign</h2>
-
-<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
-
-<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
-
-<h2>Other thoughts</h2>
-
-<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
-
-<blockquote><p>to change the design of (something)</p></blockquote>
-
-<p>or</p>
-
-<blockquote><p>to revise in appearance, function, or content</p></blockquote>
-
-<p>an example:</p>
-
-<blockquote><p>The book&rsquo;s cover has been redesigned for the new edition.</p></blockquote>
-
-<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
-
-<blockquote><p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p></blockquote>
-
-<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
-
-<h2>Other references</h2>
-
-<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
-
-<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
-
-<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -548,6 +392,55 @@
 <p>Software implementation details are like roots: they expand to find any small hole where to expand. Even to scaffold expected behaviour</p>
 
 <p>Trim your plants early and often, always with the help of a test suite</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/books-read-in-2015q1/">Books Read in 2015Q1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T12:49:49+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html">post</a>:</p>
+
+<ul>
+<li><a href="https://leanpub.com/50quickideas">Fifty Quick Ideas to Improve your User Stories</a>, by Gojko Adzic and David Evans</li>
+<li><a href="https://leanpub.com/funretrospectives">Fun retrospectives</a> by Taina Caetano and Paulo Caroli</li>
+<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091">Implementation patterns</a> by Kent Beck</li>
+<li><a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">Clean code</a> by Robert C. Martin;  again</li>
+</ul>
+
+
+<p>Books started, not yet finished (WIP):</p>
+
+<ul>
+<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a>, by Benjamin J. Evans and Martijn Verburg</li>
+<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>, by Martin Fowler, (with Kent Beck, John Brant, William Opdyke, and Don Roberts)</li>
+<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>, by Steve Freeman and Nat Pryce</li>
+<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a>, by Mihaly Csikszentmihalyi</li>
+</ul>
+
+
+<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
 </div>
   
   
@@ -985,6 +878,71 @@
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/03/mob-programming-string-calculator-kata/">Mob Programming String Calculator Kata</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-03T04:46:48+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:46 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last Friday we did a kata<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> using a projector the string calculator <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> using pair programming, TDD and some mob-programming for the last refactoring.</p>
+
+<p>We used a projector (beamer) so everyone could see it. I tried to take really small baby steps but the adding part was done in ~6 cycles<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
+
+<p>We&rsquo;ve all learnt about shotcuts, live user templates for the IDE <sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>, TDD methodology, other ways of tackling the problem, how to refactor as a group, clean code, etc</p>
+
+<p>These sessions are necessary to share some knowledge among the teammates and have another chance of doing code review, releasing some pressure from daily practices or bad abstractions / designs (that will be taken care of in the future)</p>
+
+<p>We&rsquo;ve had such a great time, learning together, that would be a candidate for a weekly interaction.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Mob_programming">Mob programming</a> is such an eye opening practice. It forces you to reconsider your previous dogma and to understand the others&#8217; positions. Wikipedia reads &ldquo;early use of phrase [&hellip;] was made in &lsquo;Extreme Programming Perspectives&rsquo;&rdquo; but this practice is practiced by some, such as <a href="https://twitter.com/carlosble">Carlos Blé</a>, <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a> among others; also at the <a href="http://www.softwarecraftsmanshipbarcelona.org/">Software Craftsmanship Barcelona</a> <a href="https://twitter.com/hashtag/scbcn2013?src=hash">2013</a> and <a href="https://twitter.com/hashtag/SCBCN14?src=hash">2014</a> and the <a href="https://twitter.com/hashtag/socracan?src=hash">SoCra Canaries 2015</a></p>
+
+<h2>One goal</h2>
+
+<p>Our goal for this session was to practice TDD and baby steps, so the team can improve its ability on these skills.</p>
+
+<p>In any case, my objective for the katas (or deliberate practice) is not to get there as fast as we can but to improve our automated routines. This can affect our daily performance, as it becomes natural. It is not about the getting to the destination but enjoying the path along the way. In this manner, you are not so hurried up about a slow train but enjoy the views across the window.</p>
+
+<p>It was good that QA people in the team came to the session. He even participated with some tips / implementations during the refactors. Always fruitful to discuss (and learn) mixed skills (QA / dev) from the other side of the wall</p>
+
+<h2>Conclusion</h2>
+
+<p>I still haven&rsquo;t mastered the recipe (algorithm) for knowing when it is a scaffold and when it&rsquo;s time to refactor using &ldquo;replace algorithm&rdquo;. For know, I just use the three (3) rule and a bit of gut feeling on the side. The bad thing is that this can not be easily taught to someone else. Just learnt by osmosis and practice.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>matching none of the styles explained in <a href="http://johannesbrodwall.com/2011/12/18/how-to-start-a-coding-dojo/">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>This is a very good beginner&rsquo;s kata, created by <a href="https://twitter.com/royosherove">Roy Osherove</a>. Can be found <a href="http://osherove.com/tdd-kata-1/">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>One piece of feedback I received is that I talk too much while coding, as these 6 cycles took us about 45 minutes, total<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+<li id="fn:4">
+<p>There are some for <a href="https://www.jetbrains.com/idea/help/live-templates.html">IntelliJ IDEA</a>, <a href="http://stackoverflow.com/questions/4022367/what-is-the-eclipse-equivalent-of-intellij-live-templates">Eclipse</a> too<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1002,14 +960,6 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/05/17/books-read-in-2014q4/">Books Read in 2014Q4</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/17/books-read-in-2015q1/">Books Read in 2015Q1</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2015/05/17/software-gardening-manifesto/">Software Gardening Manifesto</a>
       </li>
     
@@ -1019,6 +969,14 @@
     
       <li class="post">
         <a href="/blog/2015/05/10/talk-software-is-eating-the-world/">Talk: Software Is Eating the World</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/self-study-in-may-2015/">Self-study in May 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/06/what-versus-how/">What Versus How</a>
       </li>
     
   </ul>
