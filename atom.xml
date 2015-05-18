@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-05-17T21:23:17+02:00</updated>
+  <updated>2015-05-18T22:46:59+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Internal Training: QA &amp; How to Test]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test/"/>
+    <updated>2015-05-18T22:20:09+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test</id>
+    <content type="html"><![CDATA[<p>At a client, we&rsquo;ve done today an internal training on &ldquo;QA &amp; how to test&rdquo;. In it, the most skilled person with the QA role in the dev team has explained to us some techniques and concepts for testing</p>
+
+<h2>My notes</h2>
+
+<p>Verification vs validation: building the product right vs building the right product.</p>
+
+<h3>Principles</h3>
+
+<p>Extracted from <a href="http://www.istqb.org/">ISTQB</a>:</p>
+
+<ul>
+<li>testing shows presence of defects</li>
+<li>exhaustive testing is impossible</li>
+<li>early testing is better than later testing</li>
+<li>defect clustering: areas with bigger defect ratio or more critical, etc should be tested more thoroughly</li>
+<li>pesticide paradox</li>
+<li>testing is context-dependent</li>
+<li>absence of errors fallacy: the absence of defects does not imply perfect software. There are also problems with validation.</li>
+</ul>
+
+
+<h3>Techniques</h3>
+
+<h4>People-based</h4>
+
+<ul>
+<li>bug bashes: e.g., time-constrained</li>
+<li>subject-matter expert testing</li>
+<li>eat your own dogfood</li>
+<li>others</li>
+</ul>
+
+
+<h4>Activity-based</h4>
+
+<ul>
+<li>regression</li>
+<li>scripted (manual)</li>
+<li>smoke</li>
+<li>exploratory</li>
+<li>installation</li>
+<li>load</li>
+<li>long sequence</li>
+<li>performance</li>
+</ul>
+
+
+<h4>Coverage-based</h4>
+
+<ul>
+<li>menu tour: exploration based on menus (especially on websites)</li>
+<li>functional and system testing</li>
+<li>integration</li>
+<li>logic</li>
+<li>state-based</li>
+</ul>
+
+
+<h4>Requirements-based</h4>
+
+<ul>
+<li>Equivalence partitioning: examples in the same set are considered equivalent</li>
+<li>Boundary based: there are interesting examples around and on the boundaries</li>
+<li>Decision tables: truth table</li>
+<li>State transition tables: state diagram</li>
+</ul>
+
+
+<h4>Risk-based</h4>
+
+<ul>
+<li>make a prioritized list: probability and impact</li>
+<li>perform testing exploring each risk</li>
+<li>after a risk disappears, another opens. Adjust your test effort to stay focused on the current crop</li>
+</ul>
+
+
+<h4>Use case tests</h4>
+
+<ul>
+<li>use case: a common case that represents one of your customer&rsquo;s cases</li>
+<li>use busines language</li>
+</ul>
+
+
+<h4>Structure-based</h4>
+
+<ul>
+<li>test coverage is different than code coverage</li>
+<li>test coverage is based on decision tables</li>
+</ul>
+
+
+<h4>Defining testing priorities</h4>
+
+<ul>
+<li>customer and contractual requirements</li>
+<li>regulatory</li>
+<li>experience-based</li>
+<li>&ldquo;Best representative&rdquo;</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Gardening Manifesto]]></title>
@@ -280,6 +390,18 @@ into a single post</p>
 <h2>Revisiting XP: be a thoughtful programmer by exercising more collective ownership</h2>
 
 <p>I&rsquo;ve read <a href="http://www.infoq.com/articles/revisit-p-collective">this article</a> by <a href="https://twitter.com/tiagooo_romero">Tiago Garcia</a> on the collective code ownership, as stated by Xtreme Programming (XP), with some example and guidelines.</p>
+
+<h2>Where&rsquo;s the Real Bottleneck in Scientific Computing?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.americanscientist.org/issues/pub/wheres-the-real-bottleneck-in-scientific-computing/99999">this article</a> by Greg Wilson on the tools and procedures investigators use to produce software.</p>
+
+<h2>Testing inside the Sprint</h2>
+
+<p>I&rsquo;ve read <a href="http://ronjeffries.com/articles/2015-03-01-testing-in-sprints/">this article</a> by Ron Jeffries.</p>
+
+<p>Discusses the need for testing and why this hasn&rsquo;t been communicated enough, as there still are people who have not understood it.</p>
+
+<p>Also about why people equal something failing when using scrum with scrum failing.</p>
 ]]></content>
   </entry>
   
@@ -1019,65 +1141,6 @@ Error: Run jekyll build --trace for more information.
 
 
 <p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Redesign as a New TDD Phase]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/"/>
-    <updated>2015-04-13T22:00:45+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase</id>
-    <content type="html"><![CDATA[<p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
-
-<h2>Concept</h2>
-
-<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, it is a phase that might appear after refactor.</p>
-
-<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
-
-<h2>How I do redesign</h2>
-
-<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
-
-<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
-
-<h2>Other thoughts</h2>
-
-<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
-
-<blockquote><p>to change the design of (something)</p></blockquote>
-
-<p>or</p>
-
-<blockquote><p>to revise in appearance, function, or content</p></blockquote>
-
-<p>an example:</p>
-
-<blockquote><p>The book&rsquo;s cover has been redesigned for the new edition.</p></blockquote>
-
-<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
-
-<blockquote><p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p></blockquote>
-
-<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
-
-<h2>Other references</h2>
-
-<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
-
-<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
-
-<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   
