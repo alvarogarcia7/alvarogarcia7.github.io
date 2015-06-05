@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-05-28T00:01:36+02:00</updated>
+  <updated>2015-06-05T09:25:59+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Self-study in June 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015/"/>
+    <updated>2015-06-03T13:13:10+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015</id>
+    <content type="html"><![CDATA[<p>Update: I&rsquo;ve grouped all small posts related to the self-study from June 2015
+into a single post</p>
+
+<h2>Le monitoring de flux par l’exemple</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.octo.com/le-monitoring-de-flux-par-lexemple/">this article</a> about monitoring, in the way of &ldquo;by example&rdquo;, by Cédrick Lunven and Julien Kirch (French)</p>
+
+<h2>The First Micro-service Architecture</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2015/05/28/TheFirstMicroserviceArchitecture.html">this article</a> about microservices and how they were implemented many years ago by Robert C. Martin</p>
+
+<h2>How I Learned to Balance My Life With Remote Work</h2>
+
+<p>I&rsquo;ve read <a href="https://open.bufferapp.com/remote-work/?utm_content=bufferaa5a2&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about balancing life and work, either physical or remote by Michael Erasmus</p>
+
+<h2>Demystified CQRS</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.codecentric.de/en/2015/05/demystified-cqrs/?utm_content=buffer35b18&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about CQRS by Nino Martincevic</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Internal Training: BPM: Process and Tools for Developers]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/02/internal-training-bpm-tool-and-process/"/>
+    <updated>2015-06-02T22:20:09+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/02/internal-training-bpm-tool-and-process</id>
+    <content type="html"><![CDATA[<p>At a client, I&rsquo;ve presented today an internal training on &ldquo;BPM: Process and tools for developers&rdquo;</p>
+
+<p>In it, we have introduced the BPM concept and the main ideas in Activiti BPM.</p>
+
+<p>Also techniques for hotswapping processes, tips and how-tos.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Internal Training: QA &amp; How to Test]]></title>
@@ -468,6 +507,14 @@ into a single post</p>
 <h2>The False Economy Of Metaprogramming</h2>
 
 <p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/03/06/the-false-economy-of-generated-methods.html">this article</a> by Michael Bernstein</p>
+
+<h2>Management and Engineering, overlapping</h2>
+
+<p>I&rsquo;ve read <a href="http://www.quora.com/Does-Adam-DAngelo-feel-comfortable-with-the-transition-from-an-engineer-to-a-management-position?srid=3OC&amp;share=1">this Quora answer</a> by Adam D&#8217;Angelo. The original title is: Does Adam D&#8217;Angelo feel comfortable with the transition from an engineer to a management position?</p>
+
+<h2>Evolution of The Twitter Stack</h2>
+
+<p>I&rsquo;ve read <a href="https://www.slideshare.net/slideshow/embed_code/key/ly83zQkBjCxnIX">these slides</a> about changing the technology stack in Twitter: from Rails to JVM-based</p>
 ]]></content>
   </entry>
   
@@ -1102,111 +1149,6 @@ into a single post</p>
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Inserting Clojure Code in Octopress]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress/"/>
-    <updated>2015-04-14T23:48:27+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress</id>
-    <content type="html"><![CDATA[<p>Inserting this code in the blog:</p>
-
-<pre><code>```clojure
-(defn all-access[k]
-    (let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-
-<p>the octopress processor throws the error:</p>
-
-<pre><code>Error: Pygments can't parse unknown language: clojure
-Error: Run jekyll build --trace for more information.
-</code></pre>
-
-<p>A solution would be to include it as lisp code:</p>
-
-<pre><code>```lisp
-(defn all-access[k]
-    (let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-
-<p>this is an example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Destructuring as a Refactor in Clojure]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/"/>
-    <updated>2015-04-14T23:36:23+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure</id>
-    <content type="html"><![CDATA[<p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
-
-<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>user=&gt; (def point {:x 5 :y 7})
-</span><span class='line'>#'user/point
-</span><span class='line'>
-</span><span class='line'>(let [{:keys [x y] :as the-point} point]
-</span><span class='line'>         (println "x:" x "y:" y "point:" the-point))
-</span><span class='line'>
-</span><span class='line'>x: 5 y: 7 point: {:x 5, :y 7}</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
-
-<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
-
-<p>This has been used for a method like this one:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>this has been refactored to this</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
 ]]></content>
   </entry>
   

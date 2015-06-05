@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="At the Craft Conf 2015 I saw someone with the book Apprenticeship Patterns by Dave Hoover and Adewale Oshineye and asked them about the book. After &hellip;">
+  <meta name="description" content="At a client, today I&rsquo;ve done an internal training on angular js: we&rsquo;ve prepared some slides and a live demo. The repository with all the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,92 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/30/internal-training-introduction-to-angularjs/">Internal Training: Introduction to AngularJs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-30T20:22:16+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:22 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, today I&rsquo;ve done an internal training on <a href="https://angularjs.org/">angular js</a>: we&rsquo;ve prepared some <a href="https://github.com/alvarogarcia7/demo-frontend-angularjs/tree/master/slides">slides</a> and a live demo.</p>
+
+<p>The repository with all the information can be found <a href="https://github.com/alvarogarcia7/demo-frontend-angularjs">here</a>.</p>
+
+<p>Apparently, the training has been a success, given that most of the talent in the team is backend focused (as opposed to full-stack) and changing from java to javascript is not straight-forward.</p>
+
+<p>Note: this post has been created a posteriori, dated with the correct training timestamp.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/whose-fault-is-this/">Whose Fault Is This?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T14:10:31+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the prologue of the book, while thanking everyone that has made the book possible:</p>
+
+<blockquote><p>[&hellip;], none of the people mentioned here would be responsible for any inaccuracy that might exist in the book, as this responsibility is exclusively mine</p>
+
+<p>Mihaly Csikszentmihalyi (translated)<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, prologue of &ldquo;<a href="http://www.amazon.com/Flow-The-Psychology-Optimal-Experience/dp/0061339202">Flow</a>&rdquo;</p></blockquote>
+
+<p>This connects with what <a href="http://twitter.com/@tastapod">Dan North</a> said in the Craft Conf about this idea of the &ldquo;I&rsquo;m the only one in the company producing good quality work, the rest are not doing the same&rdquo;. Of course, he was quoting greedy, selfish people who think this instead of attributing the success to the whole team.</p>
+
+<p>Regarding the whole team, if I recall correctly, it was <a href="http://twitter.com/@svenpet">Sven Peters</a> who explained that &ldquo;[&hellip;] either the team wins or looses. There are no individual wins [&hellip;]&rdquo; <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>In this sense, Csikszentmihalyi assumes all responsibility when quoting and reflecting on other&rsquo;s works. It was his idea to develop on top of others, so any imperfection is his.</p>
+
+<p>This is similar as when approving a pull request: you make sure that the code works and you stand by it. It is no longer the original owner&rsquo;s cause, but yours too, as you have signed this request. On the pull request, though, the code ownership is already distributed among the whole team, but approvals ensures the presence of the <a href="/blog/categories/guardian-of-the-source">guardian of the source</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>I had to translate the quote, because I did not borrow the book in English<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>When the talks are available, we will be able the ensure the correct attribution of this idea.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -635,151 +721,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting Clojure Code in Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-14T23:48:27+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:48 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Inserting this code in the blog:</p>
-
-<pre><code>```clojure
-(defn all-access[k]
-    (let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-
-<p>the octopress processor throws the error:</p>
-
-<pre><code>Error: Pygments can't parse unknown language: clojure
-Error: Run jekyll build --trace for more information.
-</code></pre>
-
-<p>A solution would be to include it as lisp code:</p>
-
-<pre><code>```lisp
-(defn all-access[k]
-    (let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-
-<p>this is an example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a Refactor in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-14T23:36:23+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:36 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
-
-<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>user=&gt; (def point {:x 5 :y 7})
-</span><span class='line'>#'user/point
-</span><span class='line'>
-</span><span class='line'>(let [{:keys [x y] :as the-point} point]
-</span><span class='line'>         (println "x:" x "y:" y "point:" the-point))
-</span><span class='line'>
-</span><span class='line'>x: 5 y: 7 point: {:x 5, :y 7}</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
-
-<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
-
-<p>This has been used for a method like this one:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>this has been refactored to this</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -797,6 +738,14 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/03/self-study-in-june-2015/">Self-study in June 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/02/internal-training-bpm-tool-and-process/">Internal Training: BPM: Process and Tools for Developers</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal Training: QA &amp; How to Test</a>
       </li>
     
@@ -806,14 +755,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/05/12/paper-tdd-in-industrial-teams/">Paper: TDD in Industrial Teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/10/talk-software-is-eating-the-world/">Talk: Software Is Eating the World</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/09/self-study-in-may-2015/">Self-study in May 2015</a>
       </li>
     
   </ul>

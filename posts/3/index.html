@@ -9,7 +9,9 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="In the last TDD workshop (experience report here), a conversation with Gary McLean Hall introduced to me this new concept of &ldquo;Redesign&rdquo; &hellip;">
+  <meta name="description" content="Inserting this code in the blog: ```clojure
+(defn all-access[k] (let [{:keys [a b] :as k}] (do a) (do (:b k))))
+``` the octopress processor throws &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +80,151 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting Clojure Code in Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-14T23:48:27+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:48 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Inserting this code in the blog:</p>
+
+<pre><code>```clojure
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+```
+</code></pre>
+
+<p>the octopress processor throws the error:</p>
+
+<pre><code>Error: Pygments can't parse unknown language: clojure
+Error: Run jekyll build --trace for more information.
+</code></pre>
+
+<p>A solution would be to include it as lisp code:</p>
+
+<pre><code>```lisp
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+```
+</code></pre>
+
+<p>this is an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a Refactor in Clojure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-14T23:36:23+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:36 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
+
+<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user=&gt; (def point {:x 5 :y 7})
+</span><span class='line'>#'user/point
+</span><span class='line'>
+</span><span class='line'>(let [{:keys [x y] :as the-point} point]
+</span><span class='line'>         (println "x:" x "y:" y "point:" the-point))
+</span><span class='line'>
+</span><span class='line'>x: 5 y: 7 point: {:x 5, :y 7}</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
+
+<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
+
+<p>This has been used for a method like this one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this has been refactored to this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -881,82 +1028,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/10/maven-module-base-for-cucumber-in-java/">Maven Module Base for Cucumber in Java</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-10T07:24:38+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:24 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve built a small maven module, to be used directly with cucumber. You can fork the repository <a href="https://github.com/alvarogarcia7/base-bdd-cucumber">here</a></p>
-
-<p>This is the setup I&rsquo;ve proposed for the meetup <a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/220673134/">&ldquo;BDD Cucumber kata (gherkin + code)&rdquo;</a>. Will see if this code is successfully used by the ~40 participants in a couple of weeks</p>
-
-<p>(Quote from the <a href="https://github.com/alvarogarcia7/base-bdd-cucumber/blob/master/README.md">README.md</a>):</p>
-
-<p>This maven project has been possible due to <a href="https://twitter.com/@thomassundberg">Thomas Sundberg</a> and <a href="https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world">this post</a></p>
-
-<p>Should you want to, there&rsquo;s a tweet to thank him the effort: <a href="https://twitter.com/intent/tweet?text=@thomassundberg%20thanks%20for%20the%20cucumber%20bdd%20tutorial!%20Will%20be%20using%20it%20from%20@agilebcn;Keep%20up%0Athe%20good%20work&amp;url=https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world/">tweet intent here</a></p>
-
-<p>Happy katas and happy bdd&#8217;ing!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/05/kata-mars-rover-in-clojure/">Kata: Mars Rover in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-05T00:33:50+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:33 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Yesterday at the <a href="http://www.meetup.com/ClojureBCN/events/220773795/">clojure meetup</a> we<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> did the <a href="http://dallashackclub.com/rover">mars rover</a> in clojure and today I&rsquo;ve tried my hand at it again. Original, from the three of us <a href="https://github.com/jesusdiez/kata-rover-clojure">here</a> and my <a href="https://github.com/alvarogarcia7/kata-rover-clojure">results here</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p><a href="https://twitter.com/jorgeavila_ss">Jorge Ávila</a>, <a href="https://twitter.com/jdiezc">Jesús Díez</a> and I<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -974,6 +1045,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/03/self-study-in-june-2015/">Self-study in June 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/02/internal-training-bpm-tool-and-process/">Internal Training: BPM: Process and Tools for Developers</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal Training: QA &amp; How to Test</a>
       </li>
     
@@ -983,14 +1062,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/12/paper-tdd-in-industrial-teams/">Paper: TDD in Industrial Teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/10/talk-software-is-eating-the-world/">Talk: Software Is Eating the World</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/09/self-study-in-may-2015/">Self-study in May 2015</a>
       </li>
     
   </ul>
