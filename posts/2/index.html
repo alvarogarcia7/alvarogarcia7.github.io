@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="At a client, today I&rsquo;ve done an internal training on angular js: we&rsquo;ve prepared some slides and a live demo. The repository with all the &hellip;">
+  <meta name="description" content="I have seen this video: Nothing is something by Sandi Metz, as I saw it recommended here In the video, she talks programming in this fashion: (it is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/04/video-nothing-is-something/">Video: Nothing Is Something</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-04T07:43:14+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:43 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have seen this video: <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A">Nothing is something</a> by <a href="https://twitter.com/@sandimetz">Sandi Metz</a>, as I saw it recommended <a href="http://garajeando.blogspot.com.es/2015/04/interesting-talk-nothing-is-something.html">here</a></p>
+
+<p>In the video, she talks programming in this fashion: (it is a stack, not an unordered list)</p>
+
+<ul>
+<li>Abstraction seeking</li>
+<li>Message centric</li>
+<li>Condition Averse</li>
+<li>Smalltalk Infected</li>
+</ul>
+
+
+<blockquote><p>Not here to change the language but change you</p></blockquote>
+
+<p>This is a pattern I&rsquo;ve also heard from <a href="https://twitter.com/@old_sound">Alvaro Videla</a>, where he said that other, more powerful languages can change your mind and help you bring some of those concepts to your own language. He was talking about Haskell, she, about Smalltalk.</p>
+
+<p>She shows how to smell the <code>null object pattern</code> (that she independently discovered herself too - can be improved studying the classics<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>), also called <code>active nothing</code>. Decorates the <code>Animal</code> with a wrapper, to call it <code>GuaranteedAnimal</code></p>
+
+<p>Later on, shows how to code an example on a &lsquo;tail&rsquo;, extending behaviour with inheritance and how to get rid of it: prefer composition versus inheritance. The importance of roles.</p>
+
+<blockquote><p>Inheritance is for specialization, not for sharing code</p></blockquote>
+
+<p>Steps to convert inheritance into composition:</p>
+
+<ol>
+<li> Isolate the difference</li>
+<li> Name the concept</li>
+<li> Define the role</li>
+<li> Inject the players</li>
+</ol>
+
+
+<p>This is a trick I discovered here: when you don&rsquo;t know what name put here, create a spreadsheet and ask yourself what name the row should have. There is an example <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A#t=1959">at this minute</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>a reference to a pattern by the same name at <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -662,65 +731,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/17/the-guardian-of-the-source/">The Guardian of the Source</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-17T22:01:48+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:01 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Overheard today at the office, while they were discussing the approval of a pull request:</p>
-
-<blockquote><p>[Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this?</p>
-
-<p>[Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source</p>
-
-<p>[PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase.</p></blockquote>
-
-<p>This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;<a href="http://knowyourmeme.com/memes/you-shall-not-pass">you shall not pass</a>&rdquo; while on top of the bridge.</p>
-
-<p>This is part of the objectives of doing a pull request before merging code: stop the bad code<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> before it is merged to the codebase.</p>
-
-<p>Later, as you start having <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows</a> in your codebase, it is easier that you start introducing more. Exactly about this is the <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows theory</a>.</p>
-
-<p>On the other hand, if you try to block that bad code before it is merged, it is cheaper to remove it: nothing depends on it, you introduce no repetition, etc<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
-
-<p>This also connects with the idea present in <a href="http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501">Software Craftsmanship, now called The Software Craftsman</a>, about preserving value for investors and treat software as an investment (with positive ROI) rather than a sunk cost.</p>
-
-<p>It is being picky and, to the most of our possibilities, do not letting any defects nor bad code into the codebase. A hedge fund manager would not let any toxic or dubious asset into the managed funds. This would be counterproductive in the long run (maybe even in the short one) and would be not doing their job correctly. Why is it that some developers suggest or accept these toxic assets?</p>
-
-<p>So, at least for me, would be an honor to be called the &ldquo;Guardian of the Source&rdquo; by someone I respect, as long as this is a serious proposition (i.e., not a joke of some kind).</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Bad code can be expressed in many ways: long methods, bad naming, breaking design principles (e.g., SOLID, KISS, DRY - OAOO), code with defects, no tests or no coverage, etc.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>A source is <a href="http://c2.com/cgi/wiki?DiscoverDefectsEarly">Discover defects early</a>. Another is <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">this paper</a> that cites the ratio of fixing it later to 5:1 (five times more expensive).<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -738,6 +748,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/11/brownbag-session-refactoring/">Brown-bag Session: Refactoring</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/03/self-study-in-june-2015/">Self-study in June 2015</a>
       </li>
     
@@ -751,10 +765,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/17/software-gardening-manifesto/">Software Gardening Manifesto</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/12/paper-tdd-in-industrial-teams/">Paper: TDD in Industrial Teams</a>
       </li>
     
   </ul>
