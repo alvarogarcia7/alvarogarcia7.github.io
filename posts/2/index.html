@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I have seen this video: Nothing is something by Sandi Metz, as I saw it recommended here In the video, she talks programming in this fashion: (it is &hellip;">
+  <meta name="description" content="At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: Testing is hard - just do it Our &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,106 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/">Internal Training: Testing Is Hard - Just Do It</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-05T23:00:17+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/">Testing is hard - just do it</a></p>
+
+<h2>Our thoughts</h2>
+
+<blockquote><p>When a bug is found, prove it exists with a test</p></blockquote>
+
+<p>This immediately reduces defect rate: the same regression cannot be introduced again</p>
+
+<blockquote><p> fix a bug a second time</p></blockquote>
+
+<p>If fixing a bug (having defects in your code) was &lsquo;waste&rsquo;, as defined by lean methodologies, it also is wast fixing it for the following times</p>
+
+<blockquote><p>testing requires discipline</p></blockquote>
+
+<p>Agree. See quote by Larry Wall (this same article)</p>
+
+<blockquote><p>[Three requirements for a good test suite]:</p>
+
+<ol>
+<li>The tests need to be easier to write</li>
+<li>The test suite must run, and pass, before any code is allowed out the door</li>
+<li>Support from the project&rsquo;s leadership</li>
+</ol>
+</blockquote>
+
+<p>Agree.</p>
+
+<blockquote><p>Programming is like drawing water from a well</p></blockquote>
+
+<p>Good analogy</p>
+
+<blockquote><p>I&rsquo;m going to assume you are smarter than me [&hellip;]</p></blockquote>
+
+<p>This is related to &lsquo;doing clever things&rsquo;: when I write &lsquo;clever code&rsquo;, that has neither comments, nor it is massaged to be Clean Code, it will cost me many times more to modify / understand in the future vs massage it a little bit.</p>
+
+<p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
+
+<p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vs</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="o">(</span><span class="n">elements</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">validElements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Open questions / other ideas</h2>
+
+<ul>
+<li>There are tests that are more important than others. Is there a tool to assign them weights and inform about which preponderation of the codebase is broken? The same (i.e., more importance) can happen for production code.</li>
+<li>Is SCRUM apt for junior developers? In the sense of the increased autonomy, more decisions, more required technical skills / values, etc</li>
+<li>We discussed what differentiates a project with a shorter deadline from one with a longer deadline. The consensus was: you should do tests for any kind of project, the shorter deadline project won&rsquo;t allow as much time for refactoring</li>
+<li>Tests iff (i.e., if and only if) working code</li>
+<li>Tests do not guarantee lack of defects</li>
+<li>Bijectiveness between tests and features (production code)</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -581,156 +681,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity Matters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-18T14:44:06+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:44 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus&#8217; <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
-
-<p>here are my notes:</p>
-
-<ul>
-<li>the software is the elephant</li>
-<li>do more, do it differently, do it better</li>
-<li>complexity of the elephant is going to dominate what you can do</li>
-<li>your ability to reason about your program is critical</li>
-<li>design is about pulling things apart</li>
-<li>become familiar by learning, trying</li>
-<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
-</ul>
-
-
-<p>Complexity vs simplicity:</p>
-
-<table>
-<thead>
-<tr>
-<th>Complexity     </th>
-<th> Simplicity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>state, objects </td>
-<td> values</td>
-</tr>
-<tr>
-<td>methods </td>
-<td> functions, namespaces</td>
-</tr>
-<tr>
-<td>variables </td>
-<td> managed refs</td>
-</tr>
-<tr>
-<td>inheritance, switch, matching  </td>
-<td> polymorphism à la carte</td>
-</tr>
-<tr>
-<td>syntax </td>
-<td> data</td>
-</tr>
-<tr>
-<td>imperative loops, fold </td>
-<td> set functions</td>
-</tr>
-<tr>
-<td>actors </td>
-<td> queues</td>
-</tr>
-<tr>
-<td>ORM </td>
-<td> declarative data manipulation</td>
-</tr>
-<tr>
-<td>conditionals </td>
-<td> rules</td>
-</tr>
-<tr>
-<td>inconsistency </td>
-<td> consistency </td>
-</tr>
-</tbody>
-</table>
-
-
-<ul>
-<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
-<li>simplicity is not about you. simplicity is a lot of hard work
-
-<ul>
-<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
-</ul>
-</li>
-<li>simplicity is not an objective</li>
-</ul>
-
-
-<p>Order is all over the place:</p>
-
-<table>
-<thead>
-<tr>
-<th>Complex  </th>
-<th> Simple</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>positional arguments </td>
-<td> named arguments or map</td>
-</tr>
-<tr>
-<td>syntax </td>
-<td> data</td>
-</tr>
-<tr>
-<td>product types  </td>
-<td> associate records</td>
-</tr>
-<tr>
-<td>imperative programs </td>
-<td> declarative programs</td>
-</tr>
-<tr>
-<td>prolog </td>
-<td> datalog</td>
-</tr>
-<tr>
-<td>call chains </td>
-<td> queues</td>
-</tr>
-<tr>
-<td>XML </td>
-<td> JSON, Clojure literals</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -748,6 +698,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/14/types-of-defects/">Types of Defects</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/11/brownbag-session-refactoring/">Brown-bag Session: Refactoring</a>
       </li>
     
@@ -761,10 +715,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal Training: QA &amp; How to Test</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/17/software-gardening-manifesto/">Software Gardening Manifesto</a>
       </li>
     
   </ul>

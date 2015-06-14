@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Overheard today at the office, while they were discussing the approval of a pull request: [Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t &hellip;">
+  <meta name="description" content="I&rsquo;ve seen this video by Rich Hickey: &ldquo;Simplicity matters&rdquo;, taken from Manuel Rivero&rsquo;s google plus' site here are my notes: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,156 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity Matters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-18T14:44:06+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus&#8217; <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
+
+<p>here are my notes:</p>
+
+<ul>
+<li>the software is the elephant</li>
+<li>do more, do it differently, do it better</li>
+<li>complexity of the elephant is going to dominate what you can do</li>
+<li>your ability to reason about your program is critical</li>
+<li>design is about pulling things apart</li>
+<li>become familiar by learning, trying</li>
+<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
+</ul>
+
+
+<p>Complexity vs simplicity:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complexity     </th>
+<th> Simplicity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state, objects </td>
+<td> values</td>
+</tr>
+<tr>
+<td>methods </td>
+<td> functions, namespaces</td>
+</tr>
+<tr>
+<td>variables </td>
+<td> managed refs</td>
+</tr>
+<tr>
+<td>inheritance, switch, matching  </td>
+<td> polymorphism à la carte</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>imperative loops, fold </td>
+<td> set functions</td>
+</tr>
+<tr>
+<td>actors </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>ORM </td>
+<td> declarative data manipulation</td>
+</tr>
+<tr>
+<td>conditionals </td>
+<td> rules</td>
+</tr>
+<tr>
+<td>inconsistency </td>
+<td> consistency </td>
+</tr>
+</tbody>
+</table>
+
+
+<ul>
+<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
+<li>simplicity is not about you. simplicity is a lot of hard work
+
+<ul>
+<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
+</ul>
+</li>
+<li>simplicity is not an objective</li>
+</ul>
+
+
+<p>Order is all over the place:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complex  </th>
+<th> Simple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>positional arguments </td>
+<td> named arguments or map</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>product types  </td>
+<td> associate records</td>
+</tr>
+<tr>
+<td>imperative programs </td>
+<td> declarative programs</td>
+</tr>
+<tr>
+<td>prolog </td>
+<td> datalog</td>
+</tr>
+<tr>
+<td>call chains </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>XML </td>
+<td> JSON, Clojure literals</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -687,6 +837,76 @@ Error: Run jekyll build --trace for more information.
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/03/31/tdd-microexercise-tire-pressure/">TDD Microexercise: Tire Pressure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T23:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday, <a href="http://twitter.com/@trikitrok">Manuel Rivero</a> and I facilitated a <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/events/221463037/">workshop</a> using the <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises/Java/TirePressureMonitoringSystem">tire pressure</a> TDD microexercise. (More microexercises can be found in <a href="/blog/categories/microexercise">this category</a>, also <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises">here</a>)</p>
+
+<p>We scheduled the session as follows:</p>
+
+<ul>
+<li>10 minutes introduction to the exercise</li>
+<li>10 minutes to download the code and take a first look</li>
+<li>10 minutes explanation about the exercise, what the problem is, etc</li>
+<li>30 minutes for the attendees to explore the solution (on their own)</li>
+<li>10 minutes for commenting the explored solutions, comments about it</li>
+<li>40 minutes of prepared kata format</li>
+<li>10 minutes of final explanations, questions and answers (Q&amp;A)</li>
+</ul>
+
+
+<p>Total: 120 minutes or two hours, approximately</p>
+
+<p>We decided that one would be mostly at the keyboard and the other mostly explaining. This allows for the speaker to introduce some concepts while the driver is performing a larger refactor / step.</p>
+
+<p>Some of our own feedback:</p>
+
+<ul>
+<li>Have the kata prepared, clear all your doubts before doing it live</li>
+<li>Be very specific about the goal of the kata: the narrower the focus, the more we will learn</li>
+<li>If necessary, exercise your shortcuts / practices one last time</li>
+<li>Set up the font as big as needed. Even remove some whitelines (present in your usual code) so more text can fit in the screen.</li>
+<li>It was very useful for us to have a small script of what we would perform: what was the idea, where to stop to explain things, etc</li>
+<li>A prepared kata is a show (like a movie), so the dialogs between the performing pair are important. Do not be afraid to tell the reasons why you did this last refactor.</li>
+<li>Answer the questions as you go, do not wait until the end of the session</li>
+</ul>
+
+
+<p>Some feedback we received:</p>
+
+<ul>
+<li>It would have been useful to do a recap at the end of the session, to refresh the most important concepts</li>
+<li>In general the session was good, they were satisfied with the techniques shown there</li>
+<li>The exercise was concise and small, perfect for two hours&#8217; time</li>
+</ul>
+
+
+<p>Many thanks to all the attendees and to Manuel: I learnt a lot from the session and renewed my energies to keep doing these workshop sessions. Also thanks to Luca Minudel for writing these awesome exercises.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/03/31/books-read-in-2015q1/">Books Read in 2015Q1</a></h1>
     
     
@@ -832,123 +1052,6 @@ Error: Run jekyll build --trace for more information.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/25/meetup-cross-pollination/">Meetup Cross-pollination</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-25T23:50:23+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:50 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://twitter.com/adibolb">Adrian Bolboaca</a> has written a very interesting post on being a community bumble-bee. (Source can be found <a href="http://blog.adrianbolboaca.ro/2015/03/talk-agile-lean-europe-2014-being-a-community-bumble-bee/">here</a>)</p>
-
-<p>He goes on to explain how he has visited many meetups all over Europe and the big chunk of information and experience he has learned from them.</p>
-
-<p>He tells us about a selfish approach to organizing meetups:</p>
-
-<blockquote><p>When one teaches two learn</p>
-
-<p>(apparently attributed to) Robert Heinlein, <a href="http://www.math.niu.edu/~rusin/nonwork/quotes">source</a></p></blockquote>
-
-<p>I share this feeling of learning while teaching, as long as you reflect and analyze (e.g., <a href="http://en.wikipedia.org/wiki/Hansei">hansei</a> or <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch05.html#reflect_as_you_work">reflect as you work</a>). I also try to apply it to my meetups.</p>
-
-<p>As a funny note, he said this cross-pollination has crystallized in as many ideas as to fill three books.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/16/open-space-code-reviews/">Open Space: Code Reviews</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-16T22:44:42+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:44 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today we&rsquo;ve discussed about code reviews on <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/events/220293683/">this open space</a></p>
-
-<h2>Notes</h2>
-
-<p>These are my notes, in no particular order:</p>
-
-<ul>
-<li>reduce information silos all around the company, as everyone [technical] can participate in these events</li>
-<li>raise the &ldquo;just arrived&rdquo; people&rsquo;s knowledge [Difficult to hit the ground up and running, but these code review sessions can help]</li>
-<li>invest one person as &lsquo;sheriff&rsquo; for the sprint: they will take care of static analysis tools (such as sonar) and continuous integration (CI; such as jenkins). They will make sure others follow the working agreements</li>
-<li>In the academic environment, some teams do share their patches via mailing lists and this makes it much slower to adapt and review changes [As compared to an on-line sharing system - like web-based interfaces to distributed version control systems] As this team doesn&rsquo;t have a CI tool, they must test it / try it manually before reviewing the code.</li>
-<li>Pair programming does not remove the need for code review [This has been surfaced twice]</li>
-<li>Your work is not more important than your team members&#8217; one. [Related to not having time to code review]</li>
-<li>Do code reviews include architecture? [We&rsquo;ve agreed that the architecture to some degree should be discussed before code reviews]</li>
-<li>&ldquo;Troll review&rdquo;</li>
-<li>Anyone can veto pull requests [By opening a question; do not allow for pull requests to be closed with open questions]</li>
-<li>A 15-minute time slot everyday to code review [As code hygiene; Done right after lunch,  breakfast or just before leaving, when you&rsquo;re tired]</li>
-<li>Code review tasks have higher priority than other tasks [Do not take other tasks if there are code reviews to do]</li>
-<li>Code reviews put a lot of pressure so people learn and the knowledge level equalizes across the team</li>
-</ul>
-
-
-<h2>Conclusions</h2>
-
-<p> My conclusions, even though some of them were not shared by everyone:</p>
-
-<ul>
-<li>Most of the people approve of code review practices: either they are doing them or are trying to apply them at their clients. (Warning: this was a code review meetup, so there&rsquo;s a bias: people not interested in them won&rsquo;t come). No one was against doing them.</li>
-<li>Code reviews have a cost, although it is beneficial to do them</li>
-<li>Should your teammates not want to participate in the code review after agreeing on doing them, appeal to their professionalism / accountability, then to their time (stated before), then troll them: after a few (healthy) trolling code review sessions, people will feel more comfortable reviewing and being reviewed. Special mention to Miguel who coined (?)<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> the term: troll review.</li>
-<li>Great way of equalizing the (technical) knowledge level within the team</li>
-<li>Great way of reduce information silos across the whole company</li>
-<li>They can be fun if you do them properly</li>
-<li>The need for code reviews do not disappear when pair programming: as long as you have a personal attachment to the code, you might not see its defects.</li>
-</ul>
-
-
-<h2>Your own</h2>
-
-<p>Should you have any conclusions to share, please add a pull request to this <a href="https://github.com/alvarogarcia7/blog_source">repository</a> or do it as a comment.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>after searching some ten minutes on the internet, there are only a couple of questions on meta.codereview stackoverflow, but not related to this. <strong>Update</strong>: In <a href="https://twitter.com/mallyvai/status/314260072798752768">here</a>, Vaibhav Mallya talks about a #trollReview, related to code. So, unfortunately, Miguel, you&rsquo;re not the first one. But there are fewer than 10 results on twitter.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -966,6 +1069,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/14/types-of-defects/">Types of Defects</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/11/brownbag-session-refactoring/">Brown-bag Session: Refactoring</a>
       </li>
     
@@ -979,10 +1086,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal Training: QA &amp; How to Test</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/17/software-gardening-manifesto/">Software Gardening Manifesto</a>
       </li>
     
   </ul>

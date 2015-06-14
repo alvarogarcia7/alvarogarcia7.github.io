@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-06-14T16:09:41+02:00</updated>
+  <updated>2015-06-14T16:22:39+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Types of Defects]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects/"/>
+    <updated>2015-06-14T16:16:51+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects</id>
+    <content type="html"><![CDATA[<h1>Types of defects</h1>
+
+<p>Some time ago, while researching types of defects and the cost of fixing them<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, I stumbled upon this:</p>
+
+<blockquote><p>Years ago I worked with a bunch of economists in the US Federal Government - they categorized &lsquo;bugs&rsquo; in their memos into three types:
+ * Typos: Simple misspellings of words. Infrequent, easy to detect, easy to fix.
+ * Writos: Incoherent sentences. More frequent, hard to detect, harder to fix.
+ * Thinkos: Conceptually bonkers. Very frequent, subtle and hard to detect; almost impossible to fix.</p>
+
+<p>Most &lsquo;late&rsquo; bugs that I&rsquo;ve seen in software projects belong in the last category - a lack of design or the failure to make a working mock-up leads to &lsquo;thinkos&rsquo; which are only obvious when the application is nearly completed. These are expensive to fix.</p>
+
+<p>Source: <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">http://developers.slashdot.org/story/03/10/21/0141215/software-defects&#8212;do-late-bugs-really-cost-more</a></p></blockquote>
+
+<p>I would also add a new category to this:</p>
+
+<ul>
+<li>Ethos: Morally wrong, although possibly legal. These may take different forms: vary from a company to the next one,
+from society to society, etc. Even harder to fix than &lsquo;thinkos&rsquo;,
+as there is a reason (mainly economic) to keep them in place.</li>
+</ul>
+
+
+<p>  On a technical note,
+  these are not usually well-known artifacts in the company, therefore not everyone
+  should know about them. Only a few developers know the correct reasons behind them and
+  the rest might be sold a fake reason, so the latter cannot fix these &lsquo;ethos&rsquo;, as they
+  assume they are present for a good reason</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This is also a chapter in the book <a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit: &lsquo;Chapter 10: The cost of defects: an illustrated history&rsquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Brown-bag Session: Refactoring]]></title>
@@ -1027,136 +1070,6 @@ into a single post</p>
 <li>Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.</li>
 <li>Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly</li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Talk: Simplicity Matters]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/"/>
-    <updated>2015-04-18T14:44:06+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus&#8217; <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
-
-<p>here are my notes:</p>
-
-<ul>
-<li>the software is the elephant</li>
-<li>do more, do it differently, do it better</li>
-<li>complexity of the elephant is going to dominate what you can do</li>
-<li>your ability to reason about your program is critical</li>
-<li>design is about pulling things apart</li>
-<li>become familiar by learning, trying</li>
-<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
-</ul>
-
-
-<p>Complexity vs simplicity:</p>
-
-<table>
-<thead>
-<tr>
-<th>Complexity     </th>
-<th> Simplicity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>state, objects </td>
-<td> values</td>
-</tr>
-<tr>
-<td>methods </td>
-<td> functions, namespaces</td>
-</tr>
-<tr>
-<td>variables </td>
-<td> managed refs</td>
-</tr>
-<tr>
-<td>inheritance, switch, matching  </td>
-<td> polymorphism à la carte</td>
-</tr>
-<tr>
-<td>syntax </td>
-<td> data</td>
-</tr>
-<tr>
-<td>imperative loops, fold </td>
-<td> set functions</td>
-</tr>
-<tr>
-<td>actors </td>
-<td> queues</td>
-</tr>
-<tr>
-<td>ORM </td>
-<td> declarative data manipulation</td>
-</tr>
-<tr>
-<td>conditionals </td>
-<td> rules</td>
-</tr>
-<tr>
-<td>inconsistency </td>
-<td> consistency </td>
-</tr>
-</tbody>
-</table>
-
-
-<ul>
-<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
-<li>simplicity is not about you. simplicity is a lot of hard work
-
-<ul>
-<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
-</ul>
-</li>
-<li>simplicity is not an objective</li>
-</ul>
-
-
-<p>Order is all over the place:</p>
-
-<table>
-<thead>
-<tr>
-<th>Complex  </th>
-<th> Simple</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>positional arguments </td>
-<td> named arguments or map</td>
-</tr>
-<tr>
-<td>syntax </td>
-<td> data</td>
-</tr>
-<tr>
-<td>product types  </td>
-<td> associate records</td>
-</tr>
-<tr>
-<td>imperative programs </td>
-<td> declarative programs</td>
-</tr>
-<tr>
-<td>prolog </td>
-<td> datalog</td>
-</tr>
-<tr>
-<td>call chains </td>
-<td> queues</td>
-</tr>
-<tr>
-<td>XML </td>
-<td> JSON, Clojure literals</td>
-</tr>
-</tbody>
-</table>
 
 ]]></content>
   </entry>

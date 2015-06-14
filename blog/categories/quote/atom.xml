@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Quote | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/quote/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-06-14T16:09:41+02:00</updated>
+  <updated>2015-06-14T16:22:39+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Types of Defects]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects/"/>
+    <updated>2015-06-14T16:16:51+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects</id>
+    <content type="html"><![CDATA[<h1>Types of defects</h1>
+
+<p>Some time ago, while researching types of defects and the cost of fixing them<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, I stumbled upon this:</p>
+
+<blockquote><p>Years ago I worked with a bunch of economists in the US Federal Government - they categorized &lsquo;bugs&rsquo; in their memos into three types:
+ * Typos: Simple misspellings of words. Infrequent, easy to detect, easy to fix.
+ * Writos: Incoherent sentences. More frequent, hard to detect, harder to fix.
+ * Thinkos: Conceptually bonkers. Very frequent, subtle and hard to detect; almost impossible to fix.</p>
+
+<p>Most &lsquo;late&rsquo; bugs that I&rsquo;ve seen in software projects belong in the last category - a lack of design or the failure to make a working mock-up leads to &lsquo;thinkos&rsquo; which are only obvious when the application is nearly completed. These are expensive to fix.</p>
+
+<p>Source: <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">http://developers.slashdot.org/story/03/10/21/0141215/software-defects&#8212;do-late-bugs-really-cost-more</a></p></blockquote>
+
+<p>I would also add a new category to this:</p>
+
+<ul>
+<li>Ethos: Morally wrong, although possibly legal. These may take different forms: vary from a company to the next one,
+from society to society, etc. Even harder to fix than &lsquo;thinkos&rsquo;,
+as there is a reason (mainly economic) to keep them in place.</li>
+</ul>
+
+
+<p>  On a technical note,
+  these are not usually well-known artifacts in the company, therefore not everyone
+  should know about them. Only a few developers know the correct reasons behind them and
+  the rest might be sold a fake reason, so the latter cannot fix these &lsquo;ethos&rsquo;, as they
+  assume they are present for a good reason</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This is also a chapter in the book <a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit: &lsquo;Chapter 10: The cost of defects: an illustrated history&rsquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Paper: TDD in Industrial Teams]]></title>
@@ -160,45 +203,6 @@
 <p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
 
 <p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Purple Wire]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/"/>
-    <updated>2015-02-24T20:57:43+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire</id>
-    <content type="html"><![CDATA[<p>A quote from the <a href="http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959">Mythical Man-Month</a>:</p>
-
-<blockquote><p>Chapter 13: The Whole and the Parts</p>
-
-<p>[&hellip;] In System/360 engineering models, one saw occasional strands of purple wire among the routine yellow wires. When a bug was found, two things were done. A quick fix was devised and installed on the system, so testing could proceed. This change was put on in purple wire, so it stuck out like a sore thumb. It was entered in the log. Meanwhile, an official change document was prepared and started into the design automation mill. Eventually this resulted in updated drawings and wire lists, and a new back panel in which the change was implemented in printed circuitry or yellow wire. Now the physical model and the paper were together again, and the purple wire was gone.</p>
-
-<p>Programming needs a purple-wire technique, and it badly needs tight control and deep respect for the paper that ultimately is the product. The vital ingredients of such technique are the logging of all changes in a journal and the distinction, carried conspicuously in source code, between quick patches and thought-through, tested, documented fixes.</p>
-
-<p>[&hellip;]</p>
-
-<p><quote> Brooks, F. - The Mythical Man-Month</quote></p></blockquote>
-
-<p>This purple-wire the author talks about is extremely important even in the current age as the whole team should not be blocked by a single defect.</p>
-
-<p>What I usually do is a commit containing a quick fix (purple-wire, scaffold, hackish if, etc) on a bugfix branch, push the changes so jenkins can verify that this purple-wire didn&rsquo;t break any other case. Then integrate this bugfix into master if required<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. If this affects <code>develop</code> branch of other developers, also merge into develop and or feature branches.</p>
-
-<p>On the other hand, in my opinion, fixing the defect should include an unit test so the defect does not reproduce again. If this is not reproducible through an unit one, escalate test levels (unit, integration, end to end, etc) until a suitable one is found.</p>
-
-<p>Once that applying the purple-wire is done, I <code>checkout</code> the last version where the defect is to be found (usually right before the bugfix branch) and create this test necessary to reproduce behavior. Only after this defect is found I fix it. Otherwise, I think the root cause might be in a different place and, therefore, fix a non-existing defect, effectively introducing a regression.</p>
-
-<p>This test also serves to reproduce that the corrected behavior is not introduced anymore into the system.</p>
-
-<p>As an ending phase for the defect, replace the purple wire with the new code and, after passing all tests, merge to master, develop and feature branches.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>If the found defect is not business critical, I try not to merge to master the purple wire, just leave master pointing to the defect and the bugfix branch with the solution. This bugfix branch will be deleted when a more stable fix is found.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   
