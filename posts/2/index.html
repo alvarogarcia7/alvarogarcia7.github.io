@@ -9,7 +9,8 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: Testing is hard - just do it Our &hellip;">
+  <meta name="description" content="After reading the GOOS1, the more and more I get this feeling of what vs how: Information hiding
+The total simpler than the sum of the parts &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/06/what-versus-how/">What Versus How</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-06T07:15:08+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:15 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After reading the GOOS<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, the more and more I get this feeling of what vs how:</p>
+
+<ul>
+<li>Information hiding</li>
+<li>The total simpler than the sum of the parts</li>
+<li>Extracting a concept so you can think about this. Makes you find better names:
+
+<ul>
+<li>test name</li>
+<li>variable name</li>
+<li>method name</li>
+<li>interface / protocol name</li>
+</ul>
+</li>
+</ul>
+
+
+<p>I also got this feeling when reading Clean Code. But with this other book the smell is much harder, stronger. This same concept is repeated all over the book. In our discussions about the book, this concept appears again and again. I&rsquo;m thinking of adding a sub-title to the book:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Growing Object-Oriented Software, Guided by Tests
+</span><span class='line'>What and not How</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Applying this in your team</h2>
+
+<p>Now, there might be a problem if your team has a split opinion on &lsquo;what vs how&rsquo; (i.e., part of the team prefers what and another prefers how)</p>
+
+<p>Reasons I&rsquo;ve heard to defend how:</p>
+
+<ul>
+<li>The ones cited above</li>
+<li>Concision / shortness</li>
+<li>Code reusability</li>
+<li>Easier to test, extracting to collaborators<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
+</ul>
+
+
+<p>Reasons I&rsquo;ve heard to defend what:</p>
+
+<ul>
+<li>Knowing exactly what the code is doing: i.e., do not have to think what the name means and to what this corresponds</li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Altough I believe you shouldn&rsquo;t do anything <em>just</em> for the purpose of tests. If it also improves your design, OK, but only for the tests, no.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -605,82 +689,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/19/logging-is-a-feature/">Logging Is a Feature</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-19T23:43:10+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:43 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of <a href="http://www.splunk.com/">Splunk</a>.</p>
-
-<p>This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
-
-<p>Strategies for dealing with this:</p>
-
-<ul>
-<li>functional logger: no shared state
-
-<ul>
-<li>can only log information available in this scope: parameters, attributes, static information</li>
-</ul>
-</li>
-<li>stateful logger: information is added to the threadContext and logged whenever necessary
-
-<ul>
-<li>can log information in this scope plus any of the previous invokings.</li>
-<li>the problem is precisely sharing state: you have to control all the possible parents to know where this data comes from. A piece of information may come from any source.</li>
-<li>Lose the reference of who is invoking you, as there is no customization for this. (only using implementation)</li>
-<li>Speak two different languages: one for logging and one for business logic</li>
-</ul>
-</li>
-<li>mixed: mix and match the best of both worlds.
-
-<ul>
-<li>The problem with the shared state can be solved if no data is overwritten and any information is stored in a map where the key is the fully qualified (FQ) method name (or FQ class name + FQ method name)</li>
-</ul>
-</li>
-</ul>
-
-
-<p>The GOOS book explains this very well on the 20th chapter, first half &ldquo;logging is a feature&rdquo;. If we log as described in chapters 19 and 20, some of the problems are reduced:</p>
-
-<ul>
-<li>multiple levels of abstraction</li>
-<li>indirect control over logging. decide in a single place whether to log exceptions of each kind or not</li>
-<li>remove &ldquo;implementation details&rdquo; such as &ldquo;log.isDebugEnabled&rdquo;</li>
-<li>remove performance issues: no need to build strings for logging every time, only need to pass objects. inside the logging layer, if the logger is enabled for that level, then spend the time building strings and print them</li>
-</ul>
-
-
-<p>We should remember that:</p>
-
-<ul>
-<li>Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.</li>
-<li>Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -698,6 +706,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/16/brown-bag-session-docker/">Brown-bag Session: Maven</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/14/types-of-defects/">Types of Defects</a>
       </li>
     
@@ -711,10 +723,6 @@
     
       <li class="post">
         <a href="/blog/2015/06/02/internal-training-bpm-tool-and-process/">Internal Training: BPM: Process and Tools for Developers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal Training: QA &amp; How to Test</a>
       </li>
     
   </ul>
