@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this post: Fifty Quick Ideas to Improve your User Stories, by Gojko Adzic &hellip;">
+  <meta name="description" content="Yesterday, Manuel Rivero and I facilitated a workshop using the tire pressure TDD microexercise. (More microexercises can be found in this category, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/tdd-microexercise-tire-pressure/">TDD Microexercise: Tire Pressure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T23:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday, <a href="http://twitter.com/@trikitrok">Manuel Rivero</a> and I facilitated a <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/events/221463037/">workshop</a> using the <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises/Java/TirePressureMonitoringSystem">tire pressure</a> TDD microexercise. (More microexercises can be found in <a href="/blog/categories/microexercise">this category</a>, also <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises">here</a>)</p>
+
+<p>We scheduled the session as follows:</p>
+
+<ul>
+<li>10 minutes introduction to the exercise</li>
+<li>10 minutes to download the code and take a first look</li>
+<li>10 minutes explanation about the exercise, what the problem is, etc</li>
+<li>30 minutes for the attendees to explore the solution (on their own)</li>
+<li>10 minutes for commenting the explored solutions, comments about it</li>
+<li>40 minutes of prepared kata format</li>
+<li>10 minutes of final explanations, questions and answers (Q&amp;A)</li>
+</ul>
+
+
+<p>Total: 120 minutes or two hours, approximately</p>
+
+<p>We decided that one would be mostly at the keyboard and the other mostly explaining. This allows for the speaker to introduce some concepts while the driver is performing a larger refactor / step.</p>
+
+<p>Some of our own feedback:</p>
+
+<ul>
+<li>Have the kata prepared, clear all your doubts before doing it live</li>
+<li>Be very specific about the goal of the kata: the narrower the focus, the more we will learn</li>
+<li>If necessary, exercise your shortcuts / practices one last time</li>
+<li>Set up the font as big as needed. Even remove some whitelines (present in your usual code) so more text can fit in the screen.</li>
+<li>It was very useful for us to have a small script of what we would perform: what was the idea, where to stop to explain things, etc</li>
+<li>A prepared kata is a show (like a movie), so the dialogs between the performing pair are important. Do not be afraid to tell the reasons why you did this last refactor.</li>
+<li>Answer the questions as you go, do not wait until the end of the session</li>
+</ul>
+
+
+<p>Some feedback we received:</p>
+
+<ul>
+<li>It would have been useful to do a recap at the end of the session, to refresh the most important concepts</li>
+<li>In general the session was good, they were satisfied with the techniques shown there</li>
+<li>The exercise was concise and small, perfect for two hours&#8217; time</li>
+</ul>
+
+
+<p>Many thanks to all the attendees and to Manuel: I learnt a lot from the session and renewed my energies to keep doing these workshop sessions. Also thanks to Luca Minudel for writing these awesome exercises.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -682,65 +752,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/24/the-purple-wire/">The Purple Wire</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-24T20:57:43+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:57 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A quote from the <a href="http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959">Mythical Man-Month</a>:</p>
-
-<blockquote><p>Chapter 13: The Whole and the Parts</p>
-
-<p>[&hellip;] In System/360 engineering models, one saw occasional strands of purple wire among the routine yellow wires. When a bug was found, two things were done. A quick fix was devised and installed on the system, so testing could proceed. This change was put on in purple wire, so it stuck out like a sore thumb. It was entered in the log. Meanwhile, an official change document was prepared and started into the design automation mill. Eventually this resulted in updated drawings and wire lists, and a new back panel in which the change was implemented in printed circuitry or yellow wire. Now the physical model and the paper were together again, and the purple wire was gone.</p>
-
-<p>Programming needs a purple-wire technique, and it badly needs tight control and deep respect for the paper that ultimately is the product. The vital ingredients of such technique are the logging of all changes in a journal and the distinction, carried conspicuously in source code, between quick patches and thought-through, tested, documented fixes.</p>
-
-<p>[&hellip;]</p>
-
-<p><quote> Brooks, F. - The Mythical Man-Month</quote></p></blockquote>
-
-<p>This purple-wire the author talks about is extremely important even in the current age as the whole team should not be blocked by a single defect.</p>
-
-<p>What I usually do is a commit containing a quick fix (purple-wire, scaffold, hackish if, etc) on a bugfix branch, push the changes so jenkins can verify that this purple-wire didn&rsquo;t break any other case. Then integrate this bugfix into master if required<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. If this affects <code>develop</code> branch of other developers, also merge into develop and or feature branches.</p>
-
-<p>On the other hand, in my opinion, fixing the defect should include an unit test so the defect does not reproduce again. If this is not reproducible through an unit one, escalate test levels (unit, integration, end to end, etc) until a suitable one is found.</p>
-
-<p>Once that applying the purple-wire is done, I <code>checkout</code> the last version where the defect is to be found (usually right before the bugfix branch) and create this test necessary to reproduce behavior. Only after this defect is found I fix it. Otherwise, I think the root cause might be in a different place and, therefore, fix a non-existing defect, effectively introducing a regression.</p>
-
-<p>This test also serves to reproduce that the corrected behavior is not introduced anymore into the system.</p>
-
-<p>As an ending phase for the defect, replace the purple wire with the new code and, after passing all tests, merge to master, develop and feature branches.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>If the found defect is not business critical, I try not to merge to master the purple wire, just leave master pointing to the defect and the bugfix branch with the solution. This bugfix branch will be deleted when a more stable fix is found.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -758,6 +769,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/">Practical Object-Oriented Design in Ruby: Chapter 1</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a>
       </li>
     
@@ -771,10 +786,6 @@
     
       <li class="post">
         <a href="/blog/2015/06/11/brownbag-session-refactoring/">Brown-bag Session: Refactoring</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/03/self-study-in-june-2015/">Self-study in June 2015</a>
       </li>
     
   </ul>
