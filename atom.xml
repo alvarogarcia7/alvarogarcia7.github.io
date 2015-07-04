@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-06-29T00:31:44+02:00</updated>
+  <updated>2015-07-04T14:39:42+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,210 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Iterate With Index in Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/"/>
+    <updated>2015-07-04T14:34:37+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure</id>
+    <content type="html"><![CDATA[<p>Scenario: iterate a sequence (<code>seq</code>) with its index</p>
+
+<p>The lines have an implicit line number (starting by 1, in most editors):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[1] line1
+</span><span class='line'>[2] line2
+</span><span class='line'>[3] hello</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you read it from file to a variable, it is converted to:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="s">&quot;line1&quot;</span> <span class="s">&quot;line2&quot;</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> This implicit line number value is not present, therefore you need to assign them one.</p>
+
+<p> In ruby, you have this construct:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">each_with_index</span> <span class="p">{</span><span class="o">|</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">val</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://stackoverflow.com/questions/310634/what-is-the-right-way-to-iterate-through-an-array-in-ruby/310638#310638">Source</a></p>
+
+<p>In clojure, there is a similar function:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">map-indexed</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[idx</span> <span class="nv">itm]</span> <span class="nv">[idx</span> <span class="nv">itm]</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">:f</span> <span class="ss">:o</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; ([0 &quot;line1&quot;] [1 &quot;line2&quot;] [2 &quot;hello&quot;])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to shift the collection to the right so it starts with 1 (for the REPL):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">def</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;line1&quot;</span> <span class="s">&quot;line2&quot;</span> <span class="s">&quot;hello&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; (&quot;line1&quot; &quot;line2&quot; &quot;hello&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">shift-one</span> <span class="nv">[lines]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">cons</span> <span class="s">&quot;&quot;</span> <span class="nv">lines</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">def</span> <span class="nv">lines</span> <span class="p">(</span><span class="nv">shift-one</span> <span class="nv">lines</span><span class="p">))</span>
+</span><span class='line'><span class="nv">lines</span>
+</span><span class='line'><span class="c1">; (&quot;&quot; &quot;line1&quot; &quot;line2&quot; &quot;hello&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">map-indexed</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[idx</span> <span class="nv">itm]</span> <span class="nv">[idx</span> <span class="nv">itm]</span><span class="p">)</span>
+</span><span class='line'>  <span class="nv">lines</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; ([0 &quot;&quot;] [1 &quot;line1&quot;] [2 &quot;line2&quot;] [3 &quot;hello&quot;])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://clojuredocs.org/clojure.core/map-indexed">Source</a>, especially <a href="https://clojuredocs.org/clojure.core/map-indexed#example-542692cdc026201cdc326d25">this one</a></p>
+
+<p>But if you only need to get the lines at certain indexes, it is also possible to get the values directly, using <code>map</code> on the sequence of desired indexes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="nv">lines</span>
+</span><span class='line'><span class="c1">; (&quot;&quot; &quot;line1&quot; &quot;line2&quot; &quot;hello&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">get-all</span> <span class="nv">[lines</span> <span class="nv">indexes]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">map</span> <span class="o">#(</span><span class="nb">nth</span> <span class="nv">lines</span> <span class="nv">%</span><span class="p">)</span> <span class="nv">indexes</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">get-all</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; (&quot;line1&quot; &quot;line2&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">get-all</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; (&quot;line1&quot; &quot;line1&quot;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code/"/>
+    <updated>2015-07-01T13:18:28+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have done a brown bag session about refactoring legacy code. It includes:</p>
+
+<ul>
+<li>legacy code definition. There is no agreement about this in the team.</li>
+<li>the legacy code change algorithm (source is Feathers, Working effectively with legacy code). Plus an example about it.</li>
+<li>working with legacy code</li>
+<li>experience with it.</li>
+</ul>
+
+
+<p>The slides are available <a href="https://github.com/alvarogarcia7/blog_source/raw/source/source/blog/uploads/refactoring-legacy-code-slides.pdf">here</a> (PDF format)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-study in July 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/01/self-study-in-july-2015/"/>
+    <updated>2015-07-01T01:08:10+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/01/self-study-in-july-2015</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve grouped all small posts related to the self-study from July 2015 into a single post</p>
+
+<h2>Clojure made simple</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=VSdnJDO-xdg">this talk</a> by Rich Hickey at the Java One. It references the talk <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Easy made simple</a></p>
+
+<ul>
+<li>polymorphism without inheritance; single dispatch on the first parameter</li>
+</ul>
+
+
+<h2>Productive pair programming</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/07/productive-pair-programming/">this article</a> about pair programming, using the driver &amp; copilot technique, written by Carlos Blé</p>
+
+<h2>Building Automated REST APIs with Python</h2>
+
+<p>Investigating QA automation for REST APIs, I&rsquo;ve read <a href="http://www.slideshare.net/jeffknupp/building-automated-rest-apis-with-python">these slides</a> about it</p>
+
+<h2>Backwards Compatibility Testing For Your Clojure Project</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jenkster.com/2014/02/backwards-compatibility-testing-your-clojure-project.html">this article</a> on making leiningen test the application on several clojure versions. Written by Kris Jenkins.</p>
+
+<h2>Succeeding with Automated Integration Tests</h2>
+
+<p>I&rsquo;ve read <a href="http://jeremydmiller.com/2015/06/25/succeeding_with_integration_testing/">this article</a> by Jeremy Miller on integration testing and how to succeed with it. Some notes:</p>
+
+<ul>
+<li>Choose the Quickest, Useful Feedback Mechanism, even if that means testing the backend and frontend separately</li>
+<li>Prefer white-box than black-box testing</li>
+<li>Use quick tests, that can be run locally in an easy fashion</li>
+<li>Do not share databases, as they introduce risks of flaky tests</li>
+</ul>
+
+
+<h2>Applied DDD in a Java EE 7 and Open Source World</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=9D_-7E7Mrzw">this video</a> by Edson Yanaga in the Java One, about DDD using Java EE 7, JSFs and lambdas on top of glassfish</p>
+
+<h2>Integrated tests are a scam</h2>
+
+<p>I&rsquo;ve read, again, <a href="http://blog.thecodewhisperer.com/2010/10/16/integrated-tests-are-a-scam/">this article</a> by J. B. Rainsberger on integrated tests and why not to use them. From a numerical / combinatorics point of view.</p>
+
+<h2>Functional Programming should be your #1 priority for 2015</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@jugoncalves/functional-programming-should-be-your-1-priority-for-2015-47dd4641d6b9">this introduction</a> to functional programming by Ju Gonçalves. Explains some functional concepts, such as:</p>
+
+<ul>
+<li>First-Class Functions</li>
+<li>High-Order Functions</li>
+<li>Pure Functions</li>
+<li>Closures</li>
+<li>Immutable State</li>
+</ul>
+
+
+<p>Also recommends a few books on the subject (e.g., SICP, HTDP).</p>
+
+<h2>A Tutorial Introduction to the Lambda Calculus</h2>
+
+<p>I&rsquo;ve read <a href="http://www.inf.fu-berlin.de/lehre/WS03/alpi/lambda.pdf">this paper</a>, an introduction to the lambda calculus. Haven&rsquo;t done the exercises. Written by Raúl Rojas</p>
+
+<h2>20 common mistakes when doing Test-Driven Development</h2>
+
+<p>I had thought of converting all of <a href="https://twitter.com/search?q=svpino%20%23tdd%20mistake&amp;src=typd">his tweets</a> into a blog post, but he has already done this for us: I&rsquo;ve read a <a href="https://blog.svpino.com/2015/05/29/20-common-mistakes-when-doing-test-driven-development">list of common mistakes</a> when doing TDD by <a href="https://twitter.com/svpino">Santiago Pino</a></p>
+
+<h2>Reducing coupling</h2>
+
+<p>I&rsquo;ve read the article by Martin Fowler <a href="http://martinfowler.com/ieeeSoftware/coupling.pdf">Reducing Coupling</a> in the IEEE SOFTWARE July/August 2001</p>
+
+<h2>Comparing Java Mock Frameworks – Part 2: Creating Mock Objects</h2>
+
+<p><a href="https://softwareinabottle.wordpress.com/2010/10/06/comparing-java-mock-frameworks-part-2-creating-mock-objects/">List of mock frameworks for java</a>. Have only read the jMock, mockito and jMockit part.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Practical Object-Oriented Design in Ruby: Chapter 1]]></title>
@@ -361,6 +565,14 @@ into a single post</p>
 <h2>Code is a job</h2>
 
 <p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
+
+<h2>The Great Newline Schism</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
+
+<h2>Top ten reasons why I won’t use your open source project</h2>
+
+<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
 ]]></content>
   </entry>
   
@@ -1078,89 +1290,6 @@ into a single post</p>
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How I Read Apprenticeship Patterns]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/25/how-i-read-apprenticeship-patterns/"/>
-    <updated>2015-04-25T13:49:01+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/25/how-i-read-apprenticeship-patterns</id>
-    <content type="html"><![CDATA[<p>At the Craft Conf 2015 I saw someone with the book <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a> by <a href="http://twitter.com/@davehoover">Dave Hoover</a> and <a href="http://twitter.com/@ade_oshineye">Adewale Oshineye</a> and asked them about the book. After praising the contents, they asked me how to approach the book.</p>
-
-<p>I recalled reading it non-sequentially, and explained it to them:</p>
-
-<ul>
-<li>Read the introduction, preface, etc first</li>
-<li>When you get to the patterns, pick one at random</li>
-<li><code>10</code>: Read it and navigate through the <code>see also</code>.</li>
-<li>If there are unread chapters from the <code>see also</code>, <code>goto 10</code></li>
-<li>Find the remaining unread chapters and read them, try to apply the same algorithm</li>
-<li>Read the appendices and finishing words</li>
-</ul>
-
-
-<p>Reading a connected chapter after the first one made me connect the dots and understand it much better than reading them sequentially.</p>
-
-<p>PS: This post was extracted from this one: <a href="../../../../2015/02/02/your-first-language/">here</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Demand for TDD and Refactor]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor/"/>
-    <updated>2015-04-25T13:28:20+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor</id>
-    <content type="html"><![CDATA[<p>When I went to the Jason Gorman&rsquo;s TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), he said something interesting regarding refactor and TDD:</p>
-
-<blockquote><p>In job offers / advertisements, TDD is much more in demand than refactor. But the latter is included in the former as an integral part.</p>
-
-<p>Jason Gorman</p></blockquote>
-
-<p>I agree with the second thought: you cannot properly do TDD without refactoring, as it is an integral part; also the third phase.</p>
-
-<p>For me, sometimes refactoring is the difference between code and &ldquo;Clean Code&rdquo; (as defined in the book by the same title). If I cannot find the (algorithmic) pattern for the software I&rsquo;m writing, I try to introduce scaffolds to keep investigating until I can find a viable, general solution (if the problem requires it.)</p>
-
-<p>Even after doing the refactor <code>replace algorithm</code>, the code might not have the responsibilities in the right place, the methods might be long, value objects not extracted yet, etc. This is where further refactor is needed to introduce all those qualities in the piece of software.</p>
-
-<p>I believe that we programmers have done a bad job of communicating with the rest of the organization what refactoring is about. It has nothing to do with beauty, style or design (in the visual sense) but is related to maintainability, coupling, defects and quality. Money, in the long run, as its objective is to make it cheaper to change in the future, a better investment and ROI. This is the common language that the rest of the company understands.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Talks I Have Attended at the Craft Conf 2015]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/"/>
-    <updated>2015-04-25T12:25:09+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015</id>
-    <content type="html"><![CDATA[<p>These are the talks I&rsquo;ve attended at the Craft Conf 2015:</p>
-
-<h2>Thursday 23th</h2>
-
-<ul>
-<li>Opening keynote by <a href="http://twitter.com/@tastapod">Dan North</a> and <a href="http://twitter.com/@jessitron">Jessica Kerr</a></li>
-<li>Writing testable code - A functional programming point of view, by <a href="http://twitter.com/@old_sound">Alvaro Videla</a></li>
-<li>Coding Culture, by <a href="http://twitter.com/@svenpet">Sven Peters</a></li>
-<li>OnConnectionLost: the life of an offline web application, by <a href="http://twitter.com/@sgrewenig">Stefanie Grewenig</a> and <a href="http://twitter.com/@jthoenes">Johannes Thönes</a></li>
-<li>Concurrency: It&rsquo;s harder (and easier) than you think, by <a href="http://twitter.com/@paulrabutcher">Paul Butcher</a></li>
-<li>Testing and Integration (the remix), by <a href="http://twitter.com/@randommood">Inés Sombra</a></li>
-<li>Beyond Features: Rethinking agile planning and tracking, by <a href="http://twitter.com/@tastapod">Dan North</a></li>
-<li>Closing keynote by <a href="http://twitter.com/@alfrehn">Alf Rehn</a></li>
-</ul>
-
-
-<h2>Friday 24th</h2>
-
-<ul>
-<li>Opening keynote: The New New Software development game: Containers, Microservices and Contract tests, by <a href="http://twitter.com/@mpoppendieck">Mary Poppendieck</a></li>
-<li>Apprenticeship patterns, revisited, by <a href="http://twitter.com/@davehoover">Dave Hoover</a></li>
-<li>Interaction Driven Design, by <a href="http://twitter.com/@sandromancuso">Sandro Mancuso</a></li>
-<li>The hidden dimension of refactoring, by <a href="http://twitter.com/@mfeathers">Michael Feathers</a></li>
-<li>Why is an API like a puppy, by <a href="http://twitter.com/@ade_oshineye">Adewale Oshineye</a></li>
-<li>Microservice antipatterns, by <a href="http://twitter.com/@tsaleh">Tammer Saleh</a></li>
-</ul>
-
-
-<p>I couldn&rsquo;t attend the last talk nor the keynote as I had to get to the airport</p>
 ]]></content>
   </entry>
   

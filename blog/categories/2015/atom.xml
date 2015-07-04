@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 2015 | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/2015/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-06-29T00:31:44+02:00</updated>
+  <updated>2015-07-04T14:39:42+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Self-study in July 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/01/self-study-in-july-2015/"/>
+    <updated>2015-07-01T01:08:10+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/01/self-study-in-july-2015</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve grouped all small posts related to the self-study from July 2015 into a single post</p>
+
+<h2>Clojure made simple</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=VSdnJDO-xdg">this talk</a> by Rich Hickey at the Java One. It references the talk <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Easy made simple</a></p>
+
+<ul>
+<li>polymorphism without inheritance; single dispatch on the first parameter</li>
+</ul>
+
+
+<h2>Productive pair programming</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/07/productive-pair-programming/">this article</a> about pair programming, using the driver &amp; copilot technique, written by Carlos Blé</p>
+
+<h2>Building Automated REST APIs with Python</h2>
+
+<p>Investigating QA automation for REST APIs, I&rsquo;ve read <a href="http://www.slideshare.net/jeffknupp/building-automated-rest-apis-with-python">these slides</a> about it</p>
+
+<h2>Backwards Compatibility Testing For Your Clojure Project</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jenkster.com/2014/02/backwards-compatibility-testing-your-clojure-project.html">this article</a> on making leiningen test the application on several clojure versions. Written by Kris Jenkins.</p>
+
+<h2>Succeeding with Automated Integration Tests</h2>
+
+<p>I&rsquo;ve read <a href="http://jeremydmiller.com/2015/06/25/succeeding_with_integration_testing/">this article</a> by Jeremy Miller on integration testing and how to succeed with it. Some notes:</p>
+
+<ul>
+<li>Choose the Quickest, Useful Feedback Mechanism, even if that means testing the backend and frontend separately</li>
+<li>Prefer white-box than black-box testing</li>
+<li>Use quick tests, that can be run locally in an easy fashion</li>
+<li>Do not share databases, as they introduce risks of flaky tests</li>
+</ul>
+
+
+<h2>Applied DDD in a Java EE 7 and Open Source World</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=9D_-7E7Mrzw">this video</a> by Edson Yanaga in the Java One, about DDD using Java EE 7, JSFs and lambdas on top of glassfish</p>
+
+<h2>Integrated tests are a scam</h2>
+
+<p>I&rsquo;ve read, again, <a href="http://blog.thecodewhisperer.com/2010/10/16/integrated-tests-are-a-scam/">this article</a> by J. B. Rainsberger on integrated tests and why not to use them. From a numerical / combinatorics point of view.</p>
+
+<h2>Functional Programming should be your #1 priority for 2015</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@jugoncalves/functional-programming-should-be-your-1-priority-for-2015-47dd4641d6b9">this introduction</a> to functional programming by Ju Gonçalves. Explains some functional concepts, such as:</p>
+
+<ul>
+<li>First-Class Functions</li>
+<li>High-Order Functions</li>
+<li>Pure Functions</li>
+<li>Closures</li>
+<li>Immutable State</li>
+</ul>
+
+
+<p>Also recommends a few books on the subject (e.g., SICP, HTDP).</p>
+
+<h2>A Tutorial Introduction to the Lambda Calculus</h2>
+
+<p>I&rsquo;ve read <a href="http://www.inf.fu-berlin.de/lehre/WS03/alpi/lambda.pdf">this paper</a>, an introduction to the lambda calculus. Haven&rsquo;t done the exercises. Written by Raúl Rojas</p>
+
+<h2>20 common mistakes when doing Test-Driven Development</h2>
+
+<p>I had thought of converting all of <a href="https://twitter.com/search?q=svpino%20%23tdd%20mistake&amp;src=typd">his tweets</a> into a blog post, but he has already done this for us: I&rsquo;ve read a <a href="https://blog.svpino.com/2015/05/29/20-common-mistakes-when-doing-test-driven-development">list of common mistakes</a> when doing TDD by <a href="https://twitter.com/svpino">Santiago Pino</a></p>
+
+<h2>Reducing coupling</h2>
+
+<p>I&rsquo;ve read the article by Martin Fowler <a href="http://martinfowler.com/ieeeSoftware/coupling.pdf">Reducing Coupling</a> in the IEEE SOFTWARE July/August 2001</p>
+
+<h2>Comparing Java Mock Frameworks – Part 2: Creating Mock Objects</h2>
+
+<p><a href="https://softwareinabottle.wordpress.com/2010/10/06/comparing-java-mock-frameworks-part-2-creating-mock-objects/">List of mock frameworks for java</a>. Have only read the jMock, mockito and jMockit part.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Self-study in June 2015]]></title>
@@ -194,6 +275,14 @@ into a single post</p>
 <h2>Code is a job</h2>
 
 <p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
+
+<h2>The Great Newline Schism</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
+
+<h2>Top ten reasons why I won’t use your open source project</h2>
+
+<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
 ]]></content>
   </entry>
   
@@ -313,35 +402,6 @@ into a single post</p>
 
 
 <p>I couldn&rsquo;t attend the last talk nor the keynote as I had to get to the airport</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Books Read in 2015Q1]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/03/31/books-read-in-2015q1/"/>
-    <updated>2015-03-31T12:49:49+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/03/31/books-read-in-2015q1</id>
-    <content type="html"><![CDATA[<p>Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html">post</a>:</p>
-
-<ul>
-<li><a href="https://leanpub.com/50quickideas">Fifty Quick Ideas to Improve your User Stories</a>, by Gojko Adzic and David Evans</li>
-<li><a href="https://leanpub.com/funretrospectives">Fun retrospectives</a> by Taina Caetano and Paulo Caroli</li>
-<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091">Implementation patterns</a> by Kent Beck</li>
-<li><a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">Clean code</a> by Robert C. Martin;  again</li>
-</ul>
-
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a>, by Benjamin J. Evans and Martijn Verburg</li>
-<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>, by Martin Fowler, (with Kent Beck, John Brant, William Opdyke, and Don Roberts)</li>
-<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>, by Steve Freeman and Nat Pryce</li>
-<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a>, by Mihaly Csikszentmihalyi</li>
-</ul>
-
-
-<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
 ]]></content>
   </entry>
   

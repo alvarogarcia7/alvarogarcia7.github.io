@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Refactoring | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/refactoring/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-06-29T00:31:44+02:00</updated>
+  <updated>2015-07-04T14:39:42+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code/"/>
+    <updated>2015-07-01T13:18:28+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have done a brown bag session about refactoring legacy code. It includes:</p>
+
+<ul>
+<li>legacy code definition. There is no agreement about this in the team.</li>
+<li>the legacy code change algorithm (source is Feathers, Working effectively with legacy code). Plus an example about it.</li>
+<li>working with legacy code</li>
+<li>experience with it.</li>
+</ul>
+
+
+<p>The slides are available <a href="https://github.com/alvarogarcia7/blog_source/raw/source/source/blog/uploads/refactoring-legacy-code-slides.pdf">here</a> (PDF format)</p>
+
+<p></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
@@ -259,6 +280,14 @@ into a single post</p>
 <h2>Code is a job</h2>
 
 <p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
+
+<h2>The Great Newline Schism</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
+
+<h2>Top ten reasons why I won’t use your open source project</h2>
+
+<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
 ]]></content>
   </entry>
   
@@ -469,43 +498,6 @@ into a single post</p>
 <h2>Evolution of The Twitter Stack</h2>
 
 <p>I&rsquo;ve read <a href="https://www.slideshare.net/slideshow/embed_code/key/ly83zQkBjCxnIX">these slides</a> about changing the technology stack in Twitter: from Rails to JVM-based</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Trimming Your Plants]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/03/31/trimming-your-plants/"/>
-    <updated>2015-03-31T23:13:45+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/03/31/trimming-your-plants</id>
-    <content type="html"><![CDATA[<p>This post belongs to the <a href="/blog/categories/growing-software">growing-software series</a></p>
-
-<p>Imagine this situation: the code works. You are at <a href="https://github.com/alvarogarcia7/refactoring_a-first-example/commit/1ff7df4d45ee1ac5bc483b90da7ed1b68f27aef9">this stage</a></p>
-
-<p>Disregarding the tests, the production code is complete. Could be better, but it is ready if you are in a hurry.</p>
-
-<p>Now, picture your test as a plant in a plant pot: it might be healthy on the outside (external quality) but how are their roots (internal quality)?</p>
-
-<p>Do you imagine them in an ordered fashion or in a jungle of roots? Everything on the outside is connected to one or several roots? In case it is several, what / how much do they share?</p>
-
-<h2>Trimming the roots</h2>
-
-<p>Now, let&rsquo;s imagine you want to put the plant in a different plant pot. You don&rsquo;t want the plant to be altered in any way: keep producing fruits as it was before, as green and shiny, etc. Just alter the container for business reasons.</p>
-
-<p>The more tidy and organized the roots are related to the outside plant itself, the easier it is to reshape (or refactor) it.</p>
-
-<p>So this is exactly what refactoring is about: &ldquo;keeping the same external behaviour, modifying the internal structure&rdquo;. I like to explain as &ldquo;modify how it is done but not what it does&rdquo;.</p>
-
-<p>When you trim the roots but leave unaltered the top, you are making it cheaper to modify the internal shape without affecting the rest. The plant will continue to grow, requiring more and more nutrients from the ground. Small increases that do not warrant a bigger plant pot, as the current one can withstand the new requirements.</p>
-
-<p>This is where the analogy is no longer useful: when writing software, you&rsquo;re also making it easier to reuse, modify and maintain.</p>
-
-<h3>Conclusion</h3>
-
-<p>The more tidied up you have your plants, the cheaper to maintain and modify.</p>
-
-<p>Software implementation details are like roots: they expand to find any small hole where to expand. Even to scaffold expected behaviour</p>
-
-<p>Trim your plants early and often, always with the help of a test suite</p>
 ]]></content>
   </entry>
   
