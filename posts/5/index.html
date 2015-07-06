@@ -9,8 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Yesterday we did a training about the maven tool. One of the team members explained to us some topics including: lifecycles
-profiles and how to &hellip;">
+  <meta name="description" content="Yesterday we organized a TDD meetup at the FIB - Barcelona School of Informatics UPC, within Barcelona Software Craftsmanship sponsored by the Junior &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,181 @@ profiles and how to &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/16/tdd-meetup-retrospective/">TDD Meetup Retrospective</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-16T05:42:44+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:42 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday we organized a TDD meetup at the <a href="http://www.fib.upc.edu/fib.html">FIB - Barcelona School of Informatics UPC</a>, within <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship</a> sponsored by the <a href="http://jediupc.com/">Junior Empresa d&#8217;Informàtica</a>. The meetup started at 9:00 until 18:00, with a one-hour pause in the middle.</p>
+
+<h2>Where</h2>
+
+<ul>
+<li>Please make sure the meetup space (e.g., classroom, meeting room) is available and ready to be used at least 15 minutes before the meetup starts</li>
+<li>The organizer and the event host should be there in advance to prepare the physical environment (chairs, wifi, beamer, etc) as well as mentally: getting comfortable with the space, loading the presentation, prepare the speaker notes, etc.</li>
+<li>Plan for the worse and hope for the best: in this particular meetup, the beamer was not available, so the host gracefully lent us some 23 inch screen as a second monitor.</li>
+</ul>
+
+
+<h2>What</h2>
+
+<ul>
+<li>The speaker should have had already decided what they are going to cover on the meetup and not deviate much from this. Leave some empty buffer space at the end because you will cumulate some deviation during the day.</li>
+<li>Of course, have the slides ready if you plan on using them</li>
+<li>I prefer having more conversations during the meetup rather than a masterclass-style one. The organizer(s) should act as conversation moderators, often guiding the conversation where (they think) it is most useful. Sometimes, it is a good idea to interrupt the conversation when someone is getting bored or losing focus<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</li>
+<li>Be prepared to ask to your attendees what do they want: they are your target</li>
+<li>Please ask to your attendees to bring their laptop with git, dependency manager, IDE / editor, test double framework installed. Otherwise, most of the first session is invested in downloading / configuring these.</li>
+<li>Please try to be communicative / funny in some way. This makes the slides easier to understand</li>
+</ul>
+
+
+<h2>Meetup details</h2>
+
+<ul>
+<li><p>We did two sessions of slides:</p>
+
+<ul>
+<li>Introduction to TDD</li>
+<li>TDD on a daily basis: learn TDD for a greater good</li>
+</ul>
+</li>
+<li><p>We did three katas:</p>
+
+<ul>
+<li>LinkedList: <a href="http://codekata.com/kata/kata21-simple-lists/">source</a>. Originally by <a href="http://twitter.com/@pragdave">Dave &ldquo;Pragmatic Dave&rdquo; Thomas</a></li>
+<li>Password: <a href="https://gist.github.com/trikitrok/c031d6b621f28b85ce0d">source</a>. Taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>, also seen on a <a href="http://twitter.com/@carlosble">Carlos Blé</a> workshop</li>
+<li>Bank Kata: <a href="https://github.com/sandromancuso/Bank-kata">source</a>. Originally from <a href="http://twitter.com/@sandromancuso">Sandro Mancuso</a></li>
+</ul>
+</li>
+<li><p>The format was this: the first set of slides, the two first katas, some discussion, then lunch; coffee (mandatory); the second set of slides, the third kata (done by them), later done by me at the beamer, explaining the situation and my mental process.</p></li>
+</ul>
+
+
+<h2>Useful feedback</h2>
+
+<ul>
+<li><p>About the event:</p>
+
+<ul>
+<li>One 8-hour event is much more effective / efficient that 4 2-hour ones</li>
+<li>No one complained about the lack of beamer. So don&rsquo;t worry too much if your host doesn&rsquo;t have one, as long as everybody can get close to the (big) screen.</li>
+</ul>
+</li>
+<li><p>About the LinkedList kata:</p>
+
+<ul>
+<li>This, as a first TDD example was too complex. Getting into TDD with classes, and serveral functions at the same time might be difficult.</li>
+<li>Too academic. This is an example you will usually never implement yourself, as there are libraries who provide it. Therefore, not applicable.</li>
+</ul>
+</li>
+<li><p>About the Password kata:</p>
+
+<ul>
+<li>They graded this kata easier than the linkedList</li>
+<li>Start with this as it is only a function</li>
+<li>This has didactic value as there are some gotchas with this kata</li>
+<li>More likely to be implemented by yourself, as most systems require some kind of user authentication</li>
+</ul>
+</li>
+<li><p>About the Bank kata:</p>
+
+<ul>
+<li>More resembling of a day-to-day problem</li>
+<li>This is a difficult kata if you haven&rsquo;t learned about mocks / test doubles</li>
+<li>Interesting interactions between objects</li>
+</ul>
+</li>
+<li><p>For me:</p>
+
+<ul>
+<li>They liked both the format and the speaker (a.k.a., me)</li>
+<li>They thought this meetup was well prepared in advance</li>
+</ul>
+</li>
+<li><p>My own feedback:</p>
+
+<ul>
+<li>It is difficult to ask the attendees to rate their own level or for you to rate it. I thought the linkedlist example would be so easy they would finish it in half the allowed time<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>, but it wasn&rsquo;t this way</li>
+<li>The productivity level varies hugely from person to person. There were some pairs that dug thoroughly on the problem and others who got stuck (sometimes with the language). Even though both types of pairs were working hard on the proposed problem</li>
+<li>We still haven&rsquo;t solved the problem with reservations: many people book a seat on the event but later won&rsquo;t come. This makes other (interested) attendees to not have a seat.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Should you want to, please share your feedback / comments via the comments section below or sending a pull request to this <a href="https://github.com/alvarogarcia7/blog_source">repository</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>a good indicator of this is body language or position and whether they are doodling on a paper sheet.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>I did prepare against this adding more possible requirements to the kata, although we finally didn&rsquo;t use them<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/10/maven-module-base-for-cucumber-in-java/">Maven Module Base for Cucumber in Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-10T07:24:38+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:24 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve built a small maven module, to be used directly with cucumber. You can fork the repository <a href="https://github.com/alvarogarcia7/base-bdd-cucumber">here</a></p>
+
+<p>This is the setup I&rsquo;ve proposed for the meetup <a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/220673134/">&ldquo;BDD Cucumber kata (gherkin + code)&rdquo;</a>. Will see if this code is successfully used by the ~40 participants in a couple of weeks</p>
+
+<p>(Quote from the <a href="https://github.com/alvarogarcia7/base-bdd-cucumber/blob/master/README.md">README.md</a>):</p>
+
+<p>This maven project has been possible due to <a href="https://twitter.com/@thomassundberg">Thomas Sundberg</a> and <a href="https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world">this post</a></p>
+
+<p>Should you want to, there&rsquo;s a tweet to thank him the effort: <a href="https://twitter.com/intent/tweet?text=@thomassundberg%20thanks%20for%20the%20cucumber%20bdd%20tutorial!%20Will%20be%20using%20it%20from%20@agilebcn;Keep%20up%0Athe%20good%20work&amp;url=https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world/">tweet intent here</a></p>
+
+<p>Happy katas and happy bdd&#8217;ing!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -819,158 +993,6 @@ profiles and how to &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/15/open-discussion-behaviour-driven-development/">Open Discussion: Behaviour-Driven Development</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-15T02:30:38+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:30 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on requirements, via automatically tested specifications. For more information, see the <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">wikipedia&rsquo;s article on the subject</a></p>
-
-<p>I forgot to mention that this is the perfect start to TDD, as this is usually called the double-loop TDD. See a post on it on <a href="http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/">coding is like cooking</a></p>
-
-<p>In this double-loop TDD, the first thing is to create a BDD scenario, run it (red-1), create a unit test that reflects this red (red-2), pass it, refactor; go to red-1 as many times as you need, doing TDD cycles. When you think the feature is done, execute the BDD scenarios and go to green (outer layer) and refactor.</p>
-
-<h2>(Our) Common setting</h2>
-
-<p>Going back to BDD, a common scenario would be the following:</p>
-
-<p>Layers of software:</p>
-
-<ul>
-<li>Domain-Specific Language (DSL). See <a href="http://en.wikipedia.org/wiki/Domain-specific_language">wikipedia&rsquo;s article</a></li>
-<li>Test adapter: an interpreter for this DSL</li>
-<li>Test software: test fixtures, methods, structures to arrange, act, and assert on the sut</li>
-<li>Production software (system under test - SUT): thing being tested</li>
-</ul>
-
-
-<h2>A BDD test vs A TDD test</h2>
-
-<p>Let&rsquo;s imagine a BDD test for a <a href="http://en.wikipedia.org/wiki/Linked_list">linked list</a>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Given I have an empty list
-</span><span class='line'>When I add an element
-</span><span class='line'>Then I have an element on the list</span></code></pre></td></tr></table></div></figure>
-
-
-<p>now, the same test in TDD [using java, junit 4, hamcrest]</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add_an_element_to_an_empty_list</span><span class="o">(){</span>
-</span><span class='line'>  <span class="n">MyLinkedList</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MyLinkedList</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;something&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">linkedList</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In some aspects, a BDD and a TDD test are similar:</p>
-
-<ul>
-<li>the given is the arrange, i.e., the prerequisite</li>
-<li>the when is the act, i.e., the command</li>
-<li>the then is the assertion, i.e., the postcondition</li>
-</ul>
-
-
-<p>(for more information on this, see <a href="http://en.wikipedia.org/wiki/Hoare_logic">Hoare&rsquo;s triple</a>)</p>
-
-<p>But in others, they are not. In BDD you do not specify the APIs, methods, etc. You only care about behavior.</p>
-
-<h2>Conclusion</h2>
-
-<p>Benefits:</p>
-
-<ul>
-<li>everyone might involved in the specification by example workshops (source: <a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154">ATDD by example</a>)</li>
-<li>live specifications. managers can now understand the real state</li>
-<li><a href="http://en.wikipedia.org/wiki/Regression_testing">regression tests</a> are much cheaper (from automation)</li>
-</ul>
-
-
-<p>Gotchas:</p>
-
-<ul>
-<li>Test only the happy paths</li>
-<li>This has a cost, do not overdo it</li>
-<li>Doesn&rsquo;t remove manual tests</li>
-<li>How do you manage multiple scenarios</li>
-<li>How fast should it be?</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/09/implementing-bdd-at-a-client/">Implementing BDD at a Client</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-09T22:23:44+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:23 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This was a low-hanging fruit as a team member who specialises in QA complained about testing in the last moment during the last sprint&rsquo;s retrospective.</p>
-
-<p>Did the grunt job of connecting the dots and configuring the maven project (using jbehave). Also, got the inspiration from a tutorial.</p>
-
-<p>Announced it only as it was in place and QA approved of it</p>
-
-<p>This grunt job clicked with <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch04.html#solution_id21">Sweep the floor</a></p>
-
-<p>Let&rsquo;s see how the sprint goes and what are the pain points during this sprint</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -988,6 +1010,10 @@ profiles and how to &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental Concepts on Programming Languages</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate With Index in Clojure</a>
       </li>
     
@@ -1000,11 +1026,7 @@ profiles and how to &hellip;">
       </li>
     
       <li class="post">
-        <a href="/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/">Practical Object-Oriented Design in Ruby: Chapter 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a>
+        <a href="/blog/2015/06/30/books-read-in-2015q2/">Books Read in 2015Q2</a>
       </li>
     
   </ul>
