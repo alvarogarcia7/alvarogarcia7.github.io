@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Quote | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/quote/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-07-06T09:29:44+02:00</updated>
+  <updated>2015-07-08T02:52:24+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Quote: Organizing Code to Allow for Easy Changes]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/"/>
+    <updated>2015-07-08T02:41:54+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes</id>
+    <content type="html"><![CDATA[<h2>Organizing Code to Allow for Easy Changes</h2>
+
+<blockquote><p>Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code.
+If you define easy to change as</p>
+
+<ul>
+<li>Changes have no unexpected side effects</li>
+<li>Small changes in requirements require correspondingly small changes in code</li>
+<li>Existing code is easy to reuse</li>
+<li>The easiest way to make a change is to add code that in itself is easy to change</li>
+</ul>
+
+
+<p>Then the code you write should have the following qualities. Code should be:</p>
+
+<ul>
+<li><strong>Transparent</strong> The consequences of change should be obvious in the code that is changing and in distant code that relies upon it</li>
+<li><strong>Reasonable</strong> The cost of any change should be proportional to the benefits the change achieves</li>
+<li><strong>Usable</strong> Existing code should be usable in new and unexpected contexts</li>
+<li><strong>Exemplary</strong> The code itself should encourage those who change it to perpetuate
+these qualities</li>
+</ul>
+
+
+<p>Code that is Transparent, Reasonable, Usable, and Exemplary (TRUE) not only meets today’s needs but can also be changed to meet the needs of the future. The first step in creating code that is TRUE is to ensure that each class has a single, well-defined responsibility.</p>
+
+<p>Practical Object Oriented Design in Ruby, by Sandi Metz</p></blockquote>
+
+<p>This can be found the in POODR > Chapter 2. Designing Classes with a Single Responsibility > Organizing Code to Allow for Easy Changes</p>
+
+<p>Note: Bold is mine</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Types of Defects]]></title>
@@ -161,50 +200,6 @@ as there is a reason (mainly economic) to keep them in place.</li>
 <p>Even after doing the refactor <code>replace algorithm</code>, the code might not have the responsibilities in the right place, the methods might be long, value objects not extracted yet, etc. This is where further refactor is needed to introduce all those qualities in the piece of software.</p>
 
 <p>I believe that we programmers have done a bad job of communicating with the rest of the organization what refactoring is about. It has nothing to do with beauty, style or design (in the visual sense) but is related to maintainability, coupling, defects and quality. Money, in the long run, as its objective is to make it cheaper to change in the future, a better investment and ROI. This is the common language that the rest of the company understands.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What Legacy Code Is About]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/"/>
-    <updated>2015-04-21T22:09:54+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about</id>
-    <content type="html"><![CDATA[<p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers">Michael Feathers</a> describes:</p>
-
-<blockquote><p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
-
-<p>M Feathers, in the preface of Working effectively with legacy code</p></blockquote>
-
-<p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
-
-<p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
-
-<p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
-
-<ul>
-<li>some test the test framework</li>
-<li>some the language</li>
-<li>some test a happy path that works by pure luck</li>
-<li>some functionalities are tested (not all happy paths)</li>
-<li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
-</ul>
-
-
-<p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
-
-<p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
-
-<p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
-
-<p>This is why I would like to update the definition:</p>
-
-<blockquote><p>Legacy code is code without tests that provide trust to all your stakeholders</p></blockquote>
-
-<p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
-
-<p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
-
-<p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
 ]]></content>
   </entry>
   

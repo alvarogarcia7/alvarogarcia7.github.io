@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-07-06T09:29:44+02:00</updated>
+  <updated>2015-07-08T02:52:24+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -14,11 +14,188 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Quote: Organizing Code to Allow for Easy Changes]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/"/>
+    <updated>2015-07-08T02:41:54+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes</id>
+    <content type="html"><![CDATA[<h2>Organizing Code to Allow for Easy Changes</h2>
+
+<blockquote><p>Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code.
+If you define easy to change as</p>
+
+<ul>
+<li>Changes have no unexpected side effects</li>
+<li>Small changes in requirements require correspondingly small changes in code</li>
+<li>Existing code is easy to reuse</li>
+<li>The easiest way to make a change is to add code that in itself is easy to change</li>
+</ul>
+
+
+<p>Then the code you write should have the following qualities. Code should be:</p>
+
+<ul>
+<li><strong>Transparent</strong> The consequences of change should be obvious in the code that is changing and in distant code that relies upon it</li>
+<li><strong>Reasonable</strong> The cost of any change should be proportional to the benefits the change achieves</li>
+<li><strong>Usable</strong> Existing code should be usable in new and unexpected contexts</li>
+<li><strong>Exemplary</strong> The code itself should encourage those who change it to perpetuate
+these qualities</li>
+</ul>
+
+
+<p>Code that is Transparent, Reasonable, Usable, and Exemplary (TRUE) not only meets today’s needs but can also be changed to meet the needs of the future. The first step in creating code that is TRUE is to ensure that each class has a single, well-defined responsibility.</p>
+
+<p>Practical Object Oriented Design in Ruby, by Sandi Metz</p></blockquote>
+
+<p>This can be found the in POODR > Chapter 2. Designing Classes with a Single Responsibility > Organizing Code to Allow for Easy Changes</p>
+
+<p>Note: Bold is mine</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Massively Reverting Local Changes]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/"/>
+    <updated>2015-07-08T02:40:24+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes</id>
+    <content type="html"><![CDATA[<p>I was changing a massive amount of files (>1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests.</p>
+
+<p>Here&rsquo;s how to do it automatically:</p>
+
+<p>Copy all the failing tests to a text editor:</p>
+
+<p>Input:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testDeleteDocument(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateXML(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testSearchXFPage(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testCreateXFPage(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdatePage(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testSearchCrop(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateCrop(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testMoveDocument(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testGetDocument(io.company.controller.dms.DocumentControllerTest)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>regex:</p>
+
+<p>(tested in Sublime 3, build 3083, Windows 64)</p>
+
+<p>find what: <code>^[^(]+\([a-Z.]*\.(.*)\)</code></p>
+
+<p>replace with: <code>$1</code></p>
+
+<p>Regex explanation for <code>^[^(]+\([a-Z.]*\.(.*)\)</code>:</p>
+
+<ul>
+<li><code>^</code>: beginning of line</li>
+<li><code>[^(]+</code>: every character except parenthesis, one or more times</li>
+<li><code>\([a-Z.]*</code>: start with one parenthesis, any number of a-z, A-Z</li>
+<li>`.&#8220;: a dot, as I&rsquo;m using regex replacement</li>
+<li><code>(.*)</code>: any character, zero or more times, captured in group <code>$1</code></li>
+<li><code>\)</code>: closing parenthesis</li>
+</ul>
+
+
+<p>Output:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest</span></code></pre></td></tr></table></div></figure>
+
+
+<p>copy that to file <code>a.txt</code></p>
+
+<p>Revert all the changes in these files:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">for</span> i in <span class="k">$(</span>cat a.txt <span class="p">|</span> uniq<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  git checkout -- *<span class="nv">$i</span>*
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Committing to the Repo File by File]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/"/>
+    <updated>2015-07-08T02:37:08+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file</id>
+    <content type="html"><![CDATA[<p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
+
+<p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">for</span> f in <span class="k">$(</span>git status -s <span class="p">|</span>grep <span class="s2">&quot;^M&quot;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  git add <span class="nv">$f</span>
+</span><span class='line'>  git commit -m <span class="s2">&quot;generic commit for all files&quot;</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Paper: Fundamental Concepts on Programming Languages]]></title>
     <link href="http://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/"/>
     <updated>2015-07-06T07:48:35+02:00</updated>
     <id>http://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages</id>
-    <content type="html"><![CDATA[<p>Note: all quotes on this post come from [this paper][<a href="http://www.cs.cmu.edu/~crary/819-f09/Strachey67.pdf">http://www.cs.cmu.edu/~crary/819-f09/Strachey67.pdf</a>]: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.</p>
+    <content type="html"><![CDATA[<p>Note: all quotes on this post come from <a href="http://www.cs.cmu.edu/~crary/819-f09/Strachey67.pdf">this paper</a>: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.</p>
 
 <h2>Contents</h2>
 
@@ -545,6 +722,10 @@ macrogenerators wholly unnecessary</p>
 <h2>Type erasure</h2>
 
 <p>I&rsquo;ve read this wikipedia <a href="https://en.wikipedia.org/wiki/Type_erasure">page on type erasure</a></p>
+
+<h2>How to make an IntelliJ IDEA plugin in less than 30 minutes</h2>
+
+<p>I&rsquo;ve read <a href="http://bjorn.tipling.com/how-to-make-an-intellij-idea-plugin-in-30-minutes">this article</a> on creating new IntelliJ IDEA plugin, by Bjorn Tipling</p>
 ]]></content>
   </entry>
   
@@ -1437,198 +1618,6 @@ into a single post</p>
 <h2>Evolution of The Twitter Stack</h2>
 
 <p>I&rsquo;ve read <a href="https://www.slideshare.net/slideshow/embed_code/key/ly83zQkBjCxnIX">these slides</a> about changing the technology stack in Twitter: from Rails to JVM-based</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What Versus How]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/05/06/what-versus-how/"/>
-    <updated>2015-05-06T07:15:08+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/05/06/what-versus-how</id>
-    <content type="html"><![CDATA[<p>After reading the GOOS<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, the more and more I get this feeling of what vs how:</p>
-
-<ul>
-<li>Information hiding</li>
-<li>The total simpler than the sum of the parts</li>
-<li>Extracting a concept so you can think about this. Makes you find better names:
-
-<ul>
-<li>test name</li>
-<li>variable name</li>
-<li>method name</li>
-<li>interface / protocol name</li>
-</ul>
-</li>
-</ul>
-
-
-<p>I also got this feeling when reading Clean Code. But with this other book the smell is much harder, stronger. This same concept is repeated all over the book. In our discussions about the book, this concept appears again and again. I&rsquo;m thinking of adding a sub-title to the book:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Growing Object-Oriented Software, Guided by Tests
-</span><span class='line'>What and not How</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Applying this in your team</h2>
-
-<p>Now, there might be a problem if your team has a split opinion on &lsquo;what vs how&rsquo; (i.e., part of the team prefers what and another prefers how)</p>
-
-<p>Reasons I&rsquo;ve heard to defend how:</p>
-
-<ul>
-<li>The ones cited above</li>
-<li>Concision / shortness</li>
-<li>Code reusability</li>
-<li>Easier to test, extracting to collaborators<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
-</ul>
-
-
-<p>Reasons I&rsquo;ve heard to defend what:</p>
-
-<ul>
-<li>Knowing exactly what the code is doing: i.e., do not have to think what the name means and to what this corresponds</li>
-</ul>
-
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>Altough I believe you shouldn&rsquo;t do anything <em>just</em> for the purpose of tests. If it also improves your design, OK, but only for the tests, no.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Internal Training: Testing Is Hard - Just Do It]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/"/>
-    <updated>2015-05-05T23:00:17+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/05/05/internal-training-testing-is-hard-just-do-it</id>
-    <content type="html"><![CDATA[<p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/">Testing is hard - just do it</a></p>
-
-<h2>Our thoughts</h2>
-
-<blockquote><p>When a bug is found, prove it exists with a test</p></blockquote>
-
-<p>This immediately reduces defect rate: the same regression cannot be introduced again</p>
-
-<blockquote><p> fix a bug a second time</p></blockquote>
-
-<p>If fixing a bug (having defects in your code) was &lsquo;waste&rsquo;, as defined by lean methodologies, it also is wast fixing it for the following times</p>
-
-<blockquote><p>testing requires discipline</p></blockquote>
-
-<p>Agree. See quote by Larry Wall (this same article)</p>
-
-<blockquote><p>[Three requirements for a good test suite]:</p>
-
-<ol>
-<li>The tests need to be easier to write</li>
-<li>The test suite must run, and pass, before any code is allowed out the door</li>
-<li>Support from the project&rsquo;s leadership</li>
-</ol>
-</blockquote>
-
-<p>Agree.</p>
-
-<blockquote><p>Programming is like drawing water from a well</p></blockquote>
-
-<p>Good analogy</p>
-
-<blockquote><p>I&rsquo;m going to assume you are smarter than me [&hellip;]</p></blockquote>
-
-<p>This is related to &lsquo;doing clever things&rsquo;: when I write &lsquo;clever code&rsquo;, that has neither comments, nor it is massaged to be Clean Code, it will cost me many times more to modify / understand in the future vs massage it a little bit.</p>
-
-<p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
-
-<p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>vs</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="o">(</span><span class="n">elements</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">validElements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Open questions / other ideas</h2>
-
-<ul>
-<li>There are tests that are more important than others. Is there a tool to assign them weights and inform about which preponderation of the codebase is broken? The same (i.e., more importance) can happen for production code.</li>
-<li>Is SCRUM apt for junior developers? In the sense of the increased autonomy, more decisions, more required technical skills / values, etc</li>
-<li>We discussed what differentiates a project with a shorter deadline from one with a longer deadline. The consensus was: you should do tests for any kind of project, the shorter deadline project won&rsquo;t allow as much time for refactoring</li>
-<li>Tests iff (i.e., if and only if) working code</li>
-<li>Tests do not guarantee lack of defects</li>
-<li>Bijectiveness between tests and features (production code)</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Video: Nothing Is Something]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/05/04/video-nothing-is-something/"/>
-    <updated>2015-05-04T07:43:14+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/05/04/video-nothing-is-something</id>
-    <content type="html"><![CDATA[<p>I have seen this video: <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A">Nothing is something</a> by <a href="https://twitter.com/@sandimetz">Sandi Metz</a>, as I saw it recommended <a href="http://garajeando.blogspot.com.es/2015/04/interesting-talk-nothing-is-something.html">here</a></p>
-
-<p>In the video, she talks programming in this fashion: (it is a stack, not an unordered list)</p>
-
-<ul>
-<li>Abstraction seeking</li>
-<li>Message centric</li>
-<li>Condition Averse</li>
-<li>Smalltalk Infected</li>
-</ul>
-
-
-<blockquote><p>Not here to change the language but change you</p></blockquote>
-
-<p>This is a pattern I&rsquo;ve also heard from <a href="https://twitter.com/@old_sound">Alvaro Videla</a>, where he said that other, more powerful languages can change your mind and help you bring some of those concepts to your own language. He was talking about Haskell, she, about Smalltalk.</p>
-
-<p>She shows how to smell the <code>null object pattern</code> (that she independently discovered herself too - can be improved studying the classics<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>), also called <code>active nothing</code>. Decorates the <code>Animal</code> with a wrapper, to call it <code>GuaranteedAnimal</code></p>
-
-<p>Later on, shows how to code an example on a &lsquo;tail&rsquo;, extending behaviour with inheritance and how to get rid of it: prefer composition versus inheritance. The importance of roles.</p>
-
-<blockquote><p>Inheritance is for specialization, not for sharing code</p></blockquote>
-
-<p>Steps to convert inheritance into composition:</p>
-
-<ol>
-<li> Isolate the difference</li>
-<li> Name the concept</li>
-<li> Define the role</li>
-<li> Inject the players</li>
-</ol>
-
-
-<p>This is a trick I discovered here: when you don&rsquo;t know what name put here, create a spreadsheet and ask yourself what name the row should have. There is an example <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A#t=1959">at this minute</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>a reference to a pattern by the same name at <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   

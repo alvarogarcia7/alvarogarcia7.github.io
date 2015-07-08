@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Protip | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/protip/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-07-06T09:29:44+02:00</updated>
+  <updated>2015-07-08T02:52:24+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Committing to the Repo File by File]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/"/>
+    <updated>2015-07-08T02:37:08+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file</id>
+    <content type="html"><![CDATA[<p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
+
+<p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
+
+<pre><code class="bash">for f in $(git status -s |grep "^M"|awk '{print $2}'); do
+  git add $f
+  git commit -m "generic commit for all files"
+done
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Iterate With Index in Clojure]]></title>

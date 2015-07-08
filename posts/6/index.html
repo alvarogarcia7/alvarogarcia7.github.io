@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on &hellip;">
+  <meta name="description" content="The toolsmith Frederick P Brooks, Jr quoted / explained a theory explained by Mills and Baker1 around 1971-72: Chapter 3: The Surgical Team [&hellip &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,490 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/22/polishing-your-tools/">Polishing Your Tools</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-22T09:30:20+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:30 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>The toolsmith</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Fred_Brooks">Frederick P Brooks, Jr</a> quoted / explained a theory explained by Mills and Baker<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> around 1971-72:</p>
+
+<blockquote><p>Chapter 3: The Surgical Team</p>
+
+<p>[&hellip;] but the team be organized like a surgical team rather than a hog-butchering team. That is, instead of each member cutting away on the problem, one does the cutting and the others give him[her] every support that will enhance his[her] effectiveness and productivity.</p>
+
+<p>[&hellip;]</p>
+
+<p><quote> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team </quote></p></blockquote>
+
+<p>(Text between square brackets is mine)</p>
+
+<p>The author goes on to explain the job descriptions for the surgeon, copilot, administrator, editor, secretaries, program clerk, toolsmith, tester and the language lawyer.</p>
+
+<p>The one that will be covered in this post is the toolsmith:</p>
+
+<blockquote><p><strong>The toolsmith</strong>. File-editing, text-editing, and interactive debugging services are now readily available, so that a team will rarely need its own machine and machine-operating crew. But these services must be available with unquestionably satisfactory response and reliability; and the surgeon must be sole judge of the adequacy of the service available to him. He needs a toolsmith, responsible for ensuring this adequacy of the basic service and for constructing, maintaining, and upgrading special tools &ndash;mostly interactive computer services&ndash; needed by his team. Each team will need its own toolsmith, regardless of the excellence and reliability of any centrally provided service, for his job is to see to the tools needed or wanted by his surgeon, without regard to any other team&rsquo;s needs. The tool-builder will often construct specialized utilities, cataloged procedures, macro libraries.</p>
+
+<p><quote> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team </quote></p></blockquote>
+
+<p>Even though the chapter reads a bit outdated, especially with the part about genders and methodologies (i.e., waterfall), the part about roles is interesting. The surgical team, as the author presents will be composed by 9 &frac12; (nine and a half) as the language lawyer can be shared among two or three teams.</p>
+
+<h2>Day to day practices</h2>
+
+<p>So, one full-time job is to build tools to service the surgeon and the copilot (1:8,5 ratio), or approximately 12% of a full-time position.</p>
+
+<p>These tools can make the surgeon and the copilot more effective, ranging from a single digit percentage to orders of magnitude in other tasks.</p>
+
+<p>As agile teams no longer have a toolsmith and the scrum master is not necessarily a technical expert who can build tools for the whole team, the tasks of creating tools must be taken care by everyone. No one better than yourself can know your needs and tailor solutions for them.</p>
+
+<p>The only downside is you have to invest ~5h (for a full time position) per week into creating and polishing tools for your work: it is a need for achieving more productivity when working.</p>
+
+<p>Nowadays that IDEs are configurable, this time might be invested on learning more advanced features as other shortcuts, refactoring techniques, other design patterns, etc. I like having my own live templates (see <a href="https://www.jetbrains.com/idea/help/creating-and-editing-live-templates.html#d1333587e219">description</a>), especially for tests, as I saw on the <a href="https://skillsmatter.com/courses/503-sandro-mancuso-s-crafting-code-course#programme">Crafting Code workshop</a> by <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a></p>
+
+<p>It may also include other activities as setting up your bash alias, cleaning your desk, trying a new UML diagram modeler, etc. Anything that improves the productivity of your main task.</p>
+
+<p>If we consider our experience and knowledge part of our tools (as we are knowledge workers), training could be considered part of polishing our tools. Short, daily or weekly training sessions (even internal) can make a great impact on breadth (not depth) of knowledge among your teammates. This shallow knowledge can open doors for more knowledge to be gained outside of company time, or used to practice and test other methods.</p>
+
+<p>This training is so useful for everyone (&ldquo;when one teaches, two learn&rdquo;) that I recommend my clients to do it. This has helped them cope with changing technologies, knowledge transfer and even some team building.</p>
+
+<h2>Company provided or not?</h2>
+
+<p>Should the company provide for this time to improve? Although I don&rsquo;t know the answer, it would greatly affect the programmers&#8217; productivity to do so. I would say, provide this time as long as what is produced is useful. How do you measure useful? This is a subjective opinion, so it depends on each one.</p>
+
+<p>Some companies acknowledge that this is so important as to invest part of their resources (0-2 hours per week) into training.</p>
+
+<p>Either way, should your company provide it for your or not, you are the one in charge of your career (from Mancuso, <a href="https://leanpub.com/socra">Software Craftsmanship</a> - now called <a href="http://www.amazon.co.uk/Software-Craftsman-Professionalism-Pragmatism-Robert/dp/0134052501/ref=sr_1_1?ie=UTF8&amp;qid=1416521895&amp;sr=8-1&amp;keywords=the+software+craftsman">The Software Craftsman</a>). If you are not allowed to invest company time for your own benefit, you could use some of your personal time to do so. It is not required, but you will soon enjoy its profits.</p>
+
+<h2>Examples</h2>
+
+<ul>
+<li>Every sprint, one of my clients (as of 2015-05) wants to review the work done using some slides and a live demo. The &lsquo;sample&rsquo; slides with the format, layout is useful. Everything that should be replaced (timestamp, contents, etc) is marked with a TODO</li>
+<li>Every day, I commit plenty of times to the control version system (i.e., git). I have an alias for commit, diff, status, etc, that saves me some keystrokes on the most common commands</li>
+</ul>
+
+
+<hr />
+
+<p>Mills, H., &ldquo;Chief programmer teams, principles, and procedures,&rdquo; IBM Federal Systems Division Report FSC 715108, Gaithersburg, Md., 1971.</p>
+
+<p>Baker, F. T., &ldquo;Chief programmer team management of production programming,&rdquo; IBM Sys. J., 11, 1 (1972).</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Original references in &ldquo;The Mythical Man-Month&rdquo; (Notes and References, page 294) point to these:<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/21/a-legacy-code-introduction/">A Legacy Code Introduction</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-21T20:05:46+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:05 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is one of the best legacy code introductions I&rsquo;ve seen:</p>
+
+<blockquote><p>The Grand Redesign in the Sky</p>
+
+<p>Eventually the team rebels. They inform management that they cannot continue to develop in this odious code base. They demand a redesign. Management does not want to expend the resources on a whole new redesign of the project, but they cannot deny that productivity is terrible. Eventually they bend to the demands of the developers and authorize the grand redesign in the sky.</p>
+
+<p>A new tiger team is selected. Everyone wants to be on this team because it&rsquo;s a greenfield project. They get to start over and create something truly beautiful. But only the best and brightest are chosen for the tiger team. Everyone else must continue to maintain the current system.</p>
+
+<p>Now the two teams are in a race. The tiger team must build a new system that does everything that the old system does. Not only that, they have to keep up with the changes that are continuously being made to the old system. Management will not replace the old system until the new system can do everything that the old system does.</p>
+
+<p>This race can go on for a very long time. I&rsquo;ve seen it take 10 years. And by the time it&rsquo;s done, the original members of the tiger team are long gone, and the current members are demanding that the new system be redesigned because it&rsquo;s such a mess.</p>
+
+<p><cite> Robert C. Martin </cite> in the chapter 1: Clean Code from the book by <a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">the same name</a></p></blockquote>
+
+<p>Also, why should you estimate the new tiger team abilities better than the old tiger team? Is it because the language, tools, or just because they are &ldquo;plain better&rdquo;?</p>
+
+<p>What guarantees that the resulting software is going to be better than the old one?</p>
+
+<p>Another interesting definition of legacy code is Michael Feather&rsquo;s one (code without tests).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/18/the-use-of-power-tools/">The Use of Power Tools</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-18T23:25:25+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:25 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;m currently reading the Apprenticeship patterns book, out of order (explained here: TODO).</p>
+
+<p>I&rsquo;m writing down the read chapters in a text file, to measure progress and also be able to backtrack if necessary. This also makes reading the book a &ldquo;choose your own adventure&rdquo;</p>
+
+<p>After reading approximately half the chapters, the navigation wasn&rsquo;t so easy using only the &ldquo;see also&rdquo; part. So I decided to break free from that constraint and start reading other chapters. But how do you know which chapters you have left to read? Knowing the whole set (<code>all</code>) and the read set (<code>read</code>) this is just the <code>all - read</code>.</p>
+
+<p>Coming to a more practical way, how to know this is an automated (non-manual) way? There are <code>m</code> in <code>read</code> and n in <code>all</code>, where m &lt;= n.</p>
+
+<p>The simplest approach would be:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for each current in read:
+</span><span class='line'>  remove current from all</span></code></pre></td></tr></table></div></figure>
+
+
+<p>as read is is no particular order, that would yield some <code>O(m*n)</code>, worst case scenario (<code>m==n</code>), <code>O(n^2)</code>.</p>
+
+<p>That is quite expensive, especially if you have to do it manually</p>
+
+<p>If we use the same algorithm but sort the <code>read</code> set (no longer a set, as sets have no order). Also, converting it to a <code>O(1)</code> lookup table (e.g., a map), that would yield some <code>O(n log2 n + m)</code> that is already better. Taking into account that the sorting can be automated by the computer, it would yield a &ldquo;manual O notation cost&rdquo; of <code>O(1 + m)</code>. So, relative to the amount of chapters you have read.</p>
+
+<p>But we can even do better in terms of this &ldquo;manual big o notation&rdquo;:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>read &lt;- sort read into a map ; cost O(1)
+</span><span class='line'>all &lt;- sort all into a map ; cost O(1)
+</span><span class='line'>
+</span><span class='line'>unread &lt;- all - intersection(all, read) ; cost O(1)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And this is where the power tools come into place: if we use <code>comm</code> or <code>diff</code>, the computer will create  the <code>unread</code> set for us, in &ldquo;manual&rdquo; cost of <code>O(1)</code></p>
+
+<h2>Example using vim, sort and diff</h2>
+
+<p>This is the <code>read</code> set (for the moment):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>the long road
+</span><span class='line'>draw your own map
+</span><span class='line'>find mentors
+</span><span class='line'>the deep end
+</span><span class='line'>create feedback loops
+</span><span class='line'>the white belt
+</span><span class='line'>practice, practice, practice
+</span><span class='line'>concrete skills
+</span><span class='line'>your first language
+</span><span class='line'>use the source
+</span><span class='line'>reflect as you work
+</span><span class='line'>record what you learn
+</span><span class='line'>kindred spirits
+</span><span class='line'>nurture your passion
+</span><span class='line'>study the classics
+</span><span class='line'>expose your ignorance
+</span><span class='line'>dig deeper
+</span><span class='line'>be the worst
+</span><span class='line'>rubbing elbows
+</span><span class='line'>unleash your enthusiasm</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and this is the all set (copy-paste from the book):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>INTRODUCTION 1 What Is Software Craftsmanship? 3 What Is Apprenticeship? 8 What Is an Apprenticeship Pattern? 9 Where Did the Patterns Come From? 9 Where Do We Go from Here? 10
+</span><span class='line'>2 EMPTYING THE CUP 11 Your First Language 13 The White Belt 18 Unleash Your Enthusiasm 22 Concrete Skills 24 Expose Your Ignorance 25 Confront Your Ignorance 28 The Deep End 30 Retreat into Competence 32 Wrapping Up 34
+</span><span class='line'>3 WALKING THE LONG ROAD 37 The Long Road 38 Craft over Art 40 Sustainable Motivations 43 Nurture Your Passion 45 Draw Your Own Map 47 Use Your Title 50 Stay in the Trenches 52 A Different Road 53 Wrapping Up 55
+</span><span class='line'>4 ACCURATE SELF-ASSESSMENT 57 Be the Worst 58 Find Mentors 61 Kindred Spirits 64 Rubbing Elbows 66 Sweep the Floor 68 Wrapping Up 71
+</span><span class='line'>5 PERPETUAL LEARNING 73 Expand Your Bandwidth 74 Practice, Practice, Practice 77 Breakable Toys 79 Use the Source 82 Reflect As You Work 85 Record What You Learn 87 Share What You Learn 89 Create Feedback Loops 91 Learn How You Fail 94 Wrapping Up 95
+</span><span class='line'>6 CONSTRUCT YOUR CURRICULUM 99 Reading List 100 Read Constantly 102 Study the Classics 104 Dig Deeper 105 Familiar Tools 109 Wrapping Up 111</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first line is not interesting to our purposes, so delete it with:</p>
+
+<p>go to first line (<code>1G</code>), then delete (<code>dd</code>)</p>
+
+<p>After a quick inspection, there&rsquo;s a number at the end of the desired line, so replace it with newline:</p>
+
+<p><code>%s/\d\+/\r/g</code> (a snippet below):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>EMPTYING THE CUP 
+</span><span class='line'> Your First Language
+</span><span class='line'> The White Belt 
+</span><span class='line'> Unleash Your Enthusiasm 
+</span><span class='line'> Concrete Skills 
+</span><span class='line'> Expose Your Ignorance
+</span><span class='line'> Confront Your Ignorance 
+</span><span class='line'> The Deep End 
+</span><span class='line'> Retreat into Competence 
+</span><span class='line'> Wrapping Up 
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'> WALKING THE LONG ROAD </span></code></pre></td></tr></table></div></figure>
+
+
+<p>The title lines are all uppercase, so delete them with <code>:%g/^\s*\u\u/d</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Your First Language 
+</span><span class='line'> The White Belt 
+</span><span class='line'> Unleash Your Enthusiasm
+</span><span class='line'> Concrete Skills 
+</span><span class='line'> Expose Your Ignorance
+</span><span class='line'> Confront Your Ignorance
+</span><span class='line'> The Deep End
+</span><span class='line'> Retreat into Competence
+</span><span class='line'> Wrapping Up 
+</span><span class='line'> 
+</span><span class='line'> 
+</span><span class='line'> The Long Road </span></code></pre></td></tr></table></div></figure>
+
+
+<p>explanation:</p>
+
+<ul>
+<li><code>:</code> : command</li>
+<li><code>%</code> : in all the file</li>
+<li><code>g</code> : do (I remember it as &lsquo;go&rsquo;)</li>
+<li><code>^</code> : starting at the beginning</li>
+<li><code>\s*</code>: whitsepace, as much a possible</li>
+<li><code>\u\u</code>: exactly to uppercase letters. Can also be expressed as <code>\u\{2}</code></li>
+<li><code>d</code> : delete</li>
+</ul>
+
+
+<p>for more information on vim&rsquo;s regex, go <a href="http://vimregex.com/">here</a></p>
+
+<p>but there are empty lines. Delete them with: <code>%g/^$/d</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Your First Language
+</span><span class='line'> The White Belt
+</span><span class='line'> Unleash Your Enthusiasm
+</span><span class='line'> Concrete Skills
+</span><span class='line'> Expose Your Ignorance 
+</span><span class='line'> Confront Your Ignorance
+</span><span class='line'> The Deep End 
+</span><span class='line'> Retreat into Competence
+</span><span class='line'> The Long Road</span></code></pre></td></tr></table></div></figure>
+
+
+<p>there is a space at the beginning of the line, delete it with <code>:%s/^ //</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Your First Language 
+</span><span class='line'>The White Belt 
+</span><span class='line'>Unleash Your Enthusiasm 
+</span><span class='line'>Concrete Skills 
+</span><span class='line'>Expose Your Ignorance  
+</span><span class='line'>Confront Your Ignorance 
+</span><span class='line'>The Deep End  
+</span><span class='line'>Retreat into Competence 
+</span><span class='line'>Wrapping Up  
+</span><span class='line'>The Long Road  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>there are upper and lowercase letters. You could find a way of doing it with vi, but I prefer something that I can remember: save the document, then process it with <code>awk</code> and <code>sort</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat all.txt <span class="p">|</span> awk <span class="s1">&#39;{print tolower($0)&#39;</span><span class="o">}</span><span class="p">|</span> sort &gt; all_sorted.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(snippet):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>a different road
+</span><span class='line'>be the worst
+</span><span class='line'>breakable toys
+</span><span class='line'>concrete skills
+</span><span class='line'>confront your ignorance
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If needed, sort and downcase the read.txt too.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat read.txt <span class="p">|</span> awk <span class="s1">&#39;{print tolower($0)&#39;</span><span class="o">}</span><span class="p">|</span> sort &gt; read_sorted.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tried using <code>comm</code>, but it wasn&rsquo;t so useful (because of whitespace).</p>
+
+<p>Tried <code>diff</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>diff read_sorted.txt all_sorted.txt  -bBw &gt; to_read.txt
+</span><span class='line'>
+</span><span class='line'>0a1
+</span><span class='line'>&gt; a different road
+</span><span class='line'>1a3
+</span><span class='line'>&gt; breakable toys
+</span><span class='line'>2a5,6
+</span><span class='line'>&gt; confront your ignorance
+</span><span class='line'>&gt; craft over art
+</span><span class='line'>5a10
+</span><span class='line'>&gt; expand your bandwidth
+</span><span class='line'>6a12
+</span><span class='line'>&gt; familiar tools
+</span><span class='line'>8a15
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to know which are the remain chapters:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat to_read.txt <span class="p">|</span> grep <span class="s2">&quot;&gt;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to count the number of remaining chapters:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat to_read.txt <span class="p">|</span> grep <span class="s2">&quot;&gt;&quot;</span> <span class="p">|</span> wc -l
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The lesson learned here is to master your tools. This would have cost me a few minutes if done manually as the list was short, too much time if long (>1000 lines).</p>
+
+<p>On a funny note, it has taken me approximately 2 min to do this processing but ~45 minutes to write this blog post. So I don&rsquo;t recommend you write as many posts as processings you do.</p>
+
+<p>To quote Apprenticeship patterns, <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch03.html#solution_id16">A different road</a>:</p>
+
+<blockquote><p>If you walk away from software development, you will find that the habit of rigorous thinking and automating tasks involving large volumes of data will still be useful wherever you go</p>
+
+<p>D Hoover, A Oshineye</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -550,117 +1034,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/24/code-snippets-stash/">Code Snippets Stash</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-24T20:49:55+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:49 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Following a team member&rsquo;s recommendation, I recently started a repository to save all my useful snippets.</p>
-
-<p>I&rsquo;ve decided that the examples should be designed guided by tests or at least to have a working example exercised by tests. Also, that I should not reinvent the wheel and use as many open source libraries as possible, reducing the amount of code I have to write myself.</p>
-
-<p>Ideally, every snippet should be a maven project (where applicable) and be imported as a small library, therefore being able to reuse the functionality incrementally across projects.</p>
-
-<p>For the time being, I&rsquo;m saving my snippets into a private repository and later I might decide to publish it for common usage.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/22/bank-kata-in-java/">Bank Kata in Java</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-22T22:52:01+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>10:52 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://twitter.com/trikitrok">Manuel Rivero</a> and I did a subset of the <a href="https://github.com/sandromancuso/Bank-kata">bank kata</a>, proposed by <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a>.</p>
-
-<p>We&rsquo;ve used java (mockito, hamcrest, junit), outside-in TDD. The code is spread among several sessions. We have not committed after each step, only at the end of the session.</p>
-
-<p>The source code is on <a href="https://github.com/alvarogarcia7/bank-kata">github</a></p>
-
-<p>You can read Manuel&rsquo;s take on the kata on <a href="http://garajeando.blogspot.com.es/2015/01/kata-bank-account-in-java.html">his blog</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/12/gmaur-code-jam/">GMaur Code Jam 2015: 01 - Mini-Power Swapper</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-12T04:25:22+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:25 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last year we started the program 12 months, 12 katas (as inspired by this <a href="https://github.com/12meses12katas">repository</a>). This year we want to propose something different: an asynchronous code jam</p>
-
-<h2>New problem: Mini-Power Swapper</h2>
-
-<p>This post belongs to a series: <a href="/blog/categories/code-jam">code-jam</a></p>
-
-<p>Each month (or so) we at GMaur will publish a new problem (and announce it on <a href="https://twitter.com/gmaurcom">twitter</a>) and post a solution to the last problem.</p>
-
-<p>This month, the <a href="https://github.com/GMaur/code-jam-2015/tree/master/problem-01">Mini-Power Swapper</a></p>
-
-<p>You can fork the repo, commit there and send a pull request. We&rsquo;ll review the code (if you want) and merge the solution to a branch in &ldquo;solutions/&rdquo;.</p>
-
-<p>Happy katas and happy code jamming!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -678,23 +1051,23 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/08/tip-massively-reverting-local-changes/">Tip: Massively Reverting Local Changes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: Committing to the Repo File by File</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental Concepts on Programming Languages</a>
       </li>
     
       <li class="post">
         <a href="/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate With Index in Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/01/brownbag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/01/self-study-in-july-2015/">Self-study in July 2015</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/30/books-read-in-2015q2/">Books Read in 2015Q2</a>
       </li>
     
   </ul>

@@ -9,8 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Update: I&rsquo;ve grouped all small posts related to the self-study from June 2015
-into a single post Le monitoring de flux par l’exemple I&rsquo;ve &hellip;">
+  <meta name="description" content="Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including: the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,144 @@ into a single post Le monitoring de flux par l’exemple I&rsquo;ve &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/16/brown-bag-session-docker/">Brown-bag Session: Maven</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-16T18:52:28+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:52 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including:</p>
+
+<ul>
+<li>the difference between a container and an image</li>
+<li>diffing image contents</li>
+<li>AUFS (Another Union FS)</li>
+<li>persistent vs non-persistent (volatile) filesystems</li>
+<li>running CMD and other commands on the instance</li>
+<li>problems of running with permission = root (or its group)</li>
+<li>downsides of it</li>
+<li>how to compare it with a virtual machine</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/14/types-of-defects/">Types of Defects</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-14T16:16:51+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:16 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some time ago, while researching types of defects and the cost of fixing them<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, I stumbled upon this:</p>
+
+<blockquote><p>Years ago I worked with a bunch of economists in the US Federal Government - they categorized &lsquo;bugs&rsquo; in their memos into three types:</p>
+
+<ul>
+<li><p>Typos: Simple misspellings of words. Infrequent, easy to detect, easy to fix.</p></li>
+<li><p>Writos: Incoherent sentences. More frequent, hard to detect, harder to fix.</p></li>
+<li><p>Thinkos: Conceptually bonkers. Very frequent, subtle and hard to detect; almost impossible to fix.</p></li>
+</ul>
+
+
+<p>Most &lsquo;late&rsquo; bugs that I&rsquo;ve seen in software projects belong in the last category - a lack of design or the failure to make a working mock-up leads to &lsquo;thinkos&rsquo; which are only obvious when the application is nearly completed. These are expensive to fix.</p>
+
+<p>Source: <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">http://developers.slashdot.org/story/03/10/21/0141215/software-defects&#8212;do-late-bugs-really-cost-more</a></p></blockquote>
+
+<p>I would also add a new category to this:</p>
+
+<ul>
+<li>Ethos: Morally wrong, although possibly legal. These may take different forms: vary from a company to the next one,
+from society to society, etc. Even harder to fix than &lsquo;thinkos&rsquo;,
+as there is a reason (mainly economic) to keep them in place.</li>
+</ul>
+
+
+<p>  On a technical note,
+  these are not usually well-known artifacts in the company, therefore not everyone
+  should know about them. Only a few developers know the correct reasons behind them and
+  the rest might be sold a fake reason, so the latter cannot fix these &lsquo;ethos&rsquo;, as they
+  assume they are present for a good reason</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This is also a chapter in the book <a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit: &lsquo;Chapter 10: The cost of defects: an illustrated history&rsquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/11/brownbag-session-refactoring/">Brown-bag Session: Refactoring</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-11T20:22:16+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:22 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, today we&rsquo;ve done a brown-bag session on refactoring: we&rsquo;ve gone through
+and a live demo, including refactoring a core piece of our code.</p>
+
+<p>We&rsquo;ve done some mob programming to help identify some smells and how to fix them.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -891,258 +1028,6 @@ into a single post</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/06/what-versus-how/">What Versus How</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-06T07:15:08+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:15 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After reading the GOOS<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, the more and more I get this feeling of what vs how:</p>
-
-<ul>
-<li>Information hiding</li>
-<li>The total simpler than the sum of the parts</li>
-<li>Extracting a concept so you can think about this. Makes you find better names:
-
-<ul>
-<li>test name</li>
-<li>variable name</li>
-<li>method name</li>
-<li>interface / protocol name</li>
-</ul>
-</li>
-</ul>
-
-
-<p>I also got this feeling when reading Clean Code. But with this other book the smell is much harder, stronger. This same concept is repeated all over the book. In our discussions about the book, this concept appears again and again. I&rsquo;m thinking of adding a sub-title to the book:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Growing Object-Oriented Software, Guided by Tests
-</span><span class='line'>What and not How</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Applying this in your team</h2>
-
-<p>Now, there might be a problem if your team has a split opinion on &lsquo;what vs how&rsquo; (i.e., part of the team prefers what and another prefers how)</p>
-
-<p>Reasons I&rsquo;ve heard to defend how:</p>
-
-<ul>
-<li>The ones cited above</li>
-<li>Concision / shortness</li>
-<li>Code reusability</li>
-<li>Easier to test, extracting to collaborators<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
-</ul>
-
-
-<p>Reasons I&rsquo;ve heard to defend what:</p>
-
-<ul>
-<li>Knowing exactly what the code is doing: i.e., do not have to think what the name means and to what this corresponds</li>
-</ul>
-
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>Altough I believe you shouldn&rsquo;t do anything <em>just</em> for the purpose of tests. If it also improves your design, OK, but only for the tests, no.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/">Internal Training: Testing Is Hard - Just Do It</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-05T23:00:17+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:00 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/">Testing is hard - just do it</a></p>
-
-<h2>Our thoughts</h2>
-
-<blockquote><p>When a bug is found, prove it exists with a test</p></blockquote>
-
-<p>This immediately reduces defect rate: the same regression cannot be introduced again</p>
-
-<blockquote><p> fix a bug a second time</p></blockquote>
-
-<p>If fixing a bug (having defects in your code) was &lsquo;waste&rsquo;, as defined by lean methodologies, it also is wast fixing it for the following times</p>
-
-<blockquote><p>testing requires discipline</p></blockquote>
-
-<p>Agree. See quote by Larry Wall (this same article)</p>
-
-<blockquote><p>[Three requirements for a good test suite]:</p>
-
-<ol>
-<li>The tests need to be easier to write</li>
-<li>The test suite must run, and pass, before any code is allowed out the door</li>
-<li>Support from the project&rsquo;s leadership</li>
-</ol>
-</blockquote>
-
-<p>Agree.</p>
-
-<blockquote><p>Programming is like drawing water from a well</p></blockquote>
-
-<p>Good analogy</p>
-
-<blockquote><p>I&rsquo;m going to assume you are smarter than me [&hellip;]</p></blockquote>
-
-<p>This is related to &lsquo;doing clever things&rsquo;: when I write &lsquo;clever code&rsquo;, that has neither comments, nor it is massaged to be Clean Code, it will cost me many times more to modify / understand in the future vs massage it a little bit.</p>
-
-<p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
-
-<p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>vs</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="o">(</span><span class="n">elements</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">validElements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Open questions / other ideas</h2>
-
-<ul>
-<li>There are tests that are more important than others. Is there a tool to assign them weights and inform about which preponderation of the codebase is broken? The same (i.e., more importance) can happen for production code.</li>
-<li>Is SCRUM apt for junior developers? In the sense of the increased autonomy, more decisions, more required technical skills / values, etc</li>
-<li>We discussed what differentiates a project with a shorter deadline from one with a longer deadline. The consensus was: you should do tests for any kind of project, the shorter deadline project won&rsquo;t allow as much time for refactoring</li>
-<li>Tests iff (i.e., if and only if) working code</li>
-<li>Tests do not guarantee lack of defects</li>
-<li>Bijectiveness between tests and features (production code)</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/04/video-nothing-is-something/">Video: Nothing Is Something</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-04T07:43:14+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:43 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have seen this video: <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A">Nothing is something</a> by <a href="https://twitter.com/@sandimetz">Sandi Metz</a>, as I saw it recommended <a href="http://garajeando.blogspot.com.es/2015/04/interesting-talk-nothing-is-something.html">here</a></p>
-
-<p>In the video, she talks programming in this fashion: (it is a stack, not an unordered list)</p>
-
-<ul>
-<li>Abstraction seeking</li>
-<li>Message centric</li>
-<li>Condition Averse</li>
-<li>Smalltalk Infected</li>
-</ul>
-
-
-<blockquote><p>Not here to change the language but change you</p></blockquote>
-
-<p>This is a pattern I&rsquo;ve also heard from <a href="https://twitter.com/@old_sound">Alvaro Videla</a>, where he said that other, more powerful languages can change your mind and help you bring some of those concepts to your own language. He was talking about Haskell, she, about Smalltalk.</p>
-
-<p>She shows how to smell the <code>null object pattern</code> (that she independently discovered herself too - can be improved studying the classics<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>), also called <code>active nothing</code>. Decorates the <code>Animal</code> with a wrapper, to call it <code>GuaranteedAnimal</code></p>
-
-<p>Later on, shows how to code an example on a &lsquo;tail&rsquo;, extending behaviour with inheritance and how to get rid of it: prefer composition versus inheritance. The importance of roles.</p>
-
-<blockquote><p>Inheritance is for specialization, not for sharing code</p></blockquote>
-
-<p>Steps to convert inheritance into composition:</p>
-
-<ol>
-<li> Isolate the difference</li>
-<li> Name the concept</li>
-<li> Define the role</li>
-<li> Inject the players</li>
-</ol>
-
-
-<p>This is a trick I discovered here: when you don&rsquo;t know what name put here, create a spreadsheet and ask yourself what name the row should have. There is an example <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A#t=1959">at this minute</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>a reference to a pattern by the same name at <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1160,23 +1045,23 @@ into a single post</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/08/tip-massively-reverting-local-changes/">Tip: Massively Reverting Local Changes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: Committing to the Repo File by File</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental Concepts on Programming Languages</a>
       </li>
     
       <li class="post">
         <a href="/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate With Index in Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/01/brownbag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/01/self-study-in-july-2015/">Self-study in July 2015</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/30/books-read-in-2015q2/">Books Read in 2015Q2</a>
       </li>
     
   </ul>
