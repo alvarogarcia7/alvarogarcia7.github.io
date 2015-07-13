@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Organizing Code to Allow for Easy Changes Asserting that code should be easy to change is akin to stating that children should be polite; the &hellip;">
+  <meta name="description" content="We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz. These are the concepts and links brought up &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,45 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-12T00:07:29+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:07 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
+
+<p>These are the concepts and links brought up during the discussion:</p>
+
+<ul>
+<li><a href="http://martinfowler.com/bliki/DataClump.html">Data Clump</a> at the bliki</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/WaMWtp1Uetp">Refactoring with Loops and Collection Pipelines</a>, indirect link to the article by Martin Fowler</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/6J9PPQpUjwY">When Worse Is Better: Incrementally Escaping Local Maxima</a>, indirect link to the article by Kent Beck</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/Sk7DfYFPt5j">Getting It Right by Betting on Wrong</a>, indirect link to an article by Sandi Metz</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -928,6 +967,106 @@ macrogenerators wholly unnecessary</p>
 <h2>How to make an IntelliJ IDEA plugin in less than 30 minutes</h2>
 
 <p>I&rsquo;ve read <a href="http://bjorn.tipling.com/how-to-make-an-intellij-idea-plugin-in-30-minutes">this article</a> on creating new IntelliJ IDEA plugin, by Bjorn Tipling</p>
+
+<h2>How to Write Clean, Testable Code</h2>
+
+<p>I&rsquo;ve watched, again, <a href="https://www.youtube.com/watch?v=XcT4yYu_TTs">this video</a> by Miško Hevery. Discusses what are the characteristics of tested and untested code, how to get from one to the other. Discusses techniques for testing code. At the end, there are questions but they cannot be heard (lack of microphone), so it is harder to follow.</p>
+
+<h2>How to Find a Mentor</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/letters-to-my-mother/how-to-find-a-mentor-27fb978a8f1">this opinion</a> on the importance of role models and mentors. The difference between them and a personal experience. Written by Joanne Wilson</p>
+
+<h2>Type theory</h2>
+
+<p>I&rsquo;ve read this wiki page on <a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a></p>
+
+<p>Some notes:</p>
+
+<ul>
+<li>&ldquo;type systems [&hellip;] language feature used to reduce bugs&rdquo;</li>
+<li>two types: Church&rsquo;s typed λ-calculi and Martin-Löf&rsquo;s intuitionistic type theory.</li>
+<li>notation:
+
+<ul>
+<li>typing judgement: <code>M : A</code>. Term <code>M</code> has type <code>A</code></li>
+<li>example: <code>nat</code> may be a type</li>
+<li><code>2 : nat</code>, like in Scala</li>
+<li>function: &ldquo;arrow&rdquo;</li>
+<li>apply function to argument: no parenthesis</li>
+</ul>
+</li>
+<li>conversion rule: rule for rewriting terms
+
+<ul>
+<li>reduction rule: conversion rule that only works in one direction</li>
+</ul>
+</li>
+<li>normal form: a form that cannot be further reduced</li>
+<li>element: all closed elements that can be reduced to the same normal form</li>
+<li>closed term: a term without parameters. Opposite is an open term</li>
+<li>convertibility: property of terms, both open and closed. Said to be convertible if two terms can be reduced to the same term
+
+<ul>
+<li>warning: x + 1 and 1 + x are not convertible because they are in normal form and not the same</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Type system</h2>
+
+<p>I&rsquo;ve read this wiki page on <a href="https://en.wikipedia.org/wiki/Type_system">type system</a></p>
+
+<p>Some notes:</p>
+
+<ul>
+<li>&ldquo;The depth of type constraints and the manner of their evaluation affect the typing of the language&rdquo;</li>
+<li>Type polymorphism</li>
+<li>{compile time, runtime} x {manually annotated, inferred}</li>
+<li>&ldquo;A program associates each value with at least one particular type, but it also can occur that one value is associated with many subtypes.&rdquo;</li>
+<li>Classification of types:
+
+<ul>
+<li>data type – a type of a value</li>
+<li>class – a type of an object</li>
+<li>kind – a type of a type, or metatype</li>
+</ul>
+</li>
+<li>the type inference might be undecidable (for more complex type inference)</li>
+<li>&ldquo;Strong typing offers more safety, but cannot guarantee complete type safety.&rdquo; An example is the division by zero, altough some languages may declare a dependent type &ldquo;non-zero numbers&rdquo;</li>
+</ul>
+
+
+<h2>The 3 things you should know about hashCode()</h2>
+
+<p>I&rsquo;ve read <a href="http://eclipsesource.com/blogs/2012/09/04/the-3-things-you-should-know-about-hashcode/">this article</a> on the hashCode() method in java, written by Ralf Sternberg.</p>
+
+<h2>What is new in SQL:2011</h2>
+
+<p>I&rsquo;ve read <a href="http://www.sigmod.org/publications/sigmod-record/1203/pdfs/10.industry.zemke.pdf">this white paper</a> on the new features in SQL 2011. Written by Fred Zemke</p>
+
+<h2>5 Error Tracking Tools Java Developers Should Know</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javacodegeeks.com/2014/09/5-error-tracking-tools-java-developers-should-know.html">this article</a> about tracking tools for java written by Alex Zhitnitsky, featuring:</p>
+
+<ul>
+<li>Raygun</li>
+<li>Sentry</li>
+<li>Takipi</li>
+<li>Airbrake</li>
+<li>StackHunter</li>
+<li>[Bonus] ABRT</li>
+<li>Comments cite <a href="http://squash.io">Squash</a> (server written in ruby, java client available) and <a href="http://rollbar.com">Rollbar</a> (home says supports android but not says anything about java)</li>
+</ul>
+
+
+<h2>Data clump</h2>
+
+<p>I&rsquo;ve read <a href="http://martinfowler.com/bliki/DataClump.html">this article</a> on the bliki, by Martin Fowler</p>
+
+<h2>NP-Complete problems</h2>
+
+<p>I&rsquo;ve read <a href="http://webdiis.unizar.es/asignaturas/TC/wp/wp-content/uploads/2012/01/L15_NPcompletos.pdf">these slides</a> by Prof. Elvira Mayordomo about NP-Complete problems, how to reduce them to other problems and practical applications. (In Spanish)</p>
 </div>
   
   
@@ -1059,85 +1198,6 @@ macrogenerators wholly unnecessary</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-23T19:19:28+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
-
-<p>The contents of the session:</p>
-
-<ul>
-<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
-<li>Ask the dev team to add an easy feature</li>
-<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
-<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
-<li>Point out that there are regressions in the few lines of the patch</li>
-<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
-<li>Explain the technique of the golden master</li>
-<li>Some more programming, until they start to see the light at the end of the tunnel</li>
-<li>Small retrospective, including:
-
-<ul>
-<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
-<li>what could I improve as facilitator or for the structure of the session</li>
-</ul>
-</li>
-</ul>
-
-
-<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
-
-<p>I prepared a small script:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">while</span> <span class="nb">test true</span><span class="p">;</span> <span class="k">do</span>
-</span><span class='line'>  git add --all<span class="p">;</span>
-</span><span class='line'>  git commit --all -m <span class="s2">&quot;save process - uknown state&quot;</span><span class="p">;</span>
-</span><span class='line'>  sleep 120<span class="p">;</span>
-</span><span class='line'><span class="k">done</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
-<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1153,6 +1213,10 @@ macrogenerators wholly unnecessary</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a>
       </li>
     
@@ -1166,10 +1230,6 @@ macrogenerators wholly unnecessary</p>
     
       <li class="post">
         <a href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental Concepts on Programming Languages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate With Index in Clojure</a>
       </li>
     
   </ul>

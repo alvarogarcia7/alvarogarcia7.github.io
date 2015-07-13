@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java-ee | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/java-ee/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-07-08T02:52:24+02:00</updated>
+  <updated>2015-07-13T07:27:08+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -115,6 +115,106 @@
 <h2>How to make an IntelliJ IDEA plugin in less than 30 minutes</h2>
 
 <p>I&rsquo;ve read <a href="http://bjorn.tipling.com/how-to-make-an-intellij-idea-plugin-in-30-minutes">this article</a> on creating new IntelliJ IDEA plugin, by Bjorn Tipling</p>
+
+<h2>How to Write Clean, Testable Code</h2>
+
+<p>I&rsquo;ve watched, again, <a href="https://www.youtube.com/watch?v=XcT4yYu_TTs">this video</a> by Miško Hevery. Discusses what are the characteristics of tested and untested code, how to get from one to the other. Discusses techniques for testing code. At the end, there are questions but they cannot be heard (lack of microphone), so it is harder to follow.</p>
+
+<h2>How to Find a Mentor</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/letters-to-my-mother/how-to-find-a-mentor-27fb978a8f1">this opinion</a> on the importance of role models and mentors. The difference between them and a personal experience. Written by Joanne Wilson</p>
+
+<h2>Type theory</h2>
+
+<p>I&rsquo;ve read this wiki page on <a href="https://en.wikipedia.org/wiki/Type_theory">type theory</a></p>
+
+<p>Some notes:</p>
+
+<ul>
+<li>&ldquo;type systems [&hellip;] language feature used to reduce bugs&rdquo;</li>
+<li>two types: Church&rsquo;s typed λ-calculi and Martin-Löf&rsquo;s intuitionistic type theory.</li>
+<li>notation:
+
+<ul>
+<li>typing judgement: <code>M : A</code>. Term <code>M</code> has type <code>A</code></li>
+<li>example: <code>nat</code> may be a type</li>
+<li><code>2 : nat</code>, like in Scala</li>
+<li>function: &ldquo;arrow&rdquo;</li>
+<li>apply function to argument: no parenthesis</li>
+</ul>
+</li>
+<li>conversion rule: rule for rewriting terms
+
+<ul>
+<li>reduction rule: conversion rule that only works in one direction</li>
+</ul>
+</li>
+<li>normal form: a form that cannot be further reduced</li>
+<li>element: all closed elements that can be reduced to the same normal form</li>
+<li>closed term: a term without parameters. Opposite is an open term</li>
+<li>convertibility: property of terms, both open and closed. Said to be convertible if two terms can be reduced to the same term
+
+<ul>
+<li>warning: x + 1 and 1 + x are not convertible because they are in normal form and not the same</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Type system</h2>
+
+<p>I&rsquo;ve read this wiki page on <a href="https://en.wikipedia.org/wiki/Type_system">type system</a></p>
+
+<p>Some notes:</p>
+
+<ul>
+<li>&ldquo;The depth of type constraints and the manner of their evaluation affect the typing of the language&rdquo;</li>
+<li>Type polymorphism</li>
+<li>{compile time, runtime} x {manually annotated, inferred}</li>
+<li>&ldquo;A program associates each value with at least one particular type, but it also can occur that one value is associated with many subtypes.&rdquo;</li>
+<li>Classification of types:
+
+<ul>
+<li>data type – a type of a value</li>
+<li>class – a type of an object</li>
+<li>kind – a type of a type, or metatype</li>
+</ul>
+</li>
+<li>the type inference might be undecidable (for more complex type inference)</li>
+<li>&ldquo;Strong typing offers more safety, but cannot guarantee complete type safety.&rdquo; An example is the division by zero, altough some languages may declare a dependent type &ldquo;non-zero numbers&rdquo;</li>
+</ul>
+
+
+<h2>The 3 things you should know about hashCode()</h2>
+
+<p>I&rsquo;ve read <a href="http://eclipsesource.com/blogs/2012/09/04/the-3-things-you-should-know-about-hashcode/">this article</a> on the hashCode() method in java, written by Ralf Sternberg.</p>
+
+<h2>What is new in SQL:2011</h2>
+
+<p>I&rsquo;ve read <a href="http://www.sigmod.org/publications/sigmod-record/1203/pdfs/10.industry.zemke.pdf">this white paper</a> on the new features in SQL 2011. Written by Fred Zemke</p>
+
+<h2>5 Error Tracking Tools Java Developers Should Know</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javacodegeeks.com/2014/09/5-error-tracking-tools-java-developers-should-know.html">this article</a> about tracking tools for java written by Alex Zhitnitsky, featuring:</p>
+
+<ul>
+<li>Raygun</li>
+<li>Sentry</li>
+<li>Takipi</li>
+<li>Airbrake</li>
+<li>StackHunter</li>
+<li>[Bonus] ABRT</li>
+<li>Comments cite <a href="http://squash.io">Squash</a> (server written in ruby, java client available) and <a href="http://rollbar.com">Rollbar</a> (home says supports android but not says anything about java)</li>
+</ul>
+
+
+<h2>Data clump</h2>
+
+<p>I&rsquo;ve read <a href="http://martinfowler.com/bliki/DataClump.html">this article</a> on the bliki, by Martin Fowler</p>
+
+<h2>NP-Complete problems</h2>
+
+<p>I&rsquo;ve read <a href="http://webdiis.unizar.es/asignaturas/TC/wp/wp-content/uploads/2012/01/L15_NPcompletos.pdf">these slides</a> by Prof. Elvira Mayordomo about NP-Complete problems, how to reduce them to other problems and practical applications. (In Spanish)</p>
 ]]></content>
   </entry>
   

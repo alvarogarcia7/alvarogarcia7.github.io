@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="This is the first post is of the growing-software series A few weeks ago, while reading the book Growing Object-Oriented Software Guided by Tests by &hellip;">
+  <meta name="description" content="This post belongs to the growing-software series Imagine this situation: the code works. You are at this stage Disregarding the tests, the production &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,182 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/trimming-your-plants/">Trimming Your Plants</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T23:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This post belongs to the <a href="/blog/categories/growing-software">growing-software series</a></p>
+
+<p>Imagine this situation: the code works. You are at <a href="https://github.com/alvarogarcia7/refactoring_a-first-example/commit/1ff7df4d45ee1ac5bc483b90da7ed1b68f27aef9">this stage</a></p>
+
+<p>Disregarding the tests, the production code is complete. Could be better, but it is ready if you are in a hurry.</p>
+
+<p>Now, picture your test as a plant in a plant pot: it might be healthy on the outside (external quality) but how are their roots (internal quality)?</p>
+
+<p>Do you imagine them in an ordered fashion or in a jungle of roots? Everything on the outside is connected to one or several roots? In case it is several, what / how much do they share?</p>
+
+<h2>Trimming the roots</h2>
+
+<p>Now, let&rsquo;s imagine you want to put the plant in a different plant pot. You don&rsquo;t want the plant to be altered in any way: keep producing fruits as it was before, as green and shiny, etc. Just alter the container for business reasons.</p>
+
+<p>The more tidy and organized the roots are related to the outside plant itself, the easier it is to reshape (or refactor) it.</p>
+
+<p>So this is exactly what refactoring is about: &ldquo;keeping the same external behaviour, modifying the internal structure&rdquo;. I like to explain as &ldquo;modify how it is done but not what it does&rdquo;.</p>
+
+<p>When you trim the roots but leave unaltered the top, you are making it cheaper to modify the internal shape without affecting the rest. The plant will continue to grow, requiring more and more nutrients from the ground. Small increases that do not warrant a bigger plant pot, as the current one can withstand the new requirements.</p>
+
+<p>This is where the analogy is no longer useful: when writing software, you&rsquo;re also making it easier to reuse, modify and maintain.</p>
+
+<h3>Conclusion</h3>
+
+<p>The more tidied up you have your plants, the cheaper to maintain and modify.</p>
+
+<p>Software implementation details are like roots: they expand to find any small hole where to expand. Even to scaffold expected behaviour</p>
+
+<p>Trim your plants early and often, always with the help of a test suite</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/tdd-microexercise-tire-pressure/">TDD Microexercise: Tire Pressure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T23:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday, <a href="http://twitter.com/@trikitrok">Manuel Rivero</a> and I facilitated a <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/events/221463037/">workshop</a> using the <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises/Java/TirePressureMonitoringSystem">tire pressure</a> TDD microexercise. (More microexercises can be found in <a href="/blog/categories/microexercise">this category</a>, also <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises">here</a>)</p>
+
+<p>We scheduled the session as follows:</p>
+
+<ul>
+<li>10 minutes introduction to the exercise</li>
+<li>10 minutes to download the code and take a first look</li>
+<li>10 minutes explanation about the exercise, what the problem is, etc</li>
+<li>30 minutes for the attendees to explore the solution (on their own)</li>
+<li>10 minutes for commenting the explored solutions, comments about it</li>
+<li>40 minutes of prepared kata format</li>
+<li>10 minutes of final explanations, questions and answers (Q&amp;A)</li>
+</ul>
+
+
+<p>Total: 120 minutes or two hours, approximately</p>
+
+<p>We decided that one would be mostly at the keyboard and the other mostly explaining. This allows for the speaker to introduce some concepts while the driver is performing a larger refactor / step.</p>
+
+<p>Some of our own feedback:</p>
+
+<ul>
+<li>Have the kata prepared, clear all your doubts before doing it live</li>
+<li>Be very specific about the goal of the kata: the narrower the focus, the more we will learn</li>
+<li>If necessary, exercise your shortcuts / practices one last time</li>
+<li>Set up the font as big as needed. Even remove some whitelines (present in your usual code) so more text can fit in the screen.</li>
+<li>It was very useful for us to have a small script of what we would perform: what was the idea, where to stop to explain things, etc</li>
+<li>A prepared kata is a show (like a movie), so the dialogs between the performing pair are important. Do not be afraid to tell the reasons why you did this last refactor.</li>
+<li>Answer the questions as you go, do not wait until the end of the session</li>
+</ul>
+
+
+<p>Some feedback we received:</p>
+
+<ul>
+<li>It would have been useful to do a recap at the end of the session, to refresh the most important concepts</li>
+<li>In general the session was good, they were satisfied with the techniques shown there</li>
+<li>The exercise was concise and small, perfect for two hours&#8217; time</li>
+</ul>
+
+
+<p>Many thanks to all the attendees and to Manuel: I learnt a lot from the session and renewed my energies to keep doing these workshop sessions. Also thanks to Luca Minudel for writing these awesome exercises.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/books-read-in-2015q1/">Books Read in 2015Q1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T12:49:49+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html">post</a>:</p>
+
+<ul>
+<li><a href="https://leanpub.com/50quickideas">Fifty Quick Ideas to Improve your User Stories</a>, by Gojko Adzic and David Evans</li>
+<li><a href="https://leanpub.com/funretrospectives">Fun retrospectives</a> by Taina Caetano and Paulo Caroli</li>
+<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091">Implementation patterns</a> by Kent Beck</li>
+<li><a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">Clean code</a> by Robert C. Martin;  again</li>
+</ul>
+
+
+<p>Books started, not yet finished (WIP):</p>
+
+<ul>
+<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a>, by Benjamin J. Evans and Martijn Verburg</li>
+<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>, by Martin Fowler, (with Kent Beck, John Brant, William Opdyke, and Don Roberts)</li>
+<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>, by Steve Freeman and Nat Pryce</li>
+<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a>, by Mihaly Csikszentmihalyi</li>
+</ul>
+
+
+<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -568,165 +744,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/03/mob-programming-string-calculator-kata/">Mob Programming String Calculator Kata</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-03T04:46:48+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:46 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last Friday we did a kata<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> using a projector the string calculator <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> using pair programming, TDD and some mob-programming for the last refactoring.</p>
-
-<p>We used a projector (beamer) so everyone could see it. I tried to take really small baby steps but the adding part was done in ~6 cycles<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
-
-<p>We&rsquo;ve all learnt about shotcuts, live user templates for the IDE <sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>, TDD methodology, other ways of tackling the problem, how to refactor as a group, clean code, etc</p>
-
-<p>These sessions are necessary to share some knowledge among the teammates and have another chance of doing code review, releasing some pressure from daily practices or bad abstractions / designs (that will be taken care of in the future)</p>
-
-<p>We&rsquo;ve had such a great time, learning together, that would be a candidate for a weekly interaction.</p>
-
-<p><a href="http://en.wikipedia.org/wiki/Mob_programming">Mob programming</a> is such an eye opening practice. It forces you to reconsider your previous dogma and to understand the others&#8217; positions. Wikipedia reads &ldquo;early use of phrase [&hellip;] was made in &lsquo;Extreme Programming Perspectives&rsquo;&rdquo; but this practice is practiced by some, such as <a href="https://twitter.com/carlosble">Carlos Blé</a>, <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a> among others; also at the <a href="http://www.softwarecraftsmanshipbarcelona.org/">Software Craftsmanship Barcelona</a> <a href="https://twitter.com/hashtag/scbcn2013?src=hash">2013</a> and <a href="https://twitter.com/hashtag/SCBCN14?src=hash">2014</a> and the <a href="https://twitter.com/hashtag/socracan?src=hash">SoCra Canaries 2015</a></p>
-
-<h2>One goal</h2>
-
-<p>Our goal for this session was to practice TDD and baby steps, so the team can improve its ability on these skills.</p>
-
-<p>In any case, my objective for the katas (or deliberate practice) is not to get there as fast as we can but to improve our automated routines. This can affect our daily performance, as it becomes natural. It is not about the getting to the destination but enjoying the path along the way. In this manner, you are not so hurried up about a slow train but enjoy the views across the window.</p>
-
-<p>It was good that QA people in the team came to the session. He even participated with some tips / implementations during the refactors. Always fruitful to discuss (and learn) mixed skills (QA / dev) from the other side of the wall</p>
-
-<h2>Conclusion</h2>
-
-<p>I still haven&rsquo;t mastered the recipe (algorithm) for knowing when it is a scaffold and when it&rsquo;s time to refactor using &ldquo;replace algorithm&rdquo;. For know, I just use the three (3) rule and a bit of gut feeling on the side. The bad thing is that this can not be easily taught to someone else. Just learnt by osmosis and practice.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>matching none of the styles explained in <a href="http://johannesbrodwall.com/2011/12/18/how-to-start-a-coding-dojo/">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>This is a very good beginner&rsquo;s kata, created by <a href="https://twitter.com/royosherove">Roy Osherove</a>. Can be found <a href="http://osherove.com/tdd-kata-1/">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>One piece of feedback I received is that I talk too much while coding, as these 6 cycles took us about 45 minutes, total<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-<li id="fn:4">
-<p>There are some for <a href="https://www.jetbrains.com/idea/help/live-templates.html">IntelliJ IDEA</a>, <a href="http://stackoverflow.com/questions/4022367/what-is-the-eclipse-equivalent-of-intellij-live-templates">Eclipse</a> too<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/24/the-purple-wire/">The Purple Wire</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-24T20:57:43+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:57 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A quote from the <a href="http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959">Mythical Man-Month</a>:</p>
-
-<blockquote><p>Chapter 13: The Whole and the Parts</p>
-
-<p>[&hellip;] In System/360 engineering models, one saw occasional strands of purple wire among the routine yellow wires. When a bug was found, two things were done. A quick fix was devised and installed on the system, so testing could proceed. This change was put on in purple wire, so it stuck out like a sore thumb. It was entered in the log. Meanwhile, an official change document was prepared and started into the design automation mill. Eventually this resulted in updated drawings and wire lists, and a new back panel in which the change was implemented in printed circuitry or yellow wire. Now the physical model and the paper were together again, and the purple wire was gone.</p>
-
-<p>Programming needs a purple-wire technique, and it badly needs tight control and deep respect for the paper that ultimately is the product. The vital ingredients of such technique are the logging of all changes in a journal and the distinction, carried conspicuously in source code, between quick patches and thought-through, tested, documented fixes.</p>
-
-<p>[&hellip;]</p>
-
-<p><quote> Brooks, F. - The Mythical Man-Month</quote></p></blockquote>
-
-<p>This purple-wire the author talks about is extremely important even in the current age as the whole team should not be blocked by a single defect.</p>
-
-<p>What I usually do is a commit containing a quick fix (purple-wire, scaffold, hackish if, etc) on a bugfix branch, push the changes so jenkins can verify that this purple-wire didn&rsquo;t break any other case. Then integrate this bugfix into master if required<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. If this affects <code>develop</code> branch of other developers, also merge into develop and or feature branches.</p>
-
-<p>On the other hand, in my opinion, fixing the defect should include an unit test so the defect does not reproduce again. If this is not reproducible through an unit one, escalate test levels (unit, integration, end to end, etc) until a suitable one is found.</p>
-
-<p>Once that applying the purple-wire is done, I <code>checkout</code> the last version where the defect is to be found (usually right before the bugfix branch) and create this test necessary to reproduce behavior. Only after this defect is found I fix it. Otherwise, I think the root cause might be in a different place and, therefore, fix a non-existing defect, effectively introducing a regression.</p>
-
-<p>This test also serves to reproduce that the corrected behavior is not introduced anymore into the system.</p>
-
-<p>As an ending phase for the defect, replace the purple wire with the new code and, after passing all tests, merge to master, develop and feature branches.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>If the found defect is not business critical, I try not to merge to master the purple wire, just leave master pointing to the defect and the bugfix branch with the solution. This bugfix branch will be deleted when a more stable fix is found.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/23/kata-persistent-linked-list/">Kata: Persistent Linked List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-23T23:19:57+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve just written a new kata, about a persistent linked list.</p>
-
-<p>It is using the same project as for the <a href="https://github.com/alvarogarcia7/kata-linkedlist">linked list kata</a>.</p>
-
-<p>For now, only the <code>add</code>, <code>contains</code> and <code>size</code> methods are implemented.</p>
-
-<p>If you have any comments or code review, please let me know</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -744,6 +761,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a>
       </li>
     
@@ -757,10 +778,6 @@
     
       <li class="post">
         <a href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental Concepts on Programming Languages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate With Index in Clojure</a>
       </li>
     
   </ul>

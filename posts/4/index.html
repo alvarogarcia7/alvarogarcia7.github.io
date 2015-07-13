@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The &hellip;">
+  <meta name="description" content="In his book Working effectively with legacy code, Michael Feathers describes: [&hellip;] legacy code as code without tests. It is a good working &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,134 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/21/what-legacy-code-is-about/">What Legacy Code Is About</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-21T22:09:54+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:09 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers">Michael Feathers</a> describes:</p>
+
+<blockquote><p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
+
+<p>M Feathers, in the preface of Working effectively with legacy code</p></blockquote>
+
+<p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
+
+<p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
+
+<p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
+
+<ul>
+<li>some test the test framework</li>
+<li>some the language</li>
+<li>some test a happy path that works by pure luck</li>
+<li>some functionalities are tested (not all happy paths)</li>
+<li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
+</ul>
+
+
+<p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
+
+<p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
+
+<p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
+
+<p>This is why I would like to update the definition:</p>
+
+<blockquote><p>Legacy code is code without tests that provide trust to all your stakeholders</p></blockquote>
+
+<p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
+
+<p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
+
+<p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-21T07:23:23+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>7:23 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.</p>
+
+<p>The code provides a way of doing <code>try|catch</code>, specifying an exception to be caught.</p>
+
+<p>The source code is available <a href="https://github.com/alvarogarcia7/annotation-aspect-java">here</a></p>
+
+<h2>In the process</h2>
+
+<p>This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.</p>
+
+<p>If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t). The unmassaged code can be found <a href="https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e">here</a>. The massaged version is at the <a href="https://github.com/alvarogarcia7/annotation-aspect-java/">tip of the arrow</a></p>
+
+<h2>More information</h2>
+
+<p>Regarding <code>annotations</code> (like @Override):</p>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/annotations/">This official article</a> on annotations is useful.</li>
+<li><a href="http://www.vogella.com/tutorials/JavaAnnotations/article.html">This article</a> by Lars Vogel guides you step by step.</li>
+<li><a href="http://tutorials.jenkov.com/java/annotations.html">This article</a> by Jakov Jenkov is very nice.</li>
+<li><a href="http://crunchify.com/understanding-java-annotation-annotation-examples/">This article</a> helps you to understand what an annotation is and what to use it for.</li>
+</ul>
+
+
+<p>Regarding <code>aspect</code> (based on AspectJ):</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation">This question</a> has been my main source of information / inspiration for the spring + aspectj configuration</li>
+</ul>
+
+
+<h2>Conclusions</h2>
+
+<p>One of the drawbacks that I find to common examples or tutorials is that they&rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including <code>pom.xml</code> (dependencies) and tests.</p>
+
+<p>Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -856,7 +984,7 @@ Error: Run jekyll build --trace for more information.
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/03/31/trimming-your-plants/">Trimming Your Plants</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/01/category-flow/">Category: Flow</a></h1>
     
     
       <p class="meta">
@@ -865,161 +993,16 @@ Error: Run jekyll build --trace for more information.
 
 
 
-<time class='entry-date' datetime='2015-03-31T23:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
+<time class='entry-date' datetime='2015-04-01T07:09:43+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>7:09 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>This post belongs to the <a href="/blog/categories/growing-software">growing-software series</a></p>
+  <div class="entry-content"><p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202/">Flow: The Psychology of Optimal Experience</a>&rsquo;, written by Mihaly Csikszentmihalyi</p>
 
-<p>Imagine this situation: the code works. You are at <a href="https://github.com/alvarogarcia7/refactoring_a-first-example/commit/1ff7df4d45ee1ac5bc483b90da7ed1b68f27aef9">this stage</a></p>
-
-<p>Disregarding the tests, the production code is complete. Could be better, but it is ready if you are in a hurry.</p>
-
-<p>Now, picture your test as a plant in a plant pot: it might be healthy on the outside (external quality) but how are their roots (internal quality)?</p>
-
-<p>Do you imagine them in an ordered fashion or in a jungle of roots? Everything on the outside is connected to one or several roots? In case it is several, what / how much do they share?</p>
-
-<h2>Trimming the roots</h2>
-
-<p>Now, let&rsquo;s imagine you want to put the plant in a different plant pot. You don&rsquo;t want the plant to be altered in any way: keep producing fruits as it was before, as green and shiny, etc. Just alter the container for business reasons.</p>
-
-<p>The more tidy and organized the roots are related to the outside plant itself, the easier it is to reshape (or refactor) it.</p>
-
-<p>So this is exactly what refactoring is about: &ldquo;keeping the same external behaviour, modifying the internal structure&rdquo;. I like to explain as &ldquo;modify how it is done but not what it does&rdquo;.</p>
-
-<p>When you trim the roots but leave unaltered the top, you are making it cheaper to modify the internal shape without affecting the rest. The plant will continue to grow, requiring more and more nutrients from the ground. Small increases that do not warrant a bigger plant pot, as the current one can withstand the new requirements.</p>
-
-<p>This is where the analogy is no longer useful: when writing software, you&rsquo;re also making it easier to reuse, modify and maintain.</p>
-
-<h3>Conclusion</h3>
-
-<p>The more tidied up you have your plants, the cheaper to maintain and modify.</p>
-
-<p>Software implementation details are like roots: they expand to find any small hole where to expand. Even to scaffold expected behaviour</p>
-
-<p>Trim your plants early and often, always with the help of a test suite</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/31/tdd-microexercise-tire-pressure/">TDD Microexercise: Tire Pressure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-31T23:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Yesterday, <a href="http://twitter.com/@trikitrok">Manuel Rivero</a> and I facilitated a <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/events/221463037/">workshop</a> using the <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises/Java/TirePressureMonitoringSystem">tire pressure</a> TDD microexercise. (More microexercises can be found in <a href="/blog/categories/microexercise">this category</a>, also <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises">here</a>)</p>
-
-<p>We scheduled the session as follows:</p>
-
-<ul>
-<li>10 minutes introduction to the exercise</li>
-<li>10 minutes to download the code and take a first look</li>
-<li>10 minutes explanation about the exercise, what the problem is, etc</li>
-<li>30 minutes for the attendees to explore the solution (on their own)</li>
-<li>10 minutes for commenting the explored solutions, comments about it</li>
-<li>40 minutes of prepared kata format</li>
-<li>10 minutes of final explanations, questions and answers (Q&amp;A)</li>
-</ul>
-
-
-<p>Total: 120 minutes or two hours, approximately</p>
-
-<p>We decided that one would be mostly at the keyboard and the other mostly explaining. This allows for the speaker to introduce some concepts while the driver is performing a larger refactor / step.</p>
-
-<p>Some of our own feedback:</p>
-
-<ul>
-<li>Have the kata prepared, clear all your doubts before doing it live</li>
-<li>Be very specific about the goal of the kata: the narrower the focus, the more we will learn</li>
-<li>If necessary, exercise your shortcuts / practices one last time</li>
-<li>Set up the font as big as needed. Even remove some whitelines (present in your usual code) so more text can fit in the screen.</li>
-<li>It was very useful for us to have a small script of what we would perform: what was the idea, where to stop to explain things, etc</li>
-<li>A prepared kata is a show (like a movie), so the dialogs between the performing pair are important. Do not be afraid to tell the reasons why you did this last refactor.</li>
-<li>Answer the questions as you go, do not wait until the end of the session</li>
-</ul>
-
-
-<p>Some feedback we received:</p>
-
-<ul>
-<li>It would have been useful to do a recap at the end of the session, to refresh the most important concepts</li>
-<li>In general the session was good, they were satisfied with the techniques shown there</li>
-<li>The exercise was concise and small, perfect for two hours&#8217; time</li>
-</ul>
-
-
-<p>Many thanks to all the attendees and to Manuel: I learnt a lot from the session and renewed my energies to keep doing these workshop sessions. Also thanks to Luca Minudel for writing these awesome exercises.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/31/books-read-in-2015q1/">Books Read in 2015Q1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-31T12:49:49+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:49 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html">post</a>:</p>
-
-<ul>
-<li><a href="https://leanpub.com/50quickideas">Fifty Quick Ideas to Improve your User Stories</a>, by Gojko Adzic and David Evans</li>
-<li><a href="https://leanpub.com/funretrospectives">Fun retrospectives</a> by Taina Caetano and Paulo Caroli</li>
-<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091">Implementation patterns</a> by Kent Beck</li>
-<li><a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">Clean code</a> by Robert C. Martin;  again</li>
-</ul>
-
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a>, by Benjamin J. Evans and Martijn Verburg</li>
-<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>, by Martin Fowler, (with Kent Beck, John Brant, William Opdyke, and Don Roberts)</li>
-<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>, by Steve Freeman and Nat Pryce</li>
-<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a>, by Mihaly Csikszentmihalyi</li>
-</ul>
-
-
-<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
+<p>Note: This has been created a posteriori with a previous date</p>
 </div>
   
   
@@ -1044,6 +1027,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a>
       </li>
     
@@ -1057,10 +1044,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental Concepts on Programming Languages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate With Index in Clojure</a>
       </li>
     
   </ul>
