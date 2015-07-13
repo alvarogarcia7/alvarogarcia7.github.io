@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-07-13T08:26:43+02:00</updated>
+  <updated>2015-07-13T09:02:56+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -122,6 +122,71 @@
 
 
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What Defines a Dependency]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/"/>
+    <updated>2015-07-13T07:48:28+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency</id>
+    <content type="html"><![CDATA[<p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java">fragment</a>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">register</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">userName</span><span class="o">)</span>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">registeredUsers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">User</span><span class="o">(</span><span class="n">userName</span><span class="o">));</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">AlreadyRegisteredUserException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">userName</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
+
+<p>He suggested that:</p>
+
+<ul>
+<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
+<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
+</ul>
+
+
+<p>As a conclusion, <code>resultListener</code> would be a notification, as it business does not require it.</p>
+
+<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java">fragment</a>)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span> <span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">,</span> <span class="kd">final</span> <span class="n">RegistryResultListener</span> <span class="n">resultListener</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">if</span><span class="o">(</span><span class="n">contains</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+</span><span class='line'>        <span class="k">return</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">users</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">resultListener</span><span class="o">.</span><span class="na">successfullyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
+
+<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
 ]]></content>
   </entry>
   
@@ -1412,116 +1477,6 @@ into a single post</p>
     <content type="html"><![CDATA[<p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.poodr.com/">Practical Object-Oriented Design in Ruby</a>&rsquo;, by Sandi Metz</p>
 
 <p>Note: This has been created a posteriori with a previous date</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Internal Training: QA &amp; How to Test]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test/"/>
-    <updated>2015-05-18T22:20:09+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test</id>
-    <content type="html"><![CDATA[<p>At a client, we&rsquo;ve done today an internal training on &ldquo;QA &amp; how to test&rdquo;. In it, the most skilled person with the QA role in the dev team has explained to us some techniques and concepts for testing</p>
-
-<h2>My notes</h2>
-
-<p>Verification vs validation: building the product right vs building the right product.</p>
-
-<h3>Principles</h3>
-
-<p>Extracted from <a href="http://www.istqb.org/">ISTQB</a>:</p>
-
-<ul>
-<li>testing shows presence of defects</li>
-<li>exhaustive testing is impossible</li>
-<li>early testing is better than later testing</li>
-<li>defect clustering: areas with bigger defect ratio or more critical, etc should be tested more thoroughly</li>
-<li>pesticide paradox</li>
-<li>testing is context-dependent</li>
-<li>absence of errors fallacy: the absence of defects does not imply perfect software. There are also problems with validation.</li>
-</ul>
-
-
-<h3>Techniques</h3>
-
-<h4>People-based</h4>
-
-<ul>
-<li>bug bashes: e.g., time-constrained</li>
-<li>subject-matter expert testing</li>
-<li>eat your own dogfood</li>
-<li>others</li>
-</ul>
-
-
-<h4>Activity-based</h4>
-
-<ul>
-<li>regression</li>
-<li>scripted (manual)</li>
-<li>smoke</li>
-<li>exploratory</li>
-<li>installation</li>
-<li>load</li>
-<li>long sequence</li>
-<li>performance</li>
-</ul>
-
-
-<h4>Coverage-based</h4>
-
-<ul>
-<li>menu tour: exploration based on menus (especially on websites)</li>
-<li>functional and system testing</li>
-<li>integration</li>
-<li>logic</li>
-<li>state-based</li>
-</ul>
-
-
-<h4>Requirements-based</h4>
-
-<ul>
-<li>Equivalence partitioning: examples in the same set are considered equivalent</li>
-<li>Boundary based: there are interesting examples around and on the boundaries</li>
-<li>Decision tables: truth table</li>
-<li>State transition tables: state diagram</li>
-</ul>
-
-
-<h4>Risk-based</h4>
-
-<ul>
-<li>make a prioritized list: probability and impact</li>
-<li>perform testing exploring each risk</li>
-<li>after a risk disappears, another opens. Adjust your test effort to stay focused on the current crop</li>
-</ul>
-
-
-<h4>Use case tests</h4>
-
-<ul>
-<li>use case: a common case that represents one of your customer&rsquo;s cases</li>
-<li>use busines language</li>
-</ul>
-
-
-<h4>Structure-based</h4>
-
-<ul>
-<li>test coverage is different than code coverage</li>
-<li>test coverage is based on decision tables</li>
-</ul>
-
-
-<h4>Defining testing priorities</h4>
-
-<ul>
-<li>customer and contractual requirements</li>
-<li>regulatory</li>
-<li>experience-based</li>
-<li>&ldquo;Best representative&rdquo;</li>
-</ul>
-
 ]]></content>
   </entry>
   

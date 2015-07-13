@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="A friend sent this Software Gardening Manifesto to me. This is related to the idea of growing software vs building it, greatly exemplified by the &hellip;">
+  <meta name="description" content="At a client, we&rsquo;ve done today an internal training on &ldquo;QA &amp; how to test&rdquo;. In it, the most skilled person with the QA role in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,136 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal Training: QA &amp; How to Test</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-18T22:20:09+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, we&rsquo;ve done today an internal training on &ldquo;QA &amp; how to test&rdquo;. In it, the most skilled person with the QA role in the dev team has explained to us some techniques and concepts for testing</p>
+
+<h2>My notes</h2>
+
+<p>Verification vs validation: building the product right vs building the right product.</p>
+
+<h3>Principles</h3>
+
+<p>Extracted from <a href="http://www.istqb.org/">ISTQB</a>:</p>
+
+<ul>
+<li>testing shows presence of defects</li>
+<li>exhaustive testing is impossible</li>
+<li>early testing is better than later testing</li>
+<li>defect clustering: areas with bigger defect ratio or more critical, etc should be tested more thoroughly</li>
+<li>pesticide paradox</li>
+<li>testing is context-dependent</li>
+<li>absence of errors fallacy: the absence of defects does not imply perfect software. There are also problems with validation.</li>
+</ul>
+
+
+<h3>Techniques</h3>
+
+<h4>People-based</h4>
+
+<ul>
+<li>bug bashes: e.g., time-constrained</li>
+<li>subject-matter expert testing</li>
+<li>eat your own dogfood</li>
+<li>others</li>
+</ul>
+
+
+<h4>Activity-based</h4>
+
+<ul>
+<li>regression</li>
+<li>scripted (manual)</li>
+<li>smoke</li>
+<li>exploratory</li>
+<li>installation</li>
+<li>load</li>
+<li>long sequence</li>
+<li>performance</li>
+</ul>
+
+
+<h4>Coverage-based</h4>
+
+<ul>
+<li>menu tour: exploration based on menus (especially on websites)</li>
+<li>functional and system testing</li>
+<li>integration</li>
+<li>logic</li>
+<li>state-based</li>
+</ul>
+
+
+<h4>Requirements-based</h4>
+
+<ul>
+<li>Equivalence partitioning: examples in the same set are considered equivalent</li>
+<li>Boundary based: there are interesting examples around and on the boundaries</li>
+<li>Decision tables: truth table</li>
+<li>State transition tables: state diagram</li>
+</ul>
+
+
+<h4>Risk-based</h4>
+
+<ul>
+<li>make a prioritized list: probability and impact</li>
+<li>perform testing exploring each risk</li>
+<li>after a risk disappears, another opens. Adjust your test effort to stay focused on the current crop</li>
+</ul>
+
+
+<h4>Use case tests</h4>
+
+<ul>
+<li>use case: a common case that represents one of your customer&rsquo;s cases</li>
+<li>use busines language</li>
+</ul>
+
+
+<h4>Structure-based</h4>
+
+<ul>
+<li>test coverage is different than code coverage</li>
+<li>test coverage is based on decision tables</li>
+</ul>
+
+
+<h4>Defining testing priorities</h4>
+
+<ul>
+<li>customer and contractual requirements</li>
+<li>regulatory</li>
+<li>experience-based</li>
+<li>&ldquo;Best representative&rdquo;</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -853,51 +983,6 @@ into a single post</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/25/how-i-read-apprenticeship-patterns/">How I Read Apprenticeship Patterns</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-25T13:49:01+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:49 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At the Craft Conf 2015 I saw someone with the book <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a> by <a href="http://twitter.com/@davehoover">Dave Hoover</a> and <a href="http://twitter.com/@ade_oshineye">Adewale Oshineye</a> and asked them about the book. After praising the contents, they asked me how to approach the book.</p>
-
-<p>I recalled reading it non-sequentially, and explained it to them:</p>
-
-<ul>
-<li>Read the introduction, preface, etc first</li>
-<li>When you get to the patterns, pick one at random</li>
-<li><code>10</code>: Read it and navigate through the <code>see also</code>.</li>
-<li>If there are unread chapters from the <code>see also</code>, <code>goto 10</code></li>
-<li>Find the remaining unread chapters and read them, try to apply the same algorithm</li>
-<li>Read the appendices and finishing words</li>
-</ul>
-
-
-<p>Reading a connected chapter after the first one made me connect the dots and understand it much better than reading them sequentially.</p>
-
-<p>PS: This post was extracted from this one: <a href="../../../../2015/02/02/your-first-language/">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -919,6 +1004,10 @@ into a single post</p>
       </li>
     
       <li class="post">
+        <a href="/blog/2015/07/13/what-defines-a-dependency/">What Defines a Dependency</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
       </li>
     
@@ -928,10 +1017,6 @@ into a single post</p>
     
       <li class="post">
         <a href="/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/08/tip-massively-reverting-local-changes/">Tip: Massively Reverting Local Changes</a>
       </li>
     
   </ul>
