@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have: Dependencies: Services that the object &hellip;">
+  <meta name="description" content="After a while, the generation of the static site using Octopress 2 was starting to be slow (around 2 minutes for 85 posts) for the kind of fast &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,121 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster Site Generation for Octopress 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-13T07:49:23+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:49 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
+
+<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
+
+<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
+
+<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cp -R blog_source blog_post_factory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>blog_post_factory/source/_posts
+</span><span class='line'>git update-index --assume-unchanged <span class="k">$(</span>ls *markdown<span class="k">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Delete all existing markdown files</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rm *markdown
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Check that git doesn&rsquo;t realize about the difference:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git status
+</span><span class='line'>
+</span><span class='line'><span class="c"># On branch source</span>
+</span><span class='line'>nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create a new post:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s2">&quot;Faster site generation for Octopress 2&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># On branch source</span>
+</span><span class='line'><span class="c"># Untracked files:</span>
+</span><span class='line'><span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 2015-07-13-faster-site-generation-for-octopress-2.markdown</span>
+</span><span class='line'>nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> to track<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
+
+<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate <span class="o">&amp;&amp;</span> rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Regenerating: <span class="m">1</span> file<span class="o">(</span>s<span class="o">)</span> changed at 2015-07-13 08:03:29 ...done in 0.617269045 seconds.
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1112,80 +1227,6 @@ macrogenerators wholly unnecessary</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/30/books-read-in-2015q2/">Books Read in 2015Q2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-30T12:49:50+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:49 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Books I&rsquo;ve read this quarter Q2 on 2015:</p>
-
-<ul>
-<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a> by Mihaly Csikszentmihalyi. Blog posts under the tag <a href="/blog/categories/flow">flow</a></li>
-<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> by Steve Freeman and Nat Pryce. Blog posts under the tag <a href="/blog/categories/goos">goos</a>. Read in the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;.</li>
-</ul>
-
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a> by Benjamin J. Evans and Martijn Verburg</li>
-<li><a href="https://leanpub.com/lisphackers">Lisp Hackers</a> by Vsevolod Dyomkin</li>
-<li><a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good!</a> by Miran Lipovača</li>
-<li><a href="http://www.amazon.co.uk/Working-Effectively-Legacy-Robert-Martin/dp/0131177052">Working Effectively with Legacy Code</a> by Michael Feathers, again</li>
-<li><a href="http://www.poodr.com/">Practical Object-Oriented Design in Ruby, An Agile Primer (POODR)</a> by Sandi Metz, with the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/blog/categories/poodr">poodr</a>.</li>
-</ul>
-
-
-<p>Books I want to finish:</p>
-
-<ul>
-<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a> by Martin Fowler, with Kent Beck, John Brant, William Opdyke, and Don Roberts</li>
-<li><a href="http://shop.oreilly.com/product/0636920028499.do">Java Performance: The Definitive Guide</a> by Scott Oaks</li>
-<li><a href="http://www.infoq.com/minibooks/scrum-xp-from-the-trenches">Scrum and XP from the trenches</a> by Henrik Kniberg</li>
-</ul>
-
-
-<p>Books that have entered the queue:</p>
-
-<ul>
-<li><a href="http://carlos.bueno.org/optimization/mature-optimization.pdf">Mature optimization</a>, by Carlos Bueno</li>
-<li><a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit, again. <a href="https://twitter.com/alvarobiz/status/611799849911103488">Gift</a></li>
-<li><a href="http://xunitpatterns.com/">XUnit Test Patterns</a> by Gerard Meszaros</li>
-<li><a href="https://leanpub.com/nightowls">Why programmers work at night</a> by Swizec Teller</li>
-<li><a href="http://letoverlambda.com/">Let Over Lambda</a> by Doug Hoyte</li>
-<li><a href="http://fldit-www.cs.uni-dortmund.de/~peter/PS07/HR.pdf">The Haskell Road to Logic, Math and Programming</a> by Kees Doets and Jan van Eijck</li>
-<li><a href="http://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs</a> by Abelson, Sussman, and Sussman</li>
-<li><a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Programming Languages</a> by Benjamin C. Pierce</li>
-<li><a href="http://www.amazon.co.uk/Craftsman-Richard-Sennett/dp/0141022094">The Craftsman</a> by Richard Sennett</li>
-<li><a href="http://www.amazon.co.uk/Software-Craftsmanship-Imperative-McBreen-Aug-2001/dp/B00L6JZAT0">Software Craftsmanship: The New Imperative</a> by Pete McBreen</li>
-<li><a href="http://www.amazon.co.uk/dp/020169946X/ref=pe_385721_37038051_TE_3p_dp_1">Fundamentals of Object-oriented Design in UML</a> by Meilir Page-Jones</li>
-</ul>
-
-
-<p>Starting in 2015-Q2, I&rsquo;m also writing here the list of books that I want to read.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1201,6 +1242,10 @@ macrogenerators wholly unnecessary</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster Site Generation for Octopress 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
       </li>
     
@@ -1214,10 +1259,6 @@ macrogenerators wholly unnecessary</p>
     
       <li class="post">
         <a href="/blog/2015/07/08/tip-massively-reverting-local-changes/">Tip: Massively Reverting Local Changes</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: Committing to the Repo File by File</a>
       </li>
     
   </ul>
