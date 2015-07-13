@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz. These are the concepts and links brought up &hellip;">
+  <meta name="description" content="We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have: Dependencies: Services that the object &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-13T07:36:14+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:36 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have:</p>
+
+<ul>
+<li>Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one.</li>
+<li>Notifications: Peers that need to be kept up to date with the object&rsquo;s activity. The object will notify interested peers whenever it changes state or performs a significant action. Notifications are &ldquo;fire and forget&rdquo;; the object neither knows nor cares which peers are listening. Notifications are so useful because they decouple objects from each other. For example, in a user interface system, a button component promises to notify any registered listeners when it&rsquo;s clicked, but does not know what those listeners will do. Similarly, the listeners expect to be called but know nothing of the way the user interface dispatches its events.</li>
+<li>Adjustments: Peers that adjust the object&rsquo;s behavior to the wider needs of the system. This includes policy objects that make decisions on the object&rsquo;s behalf (the Strategy pattern in [Gamma94]) and component parts of the object if it&rsquo;s a composite. For example, a Swing JTable will ask a TableCellRenderer to draw a cell&rsquo;s value, perhaps as RGB (Red, Green, Blue) values for a color. If we change the renderer, the table will change its presentation, now displaying the HSB (Hue, Saturation, Brightness) values.</li>
+</ul>
+</blockquote>
+
+<p>Source is Growing Object-Oriented Software, Guided by Tests > Chapter 6, Object-Oriented Style > Object Peer Stereotypes, page 52</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1148,56 +1186,6 @@ macrogenerators wholly unnecessary</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/">Practical Object-Oriented Design in Ruby: Chapter 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-29T00:07:29+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:07 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We&rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
-
-<p>These are the concepts and links brought up during the discussion:</p>
-
-<blockquote><p>Walking on water and developing software from a specification are easy if both are frozen.</p>
-
-<p>Edward V Berard, source is <a href="https://en.wikiquote.org/wiki/Edward_V._Berard">Wikiquote</a></p></blockquote>
-
-<p>Two cited papers on metrics for design:</p>
-
-<ul>
-<li><a href="http://www.pitt.edu/~ckemerer/CK%20research%20papers/MetricForOOD_ChidamberKemerer94.pdf">A metrics suite for object oriented design</a> by Chidamber and Kemerer</li>
-<li><a href="http://www.cs.umd.edu/~basili/publications/technical/T102.pdf">A validation of object-oriented design metrics as quality indicators</a> by Basili, Briand and Melo</li>
-</ul>
-
-
-<p> The video for the &lsquo;churn&rsquo; as a measure:</p>
-
-<ul>
-<li><a href="http://www.ustream.tv/recorded/61483799">The Hidden Dimension Of Refactoring</a> by Michael Feathers</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1213,6 +1201,10 @@ macrogenerators wholly unnecessary</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a>
       </li>
     
@@ -1226,10 +1218,6 @@ macrogenerators wholly unnecessary</p>
     
       <li class="post">
         <a href="/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: Committing to the Repo File by File</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental Concepts on Programming Languages</a>
       </li>
     
   </ul>
