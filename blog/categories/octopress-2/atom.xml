@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress-2 | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/octopress-2/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-07-13T08:21:59+02:00</updated>
+  <updated>2015-07-13T08:26:43+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -69,6 +69,16 @@ nothing added to commit but untracked files present (use "git add" to track)
 </code></pre>
 
 <p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
+
+<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
+
+<pre><code class="ruby">desc "Cleans all *.markdown files for a faster site generation"
+task :ignore do
+  cd "#{source_dir}/#{posts_dir}"
+  system "git update-index --assume-unchanged $(ls *.markdown)"
+  system "rm $(ls *.markdown)"
+end
+</code></pre>
 
 <h2>Conclusion</h2>
 

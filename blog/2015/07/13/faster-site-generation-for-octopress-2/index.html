@@ -174,12 +174,29 @@
 
 <p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
 
+<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">desc</span> <span class="s2">&quot;Cleans all *.markdown files for a faster site generation&quot;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:ignore</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged $(ls *.markdown)&quot;</span>
+</span><span class='line'>  <span class="nb">system</span> <span class="s2">&quot;rm $(ls *.markdown)&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h2>Conclusion</h2>
 
 <p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Regenerating: <span class="m">1</span> file<span class="o">(</span>s<span class="o">)</span> changed at 2015-07-13 08:03:29 ...done in 0.617269045 seconds.
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Regenerating</span><span class="p">:</span> <span class="mi">1</span> <span class="n">file</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">changed</span> <span class="n">at</span> <span class="mi">2015</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">13</span> <span class="mi">08</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mi">29</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">done</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="mi">617269045</span> <span class="n">seconds</span><span class="o">.</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
