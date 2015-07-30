@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I&rsquo;ve just written a new kata, about a persistent linked list. It is using the same project as for the linked list kata. For now, only the add, &hellip;">
+  <meta name="description" content="A quote from the Mythical Man-Month: Chapter 13: The Whole and the Parts [&hellip;] In System/360 engineering models, one saw occasional strands of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/24/the-purple-wire/">The Purple Wire</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-24T20:57:43+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:57 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A quote from the <a href="http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959">Mythical Man-Month</a>:</p>
+
+<blockquote><p>Chapter 13: The Whole and the Parts</p>
+
+<p>[&hellip;] In System/360 engineering models, one saw occasional strands of purple wire among the routine yellow wires. When a bug was found, two things were done. A quick fix was devised and installed on the system, so testing could proceed. This change was put on in purple wire, so it stuck out like a sore thumb. It was entered in the log. Meanwhile, an official change document was prepared and started into the design automation mill. Eventually this resulted in updated drawings and wire lists, and a new back panel in which the change was implemented in printed circuitry or yellow wire. Now the physical model and the paper were together again, and the purple wire was gone.</p>
+
+<p>Programming needs a purple-wire technique, and it badly needs tight control and deep respect for the paper that ultimately is the product. The vital ingredients of such technique are the logging of all changes in a journal and the distinction, carried conspicuously in source code, between quick patches and thought-through, tested, documented fixes.</p>
+
+<p>[&hellip;]</p>
+
+<p><quote> Brooks, F. - The Mythical Man-Month</quote></p></blockquote>
+
+<p>This purple-wire the author talks about is extremely important even in the current age as the whole team should not be blocked by a single defect.</p>
+
+<p>What I usually do is a commit containing a quick fix (purple-wire, scaffold, hackish if, etc) on a bugfix branch, push the changes so jenkins can verify that this purple-wire didn&rsquo;t break any other case. Then integrate this bugfix into master if required<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. If this affects <code>develop</code> branch of other developers, also merge into develop and or feature branches.</p>
+
+<p>On the other hand, in my opinion, fixing the defect should include an unit test so the defect does not reproduce again. If this is not reproducible through an unit one, escalate test levels (unit, integration, end to end, etc) until a suitable one is found.</p>
+
+<p>Once that applying the purple-wire is done, I <code>checkout</code> the last version where the defect is to be found (usually right before the bugfix branch) and create this test necessary to reproduce behavior. Only after this defect is found I fix it. Otherwise, I think the root cause might be in a different place and, therefore, fix a non-existing defect, effectively introducing a regression.</p>
+
+<p>This test also serves to reproduce that the corrected behavior is not introduced anymore into the system.</p>
+
+<p>As an ending phase for the defect, replace the purple wire with the new code and, after passing all tests, merge to master, develop and feature branches.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>If the found defect is not business critical, I try not to merge to master the purple wire, just leave master pointing to the defect and the bugfix branch with the solution. This bugfix branch will be deleted when a more stable fix is found.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -989,55 +1048,6 @@ when previously I had only read the theoretical parts (Part I and Chapter 12 in 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/02/your-first-language/">Your First Language</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-02T21:25:37+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:25 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After reading (in a specific order - below) part of the patterns in <a href="http://shop.oreilly.com/product/9780596518387.do">Apprenticeship Patterns</a>,
-I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch02.html#your_first_language">&ldquo;Your First Language&rdquo;</a></p>
-
-<p>First of all, the illustration with the baby reading a Java book is priceless.</p>
-
-<p>Having said that, I came to the realization that you might not know a paradigm but just an implementation
-(e.g., you don&rsquo;t know about Object-Oriented programming but just about Java), in the same fashion as you could not know about LISPs but only about an implementation, such as clojure.</p>
-
-<p>Also, clicks with the idea of &ldquo;code to interfaces, not implementations&rdquo;. Does it also click with you?</p>
-
-<p>PS: What a great book this is. I&rsquo;m reading it as explained <a href="../../../../2015/04/25/how-i-read-apprenticeship-patterns/">here</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
-<p>PPS: you can read it online for free, <a href="http://chimera.labs.oreilly.com/books/1234000001813/">here</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>This post was extracted on 2015-04-25. The refactor techniques are very useful, not only for programming<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -1055,6 +1065,10 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing Your Own Maven Dependencies</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate Values in Constants</a>
       </li>
     
@@ -1068,10 +1082,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
     
       <li class="post">
         <a href="/blog/2015/07/27/craftsmanship-analogy/">Craftsmanship Analogy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/">Practical Object-Oriented Design in Ruby: Chapter 4</a>
       </li>
     
   </ul>

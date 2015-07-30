@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I was changing a massive amount of files (>1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the &hellip;&#8221;>
+  <meta name="description" content="Organizing Code to Allow for Easy Changes Asserting that code should be easy to change is akin to stating that children should be polite; the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-08T02:41:54+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:41 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Organizing Code to Allow for Easy Changes</h2>
+
+<blockquote><p>Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code.
+If you define easy to change as</p>
+
+<ul>
+<li>Changes have no unexpected side effects</li>
+<li>Small changes in requirements require correspondingly small changes in code</li>
+<li>Existing code is easy to reuse</li>
+<li>The easiest way to make a change is to add code that in itself is easy to change</li>
+</ul>
+
+
+<p>Then the code you write should have the following qualities. Code should be:</p>
+
+<ul>
+<li><strong>Transparent</strong> The consequences of change should be obvious in the code that is changing and in distant code that relies upon it</li>
+<li><strong>Reasonable</strong> The cost of any change should be proportional to the benefits the change achieves</li>
+<li><strong>Usable</strong> Existing code should be usable in new and unexpected contexts</li>
+<li><strong>Exemplary</strong> The code itself should encourage those who change it to perpetuate
+these qualities</li>
+</ul>
+
+
+<p>Code that is Transparent, Reasonable, Usable, and Exemplary (TRUE) not only meets today’s needs but can also be changed to meet the needs of the future. The first step in creating code that is TRUE is to ensure that each class has a single, well-defined responsibility.</p>
+
+<p>Practical Object Oriented Design in Ruby, by Sandi Metz</p></blockquote>
+
+<p>This can be found the in POODR > Chapter 2. Designing Classes with a Single Responsibility > Organizing Code to Allow for Easy Changes</p>
+
+<p>Note: Bold is mine</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1413,47 +1472,6 @@ macrogenerators wholly unnecessary</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/16/brown-bag-session-docker/">Brown-bag Session: Docker</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-16T18:52:28+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:52 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including:</p>
-
-<ul>
-<li>the difference between a container and an image</li>
-<li>diffing image contents</li>
-<li>AUFS (Another Union FS)</li>
-<li>persistent vs non-persistent (volatile) filesystems</li>
-<li>running CMD and other commands on the instance</li>
-<li>problems of running with permission = root (or its group)</li>
-<li>downsides of it</li>
-<li>how to compare it with a virtual machine</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1471,6 +1489,10 @@ macrogenerators wholly unnecessary</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing Your Own Maven Dependencies</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate Values in Constants</a>
       </li>
     
@@ -1484,10 +1506,6 @@ macrogenerators wholly unnecessary</p>
     
       <li class="post">
         <a href="/blog/2015/07/27/craftsmanship-analogy/">Craftsmanship Analogy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/">Practical Object-Oriented Design in Ruby: Chapter 4</a>
       </li>
     
   </ul>
