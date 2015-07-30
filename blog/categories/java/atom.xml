@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-07-27T00:53:01+02:00</updated>
+  <updated>2015-07-30T23:19:51+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,349 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tool to Find Duplicate Values in Constants]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/"/>
+    <updated>2015-07-30T13:42:44+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants</id>
+    <content type="html"><![CDATA[<p>Imagine having this java class:</p>
+
+<pre><code class="java">private static class RepeatedConstants {
+    public static final String A = "A";
+    public static final String A_1 = A;
+    public static final String A_2 = "A";
+
+    public static final Integer _3 = 3;
+    public static final Integer THREE = 3;
+}
+</code></pre>
+
+<p>I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (> 4000 constants). A way of doing this is basing the differences on the values, directly. To do this, remove all text that is not a value:</p>
+
+<p>find what, regex mode: <code>^.*=\s*(.*);</code>
+replace with: $1</p>
+
+<p>Explanation:</p>
+
+<ul>
+<li><code>^.*=\s*</code>: any character before the equal sign. Any whitespace right after it.</li>
+<li><code>(.*);</code>: capture everything that is before the semicolon (;)</li>
+</ul>
+
+
+<p>You end up with this:</p>
+
+<pre><code>"A"
+A
+"A"
+
+3
+3
+</code></pre>
+
+<p>Copy it to <code>a.txt</code>, <code>sort</code> it and <code>uniq</code> it (to remove duplication):</p>
+
+<pre><code class="bash">cat a.txt | sort | uniq &gt; uniq.txt
+</code></pre>
+
+<p>then sort the non-uniq version:</p>
+
+<pre><code class="bash">cat a.txt | sort &gt; sorted.txt
+</code></pre>
+
+<p>and diff among them, to find the repeated values:</p>
+
+<pre><code class="bash">diff sorted.txt uniq.txt
+
+3,4d2
+&lt; "A"
+&lt; 3
+</code></pre>
+
+<p>These are the repeated values. The variable <code>   public static final String A_1 = A;</code> was not caught by this as it only has the same value in execution, not staticly.</p>
+
+<p>For this, at Gmaur, we have developed a small <a href="https://github.com/GMaur/java-duplicates-detector">module to detect duplicates</a>. The main code is this:</p>
+
+<pre><code class="java">public class RepeatedFinder {
+
+  private final Class aClass;
+
+  public RepeatedFinder(Class aClass) {
+    this.aClass = aClass;
+  }
+
+  public MultiMap findDuplicates() throws IllegalAccessException {
+    return generateMapFromValueToVariables(aClass).valuesWithMoreThanOneVariable();
+  }
+
+  private ValueToNameRepository generateMapFromValueToVariables(Class&lt;?&gt; clazz) throws IllegalAccessException {
+    ValueToNameRepository valueToNames = new ValueToNameRepository();
+    Field[] fields = clazz.getDeclaredFields();
+    Object object = new Object();
+    for (Field field : fields) {
+      Object value = field.get(object);
+      valueToNames.add(value, field.getName());
+    }
+    return valueToNames;
+  }
+</code></pre>
+
+<p>The tests and the source code can be found here: <a href="https://github.com/GMaur/java-duplicates-detector">https://github.com/GMaur/java-duplicates-detector</a></p>
+
+<p>Hope you enjoy it, as much as we have enjoyed writing it!</p>
+
+<p>Any feedback is welcome.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Exploring Testing With Java 8 Lambdas]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/"/>
+    <updated>2015-07-30T13:04:10+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas</id>
+    <content type="html"><![CDATA[<p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:</p>
+
+<p>(source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/ef00a220f427900e3180dcbeec51248845446248">here</a>)</p>
+
+<pre><code class="java">@Test
+public void log_when_sending_greeting_letters() {
+
+    sut.send(mock(GreetingLetter.class));
+
+    verify(logger).sentGreetingLetter();
+}
+
+@Test
+public void log_when_sending_love_letters() {
+
+    sut.send(mock(LoveLetter.class));
+
+    verify(logger).sentLoveLetter();
+}
+</code></pre>
+
+<p>and the production code:</p>
+
+<pre><code class="java">public class MailSender {
+    private final EventLogger eventLogger;
+
+    public MailSender (final EventLogger eventLogger) {
+        this.eventLogger = eventLogger;
+    }
+
+    public void send (final GreetingLetter letter) {
+        // more business logic
+        eventLogger.sentGreetingLetter();
+    }
+
+    public void send (final LoveLetter letter) {
+        // more business logic
+        eventLogger.sentLoveLetter();
+    }
+}
+</code></pre>
+
+<p>Note: this is an adapted code, so the business logic is not complete and seems simple.</p>
+
+<p>So I decided to explore a bit on refactoring these tests to use lambdas and reduce repetition:</p>
+
+<pre><code class="java">private MailSender sut;
+private Consumer&lt;MailSender&gt; arrange;
+private Consumer&lt;EventLogger&gt; verify;
+
+@Test
+public void log_greetings_letter() {
+    arrange = (MailSender sut) -&gt; sut.send(mock(GreetingLetter.class));
+
+    verify = EventLogger::sentGreetingLetter;
+
+    assertAndVerify();
+}
+
+@Test
+public void log_love_letter() {
+    arrange = (MailSender sut) -&gt; sut.send(mock(LoveLetter.class));
+
+    verify = EventLogger::sentLoveLetter;
+
+    assertAndVerify();
+}
+
+private void assertAndVerify() {
+    arrange.accept(sut);
+    verify.accept(logger);
+}
+</code></pre>
+
+<p>Some comments, mine and my teammates:</p>
+
+<ul>
+<li>The tests are not very readable, maybe because we&rsquo;re still not used to java 8 lambdas</li>
+<li><code>assertAndVerify</code> has multiple purposes / responsibilities</li>
+<li>The gain of usability does not outweight the loss of readability</li>
+</ul>
+
+
+<p>Finally, the refactor was discarded and we are using the initial version.</p>
+
+<p>Later, in the dojo, <a href="https://twitter.com/@trikitrok">Manuel</a> and I have refactored this a little bit more. Source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9">here</a></p>
+
+<pre><code class="java">public class MailSenderShould {
+
+    private EventLogger eventLogger;
+    private MailSender mailSender;
+
+    @Before
+    public void setUp () {
+        eventLogger = mock(EventLogger.class);
+        mailSender = new MailSender(eventLogger);
+    }
+
+    @Test
+    public void log_greetings_letter() {
+        checkThat(aLoggingLine().forA(greetingLetter()).wasLoggedWhen(aGreetingLetterWasSent()));
+    }
+
+    @Test
+    public void log_love_letter() {
+        checkThat(aLoggingLine().forA(loveLetter()).wasLoggedWhen(aLoveLetterWasSent()));
+    }
+
+    private void checkThat (final Check check) {
+        check.checkFor(mailSender, eventLogger);
+    }
+
+    private Consumer&lt;EventLogger&gt; aGreetingLetterWasSent () {
+        return EventLogger::sentGreetingLetter;
+    }
+
+    private Consumer&lt;MailSender&gt; greetingLetter () {
+        return (MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class));
+    }
+
+    private Consumer&lt;MailSender&gt; loveLetter () {
+        return (MailSender sut) -&gt; sut.sendLoveLetter(mock(LoveLetter.class));
+    }
+
+    private Consumer&lt;EventLogger&gt; aLoveLetterWasSent () {
+        return EventLogger::sentLoveLetter;
+    }
+}
+</code></pre>
+
+<p>(the logger is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9/src/test/java/com/example/lambdatesting/CheckBuilder.java">here</a>)</p>
+
+<p>Later, we have created a simpler functional DSL for the logging, joining the <code>act</code> and <code>verify</code> into an object called <code>Check</code></p>
+
+<pre><code class="java">public class MailSenderShould {
+
+    private EventLogger eventLogger;
+    private MailSender mailSender;
+
+    @Before
+    public void setUp () {
+        eventLogger = mock(EventLogger.class);
+        mailSender = new MailSender(eventLogger);
+    }
+
+    @Test
+    public void log_greetings_letter() {
+        mailSenderLogs(whenSendingAGreetingLetter());
+    }
+
+    @Test
+    public void log_love_letter() {
+        mailSenderLogs(whenSendingALoveLetter());
+    }
+
+    private Check whenSendingALoveLetter () {
+        return new Check(
+            (MailSender sut) -&gt; sut.send(letter(LoveLetter.class)),
+            EventLogger::sentLoveLetter
+        );
+    }
+
+    private void mailSenderLogs (Check check) {
+        check.checkFor(mailSender, eventLogger);
+    }
+
+    private Check whenSendingAGreetingLetter () {
+        return new Check(
+            (MailSender sut) -&gt; sut.send(letter(GreetingLetter.class)),
+            EventLogger::sentGreetingLetter
+        );
+    }
+
+    private &lt;T&gt; T letter (final Class&lt;T&gt; typeOfLetter) {
+        return mock(typeOfLetter);
+    }
+}
+</code></pre>
+
+<p>and the <code>Check</code>, just a placeholder for two <code>Consumer</code>s:</p>
+
+<pre><code class="java">public class Check {
+
+    private final Consumer&lt;MailSender&gt; act;
+    private final Consumer&lt;EventLogger&gt; verify;
+
+    public Check (final Consumer&lt;MailSender&gt; act, final Consumer&lt;EventLogger&gt; verify) {
+        this.act = act;
+        this.verify = verify;
+    }
+
+    public void checkFor(MailSender mailSender, EventLogger eventLogger) {
+        act.accept(mailSender);
+        verify.accept(eventLogger);
+    }
+}
+</code></pre>
+
+<h2>Comparison</h2>
+
+<p>Comparison between the original form and the three refactored forms of the test:</p>
+
+<pre><code class="java">@Test
+public void log_when_sending_greeting_letters() {
+
+    sut.send(mock(GreetingLetter.class));
+
+    verify(logger).sentGreetingLetter();
+}
+</code></pre>
+
+<p>This reads like a classical JUnit tests, using the interaction (with mocks).</p>
+
+<pre><code class="java">@Test
+public void log_greetings_letter() {
+    arrange = (MailSender sut) -&gt; sut.send(mock(GreetingLetter.class));
+
+    verify = EventLogger::sentGreetingLetter;
+
+    assertAndVerify();
+}
+</code></pre>
+
+<p>This is the first step towards more cohesion, at the cost of readability. You save the verify at the end, but the repeated method <code>assertAndVerify</code> is still present.</p>
+
+<pre><code class="java">@Test
+public void log_greetings_letter() {
+    checkThat(aLoggingLine().forA(greetingLetter()).wasLoggedWhen(aGreetingLetterWasSent()));
+}
+</code></pre>
+
+<p>This one reads more like a classical DSL, but is harder to read compared to a classical test.</p>
+
+<pre><code class="java">@Test
+public void log_greetings_letter() {
+    mailSenderLogs(whenSendingAGreetingLetter());
+}
+</code></pre>
+
+<p>This one reads more like a business requirement.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What Defines a Dependency]]></title>
@@ -430,6 +773,74 @@
 <h2>Applying property-based testing on my binary search tree implementation</h2>
 
 <p>I&rsquo;ve read <a href="http://garajeando.blogspot.com/2015/07/applying-property-based-testing-on-my.html">this article</a>, written by Manuel Rivero, on applying test-check (a property-based testing framework, similar to quickcheck) to a Binary Search Tree (BST) he did.</p>
+
+<h2>Do Extraterrestrials Use Functional Programming?</h2>
+
+<p>I&rsquo;ve read <a href="http://yowconference.com.au/slides/yowlambdajam2013/Chakravarty-Extraterrestrials-Keynote.pdf">these slides</a>, an introduction to lambda calculus, the Turing machine and the Halting Problem. Later, continues to describe ways of solving problems in a functional way. Also performance and optimizations; monads as well. Written by Manuel M T Chakravarty</p>
+
+<h2>WIP Limits</h2>
+
+<p>I&rsquo;ve read <a href="https://theagileist.wordpress.com/2015/06/15/wip-limits/">this post</a> by Tomas Rybing</p>
+
+<h2>Applied capacity planning</h2>
+
+<p>I&rsquo;ve read <a href="https://theagileist.wordpress.com/2015/07/27/applied-capacity-planning/">this post</a> by Tomas Rybing.</p>
+
+<h2>Don’t Get Attached to Programming Languages</h2>
+
+<p>I&rsquo;ve read <a href="http://mikecavaliere.com/dont-get-attached-programming-languages">this post</a> by Mike Cavaliere</p>
+
+<h2>The Top 5 Skills of Rock Star Software Engineers</h2>
+
+<p>I&rsquo;ve read <a href="http://softwareplusplus.com/2015/06/24/the-top-5-skills-of-rock-star-software-engineers/">this post</a> by Cory Berg</p>
+
+<h2>5 Reasons to Use Protocol Buffers Instead of JSON For Your Next Service</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codeclimate.com/blog/2014/06/05/choose-protocol-buffers/">this article</a> on Protocol Buffers, written by Michael Bernstein</p>
+
+<h2>Data Serialization Formats</h2>
+
+<p>I&rsquo;ve read <a href="https://gist.github.com/joshsz/11299196">this comparison</a> between MsgPack, JSON, Protocol Buffers, by Josh Szmajda.</p>
+
+<h2>Protocol Buffer Basics: Java</h2>
+
+<p>I&rsquo;ve read <a href="https://developers.google.com/protocol-buffers/docs/javatutorial">this introduction</a> to Protocol Buffers in Java, by Google</p>
+
+<h2>RESTful Considered Harmful</h2>
+
+<p>I&rsquo;ve read <a href="https://dzone.com/articles/restful-considered-harmful?oid=top_title">this article</a>, commenting downsides to using JSON / RESTful APIs, written by Tomasz Nurkiewicz</p>
+
+<h2>“Considered Harmful” Essays Considered Harmful</h2>
+
+<p>I&rsquo;ve read <a href="http://meyerweb.com/eric/comment/chech.html">this post</a>, by Eric Meyer, on why &ldquo;Considered Harmful&rdquo; are harmful as well.</p>
+
+<h2>Keep Lambdas Cohesive</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.agiledeveloper.com/2015/07/keep-lambdas-cohesive.html">this post</a> with recommendations on keeping the java lambdas cohesive. Written by Venkat Subramaniam</p>
+
+<h2>The Joy of Flying Robots with Clojure</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=Ty9QDqV-_Ak">this video</a> by Carin Meier at the OSCON 2013 about communicating with robots in Clojure</p>
+
+<h2>How to Learn TDD Without Getting Overwhelmed</h2>
+
+<p>I&rsquo;ve read <a href="http://www.justinweiss.com/blog/2014/06/02/how-to-learn-tdd-without-getting-overwhelmed/">this article</a> on learning TDD, by Justin Weiss</p>
+
+<h2>Kata - the Only Way to Learn TDD</h2>
+
+<p>I&rsquo;ve read <a href="http://www.peterprovost.org/blog/2012/05/02/kata-the-only-way-to-learn-tdd/">this article</a> on learning TDD, by Peter Provost</p>
+
+<h2>Koan: Past Perfect</h2>
+
+<p>I&rsquo;ve read <a href="http://thecodelesscode.com/case/180">this koan</a>, past perfect, reflecting on the people who prefer the past over the present. Who think that the past was simpler than currently is.</p>
+
+<h2>Koan: Future Imperfect</h2>
+
+<p>I&rsquo;ve read <a href="http://thecodelesscode.com/case/181">this koan</a>, continuation from past perfect.</p>
+
+<h2>Why “Agile” and especially Scrum are terrible</h2>
+
+<p>I&rsquo;ve read <a href="https://michaelochurch.wordpress.com/2015/06/06/why-agile-and-especially-scrum-are-terrible/">this article</a> on downsides of Agile and Scrum, written by Michael Church.</p>
 ]]></content>
   </entry>
   
@@ -622,69 +1033,6 @@ into a single post</p>
 <h2>Top ten reasons why I won’t use your open source project</h2>
 
 <p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Annotations and Aspects in Java]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/"/>
-    <updated>2015-04-21T07:23:23+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.</p>
-
-<p>The code provides a way of doing <code>try|catch</code>, specifying an exception to be caught.</p>
-
-<p>The source code is available <a href="https://github.com/alvarogarcia7/annotation-aspect-java">here</a></p>
-
-<h2>In the process</h2>
-
-<p>This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.</p>
-
-<p>If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t). The unmassaged code can be found <a href="https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e">here</a>. The massaged version is at the <a href="https://github.com/alvarogarcia7/annotation-aspect-java/">tip of the arrow</a></p>
-
-<h2>More information</h2>
-
-<p>Regarding <code>annotations</code> (like @Override):</p>
-
-<ul>
-<li><a href="https://docs.oracle.com/javase/tutorial/java/annotations/">This official article</a> on annotations is useful.</li>
-<li><a href="http://www.vogella.com/tutorials/JavaAnnotations/article.html">This article</a> by Lars Vogel guides you step by step.</li>
-<li><a href="http://tutorials.jenkov.com/java/annotations.html">This article</a> by Jakov Jenkov is very nice.</li>
-<li><a href="http://crunchify.com/understanding-java-annotation-annotation-examples/">This article</a> helps you to understand what an annotation is and what to use it for.</li>
-</ul>
-
-
-<p>Regarding <code>aspect</code> (based on AspectJ):</p>
-
-<ul>
-<li><a href="http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation">This question</a> has been my main source of information / inspiration for the spring + aspectj configuration</li>
-</ul>
-
-
-<h2>Conclusions</h2>
-
-<p>One of the drawbacks that I find to common examples or tutorials is that they&rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including <code>pom.xml</code> (dependencies) and tests.</p>
-
-<p>Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Maven Module Base for Cucumber in Java]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/03/10/maven-module-base-for-cucumber-in-java/"/>
-    <updated>2015-03-10T07:24:38+01:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/03/10/maven-module-base-for-cucumber-in-java</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve built a small maven module, to be used directly with cucumber. You can fork the repository <a href="https://github.com/alvarogarcia7/base-bdd-cucumber">here</a></p>
-
-<p>This is the setup I&rsquo;ve proposed for the meetup <a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/220673134/">&ldquo;BDD Cucumber kata (gherkin + code)&rdquo;</a>. Will see if this code is successfully used by the ~40 participants in a couple of weeks</p>
-
-<p>(Quote from the <a href="https://github.com/alvarogarcia7/base-bdd-cucumber/blob/master/README.md">README.md</a>):</p>
-
-<p>This maven project has been possible due to <a href="https://twitter.com/@thomassundberg">Thomas Sundberg</a> and <a href="https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world">this post</a></p>
-
-<p>Should you want to, there&rsquo;s a tweet to thank him the effort: <a href="https://twitter.com/intent/tweet?text=@thomassundberg%20thanks%20for%20the%20cucumber%20bdd%20tutorial!%20Will%20be%20using%20it%20from%20@agilebcn;Keep%20up%0Athe%20good%20work&amp;url=https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world/">tweet intent here</a></p>
-
-<p>Happy katas and happy bdd&#8217;ing!</p>
 ]]></content>
   </entry>
   

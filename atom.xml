@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-07-27T00:53:01+02:00</updated>
+  <updated>2015-07-30T23:19:51+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,601 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tool to Find Duplicate Values in Constants]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/"/>
+    <updated>2015-07-30T13:42:44+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants</id>
+    <content type="html"><![CDATA[<p>Imagine having this java class:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">RepeatedConstants</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A_1</span> <span class="o">=</span> <span class="n">A</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A_2</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">_3</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">THREE</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (> 4000 constants). A way of doing this is basing the differences on the values, directly. To do this, remove all text that is not a value:</p>
+
+<p>find what, regex mode: <code>^.*=\s*(.*);</code>
+replace with: $1</p>
+
+<p>Explanation:</p>
+
+<ul>
+<li><code>^.*=\s*</code>: any character before the equal sign. Any whitespace right after it.</li>
+<li><code>(.*);</code>: capture everything that is before the semicolon (;)</li>
+</ul>
+
+
+<p>You end up with this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="s">&quot;A&quot;</span>
+</span><span class='line'><span class="n">A</span>
+</span><span class='line'><span class="s">&quot;A&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">3</span>
+</span><span class='line'><span class="mi">3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Copy it to <code>a.txt</code>, <code>sort</code> it and <code>uniq</code> it (to remove duplication):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat a.txt <span class="p">|</span> sort <span class="p">|</span> uniq &gt; uniq.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then sort the non-uniq version:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat a.txt <span class="p">|</span> sort &gt; sorted.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and diff among them, to find the repeated values:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>diff sorted.txt uniq.txt
+</span><span class='line'>
+</span><span class='line'>3,4d2
+</span><span class='line'>&lt; <span class="s2">&quot;A&quot;</span>
+</span><span class='line'>&lt; 3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These are the repeated values. The variable <code>   public static final String A_1 = A;</code> was not caught by this as it only has the same value in execution, not staticly.</p>
+
+<p>For this, at Gmaur, we have developed a small <a href="https://github.com/GMaur/java-duplicates-detector">module to detect duplicates</a>. The main code is this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RepeatedFinder</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Class</span> <span class="n">aClass</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">RepeatedFinder</span><span class="o">(</span><span class="n">Class</span> <span class="n">aClass</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="o">.</span><span class="na">aClass</span> <span class="o">=</span> <span class="n">aClass</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">MultiMap</span> <span class="nf">findDuplicates</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nf">generateMapFromValueToVariables</span><span class="o">(</span><span class="n">aClass</span><span class="o">).</span><span class="na">valuesWithMoreThanOneVariable</span><span class="o">();</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">ValueToNameRepository</span> <span class="nf">generateMapFromValueToVariables</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">ValueToNameRepository</span> <span class="n">valueToNames</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ValueToNameRepository</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">Field</span><span class="o">[]</span> <span class="n">fields</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredFields</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Object</span><span class="o">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="n">Field</span> <span class="n">field</span> <span class="o">:</span> <span class="n">fields</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">valueToNames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">field</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">valueToNames</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The tests and the source code can be found here: <a href="https://github.com/GMaur/java-duplicates-detector">https://github.com/GMaur/java-duplicates-detector</a></p>
+
+<p>Hope you enjoy it, as much as we have enjoyed writing it!</p>
+
+<p>Any feedback is welcome.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Use the Same Import Order in IntelliJ IDEA as Eclipse's]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/"/>
+    <updated>2015-07-30T13:22:44+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses</id>
+    <content type="html"><![CDATA[<p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:</p>
+
+<p>While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.</p>
+
+<p>To solve it, see <a href="http://stackoverflow.com/questions/14716283/is-it-possible-for-intellij-to-organize-imports-the-same-way-as-in-eclipse">this link</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Exploring Testing With Java 8 Lambdas]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/"/>
+    <updated>2015-07-30T13:04:10+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas</id>
+    <content type="html"><![CDATA[<p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:</p>
+
+<p>(source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/ef00a220f427900e3180dcbeec51248845446248">here</a>)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_greeting_letters</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_love_letters</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentLoveLetter</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and the production code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSender</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">MailSender</span> <span class="o">(</span><span class="kd">final</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">eventLogger</span> <span class="o">=</span> <span class="n">eventLogger</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span> <span class="o">(</span><span class="kd">final</span> <span class="n">GreetingLetter</span> <span class="n">letter</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">// more business logic</span>
+</span><span class='line'>      <span class="n">eventLogger</span><span class="o">.</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span> <span class="o">(</span><span class="kd">final</span> <span class="n">LoveLetter</span> <span class="n">letter</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">// more business logic</span>
+</span><span class='line'>      <span class="n">eventLogger</span><span class="o">.</span><span class="na">sentLoveLetter</span><span class="o">();</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: this is an adapted code, so the business logic is not complete and seems simple.</p>
+
+<p>So I decided to explore a bit on refactoring these tests to use lambdas and reduce repetition:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">MailSender</span> <span class="n">sut</span><span class="o">;</span>
+</span><span class='line'><span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">arrange</span><span class="o">;</span>
+</span><span class='line'><span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">verify</span> <span class="o">=</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">assertAndVerify</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">verify</span> <span class="o">=</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentLoveLetter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">assertAndVerify</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">private</span> <span class="kt">void</span> <span class="nf">assertAndVerify</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">arrange</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">sut</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">verify</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">logger</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Some comments, mine and my teammates:</p>
+
+<ul>
+<li>The tests are not very readable, maybe because we&rsquo;re still not used to java 8 lambdas</li>
+<li><code>assertAndVerify</code> has multiple purposes / responsibilities</li>
+<li>The gain of usability does not outweight the loss of readability</li>
+</ul>
+
+
+<p>Finally, the refactor was discarded and we are using the initial version.</p>
+
+<p>Later, in the dojo, <a href="https://twitter.com/@trikitrok">Manuel</a> and I have refactored this a little bit more. Source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9">here</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSenderShould</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Before</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">eventLogger</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="n">EventLogger</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">mailSender</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MailSender</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Test</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">greetingLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aGreetingLetterWasSent</span><span class="o">()));</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Test</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">loveLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aLoveLetterWasSent</span><span class="o">()));</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">checkThat</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Check</span> <span class="n">check</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">check</span><span class="o">.</span><span class="na">checkFor</span><span class="o">(</span><span class="n">mailSender</span><span class="o">,</span> <span class="n">eventLogger</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">aGreetingLetterWasSent</span> <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">greetingLetter</span> <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">loveLetter</span> <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendLoveLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">aLoveLetterWasSent</span> <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentLoveLetter</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(the logger is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9/src/test/java/com/example/lambdatesting/CheckBuilder.java">here</a>)</p>
+
+<p>Later, we have created a simpler functional DSL for the logging, joining the <code>act</code> and <code>verify</code> into an object called <code>Check</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSenderShould</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Before</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">eventLogger</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="n">EventLogger</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">mailSender</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MailSender</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Test</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingAGreetingLetter</span><span class="o">());</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Test</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingALoveLetter</span><span class="o">());</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Check</span> <span class="nf">whenSendingALoveLetter</span> <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="k">new</span> <span class="nf">Check</span><span class="o">(</span>
+</span><span class='line'>          <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">letter</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">)),</span>
+</span><span class='line'>          <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentLoveLetter</span>
+</span><span class='line'>      <span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">mailSenderLogs</span> <span class="o">(</span><span class="n">Check</span> <span class="n">check</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">check</span><span class="o">.</span><span class="na">checkFor</span><span class="o">(</span><span class="n">mailSender</span><span class="o">,</span> <span class="n">eventLogger</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Check</span> <span class="nf">whenSendingAGreetingLetter</span> <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="k">new</span> <span class="nf">Check</span><span class="o">(</span>
+</span><span class='line'>          <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">letter</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">)),</span>
+</span><span class='line'>          <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span>
+</span><span class='line'>      <span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">letter</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">typeOfLetter</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nf">mock</span><span class="o">(</span><span class="n">typeOfLetter</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and the <code>Check</code>, just a placeholder for two <code>Consumer</code>s:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Check</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">act</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">Check</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">act</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">act</span> <span class="o">=</span> <span class="n">act</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">verify</span> <span class="o">=</span> <span class="n">verify</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkFor</span><span class="o">(</span><span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">,</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">act</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mailSender</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">verify</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Comparison</h2>
+
+<p>Comparison between the original form and the three refactored forms of the test:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_greeting_letters</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This reads like a classical JUnit tests, using the interaction (with mocks).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">verify</span> <span class="o">=</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">assertAndVerify</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is the first step towards more cohesion, at the cost of readability. You save the verify at the end, but the repeated method <code>assertAndVerify</code> is still present.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">greetingLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aGreetingLetterWasSent</span><span class="o">()));</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This one reads more like a classical DSL, but is harder to read compared to a classical test.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingAGreetingLetter</span><span class="o">());</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This one reads more like a business requirement.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Craftsmanship Analogy]]></title>
@@ -1333,6 +1928,74 @@ macrogenerators wholly unnecessary</p>
 <h2>Applying property-based testing on my binary search tree implementation</h2>
 
 <p>I&rsquo;ve read <a href="http://garajeando.blogspot.com/2015/07/applying-property-based-testing-on-my.html">this article</a>, written by Manuel Rivero, on applying test-check (a property-based testing framework, similar to quickcheck) to a Binary Search Tree (BST) he did.</p>
+
+<h2>Do Extraterrestrials Use Functional Programming?</h2>
+
+<p>I&rsquo;ve read <a href="http://yowconference.com.au/slides/yowlambdajam2013/Chakravarty-Extraterrestrials-Keynote.pdf">these slides</a>, an introduction to lambda calculus, the Turing machine and the Halting Problem. Later, continues to describe ways of solving problems in a functional way. Also performance and optimizations; monads as well. Written by Manuel M T Chakravarty</p>
+
+<h2>WIP Limits</h2>
+
+<p>I&rsquo;ve read <a href="https://theagileist.wordpress.com/2015/06/15/wip-limits/">this post</a> by Tomas Rybing</p>
+
+<h2>Applied capacity planning</h2>
+
+<p>I&rsquo;ve read <a href="https://theagileist.wordpress.com/2015/07/27/applied-capacity-planning/">this post</a> by Tomas Rybing.</p>
+
+<h2>Don’t Get Attached to Programming Languages</h2>
+
+<p>I&rsquo;ve read <a href="http://mikecavaliere.com/dont-get-attached-programming-languages">this post</a> by Mike Cavaliere</p>
+
+<h2>The Top 5 Skills of Rock Star Software Engineers</h2>
+
+<p>I&rsquo;ve read <a href="http://softwareplusplus.com/2015/06/24/the-top-5-skills-of-rock-star-software-engineers/">this post</a> by Cory Berg</p>
+
+<h2>5 Reasons to Use Protocol Buffers Instead of JSON For Your Next Service</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codeclimate.com/blog/2014/06/05/choose-protocol-buffers/">this article</a> on Protocol Buffers, written by Michael Bernstein</p>
+
+<h2>Data Serialization Formats</h2>
+
+<p>I&rsquo;ve read <a href="https://gist.github.com/joshsz/11299196">this comparison</a> between MsgPack, JSON, Protocol Buffers, by Josh Szmajda.</p>
+
+<h2>Protocol Buffer Basics: Java</h2>
+
+<p>I&rsquo;ve read <a href="https://developers.google.com/protocol-buffers/docs/javatutorial">this introduction</a> to Protocol Buffers in Java, by Google</p>
+
+<h2>RESTful Considered Harmful</h2>
+
+<p>I&rsquo;ve read <a href="https://dzone.com/articles/restful-considered-harmful?oid=top_title">this article</a>, commenting downsides to using JSON / RESTful APIs, written by Tomasz Nurkiewicz</p>
+
+<h2>“Considered Harmful” Essays Considered Harmful</h2>
+
+<p>I&rsquo;ve read <a href="http://meyerweb.com/eric/comment/chech.html">this post</a>, by Eric Meyer, on why &ldquo;Considered Harmful&rdquo; are harmful as well.</p>
+
+<h2>Keep Lambdas Cohesive</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.agiledeveloper.com/2015/07/keep-lambdas-cohesive.html">this post</a> with recommendations on keeping the java lambdas cohesive. Written by Venkat Subramaniam</p>
+
+<h2>The Joy of Flying Robots with Clojure</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=Ty9QDqV-_Ak">this video</a> by Carin Meier at the OSCON 2013 about communicating with robots in Clojure</p>
+
+<h2>How to Learn TDD Without Getting Overwhelmed</h2>
+
+<p>I&rsquo;ve read <a href="http://www.justinweiss.com/blog/2014/06/02/how-to-learn-tdd-without-getting-overwhelmed/">this article</a> on learning TDD, by Justin Weiss</p>
+
+<h2>Kata - the Only Way to Learn TDD</h2>
+
+<p>I&rsquo;ve read <a href="http://www.peterprovost.org/blog/2012/05/02/kata-the-only-way-to-learn-tdd/">this article</a> on learning TDD, by Peter Provost</p>
+
+<h2>Koan: Past Perfect</h2>
+
+<p>I&rsquo;ve read <a href="http://thecodelesscode.com/case/180">this koan</a>, past perfect, reflecting on the people who prefer the past over the present. Who think that the past was simpler than currently is.</p>
+
+<h2>Koan: Future Imperfect</h2>
+
+<p>I&rsquo;ve read <a href="http://thecodelesscode.com/case/181">this koan</a>, continuation from past perfect.</p>
+
+<h2>Why “Agile” and especially Scrum are terrible</h2>
+
+<p>I&rsquo;ve read <a href="https://michaelochurch.wordpress.com/2015/06/06/why-agile-and-especially-scrum-are-terrible/">this article</a> on downsides of Agile and Scrum, written by Michael Church.</p>
 ]]></content>
   </entry>
   
@@ -1497,255 +2160,6 @@ macrogenerators wholly unnecessary</p>
 <li>how to compare it with a virtual machine</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Types of Defects]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects/"/>
-    <updated>2015-06-14T16:16:51+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects</id>
-    <content type="html"><![CDATA[<p>Some time ago, while researching types of defects and the cost of fixing them<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, I stumbled upon this:</p>
-
-<blockquote><p>Years ago I worked with a bunch of economists in the US Federal Government - they categorized &lsquo;bugs&rsquo; in their memos into three types:</p>
-
-<ul>
-<li><p>Typos: Simple misspellings of words. Infrequent, easy to detect, easy to fix.</p></li>
-<li><p>Writos: Incoherent sentences. More frequent, hard to detect, harder to fix.</p></li>
-<li><p>Thinkos: Conceptually bonkers. Very frequent, subtle and hard to detect; almost impossible to fix.</p></li>
-</ul>
-
-
-<p>Most &lsquo;late&rsquo; bugs that I&rsquo;ve seen in software projects belong in the last category - a lack of design or the failure to make a working mock-up leads to &lsquo;thinkos&rsquo; which are only obvious when the application is nearly completed. These are expensive to fix.</p>
-
-<p>Source: <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">http://developers.slashdot.org/story/03/10/21/0141215/software-defects&#8212;do-late-bugs-really-cost-more</a></p></blockquote>
-
-<p>I would also add a new category to this:</p>
-
-<ul>
-<li>Ethos: Morally wrong, although possibly legal. These may take different forms: vary from a company to the next one,
-from society to society, etc. Even harder to fix than &lsquo;thinkos&rsquo;,
-as there is a reason (mainly economic) to keep them in place.</li>
-</ul>
-
-
-<p>  On a technical note,
-  these are not usually well-known artifacts in the company, therefore not everyone
-  should know about them. Only a few developers know the correct reasons behind them and
-  the rest might be sold a fake reason, so the latter cannot fix these &lsquo;ethos&rsquo;, as they
-  assume they are present for a good reason</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>This is also a chapter in the book <a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit: &lsquo;Chapter 10: The cost of defects: an illustrated history&rsquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Brown-bag Session: Refactoring]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/06/11/brownbag-session-refactoring/"/>
-    <updated>2015-06-11T20:22:16+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/06/11/brownbag-session-refactoring</id>
-    <content type="html"><![CDATA[<p>At a client, today we&rsquo;ve done a brown-bag session on refactoring: we&rsquo;ve gone through
-and a live demo, including refactoring a core piece of our code.</p>
-
-<p>We&rsquo;ve done some mob programming to help identify some smells and how to fix them.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Self-study in June 2015]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015/"/>
-    <updated>2015-06-03T13:13:10+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015</id>
-    <content type="html"><![CDATA[<p>Update: I&rsquo;ve grouped all small posts related to the self-study from June 2015
-into a single post</p>
-
-<h2>Le monitoring de flux par l’exemple</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.octo.com/le-monitoring-de-flux-par-lexemple/">this article</a> about monitoring, in the way of &ldquo;by example&rdquo;, by Cédrick Lunven and Julien Kirch (French)</p>
-
-<h2>The First Micro-service Architecture</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2015/05/28/TheFirstMicroserviceArchitecture.html">this article</a> about microservices and how they were implemented many years ago by Robert C. Martin</p>
-
-<h2>How I Learned to Balance My Life With Remote Work</h2>
-
-<p>I&rsquo;ve read <a href="https://open.bufferapp.com/remote-work/?utm_content=bufferaa5a2&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about balancing life and work, either physical or remote by Michael Erasmus</p>
-
-<h2>Demystified CQRS</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.codecentric.de/en/2015/05/demystified-cqrs/?utm_content=buffer35b18&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about CQRS by Nino Martincevic</p>
-
-<h2>The perils of programmer education in the bazaar</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.practicingruby.com/2015/06/04/the-perils-of-programmer-education-in-the-bazaar/">this article</a> by Gregory Brown</p>
-
-<h2>6 useful and lesser-known git commands</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.joncairns.com/2015/05/6-useful-and-lesser-known-git-commands/">this article</a> about git commands (log, checkout, stash, cherry-pick, annotate) by Jon Cairns</p>
-
-<h2>Is Your Scrum Standup Slowing You Down?</h2>
-
-<p>I&rsquo;ve read <a href="http://www.sitepoint.com/scrum-standup-slowing-down/">this article</a> by M. David Green</p>
-
-<h2>Me duele Indra</h2>
-
-<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=374c664073e1a1fa3deca53b4&amp;id=67ce79e01b">this Bonillista</a> (Spanish) by David Bonilla</p>
-
-<h2>TDD, BDD, [add every other method that promises software quality here] and the tea tasting lady</h2>
-
-<p>I&rsquo;ve read <a href="https://blinkingcaret.wordpress.com/2012/10/02/tdd-bdd-add-every-other-method-that-promises-software-quality-here-and-the-tea-tasting-lady/">this article</a> by Rui Figueiredo about the scientific method, TDD / BDD and how to scientifically detect if the &lsquo;how&rsquo; affects the result. In this case, exemplified by how to prepare your tea</p>
-
-<h2>The Art of Metaprogramming in Java</h2>
-
-<p>I&rsquo;ve read <a href="http://www.slideshare.net/PolymathicCoder/the-art-of-metaprogramming-in-java">these slides</a> by Abdelmonaim Remani</p>
-
-<h2>When TDD does not work</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/04/30/When-tdd-does-not-work.html">this article</a> by Uncle Bob on situations where TDD might not be appropiate, especially around the borders</p>
-
-<h2>Mi primera semana como aprendiz</h2>
-
-<p>I&rsquo;ve read <a href="http://ronnyancorini.es/blog/index.php/2015/06/08/mi-primera-semana-como-aprendiz/">Ronny Ancorini&rsquo;s experiences</a> in his first week as apprentince with Carlos Blé &amp; Associates (Spanish)</p>
-
-<h2>Refactoring without good tests</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.codeclimate.com/blog/2013/12/05/refactoring-without-good-tests/">this article</a> by Peter Bell on how to deal with a legacy codebase, what are the effects of not having tests and how to deal with. How to add tests to a codebase that is not ready for it.</p>
-
-<h2>Big Ball of Mud</h2>
-
-<p>I&rsquo;ve read <a href="http://www.laputan.org/mud/">this paper</a>, containing a collection of patterns and antipatterns (disguised as notes) by Brian Foote and Joseph Yoder</p>
-
-<h2>Comparision of different concurrency models: Actors, CSP, Disruptor and Threads [sic]</h2>
-
-<p>I&rsquo;ve read <a href="http://java-is-the-new-c.blogspot.com.es/2014/01/comparision-of-different-concurrency.html">this comparison of concurrency models</a> by Rüdiger Möller</p>
-
-<h2>5 Whys</h2>
-
-<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/5_Whys">this wikipedia</a> article on the technique called &ldquo;5 Whys&rdquo;</p>
-
-<h2>Expectations, Outcomes, and Challenges of Modern Code Review</h2>
-
-<p>I&rsquo;ve read <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=180283">this paper</a>, <a href="http://research.microsoft.com/pubs/180283/ICSE%202013-codereview.pdf">direct link</a>, by Alberto Bacchelli and Christian Bird on code review at Microsoft.</p>
-
-<p>They explain how they do it, the exact methodology they are using and why they do it.</p>
-
-<p>The main reasons to code review are:</p>
-
-<ul>
-<li>finding defects</li>
-<li>code improvement</li>
-<li>alternative solutions</li>
-<li>knowledge transfer</li>
-<li>team awareness and transparency</li>
-<li>also:
-
-<ul>
-<li>improve development process</li>
-<li>avoid build breaks</li>
-<li>share code ownership</li>
-<li>track rationale</li>
-<li>team assessment</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>The quality wheel</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.jessitron.com/2015/04/the-quality-wheel.html">this article</a> by Jessica Kerr about the qualities of beautiful code</p>
-
-<h2>5 Minute Physics</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=n6FKT-KafRk">this video</a> on interactions with the mobile devices and related to physics by David DeSandro</p>
-
-<h2>Rise of the Transpilers</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=DspYurD75Ns">this video</a> on the rise of the transpilers and coffeescript by Jeremy Ashkenas</p>
-
-<h2>Drawing Lines with Bresenham&rsquo;s Line Algorithm</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=zytBpLlSHms">this video</a> about how to apply the Bresenham&rsquo;s algorithm to draw lines (implemented in pseudo-code and javascript) by Jenn Schiffer</p>
-
-<h2>Working with Minified JavaScript</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=SuFNR7-XjKI">this video</a> by John Crepezzi on how to mix javascript files (clients and yours), how to decompile javascript in chrome, dev &amp; debug tools</p>
-
-<h2>How we ran our Legacy Code Retreat</h2>
-
-<p>I&rsquo;ve read <a href="https://pboop.wordpress.com/2012/02/19/how-we-ran-our-legacy-code-retreat/">this article</a> by Andreas Leidig, looking for inspiration on running a legacy code retreat / brown-bag session. The experience report <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">is here</a></p>
-
-<h2>Shift Left: Testing Earlier in Development</h2>
-
-<p>I&rsquo;ve read <a href="http://wirfs-brock.com/blog/2015/06/18/shift-left">this article</a> by Rebecca Wirfs-Brock</p>
-
-<h2>Polymorphic Equality</h2>
-
-<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/06/polymorphic-equality/">this article</a> on implementing polymorphic equality on C#, by Carlos Blé</p>
-
-<h2>Commit messages are not titles</h2>
-
-<p>I&rsquo;ve read <a href="http://antirez.com/news/90">this article</a> on git commit messages and how to use them, by antirez</p>
-
-<h2>Oracle Considers G1 Garbage Collector for Java 9</h2>
-
-<p>I&rsquo;ve read this <a href="https://adtmag.com/articles/2015/06/22/oracle-java-9.aspx">press article</a> on the G1 and CMS collector, by John K. Waters</p>
-
-<h2>What Tech Newbies Need</h2>
-
-<p>I&rsquo;ve read <a href="https://storify.com/jesslynnrose/what-tech-newbies-need">this set of tweets</a>, grouped by Jessica Rose about the most helpful things beginners can do to improve their programming skills.</p>
-
-<h2>JavaScript For Cats</h2>
-
-<p>I&rsquo;ve read <a href="http://jsforcats.com/">this introductory guide</a> to javascript by <a href="https://twitter.com/maxogden">Max Ogden</a></p>
-
-<h2>Why Doesn&rsquo;t Python Have Switch/Case?</h2>
-
-<p>I&rsquo;ve read <a href="http://www.pydanny.com/why-doesnt-python-have-switch-case.html">this article</a> on the switch case in the python language by Daniel Roy Greenfeld</p>
-
-<h2>[Joseph Moniz&rsquo;s] Notes on Clojure</h2>
-
-<p>I&rsquo;ve read Joseph Moniz&rsquo;s <a href="http://blog.plasmaconduit.com/notes-on-clojure/">Notes on Clojure</a>.</p>
-
-<h2>Chemical Computing with Clojure</h2>
-
-<p>I&rsquo;ve read <a href="http://gigasquidsoftware.com/chemical-computing/index.html">an article</a> on performing abstract computations with chemicals, written in Clojure by Carin Meier</p>
-
-<h2>Lenses</h2>
-
-<p>I&rsquo;ve read <a href="http://www.haskellforall.com/2012/01/haskell-for-mainstream-programmers_28.html">this tutorial</a> on writing lenses for haskell, a way of importing imperative getters / setters to a Data. Written by Gabriel Gonzalez.</p>
-
-<p>On another note, the first part, about writing getters and setters in the naive way, is also explained in Learn you a Haskell > Chapter 8 Making Our Own Types and Typeclasses > Record syntax</p>
-
-<h2>Microservices in Haskell</h2>
-
-<p>I&rsquo;ve read <a href="https://github.com/AlexanderAA/haskell-microservices/blob/gh-pages/haskell-microservices.md">these notes</a> on implementing a microservice in haskell, by <a href="https://github.com/AlexanderAA">AlexanderAA</a></p>
-
-<h2>Overcoming Resistance to Change - Isn&rsquo;t It Obvious?</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=hcz1aZ60k7w">this video</a> in the channel of The World with Theory of Constraints</p>
-
-<h2>Bacon is bad for you</h2>
-
-<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/bacon-is-bad-for-you">these slides</a>
- on professionalism and the programmer culture, by Garann Means</p>
-
-<h2>Code is a job</h2>
-
-<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
-
-<h2>The Great Newline Schism</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
-
-<h2>Top ten reasons why I won’t use your open source project</h2>
-
-<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
 ]]></content>
   </entry>
   

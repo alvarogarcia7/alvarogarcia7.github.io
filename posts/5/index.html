@@ -9,9 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Inserting this code in the blog: ```clojure
-(defn all-access[k] (let [{:keys [a b] :as k}] (do a) (do (:b k))))
-``` the octopress processor throws &hellip;">
+  <meta name="description" content="At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +78,291 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/19/logging-is-a-feature/">Logging Is a Feature</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-19T23:43:10+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:43 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of <a href="http://www.splunk.com/">Splunk</a>.</p>
+
+<p>This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
+
+<p>Strategies for dealing with this:</p>
+
+<ul>
+<li>functional logger: no shared state
+
+<ul>
+<li>can only log information available in this scope: parameters, attributes, static information</li>
+</ul>
+</li>
+<li>stateful logger: information is added to the threadContext and logged whenever necessary
+
+<ul>
+<li>can log information in this scope plus any of the previous invokings.</li>
+<li>the problem is precisely sharing state: you have to control all the possible parents to know where this data comes from. A piece of information may come from any source.</li>
+<li>Lose the reference of who is invoking you, as there is no customization for this. (only using implementation)</li>
+<li>Speak two different languages: one for logging and one for business logic</li>
+</ul>
+</li>
+<li>mixed: mix and match the best of both worlds.
+
+<ul>
+<li>The problem with the shared state can be solved if no data is overwritten and any information is stored in a map where the key is the fully qualified (FQ) method name (or FQ class name + FQ method name)</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The GOOS book explains this very well on the 20th chapter, first half &ldquo;logging is a feature&rdquo;. If we log as described in chapters 19 and 20, some of the problems are reduced:</p>
+
+<ul>
+<li>multiple levels of abstraction</li>
+<li>indirect control over logging. decide in a single place whether to log exceptions of each kind or not</li>
+<li>remove &ldquo;implementation details&rdquo; such as &ldquo;log.isDebugEnabled&rdquo;</li>
+<li>remove performance issues: no need to build strings for logging every time, only need to pass objects. inside the logging layer, if the logger is enabled for that level, then spend the time building strings and print them</li>
+</ul>
+
+
+<p>We should remember that:</p>
+
+<ul>
+<li>Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.</li>
+<li>Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity Matters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-18T14:44:06+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus&#8217; <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
+
+<p>here are my notes:</p>
+
+<ul>
+<li>the software is the elephant</li>
+<li>do more, do it differently, do it better</li>
+<li>complexity of the elephant is going to dominate what you can do</li>
+<li>your ability to reason about your program is critical</li>
+<li>design is about pulling things apart</li>
+<li>become familiar by learning, trying</li>
+<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
+</ul>
+
+
+<p>Complexity vs simplicity:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complexity     </th>
+<th> Simplicity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state, objects </td>
+<td> values</td>
+</tr>
+<tr>
+<td>methods </td>
+<td> functions, namespaces</td>
+</tr>
+<tr>
+<td>variables </td>
+<td> managed refs</td>
+</tr>
+<tr>
+<td>inheritance, switch, matching  </td>
+<td> polymorphism à la carte</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>imperative loops, fold </td>
+<td> set functions</td>
+</tr>
+<tr>
+<td>actors </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>ORM </td>
+<td> declarative data manipulation</td>
+</tr>
+<tr>
+<td>conditionals </td>
+<td> rules</td>
+</tr>
+<tr>
+<td>inconsistency </td>
+<td> consistency </td>
+</tr>
+</tbody>
+</table>
+
+
+<ul>
+<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
+<li>simplicity is not about you. simplicity is a lot of hard work
+
+<ul>
+<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
+</ul>
+</li>
+<li>simplicity is not an objective</li>
+</ul>
+
+
+<p>Order is all over the place:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complex  </th>
+<th> Simple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>positional arguments </td>
+<td> named arguments or map</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>product types  </td>
+<td> associate records</td>
+</tr>
+<tr>
+<td>imperative programs </td>
+<td> declarative programs</td>
+</tr>
+<tr>
+<td>prolog </td>
+<td> datalog</td>
+</tr>
+<tr>
+<td>call chains </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>XML </td>
+<td> JSON, Clojure literals</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/17/the-guardian-of-the-source/">The Guardian of the Source</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-17T22:01:48+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:01 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Overheard today at the office, while they were discussing the approval of a pull request:</p>
+
+<blockquote><p>[Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this?</p>
+
+<p>[Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source</p>
+
+<p>[PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase.</p></blockquote>
+
+<p>This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;<a href="http://knowyourmeme.com/memes/you-shall-not-pass">you shall not pass</a>&rdquo; while on top of the bridge.</p>
+
+<p>This is part of the objectives of doing a pull request before merging code: stop the bad code<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> before it is merged to the codebase.</p>
+
+<p>Later, as you start having <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows</a> in your codebase, it is easier that you start introducing more. Exactly about this is the <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows theory</a>.</p>
+
+<p>On the other hand, if you try to block that bad code before it is merged, it is cheaper to remove it: nothing depends on it, you introduce no repetition, etc<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>This also connects with the idea present in <a href="http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501">Software Craftsmanship, now called The Software Craftsman</a>, about preserving value for investors and treat software as an investment (with positive ROI) rather than a sunk cost.</p>
+
+<p>It is being picky and, to the most of our possibilities, do not letting any defects nor bad code into the codebase. A hedge fund manager would not let any toxic or dubious asset into the managed funds. This would be counterproductive in the long run (maybe even in the short one) and would be not doing their job correctly. Why is it that some developers suggest or accept these toxic assets?</p>
+
+<p>So, at least for me, would be an honor to be called the &ldquo;Guardian of the Source&rdquo; by someone I respect, as long as this is a serious proposition (i.e., not a joke of some kind).</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Bad code can be expressed in many ways: long methods, bad naming, breaking design principles (e.g., SOLID, KISS, DRY - OAOO), code with defects, no tests or no coverage, etc.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>A source is <a href="http://c2.com/cgi/wiki?DiscoverDefectsEarly">Discover defects early</a>. Another is <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">this paper</a> that cites the ratio of fixing it later to 5:1 (five times more expensive).<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -726,197 +1009,6 @@ Error: Run jekyll build --trace for more information.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/31/books-read-in-2015q1/">Books Read in 2015Q1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-31T12:49:49+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:49 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html">post</a>:</p>
-
-<ul>
-<li><a href="https://leanpub.com/50quickideas">Fifty Quick Ideas to Improve your User Stories</a>, by Gojko Adzic and David Evans</li>
-<li><a href="https://leanpub.com/funretrospectives">Fun retrospectives</a> by Taina Caetano and Paulo Caroli</li>
-<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091">Implementation patterns</a> by Kent Beck</li>
-<li><a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">Clean code</a> by Robert C. Martin;  again</li>
-</ul>
-
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a>, by Benjamin J. Evans and Martijn Verburg</li>
-<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>, by Martin Fowler, (with Kent Beck, John Brant, William Opdyke, and Don Roberts)</li>
-<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>, by Steve Freeman and Nat Pryce</li>
-<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a>, by Mihaly Csikszentmihalyi</li>
-</ul>
-
-
-<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/29/growing-software-according-to-the-season/">Growing Software According to the Season</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-29T18:13:45+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is the first post is of the <a href="/blog/categories/growing-software">growing-software series</a></p>
-
-<p>A few weeks ago, while reading the book <a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> by <a href="https://twitter.com/@natpryce">Nat Pryce</a> and <a href="https://twitter.com/@sf105">Steve Freeman</a>, I finally understood why the software needs to be grown and not built:</p>
-
-<blockquote class="twitter-tweet" lang="en"><p>.<a href="https://twitter.com/natpryce">@natpryce</a> <a href="https://twitter.com/sf105">@sf105</a> With the <a href="https://twitter.com/hashtag/goos?src=hash">#goos</a> book I finally grasped the importance of growing, not building software. Thanks for writing it</p>&mdash; Alvaro Garcia (@alvarobiz) <a href="https://twitter.com/alvarobiz/status/570835142136049664">February 26, 2015</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>A few days ago, I was thinking about new inspiration sources and this came to my mind:</p>
-
-<blockquote class="twitter-tweet" lang="en"><p>If we want to grow software instead of building it, should we start looking at gardening and agriculture for new inspiration? <a href="https://twitter.com/hashtag/goos?src=hash">#goos</a></p>&mdash; Alvaro Garcia (@alvarobiz) <a href="https://twitter.com/alvarobiz/status/581005906667687938">March 26, 2015</a></blockquote>
-
-
-<p>In agriculture, at least in this latitude, there are different seasons. Different plants have different temporal schedules: you need to plant, wait for it to bloom, produce fruits then collect. Maybe remove the plant and wait for the next time slot to appear.</p>
-
-<p>When growing software, things are different (or we think so):</p>
-
-<ul>
-<li>Do we need to plant? Yes, seed the project with resources</li>
-<li>Wait for it to bloom? Yes, from an outside actor perspective, there is no result for a while, even if it is one sprint</li>
-<li>Wait to produce fruits? Yes, usually some sprints past the minimum viable product (MVP) until the minimum lovable product (MLP)</li>
-<li>Do we need to collect it? Yes, usually the final tests (e.g., regression) and ship it to production to be used.</li>
-</ul>
-
-
-<p>After all, we might say that the process is not so different in both activities. Nothing to do related to tools or materials, etc.</p>
-
-<p>As in agriculture, seasons vary in productivity for a certain activity or crop: during the cold months, not many plants are able to produce fruits. Meanwhile, during the hot months, harvest is much higher. (This only applies to outdoors gardening.)</p>
-
-<p>When producing software, there might be seasons too:</p>
-
-<ul>
-<li>Seasons where productivity (harvest) varies
-
-<ul>
-<li>Lowers when a new team member joins (see the Mythical Man-Month), the pressure is too high, salaries are low, &hellip;</li>
-<li>Increases when there are no information silos, the bus factor is high, the team is not affected by external distractions, &hellip;</li>
-</ul>
-</li>
-<li>Seasons where different harvests can be planted, but a subset of them will be the most effective
-
-<ul>
-<li>A front-end developer can do back-end, but it won&rsquo;t be as productive. In this area, one can learn other disciplines and get as effective as other professionals.</li>
-<li>There are many tasks to be done but the prioritized ones are more effective</li>
-</ul>
-</li>
-<li>Some harvests are more intense on the fields than others. After that, there is a required rest so the next season is as productive as the previous one
-
-<ul>
-<li>Some projects produce burn-out so some slack time is more productive than getting to work again.</li>
-</ul>
-</li>
-</ul>
-
-
-<p>But there might be differences too:</p>
-
-<ul>
-<li>Geographical distribution: some crops cannot grow in certain conditions. I believe any geographic area (e.g., country) can produce any type of work (e.g., back-end, front-end, quality assurance, project management, etc)</li>
-<li>Quality distribution: same as before, many crops do not grow in Iceland (due to the harsh environment) or do it with lower quality as nearer to the Equator.</li>
-</ul>
-
-
-<p><a href="https://twitter.com/@XaV1uzz">Xavi Gost</a> responded to my tweet:</p>
-
-<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/alvarobiz">@alvarobiz</a> Conceptos como darle a las cosas su tiempo de crecer y madurar nos vendrian bien en la industria</p>&mdash; Xaviuzz (@XaV1uzz) <a href="https://twitter.com/XaV1uzz/status/581063149203394560">March 26, 2015</a></blockquote>
-
-
-<p>[Roughly translated: Concepts like allowing some time for things to grow and ripe would benefit the industry]</p>
-
-<p>Get the tools out of the tool-shed and start buying seeds for this spring.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/25/meetup-cross-pollination/">Meetup Cross-pollination</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-25T23:50:23+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:50 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://twitter.com/adibolb">Adrian Bolboaca</a> has written a very interesting post on being a community bumble-bee. (Source can be found <a href="http://blog.adrianbolboaca.ro/2015/03/talk-agile-lean-europe-2014-being-a-community-bumble-bee/">here</a>)</p>
-
-<p>He goes on to explain how he has visited many meetups all over Europe and the big chunk of information and experience he has learned from them.</p>
-
-<p>He tells us about a selfish approach to organizing meetups:</p>
-
-<blockquote><p>When one teaches two learn</p>
-
-<p>(apparently attributed to) Robert Heinlein, <a href="http://www.math.niu.edu/~rusin/nonwork/quotes">source</a></p></blockquote>
-
-<p>I share this feeling of learning while teaching, as long as you reflect and analyze (e.g., <a href="http://en.wikipedia.org/wiki/Hansei">hansei</a> or <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch05.html#reflect_as_you_work">reflect as you work</a>). I also try to apply it to my meetups.</p>
-
-<p>As a funny note, he said this cross-pollination has crystallized in as many ideas as to fill three books.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -934,23 +1026,23 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate Values in Constants</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the Same Import Order in IntelliJ IDEA as Eclipse&#8217;s</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing With Java 8 Lambdas</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/27/craftsmanship-analogy/">Craftsmanship Analogy</a>
       </li>
     
       <li class="post">
         <a href="/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/">Practical Object-Oriented Design in Ruby: Chapter 4</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster Site Generation for Octopress 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/13/what-defines-a-dependency/">What Defines a Dependency</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
       </li>
     
   </ul>
