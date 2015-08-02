@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including: the &hellip;">
+  <meta name="description" content="Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-23T19:19:28+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+
+<p>The contents of the session:</p>
+
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
+
+<p>I prepared a small script:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">while</span> <span class="nb">test true</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  git add --all<span class="p">;</span>
+</span><span class='line'>  git commit --all -m <span class="s2">&quot;save process - uknown state&quot;</span><span class="p">;</span>
+</span><span class='line'>  sleep 120<span class="p">;</span>
+</span><span class='line'><span class="k">done</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -726,109 +805,6 @@ into a single post</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/10/talk-software-is-eating-the-world/">Talk: Software Is Eating the World</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-10T21:00:52+02:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:00 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve watched <a href="http://reaktor.com/blog/erik-meijer-software-eating-world/">this talk</a> by Erik Meijer</p>
-
-<h2>My notes</h2>
-
-<ul>
-<li><p><a href="http://www.amazon.com/Agile-The-Good-Hype-Ugly/dp/3319051547">Agile!: The Good, the Hype and the Ugly</a></p></li>
-<li><p>The hacker way</p>
-
-<ul>
-<li>code always wins vs manager always wins</li>
-<li>source: <a href="http://www.wired.com/2012/02/zuck-letter/">http://www.wired.com/2012/02/zuck-letter/</a></li>
-</ul>
-</li>
-<li>we&rsquo;re doing maths => we&rsquo;re building a proof</li>
-<li>reinforcement learning
-
-<ul>
-<li>agent is the company</li>
-</ul>
-</li>
-<li>related to &ldquo;build, measure, learn&rdquo; by Eric Ries (<a href="http://theleanstartup.com/book">the lean startup</a>)</li>
-</ul>
-
-
-<h3>Feedback systems</h3>
-
-<ul>
-<li>Open (no) feedback system, such as timed sprinklers</li>
-<li>Closed feedback system</li>
-<li>Output only system</li>
-</ul>
-
-
-<h3>Why everything is software</h3>
-
-<ul>
-<li>Examples of everything is software</li>
-<li>Software is eating the world</li>
-<li>Even hardware is modeled as software</li>
-</ul>
-
-
-<h3>Modeling as a Finite State Machine (FSM)</h3>
-
-<ul>
-<li>There&rsquo;s memory in the feedback loop. See the <a href="http://en.wikipedia.org/wiki/Finite-state_machine">finite state machine</a></li>
-<li>A lesson from &ldquo;World War Z&rdquo;: &ldquo;When nine people agree on something, it&rsquo;s the tenth man&rsquo;s responsibility to disagree no matter how improbable the idea&rdquo;. &ldquo;You don&rsquo;t believe your own [ideas]&rdquo;. There&rsquo;s an article <a href="http://lifehacker.com/plan-more-effectively-with-the-tenth-man-rule-1689738373">here</a> and <a href="http://evidencemag.com/world-war-z/">here</a>, but they don&rsquo;t cite any official source related to this. The second one cites World War Z again, so it might be <a href="http://en.wikipedia.org/wiki/Confirmation_bias">confirmation bias</a>.</li>
-<li>Test in production (e.g., <a href="https://github.com/Netflix/SimianArmy/wiki/Chaos-Monkey">chaos monkey</a> from Netflix) rather than doing TDD</li>
-<li>No evidence of TDD as effective, he sees it as waste</li>
-<li>Move fast and break things</li>
-</ul>
-
-
-<h3>About layered organizations</h3>
-
-<ul>
-<li>Layered architecture. Examples: OSI, Catholic Church, Army</li>
-<li>Analogy: Software development as a professional team structure (also cited from Netflix)</li>
-<li>Book: Creativity from Constraints: the psychology of breakthrough. Focus, constraint, creativity</li>
-<li>Presentation: <a href="http://www.infoq.com/presentations/Developing-Expertise-Dave-Thomas">Developing Expertise: Herding Racehorses, Racing Sheep</a></li>
-<li>Analogy: Developers are like junkies, we want to be high all the time</li>
-<li>Answering a new proposal: instead of &ldquo;no, but&rdquo; (black hat), &ldquo;yes and&rdquo; (blue hat). Reference to <a href="http://www.amazon.com/Bossypants-Tina-Fey-ebook/dp/B0047Y0FGY">Bossypants</a> by Tina Fey</li>
-<li>Your knives, your tools. &ldquo;How can we make millions if we don&rsquo;t value our tools?&rdquo;</li>
-</ul>
-
-
-<h3>Conclusion</h3>
-
-<p>About software:</p>
-
-<blockquote><p>software will take over the world, and developers are the ones who make it happen.</p></blockquote>
-
-<p>About methodologies:</p>
-
-<blockquote><p>&ldquo;Programming, motherfucker. Do you speak it?&rdquo; (<a href="http://programming-motherfucker.com/">Source</a>)</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -846,6 +822,10 @@ into a single post</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/02/self-study-in-august-2015/">Self-Study in August 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing Your Own Maven Dependencies</a>
       </li>
     
@@ -859,10 +839,6 @@ into a single post</p>
     
       <li class="post">
         <a href="/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing With Java 8 Lambdas</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/27/craftsmanship-analogy/">Craftsmanship Analogy</a>
       </li>
     
   </ul>

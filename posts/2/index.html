@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Organizing Code to Allow for Easy Changes Asserting that code should be easy to change is akin to stating that children should be polite; the &hellip;">
+  <meta name="description" content="We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz. These are the concepts and links brought up &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,45 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-12T00:07:29+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:07 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
+
+<p>These are the concepts and links brought up during the discussion:</p>
+
+<ul>
+<li><a href="http://martinfowler.com/bliki/DataClump.html">Data Clump</a> at the bliki</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/WaMWtp1Uetp">Refactoring with Loops and Collection Pipelines</a>, indirect link to the article by Martin Fowler</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/6J9PPQpUjwY">When Worse Is Better: Incrementally Escaping Local Maxima</a>, indirect link to the article by Kent Beck</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/Sk7DfYFPt5j">Getting It Right by Betting on Wrong</a>, indirect link to an article by Sandi Metz</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1393,85 +1432,6 @@ macrogenerators wholly unnecessary</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-23T19:19:28+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
-
-<p>The contents of the session:</p>
-
-<ul>
-<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
-<li>Ask the dev team to add an easy feature</li>
-<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
-<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
-<li>Point out that there are regressions in the few lines of the patch</li>
-<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
-<li>Explain the technique of the golden master</li>
-<li>Some more programming, until they start to see the light at the end of the tunnel</li>
-<li>Small retrospective, including:
-
-<ul>
-<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
-<li>what could I improve as facilitator or for the structure of the session</li>
-</ul>
-</li>
-</ul>
-
-
-<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
-
-<p>I prepared a small script:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">while</span> <span class="nb">test true</span><span class="p">;</span> <span class="k">do</span>
-</span><span class='line'>  git add --all<span class="p">;</span>
-</span><span class='line'>  git commit --all -m <span class="s2">&quot;save process - uknown state&quot;</span><span class="p">;</span>
-</span><span class='line'>  sleep 120<span class="p">;</span>
-</span><span class='line'><span class="k">done</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
-<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1489,6 +1449,10 @@ macrogenerators wholly unnecessary</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/02/self-study-in-august-2015/">Self-Study in August 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing Your Own Maven Dependencies</a>
       </li>
     
@@ -1502,10 +1466,6 @@ macrogenerators wholly unnecessary</p>
     
       <li class="post">
         <a href="/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing With Java 8 Lambdas</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/27/craftsmanship-analogy/">Craftsmanship Analogy</a>
       </li>
     
   </ul>
