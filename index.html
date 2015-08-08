@@ -9,9 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Humble Object I&rsquo;ve read the Humble Object list of patterns, by Gerard Meszaros, including: humble dialog
-humble executable
-humble transaction &hellip;">
+  <meta name="description" content="From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz: An object has a dependency when it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +84,242 @@ humble transaction &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/08/08/recognizing-dependencies/">Recognizing Dependencies</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-08T14:11:29+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:11 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:</p>
+
+<blockquote><p>An object has a dependency when it knows:</p>
+
+<ul>
+<li>The name of another class. [&hellip;]</li>
+<li>The name of a message that it intends to send to someone other than self. [&hellip;]</li>
+<li>The arguments that a message requires. [&hellip;]</li>
+<li>The order of those arguments. [&hellip;]</li>
+</ul>
+</blockquote>
+
+<p>If an object knows any of these facts about another object, it has dependencies to the other.</p>
+
+<p>This is not to say that having dependencies to others is bad, as</p>
+
+<blockquote><p>A single object cannot know everything, so inevitably it will have to talk to another object.
+Chapter 3, Managing Dependencies, Introduction</p></blockquote>
+
+<p>For this latter purpose, there is the section &ldquo;Writing loosely coupled code&rdquo;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple Return Values in a Mockito Stub</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-07T11:31:19+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:31 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">spike</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">MatcherAssert</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">Matchers</span><span class="o">.</span><span class="na">is</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">spy</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">when</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.mockito.Spy</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DifferentReturnValues</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Spy</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Spike1</span> <span class="n">spike1</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Spike1</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Test</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">class</span> <span class="nc">Spike1</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getBool</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The key line is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this makes the stubbed function to return multiple values:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+</span><span class='line'><span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The last value is repeated after the last defined value:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to loop over the values, you can implement it with the <code>doAnswer</code> method:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">final</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="kc">true</span><span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">doAnswer</span><span class="o">(</span><span class="n">invocation</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class='line'>  <span class="o">}).</span><span class="na">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">).</span><span class="na">getBool</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/08/02/self-study-in-august-2015/">Self-Study in August 2015</a></h1>
     
     
@@ -121,6 +355,86 @@ humble transaction &hellip;">
 <p>I&rsquo;ve reread <a href="http://www.paulgraham.com/know.html">this small essay</a> by Paul Graham on storing information in our heads, based on the context. On the importance of rereading, to add more contexts to the initial one.</p>
 
 <p>Tags: paul-graham, reread, read</p>
+
+<h2>Protected Variation: The Importance of Being Closed</h2>
+
+<p>I&rsquo;ve read <a href="http://www.martinfowler.com/ieeeSoftware/protectedVariation.pdf">this article</a> by Craig Larman in the magazine IEEE Software > Design.</p>
+
+<p>Discusses Information Hiding, Protected Variation and the Open-Closed Principle.</p>
+
+<p>Tags: craig-larman, ocp, open-closed principle, design, information-hiding, ih, protected-variation, pv,</p>
+
+<h2>Lambda, Javascript Micro-Services on AWS</h2>
+
+<p>I&rsquo;ve read <a href="http://www.jayway.com/2014/12/18/lambda-javascript-micro-services-aws/">this post</a> explaining how to deploy a microservice on AWS on top of Lambda. Written by Anders Janmyr</p>
+
+<p>The cool thing is that you get billed by milliseconds!</p>
+
+<p>Tags: anders-janmyr, devops, microservice, lambda, aws</p>
+
+<h2>Migrating To Clojure. So Much Fn</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=Hv4slaRydRM">this talk</a> by Jan Stępień where he talks about his experience on migrating part of an application to clojure from ruby on rails</p>
+
+<p>Tags: jan-stepien, clojure, migration, ruby-on-rails, talk, wrocloverb</p>
+
+<h2>Te recomiendo escribir en un blog</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/07/te-recomiendo-escribir-en-un-blog/">this article</a> from Carlos Blé in which he recommends writing a blog, on things we discover along the way. (Spanish)</p>
+
+<p>Tags: carlos-ble, meta, blog, long-way</p>
+
+<h2>We need enough technical debt</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.svpino.com/2015/08/05/we-need-enough-technical-debt">this article</a> on why we need to accumulate a bit of technical debt, as a way of being less perfectionist and deliver more features / value to our stakeholders. Written by Santiago L. Valdarrama.</p>
+
+<p>Tags: santiago-valdarrama, technical-debt, perfectionism</p>
+
+<h2>Escribe mejores tests en Javascript</h2>
+
+<p>I&rsquo;ve read <a href="http://carlosvillu.com/escribe-mejores-tests-en-javascript/">this list</a> of tips to write better javascript tests (Spanish). By Carlos Villuendas</p>
+
+<p>Tags: carlos-villuendas, javascript, test</p>
+
+<h2>Down the Rabbit Hole</h2>
+
+<p>I&rsquo;ve read <a href="https://github.com/brettwooldridge/HikariCP/wiki/Down-the-Rabbit-Hole">this wiki</a> page on how to tune some aspects of the server hotspot JVM, by Brett Wooldridge</p>
+
+<p>Tags: performance, jvm, hotspot, inline, bytecode, brett-wooldridge</p>
+
+<h2>XP Manchester Lightning Talks 2015 Live broadcast</h2>
+
+<p>I have watched the first two <a href="https://www.youtube.com/watch?v=VD4UEW2i7hU">lightning talks</a> from XP Manchester, edition number 61.</p>
+
+<p>Tags: lightning-talk, broadcast, simplicity, manchester, 2015</p>
+
+<h2>Counting hash collisions with the birthday paradox</h2>
+
+<p>I&rsquo;ve read <a href="http://matt.might.net/articles/counting-hash-collisions/">this article</a> on the birthday paradox, or the percentage of chance of people sharing the same birthday. This could be applied to hash function, as the title says, but is not included in the article. Written by Matt Might</p>
+
+<h2>The Key to Giving and Receiving Negative Feedback</h2>
+
+<p>I&rsquo;ve read <a href="https://hbr.org/2015/08/the-key-to-giving-and-receiving-negative-feedback?">this article</a> by Joseph Grenny about how to give and receive negative feedback. It is exemplified by the plant manager who was expecting another kind of feedback from his subordinates and was surprised by their negative feedback.</p>
+
+<p>Tags: joseph-grenny, negative-feedback, feedback, by-example</p>
+
+<h2>Testing Clojure web applications with Kerodon</h2>
+
+<p>I&rsquo;ve read <a href="https://semaphoreci.com/community/tutorials/testing-clojure-web-applications-with-kerodon">this guide</a> on how to test compojure-based applications with kerodon. Written by Nebojša Stričević</p>
+
+<p>Tags: nebojsa-stricevic, compojure, kerodon, clojure, testing, guide</p>
+
+<h2>Using The Option Type Effectively</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uku-taht/2015/04/29/using-the-option-type-effectively.html">this article</a> on how to use the <code>Option</code> type (in rust), similar to <code>Optional</code> in java or <code>Maybe</code> in haskell. Written by Uku Taht.</p>
+
+<p>Tags: uku-taht, option, maybe, optional, rust</p>
+
+<h2>When Should You Think?</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/03/11/when-to-think.html">this post</a> by Robert C Martin on when to think and the hypothesis that TDD does not allow you to think before coding.</p>
+
+<p>Tags: tdd, robert-c-martin, design, hypothesis</p>
 </div>
   
   
@@ -1021,6 +1335,79 @@ replace with: $1</p>
 
 
 <p>This one reads more like a business requirement.</p>
+
+<h2>Other</h2>
+
+<p>Other ideas we have tested:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Builder</span><span class="o">.</span><span class="na">aNew</span><span class="o">().</span><span class="na">sendGreetingLetter</span><span class="o">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">assertAndVerifyThat</span><span class="o">(</span>
+</span><span class='line'>  <span class="n">theLoggingLine</span><span class="o">()</span>
+</span><span class='line'>      <span class="o">.</span><span class="na">for</span><span class="o">(</span><span class="n">aGreetingLetter</span><span class="o">())</span>
+</span><span class='line'>      <span class="o">.</span><span class="na">isLoggedWhen</span><span class="o">(</span><span class="n">greetingLetterIsSent</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">)</span>
+</span><span class='line'><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">aGreetingLetter</span><span class="o">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">greetingLetterIsSent</span><span class="o">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">assertAndVerifyThat</span><span class="o">(</span>
+</span><span class='line'>  <span class="n">theLoggingLine</span><span class="o">()</span>
+</span><span class='line'>      <span class="o">.</span><span class="na">for</span><span class="o">(</span>
+</span><span class='line'>          <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">))</span>
+</span><span class='line'>      <span class="o">)</span>
+</span><span class='line'>      <span class="o">.</span><span class="na">isLoggedWhen</span><span class="o">(</span><span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">)</span>
+</span><span class='line'><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">assertAndVerifyThat</span><span class="o">(</span><span class="n">TestContext</span> <span class="n">testContext</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">testContext</span><span class="o">.</span><span class="na">assert</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">testContext</span><span class="o">.</span><span class="na">verify</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -1327,129 +1714,6 @@ replace with: $1</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/13/what-defines-a-dependency/">What Defines a Dependency</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-13T07:48:28+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:48 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java">fragment</a>):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">register</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">userName</span><span class="o">)</span>  <span class="o">{</span>
-</span><span class='line'>    <span class="k">try</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">registeredUsers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">User</span><span class="o">(</span><span class="n">userName</span><span class="o">));</span>
-</span><span class='line'>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">AlreadyRegisteredUserException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">userName</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
-
-<p>He suggested that:</p>
-
-<ul>
-<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
-<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
-</ul>
-
-
-<p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
-
-<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java">fragment</a>)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span> <span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">,</span> <span class="kd">final</span> <span class="n">RegistryResultListener</span> <span class="n">resultListener</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">if</span><span class="o">(</span><span class="n">contains</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
-</span><span class='line'>        <span class="k">return</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">users</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">resultListener</span><span class="o">.</span><span class="na">successfullyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
-
-<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-13T07:36:14+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:36 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have:</p>
-
-<ul>
-<li>Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one.</li>
-<li>Notifications: Peers that need to be kept up to date with the object&rsquo;s activity. The object will notify interested peers whenever it changes state or performs a significant action. Notifications are &ldquo;fire and forget&rdquo;; the object neither knows nor cares which peers are listening. Notifications are so useful because they decouple objects from each other. For example, in a user interface system, a button component promises to notify any registered listeners when it&rsquo;s clicked, but does not know what those listeners will do. Similarly, the listeners expect to be called but know nothing of the way the user interface dispatches its events.</li>
-<li>Adjustments: Peers that adjust the object&rsquo;s behavior to the wider needs of the system. This includes policy objects that make decisions on the object&rsquo;s behalf (the Strategy pattern in [Gamma94]) and component parts of the object if it&rsquo;s a composite. For example, a Swing JTable will ask a TableCellRenderer to draw a cell&rsquo;s value, perhaps as RGB (Red, Green, Blue) values for a color. If we change the renderer, the table will change its presentation, now displaying the HSB (Hue, Saturation, Brightness) values.</li>
-</ul>
-</blockquote>
-
-<p>Source is Growing Object-Oriented Software, Guided by Tests > Chapter 6, Object-Oriented Style > Object Peer Stereotypes, page 52</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1465,6 +1729,14 @@ replace with: $1</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/08/recognizing-dependencies/">Recognizing Dependencies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple Return Values in a Mockito Stub</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/02/self-study-in-august-2015/">Self-Study in August 2015</a>
       </li>
     
@@ -1474,14 +1746,6 @@ replace with: $1</p>
     
       <li class="post">
         <a href="/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate Values in Constants</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the Same Import Order in IntelliJ IDEA as Eclipse&#8217;s</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing With Java 8 Lambdas</a>
       </li>
     
   </ul>

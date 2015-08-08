@@ -9,9 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="I&rsquo;ve read this book Diseño Ágil con TDD (Spanish) by
-Carlos Blé from cover to cover,
-when previously I had only read the theoretical parts ( &hellip;">
+  <meta name="description" content="At a client, I organized an open discussion on code reviews. We had a great conversation. The main idea was to discuss about it and share the ideas &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +78,184 @@ when previously I had only read the theoretical parts ( &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/07/open-discussion-on-code-reviews/">Open Discussion: On Code Reviews</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-07T18:54:54+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:54 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, I organized an open discussion on code reviews. We had a great conversation.</p>
+
+<p>The main idea was to discuss about it and share the ideas each one had. I didn&rsquo;t want it to turn into a masterclass (see <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch02.html#the_white_belt">the white belt</a>)</p>
+
+<h2>Benefits</h2>
+
+<p>These are the main benefits we saw in it:</p>
+
+<ul>
+<li>Increased trust</li>
+<li>Learning from others, other approaches</li>
+<li>Less defects, more quality</li>
+<li>Increased <a href="http://en.wikipedia.org/wiki/Bus_factor">bus factor</a>, decreased information silos</li>
+<li>Also:
+
+<ul>
+<li>Getting out of your comfort zone</li>
+<li>Communicating more often (code style, edge cases, complaining, etc)</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Pair programming</h2>
+
+<p>Then we discussed about the topic of <a href="/blog/categories/code-review">code reviews</a> and <a href="/blog/categories/pair-programming/">pair programming</a>:</p>
+
+<ul>
+<li><p>How do they mix</p>
+
+<ul>
+<li>Is the need for code review reduced when doing pair programming?</li>
+<li>It is cheaper to catch defects when pairing than code review (e.g., less to modify, mental caches are hot, &hellip;), so why do code reviews? <a href="https://twitter.com/jbrains">J. B. Rainsberger</a> has an <a href="http://us2.campaign-archive2.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=acc77a0fb2&amp;e=4a925444f9">article</a> about it</li>
+</ul>
+</li>
+<li><p>Does it give you the same benefits?</p>
+
+<ul>
+<li>I argued that it does, some of my colleagues argued against as one is &ldquo;while doing&rdquo; and the other is after.</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Practice, Practice, Practice</h2>
+
+<p>This is also a reference to a chapter by the same name (<a href="http://chimera.labs.oreilly.com/books/1234000001813/ch05.html#practice_comma_practice_comma_practice">here</a>)</p>
+
+<p>We proposed this problem:</p>
+
+<blockquote><p>Receive a list of numbers to a command-line (CLI) application and print their sum</p></blockquote>
+
+<p>I wrote simple code listing and we reviewed it. The code is <a href="https://gist.github.com/alvarogarcia7/258faea12cb9375539fe">here as a gist</a></p>
+
+<p>(Just in case, I wrote this listing with some defects / smells on purpose)</p>
+
+<p>Here are the comments:</p>
+
+<ul>
+<li>Not all parameters will be added, only the first three</li>
+<li>The parameters are out of order, overcomplicating things. Is it due to something? Should I be careful about it?</li>
+<li>There is duplication (i.e., parsing from string)</li>
+<li>Bad naming: what is <code>a</code>, <code>b</code>, <code>c</code>?</li>
+<li>There are no tests for it. No manual / javadoc either. Therefore, it&rsquo;s difficult to maintain</li>
+<li><p>Difficult to test: a smell for bad design?</p>
+
+<ul>
+<li>How to test the adding by itself? The output is to the console, so we have to capture it (at GMaur we published this tool: <a href="https://github.com/GMaur/legacyutils">legacyUtils</a>)</li>
+<li>How to test the parsing if there is no mock to be injected? Only via state tests, therefore &ldquo;end to end&rdquo; tests as it includes the adding</li>
+</ul>
+</li>
+<li><p>Mixed concerns / responsibilities. Parsing the numbers and adding them are different concerns and should not be together</p></li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<ul>
+<li>No one was against it</li>
+<li>We all agreed that is important to do it even in time-constrained environments</li>
+<li>It is also important to review our code reviews to make the most of it. The article by <a href="http://us2.campaign-archive2.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=acc77a0fb2&amp;e=4a925444f9">J. B. Rainsberger</a> is quite useful for that</li>
+<li>Even small codes can be bad and need to be reviewed (as the example)</li>
+<li>Quick and dirty proof of concept do not mix well with code reviews</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/03/pairing-with-junior-developers/">Pairing With Junior Developers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-03T23:40:21+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After reading <a href="https://devmynd.com/blog/2015-1-pairing-with-junior-developers">this blog post</a>, here are my thoughts:</p>
+
+<p><strong>WARNING</strong>: the post was about how to do it, these reflections are on a more philosophical level</p>
+
+<p>This is a controversial topic, as:</p>
+
+<ul>
+<li>You cannot discern how much or little the other person knows more than you. I cannot find the reference anymore, but it was a to the tune of &ldquo;once the other person&rsquo;s level is higher than yours, you cannot know how much&rdquo;</li>
+<li>There are different knowledge areas. Yours and theirs might overlap on some areas, but not completely. So they may be experts on an area that is not useful to the technology you&rsquo;re currently using.</li>
+<li>Different people have different passions and motivators.</li>
+</ul>
+
+
+<p>When and where are you a junior and a senior?</p>
+
+<ul>
+<li>Does it depend on each job?</li>
+<li>Is it on each product you work?</li>
+<li>Is it on each team?</li>
+</ul>
+
+
+<blockquote><p>&ldquo;when you join a new project you are starting from square one&rdquo;</p>
+
+<p><cite> D. Hoover, A. Oshineye </cite> in the chapter <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch04.html#solution_id21">Sweep the floor</a>, <a href="http://chimera.labs.oreilly.com/books/1234000001813/index.html">Apprenticeship patterns</a></p></blockquote>
+
+<p>Related to the amount of senior people, is there only one senior per team?</p>
+
+<ul>
+<li>Can everybody be a senior? If we assert this is true, what about &ldquo;if everything matters, nothing matters&rdquo;. Does that mean that everyone is senior or there are different levels of seniority and we call &ldquo;the senior&rdquo; the one on the top of the list?</li>
+<li>Who choses the senior within the team? Is it self-organized, self-chosen? Do the people chose one? Is a shared responsibility, as each one masters a (possibly different) subject?</li>
+</ul>
+
+
+<p>Food for thought.</p>
+
+<p>What do you think about it?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -417,117 +593,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/06/kata-prime-factors/">Kata: Prime Factors</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-06T21:47:04+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:47 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I just did the prime factors kata, in java using TDD. Results: <a href="https://github.com/alvarogarcia7/primeFactors">https://github.com/alvarogarcia7/primeFactors</a></p>
-
-<p>Code review, comments, pull requests are more than welcome</p>
-
-<p>Source: <a href="http://craftsmanship.sv.cmu.edu/katas/prime-factors-kata">http://craftsmanship.sv.cmu.edu/katas/prime-factors-kata</a></p>
-
-<p>Source: <a href="http://butunclebob.com/ArticleS.UncleBob.ThePrimeFactorsKata">http://butunclebob.com/ArticleS.UncleBob.ThePrimeFactorsKata</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache/">Talk: &#8216;Is TDD Dead? Of Course Not! But What´s All the Fuzz About Then?&#8217; by Emily Bache</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-06T15:47:47+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:47 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve just seen this talk: <a href="https://www.youtube.com/watch?v=PCEHRFHKZSk">Is TDD dead? Of course not! But what´s all the fuzz about then?</a> by <a href="https://twitter.com/emilybache">Emily Bache</a></p>
-
-<h3>My notes</h3>
-
-<ul>
-<li>deliberate vs accidental learning (around minute 19)</li>
-<li><p>do not be an evangelist for tdd but rather &ldquo;come learn tdd, come at a dojo with us!&rdquo;</p></li>
-<li><p>points to <a href="https://twitter.com/tastapod">Dan North</a>&rsquo;s <a href="www.youtube.com/watch?v=SPj-23z-hQA">talk</a> (at the same foo café)</p></li>
-<li>points to her book - <a href="https://leanpub.com/codingdojohandbook">The Coding Dojo Handbook</a></li>
-<li><p>points to <a href="http://cyber-dojo.org/">cyber dojo</a></p></li>
-<li><p>design is hard whether you do TDD or not</p></li>
-<li><a href="https://twitter.com/dhh">dhh</a>: too much focus on unit test.</li>
-</ul>
-
-
-<blockquote><p>I thought we got rid of best practices in agile</p></blockquote>
-
-<ul>
-<li>different kinds of advice for each kind of target (eg, based on experience level)</li>
-<li>points to self-testing code (by <a href="https://twitter.com/martinfowler">Martin Fowler</a>)</li>
-<li>problem: the test suite is no longer in sync with the production code</li>
-<li>points to approval testing:
-
-<ul>
-<li>code kata &ldquo;minesweeper&rdquo;</li>
-<li>test data + code produces output data</li>
-<li>I approve the data</li>
-<li>Useful for full features</li>
-<li>Useful for asserting on difficult parts like images</li>
-<li>realistic users to generate tests</li>
-<li>tool to manage these &ldquo;approval tests&rdquo;. Easy way of managing tests cases</li>
-<li><a href="http://texttest.org">TextTest</a> is one of these tools</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>Her conclusions</h3>
-
-<ul>
-<li>Watch out the fundamentalism</li>
-<li>TDD might take you to too many layers of indirection</li>
-<li>The share of each test (end to end, integration, unit) depends on each project / part</li>
-<li>Many TDD pieces of advice is directed to novices. When you&rsquo;re not, you should know when to stop listening</li>
-</ul>
-
-
-<p>PS: I&rsquo;ve first seen this video in <a href="http://garajeando.blogspot.com/2015/01/interesting-talk-is-tdd-dead-of-course.html">garajeando</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -545,6 +610,14 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/08/recognizing-dependencies/">Recognizing Dependencies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple Return Values in a Mockito Stub</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/02/self-study-in-august-2015/">Self-Study in August 2015</a>
       </li>
     
@@ -554,14 +627,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
     
       <li class="post">
         <a href="/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate Values in Constants</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the Same Import Order in IntelliJ IDEA as Eclipse&#8217;s</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing With Java 8 Lambdas</a>
       </li>
     
   </ul>

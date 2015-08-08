@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sample | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/sample/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-08-03T01:47:33+02:00</updated>
+  <updated>2015-08-08T18:01:05+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -366,6 +366,44 @@ public void log_greetings_letter() {
 </code></pre>
 
 <p>This one reads more like a business requirement.</p>
+
+<h2>Other</h2>
+
+<p>Other ideas we have tested:</p>
+
+<pre><code class="java">Builder.aNew().sendGreetingLetter()
+
+assertAndVerifyThat(
+    theLoggingLine()
+        .for(aGreetingLetter())
+        .isLoggedWhen(greetingLetterIsSent()
+    )
+);
+
+public Consumer&lt;MailSender&gt; aGreetingLetter(){
+    return (MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class));
+}
+
+public Consumer&lt;EventLogger&gt; greetingLetterIsSent(){
+    return EventLogger::sentGreetingLetter;
+}
+</code></pre>
+
+<pre><code class="java">assertAndVerifyThat(
+    theLoggingLine()
+        .for(
+            (MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class))
+        )
+        .isLoggedWhen(EventLogger::sentGreetingLetter)
+    )
+);
+</code></pre>
+
+<pre><code class="java">public void assertAndVerifyThat(TestContext testContext){
+    testContext.assert();
+    testContext.verify();
+}
+</code></pre>
 ]]></content>
   </entry>
   

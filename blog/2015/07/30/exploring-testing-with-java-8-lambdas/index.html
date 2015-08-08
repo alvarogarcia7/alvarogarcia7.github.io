@@ -538,6 +538,79 @@
 
 
 <p>This one reads more like a business requirement.</p>
+
+<h2>Other</h2>
+
+<p>Other ideas we have tested:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Builder</span><span class="o">.</span><span class="na">aNew</span><span class="o">().</span><span class="na">sendGreetingLetter</span><span class="o">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">assertAndVerifyThat</span><span class="o">(</span>
+</span><span class='line'>  <span class="n">theLoggingLine</span><span class="o">()</span>
+</span><span class='line'>      <span class="o">.</span><span class="na">for</span><span class="o">(</span><span class="n">aGreetingLetter</span><span class="o">())</span>
+</span><span class='line'>      <span class="o">.</span><span class="na">isLoggedWhen</span><span class="o">(</span><span class="n">greetingLetterIsSent</span><span class="o">()</span>
+</span><span class='line'>  <span class="o">)</span>
+</span><span class='line'><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">aGreetingLetter</span><span class="o">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">greetingLetterIsSent</span><span class="o">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">assertAndVerifyThat</span><span class="o">(</span>
+</span><span class='line'>  <span class="n">theLoggingLine</span><span class="o">()</span>
+</span><span class='line'>      <span class="o">.</span><span class="na">for</span><span class="o">(</span>
+</span><span class='line'>          <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">))</span>
+</span><span class='line'>      <span class="o">)</span>
+</span><span class='line'>      <span class="o">.</span><span class="na">isLoggedWhen</span><span class="o">(</span><span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">)</span>
+</span><span class='line'><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">assertAndVerifyThat</span><span class="o">(</span><span class="n">TestContext</span> <span class="n">testContext</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">testContext</span><span class="o">.</span><span class="na">assert</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">testContext</span><span class="o">.</span><span class="na">verify</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -600,6 +673,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/08/recognizing-dependencies/">Recognizing Dependencies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple Return Values in a Mockito Stub</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/02/self-study-in-august-2015/">Self-Study in August 2015</a>
       </li>
     
@@ -609,14 +690,6 @@
     
       <li class="post">
         <a href="/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate Values in Constants</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the Same Import Order in IntelliJ IDEA as Eclipse&#8217;s</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing With Java 8 Lambdas</a>
       </li>
     
   </ul>

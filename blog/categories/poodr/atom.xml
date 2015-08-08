@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Poodr | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/poodr/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-08-03T01:47:33+02:00</updated>
+  <updated>2015-08-08T18:01:05+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Recognizing Dependencies]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/"/>
+    <updated>2015-08-08T14:11:29+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies</id>
+    <content type="html"><![CDATA[<p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:</p>
+
+<blockquote><p>An object has a dependency when it knows:</p>
+
+<ul>
+<li>The name of another class. [&hellip;]</li>
+<li>The name of a message that it intends to send to someone other than self. [&hellip;]</li>
+<li>The arguments that a message requires. [&hellip;]</li>
+<li>The order of those arguments. [&hellip;]</li>
+</ul>
+</blockquote>
+
+<p>If an object knows any of these facts about another object, it has dependencies to the other.</p>
+
+<p>This is not to say that having dependencies to others is bad, as</p>
+
+<blockquote><p>A single object cannot know everything, so inevitably it will have to talk to another object.
+Chapter 3, Managing Dependencies, Introduction</p></blockquote>
+
+<p>For this latter purpose, there is the section &ldquo;Writing loosely coupled code&rdquo;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Practical Object-Oriented Design in Ruby: Chapter 4]]></title>
@@ -116,17 +144,6 @@ these qualities</li>
 <li><a href="http://www.ustream.tv/recorded/61483799">The Hidden Dimension Of Refactoring</a> by Michael Feathers</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Category: Poodr]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/"/>
-    <updated>2015-06-01T07:09:43+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/06/01/category-poodr</id>
-    <content type="html"><![CDATA[<p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.poodr.com/">Practical Object-Oriented Design in Ruby</a>&rsquo;, by Sandi Metz</p>
-
-<p>Note: This has been created a posteriori with a previous date</p>
 ]]></content>
   </entry>
   

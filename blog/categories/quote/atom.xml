@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Quote | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/quote/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-08-03T01:47:33+02:00</updated>
+  <updated>2015-08-08T18:01:05+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Recognizing Dependencies]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/"/>
+    <updated>2015-08-08T14:11:29+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies</id>
+    <content type="html"><![CDATA[<p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:</p>
+
+<blockquote><p>An object has a dependency when it knows:</p>
+
+<ul>
+<li>The name of another class. [&hellip;]</li>
+<li>The name of a message that it intends to send to someone other than self. [&hellip;]</li>
+<li>The arguments that a message requires. [&hellip;]</li>
+<li>The order of those arguments. [&hellip;]</li>
+</ul>
+</blockquote>
+
+<p>If an object knows any of these facts about another object, it has dependencies to the other.</p>
+
+<p>This is not to say that having dependencies to others is bad, as</p>
+
+<blockquote><p>A single object cannot know everything, so inevitably it will have to talk to another object.
+Chapter 3, Managing Dependencies, Introduction</p></blockquote>
+
+<p>For this latter purpose, there is the section &ldquo;Writing loosely coupled code&rdquo;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quote: Organizing Code to Allow for Easy Changes]]></title>
@@ -179,27 +207,6 @@ as there is a reason (mainly economic) to keep them in place.</li>
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Demand for TDD and Refactor]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor/"/>
-    <updated>2015-04-25T13:28:20+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor</id>
-    <content type="html"><![CDATA[<p>When I went to the Jason Gorman&rsquo;s TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), he said something interesting regarding refactor and TDD:</p>
-
-<blockquote><p>In job offers / advertisements, TDD is much more in demand than refactor. But the latter is included in the former as an integral part.</p>
-
-<p>Jason Gorman</p></blockquote>
-
-<p>I agree with the second thought: you cannot properly do TDD without refactoring, as it is an integral part; also the third phase.</p>
-
-<p>For me, sometimes refactoring is the difference between code and &ldquo;Clean Code&rdquo; (as defined in the book by the same title). If I cannot find the (algorithmic) pattern for the software I&rsquo;m writing, I try to introduce scaffolds to keep investigating until I can find a viable, general solution (if the problem requires it.)</p>
-
-<p>Even after doing the refactor <code>replace algorithm</code>, the code might not have the responsibilities in the right place, the methods might be long, value objects not extracted yet, etc. This is where further refactor is needed to introduce all those qualities in the piece of software.</p>
-
-<p>I believe that we programmers have done a bad job of communicating with the rest of the organization what refactoring is about. It has nothing to do with beauty, style or design (in the visual sense) but is related to maintainability, coupling, defects and quality. Money, in the long run, as its objective is to make it cheaper to change in the future, a better investment and ROI. This is the common language that the rest of the company understands.</p>
 ]]></content>
   </entry>
   

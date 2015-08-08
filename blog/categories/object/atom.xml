@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Object | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/object/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-08-08T18:01:05+02:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Recognizing Dependencies]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/"/>
+    <updated>2015-08-08T14:11:29+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies</id>
+    <content type="html"><![CDATA[<p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:</p>
+
+<blockquote><p>An object has a dependency when it knows:</p>
+
+<ul>
+<li>The name of another class. [&hellip;]</li>
+<li>The name of a message that it intends to send to someone other than self. [&hellip;]</li>
+<li>The arguments that a message requires. [&hellip;]</li>
+<li>The order of those arguments. [&hellip;]</li>
+</ul>
+</blockquote>
+
+<p>If an object knows any of these facts about another object, it has dependencies to the other.</p>
+
+<p>This is not to say that having dependencies to others is bad, as</p>
+
+<blockquote><p>A single object cannot know everything, so inevitably it will have to talk to another object.
+Chapter 3, Managing Dependencies, Introduction</p></blockquote>
+
+<p>For this latter purpose, there is the section &ldquo;Writing loosely coupled code&rdquo;</p>
+]]></content>
+  </entry>
+  
+</feed>
