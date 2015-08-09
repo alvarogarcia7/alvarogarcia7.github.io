@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Self-study-aggregation | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/self-study-aggregation/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-08-08T18:01:05+02:00</updated>
+  <updated>2015-08-10T01:03:17+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -119,6 +119,25 @@
 <p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/03/11/when-to-think.html">this post</a> by Robert C Martin on when to think and the hypothesis that TDD does not allow you to think before coding.</p>
 
 <p>Tags: tdd, robert-c-martin, design, hypothesis</p>
+
+<h2>Orthogonal latin squares: an application of experiment design to compiler testing</h2>
+
+<p>I&rsquo;ve read <a href="http://barbie.uta.edu/~mehra/20_an%20application%20of%20experiment%20design%20to%20compiler%20testing.pdf">this paper</a> by Robert Mandl on techniques that can be applied to reduce the burden of exhaustive testing to compilers. Preferring &ldquo;surely all relevant distinct combinations&rdquo; we can reduce the amount of testing. This paper tries to formalize the concept of &ldquo;near-exhaustive testing&rdquo;</p>
+
+<p>Tags: latin-square, robert-mandl, compiler, testing, near-exhaustive-testing, optimization, exhaustive-testing</p>
+
+<h2>  Practical Type System Benefits</h2>
+
+<p>I&rsquo;ve read <a href="https://themonadreader.files.wordpress.com/2014/04/nccb.pdf">this article</a> by Neil Brown on benefits of the type system, with examples in haskell. He goes on to explore the benefits of involving the type-checker at compile time to remove type errors and ease the programming effort:</p>
+
+<blockquote><p>I find that several problems in Haskell can be solved by involving the type system
+further: The trick is to involve the type system in ways that provide a big benefit
+for the cost, but not going so far that the type system gets in the way of code
+that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p></blockquote>
+
+<p>I&rsquo;ve also learned the concept of the quasi-quoter: similar to a preprocessor, executed at compile time and type-checked</p>
+
+<p>Tags: neil-brown, quote, quasi-quoter, preprocessor, haskell, monad-reader</p>
 ]]></content>
   </entry>
   

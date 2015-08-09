@@ -9,7 +9,11 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz: An object has a dependency when it &hellip;">
+  <meta name="description" content="Many times I&rsquo;ve written this function: 1
+2
+3
+4
+public boolean between(int lowerBound, int n, int upperBound){ return lowerBound &lt;= n &amp;& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +82,131 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/10/the-language-was-prepared-for-that/">The Language Was Prepared for That</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-10T00:58:33+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:58 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many times I&rsquo;ve written this function:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">between</span><span class="o">(</span><span class="kt">int</span> <span class="n">lowerBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upperBound</span><span class="o">){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">lowerBound</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">upperBound</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It may depend on the case, whether it is <code>[]</code>, <code>[)</code>, <code>(]</code> or <code>()</code>, to use mathematical terms.</p>
+
+<p>When the two comparisons are the same (<code>[]</code> and <code>()</code>), there is duplication in the comparisons.</p>
+
+<p>Investigating a little bit on this in clojure, I&rsquo;ve found this function:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="nb">&lt;=</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And its <a href="https://clojuredocs.org/clojure.core/%3C=">clojuredocs</a>: Returns non-nil if nums are in monotonically non-decreasing order,
+otherwise false.</p>
+
+<p>A sample usage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nb">&lt;=</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; true</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">&lt;=</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The last part is the most interesting one. As this function is prepared to receive more than two parameters, it is very easy for the programmer to use it. We could say that the language was prepared for that.</p>
+
+<p>The <a href="https://github.com/clojure/clojure/blob/clojure-1.7.0/src/clj/clojure/core.clj#L1020">implementation</a>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nb">&lt;=</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">[x]</span> <span class="nv">true</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">[x</span> <span class="nv">y]</span> <span class="p">(</span><span class="o">.</span> <span class="nv">clojure.lang.Numbers</span> <span class="p">(</span><span class="nv">lte</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">[x</span> <span class="nv">y</span> <span class="nv">&amp;</span> <span class="nv">more]</span>
+</span><span class='line'>   <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;=</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">more</span><span class="p">)</span>
+</span><span class='line'>       <span class="p">(</span><span class="nv">recur</span> <span class="nv">y</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">more</span><span class="p">)</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">more</span><span class="p">))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nb">&lt;=</span> <span class="nv">y</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">more</span><span class="p">)))</span>
+</span><span class='line'>     <span class="nv">false</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inspired by this, I&rsquo;ve implemented the same function in haskell (for the repl):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kr">let</span> <span class="n">isBigger</span> <span class="n">acc</span> <span class="n">ele</span> <span class="ow">=</span> <span class="p">(</span><span class="n">snd</span> <span class="n">acc</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">fst</span> <span class="n">acc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ele</span> <span class="kr">in</span>
+</span><span class='line'>   <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">ele</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">ele</span><span class="p">,</span> <span class="n">isBigger</span> <span class="n">acc</span> <span class="n">ele</span><span class="p">))</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kt">True</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and a simpler solution I&rsquo;ve found on <a href="http://codereview.stackexchange.com/questions/46606/is-a-list-sorted/46608#46608">Stack Overflow</a>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">isSorted</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+</span><span class='line'><span class="nf">isSorted</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">all</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">y</span><span class="p">)</span> <span class="o">$</span> <span class="n">zip</span> <span class="n">xs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">isSorted</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+</span><span class='line'><span class="nf">isSorted</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">and</span> <span class="o">$</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">&lt;=</span><span class="p">)</span> <span class="n">xs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Conclusion</h2>
+
+<p>Unless a more elegant, language-provided solution exists in haskell, the clojure one is way simpler. This is one of the benefits of prefix notation, that operators (e.g., <code>+</code>, <code>-</code>, <code>*</code>, <code>&lt;=</code>) are overloaded to take more arguments than before.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -320,6 +449,45 @@ Chapter 3, Managing Dependencies, Introduction</p></blockquote>
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/08/03/resources-for-java-9-beta/">Resources for Java 9 (Beta)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-03T01:49:30+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>1:49 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve found this list of links for Java 9, while in beta, useful:</p>
+
+<ul>
+<li><a href="https://wiki.openjdk.java.net/display/Adoption/JDK+9+Outreach">Contents of the new version</a></li>
+<li><a href="http://www.meetup.com/Londonjavacommunity/events/221570203/">Java REPL workshop</a>, with useful commands and questions &amp; answers for installing the REPL</li>
+<li><a href="https://java.net/downloads/adoptopenjdk/REPL_Tutorial.pdf">REPL tutorial PDF</a></li>
+<li>Another <a href="http://www.jclarity.com/2015/04/15/java-9-repl-getting-started-guide/">getting started guide</a>, by JClarity</li>
+<li>Yet another <a href="http://blog.arungupta.me/jdk9-repl-getting-started/">getting started guide</a>, by Arun Gupta</li>
+<li><a href="http://www.infoq.com/news/2014/09/repl-for-java">Information on the REPL project</a>, (codenamed Kulla)</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/08/02/self-study-in-august-2015/">Self-Study in August 2015</a></h1>
     
     
@@ -435,6 +603,25 @@ Chapter 3, Managing Dependencies, Introduction</p></blockquote>
 <p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/03/11/when-to-think.html">this post</a> by Robert C Martin on when to think and the hypothesis that TDD does not allow you to think before coding.</p>
 
 <p>Tags: tdd, robert-c-martin, design, hypothesis</p>
+
+<h2>Orthogonal latin squares: an application of experiment design to compiler testing</h2>
+
+<p>I&rsquo;ve read <a href="http://barbie.uta.edu/~mehra/20_an%20application%20of%20experiment%20design%20to%20compiler%20testing.pdf">this paper</a> by Robert Mandl on techniques that can be applied to reduce the burden of exhaustive testing to compilers. Preferring &ldquo;surely all relevant distinct combinations&rdquo; we can reduce the amount of testing. This paper tries to formalize the concept of &ldquo;near-exhaustive testing&rdquo;</p>
+
+<p>Tags: latin-square, robert-mandl, compiler, testing, near-exhaustive-testing, optimization, exhaustive-testing</p>
+
+<h2>  Practical Type System Benefits</h2>
+
+<p>I&rsquo;ve read <a href="https://themonadreader.files.wordpress.com/2014/04/nccb.pdf">this article</a> by Neil Brown on benefits of the type system, with examples in haskell. He goes on to explore the benefits of involving the type-checker at compile time to remove type errors and ease the programming effort:</p>
+
+<blockquote><p>I find that several problems in Haskell can be solved by involving the type system
+further: The trick is to involve the type system in ways that provide a big benefit
+for the cost, but not going so far that the type system gets in the way of code
+that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p></blockquote>
+
+<p>I&rsquo;ve also learned the concept of the quasi-quoter: similar to a preprocessor, executed at compile time and type-checked</p>
+
+<p>Tags: neil-brown, quote, quasi-quoter, preprocessor, haskell, monad-reader</p>
 </div>
   
   
@@ -1544,176 +1731,6 @@ replace with: $1</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/">Practical Object-Oriented Design in Ruby: Chapter 4</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-26T22:40:29+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:40 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
-
-<p>These are the concepts and links brought up during the discussion:</p>
-
-<ul>
-<li>The craftsmanship analogy, as exposed in <a href="https://twitter.com/sarahmei/status/625089415812022272">these tweets</a></li>
-<li>Difference between function and method</li>
-<li>What vs How (also present in the GOOS)</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster Site Generation for Octopress 2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-13T07:49:23+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:49 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
-
-<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
-
-<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
-
-<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cp -R blog_source blog_post_factory
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>blog_post_factory/source/_posts
-</span><span class='line'>git update-index --assume-unchanged <span class="k">$(</span>ls *markdown<span class="k">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Delete all existing markdown files</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rm *markdown
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Check that git doesn&rsquo;t realize about the difference:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git status
-</span><span class='line'>
-</span><span class='line'><span class="c"># On branch source</span>
-</span><span class='line'>nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Create a new post:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s2">&quot;Faster site generation for Octopress 2&quot;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># On branch source</span>
-</span><span class='line'><span class="c"># Untracked files:</span>
-</span><span class='line'><span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># 2015-07-13-faster-site-generation-for-octopress-2.markdown</span>
-</span><span class='line'>nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> to track<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
-
-<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate <span class="o">&amp;&amp;</span> rake deploy
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
-
-<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">desc</span> <span class="s2">&quot;Cleans all *.markdown files for a faster site generation&quot;</span>
-</span><span class='line'><span class="n">task</span> <span class="ss">:ignore</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>  <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged $(ls *.markdown)&quot;</span>
-</span><span class='line'>  <span class="nb">system</span> <span class="s2">&quot;rm $(ls *.markdown)&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Conclusion</h2>
-
-<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Regenerating</span><span class="p">:</span> <span class="mi">1</span> <span class="n">file</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">changed</span> <span class="n">at</span> <span class="mi">2015</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">13</span> <span class="mi">08</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mi">29</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">done</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="mi">617269045</span> <span class="n">seconds</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1729,6 +1746,10 @@ replace with: $1</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/10/the-language-was-prepared-for-that/">The Language Was Prepared for That</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/08/recognizing-dependencies/">Recognizing Dependencies</a>
       </li>
     
@@ -1737,15 +1758,11 @@ replace with: $1</p>
       </li>
     
       <li class="post">
+        <a href="/blog/2015/08/03/resources-for-java-9-beta/">Resources for Java 9 (Beta)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/02/self-study-in-august-2015/">Self-Study in August 2015</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing Your Own Maven Dependencies</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate Values in Constants</a>
       </li>
     
   </ul>
