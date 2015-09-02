@@ -9,11 +9,14 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Scenario: iterate a sequence (seq) with its index The lines have an implicit line number (starting by 1, in most editors): 1
+  <meta name="description" content="A friend and I were arguing about this code (fragment): 1
 2
 3
-[1] line1
-[2] line2 &hellip;">
+4
+5
+6
+7
+public void register (final String userName) { try { registeredUsers.add(new &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +85,732 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/13/what-defines-a-dependency/">What Defines a Dependency</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-13T07:48:28+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:48 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java">fragment</a>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">register</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">userName</span><span class="o">)</span>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">registeredUsers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">User</span><span class="o">(</span><span class="n">userName</span><span class="o">));</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">AlreadyRegisteredUserException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">userName</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
+
+<p>He suggested that:</p>
+
+<ul>
+<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
+<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
+</ul>
+
+
+<p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
+
+<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java">fragment</a>)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span> <span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">,</span> <span class="kd">final</span> <span class="n">RegistryResultListener</span> <span class="n">resultListener</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">if</span><span class="o">(</span><span class="n">contains</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+</span><span class='line'>        <span class="k">return</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">users</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">resultListener</span><span class="o">.</span><span class="na">successfullyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
+
+<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-13T07:36:14+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:36 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have:</p>
+
+<ul>
+<li>Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one.</li>
+<li>Notifications: Peers that need to be kept up to date with the object&rsquo;s activity. The object will notify interested peers whenever it changes state or performs a significant action. Notifications are &ldquo;fire and forget&rdquo;; the object neither knows nor cares which peers are listening. Notifications are so useful because they decouple objects from each other. For example, in a user interface system, a button component promises to notify any registered listeners when it&rsquo;s clicked, but does not know what those listeners will do. Similarly, the listeners expect to be called but know nothing of the way the user interface dispatches its events.</li>
+<li>Adjustments: Peers that adjust the object&rsquo;s behavior to the wider needs of the system. This includes policy objects that make decisions on the object&rsquo;s behalf (the Strategy pattern in [Gamma94]) and component parts of the object if it&rsquo;s a composite. For example, a Swing JTable will ask a TableCellRenderer to draw a cell&rsquo;s value, perhaps as RGB (Red, Green, Blue) values for a color. If we change the renderer, the table will change its presentation, now displaying the HSB (Hue, Saturation, Brightness) values.</li>
+</ul>
+</blockquote>
+
+<p>Source is Growing Object-Oriented Software, Guided by Tests > Chapter 6, Object-Oriented Style > Object Peer Stereotypes, page 52</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-12T00:07:29+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:07 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
+
+<p>These are the concepts and links brought up during the discussion:</p>
+
+<ul>
+<li><a href="http://martinfowler.com/bliki/DataClump.html">Data Clump</a> at the bliki</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/WaMWtp1Uetp">Refactoring with Loops and Collection Pipelines</a>, indirect link to the article by Martin Fowler</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/6J9PPQpUjwY">When Worse Is Better: Incrementally Escaping Local Maxima</a>, indirect link to the article by Kent Beck</li>
+<li><a href="https://plus.google.com/117817370205182982732/posts/Sk7DfYFPt5j">Getting It Right by Betting on Wrong</a>, indirect link to an article by Sandi Metz</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-08T02:41:54+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:41 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Organizing Code to Allow for Easy Changes</h2>
+
+<blockquote><p>Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code.
+If you define easy to change as</p>
+
+<ul>
+<li>Changes have no unexpected side effects</li>
+<li>Small changes in requirements require correspondingly small changes in code</li>
+<li>Existing code is easy to reuse</li>
+<li>The easiest way to make a change is to add code that in itself is easy to change</li>
+</ul>
+
+
+<p>Then the code you write should have the following qualities. Code should be:</p>
+
+<ul>
+<li><strong>Transparent</strong> The consequences of change should be obvious in the code that is changing and in distant code that relies upon it</li>
+<li><strong>Reasonable</strong> The cost of any change should be proportional to the benefits the change achieves</li>
+<li><strong>Usable</strong> Existing code should be usable in new and unexpected contexts</li>
+<li><strong>Exemplary</strong> The code itself should encourage those who change it to perpetuate
+these qualities</li>
+</ul>
+
+
+<p>Code that is Transparent, Reasonable, Usable, and Exemplary (TRUE) not only meets today’s needs but can also be changed to meet the needs of the future. The first step in creating code that is TRUE is to ensure that each class has a single, well-defined responsibility.</p>
+
+<p>Practical Object Oriented Design in Ruby, by Sandi Metz</p></blockquote>
+
+<p>This can be found the in POODR > Chapter 2. Designing Classes with a Single Responsibility > Organizing Code to Allow for Easy Changes</p>
+
+<p>Note: Bold is mine</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/08/tip-massively-reverting-local-changes/">Tip: Massively Reverting Local Changes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-08T02:40:24+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:40 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was changing a massive amount of files (>1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests.</p>
+
+<p>Here&rsquo;s how to do it automatically:</p>
+
+<p>Copy all the failing tests to a text editor:</p>
+
+<p>Input:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testDeleteDocument(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateXML(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testSearchXFPage(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testCreateXFPage(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdatePage(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testSearchCrop(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testUpdateCrop(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testMoveDocument(io.company.controller.dms.DocumentControllerTest)
+</span><span class='line'>testGetDocument(io.company.controller.dms.DocumentControllerTest)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>regex:</p>
+
+<p>(tested in Sublime 3, build 3083, Windows 64)</p>
+
+<p>find what: <code>^[^(]+\([a-Z.]*\.(.*)\)</code></p>
+
+<p>replace with: <code>$1</code></p>
+
+<p>Regex explanation for <code>^[^(]+\([a-Z.]*\.(.*)\)</code>:</p>
+
+<ul>
+<li><code>^</code>: beginning of line</li>
+<li><code>[^(]+</code>: every character except parenthesis, one or more times</li>
+<li><code>\([a-Z.]*</code>: start with one parenthesis, any number of a-z, A-Z</li>
+<li>`.&#8220;: a dot, as I&rsquo;m using regex replacement</li>
+<li><code>(.*)</code>: any character, zero or more times, captured in group <code>$1</code></li>
+<li><code>\)</code>: closing parenthesis</li>
+</ul>
+
+
+<p>Output:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest
+</span><span class='line'>DocumentControllerTest</span></code></pre></td></tr></table></div></figure>
+
+
+<p>copy that to file <code>a.txt</code></p>
+
+<p>Revert all the changes in these files:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">for</span> i in <span class="k">$(</span>cat a.txt <span class="p">|</span> uniq<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  git checkout -- *<span class="nv">$i</span>*
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: Committing to the Repo File by File</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-08T02:37:08+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:37 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
+
+<p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">for</span> f in <span class="k">$(</span>git status -s <span class="p">|</span>grep <span class="s2">&quot;^M&quot;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  git add <span class="nv">$f</span>
+</span><span class='line'>  git commit -m <span class="s2">&quot;generic commit for all files&quot;</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental Concepts on Programming Languages</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-06T07:48:35+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:48 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Note: all quotes on this post come from <a href="http://www.cs.cmu.edu/~crary/819-f09/Strachey67.pdf">this paper</a>: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.</p>
+
+<h2>Contents</h2>
+
+<p>This paper starts slow, from the mathematical and philosophical point of view, until it gets to the basic concepts on the fundamental concepts:</p>
+
+<ul>
+<li>Assignment command</li>
+<li>L-Value and R-Value</li>
+<li>Definitions</li>
+<li>Names</li>
+<li>Numerals</li>
+<li>Conceptual models: an explanation about the relationship between the code, the memory store and the abstract concepts</li>
+</ul>
+
+
+<p>Later, it gets more in depth to the conceptual constructs, where most of the content is explained and contains:</p>
+
+<ul>
+<li>Expressions and commands</li>
+<li>Expressions and evaluations</li>
+<li>Commands and sequencing</li>
+<li>Definition of functions and routines</li>
+<li>Functions and routines as data items</li>
+<li>Types and polymorphism</li>
+<li>Compound data structures</li>
+</ul>
+
+
+<p>Finally, as closing notes, it explains some implementation details (such as Load-Update Pairs), tools as Macrogenerators (nowadays called macros) and formal semantics</p>
+
+<h2>Notes / highlights</h2>
+
+<h3>L-Values and R-Values</h3>
+
+<blockquote><p>L-value for the address-like object appropriate on the left of the assignment, and R-value for the contents-like object appropriate for the right</p>
+
+<p>2.1, Assignment commands in page 14</p>
+
+<p>An L-value represents an area of the store of the computer. [&hellip;] Two essential features [&hellip;] it has content &ndash;i.e., an associated R-value&ndash; and that it is in general possible to change this content</p>
+
+<p>2.2, L-values and R-Values in pages 14-15</p></blockquote>
+
+<h3>Referential transparency</h3>
+
+<p>Explained in 3.2.1, Values:</p>
+
+<blockquote><p>In essence, this means that if we wish to find the value of an expression with contains a sub-expression, the only thing we need to know about the sub-expression is its value.</p></blockquote>
+
+<p>Also cites Quine <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> on this matter.</p>
+
+<blockquote><p>We tend to assume automatically that the symbol <code>x</code> in an expression such as <code>3x**2 + 2x + 17</code> stands for the same thing (or has the same value) on each occasion it occurs. This is the most important consequence of referential transparency</p>
+
+<p>3.3.1 Variables, page 22</p>
+
+<p>If we consider L-values as well as R-Values, however, we can preserve referential transparency as far as L-values are concerned. Thi is because L-values, being generalised addresses, are not altered by assignment command</p>
+
+<p>3.3.1 Variables, page 22</p></blockquote>
+
+<h3>Types of variables: bound, free</h3>
+
+<p>Explains the types of variables, based on their belonging to an environment or not: bound variable and free variable. Page 20</p>
+
+<h3>Evaluating vs applying</h3>
+
+<blockquote><p>Distinction between evaluating an operator and applying it to its operands
+3.2.4, Evaluation, page 20</p></blockquote>
+
+<p>This also introduces the concept of currification / currying:</p>
+
+<blockquote><p>[&hellip;] for reducing operators with several operands to the successive application of single operands operators
+3.2.4, Evaluation, page 21</p></blockquote>
+
+<p>An example is given.</p>
+
+<h3>Conditional expressions vs conditional commands</h3>
+
+<p>Introduces the concept of conditional expression, akin to the ternary operator (example in java):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this is equivalent to (example in java):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+</span><span class='line'><span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and the conditional command (example in java):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">f</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">h</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">g</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The conditional expression is also known as &ldquo;functional if&rdquo;</p>
+
+<h2>Parameter calling modes</h2>
+
+<p>Explains call by value and call by reference, equivalent to calling by R-Value or L-Value, respectively</p>
+
+<p>3.4.2, Parameter calling mode</p>
+
+<h3>Functions and routines</h3>
+
+<blockquote><p>Functions and routines are as different in their nature as expressions and commands. It
+is unfortunate, therefore, that most programming languages manage to confuse them very
+successfully</p>
+
+<p>3.4.5 Functions and routines, page 30</p>
+
+<p>The problem arises because we naturally expect referential transparency of R-values in
+expressions, particularly those on the right of assignment commands</p>
+
+<p>3.4.5 Functions and routines, page 30</p>
+
+<p>Any departure of R-value referential transparency in a R-value context should
+either be eliminated by decomposing the expression into several commands and simpler
+expressions, or, if this turns out to be difficult, the subject of a comment</p>
+
+<p>3.4.5 Functions and routines, page 30</p></blockquote>
+
+<h3>Constancy and fixity</h3>
+
+<p>&ldquo;Protection by freezing&rdquo;</p>
+
+<blockquote><p>Constancy is thus an attribute of an L-value, and
+is, moreover, an invariant attribute. Thus when we create a new L-value, and in particular
+when we define a new quantity, we must decide whether it is a constant or a variable.</p>
+
+<p>3.4.6 Constants and variables, page 30</p>
+
+<p>[&hellip;] fixed function. This is defined as a function which
+either has no free variables, or if it has, whose free variables are all both constant and fixed.</p>
+
+<p>3.4.7, Fixed and free, page 31</p>
+
+<p>Note that fixity is a property of the λ-expression&ndash;i.e., a property of the R-value, while
+constancy is a property of the L-value.</p>
+
+<p>3.4.7, Fixed and free, page 31</p></blockquote>
+
+<p>In general:</p>
+
+<ul>
+<li>Constancy is an attribute of the L-Value</li>
+<li>Fixity is an attribute of the R-Value</li>
+</ul>
+
+
+<p>Both for functions and objects.</p>
+
+<h3>First and second class objects</h3>
+
+<blockquote><p>A procedure, on the other hand, may only appear in another procedure call either
+as the operator (the most common case) or as one of the actual parameters. There are no
+other expressions involving procedures or whose results are procedures. Thus in a sense
+procedures in ALGOL are second class citizens—they always have to appear in person
+and can never be represented by a variable or expression</p>
+
+<p>3.5.1, First and second class objects, page 32</p>
+
+<p>Historically this second class status of procedures in ALGOL is probably a consequence
+of the view of functions taken by many mathematicians: that they are constants whose
+name one can always recognise.</p>
+
+<p>3.5.1, First and second class objects, page 33</p>
+
+<p>[&hellip;] it is remarkably difficult to stop looking on functions as second class objects</p>
+
+<p>3.5.1, First and second class objects, page 33</p>
+
+<p>and in particular, of functions which have functions as a result</p>
+
+<p>3.5.1, First and second class objects, page 33</p></blockquote>
+
+<h3>Closure</h3>
+
+<blockquote><p>Thus the R-value of a function contains two parts—a rule for evaluating the expression,
+and an environment which supplies its free variables. An R-value of this sort will be called
+a closure.</p>
+
+<p>3.5.2, Representation of functions, page 34</p></blockquote>
+
+<h3>Types</h3>
+
+<p>There is information on types: latent vs manifest, how to determine it</p>
+
+<blockquote><p>We call attributes which can be determined at compile time in this way manifest; attributes
+that can only be determined by running the program are known as latent</p>
+
+<p>3.6.2, Manifest and latent, page 36</p></blockquote>
+
+<h3>Polymorphism</h3>
+
+<p>Ad-hoc vs parametric polymorphism</p>
+
+<blockquote><p>In ad hoc polymorphism there is no single systematic way of determining the type of the
+result from the type of the arguments. There may be several rules of limited extent which
+reduce the number of cases, but these are themselves ad hoc both in scope and content</p>
+
+<p>3.6.4, Polymorphism, page 37</p>
+
+<p>Parametric polymorphism:</p>
+
+<p>(α ⇒ β, α list) ⇒ β list</p>
+
+<p>3.6.4, Polymorphism, page 37</p></blockquote>
+
+<h3>Collections</h3>
+
+<blockquote><ul>
+<li><strong>List</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
+<li><strong>Ntuple</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
+<li><strong>Set</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
+<li><strong>Bag or Coll</strong>: It consists of an unordered collection of objects all of which are of the same type and differs from a set in that repetitions are allowed</li>
+</ul>
+
+
+<p>3.7.7, Other forms of structure, page 45</p></blockquote>
+
+<p>Also talks about &ldquo;rings&rdquo; (3.7.7, Other forms of structure, page 45)</p>
+
+<h3>Macros</h3>
+
+<blockquote><p>macrogenerators deal with the symbols which represent
+the variables, values and other objects of concern to a program so that all their manipulation
+is performed before the final compiling</p>
+
+<p>4.2, Macrogenerators, page 47</p>
+
+<p>Macrogeneration seems to be particularly valuable when a semantic extension of the
+language is required</p>
+
+<p>4.2, Macrogenerators, page 47</p>
+
+<p>I believe, a proper aim for programming language designers to try to make the use of
+macrogenerators wholly unnecessary</p>
+
+<p>4.2, Macrogenerators, page 47</p></blockquote>
+
+<h3>funny comments</h3>
+
+<blockquote><p>One important characteristic of mathematics is our habit of using names for things</p>
+
+<p>3.3.1 Variables, page 22</p>
+
+<p>if this turns out to be difficult, the subject of a comment</p>
+
+<p>3.4.5 Functions and routines, page 30</p>
+
+<p><strong>Bag or Coll</strong> This is a new sort of collection for which there is, as yet, no generally accepted name.</p>
+
+<p>3.7.7, Other forms of structure, page 45</p></blockquote>
+
+<h2>Review</h2>
+
+<p>This has been a very interesting paper, on the foundational concepts. A more formal approach to the assignment operator, L-Values and R-Values and functions.</p>
+
+<p>The part about types is very interesting, explained in simple terms and with examples.</p>
+
+<p>Some of the examples are in CPL, that although an old language, it is still comprehensible. The examples or equivalences in lambda calculus are more difficult to understand (I had to read an introduction to it<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>, just to grab the basics)</p>
+
+<p>Some concepts are a bit outdated, such as the missing object orientation (or its features) or the assembly code, but in general the contents resist the time.</p>
+
+<p>Many of the concepts in programming are around L-Values and R-Values and this paper has made me realize this. Also that even if we are users of these systems, I didn&rsquo;t know many formalities behind it (assignment operator, rewriting, types, type inference, polymorphism modes, polymorphism without inheritance, etc).</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Quine, W.V. Word and Object. New York Technology Press and Wiley, 1960<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p><a href="../../../../2015/07/01/self-study-in-july-2015">introduction to lambda calculus</a>, search for &ldquo;A Tutorial Introduction to the Lambda Calculus&rdquo;<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -709,560 +1438,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/30/books-read-in-2015q2/">Books Read in 2015Q2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-30T12:49:50+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:49 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Books I&rsquo;ve read this quarter Q2 on 2015:</p>
-
-<ul>
-<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a> by Mihaly Csikszentmihalyi. Blog posts under the tag <a href="/blog/categories/flow">flow</a></li>
-<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> by Steve Freeman and Nat Pryce. Blog posts under the tag <a href="/blog/categories/goos">goos</a>. Read in the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;.</li>
-<li>TDD in Java, by Viktor Farcic and Alex García. I&rsquo;ve reviewed this book.</li>
-</ul>
-
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a> by Benjamin J. Evans and Martijn Verburg</li>
-<li><a href="https://leanpub.com/lisphackers">Lisp Hackers</a> by Vsevolod Dyomkin</li>
-<li><a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good!</a> by Miran Lipovača</li>
-<li><a href="http://www.amazon.co.uk/Working-Effectively-Legacy-Robert-Martin/dp/0131177052">Working Effectively with Legacy Code</a> by Michael Feathers, again</li>
-<li><a href="http://www.poodr.com/">Practical Object-Oriented Design in Ruby, An Agile Primer (POODR)</a> by Sandi Metz, with the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/blog/categories/poodr">poodr</a>.</li>
-</ul>
-
-
-<p>Books I want to finish:</p>
-
-<ul>
-<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a> by Martin Fowler, with Kent Beck, John Brant, William Opdyke, and Don Roberts</li>
-<li><a href="http://shop.oreilly.com/product/0636920028499.do">Java Performance: The Definitive Guide</a> by Scott Oaks</li>
-<li><a href="http://www.infoq.com/minibooks/scrum-xp-from-the-trenches">Scrum and XP from the trenches</a> by Henrik Kniberg</li>
-</ul>
-
-
-<p>Books that have entered the queue:</p>
-
-<ul>
-<li><a href="http://carlos.bueno.org/optimization/mature-optimization.pdf">Mature optimization</a>, by Carlos Bueno</li>
-<li><a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit, again. <a href="https://twitter.com/alvarobiz/status/611799849911103488">Gift</a></li>
-<li><a href="http://xunitpatterns.com/">XUnit Test Patterns</a> by Gerard Meszaros</li>
-<li><a href="https://leanpub.com/nightowls">Why programmers work at night</a> by Swizec Teller</li>
-<li><a href="http://letoverlambda.com/">Let Over Lambda</a> by Doug Hoyte</li>
-<li><a href="http://fldit-www.cs.uni-dortmund.de/~peter/PS07/HR.pdf">The Haskell Road to Logic, Math and Programming</a> by Kees Doets and Jan van Eijck</li>
-<li><a href="http://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs</a> by Abelson, Sussman, and Sussman</li>
-<li><a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Programming Languages</a> by Benjamin C. Pierce</li>
-<li><a href="http://www.amazon.co.uk/Craftsman-Richard-Sennett/dp/0141022094">The Craftsman</a> by Richard Sennett</li>
-<li><a href="http://www.amazon.co.uk/Software-Craftsmanship-Imperative-McBreen-Aug-2001/dp/B00L6JZAT0">Software Craftsmanship: The New Imperative</a> by Pete McBreen</li>
-<li><a href="http://www.amazon.co.uk/dp/020169946X/ref=pe_385721_37038051_TE_3p_dp_1">Fundamentals of Object-oriented Design in UML</a> by Meilir Page-Jones</li>
-</ul>
-
-
-<p>Starting in 2015-Q2, I&rsquo;m also writing here the list of books that I want to read.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/">Practical Object-Oriented Design in Ruby: Chapter 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-29T00:07:29+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:07 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We&rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
-
-<p>These are the concepts and links brought up during the discussion:</p>
-
-<blockquote><p>Walking on water and developing software from a specification are easy if both are frozen.</p>
-
-<p>Edward V Berard, source is <a href="https://en.wikiquote.org/wiki/Edward_V._Berard">Wikiquote</a></p></blockquote>
-
-<p>Two cited papers on metrics for design:</p>
-
-<ul>
-<li><a href="http://www.pitt.edu/~ckemerer/CK%20research%20papers/MetricForOOD_ChidamberKemerer94.pdf">A metrics suite for object oriented design</a> by Chidamber and Kemerer</li>
-<li><a href="http://www.cs.umd.edu/~basili/publications/technical/T102.pdf">A validation of object-oriented design metrics as quality indicators</a> by Basili, Briand and Melo</li>
-</ul>
-
-
-<p> The video for the &lsquo;churn&rsquo; as a measure:</p>
-
-<ul>
-<li><a href="http://www.ustream.tv/recorded/61483799">The Hidden Dimension Of Refactoring</a> by Michael Feathers</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-23T19:19:28+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
-
-<p>The contents of the session:</p>
-
-<ul>
-<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
-<li>Ask the dev team to add an easy feature</li>
-<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
-<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
-<li>Point out that there are regressions in the few lines of the patch</li>
-<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
-<li>Explain the technique of the golden master</li>
-<li>Some more programming, until they start to see the light at the end of the tunnel</li>
-<li>Small retrospective, including:
-
-<ul>
-<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
-<li>what could I improve as facilitator or for the structure of the session</li>
-</ul>
-</li>
-</ul>
-
-
-<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
-
-<p>I prepared a small script:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">while</span> <span class="nb">test true</span><span class="p">;</span> <span class="k">do</span>
-</span><span class='line'>  git add --all<span class="p">;</span>
-</span><span class='line'>  git commit --all -m <span class="s2">&quot;save process - uknown state&quot;</span><span class="p">;</span>
-</span><span class='line'>  sleep 120<span class="p">;</span>
-</span><span class='line'><span class="k">done</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
-<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/16/brown-bag-session-docker/">Brown-bag Session: Docker</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-16T18:52:28+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:52 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including:</p>
-
-<ul>
-<li>the difference between a container and an image</li>
-<li>diffing image contents</li>
-<li>AUFS (Another Union FS)</li>
-<li>persistent vs non-persistent (volatile) filesystems</li>
-<li>running CMD and other commands on the instance</li>
-<li>problems of running with permission = root (or its group)</li>
-<li>downsides of it</li>
-<li>how to compare it with a virtual machine</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/14/types-of-defects/">Types of Defects</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T16:16:51+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:16 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Some time ago, while researching types of defects and the cost of fixing them<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, I stumbled upon this:</p>
-
-<blockquote><p>Years ago I worked with a bunch of economists in the US Federal Government - they categorized &lsquo;bugs&rsquo; in their memos into three types:</p>
-
-<ul>
-<li><p>Typos: Simple misspellings of words. Infrequent, easy to detect, easy to fix.</p></li>
-<li><p>Writos: Incoherent sentences. More frequent, hard to detect, harder to fix.</p></li>
-<li><p>Thinkos: Conceptually bonkers. Very frequent, subtle and hard to detect; almost impossible to fix.</p></li>
-</ul>
-
-
-<p>Most &lsquo;late&rsquo; bugs that I&rsquo;ve seen in software projects belong in the last category - a lack of design or the failure to make a working mock-up leads to &lsquo;thinkos&rsquo; which are only obvious when the application is nearly completed. These are expensive to fix.</p>
-
-<p>Source: <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">http://developers.slashdot.org/story/03/10/21/0141215/software-defects&#8212;do-late-bugs-really-cost-more</a></p></blockquote>
-
-<p>I would also add a new category to this:</p>
-
-<ul>
-<li>Ethos: Morally wrong, although possibly legal. These may take different forms: vary from a company to the next one,
-from society to society, etc. Even harder to fix than &lsquo;thinkos&rsquo;,
-as there is a reason (mainly economic) to keep them in place.</li>
-</ul>
-
-
-<p>  On a technical note,
-  these are not usually well-known artifacts in the company, therefore not everyone
-  should know about them. Only a few developers know the correct reasons behind them and
-  the rest might be sold a fake reason, so the latter cannot fix these &lsquo;ethos&rsquo;, as they
-  assume they are present for a good reason</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>This is also a chapter in the book <a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit: &lsquo;Chapter 10: The cost of defects: an illustrated history&rsquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/11/brownbag-session-refactoring/">Brown-bag Session: Refactoring</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-11T20:22:16+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:22 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At a client, today we&rsquo;ve done a brown-bag session on refactoring: we&rsquo;ve gone through
-and a live demo, including refactoring a core piece of our code.</p>
-
-<p>We&rsquo;ve done some mob programming to help identify some smells and how to fix them.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/03/self-study-in-june-2015/">Self-study in June 2015</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-03T13:13:10+02:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>1:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Update: I&rsquo;ve grouped all small posts related to the self-study from June 2015
-into a single post</p>
-
-<h2>Le monitoring de flux par l’exemple</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.octo.com/le-monitoring-de-flux-par-lexemple/">this article</a> about monitoring, in the way of &ldquo;by example&rdquo;, by Cédrick Lunven and Julien Kirch (French)</p>
-
-<h2>The First Micro-service Architecture</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2015/05/28/TheFirstMicroserviceArchitecture.html">this article</a> about microservices and how they were implemented many years ago by Robert C. Martin</p>
-
-<h2>How I Learned to Balance My Life With Remote Work</h2>
-
-<p>I&rsquo;ve read <a href="https://open.bufferapp.com/remote-work/?utm_content=bufferaa5a2&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about balancing life and work, either physical or remote by Michael Erasmus</p>
-
-<h2>Demystified CQRS</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.codecentric.de/en/2015/05/demystified-cqrs/?utm_content=buffer35b18&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about CQRS by Nino Martincevic</p>
-
-<h2>The perils of programmer education in the bazaar</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.practicingruby.com/2015/06/04/the-perils-of-programmer-education-in-the-bazaar/">this article</a> by Gregory Brown</p>
-
-<h2>6 useful and lesser-known git commands</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.joncairns.com/2015/05/6-useful-and-lesser-known-git-commands/">this article</a> about git commands (log, checkout, stash, cherry-pick, annotate) by Jon Cairns</p>
-
-<h2>Is Your Scrum Standup Slowing You Down?</h2>
-
-<p>I&rsquo;ve read <a href="http://www.sitepoint.com/scrum-standup-slowing-down/">this article</a> by M. David Green</p>
-
-<h2>Me duele Indra</h2>
-
-<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=374c664073e1a1fa3deca53b4&amp;id=67ce79e01b">this Bonillista</a> (Spanish) by David Bonilla</p>
-
-<h2>TDD, BDD, [add every other method that promises software quality here] and the tea tasting lady</h2>
-
-<p>I&rsquo;ve read <a href="https://blinkingcaret.wordpress.com/2012/10/02/tdd-bdd-add-every-other-method-that-promises-software-quality-here-and-the-tea-tasting-lady/">this article</a> by Rui Figueiredo about the scientific method, TDD / BDD and how to scientifically detect if the &lsquo;how&rsquo; affects the result. In this case, exemplified by how to prepare your tea</p>
-
-<h2>The Art of Metaprogramming in Java</h2>
-
-<p>I&rsquo;ve read <a href="http://www.slideshare.net/PolymathicCoder/the-art-of-metaprogramming-in-java">these slides</a> by Abdelmonaim Remani</p>
-
-<h2>When TDD does not work</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/04/30/When-tdd-does-not-work.html">this article</a> by Uncle Bob on situations where TDD might not be appropiate, especially around the borders</p>
-
-<h2>Mi primera semana como aprendiz</h2>
-
-<p>I&rsquo;ve read <a href="http://ronnyancorini.es/blog/index.php/2015/06/08/mi-primera-semana-como-aprendiz/">Ronny Ancorini&rsquo;s experiences</a> in his first week as apprentince with Carlos Blé &amp; Associates (Spanish)</p>
-
-<h2>Refactoring without good tests</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.codeclimate.com/blog/2013/12/05/refactoring-without-good-tests/">this article</a> by Peter Bell on how to deal with a legacy codebase, what are the effects of not having tests and how to deal with. How to add tests to a codebase that is not ready for it.</p>
-
-<h2>Big Ball of Mud</h2>
-
-<p>I&rsquo;ve read <a href="http://www.laputan.org/mud/">this paper</a>, containing a collection of patterns and antipatterns (disguised as notes) by Brian Foote and Joseph Yoder</p>
-
-<h2>Comparision of different concurrency models: Actors, CSP, Disruptor and Threads [sic]</h2>
-
-<p>I&rsquo;ve read <a href="http://java-is-the-new-c.blogspot.com.es/2014/01/comparision-of-different-concurrency.html">this comparison of concurrency models</a> by Rüdiger Möller</p>
-
-<h2>5 Whys</h2>
-
-<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/5_Whys">this wikipedia</a> article on the technique called &ldquo;5 Whys&rdquo;</p>
-
-<h2>Expectations, Outcomes, and Challenges of Modern Code Review</h2>
-
-<p>I&rsquo;ve read <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=180283">this paper</a>, <a href="http://research.microsoft.com/pubs/180283/ICSE%202013-codereview.pdf">direct link</a>, by Alberto Bacchelli and Christian Bird on code review at Microsoft.</p>
-
-<p>They explain how they do it, the exact methodology they are using and why they do it.</p>
-
-<p>The main reasons to code review are:</p>
-
-<ul>
-<li>finding defects</li>
-<li>code improvement</li>
-<li>alternative solutions</li>
-<li>knowledge transfer</li>
-<li>team awareness and transparency</li>
-<li>also:
-
-<ul>
-<li>improve development process</li>
-<li>avoid build breaks</li>
-<li>share code ownership</li>
-<li>track rationale</li>
-<li>team assessment</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>The quality wheel</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.jessitron.com/2015/04/the-quality-wheel.html">this article</a> by Jessica Kerr about the qualities of beautiful code</p>
-
-<h2>5 Minute Physics</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=n6FKT-KafRk">this video</a> on interactions with the mobile devices and related to physics by David DeSandro</p>
-
-<h2>Rise of the Transpilers</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=DspYurD75Ns">this video</a> on the rise of the transpilers and coffeescript by Jeremy Ashkenas</p>
-
-<h2>Drawing Lines with Bresenham&rsquo;s Line Algorithm</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=zytBpLlSHms">this video</a> about how to apply the Bresenham&rsquo;s algorithm to draw lines (implemented in pseudo-code and javascript) by Jenn Schiffer</p>
-
-<h2>Working with Minified JavaScript</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=SuFNR7-XjKI">this video</a> by John Crepezzi on how to mix javascript files (clients and yours), how to decompile javascript in chrome, dev &amp; debug tools</p>
-
-<h2>How we ran our Legacy Code Retreat</h2>
-
-<p>I&rsquo;ve read <a href="https://pboop.wordpress.com/2012/02/19/how-we-ran-our-legacy-code-retreat/">this article</a> by Andreas Leidig, looking for inspiration on running a legacy code retreat / brown-bag session. The experience report <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">is here</a></p>
-
-<h2>Shift Left: Testing Earlier in Development</h2>
-
-<p>I&rsquo;ve read <a href="http://wirfs-brock.com/blog/2015/06/18/shift-left">this article</a> by Rebecca Wirfs-Brock</p>
-
-<h2>Polymorphic Equality</h2>
-
-<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/06/polymorphic-equality/">this article</a> on implementing polymorphic equality on C#, by Carlos Blé</p>
-
-<h2>Commit messages are not titles</h2>
-
-<p>I&rsquo;ve read <a href="http://antirez.com/news/90">this article</a> on git commit messages and how to use them, by antirez</p>
-
-<h2>Oracle Considers G1 Garbage Collector for Java 9</h2>
-
-<p>I&rsquo;ve read this <a href="https://adtmag.com/articles/2015/06/22/oracle-java-9.aspx">press article</a> on the G1 and CMS collector, by John K. Waters</p>
-
-<h2>What Tech Newbies Need</h2>
-
-<p>I&rsquo;ve read <a href="https://storify.com/jesslynnrose/what-tech-newbies-need">this set of tweets</a>, grouped by Jessica Rose about the most helpful things beginners can do to improve their programming skills.</p>
-
-<h2>JavaScript For Cats</h2>
-
-<p>I&rsquo;ve read <a href="http://jsforcats.com/">this introductory guide</a> to javascript by <a href="https://twitter.com/maxogden">Max Ogden</a></p>
-
-<h2>Why Doesn&rsquo;t Python Have Switch/Case?</h2>
-
-<p>I&rsquo;ve read <a href="http://www.pydanny.com/why-doesnt-python-have-switch-case.html">this article</a> on the switch case in the python language by Daniel Roy Greenfeld</p>
-
-<h2>[Joseph Moniz&rsquo;s] Notes on Clojure</h2>
-
-<p>I&rsquo;ve read Joseph Moniz&rsquo;s <a href="http://blog.plasmaconduit.com/notes-on-clojure/">Notes on Clojure</a>.</p>
-
-<h2>Chemical Computing with Clojure</h2>
-
-<p>I&rsquo;ve read <a href="http://gigasquidsoftware.com/chemical-computing/index.html">an article</a> on performing abstract computations with chemicals, written in Clojure by Carin Meier</p>
-
-<h2>Lenses</h2>
-
-<p>I&rsquo;ve read <a href="http://www.haskellforall.com/2012/01/haskell-for-mainstream-programmers_28.html">this tutorial</a> on writing lenses for haskell, a way of importing imperative getters / setters to a Data. Written by Gabriel Gonzalez.</p>
-
-<p>On another note, the first part, about writing getters and setters in the naive way, is also explained in Learn you a Haskell > Chapter 8 Making Our Own Types and Typeclasses > Record syntax</p>
-
-<h2>Microservices in Haskell</h2>
-
-<p>I&rsquo;ve read <a href="https://github.com/AlexanderAA/haskell-microservices/blob/gh-pages/haskell-microservices.md">these notes</a> on implementing a microservice in haskell, by <a href="https://github.com/AlexanderAA">AlexanderAA</a></p>
-
-<h2>Overcoming Resistance to Change - Isn&rsquo;t It Obvious?</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=hcz1aZ60k7w">this video</a> in the channel of The World with Theory of Constraints</p>
-
-<h2>Bacon is bad for you</h2>
-
-<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/bacon-is-bad-for-you">these slides</a>
- on professionalism and the programmer culture, by Garann Means</p>
-
-<h2>Code is a job</h2>
-
-<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
-
-<h2>The Great Newline Schism</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
-
-<h2>Top ten reasons why I won’t use your open source project</h2>
-
-<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1280,23 +1455,23 @@ into a single post</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/08/10/the-language-was-prepared-for-that/">The Language Was Prepared for That</a>
+        <a href="/blog/2015/09/02/brownbag-session-xtreme-programming/">Brown-bag Session: eXtreme Programming</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/08/08/recognizing-dependencies/">Recognizing Dependencies</a>
+        <a href="/blog/2015/09/01/self-study-in-september-2015/">Self-Study in September 2015</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple Return Values in a Mockito Stub</a>
+        <a href="/blog/2015/08/19/coding-dojo-palindromes/">Coding Dojo: Palindromes</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/">Brown-bag Session and Dojo: Beginning Clojure</a>
+        <a href="/blog/2015/08/17/coding-dojo-goldbach-conjecture/">Coding Dojo: Goldbach Conjecture</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/08/03/resources-for-java-9-beta/">Resources for Java 9 (Beta)</a>
+        <a href="/blog/2015/08/13/searching-on-a-suite-of-failing-tests/">Searching on a Suite of Failing Tests</a>
       </li>
     
   </ul>
