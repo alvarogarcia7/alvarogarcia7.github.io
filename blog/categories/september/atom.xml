@@ -4,7 +4,7 @@
   <title><![CDATA[Category: September | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/september/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-09-02T22:59:07+02:00</updated>
+  <updated>2015-09-08T07:57:45+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -53,6 +53,130 @@
 <p>There is more on part 2: <a href="http://waitbutwhy.com/2013/11/how-to-beat-procrastination.html">How to beat procrastination</a></p>
 
 <p>Tags: tim-urban, procrastination, rational-part, instant-gratification-monkey, panic-monster, brain, comparison</p>
+
+<h2>Algebraic data type</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">this wikipedia page</a>, that explains what this is, a few examples and the theory behind it.</p>
+
+<p>Tags: wikipedia, data-type, algebraic-data-type</p>
+
+<h2>Recursion</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">this wikipedia page</a>, that explains the recursion basic concepts, such as:</p>
+
+<ul>
+<li>induction, coinduction</li>
+<li>recursion, corecursion</li>
+<li>implementation details in iterative vs recursive programs:
+
+<ul>
+<li>shortcutting recursion (i.e., arm-length&rsquo;s recursion)</li>
+<li>wrapper function</li>
+<li>tail-call optimization, related to tail-recursive functions</li>
+</ul>
+</li>
+<li>recursion and its relation to data structures</li>
+<li>base case / recursive case and removing the need of the base one in corecursion or in non-strict languages</li>
+<li>types of recursion:
+
+<ul>
+<li>direct, indirect, mutual</li>
+<li>generative, structural</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Tags: recursion, corecursion, induction, coinduction, tail-call-optimization, tail-recursion, direct-recursion, indirect-recursion, mutual-recursion, generative-recursion, structural-recursion, arm-length-recursion, iterative-function, recursive-function, base-case, recursive-case, wikipedia, data-structure</p>
+
+<h2>Anonymous function</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Anonymous_function">this wikipedia page</a>, that describes what is a lambda expression or an anonymous function. How it can be used (e.g., currying, higher-order function, closures) and gives examples in many languages.</p>
+
+<p>Cites its invention (Church, 1936, lambda-calculus) and its first implementation (Lisp, 1958)</p>
+
+<p>Tags: alonzo-church, anonymous-function, lambda-expression, closure, lambda-calculus, lisp, currying, higher-order-function, wikipedia</p>
+
+<h2>Closure</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">this wikipedia page</a>, that explains the concept of closures and the usual confusion between closure and lambda. Also some applications.</p>
+
+<p>Discusses closures as a way of deferring execution and implementing object-oriented (OO) systems</p>
+
+<p>Tags: wikipedia, closure, object-orientation, lambda-expression</p>
+
+<h2>Zen Story: The Master Archer</h2>
+
+<p>I&rsquo;ve read <a href="http://www.thedailyzen.org/2015/06/23/zen-story-the-master-archer/">this story</a> by Charlie Ambler about perfectionism and deep study, exemplified by the general that retires to study archery and the child who draws targets around the arrows.</p>
+
+<p>Tags: charlie-amber, master, student, zen, story</p>
+
+<h2>Loosely Coupled</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.bwhaley.com/loosely-coupled">this article</a> by Ben Whaley about how to loosely couple services introducing a queue and the difference in patterns between push and pull communication.</p>
+
+<p>Tags: ben-whaley, push, pull, coupling, loose-coupling, service, queue, aws</p>
+
+<h2>Being good at programming competitions correlates negatively with being good on the job</h2>
+
+<p>I&rsquo;ve watched the small video and the discussion about programmers&#8217; talent at <a href="http://www.catonmat.net/blog/programming-competitions-work-performance/">this page</a>. By Peteris Krumins.</p>
+
+<p>The original video explains that being good at a programming contest correlates negatively with skill at a programming job, even if the company hires them.</p>
+
+<p>The discussion explains the analogy with height and the NBA and concludes that this parameter should be preponderated with less importance than others.</p>
+
+<p>Tags: google, peter-norvig, nba, analogy, programming-contest, programming-skill, peteris-krumins</p>
+
+<h2>On Functors</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/on-functors/">this comparison</a> by Peteris Krumins of what the functors are in different languages:</p>
+
+<ul>
+<li>C++: function objects</li>
+<li>Standard ML: generic implementation of interfaces. They allow to compose structures</li>
+<li>Haskell: structure containing zero or more objects that can be converted to another structure containing the other objects. It&rsquo;s an homomorphism between two categories.</li>
+<li>Prolog: built-in predicate for self-inspection and the atom at the start of the structure</li>
+</ul>
+
+
+<p>Tags: peteris-krumins, comparison, haskell, c-plus-plus, standard-ml, prolog, functor</p>
+
+<h2>Recursive Regular Expressions</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/recursive-regular-expressions/">this article</a> on recursive regular expressions by Peteris Krumins.</p>
+
+<p>In it, he lightly describes how a regular expression relates to a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-Free Grammar</a> and the language support for Perl to include recursive regular expressions. Based on the examples (e.g., <code>0^n1^n</code>), it really clicked to me that this could be expressed as a recursive function, with its base case and the recursive one. Also that it &ldquo;depends on solutions to smaller instances of the same problem&rdquo; (<a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">wikipedia</a>)</p>
+
+<p>Tags: peteris-krumins, regular-expression, recursion, recursive-regular-expression, perl, context-free-grammar, formal-language-theory</p>
+
+<h2>In Functional Programming, what is a functor?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/2030863/in-functional-programming-what-is-a-functor/2031421#2031421">this answer</a>, by Norman Ramsey, on what is a functor.</p>
+
+<p>He explains in simple words what the concept is and how a type can belong to the class functor. Examples in haskell.</p>
+
+<p>Tags: norman-ramsey, functor, stack-overflow, haskell, type-class, class, map, fmap</p>
+
+<h2>Functors</h2>
+
+<p>I&rsquo;ve read <a href="http://www.clojure.net/2013/01/19/Functors/">this article</a> by Jim Duey explaining functors in Clojure. He introduces a couple of notes of Haskell but all of the examples are in Clojure. Explains functors, a subset of it called applicatives, and the two libraries he has created.</p>
+
+<p>Tags: jim-duey, functor, clojure, haskell</p>
+
+<h2>10 Tips for Proper Application Logging</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javacodegeeks.com/2011/01/10-tips-proper-application-logging.html">this article</a> by Tomasz Nurkiewicz about tips on logging:</p>
+
+<ul>
+<li>reduce side effects</li>
+<li>use categories and levels</li>
+<li>connection with external systems</li>
+<li>handling exceptions</li>
+<li>automatically / manually reading logging files</li>
+</ul>
+
+
+<p>Tags: tomasz-nurkiewicz, logging, sl4j, log4j, tip</p>
 ]]></content>
   </entry>
   

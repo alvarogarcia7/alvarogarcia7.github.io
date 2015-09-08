@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="This is an experience report on Jason Gorman&rsquo;s &ldquo;Test-driven development intensive workshop&rdquo; on the April 11th, 2015 I attended this &hellip;">
+  <meta name="description" content="Manuel has taught us today about the default value while destructuring: The following example illustrates the use of an :as directive to bind a local &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,162 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a Refactor in Clojure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-14T23:36:23+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:36 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
+
+<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user=&gt; (def point {:x 5 :y 7})
+</span><span class='line'>#'user/point
+</span><span class='line'>
+</span><span class='line'>(let [{:keys [x y] :as the-point} point]
+</span><span class='line'>         (println "x:" x "y:" y "point:" the-point))
+</span><span class='line'>
+</span><span class='line'>x: 5 y: 7 point: {:x 5, :y 7}</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
+
+<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
+
+<p>This has been used for a method like this one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this has been refactored to this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a New TDD Phase</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-13T22:00:45+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
+
+<h2>Concept</h2>
+
+<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, it is a phase that might appear after refactor.</p>
+
+<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
+
+<h2>How I do redesign</h2>
+
+<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
+
+<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
+
+<h2>Other thoughts</h2>
+
+<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
+
+<blockquote><p>to change the design of (something)</p></blockquote>
+
+<p>or</p>
+
+<blockquote><p>to revise in appearance, function, or content</p></blockquote>
+
+<p>an example:</p>
+
+<blockquote><p>The book&rsquo;s cover has been redesigned for the new edition.</p></blockquote>
+
+<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
+
+<blockquote><p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p></blockquote>
+
+<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
+
+<h2>Other references</h2>
+
+<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
+
+<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
+
+<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -767,181 +923,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/16/tdd-meetup-retrospective/">TDD Meetup Retrospective</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-16T05:42:44+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:42 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Yesterday we organized a TDD meetup at the <a href="http://www.fib.upc.edu/fib.html">FIB - Barcelona School of Informatics UPC</a>, within <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship</a> sponsored by the <a href="http://jediupc.com/">Junior Empresa d&#8217;Informàtica</a>. The meetup started at 9:00 until 18:00, with a one-hour pause in the middle.</p>
-
-<h2>Where</h2>
-
-<ul>
-<li>Please make sure the meetup space (e.g., classroom, meeting room) is available and ready to be used at least 15 minutes before the meetup starts</li>
-<li>The organizer and the event host should be there in advance to prepare the physical environment (chairs, wifi, beamer, etc) as well as mentally: getting comfortable with the space, loading the presentation, prepare the speaker notes, etc.</li>
-<li>Plan for the worse and hope for the best: in this particular meetup, the beamer was not available, so the host gracefully lent us some 23 inch screen as a second monitor.</li>
-</ul>
-
-
-<h2>What</h2>
-
-<ul>
-<li>The speaker should have had already decided what they are going to cover on the meetup and not deviate much from this. Leave some empty buffer space at the end because you will cumulate some deviation during the day.</li>
-<li>Of course, have the slides ready if you plan on using them</li>
-<li>I prefer having more conversations during the meetup rather than a masterclass-style one. The organizer(s) should act as conversation moderators, often guiding the conversation where (they think) it is most useful. Sometimes, it is a good idea to interrupt the conversation when someone is getting bored or losing focus<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</li>
-<li>Be prepared to ask to your attendees what do they want: they are your target</li>
-<li>Please ask to your attendees to bring their laptop with git, dependency manager, IDE / editor, test double framework installed. Otherwise, most of the first session is invested in downloading / configuring these.</li>
-<li>Please try to be communicative / funny in some way. This makes the slides easier to understand</li>
-</ul>
-
-
-<h2>Meetup details</h2>
-
-<ul>
-<li><p>We did two sessions of slides:</p>
-
-<ul>
-<li>Introduction to TDD</li>
-<li>TDD on a daily basis: learn TDD for a greater good</li>
-</ul>
-</li>
-<li><p>We did three katas:</p>
-
-<ul>
-<li>LinkedList: <a href="http://codekata.com/kata/kata21-simple-lists/">source</a>. Originally by <a href="http://twitter.com/@pragdave">Dave &ldquo;Pragmatic Dave&rdquo; Thomas</a></li>
-<li>Password: <a href="https://gist.github.com/trikitrok/c031d6b621f28b85ce0d">source</a>. Taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>, also seen on a <a href="http://twitter.com/@carlosble">Carlos Blé</a> workshop</li>
-<li>Bank Kata: <a href="https://github.com/sandromancuso/Bank-kata">source</a>. Originally from <a href="http://twitter.com/@sandromancuso">Sandro Mancuso</a></li>
-</ul>
-</li>
-<li><p>The format was this: the first set of slides, the two first katas, some discussion, then lunch; coffee (mandatory); the second set of slides, the third kata (done by them), later done by me at the beamer, explaining the situation and my mental process.</p></li>
-</ul>
-
-
-<h2>Useful feedback</h2>
-
-<ul>
-<li><p>About the event:</p>
-
-<ul>
-<li>One 8-hour event is much more effective / efficient that 4 2-hour ones</li>
-<li>No one complained about the lack of beamer. So don&rsquo;t worry too much if your host doesn&rsquo;t have one, as long as everybody can get close to the (big) screen.</li>
-</ul>
-</li>
-<li><p>About the LinkedList kata:</p>
-
-<ul>
-<li>This, as a first TDD example was too complex. Getting into TDD with classes, and serveral functions at the same time might be difficult.</li>
-<li>Too academic. This is an example you will usually never implement yourself, as there are libraries who provide it. Therefore, not applicable.</li>
-</ul>
-</li>
-<li><p>About the Password kata:</p>
-
-<ul>
-<li>They graded this kata easier than the linkedList</li>
-<li>Start with this as it is only a function</li>
-<li>This has didactic value as there are some gotchas with this kata</li>
-<li>More likely to be implemented by yourself, as most systems require some kind of user authentication</li>
-</ul>
-</li>
-<li><p>About the Bank kata:</p>
-
-<ul>
-<li>More resembling of a day-to-day problem</li>
-<li>This is a difficult kata if you haven&rsquo;t learned about mocks / test doubles</li>
-<li>Interesting interactions between objects</li>
-</ul>
-</li>
-<li><p>For me:</p>
-
-<ul>
-<li>They liked both the format and the speaker (a.k.a., me)</li>
-<li>They thought this meetup was well prepared in advance</li>
-</ul>
-</li>
-<li><p>My own feedback:</p>
-
-<ul>
-<li>It is difficult to ask the attendees to rate their own level or for you to rate it. I thought the linkedlist example would be so easy they would finish it in half the allowed time<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>, but it wasn&rsquo;t this way</li>
-<li>The productivity level varies hugely from person to person. There were some pairs that dug thoroughly on the problem and others who got stuck (sometimes with the language). Even though both types of pairs were working hard on the proposed problem</li>
-<li>We still haven&rsquo;t solved the problem with reservations: many people book a seat on the event but later won&rsquo;t come. This makes other (interested) attendees to not have a seat.</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Should you want to, please share your feedback / comments via the comments section below or sending a pull request to this <a href="https://github.com/alvarogarcia7/blog_source">repository</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>a good indicator of this is body language or position and whether they are doodling on a paper sheet.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>I did prepare against this adding more possible requirements to the kata, although we finally didn&rsquo;t use them<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/10/maven-module-base-for-cucumber-in-java/">Maven Module Base for Cucumber in Java</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-10T07:24:38+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:24 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve built a small maven module, to be used directly with cucumber. You can fork the repository <a href="https://github.com/alvarogarcia7/base-bdd-cucumber">here</a></p>
-
-<p>This is the setup I&rsquo;ve proposed for the meetup <a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/220673134/">&ldquo;BDD Cucumber kata (gherkin + code)&rdquo;</a>. Will see if this code is successfully used by the ~40 participants in a couple of weeks</p>
-
-<p>(Quote from the <a href="https://github.com/alvarogarcia7/base-bdd-cucumber/blob/master/README.md">README.md</a>):</p>
-
-<p>This maven project has been possible due to <a href="https://twitter.com/@thomassundberg">Thomas Sundberg</a> and <a href="https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world">this post</a></p>
-
-<p>Should you want to, there&rsquo;s a tweet to thank him the effort: <a href="https://twitter.com/intent/tweet?text=@thomassundberg%20thanks%20for%20the%20cucumber%20bdd%20tutorial!%20Will%20be%20using%20it%20from%20@agilebcn;Keep%20up%0Athe%20good%20work&amp;url=https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world/">tweet intent here</a></p>
-
-<p>Happy katas and happy bdd&#8217;ing!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -959,6 +940,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/08/navigating-the-github-repositories/">Navigating the GitHub Repositories</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/09/08/a-basic-working-environment/">A Basic Working Environment</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/09/02/brownbag-session-xtreme-programming/">Brown-bag Session: eXtreme Programming</a>
       </li>
     
@@ -968,14 +957,6 @@
     
       <li class="post">
         <a href="/blog/2015/08/19/coding-dojo-palindromes/">Coding Dojo: Palindromes</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/08/17/coding-dojo-goldbach-conjecture/">Coding Dojo: Goldbach Conjecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/08/13/searching-on-a-suite-of-failing-tests/">Searching on a Suite of Failing Tests</a>
       </li>
     
   </ul>

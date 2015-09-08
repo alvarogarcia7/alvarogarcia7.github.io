@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-09-02T22:59:07+02:00</updated>
+  <updated>2015-09-08T07:57:45+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Navigating the GitHub Repositories]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories/"/>
+    <updated>2015-09-08T07:54:15+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve reorganized my github repositories, especially the katas.</p>
+
+<p>All of them can be found in <a href="https://github.com/search?utf8=%E2%9C%93&amp;q=user%3Aalvarogarcia7+kata&amp;type=Repositories&amp;ref=searchresults">this search</a></p>
+
+<p>Separated by language:</p>
+
+<ul>
+<li><a href="https://github.com/search?l=Java&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Java</a></li>
+<li><a href="https://github.com/search?l=Clojure&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Clojure</a></li>
+<li><a href="https://github.com/search?l=JavaScript&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Javascript</a></li>
+<li><a href="https://github.com/search?l=Haskell&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Haskell</a></li>
+</ul>
+
+
+<p>To the best of my knowledge, all repositories follow a similar pattern:</p>
+
+<ul>
+<li>Contain the keyword &lsquo;kata&rsquo;</li>
+<li>Contain the language</li>
+<li>Contain a description of the exercise</li>
+</ul>
+
+
+<p>An example: <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-haskell">palindromes-searcher-kata-haskell</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Basic Working Environment]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/"/>
+    <updated>2015-09-08T07:46:56+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment</id>
+    <content type="html"><![CDATA[<p>Sometimes, when working out of somebody&rsquo;s else computer, I won&rsquo;t have my preferred IDE installed.</p>
+
+<p>In this case, what I usually do &ndash;as long as the programming session is more than 5 TDD cycles&ndash;, is to configure my own environment. It includes:</p>
+
+<ul>
+<li>text editor: $EDITOR is enough</li>
+<li>test runner. A simple bash script executing the tests will suffice</li>
+<li>git terminal: to commit, see differences, revert, etc</li>
+<li>[optional] REPL if the language has it</li>
+</ul>
+
+
+<p>If the system already has it, I will use <code>screen</code> to cycle around the sessions.</p>
+
+<h2>A simple test runner</h2>
+
+<p>More in depth, the test runner will be similar to this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">while</span> <span class="o">[</span> <span class="nb">true</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>    clear<span class="p">;</span>
+</span><span class='line'>    date<span class="p">;</span>
+</span><span class='line'>    runhaskell Spec.hs<span class="p">;</span>
+</span><span class='line'>    <span class="nb">read </span>i<span class="p">;</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This script will:</p>
+
+<ul>
+<li>clear the screen (for better readability)</li>
+<li>print the date</li>
+<li>execute the tests</li>
+<li>read from the console, effectively waiting for the user to interact (an enter is enough)</li>
+</ul>
+
+
+<p>The date is useful for both detecting the pace of the cycles and for scrolling up and down in the terminal.</p>
+
+<p>If this date is much too necessary, it might indicate the presence of the TDD antipattern &ldquo;El Bocazas&rdquo; / &ldquo;A mouthful&rdquo;, present in <a href="http://www.carlosble.com/downloads/disenoAgilConTdd_ebook.pdf">Diseño Ágil con TDD</a>. I use when the output of the test runner is extensive (such as <code>runhaskell</code>).</p>
+
+<p>If the test runner output is too verbose, a possible step forward is to silence output in when every test is green (fragment):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">output</span><span class="o">=</span><span class="k">$(</span>runhaskell Spec.hs<span class="k">)</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;OK&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="nv">$output</span><span class="p">;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Other test runners</h2>
+
+<p>As a side note, other test runners are quieter than others:</p>
+
+<ul>
+<li><code>py.test</code> will output the name of the file and &ldquo;E&rdquo; for error and &ldquo;.&rdquo; for OK</li>
+<li><code>clojure.test</code> will output the name of the file and a total of tests and assertions. <a href="http://jakemccrary.com/blog/2015/04/25/quieter-clojure-dot-test-output/">Here</a> to make it quieter</li>
+<li><code>HSpec</code> will output one line per <code>describe</code> and <code>it</code>. Inspired by RSpec</li>
+<li><code>Jasmine</code> will output one line per <code>describe</code> and <code>it</code>, as HSpec, as both of them are inspired by RSpec.</li>
+<li><code>Junit</code> and derivatives will produce the name of the file and total of tests and assertions. Also, on demand, a file containing test results so it can be interpreted by the IDE.</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Brown-bag Session: eXtreme Programming]]></title>
@@ -66,6 +182,130 @@
 <p>There is more on part 2: <a href="http://waitbutwhy.com/2013/11/how-to-beat-procrastination.html">How to beat procrastination</a></p>
 
 <p>Tags: tim-urban, procrastination, rational-part, instant-gratification-monkey, panic-monster, brain, comparison</p>
+
+<h2>Algebraic data type</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">this wikipedia page</a>, that explains what this is, a few examples and the theory behind it.</p>
+
+<p>Tags: wikipedia, data-type, algebraic-data-type</p>
+
+<h2>Recursion</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">this wikipedia page</a>, that explains the recursion basic concepts, such as:</p>
+
+<ul>
+<li>induction, coinduction</li>
+<li>recursion, corecursion</li>
+<li>implementation details in iterative vs recursive programs:
+
+<ul>
+<li>shortcutting recursion (i.e., arm-length&rsquo;s recursion)</li>
+<li>wrapper function</li>
+<li>tail-call optimization, related to tail-recursive functions</li>
+</ul>
+</li>
+<li>recursion and its relation to data structures</li>
+<li>base case / recursive case and removing the need of the base one in corecursion or in non-strict languages</li>
+<li>types of recursion:
+
+<ul>
+<li>direct, indirect, mutual</li>
+<li>generative, structural</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Tags: recursion, corecursion, induction, coinduction, tail-call-optimization, tail-recursion, direct-recursion, indirect-recursion, mutual-recursion, generative-recursion, structural-recursion, arm-length-recursion, iterative-function, recursive-function, base-case, recursive-case, wikipedia, data-structure</p>
+
+<h2>Anonymous function</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Anonymous_function">this wikipedia page</a>, that describes what is a lambda expression or an anonymous function. How it can be used (e.g., currying, higher-order function, closures) and gives examples in many languages.</p>
+
+<p>Cites its invention (Church, 1936, lambda-calculus) and its first implementation (Lisp, 1958)</p>
+
+<p>Tags: alonzo-church, anonymous-function, lambda-expression, closure, lambda-calculus, lisp, currying, higher-order-function, wikipedia</p>
+
+<h2>Closure</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">this wikipedia page</a>, that explains the concept of closures and the usual confusion between closure and lambda. Also some applications.</p>
+
+<p>Discusses closures as a way of deferring execution and implementing object-oriented (OO) systems</p>
+
+<p>Tags: wikipedia, closure, object-orientation, lambda-expression</p>
+
+<h2>Zen Story: The Master Archer</h2>
+
+<p>I&rsquo;ve read <a href="http://www.thedailyzen.org/2015/06/23/zen-story-the-master-archer/">this story</a> by Charlie Ambler about perfectionism and deep study, exemplified by the general that retires to study archery and the child who draws targets around the arrows.</p>
+
+<p>Tags: charlie-amber, master, student, zen, story</p>
+
+<h2>Loosely Coupled</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.bwhaley.com/loosely-coupled">this article</a> by Ben Whaley about how to loosely couple services introducing a queue and the difference in patterns between push and pull communication.</p>
+
+<p>Tags: ben-whaley, push, pull, coupling, loose-coupling, service, queue, aws</p>
+
+<h2>Being good at programming competitions correlates negatively with being good on the job</h2>
+
+<p>I&rsquo;ve watched the small video and the discussion about programmers&#8217; talent at <a href="http://www.catonmat.net/blog/programming-competitions-work-performance/">this page</a>. By Peteris Krumins.</p>
+
+<p>The original video explains that being good at a programming contest correlates negatively with skill at a programming job, even if the company hires them.</p>
+
+<p>The discussion explains the analogy with height and the NBA and concludes that this parameter should be preponderated with less importance than others.</p>
+
+<p>Tags: google, peter-norvig, nba, analogy, programming-contest, programming-skill, peteris-krumins</p>
+
+<h2>On Functors</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/on-functors/">this comparison</a> by Peteris Krumins of what the functors are in different languages:</p>
+
+<ul>
+<li>C++: function objects</li>
+<li>Standard ML: generic implementation of interfaces. They allow to compose structures</li>
+<li>Haskell: structure containing zero or more objects that can be converted to another structure containing the other objects. It&rsquo;s an homomorphism between two categories.</li>
+<li>Prolog: built-in predicate for self-inspection and the atom at the start of the structure</li>
+</ul>
+
+
+<p>Tags: peteris-krumins, comparison, haskell, c-plus-plus, standard-ml, prolog, functor</p>
+
+<h2>Recursive Regular Expressions</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/recursive-regular-expressions/">this article</a> on recursive regular expressions by Peteris Krumins.</p>
+
+<p>In it, he lightly describes how a regular expression relates to a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-Free Grammar</a> and the language support for Perl to include recursive regular expressions. Based on the examples (e.g., <code>0^n1^n</code>), it really clicked to me that this could be expressed as a recursive function, with its base case and the recursive one. Also that it &ldquo;depends on solutions to smaller instances of the same problem&rdquo; (<a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">wikipedia</a>)</p>
+
+<p>Tags: peteris-krumins, regular-expression, recursion, recursive-regular-expression, perl, context-free-grammar, formal-language-theory</p>
+
+<h2>In Functional Programming, what is a functor?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/2030863/in-functional-programming-what-is-a-functor/2031421#2031421">this answer</a>, by Norman Ramsey, on what is a functor.</p>
+
+<p>He explains in simple words what the concept is and how a type can belong to the class functor. Examples in haskell.</p>
+
+<p>Tags: norman-ramsey, functor, stack-overflow, haskell, type-class, class, map, fmap</p>
+
+<h2>Functors</h2>
+
+<p>I&rsquo;ve read <a href="http://www.clojure.net/2013/01/19/Functors/">this article</a> by Jim Duey explaining functors in Clojure. He introduces a couple of notes of Haskell but all of the examples are in Clojure. Explains functors, a subset of it called applicatives, and the two libraries he has created.</p>
+
+<p>Tags: jim-duey, functor, clojure, haskell</p>
+
+<h2>10 Tips for Proper Application Logging</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javacodegeeks.com/2011/01/10-tips-proper-application-logging.html">this article</a> by Tomasz Nurkiewicz about tips on logging:</p>
+
+<ul>
+<li>reduce side effects</li>
+<li>use categories and levels</li>
+<li>connection with external systems</li>
+<li>handling exceptions</li>
+<li>automatically / manually reading logging files</li>
+</ul>
+
+
+<p>Tags: tomasz-nurkiewicz, logging, sl4j, log4j, tip</p>
 ]]></content>
   </entry>
   
@@ -2000,136 +2240,6 @@ replace with: $1</p>
 
 
 <blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">I don&#39;t have first-hand experience to draw on. But I suppose none of the software-as-craft folks have apprenticed at a blacksmith, either.😊</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625107793230458880">July 26, 2015</a></blockquote>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Practical Object-Oriented Design in Ruby: Chapter 4]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/"/>
-    <updated>2015-07-26T22:40:29+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4</id>
-    <content type="html"><![CDATA[<p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
-
-<p>These are the concepts and links brought up during the discussion:</p>
-
-<ul>
-<li>The craftsmanship analogy, as exposed in <a href="https://twitter.com/sarahmei/status/625089415812022272">these tweets</a></li>
-<li>Difference between function and method</li>
-<li>What vs How (also present in the GOOS)</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Faster Site Generation for Octopress 2]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/"/>
-    <updated>2015-07-13T07:49:23+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2</id>
-    <content type="html"><![CDATA[<p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
-
-<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
-
-<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
-
-<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cp -R blog_source blog_post_factory
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>blog_post_factory/source/_posts
-</span><span class='line'>git update-index --assume-unchanged <span class="k">$(</span>ls *markdown<span class="k">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Delete all existing markdown files</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rm *markdown
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Check that git doesn&rsquo;t realize about the difference:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git status
-</span><span class='line'>
-</span><span class='line'><span class="c"># On branch source</span>
-</span><span class='line'>nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Create a new post:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s2">&quot;Faster site generation for Octopress 2&quot;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># On branch source</span>
-</span><span class='line'><span class="c"># Untracked files:</span>
-</span><span class='line'><span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># 2015-07-13-faster-site-generation-for-octopress-2.markdown</span>
-</span><span class='line'>nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> to track<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
-
-<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate <span class="o">&amp;&amp;</span> rake deploy
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
-
-<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">desc</span> <span class="s2">&quot;Cleans all *.markdown files for a faster site generation&quot;</span>
-</span><span class='line'><span class="n">task</span> <span class="ss">:ignore</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>  <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged $(ls *.markdown)&quot;</span>
-</span><span class='line'>  <span class="nb">system</span> <span class="s2">&quot;rm $(ls *.markdown)&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Conclusion</h2>
-
-<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Regenerating</span><span class="p">:</span> <span class="mi">1</span> <span class="n">file</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">changed</span> <span class="n">at</span> <span class="mi">2015</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">13</span> <span class="mi">08</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mi">29</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">done</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="mi">617269045</span> <span class="n">seconds</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
 
