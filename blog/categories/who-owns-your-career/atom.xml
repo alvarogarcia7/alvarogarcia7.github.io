@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Who-owns-your-career | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/who-owns-your-career/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-09-08T07:57:45+02:00</updated>
+  <updated>2015-09-18T07:20:07+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -75,6 +75,9 @@
 <ul>
 <li>Every sprint, one of my clients (as of 2015-05) wants to review the work done using some slides and a live demo. The &lsquo;sample&rsquo; slides with the format, layout is useful. Everything that should be replaced (timestamp, contents, etc) is marked with a TODO</li>
 <li>Every day, I commit plenty of times to the control version system (i.e., git). I have an alias for commit, diff, status, etc, that saves me some keystrokes on the most common commands</li>
+<li>See the post &ldquo;A basic working environment&rdquo;</li>
+<li>Deployment, even on local, is automated: a script for getting the latest <code>branch</code>, <code>develop</code> or <code>master</code> code, build the Docker container, start the docker image, notify me the code is ready</li>
+<li>Pipeline: I have a pipeline, in local, where I can push and the tests will be executed automatically. If the build fails (usually BDD tests), I can <code>push -f</code> without affecting to the repo history.</li>
 </ul>
 
 
