@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Training | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/training/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-09-18T07:20:07+02:00</updated>
+  <updated>2015-09-27T21:27:58+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Brown Bag Session: Clojure's Data and Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/23/brown-bag-session-clojures-data-and-code/"/>
+    <updated>2015-09-23T21:24:58+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/23/brown-bag-session-clojures-data-and-code</id>
+    <content type="html"><![CDATA[<p>Today, at a client, I&rsquo;ve facilitated the brown-bag session on Clojure, introducing Lisp&rsquo;s <a href="https://en.wikipedia.org/wiki/Homoiconicity">homoiconicity</a>.</p>
+
+<h2>Session Structure</h2>
+
+<p>The session was designed as a kata, first introducing participants in the problem, letting some time to read the initial version and to think about possible solutions.</p>
+
+<p>Then, I structured the rest of the time as a prepared kata, where I was explaining in the beamer our current problems (day-to-day tasks) and possible solutions in Clojure.</p>
+
+<p>Among them:</p>
+
+<ul>
+<li>Configuration and extensibility: allowing for flexibility, define at configuration time new features without recompiling or modifying the system.</li>
+<li>Persisting and restoring certain state: this is a problem that could easily be solved persisting data in Lisp</li>
+</ul>
+
+
+<p>I explained, in private to those who asked, about <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a> and its dialects <a href="https://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a>, <a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a> and <a href="https://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a>.</p>
+
+<h2>Feedback</h2>
+
+<ul>
+<li>They liked the effort of investigating new languages to solve problems we have in our current stack</li>
+<li>They liked introducing the language features with a back-story to better understand the concepts</li>
+<li>They suggested to improve the level of the session: as the group as a whole is still starting with Clojure, leaving them on their own with code is too much. They asked for more guidance</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
@@ -118,116 +152,6 @@ done;
 <p>In it, we have introduced the BPM concept and the main ideas in Activiti BPM.</p>
 
 <p>Also techniques for hotswapping processes, tips and how-tos.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Internal Training: QA &amp; How to Test]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test/"/>
-    <updated>2015-05-18T22:20:09+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test</id>
-    <content type="html"><![CDATA[<p>At a client, we&rsquo;ve done today an internal training on &ldquo;QA &amp; how to test&rdquo;. In it, the most skilled person with the QA role in the dev team has explained to us some techniques and concepts for testing</p>
-
-<h2>My notes</h2>
-
-<p>Verification vs validation: building the product right vs building the right product.</p>
-
-<h3>Principles</h3>
-
-<p>Extracted from <a href="http://www.istqb.org/">ISTQB</a>:</p>
-
-<ul>
-<li>testing shows presence of defects</li>
-<li>exhaustive testing is impossible</li>
-<li>early testing is better than later testing</li>
-<li>defect clustering: areas with bigger defect ratio or more critical, etc should be tested more thoroughly</li>
-<li>pesticide paradox</li>
-<li>testing is context-dependent</li>
-<li>absence of errors fallacy: the absence of defects does not imply perfect software. There are also problems with validation.</li>
-</ul>
-
-
-<h3>Techniques</h3>
-
-<h4>People-based</h4>
-
-<ul>
-<li>bug bashes: e.g., time-constrained</li>
-<li>subject-matter expert testing</li>
-<li>eat your own dogfood</li>
-<li>others</li>
-</ul>
-
-
-<h4>Activity-based</h4>
-
-<ul>
-<li>regression</li>
-<li>scripted (manual)</li>
-<li>smoke</li>
-<li>exploratory</li>
-<li>installation</li>
-<li>load</li>
-<li>long sequence</li>
-<li>performance</li>
-</ul>
-
-
-<h4>Coverage-based</h4>
-
-<ul>
-<li>menu tour: exploration based on menus (especially on websites)</li>
-<li>functional and system testing</li>
-<li>integration</li>
-<li>logic</li>
-<li>state-based</li>
-</ul>
-
-
-<h4>Requirements-based</h4>
-
-<ul>
-<li>Equivalence partitioning: examples in the same set are considered equivalent</li>
-<li>Boundary based: there are interesting examples around and on the boundaries</li>
-<li>Decision tables: truth table</li>
-<li>State transition tables: state diagram</li>
-</ul>
-
-
-<h4>Risk-based</h4>
-
-<ul>
-<li>make a prioritized list: probability and impact</li>
-<li>perform testing exploring each risk</li>
-<li>after a risk disappears, another opens. Adjust your test effort to stay focused on the current crop</li>
-</ul>
-
-
-<h4>Use case tests</h4>
-
-<ul>
-<li>use case: a common case that represents one of your customer&rsquo;s cases</li>
-<li>use busines language</li>
-</ul>
-
-
-<h4>Structure-based</h4>
-
-<ul>
-<li>test coverage is different than code coverage</li>
-<li>test coverage is based on decision tables</li>
-</ul>
-
-
-<h4>Defining testing priorities</h4>
-
-<ul>
-<li>customer and contractual requirements</li>
-<li>regulatory</li>
-<li>experience-based</li>
-<li>&ldquo;Best representative&rdquo;</li>
-</ul>
-
 ]]></content>
   </entry>
   

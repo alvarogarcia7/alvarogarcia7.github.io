@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="In the prologue of the book, while thanking everyone that has made the book possible: [&hellip;], none of the people mentioned here would be &hellip;">
+  <meta name="description" content="At a client, today I&rsquo;ve done an internal training on angular js: we&rsquo;ve prepared some slides and a live demo. The repository with all the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,41 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/30/internal-training-introduction-to-angularjs/">Internal Training: Introduction to AngularJs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-30T20:22:16+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:22 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, today I&rsquo;ve done an internal training on <a href="https://angularjs.org/">angular js</a>: we&rsquo;ve prepared some <a href="https://github.com/alvarogarcia7/demo-frontend-angularjs/tree/master/slides">slides</a> and a live demo.</p>
+
+<p>The repository with all the information can be found <a href="https://github.com/alvarogarcia7/demo-frontend-angularjs">here</a>.</p>
+
+<p>Apparently, the training has been a success, given that most of the talent in the team is backend focused (as opposed to full-stack) and changing from java to javascript is not straight-forward.</p>
+
+<p>Note: this post has been created a posteriori, dated with the correct training timestamp.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -688,74 +723,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting Clojure Code in Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-14T23:48:27+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:48 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Inserting this code in the blog:</p>
-
-<pre><code>```clojure
-(defn all-access[k]
-    (let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-
-<p>the octopress processor throws the error:</p>
-
-<pre><code>Error: Pygments can't parse unknown language: clojure
-Error: Run jekyll build --trace for more information.
-</code></pre>
-
-<p>A solution would be to include it as lisp code:</p>
-
-<pre><code>```lisp
-(defn all-access[k]
-    (let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-
-<p>this is an example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -773,6 +740,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/23/brown-bag-session-clojures-data-and-code/">Brown Bag Session: Clojure&#8217;s Data and Code</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/09/08/navigating-the-github-repositories/">Navigating the GitHub Repositories</a>
       </li>
     
@@ -786,10 +757,6 @@ Error: Run jekyll build --trace for more information.
     
       <li class="post">
         <a href="/blog/2015/09/01/self-study-in-september-2015/">Self-Study in September 2015</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/08/19/coding-dojo-palindromes/">Coding Dojo: Palindromes</a>
       </li>
     
   </ul>
