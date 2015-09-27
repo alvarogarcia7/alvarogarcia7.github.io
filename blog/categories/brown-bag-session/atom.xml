@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Brown-bag-session | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/brown-bag-session/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-09-27T21:27:58+02:00</updated>
+  <updated>2015-09-27T21:55:01+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -36,6 +36,23 @@
     <content type="html"><![CDATA[<p>At a client, today we&rsquo;ve done a brown-bag session on <a href="http://projects.spring.io/spring-boot/">Spring Boot</a>: we&rsquo;ve gone through the basics with a <a href="https://github.com/Rossyafk/spring-boot-demo/">sample maven project</a> and its <a href="https://github.com/Rossyafk/spring-boot-demo/blob/master/pom.xml">pom file</a>.</p>
 
 <p>We&rsquo;ve seen the <a href="http://start.spring.io/">Spring Initializr</a> and a live demo, using curl for REST client.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session and Dojo: Beginning Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/"/>
+    <updated>2015-08-05T01:14:14+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure</id>
+    <content type="html"><![CDATA[<p>At a client, today I&rsquo;ve facilitated a brown-bag session introducing the Clojure language to a group of java programmers.</p>
+
+<p>I&rsquo;ve started hands-on, live coding on a REPL. To make things easier, I&rsquo;ve created a maven project that imports the clojure jar and lets you obtain dependencies from clojars. The repo is <a href="https://github.com/alvarogarcia7/clojure-for-java-devs">here</a>. This repo wouldn&rsquo;t have been possible without the <a href="https://github.com/talios/clojure-maven-plugin">clojure maven plugin</a>, written by Mark Derricutt.</p>
+
+<p>I&rsquo;ve more or less followed <a href="https://github.com/alvarogarcia7/clojure-for-java-devs/blob/master/guide.md">this guide</a></p>
+
+<p>We&rsquo;ve also practiced, using a dojo in clojure, the fizzbuzz kata.</p>
+
+<p>There is a sample implementation in the same repo, <a href="https://github.com/alvarogarcia7/clojure-for-java-devs/tree/sample-implementation/src">this folder</a>.</p>
 ]]></content>
   </entry>
   
@@ -109,27 +126,6 @@ done;
 <p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Brown-bag Session: Docker]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker/"/>
-    <updated>2015-06-16T18:52:28+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker</id>
-    <content type="html"><![CDATA[<p>Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including:</p>
-
-<ul>
-<li>the difference between a container and an image</li>
-<li>diffing image contents</li>
-<li>AUFS (Another Union FS)</li>
-<li>persistent vs non-persistent (volatile) filesystems</li>
-<li>running CMD and other commands on the instance</li>
-<li>problems of running with permission = root (or its group)</li>
-<li>downsides of it</li>
-<li>how to compare it with a virtual machine</li>
-</ul>
 
 ]]></content>
   </entry>
