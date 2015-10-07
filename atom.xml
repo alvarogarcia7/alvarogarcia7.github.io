@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-09-27T21:55:01+02:00</updated>
+  <updated>2015-10-07T22:17:20+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,237 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Java Tips & Gotchas]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas/"/>
+    <updated>2015-10-07T12:06:58+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas</id>
+    <content type="html"><![CDATA[<p>Make the JVM use UTF-8 character encoding by default</p>
+
+<p>Set up the system property <code>JAVA_TOOL_OPTIONS</code> to <code>-Dfile.encoding=UTF8</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Differences in Maven Test Execution]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/"/>
+    <updated>2015-10-05T18:18:55+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution</id>
+    <content type="html"><![CDATA[<p>There are times when you only want to have the production code:</p>
+
+<ul>
+<li>downstream job after a successful build</li>
+<li>compiling in local after checkout from DVCS</li>
+<li>spiking (possibly the tests are broken)</li>
+<li>speeding up the process</li>
+</ul>
+
+
+<p>For that, maven allows to skip the tests, selectively:</p>
+
+<ul>
+<li><code>-DskipTests</code> compiles the tests, but skips running them</li>
+<li><code>-Dmaven.test.skip</code> skips compiling the tests and does not run them. This can also be written as <code>-Dmaven.test.skip=true</code></li>
+</ul>
+
+
+<p>In case some of your tests depend on tests from another artifact (e.g. Object Mother, test infrastructure) and the latter has changed, you must compile the tests. You need to not execute the tests</p>
+
+<p>For more information:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/25639336/whats-the-difference-between-dskiptests-and-dmaven-test-skip-true">this stackoverflow</a> post is useful</li>
+<li><a href="http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html">Documentation for skipping tests</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Propagate the Failure in Bash]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/"/>
+    <updated>2015-10-02T08:53:29+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash</id>
+    <content type="html"><![CDATA[<p>In bash, the usual behavior is to return the last status code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash-3.1<span class="nv">$ </span>tr
+</span><span class='line'>tr: two strings must be given when translating
+</span><span class='line'>bash-3.1<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+</span><span class='line'>1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But this also applies to pipes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash-3.1<span class="nv">$ </span>tr<span class="p">|</span>tee 1.txt
+</span><span class='line'>tr: two strings must be given when translating
+</span><span class='line'>bash-3.1<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+</span><span class='line'>0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Should you want to pass the non-zero (error) status code to the next operation, use this toggle this feature: <code>set -o pipefail</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash-3.1<span class="nv">$ </span><span class="nb">set</span> -o pipefail
+</span><span class='line'>bash-3.1<span class="nv">$ </span>tr<span class="p">|</span>tee 1.txt
+</span><span class='line'>tr: two strings must be given when translating
+</span><span class='line'>bash-3.1<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+</span><span class='line'>1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
+
+<h2>Set Builtin Reference</h2>
+
+<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a>:</p>
+
+<h3>-e</h3>
+
+<blockquote><p>-e</p>
+
+<p>Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;&amp; or || list except the command following the final &amp;&amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.</p>
+
+<p>This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.</p>
+
+<p>If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.</p></blockquote>
+
+<h3>-o pipefail</h3>
+
+<blockquote><p>-o pipefail</p>
+
+<p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in October 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/"/>
+    <updated>2015-10-01T15:25:19+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015</id>
+    <content type="html"><![CDATA[<h2>Blazing Fast HTML: Virtual DOM in Elm</h2>
+
+<p>I&rsquo;ve read <a href="http://elm-lang.org/blog/blazing-fast-html">this article</a> explaining how Elm works in relation to the virtual DOM. By Evan Czaplicki.</p>
+
+<p>Tags: elm, dom, virtual-dom, comparison, speed, haskell, evan-czaplicki</p>
+
+<h2>Why you should never, ever, ever use MongoDB</h2>
+
+<p>I&rsquo;ve read <a href="http://cryto.net/~joepie91/blog/2015/07/19/why-you-should-never-ever-ever-use-mongodb/">this article</a> stating the downsides of using MongoDB. Written by Sven Slootweg</p>
+
+<p>Tags: mongodb, downside, sven-slootweg, json, document-store, postgresql, acid</p>
+
+<h2>Do you really get classloaders?</h2>
+
+<p>I&rsquo;ve watched <a href="http://zeroturnaround.com/rebellabs/rebel-labs-tutorial-do-you-really-get-classloaders/">this video</a> by Jevgeny Kabanov on classloaders: what they are, how they work nad some tips to solve common issues.</p>
+
+<p>My notes:</p>
+
+<ul>
+<li>the classloading is lazy: the resources are not loaded until they are mentioned</li>
+<li>every classloader has a parent</li>
+<li>every class has a classloader associated with it</li>
+<li>every object has a class associated with it</li>
+<li>classloading delegation: the parent is consulted before loading a class. if it has it, it will load it. If not, I will delegate it</li>
+</ul>
+
+
+<p>There is also <a href="http://www.javaworld.com/article/2074396/core-java/javaone-2011--do-you-really-get-classloaders-.html">this article</a> on the same video</p>
+
+<p>Tags: jevgeny-kabanov, classloader, java,</p>
+
+<h2>Truth table</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Truth_table">the wikipedia article</a> about the truth table and the 16 possible binary boolean operators:</p>
+
+<ul>
+<li>Contradiction</li>
+<li>NOR</li>
+<li>Converse nonimplication</li>
+<li>Negation (of p)</li>
+<li>Material nonimplication</li>
+<li>Negation (of q)</li>
+<li>XOR (exclusive disjunction)</li>
+<li>NAND</li>
+<li>AND (conjunction)</li>
+<li>XNOR (biconditional)</li>
+<li>Projection (of p)</li>
+<li>Implication</li>
+<li>Projection (of q)</li>
+<li>Converse implication</li>
+<li>OR (disjunction)</li>
+<li>Tautology</li>
+</ul>
+
+
+<h2>7 lines of code, 3 minutes: Implement a programming language from scratch</h2>
+
+<p>I&rsquo;ve read <a href="http://matt.might.net/articles/implementing-a-programming-language/">this article</a> by Matt Might about the benefits of implementing a language (from scratch but on top of another existing language used as framework). Chooses lambda calculus as the desired DSL</p>
+
+<p>Tags: matt-might, lambda-calculus, racket, domain-specific-language</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Books Read in 2015Q3]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/30/books-read-in-2015q3/"/>
+    <updated>2015-09-30T12:49:50+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/30/books-read-in-2015q3</id>
+    <content type="html"><![CDATA[<p>Books I&rsquo;ve read this quarter<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>:</p>
+
+<ul>
+<li><a href="http://www.amazon.co.uk/Craftsman-Richard-Sennett/dp/0141022094">The Craftsman</a> by Richard Sennett. Posts under the tag <a href="http://alvarogarcia7.github.io/blog/categories/the-craftsman">the-craftsman</a></li>
+<li><a href="http://www.amazon.co.uk/Software-Craftsmanship-Imperative-McBreen-Aug-2001/dp/B00L6JZAT0">Software Craftsmanship: The New Imperative</a> by Pete McBreen. Posts under the tag <a href="http://alvarogarcia7.github.io/blog/categories/software-craftsmanship-book">software-craftsmanship-book</a></li>
+<li><a href="https://leanpub.com/lisphackers">Lisp Hackers</a> by Vsevolod Dyomkin</li>
+<li><a href="https://pragprog.com/book/cfcar2/the-passionate-programmer">The Passionate Programmer: Creating a Remarkable Career in Software Development</a> by Chad Fowler.</li>
+</ul>
+
+
+<p>Books started, not yet finished (WIP):</p>
+
+<ul>
+<li><a href="http://haskellbook.com/">Haskell Programming</a>, By Chris Allen and Julie Moronuki. This book is still in progress and I&rsquo;m reviewing it</li>
+<li><a href="https://pragprog.com/book/mbfpp/functional-programming-patterns-in-scala-and-clojure">Functional Programming Patterns in Scala and Clojure</a> by Michael Bevilacqua-Linn</li>
+<li><a href="https://pragprog.com/book/ahptl/pragmatic-thinking-and-learning">Pragmatic Thinking and Learning: Refactor Your Wetware</a> by Andy Hunt</li>
+</ul>
+
+
+<p>Books I want to finish:</p>
+
+<p>Books that have entered the queue:</p>
+
+<ul>
+<li><a href="http://www.braveclojure.com/#toc">Clojure for the brave and true</a></li>
+<li><a href="http://press.princeton.edu/titles/669.html">How to Solve It: A New Aspect of Mathematical Method</a> by George Pólya</li>
+<li><a href="http://www.amazon.com/Conceptual-Mathematics-First-Introduction-Categories/dp/052171916X">Conceptual Mathematics: A First Introduction to Categories</a> by Lawvere and Schanuel</li>
+<li><a href="http://computationbook.com/">Understanding Computation: From Simple Machines to Impossible Programs</a> by Tom Stuart</li>
+<li><a href="http://www.cambridge.org/wm-ecommerce-web/academic/landingPage/PIHMOOC">Programming in Haskell</a> by Graham Hutton</li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>The ending date of the quarter is the same as the publication date<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Brown Bag Session: Clojure's Data and Code]]></title>
@@ -457,6 +688,26 @@
 <p>I&rsquo;ve found (and played) with <a href="http://www.ccs.neu.edu/home/dimvar/jstypes.html">this JavaScript type inference engine</a>. Written in Javascript (and available online). Written by Dimitrios Vardoulakis.</p>
 
 <p>Tags: javascript-type-inference, type-inference, type-inference-algorithm, dimitrios-vardoulakis, cfa2</p>
+
+<h2>Alternatives to boolean parameters</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/dariusz-pasciak/2015/05/28/alternatives-to-boolean-parameters.html">this article</a> explaining alternatives to sending a boolean parameter to decide on the contents of the function. Written by Dariusz Pasciak</p>
+
+<p>As I heard some time ago, if a function receives a boolean to decide on what to do, it will for sure have more than one responsibility: one for the false value and one for the true value.</p>
+
+<p>Tags: dariusz-pasciak, boolean, srp, boolean-parameter</p>
+
+<h2>Why Are Web Uploads So Painful?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/why-are-web-uploads-so-painful/">this article</a> on web uploads being painful. By Jeff Atwood. The screenshots feel old (2007) and some of the problems have already been solved.</p>
+
+<p>Tags: jeff-atwood, article, upload, browser</p>
+
+<h2>Can Your Team Pass The Elevator Test?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/can-your-team-pass-the-elevator-test/">this article</a> on the elevator test by Jeff Atwood.</p>
+
+<p>Tags: jeff-atwood, article, elevator-test, assumption, microsoft-bob, vision, product, feature</p>
 ]]></content>
   </entry>
   
@@ -968,1322 +1219,6 @@ Chapter 3, Managing Dependencies, Introduction</p></blockquote>
 <li>Yet another <a href="http://blog.arungupta.me/jdk9-repl-getting-started/">getting started guide</a>, by Arun Gupta</li>
 <li><a href="http://www.infoq.com/news/2014/09/repl-for-java">Information on the REPL project</a>, (codenamed Kulla)</li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Self-Study in August 2015]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/08/02/self-study-in-august-2015/"/>
-    <updated>2015-08-02T21:45:19+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/08/02/self-study-in-august-2015</id>
-    <content type="html"><![CDATA[<h2>Humble Object</h2>
-
-<p>I&rsquo;ve read the <a href="http://xunitpatterns.com/Humble%20Object.html">Humble Object</a> list of patterns, by Gerard Meszaros, including:</p>
-
-<ul>
-<li>humble dialog</li>
-<li>humble executable</li>
-<li>humble transaction controller</li>
-<li>humble container adapter</li>
-</ul>
-
-
-<p>Tags: pattern, gerard-meszaros</p>
-
-<h2>How you know</h2>
-
-<p>I&rsquo;ve reread <a href="http://www.paulgraham.com/know.html">this small essay</a> by Paul Graham on storing information in our heads, based on the context. On the importance of rereading, to add more contexts to the initial one.</p>
-
-<p>Tags: paul-graham, reread, read</p>
-
-<h2>Protected Variation: The Importance of Being Closed</h2>
-
-<p>I&rsquo;ve read <a href="http://www.martinfowler.com/ieeeSoftware/protectedVariation.pdf">this article</a> by Craig Larman in the magazine IEEE Software > Design.</p>
-
-<p>Discusses Information Hiding, Protected Variation and the Open-Closed Principle.</p>
-
-<p>Tags: craig-larman, ocp, open-closed principle, design, information-hiding, ih, protected-variation, pv,</p>
-
-<h2>Lambda, Javascript Micro-Services on AWS</h2>
-
-<p>I&rsquo;ve read <a href="http://www.jayway.com/2014/12/18/lambda-javascript-micro-services-aws/">this post</a> explaining how to deploy a microservice on AWS on top of Lambda. Written by Anders Janmyr</p>
-
-<p>The cool thing is that you get billed by milliseconds!</p>
-
-<p>Tags: anders-janmyr, devops, microservice, lambda, aws</p>
-
-<h2>Migrating To Clojure. So Much Fn</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=Hv4slaRydRM">this talk</a> by Jan Stępień where he talks about his experience on migrating part of an application to clojure from ruby on rails</p>
-
-<p>Tags: jan-stepien, clojure, migration, ruby-on-rails, talk, wrocloverb</p>
-
-<h2>Te recomiendo escribir en un blog</h2>
-
-<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/07/te-recomiendo-escribir-en-un-blog/">this article</a> from Carlos Blé in which he recommends writing a blog, on things we discover along the way. (Spanish)</p>
-
-<p>Tags: carlos-ble, meta, blog, long-way</p>
-
-<h2>We need enough technical debt</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.svpino.com/2015/08/05/we-need-enough-technical-debt">this article</a> on why we need to accumulate a bit of technical debt, as a way of being less perfectionist and deliver more features / value to our stakeholders. Written by Santiago L. Valdarrama.</p>
-
-<p>Tags: santiago-valdarrama, technical-debt, perfectionism</p>
-
-<h2>Escribe mejores tests en Javascript</h2>
-
-<p>I&rsquo;ve read <a href="http://carlosvillu.com/escribe-mejores-tests-en-javascript/">this list</a> of tips to write better javascript tests (Spanish). By Carlos Villuendas</p>
-
-<p>Tags: carlos-villuendas, javascript, test</p>
-
-<h2>Down the Rabbit Hole</h2>
-
-<p>I&rsquo;ve read <a href="https://github.com/brettwooldridge/HikariCP/wiki/Down-the-Rabbit-Hole">this wiki</a> page on how to tune some aspects of the server hotspot JVM, by Brett Wooldridge</p>
-
-<p>Tags: performance, jvm, hotspot, inline, bytecode, brett-wooldridge</p>
-
-<h2>XP Manchester Lightning Talks 2015 Live broadcast</h2>
-
-<p>I have watched the first two <a href="https://www.youtube.com/watch?v=VD4UEW2i7hU">lightning talks</a> from XP Manchester, edition number 61.</p>
-
-<p>Tags: lightning-talk, broadcast, simplicity, manchester, 2015</p>
-
-<h2>Counting hash collisions with the birthday paradox</h2>
-
-<p>I&rsquo;ve read <a href="http://matt.might.net/articles/counting-hash-collisions/">this article</a> on the birthday paradox, or the percentage of chance of people sharing the same birthday. This could be applied to hash function, as the title says, but is not included in the article. Written by Matt Might</p>
-
-<h2>Why I&rsquo;m The Best Programmer In The World*</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/why-im-the-best-programmer-in-the-world/">this ironically-titled article</a> by Jeff Atwood on humility and how to improve as a programmer.</p>
-
-<p>Tags: jeff-atwood</p>
-
-<h2>The Key to Giving and Receiving Negative Feedback</h2>
-
-<p>I&rsquo;ve read <a href="https://hbr.org/2015/08/the-key-to-giving-and-receiving-negative-feedback?">this article</a> by Joseph Grenny about how to give and receive negative feedback. It is exemplified by the plant manager who was expecting another kind of feedback from his subordinates and was surprised by their negative feedback.</p>
-
-<p>Tags: joseph-grenny, negative-feedback, feedback, by-example</p>
-
-<h2>Testing Clojure web applications with Kerodon</h2>
-
-<p>I&rsquo;ve read <a href="https://semaphoreci.com/community/tutorials/testing-clojure-web-applications-with-kerodon">this guide</a> on how to test compojure-based applications with kerodon. Written by Nebojša Stričević</p>
-
-<p>Tags: nebojsa-stricevic, compojure, kerodon, clojure, testing, guide</p>
-
-<h2>Using The Option Type Effectively</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uku-taht/2015/04/29/using-the-option-type-effectively.html">this article</a> on how to use the <code>Option</code> type (in rust), similar to <code>Optional</code> in java or <code>Maybe</code> in haskell. Written by Uku Taht.</p>
-
-<p>Tags: uku-taht, option, maybe, optional, rust</p>
-
-<h2>When Should You Think?</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/03/11/when-to-think.html">this post</a> by Robert C Martin on when to think and the hypothesis that TDD does not allow you to think before coding.</p>
-
-<p>Tags: tdd, robert-c-martin, design, hypothesis</p>
-
-<h2>Orthogonal latin squares: an application of experiment design to compiler testing</h2>
-
-<p>I&rsquo;ve read <a href="http://barbie.uta.edu/~mehra/20_an%20application%20of%20experiment%20design%20to%20compiler%20testing.pdf">this paper</a> by Robert Mandl on techniques that can be applied to reduce the burden of exhaustive testing to compilers. Preferring &ldquo;surely all relevant distinct combinations&rdquo; we can reduce the amount of testing. This paper tries to formalize the concept of &ldquo;near-exhaustive testing&rdquo;</p>
-
-<p>Tags: latin-square, robert-mandl, compiler, testing, near-exhaustive-testing, optimization, exhaustive-testing</p>
-
-<h2>  Practical Type System Benefits</h2>
-
-<p>I&rsquo;ve read <a href="https://themonadreader.files.wordpress.com/2014/04/nccb.pdf">this article</a> by Neil Brown on benefits of the type system, with examples in haskell. He goes on to explore the benefits of involving the type-checker at compile time to remove type errors and ease the programming effort:</p>
-
-<blockquote><p>I find that several problems in Haskell can be solved by involving the type system
-further: The trick is to involve the type system in ways that provide a big benefit
-for the cost, but not going so far that the type system gets in the way of code
-that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p></blockquote>
-
-<p>I&rsquo;ve also learned the concept of the quasi-quoter: similar to a preprocessor, executed at compile time and type-checked</p>
-
-<p>Tags: neil-brown, quote, quasi-quoter, preprocessor, haskell, monad-reader</p>
-
-<h2>ClojureScript and the Blub Paradox</h2>
-
-<p>I&rsquo;ve read this article comparing javascript and clojurescript using the fizzbuzz kata. There is a nice example of the pattern matching for the cases (i.e. &ldquo;switch&rdquo;) of the fizz, buzz. Written by Nate Wildermuth</p>
-
-<p>Tags: clojurescript, javascript, fizzbuzz, kata, nate-wildermuth</p>
-
-<h2>No malinterpretes tu carrera</h2>
-
-<p>I&rsquo;ve read <a href="http://www.carlosble.com/2011/02/no-malinterpretes-tu-carrera/">this article</a> on (not) changing careers from programmer to designer, analyst, team manager. About the programmer&rsquo;s passion and why not to misinterpret your career. Written by Carlos Blé. In Spanish.</p>
-
-<p>Tags: carlos-ble, career, programming, management, career-change</p>
-
-<h2>Just Haskell or Nothing</h2>
-
-<p>I&rsquo;ve read <a href="https://cheecheeo.github.io/just_haskell_or_nothing.html">these slides</a> on packaging values in (Just a) or Nothing for possibly failed computations in haskell. Written by John Chee</p>
-
-<p>Tags: john-chee, haskell, just, nothing, maybe, functor</p>
-
-<h2>Tracking Joy at Work</h2>
-
-<p>I&rsquo;ve read <a href="http://begriffs.com/posts/2015-03-15-tracking-joy-at-work.html">this article</a> about quantifying happiness at the office (or at work). Joe Nelson, the author of the article, uses the quantifying method described int the book <a href="http://www.amazon.com/Experience-Sampling-Method-Measuring-Everyday/dp/1412925576/">Experience Sampling Method</a> (<a href="https://en.wikipedia.org/wiki/Experience_sampling_method">wikipedia page</a>) by Hektner, Schmidt, Csikszentmihalyi.</p>
-
-<p>The last one, not coincidentally is the author of <a href="http://www.amazon.com/Flow-The-Psychology-Optimal-Experience/dp/0061339202">Flow: The Psychology of Optimal Experience</a>.</p>
-
-<p>Tags: mihaly-csikszentmihalyi, flow, quantification, data, experience-sampling, article, joe-nelson</p>
-
-<h2>Going &ldquo;Write-Only&rdquo;</h2>
-
-<p>I&rsquo;ve read <a href="http://begriffs.com/posts/2015-04-20-going-write-only.html">this article</a> by Joe Nelson on going &ldquo;write-only&rdquo; on social media, blogs, news, etc, as opposed to read-only (only consuming media) or read-write (consuming and producing). He cites another programmer, <a href="http://joey.hess.usesthis.com/">Joey Hess</a> and about the quality and durability of your work.</p>
-
-<p>Tags: article, joe-nelson, write-only, social-media, reading, philosophy, thoreau, nietzsche, joey-hess</p>
-
-<h2>Create a static site with Hakyll, Github and Travis CI</h2>
-
-<p>I&rsquo;ve read <a href="http://begriffs.com/posts/2014-08-12-create-static-site-with-hakyll-github.html">this article</a> on how to create your blog with hakyll and travis ci. Written by Joe Nelson</p>
-
-<p>Travis ci is used to do continuous integration and automatically deploy each commit to production (github pages).</p>
-
-<p>Tags: hakyll, haskell, joe-nelson, meta, blog, continuous-deployment, github, github-pages, travis-ci</p>
-
-<h2>Falling in Love with Computer Science</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=haxusGuUyt4">this video</a> by Kathy Pham, an American that discovered her passion, her love to computer science a few years ago. She tells the events around computer science from the beginning of college to the current moment.</p>
-
-<p>Tags: kathy-pham, passion, love, computer-science, autobiography, time-lapse, google-developers</p>
-
-<h2>Duck Typing</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=h0rTF__RNo4">this video</a> by Dan Grossman, part of the <a href="https://www.coursera.org/course/proglang">&ldquo;Programming Languages&rdquo; MOOC</a>, in which he explains what is a Duck Type and how to use (and abuse) them in ruby.</p>
-
-<p>Tags: ruby, dan-grossman, mooc, mooc-programming-languages</p>
-
-<h2>Not-So-Private Clojure Functions</h2>
-
-<p>I&rsquo;ve read <a href="http://christophermaier.name/blog/2011/04/30/not-so-private-clojure-functions">this article</a> explaining how to bypass private functions in clojure: either create a lambda or create a different namespace. Written by Christopher Maier</p>
-
-<p>Tags: private-variable, clojure, testing, joy-of-clojure, christopher-maier, private-function, namespace</p>
-
-<h2>Frege (and Clojure)</h2>
-
-<p>I&rsquo;ve read <a href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/">this article</a> that tells the Pragmatic Programmer&rsquo;s advice to learn a new language every year and the author (Sean Corfield) explains his trajectory learning them. He also cites the Lein plugin he&rsquo;s built: <code>lein-fregec</code> and how to connect clojure and frege (a.k.a JVM&rsquo;s haskell).</p>
-
-<p>Tags: haskell, frege, jvm, clojure, ffi, pragmatic-programmer, advice, lein-fregec,  sean-corfield, comparison</p>
-
-<h2>Two months early. 300k under budget</h2>
-
-<p>I&rsquo;ve read <a href="https://thoughtworks.github.io/p2/issue09/two-months-early/">the tale</a> of a Thoughtworks Project Manager who convinced his client to start using clojure to deliver a custom-made CMS. Written by Dave Elliman.</p>
-
-<p>Tags: dave-elliman, thoughtworks, project-manager, clojure, cms, microservice</p>
-
-<h2>Convince your boss to use Clojure</h2>
-
-<p>I&rsquo;ve read <a href="http://www.lispcast.com/convince-your-boss-to-use-clojure">this guide</a> by Eric Normand on how to convince your boss or your company to start using clojure.</p>
-
-<p>Tags: company, clojure, eric-normand, how-to, guide</p>
-
-<h2>A brief introduction to Prolog</h2>
-
-<p>I&rsquo;ve read <a href="https://docs.google.com/presentation/d/1NAUo8nWLfNvvW3Wb7HJMunljjDJbzu7mo-5twKeGDvc/edit#slide=id.g63daf4745_0_56">these slides</a> about a brief introduction to prolog and how to do web development in it. By Jaelle Scheuerman</p>
-
-<p>Tags: jaelle-scheuerman, prolog, web-development, rest, slide</p>
-
-<h2>Arrayzing - The JavaScript array cheatsheet</h2>
-
-<p>I&rsquo;ve read <a href="https://gist.github.com/ourmaninamsterdam/1be9a5590c9cf4a0ab42">this cheatsheet</a> for javascript arrays. Written by Justin Perry</p>
-
-<p>Tags: cheatsheet, array, javascript, gist, justin-perry</p>
-
-<h2>Some words on lazy evaluation and sharing</h2>
-
-<p>I&rsquo;ve read <a href="http://pseudo.fixme.fi/~opqdonut/blog/Some_words_on_lazy_evaluation_and_sharing.html">this article</a> comparing the <code>fix</code> definition with a hand-made one and its &ldquo;sharing&rdquo; problems. Written by Joel E. Kaasinen</p>
-
-<p>Tags: joel-kaasinen, haskell, fix, sharing, non-strictness, lazy-evaluation</p>
-
-<h2>Hammock Driven Development</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=f84n5oFoZBc">this video</a> by Rich Hickey. A few notes:</p>
-
-<p>A: identifying a problem that we&rsquo;re trying to solve</p>
-
-<p>D: assessing if the proposed solution solves the problem</p>
-
-<p>the union of the features is not the purpose of the product / is not the product</p>
-
-<p>proramming is not completing features</p>
-
-<p>avoiding problems /= solving problems</p>
-
-<p>book: how to solve it - G. Polya. Practices &amp; techniques for solving mathematic problems</p>
-
-<p>How to solve the problem</p>
-
-<ul>
-<li>state the problem</li>
-<li>understand the problem:
-
-<ul>
-<li>what do you know: facts, context, constraints.</li>
-<li>what do you don&rsquo;t know</li>
-<li>are there related problems? solutions to related problems. find an analogy: starting from scratch vs incremental step</li>
-</ul>
-</li>
-<li>be discerning</li>
-<li>more input, better output:
-
-<ul>
-<li>read about your domain problem, research papers (maybe ACM)</li>
-</ul>
-</li>
-<li>tradeoffs:
-
-<ul>
-<li>find at least two options (ups and downs) to compare before taking a decision</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Focus time for programmers like alone time for kids. Hammock time is important mind&rsquo;s eye time</p>
-
-<p>Waking mind:</p>
-
-<ul>
-<li>critical thinking</li>
-<li>analysis</li>
-<li>tactics</li>
-<li>prone to local maxima</li>
-<li>feed work to background mind</li>
-<li>analyze its products</li>
-</ul>
-
-
-<p>Background mind:</p>
-
-<ul>
-<li>making connections</li>
-<li>synthesis</li>
-<li>strategy</li>
-<li>abstracts, analogies</li>
-<li>solves most non-trivial problems</li>
-</ul>
-
-
-<p>loading it: work it hard in the waking mind to be included in the background mind</p>
-
-<p>abstraction = software strategy</p>
-
-<p>tip: small answer is better than big answer (occam&rsquo;s razor?)​</p>
-
-<p>Tags: rich-hickey, hammock-driven-development, background-mind, waking-mind, solve-problem, george-polya, book, analysis, design, talk</p>
-
-<h2>Parallelism /= Concurrency</h2>
-
-<p>I&rsquo;ve read <a href="https://ghcmutterings.wordpress.com/2009/10/06/parallelism-concurrency/">this article</a> on the differences between parallelism and concurrency, with examples in the haskell compiler GHC. Written by <a href="https://ghcmutterings.wordpress.com/author/simonmar/">simonmar</a></p>
-
-<p>Tags: haskell, concurrency, parallelism, ghc, simonmar, comparison</p>
-
-<h2>Parallelism vs. Concurrency</h2>
-
-<p>I&rsquo;ve read <a href="https://wiki.haskell.org/Parallelism_vs._Concurrency">this page</a> from the haskell wiki.</p>
-
-<p>Tags: haskell, concurrency, parallelism, ghc, comparison</p>
-
-<h2>Writing code that writes code — with Hack Codegen</h2>
-
-<p>I&rsquo;ve read <a href="https://code.facebook.com/posts/1624644147776541/writing-code-that-writes-code-with-hack-codegen/">this article</a> about metaprogramming (code that generates code) in PHP. Written by Alejandro Marcu.</p>
-
-<p>I&rsquo;ve arrived to this from this tweet:</p>
-
-<blockquote class="twitter-tweet" data-cards="hidden" lang="en"><p lang="en" dir="ltr">This is what happens when your programming language doesn&#39;t have macros <a href="https://t.co/ZfsEe2EJIj">https://t.co/ZfsEe2EJIj</a>. Yuck.</p>&mdash; David Nolen (@swannodette) <a href="https://twitter.com/swannodette/status/634495099607613440">August 20, 2015</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>Tags: alejandro-marcu, metaprogramming, php, macro, lisp, clojure</p>
-
-<h2>How katas can help you learn</h2>
-
-<p>I&rsquo;ve read <a href="http://codurance.com/2015/08/18/How-katas-can-help-you-learn/">this article</a> on learning from katas, with the example of the Roman Numerals kata in Objective-C. Written by Sandro Mancuso.</p>
-
-<p>Tags: sandro-mancuso, kata, learning, roman-numeral, objective-c</p>
-
-<h2>Java 8: Definitive guide to CompletableFuture</h2>
-
-<p>I&rsquo;ve read <a href="http://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html">this article</a> about Java 8&rsquo;s feature, the <code>CompletableFeature</code>. Written by Tomasz Nurkiewicz</p>
-
-<p>Tags: tomasz-nurkiewicz, java-8, completable-future, future, non-blocking, reactive-programming</p>
-
-<h2>Are You Making These 10 DDD Mistakes?</h2>
-
-<p>I&rsquo;ve read <a href="http://danielwhittaker.me/2015/07/05/are-you-making-these-10-ddd-mistakes/#">this infographic</a> on 10 DDD common mistakes, by Daniel Whittaker.</p>
-
-<p>Tags: ddd, daniel-whittaker, bounded-context, ubiquitous-language, infographic</p>
-
-<h2>Haste: Full-Stack Haskell for Non-PhD Candidates</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=3v03NFcyvzc">this talk</a> at the Strange Loop Conference 2014 about Haste language, a haskell version that compiles to javascript, therefore letting you write haskell in the browser. By Erin Swenson-Healey and James Cooper</p>
-
-<p>In this talk they recommend the <a href="http://www.seas.upenn.edu/~cis194/lectures.html">CIS194 course</a></p>
-
-<p>Tags: haste, haskell, james-cooper, erin-swenson-healey, strange-loop, 2014, talk</p>
-
-<h2>A Year of Haskell</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=wZ0RQG3mFPw">this talk</a> about experiences using haskell professionally, by the American Justin Leitgeb in a Equatorian company in Quito, Stack Builders. He goes on to explain the haskell language in comparison to ruby on rails, what he mostly used with his clients.</p>
-
-<p>Also explains what sells and doesn&rsquo;t (mostly productivity, not security) and gives pointer for applying it to a company</p>
-
-<p>Tags: justin-leitgeb, ecuador, haskell, stack-builders, lambda-days, 2015, client, professional, consulting, consultancy</p>
-
-<h2>A Taste of Haskell</h2>
-
-<p>I&rsquo;ve watched a lesson by Simon Peyton-Jones, that introduces haskell to experienced programmers, not in the language but in programming in general. At the conference OSCON 2007</p>
-
-<p>Links: <a href="https://www.youtube.com/watch?v=jLj1QV11o9g">part 1</a>, <a href="https://www.youtube.com/watch?v=IqXTUbdLig0">part 2</a>, <a href="http://www.slideshare.net/oscon2007/os-peytonjones">slides</a></p>
-
-<p>Tags: oscon, 2007, haskell, introduction, lesson, simon-peyton-jones</p>
-
-<h2>Programming - Why Haskell is Great</h2>
-
-<p>I&rsquo;ve seen <a href="https://www.youtube.com/watch?v=RqvCNb7fKsg">this video</a> introducing some features of haskell. The most basic features, the REPL,  function composition. By FrungyKing</p>
-
-<p>Tags: haskell, introduction, video, screencast, repl, frungyking</p>
-
-<h2>History of Haskell: being lazy with class</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=3bjXGrycMhQ">this video</a> by Simon Peyton-Jones at the &ldquo;History of Programming Languages Conference III&rdquo; which explains how the language was designed and written, a language timeline, what options they took, how they decided about monadic IO, etc.</p>
-
-<p>Tags: simon-peyton-jones, 2007, history-of-programming-languages-conference, haskell, talk</p>
-
-<h2>The Humble Programmer</h2>
-
-<p>​I&rsquo;ve read [this EWD][ewd-340]​ about the necessary humbleness for being a programmer and the slow expansion of the trade, as compared to hardware engineers.</p>
-
-<p>He cites six reasons for preferring to be a humble programmer:</p>
-
-<ul>
-<li>the programmer only needs to manage simple programs</li>
-<li>simple programs imply reducing the search space</li>
-<li>construct a program from a mathematical proof instead of test its properties after building the software. see quote below</li>
-<li>a good abstraction can hide much complexity and difficulty</li>
-<li>the importance of the used tool in the final product</li>
-<li>&ldquo;the only problems we can satisfactory solve are the ones that admit a factored solution&rdquo;</li>
-</ul>
-
-
-<p>In this essay I&rsquo;ve found the idea of</p>
-
-<blockquote><p>Testing shows the presence, not the absence of bugs</p></blockquote>
-
-<p>That <a href="https://en.wikiquote.org/wiki/Edsger_W._Dijkstra">Wikiquote</a> attributes to an earlier paper (in 1969). In this paper, the verbatim quote is:</p>
-
-<blockquote><p>program testing can be a very effective way to show the presence of bugs, but is hopelessly inadequate for showing their absence.</p></blockquote>
-
-<p>This idea also connects to the &ldquo;lower bounds&rdquo; and &ldquo;upper bounds&rdquo; of program correctness expressed in the article <a href="https://cdsmith.wordpress.com/2011/01/09/an-old-article-i-wrote/">An Old Article I Wrote</a> which is about static types, by Cdsmith. Admittedly, much later, in 2008, so this idea could be inspired by the Dijkstra&rsquo;s article.</p>
-
-<p>Tags: edsger-dijkstra, ewd, dijkstra, humble-programmer, essay, comparison, absence-of-bugs, quote</p>
-
-<h2>Building a Link Shortener with Snaplets</h2>
-
-<p>I&rsquo;ve seen <a href="https://vimeo.com/59109358">this video</a> of how to build a link shortener webapp in haskell with the framework snap. By Ryan Trinkle. Found it in the <a href="http://snapframework.com/docs">snap docs</a> page.</p>
-
-<p>Tags: snap, haskell, link-shortener, talk, webapp, framework, ryan-trinkle</p>
-
-<h2>Comparing Haskell Web Frameworks</h2>
-
-<p>I&rsquo;ve read <a href="http://www.edofic.com/posts/2014-02-23-haskell-web.html">this comparison</a> of haskell web frameworks, by Andraz Bajt (a.k.a, edofic)</p>
-
-<p>Tags: andraz-bajt, edofic, haskell, web-framework, framework, comparison</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Packing Your Own Maven Dependencies]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/"/>
-    <updated>2015-07-30T23:21:18+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies</id>
-    <content type="html"><![CDATA[<p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.</p>
-
-<p>This is how most of them look like:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
-</span><span class='line'>         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-</span><span class='line'>         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>com.gmaur.legacycode<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>legacyutils<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;dependencies&gt;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;artifactId&gt;</span>hamcrest-all<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;version&gt;</span>1.3<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;version&gt;</span>4.11<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;groupId&gt;</span>org.mockito<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;artifactId&gt;</span>mockito-all<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;version&gt;</span>2.0.2-beta<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/dependencies&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;build&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;plugins&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;version&gt;</span>2.18.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;includes&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;include&gt;</span>**/**Test.java<span class="nt">&lt;/include&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;include&gt;</span>**/**Should.java<span class="nt">&lt;/include&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;/includes&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/plugins&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/build&gt;</span>
-</span><span class='line'><span class="nt">&lt;/project&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note: the <code>org.apache.maven.plugins:maven-surefire-plugin</code> is to make maven execute the tests that end in <code>*Should</code>.</p>
-
-<p>Now, the dependency versions and plugin configuration is repeated in all the projects, which is plenty of repetition.</p>
-
-<h2>Enter JitPack.io</h2>
-
-<p>With the tool <a href="https://JitPack.io">JitPack.io</a>, you can generate your own dependencies. A guide on how to use it can be found <a href="https://jitpack.io/docs/">here</a></p>
-
-<p>I&rsquo;ve published my own java dependency (originally <a href="https://github.com/alvarogarcia7/java-parent/releases/tag/v0.0.1">a github release</a>)</p>
-
-<p>A <code>pom.xml</code> in the new style is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/master/pom.xml">here</a>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
-</span><span class='line'>         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-</span><span class='line'>         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;groupId&gt;</span>com.example.spike<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;artifactId&gt;</span>lambdatesting<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;parent&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>com.github.alvarogarcia7<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>java-parent<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;version&gt;</span>v0.0.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/parent&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;repositories&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;repository&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;id&gt;</span>jitpack.io<span class="nt">&lt;/id&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;url&gt;</span>https://jitpack.io<span class="nt">&lt;/url&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/repository&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/repositories&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;dependencies&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.github.alvarogarcia7<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>java-parent<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>v0.0.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>hamcrest-all<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>org.mockito<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>mockito-all<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/dependencies&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It does not need the plugin configuration nor the dependency versions. The downside is that it needs to be as the <code>parent pom</code>.</p>
-
-<h2>Acknowledgments</h2>
-
-<p>Thanks to Manuel for encouraging me to write this article</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tool to Find Duplicate Values in Constants]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/"/>
-    <updated>2015-07-30T13:42:44+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants</id>
-    <content type="html"><![CDATA[<p>Imagine having this java class:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">RepeatedConstants</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A_1</span> <span class="o">=</span> <span class="n">A</span><span class="o">;</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A_2</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">_3</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">THREE</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (> 4000 constants). A way of doing this is basing the differences on the values, directly. To do this, remove all text that is not a value:</p>
-
-<p>find what, regex mode: <code>^.*=\s*(.*);</code>
-replace with: $1</p>
-
-<p>Explanation:</p>
-
-<ul>
-<li><code>^.*=\s*</code>: any character before the equal sign. Any whitespace right after it.</li>
-<li><code>(.*);</code>: capture everything that is before the semicolon (;)</li>
-</ul>
-
-
-<p>You end up with this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="s">&quot;A&quot;</span>
-</span><span class='line'><span class="n">A</span>
-</span><span class='line'><span class="s">&quot;A&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">3</span>
-</span><span class='line'><span class="mi">3</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Copy it to <code>a.txt</code>, <code>sort</code> it and <code>uniq</code> it (to remove duplication):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat a.txt <span class="p">|</span> sort <span class="p">|</span> uniq &gt; uniq.txt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>then sort the non-uniq version:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat a.txt <span class="p">|</span> sort &gt; sorted.txt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and diff among them, to find the repeated values:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>diff sorted.txt uniq.txt
-</span><span class='line'>
-</span><span class='line'>3,4d2
-</span><span class='line'>&lt; <span class="s2">&quot;A&quot;</span>
-</span><span class='line'>&lt; 3
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>These are the repeated values. The variable <code>   public static final String A_1 = A;</code> was not caught by this as it only has the same value in execution, not staticly.</p>
-
-<p>For this, at Gmaur, we have developed a small <a href="https://github.com/GMaur/java-duplicates-detector">module to detect duplicates</a>. The main code is this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RepeatedFinder</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Class</span> <span class="n">aClass</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="nf">RepeatedFinder</span><span class="o">(</span><span class="n">Class</span> <span class="n">aClass</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">.</span><span class="na">aClass</span> <span class="o">=</span> <span class="n">aClass</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="n">MultiMap</span> <span class="nf">findDuplicates</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nf">generateMapFromValueToVariables</span><span class="o">(</span><span class="n">aClass</span><span class="o">).</span><span class="na">valuesWithMoreThanOneVariable</span><span class="o">();</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">ValueToNameRepository</span> <span class="nf">generateMapFromValueToVariables</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">ValueToNameRepository</span> <span class="n">valueToNames</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ValueToNameRepository</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">Field</span><span class="o">[]</span> <span class="n">fields</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredFields</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Object</span><span class="o">();</span>
-</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="n">Field</span> <span class="n">field</span> <span class="o">:</span> <span class="n">fields</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
-</span><span class='line'>      <span class="n">valueToNames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">field</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">valueToNames</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The tests and the source code can be found here: <a href="https://github.com/GMaur/java-duplicates-detector">https://github.com/GMaur/java-duplicates-detector</a></p>
-
-<p>Hope you enjoy it, as much as we have enjoyed writing it!</p>
-
-<p>Any feedback is welcome.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tip: Use the Same Import Order in IntelliJ IDEA as Eclipse's]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/"/>
-    <updated>2015-07-30T13:22:44+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses</id>
-    <content type="html"><![CDATA[<p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:</p>
-
-<p>While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.</p>
-
-<p>To solve it, see <a href="http://stackoverflow.com/questions/14716283/is-it-possible-for-intellij-to-organize-imports-the-same-way-as-in-eclipse">this link</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Exploring Testing With Java 8 Lambdas]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/"/>
-    <updated>2015-07-30T13:04:10+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas</id>
-    <content type="html"><![CDATA[<p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:</p>
-
-<p>(source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/ef00a220f427900e3180dcbeec51248845446248">here</a>)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_greeting_letters</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_love_letters</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentLoveLetter</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and the production code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSender</span> <span class="o">{</span>
-</span><span class='line'>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="nf">MailSender</span> <span class="o">(</span><span class="kd">final</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">eventLogger</span> <span class="o">=</span> <span class="n">eventLogger</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span> <span class="o">(</span><span class="kd">final</span> <span class="n">GreetingLetter</span> <span class="n">letter</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="c1">// more business logic</span>
-</span><span class='line'>      <span class="n">eventLogger</span><span class="o">.</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span> <span class="o">(</span><span class="kd">final</span> <span class="n">LoveLetter</span> <span class="n">letter</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="c1">// more business logic</span>
-</span><span class='line'>      <span class="n">eventLogger</span><span class="o">.</span><span class="na">sentLoveLetter</span><span class="o">();</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note: this is an adapted code, so the business logic is not complete and seems simple.</p>
-
-<p>So I decided to explore a bit on refactoring these tests to use lambdas and reduce repetition:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">MailSender</span> <span class="n">sut</span><span class="o">;</span>
-</span><span class='line'><span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">arrange</span><span class="o">;</span>
-</span><span class='line'><span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">verify</span> <span class="o">=</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">assertAndVerify</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">verify</span> <span class="o">=</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentLoveLetter</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">assertAndVerify</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">private</span> <span class="kt">void</span> <span class="nf">assertAndVerify</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">arrange</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">sut</span><span class="o">);</span>
-</span><span class='line'>  <span class="n">verify</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">logger</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Some comments, mine and my teammates:</p>
-
-<ul>
-<li>The tests are not very readable, maybe because we&rsquo;re still not used to java 8 lambdas</li>
-<li><code>assertAndVerify</code> has multiple purposes / responsibilities</li>
-<li>The gain of usability does not outweight the loss of readability</li>
-</ul>
-
-
-<p>Finally, the refactor was discarded and we are using the initial version.</p>
-
-<p>Later, in the dojo, <a href="https://twitter.com/@trikitrok">Manuel</a> and I have refactored this a little bit more. Source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9">here</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSenderShould</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Before</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">eventLogger</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="n">EventLogger</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>      <span class="n">mailSender</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MailSender</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Test</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">greetingLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aGreetingLetterWasSent</span><span class="o">()));</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Test</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">loveLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aLoveLetterWasSent</span><span class="o">()));</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">checkThat</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Check</span> <span class="n">check</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">check</span><span class="o">.</span><span class="na">checkFor</span><span class="o">(</span><span class="n">mailSender</span><span class="o">,</span> <span class="n">eventLogger</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">aGreetingLetterWasSent</span> <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">greetingLetter</span> <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">loveLetter</span> <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendLoveLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">aLoveLetterWasSent</span> <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentLoveLetter</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>(the logger is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9/src/test/java/com/example/lambdatesting/CheckBuilder.java">here</a>)</p>
-
-<p>Later, we have created a simpler functional DSL for the logging, joining the <code>act</code> and <code>verify</code> into an object called <code>Check</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSenderShould</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Before</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">eventLogger</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="n">EventLogger</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>      <span class="n">mailSender</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MailSender</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Test</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingAGreetingLetter</span><span class="o">());</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Test</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingALoveLetter</span><span class="o">());</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">Check</span> <span class="nf">whenSendingALoveLetter</span> <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="k">new</span> <span class="nf">Check</span><span class="o">(</span>
-</span><span class='line'>          <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">letter</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">)),</span>
-</span><span class='line'>          <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentLoveLetter</span>
-</span><span class='line'>      <span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">mailSenderLogs</span> <span class="o">(</span><span class="n">Check</span> <span class="n">check</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">check</span><span class="o">.</span><span class="na">checkFor</span><span class="o">(</span><span class="n">mailSender</span><span class="o">,</span> <span class="n">eventLogger</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="n">Check</span> <span class="nf">whenSendingAGreetingLetter</span> <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="k">new</span> <span class="nf">Check</span><span class="o">(</span>
-</span><span class='line'>          <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">letter</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">)),</span>
-</span><span class='line'>          <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span>
-</span><span class='line'>      <span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">letter</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">typeOfLetter</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="nf">mock</span><span class="o">(</span><span class="n">typeOfLetter</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and the <code>Check</code>, just a placeholder for two <code>Consumer</code>s:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Check</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">act</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="nf">Check</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">act</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">act</span> <span class="o">=</span> <span class="n">act</span><span class="o">;</span>
-</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">verify</span> <span class="o">=</span> <span class="n">verify</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkFor</span><span class="o">(</span><span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">,</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">act</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mailSender</span><span class="o">);</span>
-</span><span class='line'>      <span class="n">verify</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Comparison</h2>
-
-<p>Comparison between the original form and the three refactored forms of the test:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_greeting_letters</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This reads like a classical JUnit tests, using the interaction (with mocks).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">verify</span> <span class="o">=</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">assertAndVerify</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is the first step towards more cohesion, at the cost of readability. You save the verify at the end, but the repeated method <code>assertAndVerify</code> is still present.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">greetingLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aGreetingLetterWasSent</span><span class="o">()));</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This one reads more like a classical DSL, but is harder to read compared to a classical test.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Test</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingAGreetingLetter</span><span class="o">());</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This one reads more like a business requirement.</p>
-
-<h2>Other</h2>
-
-<p>Other ideas we have tested:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Builder</span><span class="o">.</span><span class="na">aNew</span><span class="o">().</span><span class="na">sendGreetingLetter</span><span class="o">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">assertAndVerifyThat</span><span class="o">(</span>
-</span><span class='line'>  <span class="n">theLoggingLine</span><span class="o">()</span>
-</span><span class='line'>      <span class="o">.</span><span class="na">for</span><span class="o">(</span><span class="n">aGreetingLetter</span><span class="o">())</span>
-</span><span class='line'>      <span class="o">.</span><span class="na">isLoggedWhen</span><span class="o">(</span><span class="n">greetingLetterIsSent</span><span class="o">()</span>
-</span><span class='line'>  <span class="o">)</span>
-</span><span class='line'><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">aGreetingLetter</span><span class="o">(){</span>
-</span><span class='line'>  <span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">greetingLetterIsSent</span><span class="o">(){</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">assertAndVerifyThat</span><span class="o">(</span>
-</span><span class='line'>  <span class="n">theLoggingLine</span><span class="o">()</span>
-</span><span class='line'>      <span class="o">.</span><span class="na">for</span><span class="o">(</span>
-</span><span class='line'>          <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">))</span>
-</span><span class='line'>      <span class="o">)</span>
-</span><span class='line'>      <span class="o">.</span><span class="na">isLoggedWhen</span><span class="o">(</span><span class="nl">EventLogger:</span><span class="o">:</span><span class="n">sentGreetingLetter</span><span class="o">)</span>
-</span><span class='line'>  <span class="o">)</span>
-</span><span class='line'><span class="o">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">assertAndVerifyThat</span><span class="o">(</span><span class="n">TestContext</span> <span class="n">testContext</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">testContext</span><span class="o">.</span><span class="na">assert</span><span class="o">();</span>
-</span><span class='line'>  <span class="n">testContext</span><span class="o">.</span><span class="na">verify</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tip | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/tip/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-09-27T21:55:01+02:00</updated>
+  <updated>2015-10-07T22:17:20+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,408 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Java Tips & Gotchas]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas/"/>
+    <updated>2015-10-07T12:06:58+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas</id>
+    <content type="html"><![CDATA[<p>Make the JVM use UTF-8 character encoding by default</p>
+
+<p>Set up the system property <code>JAVA_TOOL_OPTIONS</code> to <code>-Dfile.encoding=UTF8</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Differences in Maven Test Execution]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/"/>
+    <updated>2015-10-05T18:18:55+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution</id>
+    <content type="html"><![CDATA[<p>There are times when you only want to have the production code:</p>
+
+<ul>
+<li>downstream job after a successful build</li>
+<li>compiling in local after checkout from DVCS</li>
+<li>spiking (possibly the tests are broken)</li>
+<li>speeding up the process</li>
+</ul>
+
+
+<p>For that, maven allows to skip the tests, selectively:</p>
+
+<ul>
+<li><code>-DskipTests</code> compiles the tests, but skips running them</li>
+<li><code>-Dmaven.test.skip</code> skips compiling the tests and does not run them. This can also be written as <code>-Dmaven.test.skip=true</code></li>
+</ul>
+
+
+<p>In case some of your tests depend on tests from another artifact (e.g. Object Mother, test infrastructure) and the latter has changed, you must compile the tests. You need to not execute the tests</p>
+
+<p>For more information:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/25639336/whats-the-difference-between-dskiptests-and-dmaven-test-skip-true">this stackoverflow</a> post is useful</li>
+<li><a href="http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html">Documentation for skipping tests</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Propagate the Failure in Bash]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/"/>
+    <updated>2015-10-02T08:53:29+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash</id>
+    <content type="html"><![CDATA[<p>In bash, the usual behavior is to return the last status code:</p>
+
+<pre><code class="bash">bash-3.1$ tr
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+1
+</code></pre>
+
+<p>But this also applies to pipes:</p>
+
+<pre><code class="bash">bash-3.1$ tr|tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+0
+</code></pre>
+
+<p>Should you want to pass the non-zero (error) status code to the next operation, use this toggle this feature: <code>set -o pipefail</code></p>
+
+<pre><code class="bash">bash-3.1$ set -o pipefail
+bash-3.1$ tr|tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+1
+</code></pre>
+
+<p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
+
+<h2>Set Builtin Reference</h2>
+
+<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a>:</p>
+
+<h3>-e</h3>
+
+<blockquote><p>-e</p>
+
+<p>Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;&amp; or || list except the command following the final &amp;&amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.</p>
+
+<p>This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.</p>
+
+<p>If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.</p></blockquote>
+
+<h3>-o pipefail</h3>
+
+<blockquote><p>-o pipefail</p>
+
+<p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in September 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/01/self-study-in-september-2015/"/>
+    <updated>2015-09-01T15:25:19+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/01/self-study-in-september-2015</id>
+    <content type="html"><![CDATA[<h2>The 30 second habit with a lifelong impact</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.growth.supply/the-30-second-habit-with-a-lifelong-impact-2c3f948ead98">this article</a> list of patterns, by Robyn Scott, in which it is explained why to compress information in a few ideas, investing 30 seconds to condense the article.</p>
+
+<p>Tags: 30-second, habit, robyn-scott</p>
+
+<h2>The Strengths and Weaknesses of Extreme Programming</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=LkhLZ7_KZ5w">this video</a> explaining the strengths and weaknesses of extreme programming. By William Matheson</p>
+
+<p>Tags: extreme-programming, xp, william-matheson, video, strength, weakness</p>
+
+<h2>Poster de Extreme Programming</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=4nN6Gh79Yg8">this video</a> introducing eXtreme Programming. By Martín Salías</p>
+
+<p>Tags: martin-salias, kleer, extreme-programming, xp</p>
+
+<h2>Good Tech Lead, Bad Tech Lead</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.growth.supply/good-tech-lead-bad-tech-lead-948b2b806d86">this comparison</a> of good and bad traits in tech leads. By Jason Liszka.</p>
+
+<p>Explains the differences between good and bad tech leads, even though many of these qualities are shared by plain team members</p>
+
+<p>Tags: jason-liszka, tech-lead, comparison</p>
+
+<h2>Why Procrastinators Procrastinate</h2>
+
+<p>I&rsquo;ve read <a href="http://waitbutwhy.com/2013/10/why-procrastinators-procrastinate.html">this article</a> by Tim Urban on procrastination: this article compares the procrastinator and the non-procrastinator brain with pictures, introducing the Rational part, the Instant Gratification Monkey and the Panic Monster. Shows some reasons why.</p>
+
+<p>There is more on part 2: <a href="http://waitbutwhy.com/2013/11/how-to-beat-procrastination.html">How to beat procrastination</a></p>
+
+<p>Tags: tim-urban, procrastination, rational-part, instant-gratification-monkey, panic-monster, brain, comparison</p>
+
+<h2>Algebraic data type</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">this wikipedia page</a>, that explains what this is, a few examples and the theory behind it.</p>
+
+<p>Tags: wikipedia, data-type, algebraic-data-type</p>
+
+<h2>Recursion</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">this wikipedia page</a>, that explains the recursion basic concepts, such as:</p>
+
+<ul>
+<li>induction, coinduction</li>
+<li>recursion, corecursion</li>
+<li>implementation details in iterative vs recursive programs:
+
+<ul>
+<li>shortcutting recursion (i.e., arm-length&rsquo;s recursion)</li>
+<li>wrapper function</li>
+<li>tail-call optimization, related to tail-recursive functions</li>
+</ul>
+</li>
+<li>recursion and its relation to data structures</li>
+<li>base case / recursive case and removing the need of the base one in corecursion or in non-strict languages</li>
+<li>types of recursion:
+
+<ul>
+<li>direct, indirect, mutual</li>
+<li>generative, structural</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Tags: recursion, corecursion, induction, coinduction, tail-call-optimization, tail-recursion, direct-recursion, indirect-recursion, mutual-recursion, generative-recursion, structural-recursion, arm-length-recursion, iterative-function, recursive-function, base-case, recursive-case, wikipedia, data-structure</p>
+
+<h2>Anonymous function</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Anonymous_function">this wikipedia page</a>, that describes what is a lambda expression or an anonymous function. How it can be used (e.g., currying, higher-order function, closures) and gives examples in many languages.</p>
+
+<p>Cites its invention (Church, 1936, lambda-calculus) and its first implementation (Lisp, 1958)</p>
+
+<p>Tags: alonzo-church, anonymous-function, lambda-expression, closure, lambda-calculus, lisp, currying, higher-order-function, wikipedia</p>
+
+<h2>Closure</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">this wikipedia page</a>, that explains the concept of closures and the usual confusion between closure and lambda. Also some applications.</p>
+
+<p>Discusses closures as a way of deferring execution and implementing object-oriented (OO) systems</p>
+
+<p>Tags: wikipedia, closure, object-orientation, lambda-expression</p>
+
+<h2>Zen Story: The Master Archer</h2>
+
+<p>I&rsquo;ve read <a href="http://www.thedailyzen.org/2015/06/23/zen-story-the-master-archer/">this story</a> by Charlie Ambler about perfectionism and deep study, exemplified by the general that retires to study archery and the child who draws targets around the arrows.</p>
+
+<p>Tags: charlie-amber, master, student, zen, story</p>
+
+<h2>Loosely Coupled</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.bwhaley.com/loosely-coupled">this article</a> by Ben Whaley about how to loosely couple services introducing a queue and the difference in patterns between push and pull communication.</p>
+
+<p>Tags: ben-whaley, push, pull, coupling, loose-coupling, service, queue, aws</p>
+
+<h2>Being good at programming competitions correlates negatively with being good on the job</h2>
+
+<p>I&rsquo;ve watched the small video and the discussion about programmers&#8217; talent at <a href="http://www.catonmat.net/blog/programming-competitions-work-performance/">this page</a>. By Peteris Krumins.</p>
+
+<p>The original video explains that being good at a programming contest correlates negatively with skill at a programming job, even if the company hires them.</p>
+
+<p>The discussion explains the analogy with height and the NBA and concludes that this parameter should be preponderated with less importance than others.</p>
+
+<p>Tags: google, peter-norvig, nba, analogy, programming-contest, programming-skill, peteris-krumins</p>
+
+<h2>On Functors</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/on-functors/">this comparison</a> by Peteris Krumins of what the functors are in different languages:</p>
+
+<ul>
+<li>C++: function objects</li>
+<li>Standard ML: generic implementation of interfaces. They allow to compose structures</li>
+<li>Haskell: structure containing zero or more objects that can be converted to another structure containing the other objects. It&rsquo;s an homomorphism between two categories.</li>
+<li>Prolog: built-in predicate for self-inspection and the atom at the start of the structure</li>
+</ul>
+
+
+<p>Tags: peteris-krumins, comparison, haskell, c-plus-plus, standard-ml, prolog, functor</p>
+
+<h2>Recursive Regular Expressions</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/recursive-regular-expressions/">this article</a> on recursive regular expressions by Peteris Krumins.</p>
+
+<p>In it, he lightly describes how a regular expression relates to a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-Free Grammar</a> and the language support for Perl to include recursive regular expressions. Based on the examples (e.g., <code>0^n1^n</code>), it really clicked to me that this could be expressed as a recursive function, with its base case and the recursive one. Also that it &ldquo;depends on solutions to smaller instances of the same problem&rdquo; (<a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">wikipedia</a>)</p>
+
+<p>Tags: peteris-krumins, regular-expression, recursion, recursive-regular-expression, perl, context-free-grammar, formal-language-theory</p>
+
+<h2>In Functional Programming, what is a functor?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/2030863/in-functional-programming-what-is-a-functor/2031421#2031421">this answer</a>, by Norman Ramsey, on what is a functor.</p>
+
+<p>He explains in simple words what the concept is and how a type can belong to the class functor. Examples in haskell.</p>
+
+<p>Tags: norman-ramsey, functor, stack-overflow, haskell, type-class, class, map, fmap</p>
+
+<h2>Functors</h2>
+
+<p>I&rsquo;ve read <a href="http://www.clojure.net/2013/01/19/Functors/">this article</a> by Jim Duey explaining functors in Clojure. He introduces a couple of notes of Haskell but all of the examples are in Clojure. Explains functors, a subset of it called applicatives, and the two libraries he has created.</p>
+
+<p>Tags: jim-duey, functor, clojure, haskell</p>
+
+<h2>10 Tips for Proper Application Logging</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javacodegeeks.com/2011/01/10-tips-proper-application-logging.html">this article</a> by Tomasz Nurkiewicz about tips on logging:</p>
+
+<ul>
+<li>reduce side effects</li>
+<li>use categories and levels</li>
+<li>connection with external systems</li>
+<li>handling exceptions</li>
+<li>automatically / manually reading logging files</li>
+</ul>
+
+
+<p>Tags: tomasz-nurkiewicz, logging, sl4j, log4j, tip</p>
+
+<h2>What is &ldquo;duck typing&rdquo;?</h2>
+
+<p>I&rsquo;ve read <a href="http://ericlippert.com/2014/01/02/what-is-duck-typing/">this article</a> by Eric Lippert about duck typing</p>
+
+<p>Tags: duck-typing, eric-lippert, type-system, c-sharp</p>
+
+<h2>Yagni</h2>
+
+<p>I&rsquo;ve reread <a href="http://martinfowler.com/bliki/Yagni.html">this article</a> by Martin Fowler on the cost of developing features that are not needed</p>
+
+<p>Tags: martin-fowler, yagni, article, misunderstanding</p>
+
+<h2>Learn Haskell</h2>
+
+<p>I&rsquo;ve seen <a href="https://www.youtube.com/watch?v=JJlI5FPTbgE">this video</a> by Jordan Medlock on learning haskell, explaining the basics and how to use the REPL</p>
+
+<p>Tags: haskell, repl, jordan-medlock, beginner, video</p>
+
+<h2>Learn Haskell</h2>
+
+<p>I&rsquo;ve seen <a href="https://www.youtube.com/watch?v=JJlI5FPTbgE">this video</a> by Jordan Medlock on learning haskell, explaining the basics and how to use the REPL</p>
+
+<p>Tags: haskell, repl, jordan-medlock, beginner, video</p>
+
+<h2>TMUX - The Terminal Multiplexer</h2>
+
+<p>I&rsquo;ve read these two parts: (<a href="http://blog.hawkhost.com/2010/06/28/tmux-the-terminal-multiplexer/">one</a>, <a href="http://blog.hawkhost.com/2010/07/02/tmux-%E2%80%93-the-terminal-multiplexer-part-2">two</a>) of an introduction guide to <code>tmux</code> (the unix terminal multiplexer) by Cody from Hawk Host.</p>
+
+<p>In it, he explains the basics of tmux and the main differences with <code>screen</code></p>
+
+<p>Tags: cody, hawk-host, tmux, how-to</p>
+
+<h2>Thermodynamics and Garbage Collection</h2>
+
+<p>I&rsquo;ve read <a href="http://www.pipeline.com/~hbaker1/ThermoGC.html">this paper</a> by Henry G. Baker that explains the analogy of the garbage collection (&ldquo;a freezer&rdquo;) and thermodynamics, where the state mutator (th program, also an oven) modifies the garbage heap and introduces / extracts entropy into the system.</p>
+
+<p>Comparison between entropy and lack of information, using the theories from Shannon, Maxwell-Boltzmann. There&rsquo;s a reference to the knapsack problem and to simulated annealing.</p>
+
+<p>There&rsquo;s also a gentle introduction to thermodynamics in layman terms: heat, temperature, microstates, macrostates, reversability, etc.</p>
+
+<p>In this paper it is also reflected (in macro vs micro states) that the sum all parts is simpler than the single ones (i.e., Information Hiding)</p>
+
+<p>Tags: henry-baker, thermodynamics, microstate, macrostate, analogy, simulated-annealing, garbage-collection, shannon, information, maxwell-boltzmann, freezer, oven, entropy</p>
+
+<h2>How we ended up with microservices</h2>
+
+<p>I&rsquo;ve read <a href="http://philcalcado.com/2015/09/08/how_we_ended_up_with_microservices.html">this article</a>, by Phil Calçado, where he talks about his stay at SoundCloud:</p>
+
+<ul>
+<li>the value stream map: from X days to Y</li>
+<li>reorganizing teams into service teams</li>
+<li>conway&rsquo;s law and teams being responsible for support. Also, being given full authority</li>
+</ul>
+
+
+<p>  Tags: phil-calcado, soundcloud, microservice, team-split, value-stream-mapping, conversion, reorganization</p>
+
+<h2>Lisp is still a secret weapon</h2>
+
+<p>I&rsquo;ve read <a href="http://kep.io/is-lisp-still-a-secret-weapon/">this article</a> by Judd Keppel where he explains it is a good idea that Clojure / ClojureScript continues to be a secret, not known among developers. Cites the article &lsquo;Beating the averages&rsquo; by Paul Graham and the amount of available packages in npm, maven central, etc</p>
+
+<p>Tags: paul-graham, judd-keppel, clojure, clojurescript, weapon, developer</p>
+
+<h2>Perceptron</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Perceptron">this wikipedia</a> article that explains the single-layer and multi-layer perceptron. First designed to be a machine (hardware), but later an algorithm for supervised machine learning. Worked by Minsky &amp; Papert and invented by Frank Rosenblatt in 1958.</p>
+
+<p>Tags: peceptron, artificial-intelligence, machine-learning, frank-rosenblatt, 1958, mavin-minsky, seymour-papert</p>
+
+<h2>Is C# a strongly typed or a weakly typed language?</h2>
+
+<p>I&rsquo;ve read <a href="http://ericlippert.com/2012/10/15/is-c-a-strongly-typed-or-a-weakly-typed-language/">this article</a>, in the form of a dialogue between Eric Lippert and himself about the C# language and its type system.</p>
+
+<p>Tags: type-system, c-sharp, eric-lippert, dialogue, strongly-typed, weakly-typed, language</p>
+
+<h2>Diseño por contratos: construyendo software confiable</h2>
+
+<p>I&rsquo;ve read <a href="http://www.revista.unam.mx/vol.4/num5/art11/sep_art11.pdf">this paper</a> that explains design by contract, based on the Hoare triplet, pre-post condition, method and class invariant. With examples in Eiffel, Java about a package sender company. Also explains pre/post with inheritance. By Gerardo Rossel and Andrea Manna. In Spanish.</p>
+
+<p>Tags: gerardo-rossel, andrea-manna, design-by-contract, unam-mx, eiffel, java, precondition, postcondition, trust, quality, hoare-triplet, method-invariant, class-invariant</p>
+
+<h2>The Inevitable Return of COBOL</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.hackerrank.com/the-inevitable-return-of-cobol/">this article</a> that explains the current state of COBOL in programming and systems. Written by Ritika Trikha</p>
+
+<p>Tags: ritika-trikha, cobol, programming-language, retirement, median-age</p>
+
+<h2>The Risky Eclipse of Statisticians</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.hackerrank.com/the-risky-eclipse-of-statisticians/">this article</a> where Ritika Trikha explains the current situation regarding Big Data and the statiscian jobs. How Big Data is in demand but the latter are not and what effects this might have.</p>
+
+<p>Tags: ritika-trikha, bootcamp, programming, hiring, big-data, analysis, statistics</p>
+
+<h2>Give it five minutes</h2>
+
+<p>I&rsquo;ve read <a href="https://signalvnoise.com/posts/3124-give-it-five-minutes">this article</a> by Jason Fried where he explains why we should give ideas time to sink in and marinate, before dismissing them. Ideas are so fragile that it is better to let them live for a while before dismissing them. This also applies for thoughts (other people&rsquo;s or your own).</p>
+
+<p>Tags: jason-fried, idea, think, startup, blue-hat, thinking-hat,  six-thinking-hats, red-hat</p>
+
+<h2>Reading Clojure Stacktraces</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jayfields.com/2012/06/reading-clojure-stacktraces.html">this article</a> by Jay Fields on reading clojure stacktraces. Very similar to &ldquo;Clojure Stack Traces for the Uninitiated&rdquo;</p>
+
+<p>Tags: jay-fields, clojure, stacktrace</p>
+
+<h2>Clojure Stack Traces for the Uninitiated</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/connor-mendenhall/2014/09/12/clojure-stacktraces.html">this article</a> on how to interpret clojure stacktraces. Written by Connor Mendenhall</p>
+
+<p>Tags: connor-mendenhall, clojure, stacktrace</p>
+
+<h2>JavaScript type inference</h2>
+
+<p>I&rsquo;ve found (and played) with <a href="http://www.ccs.neu.edu/home/dimvar/jstypes.html">this JavaScript type inference engine</a>. Written in Javascript (and available online). Written by Dimitrios Vardoulakis.</p>
+
+<p>Tags: javascript-type-inference, type-inference, type-inference-algorithm, dimitrios-vardoulakis, cfa2</p>
+
+<h2>Alternatives to boolean parameters</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/dariusz-pasciak/2015/05/28/alternatives-to-boolean-parameters.html">this article</a> explaining alternatives to sending a boolean parameter to decide on the contents of the function. Written by Dariusz Pasciak</p>
+
+<p>As I heard some time ago, if a function receives a boolean to decide on what to do, it will for sure have more than one responsibility: one for the false value and one for the true value.</p>
+
+<p>Tags: dariusz-pasciak, boolean, srp, boolean-parameter</p>
+
+<h2>Why Are Web Uploads So Painful?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/why-are-web-uploads-so-painful/">this article</a> on web uploads being painful. By Jeff Atwood. The screenshots feel old (2007) and some of the problems have already been solved.</p>
+
+<p>Tags: jeff-atwood, article, upload, browser</p>
+
+<h2>Can Your Team Pass The Elevator Test?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/can-your-team-pass-the-elevator-test/">this article</a> on the elevator test by Jeff Atwood.</p>
+
+<p>Tags: jeff-atwood, article, elevator-test, assumption, microsoft-bob, vision, product, feature</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Searching on a Suite of Failing Tests]]></title>
@@ -116,197 +518,6 @@
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Multiple Return Values in a Mockito Stub]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/"/>
-    <updated>2015-08-07T11:31:19+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.</p>
-
-<pre><code class="java">package com.example.spike;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
-import org.junit.Test;
-import org.mockito.Spy;
-
-public class DifferentReturnValues {
-
-    @Spy
-    private Spike1 spike1 = new Spike1();
-
-
-    @Test
-    public void spike1() {
-        spike1 = spy(spike1);
-        when(spike1.getBool()).thenReturn(false, true);
-
-        assertThat(spike1.getBool(), is(false));
-        assertThat(spike1.getBool(), is(true));
-
-        assertThat(spike1.getBool(), is(true));
-        assertThat(spike1.getBool(), is(true));
-    }
-
-
-    private class Spike1 {
-        public boolean getBool() {
-            return true;
-        }
-    }
-}
-</code></pre>
-
-<p>The key line is:</p>
-
-<pre><code class="java">when(spike1.getBool()).thenReturn(false, true);
-</code></pre>
-
-<p>this makes the stubbed function to return multiple values:</p>
-
-<pre><code class="java">assertThat(spike1.getBool(), is(false));
-assertThat(spike1.getBool(), is(true));
-</code></pre>
-
-<p>The last value is repeated after the last defined value:</p>
-
-<pre><code class="java">@Test
-public void spike1() {
-    spike1 = spy(spike1);
-    when(spike1.getBool()).thenReturn(false, true);
-
-    assertThat(spike1.getBool(), is(false));
-    assertThat(spike1.getBool(), is(true));
-
-    assertThat(spike1.getBool(), is(true));
-    assertThat(spike1.getBool(), is(true));
-}
-</code></pre>
-
-<p>If you want to loop over the values, you can implement it with the <code>doAnswer</code> method:</p>
-
-<pre><code class="java">@Test
-public void spike1() {
-    spike1 = spy(spike1);
-    when(spike1.getBool()).thenReturn(false, true);
-
-    final boolean[] value = {true};
-
-    doAnswer(invocation -&gt; {
-        value[0] = !value[0];
-        return value[0];
-    }).when(spike1).getBool();
-
-    assertThat(spike1.getBool(), is(false));
-    assertThat(spike1.getBool(), is(true));
-
-    assertThat(spike1.getBool(), is(false));
-    assertThat(spike1.getBool(), is(true));
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tip: Massively Reverting Local Changes]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/"/>
-    <updated>2015-07-08T02:40:24+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes</id>
-    <content type="html"><![CDATA[<p>I was changing a massive amount of files (>1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests.</p>
-
-<p>Here&rsquo;s how to do it automatically:</p>
-
-<p>Copy all the failing tests to a text editor:</p>
-
-<p>Input:</p>
-
-<pre><code>testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest)
-testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest)
-testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest)
-testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest)
-testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest)
-testDeleteDocument(io.company.controller.dms.DocumentControllerTest)
-testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest)
-testUpdateXML(io.company.controller.dms.DocumentControllerTest)
-testSearchXFPage(io.company.controller.dms.DocumentControllerTest)
-testCreateXFPage(io.company.controller.dms.DocumentControllerTest)
-testUpdatePage(io.company.controller.dms.DocumentControllerTest)
-testSearchCrop(io.company.controller.dms.DocumentControllerTest)
-testUpdateCrop(io.company.controller.dms.DocumentControllerTest)
-testMoveDocument(io.company.controller.dms.DocumentControllerTest)
-testGetDocument(io.company.controller.dms.DocumentControllerTest)
-</code></pre>
-
-<p>regex:</p>
-
-<p>(tested in Sublime 3, build 3083, Windows 64)</p>
-
-<p>find what: <code>^[^(]+\([a-Z.]*\.(.*)\)</code></p>
-
-<p>replace with: <code>$1</code></p>
-
-<p>Regex explanation for <code>^[^(]+\([a-Z.]*\.(.*)\)</code>:</p>
-
-<ul>
-<li><code>^</code>: beginning of line</li>
-<li><code>[^(]+</code>: every character except parenthesis, one or more times</li>
-<li><code>\([a-Z.]*</code>: start with one parenthesis, any number of a-z, A-Z</li>
-<li>`.&#8220;: a dot, as I&rsquo;m using regex replacement</li>
-<li><code>(.*)</code>: any character, zero or more times, captured in group <code>$1</code></li>
-<li><code>\)</code>: closing parenthesis</li>
-</ul>
-
-
-<p>Output:</p>
-
-<pre><code>DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-</code></pre>
-
-<p>copy that to file <code>a.txt</code></p>
-
-<p>Revert all the changes in these files:</p>
-
-<pre><code class="bash">for i in $(cat a.txt | uniq); do
-  git checkout -- *$i*
-done
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tip: Committing to the Repo File by File]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/"/>
-    <updated>2015-07-08T02:37:08+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file</id>
-    <content type="html"><![CDATA[<p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
-
-<p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
-
-<pre><code class="bash">for f in $(git status -s |grep "^M"|awk '{print $2}'); do
-  git add $f
-  git commit -m "generic commit for all files"
-done
-</code></pre>
 ]]></content>
   </entry>
   

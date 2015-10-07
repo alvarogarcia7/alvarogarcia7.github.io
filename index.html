@@ -9,7 +9,8 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Today, at a client, I&rsquo;ve facilitated the brown-bag session on Clojure, introducing Lisp&rsquo;s homoiconicity. Session Structure The session &hellip;">
+  <meta name="description" content="Make the JVM use UTF-8 character encoding by default Set up the system property JAVA_TOOL_OPTIONS to -Dfile.encoding=UTF8
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,337 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/10/07/java-tips-gotchas/">Java Tips & Gotchas</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-07T12:06:58+02:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:06 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Make the JVM use UTF-8 character encoding by default</p>
+
+<p>Set up the system property <code>JAVA_TOOL_OPTIONS</code> to <code>-Dfile.encoding=UTF8</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-05T18:18:55+02:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are times when you only want to have the production code:</p>
+
+<ul>
+<li>downstream job after a successful build</li>
+<li>compiling in local after checkout from DVCS</li>
+<li>spiking (possibly the tests are broken)</li>
+<li>speeding up the process</li>
+</ul>
+
+
+<p>For that, maven allows to skip the tests, selectively:</p>
+
+<ul>
+<li><code>-DskipTests</code> compiles the tests, but skips running them</li>
+<li><code>-Dmaven.test.skip</code> skips compiling the tests and does not run them. This can also be written as <code>-Dmaven.test.skip=true</code></li>
+</ul>
+
+
+<p>In case some of your tests depend on tests from another artifact (e.g. Object Mother, test infrastructure) and the latter has changed, you must compile the tests. You need to not execute the tests</p>
+
+<p>For more information:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/25639336/whats-the-difference-between-dskiptests-and-dmaven-test-skip-true">this stackoverflow</a> post is useful</li>
+<li><a href="http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html">Documentation for skipping tests</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the Failure in Bash</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-02T08:53:29+02:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:53 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In bash, the usual behavior is to return the last status code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash-3.1<span class="nv">$ </span>tr
+</span><span class='line'>tr: two strings must be given when translating
+</span><span class='line'>bash-3.1<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+</span><span class='line'>1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But this also applies to pipes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash-3.1<span class="nv">$ </span>tr<span class="p">|</span>tee 1.txt
+</span><span class='line'>tr: two strings must be given when translating
+</span><span class='line'>bash-3.1<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+</span><span class='line'>0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Should you want to pass the non-zero (error) status code to the next operation, use this toggle this feature: <code>set -o pipefail</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash-3.1<span class="nv">$ </span><span class="nb">set</span> -o pipefail
+</span><span class='line'>bash-3.1<span class="nv">$ </span>tr<span class="p">|</span>tee 1.txt
+</span><span class='line'>tr: two strings must be given when translating
+</span><span class='line'>bash-3.1<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+</span><span class='line'>1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
+
+<h2>Set Builtin Reference</h2>
+
+<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a>:</p>
+
+<h3>-e</h3>
+
+<blockquote><p>-e</p>
+
+<p>Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;&amp; or || list except the command following the final &amp;&amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.</p>
+
+<p>This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.</p>
+
+<p>If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.</p></blockquote>
+
+<h3>-o pipefail</h3>
+
+<blockquote><p>-o pipefail</p>
+
+<p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/10/01/self-study-in-october-2015/">Self-Study in October 2015</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-01T15:25:19+02:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>3:25 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Blazing Fast HTML: Virtual DOM in Elm</h2>
+
+<p>I&rsquo;ve read <a href="http://elm-lang.org/blog/blazing-fast-html">this article</a> explaining how Elm works in relation to the virtual DOM. By Evan Czaplicki.</p>
+
+<p>Tags: elm, dom, virtual-dom, comparison, speed, haskell, evan-czaplicki</p>
+
+<h2>Why you should never, ever, ever use MongoDB</h2>
+
+<p>I&rsquo;ve read <a href="http://cryto.net/~joepie91/blog/2015/07/19/why-you-should-never-ever-ever-use-mongodb/">this article</a> stating the downsides of using MongoDB. Written by Sven Slootweg</p>
+
+<p>Tags: mongodb, downside, sven-slootweg, json, document-store, postgresql, acid</p>
+
+<h2>Do you really get classloaders?</h2>
+
+<p>I&rsquo;ve watched <a href="http://zeroturnaround.com/rebellabs/rebel-labs-tutorial-do-you-really-get-classloaders/">this video</a> by Jevgeny Kabanov on classloaders: what they are, how they work nad some tips to solve common issues.</p>
+
+<p>My notes:</p>
+
+<ul>
+<li>the classloading is lazy: the resources are not loaded until they are mentioned</li>
+<li>every classloader has a parent</li>
+<li>every class has a classloader associated with it</li>
+<li>every object has a class associated with it</li>
+<li>classloading delegation: the parent is consulted before loading a class. if it has it, it will load it. If not, I will delegate it</li>
+</ul>
+
+
+<p>There is also <a href="http://www.javaworld.com/article/2074396/core-java/javaone-2011--do-you-really-get-classloaders-.html">this article</a> on the same video</p>
+
+<p>Tags: jevgeny-kabanov, classloader, java,</p>
+
+<h2>Truth table</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Truth_table">the wikipedia article</a> about the truth table and the 16 possible binary boolean operators:</p>
+
+<ul>
+<li>Contradiction</li>
+<li>NOR</li>
+<li>Converse nonimplication</li>
+<li>Negation (of p)</li>
+<li>Material nonimplication</li>
+<li>Negation (of q)</li>
+<li>XOR (exclusive disjunction)</li>
+<li>NAND</li>
+<li>AND (conjunction)</li>
+<li>XNOR (biconditional)</li>
+<li>Projection (of p)</li>
+<li>Implication</li>
+<li>Projection (of q)</li>
+<li>Converse implication</li>
+<li>OR (disjunction)</li>
+<li>Tautology</li>
+</ul>
+
+
+<h2>7 lines of code, 3 minutes: Implement a programming language from scratch</h2>
+
+<p>I&rsquo;ve read <a href="http://matt.might.net/articles/implementing-a-programming-language/">this article</a> by Matt Might about the benefits of implementing a language (from scratch but on top of another existing language used as framework). Chooses lambda calculus as the desired DSL</p>
+
+<p>Tags: matt-might, lambda-calculus, racket, domain-specific-language</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/09/30/books-read-in-2015q3/">Books Read in 2015Q3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-09-30T12:49:50+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Books I&rsquo;ve read this quarter<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>:</p>
+
+<ul>
+<li><a href="http://www.amazon.co.uk/Craftsman-Richard-Sennett/dp/0141022094">The Craftsman</a> by Richard Sennett. Posts under the tag <a href="/blog/categories/the-craftsman">the-craftsman</a></li>
+<li><a href="http://www.amazon.co.uk/Software-Craftsmanship-Imperative-McBreen-Aug-2001/dp/B00L6JZAT0">Software Craftsmanship: The New Imperative</a> by Pete McBreen. Posts under the tag <a href="/blog/categories/software-craftsmanship-book">software-craftsmanship-book</a></li>
+<li><a href="https://leanpub.com/lisphackers">Lisp Hackers</a> by Vsevolod Dyomkin</li>
+<li><a href="https://pragprog.com/book/cfcar2/the-passionate-programmer">The Passionate Programmer: Creating a Remarkable Career in Software Development</a> by Chad Fowler.</li>
+</ul>
+
+
+<p>Books started, not yet finished (WIP):</p>
+
+<ul>
+<li><a href="http://haskellbook.com/">Haskell Programming</a>, By Chris Allen and Julie Moronuki. This book is still in progress and I&rsquo;m reviewing it</li>
+<li><a href="https://pragprog.com/book/mbfpp/functional-programming-patterns-in-scala-and-clojure">Functional Programming Patterns in Scala and Clojure</a> by Michael Bevilacqua-Linn</li>
+<li><a href="https://pragprog.com/book/ahptl/pragmatic-thinking-and-learning">Pragmatic Thinking and Learning: Refactor Your Wetware</a> by Andy Hunt</li>
+</ul>
+
+
+<p>Books I want to finish:</p>
+
+<p>Books that have entered the queue:</p>
+
+<ul>
+<li><a href="http://www.braveclojure.com/#toc">Clojure for the brave and true</a></li>
+<li><a href="http://press.princeton.edu/titles/669.html">How to Solve It: A New Aspect of Mathematical Method</a> by George Pólya</li>
+<li><a href="http://www.amazon.com/Conceptual-Mathematics-First-Introduction-Categories/dp/052171916X">Conceptual Mathematics: A First Introduction to Categories</a> by Lawvere and Schanuel</li>
+<li><a href="http://computationbook.com/">Understanding Computation: From Simple Machines to Impossible Programs</a> by Tom Stuart</li>
+<li><a href="http://www.cambridge.org/wm-ecommerce-web/academic/landingPage/PIHMOOC">Programming in Haskell</a> by Graham Hutton</li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>The ending date of the quarter is the same as the publication date<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -619,281 +951,26 @@
 <p>I&rsquo;ve found (and played) with <a href="http://www.ccs.neu.edu/home/dimvar/jstypes.html">this JavaScript type inference engine</a>. Written in Javascript (and available online). Written by Dimitrios Vardoulakis.</p>
 
 <p>Tags: javascript-type-inference, type-inference, type-inference-algorithm, dimitrios-vardoulakis, cfa2</p>
-</div>
-  
-  
 
+<h2>Alternatives to boolean parameters</h2>
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/08/19/coding-dojo-palindromes/">Coding Dojo: Palindromes</a></h1>
-    
-    
-      <p class="meta">
-        
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/dariusz-pasciak/2015/05/28/alternatives-to-boolean-parameters.html">this article</a> explaining alternatives to sending a boolean parameter to decide on the contents of the function. Written by Dariusz Pasciak</p>
 
+<p>As I heard some time ago, if a function receives a boolean to decide on what to do, it will for sure have more than one responsibility: one for the false value and one for the true value.</p>
 
+<p>Tags: dariusz-pasciak, boolean, srp, boolean-parameter</p>
 
+<h2>Why Are Web Uploads So Painful?</h2>
 
-<time class='entry-date' datetime='2015-08-19T11:37:16+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:37 am</span></time>
-        
-      </p>
-    
-  </header>
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/why-are-web-uploads-so-painful/">this article</a> on web uploads being painful. By Jeff Atwood. The screenshots feel old (2007) and some of the problems have already been solved.</p>
 
+<p>Tags: jeff-atwood, article, upload, browser</p>
 
-  <div class="entry-content"><p>At a client, today I&rsquo;ve facilitated a coding dojo on palindrome searching.</p>
+<h2>Can Your Team Pass The Elevator Test?</h2>
 
-<p>I&rsquo;ve prepared a <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-java">github repository</a> for the java solutions. In this repository, the tag <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-java/tree/start-here"><code>start-here</code></a> has the prepared pom with dependencies.</p>
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/can-your-team-pass-the-elevator-test/">this article</a> on the elevator test by Jeff Atwood.</p>
 
-<p>We have paired to work on the kata but none of my teammate&rsquo;s solutions are available (at the moment), but mine is at the <code>master</code> branch.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/08/17/coding-dojo-goldbach-conjecture/">Coding Dojo: Goldbach Conjecture</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-17T23:37:16+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:37 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At the <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship meetup</a>, today I&rsquo;ve facilitated a coding dojo on the <a href="https://en.wikipedia.org/wiki/Goldbach%27s_conjecture">Goldbach Conjecture</a>. The problem was prepared by <a href="https://twitter.com/trikitrok">Manuel Rivero</a>.</p>
-
-<p>The meetup event is <a href="http://www.meetup.com/es/Barcelona-Software-Craftsmanship/events/224169573/">here</a> and there are plenty of solutions prepared by the pairs:
-  * <a href="https://github.com/Duber/GoldbachConjectureKataInJava">Java</a>
-  * <a href="https://github.com/raullorca/GoldbachConjectureKata">C#</a>
-  * <a href="https://github.com/alvarogarcia7/goldbach-conjecture-kata-haskell">Haskell</a>
-  * <a href="https://github.com/celtric/goldbach-conjecture-kata-php">PHP</a>
-  * <a href="https://github.com/celtric/goldbach-conjecture-kata-java">Java</a>
-  * <a href="https://github.com/juanangosto/GoldbachsConjecture">PHP</a>
-  * <a href="https://github.com/rojoangel/12moths-12katas/tree/master/7-goldbach-conjecture-kata">Haskell</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/08/13/searching-on-a-suite-of-failing-tests/">Searching on a Suite of Failing Tests</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-13T16:45:19+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:45 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Motivation</h2>
-
-<p>Today, at a client, in the green phase, we had a test suite which was failing: the whole suite fails but the test cases, individually, succeed.</p>
-
-<p>So my first impression was that something was being shared between tests. Also confirmed because the failing class was an EndToEnd test, in which we load the whole spring context</p>
-
-<p>A quick glance was not revealing anything interesting, so I decided to find which is the minimum suite (as opposed as to the whole suite) that makes the new testcase fail, expecting to narrow the search for possible causes. This is very similar to what QuickCheck does, to generate the minimum testcase that breaks your property. In this way, you can focus in a possibly simpler<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> feature.</p>
-
-<p>This post covers how to perform this search.</p>
-
-<h2>Mathematical formulation</h2>
-
-<p>Let <code>T</code> be a sequence of tests: <code>i1, i2, ..., in, F, j1, j2, ..., jm</code></p>
-
-<p>where:
-  * <code>i</code> are green tests
-  *  <code>F</code> is first failing test
-    * when executed in isolation, is green
-    * when executed in the sequence, is red
-  *  <code>j</code> are tests after the failed test.</p>
-
-<p>In this case, the order is important, as the failed test suite (presumably) comes from a shared state set by a previous test.</p>
-
-<p>The first search-space pruning is to remove the <code>j</code>, as they supposedly don&rsquo;t have any effect (as they are after the failed test)</p>
-
-<p>let <code>T1</code> be a subsequence of <code>T</code> that includes <code>i</code> and <code>F</code>: <code>i1, i2, ..., in, F</code></p>
-
-<p>Then it is assumed that one (or more) of the <code>i</code> generates an inconsistent state that makes <code>F</code> fail.</p>
-
-<p>In the sequence <code>T1</code>, <code>F</code> fails, but in the sequence <code>TF</code> composed by <code>F</code> only, the test succeeds. This can be thought as the equivalent of the <a href="https://en.wikipedia.org/wiki/Intermediate_value_theorem">Intermediate value theorem</a>, also called Bolzano&rsquo;s theorem, where the <code>T1</code> is at one side ot the axis and the <code>TF</code> at another. The theorem proves that there must be at least one value where the domain of the function crosses the axis</p>
-
-<p>I say &ldquo;thought of&rdquo; because that theorem is only for continous functions and sets are not (are discrete) but the analogy is good enough: if one sequence is OK but the other isn&rsquo;t, there must be a minimum sequence where the result is OK and another one where the results are not. They two sequences must not be the same case as one result cannot be OK and not OK at the same time.</p>
-
-<h2>Naïve search</h2>
-
-<p>The first way of searching would be find the minimum set that fails:</p>
-
-<ul>
-<li>include <code>F</code>, then another from <code>i1,...,in</code> that makes the <code>F</code> fail. <code>F</code> the last one, because it needs to be affected by the side effects from the preceding test.</li>
-<li>if the first strategy does not work, for each of the above cases, add another from the <code>i1,...,in</code> (except the one that was added)</li>
-</ul>
-
-
-<p>For the first step, it takes <code>O(n * 2)</code>, assuming executing a single test costs <code>O(1)</code>. Reduces to <code>O(n)</code></p>
-
-<p>For the second step, <code>O(n * n-1 * 3)</code>. Reduces to <code>O(n^2)</code></p>
-
-<p>For the third step, <code>O(n * n-1 * n-2 * 4)</code>. Reduces to <code>O(n^3)</code></p>
-
-<p>For the nth step, it costs <code>O(n * n-1 * n-2 * ... * n-(n-1) * (n+1))</code>. Reduces to <code>O(n^n)</code>. Which is polynomical but not feasible for medium-sized <code>n</code> (in an automatic fashion) or small <code>n</code> (in a manual fashion)</p>
-
-<h2>Dichotomous search</h2>
-
-<p>(This is also known as <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary search</a>)</p>
-
-<p>Inspired by <code>git-bisect</code>, I decided to treat the sequence <code>i1, ..., in</code> as the source for the dicotomical search, applying the subsequences to <code>F</code>.</p>
-
-<p>The first step, it takes <code>O(n/2 * n/2)</code> = <code>O(n^2)</code> to execute half the tests</p>
-
-<p>The second step, is to execute half the number of the tests previously executed, either from the sequence before (if the <code>F</code> fails) or from the other half (if <code>F</code> does not fail). The cost is <code>O(n/4 * n/4)</code> = <code>O(n^2)</code></p>
-
-<p>For the nth step, the cost is <code>O(n/2^n * n/2^n)</code> = <code>O(n^2/2^n)</code> = <code>O(0)</code></p>
-
-<p>This n in the nth step is smaller than the other n, as each step divides by two the amount of tests to be included.</p>
-
-<p>The amount of tests to be executed is <code>n + n/2 + n/4 + n/8 + ... + 1</code> which is roughly <code>2n</code>. Executing each test costs <code>O(1)</code> (by the assumption before), so the total cost is <code>O(2n)</code> = <code>O(n)</code></p>
-
-<p>If we take it by the amount of steps we need to manually execute is 1 for the whole, 1 for the half, 1 for the quarter, &hellip;. = <code>O(log2 n)</code></p>
-
-<h2>Procedure</h2>
-
-<p>To keep the executed tests, I created a support branch where I deleted the tests that were selected to be excluded. Always executed &ldquo;all tests in the suite&rdquo; as this makes it faster to select in the IDE.</p>
-
-<p>When the half taken was wrong, I reverted the last commit and selected the other half.</p>
-
-<p>After finding the minimum sequence and solving the issue, this support branch was discarded</p>
-
-<h2>Conclusion</h2>
-
-<p>In the real scenario, with around 100 tests, searching manually in the naïve way would not have been possible. It would have cost 100 steps, as the minimum set that produces <code>F</code> had size 2 (so only one step was necessary).</p>
-
-<p>Applying the dichotomous search, in 8-10 steps I had finished, with the guarantee that no matter how many tests produced the <code>F</code> I would have found it in a reasonable amount of time.</p>
-
-<h2>Comments</h2>
-
-<p>Finally, the root cause for the failing test <code>F</code> was the OrientDB InMemory implementation with Spring context, as the former does not allow two instances at the same time in the same JVM.</p>
-
-<p>It was solved using <code>@DirtiesContext</code> in both cases of the minimum sequence that forms <code>F</code>, so no matter which order the executor decides, the context will always be clean for the next execution.</p>
-
-<p>We found this thanks to a teammate&rsquo;s intuition.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Because maybe the minimum testcase is more difficult than another.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/08/12/brownbag-session-spring-boot/">Brown-bag Session: Spring Boot</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-12T10:44:16+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:44 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At a client, today we&rsquo;ve done a brown-bag session on <a href="http://projects.spring.io/spring-boot/">Spring Boot</a>: we&rsquo;ve gone through the basics with a <a href="https://github.com/Rossyafk/spring-boot-demo/">sample maven project</a> and its <a href="https://github.com/Rossyafk/spring-boot-demo/blob/master/pom.xml">pom file</a>.</p>
-
-<p>We&rsquo;ve seen the <a href="http://start.spring.io/">Spring Initializr</a> and a live demo, using curl for REST client.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/08/10/the-animal-laborans-and-the-homo-faber/">The Animal Laborans and the Homo Faber</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-10T01:19:58+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:19 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve found this quote very interesting from the book &ldquo;The Craftsman&rdquo;, by Richard Sennett:</p>
-
-<blockquote><p><em>Animal laborans</em> is, as the name implies, the human being akin to a beast of burden,
-a drudge condemned to routine. Arendt enriched this image by imagining him or her absorbed
-in a task that shuts out the world, a state well exemplified by Oppenheimer&rsquo;s feeling that the
-atomic bomb was a &ldquo;sweet&rdquo; problem, or Eichmann&rsquo;s obsession with making the gas chambers
-efficient. In the act of making it work, nothing else matters; Animal laborans takes the work as
-end end it itself.</p>
-
-<p>By contrast, <em>Homo faber</em> is her image of men and women doing another kind of work, making
-a life in common. Again Arendt enriched an inherited idea. The Lating tag Homo faber
-means simple &ldquo;man as maker&rdquo;. [&hellip;] Homo faber is the judge of material labor and practice, not
-Animal laborans&rsquo;s colleague but his supertior. Thus, in her view, we human beings live in two
-dimensions, In one we make things; in this condition we are amoral, absorbed in a task. We
-also harbor another, higher way of life in which we stop producing and start discussion and
-judging together. Whereas Animal laborans is fixated in the question &ldquo;How?&rdquo; Homo faber
-asks &ldquo;Why?&rdquo;</p>
-
-<p>Richard Sennett, The Craftsman, Prologue, page 7</p></blockquote>
+<p>Tags: jeff-atwood, article, elevator-test, assumption, microsoft-bob, vision, product, feature</p>
 </div>
   
   
@@ -916,23 +993,23 @@ asks &ldquo;Why?&rdquo;</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/09/23/brown-bag-session-clojures-data-and-code/">Brown Bag Session: Clojure&#8217;s Data and Code</a>
+        <a href="/blog/2015/10/07/java-tips-gotchas/">Java Tips & Gotchas</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/09/08/navigating-the-github-repositories/">Navigating the GitHub Repositories</a>
+        <a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/09/08/a-basic-working-environment/">A Basic Working Environment</a>
+        <a href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the Failure in Bash</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/09/02/brownbag-session-xtreme-programming/">Brown-bag Session: eXtreme Programming</a>
+        <a href="/blog/2015/10/01/self-study-in-october-2015/">Self-Study in October 2015</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/09/01/self-study-in-september-2015/">Self-Study in September 2015</a>
+        <a href="/blog/2015/09/30/books-read-in-2015q3/">Books Read in 2015Q3</a>
       </li>
     
   </ul>

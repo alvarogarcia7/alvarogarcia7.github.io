@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: October | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/october/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-10-07T22:17:20+02:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in October 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/"/>
+    <updated>2015-10-01T15:25:19+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015</id>
+    <content type="html"><![CDATA[<p></p>
+
+<h2>Blazing Fast HTML: Virtual DOM in Elm</h2>
+
+<p>I&rsquo;ve read <a href="http://elm-lang.org/blog/blazing-fast-html">this article</a> explaining how Elm works in relation to the virtual DOM. By Evan Czaplicki.</p>
+
+<p>Tags: elm, dom, virtual-dom, comparison, speed, haskell, evan-czaplicki</p>
+
+<h2>Why you should never, ever, ever use MongoDB</h2>
+
+<p>I&rsquo;ve read <a href="http://cryto.net/~joepie91/blog/2015/07/19/why-you-should-never-ever-ever-use-mongodb/">this article</a> stating the downsides of using MongoDB. Written by Sven Slootweg</p>
+
+<p>Tags: mongodb, downside, sven-slootweg, json, document-store, postgresql, acid</p>
+
+<h2>Do you really get classloaders?</h2>
+
+<p>I&rsquo;ve watched <a href="http://zeroturnaround.com/rebellabs/rebel-labs-tutorial-do-you-really-get-classloaders/">this video</a> by Jevgeny Kabanov on classloaders: what they are, how they work nad some tips to solve common issues.</p>
+
+<p>My notes:</p>
+
+<ul>
+<li>the classloading is lazy: the resources are not loaded until they are mentioned</li>
+<li>every classloader has a parent</li>
+<li>every class has a classloader associated with it</li>
+<li>every object has a class associated with it</li>
+<li>classloading delegation: the parent is consulted before loading a class. if it has it, it will load it. If not, I will delegate it</li>
+</ul>
+
+
+<p>There is also <a href="http://www.javaworld.com/article/2074396/core-java/javaone-2011--do-you-really-get-classloaders-.html">this article</a> on the same video</p>
+
+<p>Tags: jevgeny-kabanov, classloader, java,</p>
+
+<h2>Truth table</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Truth_table">the wikipedia article</a> about the truth table and the 16 possible binary boolean operators:</p>
+
+<ul>
+<li>Contradiction</li>
+<li>NOR</li>
+<li>Converse nonimplication</li>
+<li>Negation (of p)</li>
+<li>Material nonimplication</li>
+<li>Negation (of q)</li>
+<li>XOR (exclusive disjunction)</li>
+<li>NAND</li>
+<li>AND (conjunction)</li>
+<li>XNOR (biconditional)</li>
+<li>Projection (of p)</li>
+<li>Implication</li>
+<li>Projection (of q)</li>
+<li>Converse implication</li>
+<li>OR (disjunction)</li>
+<li>Tautology</li>
+</ul>
+
+
+<h2>7 lines of code, 3 minutes: Implement a programming language from scratch</h2>
+
+<p>I&rsquo;ve read <a href="http://matt.might.net/articles/implementing-a-programming-language/">this article</a> by Matt Might about the benefits of implementing a language (from scratch but on top of another existing language used as framework). Chooses lambda calculus as the desired DSL</p>
+
+<p>Tags: matt-might, lambda-calculus, racket, domain-specific-language</p>
+]]></content>
+  </entry>
+  
+</feed>
