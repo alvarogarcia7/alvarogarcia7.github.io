@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Failure | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/failure/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-10-07T22:17:20+02:00</updated>
+  <updated>2015-10-10T13:30:02+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -34,7 +34,7 @@ bash-3.1$ echo $?
 0
 </code></pre>
 
-<p>Should you want to pass the non-zero (error) status code to the next operation, use this toggle this feature: <code>set -o pipefail</code></p>
+<p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
 
 <pre><code class="bash">bash-3.1$ set -o pipefail
 bash-3.1$ tr|tee 1.txt

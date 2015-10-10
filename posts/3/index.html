@@ -9,9 +9,8 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Humble Object I&rsquo;ve read the Humble Object list of patterns, by Gerard Meszaros, including: humble dialog
-humble executable
-humble transaction &hellip;">
+  <meta name="description" content="I&rsquo;ve found this list of links for Java 9, while in beta, useful: Contents of the new version
+Java REPL workshop, with useful commands and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +79,45 @@ humble transaction &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/03/resources-for-java-9-beta/">Resources for Java 9 (Beta)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-03T01:49:30+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>1:49 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve found this list of links for Java 9, while in beta, useful:</p>
+
+<ul>
+<li><a href="https://wiki.openjdk.java.net/display/Adoption/JDK+9+Outreach">Contents of the new version</a></li>
+<li><a href="http://www.meetup.com/Londonjavacommunity/events/221570203/">Java REPL workshop</a>, with useful commands and questions &amp; answers for installing the REPL</li>
+<li><a href="https://java.net/downloads/adoptopenjdk/REPL_Tutorial.pdf">REPL tutorial PDF</a></li>
+<li>Another <a href="http://www.jclarity.com/2015/04/15/java-9-repl-getting-started-guide/">getting started guide</a>, by JClarity</li>
+<li>Yet another <a href="http://blog.arungupta.me/jdk9-repl-getting-started/">getting started guide</a>, by Arun Gupta</li>
+<li><a href="http://www.infoq.com/news/2014/09/repl-for-java">Information on the REPL project</a>, (codenamed Kulla)</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1881,44 +1919,6 @@ replace with: $1</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-13T07:36:14+02:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:36 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have:</p>
-
-<ul>
-<li>Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one.</li>
-<li>Notifications: Peers that need to be kept up to date with the object&rsquo;s activity. The object will notify interested peers whenever it changes state or performs a significant action. Notifications are &ldquo;fire and forget&rdquo;; the object neither knows nor cares which peers are listening. Notifications are so useful because they decouple objects from each other. For example, in a user interface system, a button component promises to notify any registered listeners when it&rsquo;s clicked, but does not know what those listeners will do. Similarly, the listeners expect to be called but know nothing of the way the user interface dispatches its events.</li>
-<li>Adjustments: Peers that adjust the object&rsquo;s behavior to the wider needs of the system. This includes policy objects that make decisions on the object&rsquo;s behalf (the Strategy pattern in [Gamma94]) and component parts of the object if it&rsquo;s a composite. For example, a Swing JTable will ask a TableCellRenderer to draw a cell&rsquo;s value, perhaps as RGB (Red, Green, Blue) values for a color. If we change the renderer, the table will change its presentation, now displaying the HSB (Hue, Saturation, Brightness) values.</li>
-</ul>
-</blockquote>
-
-<p>Source is Growing Object-Oriented Software, Guided by Tests > Chapter 6, Object-Oriented Style > Object Peer Stereotypes, page 52</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -1936,6 +1936,10 @@ replace with: $1</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/10/10/tool_building_local_pipeline/">Tool: Building a Local Pipeline</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/07/java-tips-gotchas/">Java Tips & Gotchas</a>
       </li>
     
@@ -1949,10 +1953,6 @@ replace with: $1</p>
     
       <li class="post">
         <a href="/blog/2015/10/01/self-study-in-october-2015/">Self-Study in October 2015</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/09/30/books-read-in-2015q3/">Books Read in 2015Q3</a>
       </li>
     
   </ul>

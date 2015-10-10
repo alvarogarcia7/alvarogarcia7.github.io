@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-10-07T22:17:20+02:00</updated>
+  <updated>2015-10-10T13:30:02+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -14,11 +14,209 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Tool: Building a Local Pipeline]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/"/>
+    <updated>2015-10-10T12:06:58+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline</id>
+    <content type="html"><![CDATA[<h2>Motivation</h2>
+
+<p>At a client, one of the projects has a long building process and the tests are mostly slow, so I use a local building <a href="https://en.wikipedia.org/wiki/Pipeline_(software)">pipeline</a>, an example of the <a href="https://msdn.microsoft.com/library/dn568100.aspx">Pipes and Filters</a> pattern.</p>
+
+<p>This allows for executing manually only the fast unit tests, then automatically (no user intervention, no time spent) executing the rest of them before pushing. In case the latter fails, it is possible to do <code>git push -f</code> to the <code>pipeline</code> without corrupting the central repository (<code>origin</code>) history, possibly disturbing others.</p>
+
+<p>This strategy also allows for parallel modification of sources: you can continue working on your IDE while the compiler is working on the other working directory. Should you introduce any syntax / logical error on your working code, the compiler is not affected, as it has a working copy just for itself.</p>
+
+<h2>Implementation</h2>
+
+<p>This requires two git repositories:</p>
+
+<ul>
+<li><code>local</code> or working copy. Configure it so it has a remote called <code>pipeline</code> and the <code>origin</code>, the repository you cloned from. This is a non-bare repository.</li>
+<li><code>pipeline</code>, used for building. This also is a non-bare repository.</li>
+</ul>
+
+
+<p>In the <code>local</code> you can do the development and local commits.</p>
+
+<p>When you&rsquo;re done, instead of</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git push origin <span class="nv">$branch</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>do</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git push pipeline <span class="nv">$branch</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After the git hook is installed, this will trigger the pipeline execution.</p>
+
+<h3>Git hook</h3>
+
+<p>In the <code>pipeline</code>, in the <code>.git/hooks/post-receive</code> file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>chmod +x pipeline.sh
+</span><span class='line'><span class="k">while</span> <span class="nb">read </span>oldrev newrev refname
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'>  <span class="c"># whatever you want to execute</span>
+</span><span class='line'>   <span class="nv">branch</span><span class="o">=</span><span class="k">$(</span>git rev-parse --symbolic --abbrev-ref <span class="nv">$refname</span><span class="k">)</span>
+</span><span class='line'>  ./pipeline.sh <span class="nv">$branch</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above script, we&rsquo;re telling git to execute the <code>pipeline.sh</code> with the received branch as argument.</p>
+
+<h3>Pipeline executor</h3>
+
+<p>In the <code>pipeline</code> repository, in <code>.git/pipeline.sh</code> file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">set</span> -e
+</span><span class='line'><span class="nb">set</span> -o pipefail
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> cleanup <span class="o">{</span>
+</span><span class='line'>  git checkout develop
+</span><span class='line'>  git pull develop
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># upon failure, tell the user</span>
+</span><span class='line'><span class="k">function</span> err <span class="o">{</span>
+</span><span class='line'>  cleanup
+</span><span class='line'>  growlnotify <span class="s2">&quot;pipeline fails&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># trap signal ERR, executing function &#39;err&#39;</span>
+</span><span class='line'><span class="nb">trap</span> <span class="s2">&quot;err&quot;</span> ERR
+</span><span class='line'>
+</span><span class='line'><span class="nv">branch</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$branch</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;need to specify a branch&quot;</span>
+</span><span class='line'>    <span class="nb">exit</span> -1
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'>git checkout <span class="nv">$branch</span>
+</span><span class='line'>mvn clean install <span class="p">|</span> tee output.log
+</span><span class='line'>git push --set-upstream origin <span class="nv">$branch</span>
+</span><span class='line'>cleanup
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Pipeline executor explanation</h4>
+
+<ul>
+<li><p>We prepare the bash environment:</p>
+
+<ul>
+<li><code>-e</code>: fail the script when a command fails</li>
+<li><code>-o pipefail</code>: fail the script when some command fails in a pipe</li>
+<li><code>err</code> and <code>trap</code>: create a hook to be executed when the signal is trapped</li>
+</ul>
+</li>
+<li><p>We require a branch to execute this script.</p></li>
+<li>Checkout to that branch</li>
+<li>Clean, compile &amp; execute tests</li>
+<li>Push to origin</li>
+<li>Clean up</li>
+<li>In case this fails, the script will stop and notify the user with <code>growl</code> and clean up.</li>
+</ul>
+
+
+<p>Clean up: checkout to develop (or any other branch that always exists), leaving the system prepared to execute again.</p>
+
+<h3>Notifications: telling the user</h3>
+
+<p>The program <code>growlnotify</code> is a <a href="http://www.growlforwindows.com/gfw/help/growlnotify.aspx">CLI notifier</a> to <code>growl</code> (<a href="http://www.growlforwindows.com/gfw/default.aspx">windows</a>, <a href="http://mattn.github.io/growl-for-linux/">linux</a>)</p>
+
+<h2>Conclusions</h2>
+
+<p>Ideally, the tests should be faster, and executing them locally should always be possible, maybe in the <code>pre-commit</code> hook. Whenever this is not possible, a local pipeline can reduce the time spent waiting for test execution and remove the lock on the working directory while the compiler is working.</p>
+
+<p>This pipeline aims to be simple, without many customizations and being single-user. For more complex workflows and other restrictions, it might be better to drop this project and start investigating continuous integration (CI) tools such as e.g., <a href="https://jenkins-ci.org/">Jenkins</a>, <a href="https://travis-ci.org/">Travis</a>, <a href="https://atlassian.com/software/bamboo">Bamboo</a></p>
+
+<h2>Further work</h2>
+
+<p>The jobs in the <code>pipeline</code> could be queued, so it is possible to push to the pipeline before the previous job has started. See reference below.</p>
+
+<h2>Reference</h2>
+
+<ul>
+<li><a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html">Trap</a></li>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a></li>
+<li><a href="http://idolinux.blogspot.com/2008/08/bash-script-error-handling.html">Sample bash error handling</a></li>
+<li><a href="http://superuser.com/questions/220364/how-to-run-commands-as-in-a-queue">Queuing bash jobs</a></li>
+</ul>
+
+
+<h2>Appendix</h2>
+
+<p>This script will push to the pipeline:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'>git push pipeline  2&gt;<span class="p">&amp;</span><span class="m">1</span> &gt; /dev/null <span class="p">&amp;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Java Tips & Gotchas]]></title>
     <link href="http://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas/"/>
     <updated>2015-10-07T12:06:58+02:00</updated>
     <id>http://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas</id>
-    <content type="html"><![CDATA[<p>Make the JVM use UTF-8 character encoding by default</p>
+    <content type="html"><![CDATA[<h2>JVM default encoding as UTF-8</h2>
+
+<p>Make the JVM use UTF-8 character encoding by default</p>
 
 <p>Set up the system property <code>JAVA_TOOL_OPTIONS</code> to <code>-Dfile.encoding=UTF8</code></p>
 ]]></content>
@@ -90,7 +288,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Should you want to pass the non-zero (error) status code to the next operation, use this toggle this feature: <code>set -o pipefail</code></p>
+<p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -194,6 +392,33 @@
 <p>I&rsquo;ve read <a href="http://matt.might.net/articles/implementing-a-programming-language/">this article</a> by Matt Might about the benefits of implementing a language (from scratch but on top of another existing language used as framework). Chooses lambda calculus as the desired DSL</p>
 
 <p>Tags: matt-might, lambda-calculus, racket, domain-specific-language</p>
+
+<h2>Turing completeness</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Turing_completeness">this wikipedia article</a> (both main and discussion) about this subject.</p>
+
+<p>It has sounded strange to me the reference to S-expressions:</p>
+
+<blockquote><p>Data languages
+The notion of Turing-completeness does not apply to languages such as XML, HTML, JSON, YAML and S-expressions because they are typically used to represent structured data, not describe computation [&hellip;]</p></blockquote>
+
+<p>If data (S-expression) is represented as the same format as code (e.g., Lisp&rsquo;s S-expression) and the latter is used to represent a computation, shouldn&rsquo;t be &ldquo;data languages that also are used as computation languages&rdquo; excluded from that list?</p>
+
+<p>As a side note, Lisp is Turing Complete (see <a href="https://en.wikipedia.org/wiki/Turing_completeness#Examples">Turing Complete#Examples</a>)</p>
+
+<h2>The Prize Is Won; The Simplest Universal Turing Machine Is Proved</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.wolfram.com/2007/10/24/the-prize-is-won-the-simplest-universal-turing-machine-is-proved/?year=2007&amp;monthnum=10">this article</a> by Stephen Wolfram about the proof of a Turing Machine 2,3 being universal by Alex Smith.</p>
+
+<p>Tags: stephen-wolfram, turing-machine, universal-turing-machine, proof, paper, alex-smith</p>
+
+<h2>No increment operator (++) in Ruby?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/3717519/no-increment-operator-in-ruby">this stackoverflow</a> question about the lack of post-increment operator (i++) in Ruby:</p>
+
+<blockquote><p>++ and &ndash; are NOT reserved operator in Ruby.</p>
+
+<p>Mailing list from <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/2710">Yukihiro Matsumoto aka matz</a></p></blockquote>
 ]]></content>
   </entry>
   
@@ -1201,25 +1426,6 @@ Chapter 3, Managing Dependencies, Introduction</p></blockquote>
 <p>We&rsquo;ve also practiced, using a dojo in clojure, the fizzbuzz kata.</p>
 
 <p>There is a sample implementation in the same repo, <a href="https://github.com/alvarogarcia7/clojure-for-java-devs/tree/sample-implementation/src">this folder</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Resources for Java 9 (Beta)]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/08/03/resources-for-java-9-beta/"/>
-    <updated>2015-08-03T01:49:30+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/08/03/resources-for-java-9-beta</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve found this list of links for Java 9, while in beta, useful:</p>
-
-<ul>
-<li><a href="https://wiki.openjdk.java.net/display/Adoption/JDK+9+Outreach">Contents of the new version</a></li>
-<li><a href="http://www.meetup.com/Londonjavacommunity/events/221570203/">Java REPL workshop</a>, with useful commands and questions &amp; answers for installing the REPL</li>
-<li><a href="https://java.net/downloads/adoptopenjdk/REPL_Tutorial.pdf">REPL tutorial PDF</a></li>
-<li>Another <a href="http://www.jclarity.com/2015/04/15/java-9-repl-getting-started-guide/">getting started guide</a>, by JClarity</li>
-<li>Yet another <a href="http://blog.arungupta.me/jdk9-repl-getting-started/">getting started guide</a>, by Arun Gupta</li>
-<li><a href="http://www.infoq.com/news/2014/09/repl-for-java">Information on the REPL project</a>, (codenamed Kulla)</li>
-</ul>
-
 ]]></content>
   </entry>
   
