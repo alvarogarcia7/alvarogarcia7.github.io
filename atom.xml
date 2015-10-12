@@ -4,7 +4,7 @@
   <title><![CDATA[The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-10-10T13:30:02+02:00</updated>
+  <updated>2015-10-12T17:26:13+02:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -12,6 +12,157 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Calling All Methods in an Object in Ruby]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/12/calling-all-methods-in-a-ruby-object/"/>
+    <updated>2015-10-12T11:55:17+02:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/12/calling-all-methods-in-a-ruby-object</id>
+    <content type="html"><![CDATA[<p>In Ruby, you can query the methods an object accepts:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="mi">1</span><span class="o">.</span><span class="n">methods</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:to_s</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:-@</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:+</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:-</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:*</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:/</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:div</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:%</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:modulo</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:divmod</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">:fdiv</span><span class="p">,</span>
+</span><span class='line'> <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In case you want to call all methods, <a href="https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods.rb">this</a> can be useful (plus its <a href="https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods_spec.rb">tests</a>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">call_all_methods</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1"># remove methods that modify the PRY environment or are too verbose</span>
+</span><span class='line'>  <span class="n">success</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>  <span class="n">error</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>  <span class="n">exclusions</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:pry</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">:methods</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">:private_methods</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">:public_methods</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">:gem</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">to_s</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">object</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+</span><span class='line'>    <span class="k">unless</span> <span class="n">exclusions</span><span class="o">.</span><span class="n">include?</span> <span class="n">x</span><span class="o">.</span><span class="n">to_s</span> <span class="k">then</span>
+</span><span class='line'>      <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">empty?</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>          <span class="n">success</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="n">__send__</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">success</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="n">__send__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">ex</span>
+</span><span class='line'>        <span class="n">error</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">=</span> <span class="n">ex</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">success</span><span class="o">.</span><span class="n">select!</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">nil?</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">error</span><span class="o">.</span><span class="n">select!</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">nil?</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">{</span><span class="ss">success</span><span class="p">:</span> <span class="n">success</span><span class="p">,</span> <span class="ss">error</span><span class="p">:</span> <span class="n">error</span><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>usage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">51</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">call_all_methods</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:success</span> <span class="o">=&gt;</span>
+</span><span class='line'><span class="o">[[</span><span class="ss">:to_s</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:-@</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:abs</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:magnitude</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:~</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:to_f</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:size</span><span class="p">,</span> <span class="mi">4</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:zero?</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:odd?</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:even?</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">[</span><span class="ss">:succ</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'> <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>also with parameters:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">call_all_methods</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="err">☺</span><span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:success</span><span class="o">=&gt;</span>
+</span><span class='line'>  <span class="o">[[</span><span class="ss">:+</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>   <span class="o">[</span><span class="ss">:-</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>   <span class="o">[</span><span class="ss">:*</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>   <span class="o">[</span><span class="ss">:/</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Should you be interested in having this as a gem, please tell me (comments or <a href="https://twitter.com/@alvarobiz">@alvarobiz</a>)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tool: Building a Local Pipeline]]></title>
@@ -508,7 +659,9 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
     <link href="http://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories/"/>
     <updated>2015-09-08T07:54:15+02:00</updated>
     <id>http://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve reorganized my github repositories, especially the katas.</p>
+    <content type="html"><![CDATA[<p>I&rsquo;ve reorganized my github repositories, especially the katas and the <code>simple sessions</code>.</p>
+
+<h2>Katas</h2>
 
 <p>All of them can be found in <a href="https://github.com/search?utf8=%E2%9C%93&amp;q=user%3Aalvarogarcia7+kata&amp;type=Repositories&amp;ref=searchresults">this search</a></p>
 
@@ -532,6 +685,12 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
 
 
 <p>An example: <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-haskell">palindromes-searcher-kata-haskell</a></p>
+
+<h2>Simple sessions</h2>
+
+<p>A simple session is a lapse of time working with the language to solve a problem, but not big enough to deserve a repository of its own. Usually, the simple sessions are performed in languages that have a REPL, tool that eases this need</p>
+
+<p>They can be found in <a href="https://github.com/search?q=user%3Aalvarogarcia7+simple-sessions">this search</a></p>
 ]]></content>
   </entry>
   
@@ -1409,23 +1568,6 @@ Chapter 3, Managing Dependencies, Introduction</p></blockquote>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Brown-bag Session and Dojo: Beginning Clojure]]></title>
-    <link href="http://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/"/>
-    <updated>2015-08-05T01:14:14+02:00</updated>
-    <id>http://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure</id>
-    <content type="html"><![CDATA[<p>At a client, today I&rsquo;ve facilitated a brown-bag session introducing the Clojure language to a group of java programmers.</p>
-
-<p>I&rsquo;ve started hands-on, live coding on a REPL. To make things easier, I&rsquo;ve created a maven project that imports the clojure jar and lets you obtain dependencies from clojars. The repo is <a href="https://github.com/alvarogarcia7/clojure-for-java-devs">here</a>. This repo wouldn&rsquo;t have been possible without the <a href="https://github.com/talios/clojure-maven-plugin">clojure maven plugin</a>, written by Mark Derricutt.</p>
-
-<p>I&rsquo;ve more or less followed <a href="https://github.com/alvarogarcia7/clojure-for-java-devs/blob/master/guide.md">this guide</a></p>
-
-<p>We&rsquo;ve also practiced, using a dojo in clojure, the fizzbuzz kata.</p>
-
-<p>There is a sample implementation in the same repo, <a href="https://github.com/alvarogarcia7/clojure-for-java-devs/tree/sample-implementation/src">this folder</a>.</p>
 ]]></content>
   </entry>
   
