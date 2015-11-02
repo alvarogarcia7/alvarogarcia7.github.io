@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Categories 1958 [ 1 ] 1967 [ 2 ] 1986 [ 1 ] 2004 [ 1 ] 2007 [ 1 ] 2008 [ 1 ] 2010 [ 1 ] 2014 [ 3 ] 2015 [ 11 ] 30-second [ 1 ] 5-whys [ 1 ] 8th- &hellip;">
+  <meta name="description" content="Categories 1958 [ 1 ] 1967 [ 2 ] 1986 [ 1 ] 2004 [ 1 ] 2007 [ 1 ] 2008 [ 1 ] 2010 [ 1 ] 2014 [ 3 ] 2015 [ 12 ] 30-second [ 1 ] 5-whys [ 1 ] 8th- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -53,14 +53,20 @@
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
-<form action="https://www.google.com/search" method="get">
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:alvarogarcia7.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -103,7 +109,7 @@
 
     <li><a href="/blog/categories/2014"}}/">2014</a> [ 3 ]</li>
 
-    <li><a href="/blog/categories/2015"}}/">2015</a> [ 11 ]</li>
+    <li><a href="/blog/categories/2015"}}/">2015</a> [ 12 ]</li>
 
     <li><a href="/blog/categories/30-second"}}/">30-second</a> [ 1 ]</li>
 
@@ -1327,6 +1333,8 @@
 
     <li><a href="/blog/categories/notification"}}/">Notification</a> [ 3 ]</li>
 
+    <li><a href="/blog/categories/november"}}/">November</a> [ 1 ]</li>
+
     <li><a href="/blog/categories/np-complete"}}/">Np-complete</a> [ 1 ]</li>
 
     <li><a href="/blog/categories/object"}}/">Object</a> [ 2 ]</li>
@@ -1597,7 +1605,7 @@
 
     <li><a href="/blog/categories/reactive-programming"}}/">Reactive-programming</a> [ 1 ]</li>
 
-    <li><a href="/blog/categories/read"}}/">Read</a> [ 3 ]</li>
+    <li><a href="/blog/categories/read"}}/">Read</a> [ 4 ]</li>
 
     <li><a href="/blog/categories/reading"}}/">Reading</a> [ 8 ]</li>
 
@@ -1739,7 +1747,7 @@
 
     <li><a href="/blog/categories/self-study"}}/">Self-study</a> [ 7 ]</li>
 
-    <li><a href="/blog/categories/self-study-aggregation"}}/">Self-study-aggregation</a> [ 6 ]</li>
+    <li><a href="/blog/categories/self-study-aggregation"}}/">Self-study-aggregation</a> [ 7 ]</li>
 
     <li><a href="/blog/categories/senior"}}/">Senior</a> [ 1 ]</li>
 
@@ -2138,6 +2146,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: Calling All Methods in an Object in Ruby</a>
       </li>
     
@@ -2153,17 +2165,13 @@
         <a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the Failure in Bash</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub

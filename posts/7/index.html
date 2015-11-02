@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="When I went to the Jason Gorman&rsquo;s TDD workshop (experience report here), he said something interesting regarding refactor and TDD: In job &hellip;">
+  <meta name="description" content="At the Craft Conf 2015 I saw someone with the book Apprenticeship Patterns by Dave Hoover and Adewale Oshineye and asked them about the book. After &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -53,14 +53,20 @@
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
-<form action="https://www.google.com/search" method="get">
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:alvarogarcia7.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -78,6 +84,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/how-i-read-apprenticeship-patterns/">How I Read Apprenticeship Patterns</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T13:49:01+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At the Craft Conf 2015 I saw someone with the book <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a> by <a href="http://twitter.com/@davehoover">Dave Hoover</a> and <a href="http://twitter.com/@ade_oshineye">Adewale Oshineye</a> and asked them about the book. After praising the contents, they asked me how to approach the book.</p>
+
+<p>I recalled reading it non-sequentially, and explained it to them:</p>
+
+<ul>
+<li>Read the introduction, preface, etc first</li>
+<li>When you get to the patterns, pick one at random</li>
+<li><code>10</code>: Read it and navigate through the <code>see also</code>.</li>
+<li>If there are unread chapters from the <code>see also</code>, <code>goto 10</code></li>
+<li>Find the remaining unread chapters and read them, try to apply the same algorithm</li>
+<li>Read the appendices and finishing words</li>
+</ul>
+
+
+<p>Reading a connected chapter after the first one made me connect the dots and understand it much better than reading them sequentially.</p>
+
+<p>PS: This post was extracted from this one: <a href="../../../../2015/02/02/your-first-language/">here</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -402,7 +453,7 @@
   </header>
 
 
-  <div class="entry-content"><p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus&#8217; <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
+  <div class="entry-content"><p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus' <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
 
 <p>here are my notes:</p>
 
@@ -735,85 +786,6 @@ Error: Run jekyll build --trace for more information.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a New TDD Phase</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-13T22:00:45+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:00 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
-
-<h2>Concept</h2>
-
-<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, it is a phase that might appear after refactor.</p>
-
-<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
-
-<h2>How I do redesign</h2>
-
-<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
-
-<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
-
-<h2>Other thoughts</h2>
-
-<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
-
-<blockquote><p>to change the design of (something)</p></blockquote>
-
-<p>or</p>
-
-<blockquote><p>to revise in appearance, function, or content</p></blockquote>
-
-<p>an example:</p>
-
-<blockquote><p>The book&rsquo;s cover has been redesigned for the new edition.</p></blockquote>
-
-<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
-
-<blockquote><p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p></blockquote>
-
-<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
-
-<h2>Other references</h2>
-
-<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
-
-<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
-
-<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -831,6 +803,10 @@ Error: Run jekyll build --trace for more information.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: Calling All Methods in an Object in Ruby</a>
       </li>
     
@@ -846,17 +822,13 @@ Error: Run jekyll build --trace for more information.
         <a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the Failure in Bash</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub

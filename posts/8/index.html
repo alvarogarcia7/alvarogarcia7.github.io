@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="This is an experience report on Jason Gorman&rsquo;s &ldquo;Test-driven development intensive workshop&rdquo; on the April 11th, 2015 I attended this &hellip;">
+  <meta name="description" content="In the last TDD workshop (experience report here), a conversation with Gary McLean Hall introduced to me this new concept of &ldquo;Redesign&rdquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -53,14 +53,20 @@
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
-<form action="https://www.google.com/search" method="get">
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:alvarogarcia7.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -78,6 +84,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a New TDD Phase</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-13T22:00:45+02:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
+
+<h2>Concept</h2>
+
+<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, it is a phase that might appear after refactor.</p>
+
+<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
+
+<h2>How I do redesign</h2>
+
+<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
+
+<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
+
+<h2>Other thoughts</h2>
+
+<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
+
+<blockquote><p>to change the design of (something)</p></blockquote>
+
+<p>or</p>
+
+<blockquote><p>to revise in appearance, function, or content</p></blockquote>
+
+<p>an example:</p>
+
+<blockquote><p>The book&rsquo;s cover has been redesigned for the new edition.</p></blockquote>
+
+<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
+
+<blockquote><p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p></blockquote>
+
+<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
+
+<h2>Other references</h2>
+
+<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
+
+<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
+
+<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -131,7 +216,7 @@
 
 <ul>
 <li>Chicago style by Kent Beck. Reference book would be &ldquo;<a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">TDD by example</a>&rdquo;</li>
-<li>London school or Mockist style by Steve Freeman and Nat Pryce. Reference book would be <a href="http://www.growing-object-oriented-software.com/">&ldquo;Growing object oriented software, guided by tests</a>&#8221;</li>
+<li>London school or Mockist style by Steve Freeman and Nat Pryce. Reference book would be <a href="http://www.growing-object-oriented-software.com/">&ldquo;Growing object oriented software, guided by tests</a>"</li>
 </ul>
 </li>
 <li>13 good habits for a sustainable test-driven development way</li>
@@ -488,7 +573,7 @@
 <ul>
 <li>It would have been useful to do a recap at the end of the session, to refresh the most important concepts</li>
 <li>In general the session was good, they were satisfied with the techniques shown there</li>
-<li>The exercise was concise and small, perfect for two hours&#8217; time</li>
+<li>The exercise was concise and small, perfect for two hours' time</li>
 </ul>
 
 
@@ -724,7 +809,7 @@
 <li>invest one person as &lsquo;sheriff&rsquo; for the sprint: they will take care of static analysis tools (such as sonar) and continuous integration (CI; such as jenkins). They will make sure others follow the working agreements</li>
 <li>In the academic environment, some teams do share their patches via mailing lists and this makes it much slower to adapt and review changes [As compared to an on-line sharing system - like web-based interfaces to distributed version control systems] As this team doesn&rsquo;t have a CI tool, they must test it / try it manually before reviewing the code.</li>
 <li>Pair programming does not remove the need for code review [This has been surfaced twice]</li>
-<li>Your work is not more important than your team members&#8217; one. [Related to not having time to code review]</li>
+<li>Your work is not more important than your team members' one. [Related to not having time to code review]</li>
 <li>Do code reviews include architecture? [We&rsquo;ve agreed that the architecture to some degree should be discussed before code reviews]</li>
 <li>&ldquo;Troll review&rdquo;</li>
 <li>Anyone can veto pull requests [By opening a question; do not allow for pull requests to be closed with open questions]</li>
@@ -788,7 +873,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Yesterday we organized a TDD meetup at the <a href="http://www.fib.upc.edu/fib.html">FIB - Barcelona School of Informatics UPC</a>, within <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship</a> sponsored by the <a href="http://jediupc.com/">Junior Empresa d&#8217;Informàtica</a>. The meetup started at 9:00 until 18:00, with a one-hour pause in the middle.</p>
+  <div class="entry-content"><p>Yesterday we organized a TDD meetup at the <a href="http://www.fib.upc.edu/fib.html">FIB - Barcelona School of Informatics UPC</a>, within <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship</a> sponsored by the <a href="http://jediupc.com/">Junior Empresa d'Informàtica</a>. The meetup started at 9:00 until 18:00, with a one-hour pause in the middle.</p>
 
 <h2>Where</h2>
 
@@ -903,45 +988,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/10/maven-module-base-for-cucumber-in-java/">Maven Module Base for Cucumber in Java</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-10T07:24:38+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:24 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve built a small maven module, to be used directly with cucumber. You can fork the repository <a href="https://github.com/alvarogarcia7/base-bdd-cucumber">here</a></p>
-
-<p>This is the setup I&rsquo;ve proposed for the meetup <a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/220673134/">&ldquo;BDD Cucumber kata (gherkin + code)&rdquo;</a>. Will see if this code is successfully used by the ~40 participants in a couple of weeks</p>
-
-<p>(Quote from the <a href="https://github.com/alvarogarcia7/base-bdd-cucumber/blob/master/README.md">README.md</a>):</p>
-
-<p>This maven project has been possible due to <a href="https://twitter.com/@thomassundberg">Thomas Sundberg</a> and <a href="https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world">this post</a></p>
-
-<p>Should you want to, there&rsquo;s a tweet to thank him the effort: <a href="https://twitter.com/intent/tweet?text=@thomassundberg%20thanks%20for%20the%20cucumber%20bdd%20tutorial!%20Will%20be%20using%20it%20from%20@agilebcn;Keep%20up%0Athe%20good%20work&amp;url=https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world/">tweet intent here</a></p>
-
-<p>Happy katas and happy bdd&#8217;ing!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -959,6 +1005,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: Calling All Methods in an Object in Ruby</a>
       </li>
     
@@ -974,17 +1024,13 @@
         <a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the Failure in Bash</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub

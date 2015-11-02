@@ -9,8 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Yesterday we did a training about the maven tool. One of the team members explained to us some topics including: lifecycles
-profiles and how to &hellip;">
+  <meta name="description" content="I&rsquo;ve built a small maven module, to be used directly with cucumber. You can fork the repository here This is the setup I&rsquo;ve proposed for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -54,14 +53,20 @@ profiles and how to &hellip;">
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
-<form action="https://www.google.com/search" method="get">
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:alvarogarcia7.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -79,6 +84,45 @@ profiles and how to &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/10/maven-module-base-for-cucumber-in-java/">Maven Module Base for Cucumber in Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-10T07:24:38+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:24 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve built a small maven module, to be used directly with cucumber. You can fork the repository <a href="https://github.com/alvarogarcia7/base-bdd-cucumber">here</a></p>
+
+<p>This is the setup I&rsquo;ve proposed for the meetup <a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/220673134/">&ldquo;BDD Cucumber kata (gherkin + code)&rdquo;</a>. Will see if this code is successfully used by the ~40 participants in a couple of weeks</p>
+
+<p>(Quote from the <a href="https://github.com/alvarogarcia7/base-bdd-cucumber/blob/master/README.md">README.md</a>):</p>
+
+<p>This maven project has been possible due to <a href="https://twitter.com/@thomassundberg">Thomas Sundberg</a> and <a href="https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world">this post</a></p>
+
+<p>Should you want to, there&rsquo;s a tweet to thank him the effort: <a href="https://twitter.com/intent/tweet?text=@thomassundberg%20thanks%20for%20the%20cucumber%20bdd%20tutorial!%20Will%20be%20using%20it%20from%20@agilebcn;Keep%20up%0Athe%20good%20work&amp;url=https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world/">tweet intent here</a></p>
+
+<p>Happy katas and happy bdd'ing!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -207,7 +251,7 @@ profiles and how to &hellip;">
 
 <p>We&rsquo;ve had such a great time, learning together, that would be a candidate for a weekly interaction.</p>
 
-<p><a href="http://en.wikipedia.org/wiki/Mob_programming">Mob programming</a> is such an eye opening practice. It forces you to reconsider your previous dogma and to understand the others&#8217; positions. Wikipedia reads &ldquo;early use of phrase [&hellip;] was made in &lsquo;Extreme Programming Perspectives&rsquo;&rdquo; but this practice is practiced by some, such as <a href="https://twitter.com/carlosble">Carlos Blé</a>, <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a> among others; also at the <a href="http://www.softwarecraftsmanshipbarcelona.org/">Software Craftsmanship Barcelona</a> <a href="https://twitter.com/hashtag/scbcn2013?src=hash">2013</a> and <a href="https://twitter.com/hashtag/SCBCN14?src=hash">2014</a> and the <a href="https://twitter.com/hashtag/socracan?src=hash">SoCra Canaries 2015</a></p>
+<p><a href="http://en.wikipedia.org/wiki/Mob_programming">Mob programming</a> is such an eye opening practice. It forces you to reconsider your previous dogma and to understand the others' positions. Wikipedia reads &ldquo;early use of phrase [&hellip;] was made in &lsquo;Extreme Programming Perspectives&rsquo;&rdquo; but this practice is practiced by some, such as <a href="https://twitter.com/carlosble">Carlos Blé</a>, <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a> among others; also at the <a href="http://www.softwarecraftsmanshipbarcelona.org/">Software Craftsmanship Barcelona</a> <a href="https://twitter.com/hashtag/scbcn2013?src=hash">2013</a> and <a href="https://twitter.com/hashtag/SCBCN14?src=hash">2014</a> and the <a href="https://twitter.com/hashtag/socracan?src=hash">SoCra Canaries 2015</a></p>
 
 <h2>One goal</h2>
 
@@ -400,7 +444,7 @@ profiles and how to &hellip;">
 
 <h2>Company provided or not?</h2>
 
-<p>Should the company provide for this time to improve? Although I don&rsquo;t know the answer, it would greatly affect the programmers&#8217; productivity to do so. I would say, provide this time as long as what is produced is useful. How do you measure useful? This is a subjective opinion, so it depends on each one.</p>
+<p>Should the company provide for this time to improve? Although I don&rsquo;t know the answer, it would greatly affect the programmers' productivity to do so. I would say, provide this time as long as what is produced is useful. How do you measure useful? This is a subjective opinion, so it depends on each one.</p>
 
 <p>Some companies acknowledge that this is so important as to invest part of their resources (0-2 hours per week) into training.</p>
 
@@ -937,43 +981,6 @@ profiles and how to &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/09/implementing-bdd-at-a-client/">Implementing BDD at a Client</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-09T22:23:44+01:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:23 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This was a low-hanging fruit as a team member who specialises in QA complained about testing in the last moment during the last sprint&rsquo;s retrospective.</p>
-
-<p>Did the grunt job of connecting the dots and configuring the maven project (using jbehave). Also, got the inspiration from a tutorial.</p>
-
-<p>Announced it only as it was in place and QA approved of it</p>
-
-<p>This grunt job clicked with <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch04.html#solution_id21">Sweep the floor</a></p>
-
-<p>Let&rsquo;s see how the sprint goes and what are the pain points during this sprint</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/10">&larr; Older</a>
@@ -991,6 +998,10 @@ profiles and how to &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: Calling All Methods in an Object in Ruby</a>
       </li>
     
@@ -1006,17 +1017,13 @@ profiles and how to &hellip;">
         <a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the Failure in Bash</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub

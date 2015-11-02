@@ -53,14 +53,20 @@
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
-<form action="https://www.google.com/search" method="get">
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:alvarogarcia7.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -110,6 +116,7 @@
 <li><a href="https://github.com/search?l=Clojure&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Clojure</a></li>
 <li><a href="https://github.com/search?l=JavaScript&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Javascript</a></li>
 <li><a href="https://github.com/search?l=Haskell&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Haskell</a></li>
+<li><a href="https://github.com/search?l=ruby&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Ruby</a></li>
 </ul>
 
 
@@ -170,7 +177,7 @@
         <a class="basic-alignment left" href="/blog/2015/09/08/a-basic-working-environment/" title="Previous Post: A basic working environment">&laquo; A basic working environment</a>
       
       
-        <a class="basic-alignment right" href="/blog/2015/09/23/brown-bag-session-clojures-data-and-code/" title="Next Post: Brown Bag Session: Clojure's Data and Code">Brown Bag Session: Clojure&#8217;s Data and Code &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2015/09/23/brown-bag-session-clojures-data-and-code/" title="Next Post: Brown Bag Session: Clojure's Data and Code">Brown Bag Session: Clojure's Data and Code &raquo;</a>
       
     </p>
   </footer>
@@ -191,6 +198,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: Calling All Methods in an Object in Ruby</a>
       </li>
     
@@ -206,17 +217,13 @@
         <a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the Failure in Bash</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub

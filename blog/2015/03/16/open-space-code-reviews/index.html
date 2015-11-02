@@ -53,14 +53,20 @@
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
-<form action="https://www.google.com/search" method="get">
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:alvarogarcia7.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -109,7 +115,7 @@
 <li>invest one person as &lsquo;sheriff&rsquo; for the sprint: they will take care of static analysis tools (such as sonar) and continuous integration (CI; such as jenkins). They will make sure others follow the working agreements</li>
 <li>In the academic environment, some teams do share their patches via mailing lists and this makes it much slower to adapt and review changes [As compared to an on-line sharing system - like web-based interfaces to distributed version control systems] As this team doesn&rsquo;t have a CI tool, they must test it / try it manually before reviewing the code.</li>
 <li>Pair programming does not remove the need for code review [This has been surfaced twice]</li>
-<li>Your work is not more important than your team members&#8217; one. [Related to not having time to code review]</li>
+<li>Your work is not more important than your team members' one. [Related to not having time to code review]</li>
 <li>Do code reviews include architecture? [We&rsquo;ve agreed that the architecture to some degree should be discussed before code reviews]</li>
 <li>&ldquo;Troll review&rdquo;</li>
 <li>Anyone can veto pull requests [By opening a question; do not allow for pull requests to be closed with open questions]</li>
@@ -207,6 +213,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: Calling All Methods in an Object in Ruby</a>
       </li>
     
@@ -222,17 +232,13 @@
         <a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the Failure in Bash</a>
-      </li>
-    
   </ul>
 </section>
 
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
