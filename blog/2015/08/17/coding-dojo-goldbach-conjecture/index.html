@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Coding Dojo: Goldbach Conjecture - The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="At the Barcelona Software Craftsmanship meetup, today I&rsquo;ve facilitated a coding dojo on the Goldbach Conjecture. The problem was prepared by &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Coding Dojo: Goldbach Conjecture</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-17T21:37:16+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:37 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>At the <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship meetup</a>, today I&rsquo;ve facilitated a coding dojo on the <a href="https://en.wikipedia.org/wiki/Goldbach%27s_conjecture">Goldbach Conjecture</a>. The problem was prepared by <a href="https://twitter.com/trikitrok">Manuel Rivero</a>.</p>
+
+<p>The meetup event is <a href="http://www.meetup.com/es/Barcelona-Software-Craftsmanship/events/224169573/">here</a> and there are plenty of solutions prepared by the pairs:
+  * <a href="https://github.com/Duber/GoldbachConjectureKataInJava">Java</a>
+  * <a href="https://github.com/raullorca/GoldbachConjectureKata">C#</a>
+  * <a href="https://github.com/alvarogarcia7/goldbach-conjecture-kata-haskell">Haskell</a>
+  * <a href="https://github.com/celtric/goldbach-conjecture-kata-php">PHP</a>
+  * <a href="https://github.com/celtric/goldbach-conjecture-kata-java">Java</a>
+  * <a href="https://github.com/juanangosto/GoldbachsConjecture">PHP</a>
+  * <a href="https://github.com/rojoangel/12moths-12katas/tree/master/7-goldbach-conjecture-kata">Haskell</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">alvaro garcia</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-08-17T21:37:16+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:37 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/barcelona-software-craftsmanship/'>barcelona-software-craftsmanship</a>, <a class='category' href='/blog/categories/coding-dojo/'>coding-dojo</a>, <a class='category' href='/blog/categories/conjecture/'>conjecture</a>, <a class='category' href='/blog/categories/facilitation/'>facilitation</a>, <a class='category' href='/blog/categories/facilitator/'>facilitator</a>, <a class='category' href='/blog/categories/goldbach/'>goldbach</a>, <a class='category' href='/blog/categories/goldbach-conjecture/'>goldbach-conjecture</a>, <a class='category' href='/blog/categories/java/'>java</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/08/13/searching-on-a-suite-of-failing-tests/" title="Previous Post: Searching on a suite of failing tests">&laquo; Searching on a suite of failing tests</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/08/19/coding-dojo-palindromes/" title="Next Post: Coding dojo: Palindromes">Coding dojo: Palindromes &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/self-study-in-december-2015/">Self-Study in December 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/functional-implementation-patterns/">Functional Implementation Patterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: Calling All Methods in an Object in Ruby</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/10/tool_building_local_pipeline/">Tool: Building a Local Pipeline</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/';
+        var disqus_url = 'http://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
