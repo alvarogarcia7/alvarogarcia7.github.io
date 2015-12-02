@@ -9,7 +9,7 @@
   <meta name="author" content="alvaro garcia">
 
   
-  <meta name="description" content="Call me maybe: RabbitMQ I&rsquo;ve read this article by Kyle Kingsbury on using RabbitMQ as a lock service. It investigates and gives a &hellip;">
+  <meta name="description" content="Ruby Equality And Object Comparison I&rsquo;ve read this article, written by Alan Skorkin, that explains equality comparisons in ruby: equal? is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,276 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/12/02/self-study-in-december-2015/">Self-Study in December 2015</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-02T08:50:19+01:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:50 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Ruby Equality And Object Comparison</h2>
+
+<p>I&rsquo;ve read <a href="http://www.skorks.com/2009/09/ruby-equality-and-object-comparison/">this article</a>, written by Alan Skorkin, that explains equality comparisons in ruby:</p>
+
+<ul>
+<li>equal? is reference equality</li>
+<li>== is value equality</li>
+<li>eql? is value and type equality</li>
+</ul>
+
+
+<p>Tags: ruby, comparison, equality, object, reference, alan-skorkin</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/11/02/functional-implementation-patterns/">Functional Implementation Patterns</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-02T21:26:13+01:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:26 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Collection of HOFs</h1>
+
+<h2>Select Attribute</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Array</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">select_attribute</span> <span class="kp">attr</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">unit</span><span class="o">|</span> <span class="n">unit</span><span class="o">[</span><span class="kp">attr</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>usage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">71</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span>
+</span><span class='line'>    <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">}</span><span class="o">]</span>
+</span><span class='line'>                                   <span class="o">.</span><span class="n">select_attribute</span> <span class="ss">:even?</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Collection of patterns</h1>
+
+<h2>Decorating a collection</h2>
+
+<h3>Introduction</h3>
+
+<p>You want to materialize properties from a collection</p>
+
+<h3>Alternative names</h3>
+
+<ul>
+<li>Intermediary</li>
+<li>Functional decorator</li>
+<li>Collection Annotation (from <a href="http://www.cs.uni.edu/~wallingf/patterns/recursion.html">Wallingford&rsquo;s Roundabout</a>, especially <a href="http://www.cs.uni.edu/~wallingf/patterns/recursion.html#2">Interface procedure</a>)</li>
+</ul>
+
+
+<h3>Example</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">62</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
+</span><span class='line'>                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+</span><span class='line'>                         <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span>
+</span><span class='line'>                       <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">true</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">}</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Extra</h3>
+
+<p>Naming the decoration</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">62</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
+</span><span class='line'>                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+</span><span class='line'>                         <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span>
+</span><span class='line'>                       <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">true</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">}</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>compare to</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">63</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
+</span><span class='line'>                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="kp">false</span><span class="o">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the latter, you are expressing the how, not the what.</p>
+
+<h2>Expand a HOF</h2>
+
+<p>You have a HOF that you want to split in several ones</p>
+
+<h3>Example</h3>
+
+<p>Original:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
+</span><span class='line'>                      <span class="o">.</span><span class="n">select</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Introduce an intermediary:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
+</span><span class='line'>                      <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="kp">false</span><span class="o">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then select all that match:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">67</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
+</span><span class='line'>                       <span class="o">.</span><span class="n">map</span>    <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>                       <span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>                       <span class="o">.</span><span class="n">map</span>    <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">first</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Compact HOF</h2>
+
+<h3>Introduction</h3>
+
+<p>You have several HOFs in a row: you decorate the collection, act on the decorated values, then use only part from the new aggregation.</p>
+
+<h3>Example</h3>
+
+<h4>Diff</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">-</span> <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'><span class="o">-</span> <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">f</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'><span class="o">-</span> <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">first</span><span class="p">}</span>
+</span><span class='line'><span class="o">+</span> <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">48</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>replace it by:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">49</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">-</span><span class="n">x</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Do not use when</h3>
+
+<p>This pattern is not appropriate when you depend on (i.e., cannot discard) the data generated by the decoration.</p>
+
+<p>Example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">50</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="o">[-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a></h1>
     
     
@@ -115,6 +385,201 @@
 <p>Note: References Jepsen (I guess an inside joke to the song &ldquo;Call me maybe&rdquo; by Carly Rae Jepsen) for at-most-once and at-least-once message delivery.</p>
 
 <p>Tags: rabbitmq, kyle-kingsbury, lock, cap-theorem, distributed-system, jepsen, knossos, at-most-once-delivery, at-least-once-delivery, counterexample, mutex</p>
+
+<h2>Everyone is potentially a teacher</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/09/everyone-is-potentially-a-teacher">this article</a> by Carlos Blé where he explains that everyone can have ideas worth spreading and that the knowledge not only comes from others but also from the relationships that tie you to other people.</p>
+
+<p>Tags: carlos-ble, teaching, pedagogy, idea, teacher, relationship</p>
+
+<h2>Ragel State Machine Compiler</h2>
+
+<p>I&rsquo;ve read <a href="http://www.colm.net/open-source/ragel/">this article</a> explaining what the Ragel project is about: a code generator from regex to code in languages such as C#, Java, etc. It is limited to finite state machines (FSM), with determinism. It can also handle some indeterminism. Written by Adrian D. Thurston</p>
+
+<p>Tags: adrian-thurston, fsm, state-machine, finite-state-machine, code-generation, ragel</p>
+
+<h2>HTTP is obsolete. It&rsquo;s time for the distributed, permanent web</h2>
+
+<p>I&rsquo;ve read <a href="https://ipfs.io/ipfs/QmNhFJjGcMPqpuYfxL62VVB9528NXqDNMFXiqN5bgFYiZ1/its-time-for-the-permanent-web.html">this article</a> by Kyle Drake explaining the need for a permanent, distributed web archive.</p>
+
+<p>Using a distributed file system (IPFS) and software similar to Bitcoin, they can host parts of the web locally, making it immutable and distributed</p>
+
+<p>Tags: kyle-drake, web-archive, centralization, decentralization, distribution, permanent-web, ipfs, federation,</p>
+
+<h2>Recovering From the Integrated Tests Scam</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive1.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=42e61e203e&amp;e=4a925444f9">this article</a> from J. B. Rainsberger on the integrated test scam and how to solve it: refactoring.</p>
+
+<p>Tags: jbrains, tdd, integrated-test, integration-test, j-rainsberger</p>
+
+<h2>Broken windows theory</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Broken_windows_theory">this wikipedia article</a> that talks about the broken windows theory, that states that controlling and monitoring public spaces leads to lowering the serious crimes.</p>
+
+<p>Cites three causes for this:</p>
+
+<ul>
+<li>Social norms and conformity</li>
+<li>Lack of routing monitoring</li>
+<li>Social signaling and signal crime</li>
+</ul>
+
+
+<p>Also discusses examples in the US and in the Netherlands, as well as criticisms.</p>
+
+<p>I&rsquo;ve read it to better understand how to apply this theory to software development, on a day-to-day basis.</p>
+
+<p>Tags: wikipedia, theory, broken-window</p>
+
+<h2>Scsh</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Scsh">the wikipedia page</a> for Scsh, the Scheme shell.</p>
+
+<h2>Why is Scala&rsquo;s type inference not as powerful as Haskell&rsquo;s?</h2>
+
+<p>I&rsquo;ve read the reasoning why Haskell supports other type inferences that are not present in Scala, in <a href="http://stackoverflow.com/questions/7234095/why-is-scalas-type-inference-not-as-powerful-as-haskells">this StackOverflow question</a></p>
+
+<p>Tags: scala, haskell, type-inference, hindley-milner, type-inference-algorithm</p>
+
+<h2>The Future of the LispM</h2>
+
+<p>I&rsquo;ve read <a href="http://arrdem.com/2014/11/28/the_future_of_the_lispm/">this article</a> explaining the past and current situation in the Lisp world: from Lisp, to LispM, to the MIT and Symbolics Inc., to Clojure and Scheme.</p>
+
+<p>Also talks about integration with the operating system and its execution in the microprocessor. Written by Reid McKenzie</p>
+
+<p>Tags: reid-mckenzie, lisp, lispm, clojure, scheme, symbolics</p>
+
+<h2>The Lisp Curse</h2>
+
+<p>I&rsquo;ve read <a href="http://www.winestockwebdesign.com/Essays/Lisp_Curse.html">this essay</a> by Rudolf Winestock, where he explains the low barrier (or low cost) for people in powerful languages (such as Lisp) to not accept the status quo in their project and fork / start their own.</p>
+
+<p>It also compares languages and the people attracted to them. Cites Mark Tarver&rsquo;s essays several times, including the Brilliant Bipolar Mind (BBM) in <a href="https://web.archive.org/web/20150308085419/http://www.lambdassociates.org/blog/bipolar.htm">this other</a> essay (from WebArchive). Compares the BBM and the normal worker in usefulness to companies.</p>
+
+<p>Cites the Pareto principle (80-20 rule): a single hacker will port 80% the library from another language, leaving it buggy, undocumented and only understandable by the original author (assuming this is only 20% of the work). The rest (e.g., documentation, bugfixing, maintenance) are dropped and never taken care of.</p>
+
+<p>Cites that this could be somewhat based on the facility of creating new features for the language. A small effort implies small implementation time, leaving no margin for thinking it through and seeing other corner cases. Also, a single person working on the project means no code review. The style might be coherent (always the same one), but might not be idiomatic, understandable by others, maintainable, etc.</p>
+
+<p>Closes the essay with this quote:</p>
+
+<blockquote><p>The expressive power of Lisp has drawbacks. There is no such thing as a free lunch.</p></blockquote>
+
+<p>Tags: rudolf-winestock, essay, pareto-principle, hacking, one-man-band, lisp, no-free-lunch, quote</p>
+
+<h2>The Bipolar Lisp Programmer</h2>
+
+<p>I&rsquo;ve read <a href="https://web.archive.org/web/20150308085419/http://www.lambdassociates.org/blog/bipolar.htm">this essay</a> by Mark Tarver on the Bipolar Lisp programmmer or the koan of Lisp.</p>
+
+<p>It explains the history of the Brilliant Bipolar Mind (BBM) when they attend high school and college. The freedom they&rsquo;re given, exactly the same as in Lisp, as you don&rsquo;t need to mix and socialize with others to create a good-enough solution.</p>
+
+<p>In this fashion, he says, most of the projects are 80% finished, not documented, not maintained. The same problems that worry enterprises.</p>
+
+<p>Cites the article &ldquo;Lisp: Good News, Bad News, How to Win Big&rdquo;</p>
+
+<p>Tags: essay, mark-tarver, bipolar-lisp-programmer, lisp-programmer, programmer, brillian-bipolar-mind, blp, bbm, koan</p>
+
+<p>Note: this article was no longer present on its original site. Fetched it from the Web Archive (WayBack Machine).</p>
+
+<h2>Writing readable Clojure code</h2>
+
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/jiriknesl/writing-readable-clojure-code">these slides</a> by Jiří Knesl, that explains how to write better clojure code:</p>
+
+<ul>
+<li>Macros</li>
+<li>HOFs</li>
+<li>left-to-right vs right-to-left code</li>
+</ul>
+
+
+<p>Tags: clojure, jiri-knesl, macro, hof, thread, slide</p>
+
+<h2>How can I get a reference to a method?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/485151/how-can-i-get-a-reference-to-a-method">this question</a>, <a href="http://stackoverflow.com/questions/4294485/how-do-i-reference-a-function-in-ruby">another question</a> from StackOverflow</p>
+
+<p>Tags: stackoverflow, question, ruby, functional-programming, method-reference</p>
+
+<h2>Implicit and Explicit Blocks</h2>
+
+<p>I&rsquo;ve read <a href="https://rubymonk.com/learning/books/4-ruby-primer-ascent/chapters/18-blocks/lessons/55-new-lesson">this lesson from rubyMonk</a></p>
+
+<p>Tags: rubymonk, lesson, block, ruby</p>
+
+<h2>What&rsquo;s Point-free Programing?</h2>
+
+<p>I&rsquo;ve read <a href="http://xahlee.info/comp/point-free_programing.html">this article</a> by Xah Lee explaining point-free programming, which requires a glance at function decomposition (currying)</p>
+
+<blockquote><p>[&hellip;] “point-free programing” is:</p>
+
+<ul>
+<li>It is about a particular <strong>syntax</strong> for <strong>function definition</strong>.</li>
+<li>When <strong>defining a function</strong>, no symbol is used for function parameter.</li>
+</ul>
+</blockquote>
+
+<h2>Oracle’s “planned obsolescence” for Java</h2>
+
+<p>I&rsquo;ve read <a href="https://jaxenter.com/oracle-and-javas-planned-obsolescence-121144.html">this article</a> by Coman Hamilton on the possible Java&rsquo;s planned obsolescence by Oracle.</p>
+
+<p>Discusses features pushed to future releases, comparing it to other legacy languages.</p>
+
+<p>Tags: obsolescence, legacy-language, planned-obsolescence, java, java-ee, oracle, fortran, cobol, coman-hamilton</p>
+
+<h2>Your first Ruby native extension: C</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.jcoglan.com/2012/07/29/your-first-ruby-native-extension-c/">this article</a> about writing a native extension for ruby. Written by James Coglan</p>
+
+<p>Tags: james-coglan, ruby, c, native-extension</p>
+
+<h2>What&rsquo;s the difference between equal?, eql?, ===, and ==?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">this stackoverflow</a> question regarding Ruby operators: equal?, eql?, ===, ==:</p>
+
+<ul>
+<li>==: generic equality</li>
+<li>===: case equality (for case - when)</li>
+<li>eql?: hash equality</li>
+<li>equal?: identity comparison (pointer comparison)</li>
+</ul>
+
+
+<p>Tags: comparison, stackoverflow, ruby, equal, eq, ==, ===, question, answer, jtbandes</p>
+
+<h2>Kanban</h2>
+
+<p>I&rsquo;ve read <a href="https://es.wikipedia.org/wiki/Kanban">the wikipedia page</a> for Kanban (Spanish)</p>
+
+<p>Tags: wikipedia, kanban, agile-methodology, management</p>
+
+<h2>Is your Scrum team Agile?</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.thesoftwarecraft.com/2014/04/is-your-scrum-team-agile.html">this article</a> by  Bart Bakker where he discusses some common patterns in Agile implementations (in software companies)</p>
+
+<p>Tags: scrum, team, agile, scrum-implementation, bart-bakker</p>
+
+<h2>Mejora tu trabajo en equipo con el método Kanban</h2>
+
+<p>I&rsquo;ve read <a href="http://hipertextual.com/archivo/2013/11/que-es-kanban/">this article</a> that explains then kanban management framework, with its principles and its values. Written by Jose López (in Spanish)</p>
+
+<p>Tags: kanban, management, agile-methodology, management-framework, principle, value, jose-lopez</p>
+
+<h2>¿Qué es el método Kanban para la gestión de proyectos?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javiergarzas.com/2011/11/kanban.html">this article</a> (Spanish) written by Javier Garzás where it is explained the kanban methodology and three of its main rules:</p>
+
+<ul>
+<li>visualize workflow</li>
+<li>limit WIP</li>
+<li>measure {lead, cycle} time</li>
+</ul>
+
+
+<p>Tags: kanban, management, agile-methodology, management-framework, principle, value, javier-garzas</p>
+
+<h2>describe vs. context in rspec</h2>
+
+<p>I&rsquo;ve read <a href="http://lmws.net/describe-vs-context-in-rspec">this article</a> that explains the (lack of) functional difference between RSpec&rsquo;s <code>describe</code> and <code>context</code> methods. The difference is contextual (i.e., the amount of information they convey). Written by LM</p>
+
+<p>Tags: rspec, ruby, describe, context, difference</p>
 </div>
   
   
@@ -959,121 +1424,6 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/09/23/brown-bag-session-clojures-data-and-code/">Brown Bag Session: Clojure's Data and Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-09-23T21:24:58+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:24 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today, at a client, I&rsquo;ve facilitated the brown-bag session on Clojure, introducing Lisp&rsquo;s <a href="https://en.wikipedia.org/wiki/Homoiconicity">homoiconicity</a>.</p>
-
-<h2>Session Structure</h2>
-
-<p>The session was designed as a kata, first introducing participants in the problem, letting some time to read the initial version and to think about possible solutions.</p>
-
-<p>Then, I structured the rest of the time as a prepared kata, where I was explaining in the beamer our current problems (day-to-day tasks) and possible solutions in Clojure.</p>
-
-<p>Among them:</p>
-
-<ul>
-<li>Configuration and extensibility: allowing for flexibility, define at configuration time new features without recompiling or modifying the system.</li>
-<li>Persisting and restoring certain state: this is a problem that could easily be solved persisting data in Lisp</li>
-</ul>
-
-
-<p>I explained, in private to those who asked, about <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a> and its dialects <a href="https://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a>, <a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a> and <a href="https://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a>.</p>
-
-<h2>Feedback</h2>
-
-<ul>
-<li>They liked the effort of investigating new languages to solve problems we have in our current stack</li>
-<li>They liked introducing the language features with a back-story to better understand the concepts</li>
-<li>They suggested to improve the level of the session: as the group as a whole is still starting with Clojure, leaving them on their own with code is too much. They asked for more guidance</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/09/08/navigating-the-github-repositories/">Navigating the GitHub Repositories</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-09-08T07:54:15+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:54 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve reorganized my github repositories, especially the katas and the <code>simple sessions</code>.</p>
-
-<h2>Katas</h2>
-
-<p>All of them can be found in <a href="https://github.com/search?utf8=%E2%9C%93&amp;q=user%3Aalvarogarcia7+kata&amp;type=Repositories&amp;ref=searchresults">this search</a></p>
-
-<p>Separated by language:</p>
-
-<ul>
-<li><a href="https://github.com/search?l=Java&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Java</a></li>
-<li><a href="https://github.com/search?l=Clojure&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Clojure</a></li>
-<li><a href="https://github.com/search?l=JavaScript&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Javascript</a></li>
-<li><a href="https://github.com/search?l=Haskell&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Haskell</a></li>
-<li><a href="https://github.com/search?l=ruby&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Ruby</a></li>
-</ul>
-
-
-<p>To the best of my knowledge, all repositories follow a similar pattern:</p>
-
-<ul>
-<li>Contain the keyword &lsquo;kata&rsquo;</li>
-<li>Contain the language</li>
-<li>Contain a description of the exercise</li>
-</ul>
-
-
-<p>An example: <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-haskell">palindromes-searcher-kata-haskell</a></p>
-
-<h2>Simple sessions</h2>
-
-<p>A simple session is a lapse of time working with the language to solve a problem, but not big enough to deserve a repository of its own. Usually, the simple sessions are performed in languages that have a REPL, tool that eases this need</p>
-
-<p>They can be found in <a href="https://github.com/search?q=user%3Aalvarogarcia7+simple-sessions">this search</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1089,6 +1439,14 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/12/02/self-study-in-december-2015/">Self-Study in December 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/functional-implementation-patterns/">Functional Implementation Patterns</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
       </li>
     
@@ -1098,14 +1456,6 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
     
       <li class="post">
         <a href="/blog/2015/10/10/tool_building_local_pipeline/">Tool: Building a Local Pipeline</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/10/07/java-tips-gotchas/">Java Tips & Gotchas</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in Maven Test Execution</a>
       </li>
     
   </ul>

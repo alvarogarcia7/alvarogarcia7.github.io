@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Right-tool-for-the-right-job | The long way through Software Craftsmanship]]></title>
   <link href="http://alvarogarcia7.github.io/blog/categories/right-tool-for-the-right-job/atom.xml" rel="self"/>
   <link href="http://alvarogarcia7.github.io/"/>
-  <updated>2015-11-02T15:02:13+01:00</updated>
+  <updated>2015-12-02T10:45:12+01:00</updated>
   <id>http://alvarogarcia7.github.io/</id>
   <author>
     <name><![CDATA[alvaro garcia]]></name>
@@ -24,7 +24,7 @@
 
 <p>After reading approximately half the chapters, the navigation wasn&rsquo;t so easy using only the &ldquo;see also&rdquo; part. So I decided to break free from that constraint and start reading other chapters. But how do you know which chapters you have left to read? Knowing the whole set (<code>all</code>) and the read set (<code>read</code>) this is just the <code>all - read</code>.</p>
 
-<p>Coming to a more practical way, how to know this is an automated (non-manual) way? There are <code>m</code> in <code>read</code> and n in <code>all</code>, where m &lt;= n.</p>
+<p>Coming to a more practical way, how to know this is an automated (non-manual) way? There are <code>m</code> in <code>read</code> and n in <code>all</code>, where <code>m &lt;= n</code>.</p>
 
 <p>The simplest approach would be:</p>
 
@@ -130,8 +130,8 @@ unleash your enthusiasm
 <li><code>%</code> : in all the file</li>
 <li><code>g</code> : do (I remember it as &lsquo;go&rsquo;)</li>
 <li><code>^</code> : starting at the beginning</li>
-<li><code>\s*</code>: whitsepace, as much a possible</li>
-<li><code>\u\u</code>: exactly to uppercase letters. Can also be expressed as <code>\u\{2}</code></li>
+<li><code>\s*</code>: whitespace, as much a possible</li>
+<li><code>\u\u</code>: exactly two uppercase letters. Can also be expressed as <code>\u\{2}</code></li>
 <li><code>d</code> : delete</li>
 </ul>
 
