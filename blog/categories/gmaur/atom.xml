@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Gmaur | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/gmaur/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-02T17:31:09+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tool to Find Duplicate Values in Constants]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/"/>
+    <updated>2015-07-30T11:42:44+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants</id>
+    <content type="html"><![CDATA[<p>Imagine having this java class:</p>
+
+<pre><code class="java">private static class RepeatedConstants {
+    public static final String A = "A";
+    public static final String A_1 = A;
+    public static final String A_2 = "A";
+
+    public static final Integer _3 = 3;
+    public static final Integer THREE = 3;
+}
+</code></pre>
+
+<p>I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (> 4000 constants). A way of doing this is basing the differences on the values, directly. To do this, remove all text that is not a value:</p>
+
+<p>find what, regex mode: <code>^.*=\s*(.*);</code>
+replace with: $1</p>
+
+<p>Explanation:</p>
+
+<ul>
+<li><code>^.*=\s*</code>: any character before the equal sign. Any whitespace right after it.</li>
+<li><code>(.*);</code>: capture everything that is before the semicolon (;)</li>
+</ul>
+
+
+<p>You end up with this:</p>
+
+<pre><code>"A"
+A
+"A"
+
+3
+3
+</code></pre>
+
+<p>Copy it to <code>a.txt</code>, <code>sort</code> it and <code>uniq</code> it (to remove duplication):</p>
+
+<pre><code class="bash">cat a.txt | sort | uniq &gt; uniq.txt
+</code></pre>
+
+<p>then sort the non-uniq version:</p>
+
+<pre><code class="bash">cat a.txt | sort &gt; sorted.txt
+</code></pre>
+
+<p>and diff among them, to find the repeated values:</p>
+
+<pre><code class="bash">diff sorted.txt uniq.txt
+
+3,4d2
+&lt; "A"
+&lt; 3
+</code></pre>
+
+<p>These are the repeated values. The variable <code>   public static final String A_1 = A;</code> was not caught by this as it only has the same value in execution, not staticly.</p>
+
+<p>For this, at Gmaur, we have developed a small <a href="https://github.com/GMaur/java-duplicates-detector">module to detect duplicates</a>. The main code is this:</p>
+
+<pre><code class="java">public class RepeatedFinder {
+
+  private final Class aClass;
+
+  public RepeatedFinder(Class aClass) {
+    this.aClass = aClass;
+  }
+
+  public MultiMap findDuplicates() throws IllegalAccessException {
+    return generateMapFromValueToVariables(aClass).valuesWithMoreThanOneVariable();
+  }
+
+  private ValueToNameRepository generateMapFromValueToVariables(Class&lt;?&gt; clazz) throws IllegalAccessException {
+    ValueToNameRepository valueToNames = new ValueToNameRepository();
+    Field[] fields = clazz.getDeclaredFields();
+    Object object = new Object();
+    for (Field field : fields) {
+      Object value = field.get(object);
+      valueToNames.add(value, field.getName());
+    }
+    return valueToNames;
+  }
+</code></pre>
+
+<p>The tests and the source code can be found here: <a href="https://github.com/GMaur/java-duplicates-detector">https://github.com/GMaur/java-duplicates-detector</a></p>
+
+<p>Hope you enjoy it, as much as we have enjoyed writing it!</p>
+
+<p>Any feedback is welcome.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GMaur Code Jam 2015: 01 - Mini-Power Swapper]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/01/12/gmaur-code-jam/"/>
+    <updated>2015-01-12T03:25:22+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/01/12/gmaur-code-jam</id>
+    <content type="html"><![CDATA[<p>Last year we started the program 12 months, 12 katas (as inspired by this <a href="https://github.com/12meses12katas">repository</a>). This year we want to propose something different: an asynchronous code jam</p>
+
+<h2>New problem: Mini-Power Swapper</h2>
+
+<p>This post belongs to a series: <a href="/blog/categories/code-jam">code-jam</a></p>
+
+<p>Each month (or so) we at GMaur will publish a new problem (and announce it on <a href="https://twitter.com/gmaurcom">twitter</a>) and post a solution to the last problem.</p>
+
+<p>This month, the <a href="https://github.com/GMaur/code-jam-2015/tree/master/problem-01">Mini-Power Swapper</a></p>
+
+<p>You can fork the repo, commit there and send a pull request. We&rsquo;ll review the code (if you want) and merge the solution to a branch in &ldquo;solutions/&rdquo;.</p>
+
+<p>Happy katas and happy code jamming!</p>
+]]></content>
+  </entry>
+  
+</feed>
