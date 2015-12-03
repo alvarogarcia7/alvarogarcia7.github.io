@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Client | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/client/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-03T20:29:18+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Brown Bag Session: Clojure's Data and Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/23/brown-bag-session-clojures-data-and-code/"/>
+    <updated>2015-09-23T19:24:58+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/23/brown-bag-session-clojures-data-and-code</id>
+    <content type="html"><![CDATA[<p>Today, at a client, I&rsquo;ve facilitated the brown-bag session on Clojure, introducing Lisp&rsquo;s <a href="https://en.wikipedia.org/wiki/Homoiconicity">homoiconicity</a>.</p>
+
+<h2>Session Structure</h2>
+
+<p>The session was designed as a kata, first introducing participants in the problem, letting some time to read the initial version and to think about possible solutions.</p>
+
+<p>Then, I structured the rest of the time as a prepared kata, where I was explaining in the beamer our current problems (day-to-day tasks) and possible solutions in Clojure.</p>
+
+<p>Among them:</p>
+
+<ul>
+<li>Configuration and extensibility: allowing for flexibility, define at configuration time new features without recompiling or modifying the system.</li>
+<li>Persisting and restoring certain state: this is a problem that could easily be solved persisting data in Lisp</li>
+</ul>
+
+
+<p>I explained, in private to those who asked, about <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a> and its dialects <a href="https://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a>, <a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a> and <a href="https://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a>.</p>
+
+<h2>Feedback</h2>
+
+<ul>
+<li>They liked the effort of investigating new languages to solve problems we have in our current stack</li>
+<li>They liked introducing the language features with a back-story to better understand the concepts</li>
+<li>They suggested to improve the level of the session: as the group as a whole is still starting with Clojure, leaving them on their own with code is too much. They asked for more guidance</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: eXtreme Programming]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/"/>
+    <updated>2015-09-02T08:41:16+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming</id>
+    <content type="html"><![CDATA[<p>At a client, today I&rsquo;ve introduced the eXtreme Programmig methodology, with its values, principles, practices in a brown-bag session.</p>
+
+<p>It has been an informal session, without slides, but we have used <a href="https://www.youtube.com/watch?v=4nN6Gh79Yg8">this video</a> by the Kleer guys (in Spanish).</p>
+
+<p>The video gives a high-level overview of what XP is. We also needed to cover the daily practices (e.g., TDD, pair programming, whole team)</p>
+
+<p>After that, we&rsquo;ve done a questions&amp;answers round to solve the teammates' doubts</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Coding Dojo: Palindromes]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/19/coding-dojo-palindromes/"/>
+    <updated>2015-08-19T09:37:16+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/19/coding-dojo-palindromes</id>
+    <content type="html"><![CDATA[<p>At a client, today I&rsquo;ve facilitated a coding dojo on palindrome searching.</p>
+
+<p>I&rsquo;ve prepared a <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-java">github repository</a> for the java solutions. In this repository, the tag <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-java/tree/start-here"><code>start-here</code></a> has the prepared pom with dependencies.</p>
+
+<p>We have paired to work on the kata but none of my teammate&rsquo;s solutions are available (at the moment), but mine is at the <code>master</code> branch.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Spring Boot]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/12/brownbag-session-spring-boot/"/>
+    <updated>2015-08-12T08:44:16+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/12/brownbag-session-spring-boot</id>
+    <content type="html"><![CDATA[<p>At a client, today we&rsquo;ve done a brown-bag session on <a href="http://projects.spring.io/spring-boot/">Spring Boot</a>: we&rsquo;ve gone through the basics with a <a href="https://github.com/Rossyafk/spring-boot-demo/">sample maven project</a> and its <a href="https://github.com/Rossyafk/spring-boot-demo/blob/master/pom.xml">pom file</a>.</p>
+
+<p>We&rsquo;ve seen the <a href="http://start.spring.io/">Spring Initializr</a> and a live demo, using curl for REST client.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session and Dojo: Beginning Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/04/brown-bag-session-and-dojo-beginning-clojure/"/>
+    <updated>2015-08-04T23:14:14+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/04/brown-bag-session-and-dojo-beginning-clojure</id>
+    <content type="html"><![CDATA[<p>At a client, today I&rsquo;ve facilitated a brown-bag session introducing the Clojure language to a group of java programmers.</p>
+
+<p>I&rsquo;ve started hands-on, live coding on a REPL. To make things easier, I&rsquo;ve created a maven project that imports the clojure jar and lets you obtain dependencies from clojars. The repo is <a href="https://github.com/alvarogarcia7/clojure-for-java-devs">here</a>. This repo wouldn&rsquo;t have been possible without the <a href="https://github.com/talios/clojure-maven-plugin">clojure maven plugin</a>, written by Mark Derricutt.</p>
+
+<p>I&rsquo;ve more or less followed <a href="https://github.com/alvarogarcia7/clojure-for-java-devs/blob/master/guide.md">this guide</a></p>
+
+<p>We&rsquo;ve also practiced, using a dojo in clojure, the fizzbuzz kata.</p>
+
+<p>There is a sample implementation in the same repo, <a href="https://github.com/alvarogarcia7/clojure-for-java-devs/tree/sample-implementation/src">this folder</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

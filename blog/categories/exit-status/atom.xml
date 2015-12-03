@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Exit-status | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/exit-status/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-03T20:29:18+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Propagate the Failure in Bash]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/"/>
+    <updated>2015-10-02T06:53:29+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash</id>
+    <content type="html"><![CDATA[<p>In bash, the usual behavior is to return the last status code:</p>
+
+<pre><code class="bash">bash-3.1$ tr
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+1
+</code></pre>
+
+<p>But this also applies to pipes:</p>
+
+<pre><code class="bash">bash-3.1$ tr|tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+0
+</code></pre>
+
+<p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
+
+<pre><code class="bash">bash-3.1$ set -o pipefail
+bash-3.1$ tr|tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+1
+</code></pre>
+
+<p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
+
+<h2>Set Builtin Reference</h2>
+
+<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a>:</p>
+
+<h3>-e</h3>
+
+<blockquote><p>-e</p>
+
+<p>Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;&amp; or || list except the command following the final &amp;&amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.</p>
+
+<p>This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.</p>
+
+<p>If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.</p></blockquote>
+
+<h3>-o pipefail</h3>
+
+<blockquote><p>-o pipefail</p>
+
+<p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p></blockquote>
+]]></content>
+  </entry>
+  
+</feed>
