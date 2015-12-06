@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Welc | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/welc/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-06T16:30:19+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What Legacy Code Is About]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/"/>
+    <updated>2015-04-21T20:09:54+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about</id>
+    <content type="html"><![CDATA[<p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers">Michael Feathers</a> describes:</p>
+
+<blockquote><p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
+
+<p>M Feathers, in the preface of Working effectively with legacy code</p></blockquote>
+
+<p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
+
+<p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
+
+<p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
+
+<ul>
+<li>some test the test framework</li>
+<li>some the language</li>
+<li>some test a happy path that works by pure luck</li>
+<li>some functionalities are tested (not all happy paths)</li>
+<li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
+</ul>
+
+
+<p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
+
+<p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
+
+<p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
+
+<p>This is why I would like to update the definition:</p>
+
+<blockquote><p>Legacy code is code without tests that provide trust to all your stakeholders</p></blockquote>
+
+<p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
+
+<p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
+
+<p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
+]]></content>
+  </entry>
+  
+</feed>
