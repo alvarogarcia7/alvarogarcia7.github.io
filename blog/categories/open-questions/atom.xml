@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Open-questions | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/open-questions/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-07T22:19:14+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Internal Training: Testing Is Hard - Just Do It]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/"/>
+    <updated>2015-05-05T21:00:17+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/05/05/internal-training-testing-is-hard-just-do-it</id>
+    <content type="html"><![CDATA[<p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/">Testing is hard - just do it</a></p>
+
+<h2>Our thoughts</h2>
+
+<blockquote><p>When a bug is found, prove it exists with a test</p></blockquote>
+
+<p>This immediately reduces defect rate: the same regression cannot be introduced again</p>
+
+<blockquote><p> fix a bug a second time</p></blockquote>
+
+<p>If fixing a bug (having defects in your code) was &lsquo;waste&rsquo;, as defined by lean methodologies, it also is wast fixing it for the following times</p>
+
+<blockquote><p>testing requires discipline</p></blockquote>
+
+<p>Agree. See quote by Larry Wall (this same article)</p>
+
+<blockquote><p>[Three requirements for a good test suite]:</p>
+
+<ol>
+<li>The tests need to be easier to write</li>
+<li>The test suite must run, and pass, before any code is allowed out the door</li>
+<li>Support from the project&rsquo;s leadership</li>
+</ol>
+</blockquote>
+
+<p>Agree.</p>
+
+<blockquote><p>Programming is like drawing water from a well</p></blockquote>
+
+<p>Good analogy</p>
+
+<blockquote><p>I&rsquo;m going to assume you are smarter than me [&hellip;]</p></blockquote>
+
+<p>This is related to &lsquo;doing clever things&rsquo;: when I write &lsquo;clever code&rsquo;, that has neither comments, nor it is massaged to be Clean Code, it will cost me many times more to modify / understand in the future vs massage it a little bit.</p>
+
+<p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
+
+<p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
+
+<pre><code class="java">private String select(List&lt;String&gt; elements){
+    return elements.get(2);
+}
+</code></pre>
+
+<p>vs</p>
+
+<pre><code class="java">private String selectFirstValidLine(List&lt;String&gt; elements){
+    List&lt;String&gt; validElements = skipHeader(elements);
+    return validElements.get(1);
+}
+</code></pre>
+
+<h2>Open questions / other ideas</h2>
+
+<ul>
+<li>There are tests that are more important than others. Is there a tool to assign them weights and inform about which preponderation of the codebase is broken? The same (i.e., more importance) can happen for production code.</li>
+<li>Is SCRUM apt for junior developers? In the sense of the increased autonomy, more decisions, more required technical skills / values, etc</li>
+<li>We discussed what differentiates a project with a shorter deadline from one with a longer deadline. The consensus was: you should do tests for any kind of project, the shorter deadline project won&rsquo;t allow as much time for refactoring</li>
+<li>Tests iff (i.e., if and only if) working code</li>
+<li>Tests do not guarantee lack of defects</li>
+<li>Bijectiveness between tests and features (production code)
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

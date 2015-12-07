@@ -1,0 +1,1061 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="Overheard today at the office, while they were discussing the approval of a pull request: [Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/posts/8">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/17/the-guardian-of-the-source/">The Guardian of the Source</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-17T20:01:48+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:01 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Overheard today at the office, while they were discussing the approval of a pull request:</p>
+
+<blockquote><p>[Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this?</p>
+
+<p>[Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source</p>
+
+<p>[PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase.</p></blockquote>
+
+<p>This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;<a href="http://knowyourmeme.com/memes/you-shall-not-pass">you shall not pass</a>&rdquo; while on top of the bridge.</p>
+
+<p>This is part of the objectives of doing a pull request before merging code: stop the bad code<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> before it is merged to the codebase.</p>
+
+<p>Later, as you start having <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows</a> in your codebase, it is easier that you start introducing more. Exactly about this is the <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows theory</a>.</p>
+
+<p>On the other hand, if you try to block that bad code before it is merged, it is cheaper to remove it: nothing depends on it, you introduce no repetition, etc<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>This also connects with the idea present in <a href="http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501">Software Craftsmanship, now called The Software Craftsman</a>, about preserving value for investors and treat software as an investment (with positive ROI) rather than a sunk cost.</p>
+
+<p>It is being picky and, to the most of our possibilities, do not letting any defects nor bad code into the codebase. A hedge fund manager would not let any toxic or dubious asset into the managed funds. This would be counterproductive in the long run (maybe even in the short one) and would be not doing their job correctly. Why is it that some developers suggest or accept these toxic assets?</p>
+
+<p>So, at least for me, would be an honor to be called the &ldquo;Guardian of the Source&rdquo; by someone I respect, as long as this is a serious proposition (i.e., not a joke of some kind).</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Bad code can be expressed in many ways: long methods, bad naming, breaking design principles (e.g., SOLID, KISS, DRY - OAOO), code with defects, no tests or no coverage, etc.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>A source is <a href="http://c2.com/cgi/wiki?DiscoverDefectsEarly">Discover defects early</a>. Another is <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">this paper</a> that cites the ratio of fixing it later to 5:1 (five times more expensive).<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting Clojure Code in Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-14T21:48:27+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:48 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Inserting this code in the blog:</p>
+
+<pre><code>```clojure
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+```
+</code></pre>
+
+<p>the octopress processor throws the error:</p>
+
+<pre><code>Error: Pygments can't parse unknown language: clojure
+Error: Run jekyll build --trace for more information.
+</code></pre>
+
+<p>A solution would be to include it as lisp code:</p>
+
+<pre><code>```lisp
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+```
+</code></pre>
+
+<p>this is an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a Refactor in Clojure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-14T21:36:23+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:36 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
+
+<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user=&gt; (def point {:x 5 :y 7})
+</span><span class='line'>#'user/point
+</span><span class='line'>
+</span><span class='line'>(let [{:keys [x y] :as the-point} point]
+</span><span class='line'>         (println "x:" x "y:" y "point:" the-point))
+</span><span class='line'>
+</span><span class='line'>x: 5 y: 7 point: {:x 5, :y 7}</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
+
+<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
+
+<p>This has been used for a method like this one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this has been refactored to this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a New TDD Phase</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-13T20:00:45+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
+
+<h2>Concept</h2>
+
+<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, it is a phase that might appear after refactor.</p>
+
+<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
+
+<h2>How I do redesign</h2>
+
+<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
+
+<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
+
+<h2>Other thoughts</h2>
+
+<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
+
+<blockquote><p>to change the design of (something)</p></blockquote>
+
+<p>or</p>
+
+<blockquote><p>to revise in appearance, function, or content</p></blockquote>
+
+<p>an example:</p>
+
+<blockquote><p>The book&rsquo;s cover has been redesigned for the new edition.</p></blockquote>
+
+<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
+
+<blockquote><p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p></blockquote>
+
+<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
+
+<h2>Other references</h2>
+
+<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
+
+<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
+
+<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/">Experience Report: Test-driven Development Intensive, by Jason Gorman</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-12T18:13:45+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is an experience report on <a href="http://twitter.com/@jasongorman">Jason Gorman</a>&rsquo;s &ldquo;<a href="http://www.codemanship.co.uk/tdd.html">Test-driven development intensive workshop</a>&rdquo; on the April 11th, 2015</p>
+
+<p>I attended this training in the <a href="http://www.grenfell-housing.co.uk/">Greenfell housing &amp; training</a> in South Wimbledon, London SW19 1JZ. The training spanned from 10:00 to 17:00 with a half an hour for lunch plus three or four 10-15 minute pauses. (7 - ,5 - 4 * 12/60 = ~5.7hours = 5 hours 45 minutes)</p>
+
+<h2>Introduction</h2>
+
+<p>There were 23 of us, including me. We spent some half hour introducing ourselves before the training started. I remember about a tester that came to the workshop &ldquo;wanting to know more about this testing methodology&rdquo;. Jason&rsquo;s answer was priceless: &ldquo;I&rsquo;m sorry but you came to the wrong place: this is not about testing&rdquo;.</p>
+
+<p>At 10:00 sharp, he started a set of slides explaining what TDD is about, including:</p>
+
+<ul>
+<li>productivity:
+
+<ul>
+<li>no company is willing to give you a &ldquo;get out of jail free&rdquo; card to get out of the productivity zone</li>
+<li>a drop in the productivity, at least for the first weeks</li>
+<li>you have to find a time slot in your schedule to practice TDD, otherwise it&rsquo;s like learning to swim while crossing the Atlantic Ocean</li>
+</ul>
+</li>
+<li>You have to feel uncomfortable not doing TDD</li>
+<li>triangulation:
+
+<ul>
+<li>how each problem is different</li>
+<li>you can only learn it by doing</li>
+</ul>
+</li>
+<li>TDD styles:
+
+<ul>
+<li>Chicago style by Kent Beck. Reference book would be &ldquo;<a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">TDD by example</a>&rdquo;</li>
+<li>London school or Mockist style by Steve Freeman and Nat Pryce. Reference book would be <a href="http://www.growing-object-oriented-software.com/">&ldquo;Growing object oriented software, guided by tests</a>"</li>
+</ul>
+</li>
+<li>13 good habits for a sustainable test-driven development way</li>
+<li>The basic TDD cycle:
+
+<ul>
+<li>an executable specification, encoded in a failing test</li>
+<li>pass the test in the simplest way</li>
+<li>refactor</li>
+<li>(talking with another attendee, he described to me a new TDD phase called redesign. Maybe another post will explain this in deeper detail level)</li>
+</ul>
+</li>
+<li>Some ideas about <a href="http://www.extremeprogramming.org/rules/simple.html">Simple design, simple development, simplicity</a> (<a href="http://www.extremeprogramming.org">XP</a>)</li>
+<li>Shown a wrong example of mixing assertions (state) and verifications (interactions)</li>
+<li>More than one reason to go wrong makes the code non-trivial anymore. Non-trivial code requires tests</li>
+<li>You want to see the test failing for the right reason: remove / finish code that does not compile, fix null pointers, array out of bounds exceptions, etc. See it fail with &ldquo;was <X> but expected <Y>&rdquo; or &ldquo;NoInteractionException&rdquo; (hamcrest error and mockito error, respectively; both java)</li>
+<li>Duplication as a sign of design smell</li>
+<li>Process of generalizing code: discover the need for patterns</li>
+<li>The most difficult skill in TDD is refactoring [and design; note is mine]. The TDD cycle is very easy.
+
+<ul>
+<li>TDD is much more in demand than refactoring, even though the former includes the latter</li>
+</ul>
+</li>
+<li>Refactor until you&rsquo;re happy with the code, until you stand by it</li>
+</ul>
+
+
+<h2>CRC Cards</h2>
+
+<p>A <a href="http://en.wikipedia.org/wiki/Class-responsibility-collaboration_card">Class-responsibility-collaboration card</a> is as follows:</p>
+
+<ul>
+<li>top: class name</li>
+<li>half left: responsibilities</li>
+<li>half right: collaborations</li>
+</ul>
+
+
+<p>Notes from the slides:</p>
+
+<ul>
+<li>each then is an outcome
+
+<ul>
+<li>do not mix outcomes and implications. An example: after winning the lottery, the money should be transferred to my bank account and I can buy a yacht. The former is an outcome (change in state) and the latter an implication (a new action that is now enabled)</li>
+<li>an outcome is mapped to an assertion, while a collaboration is mapped to an interaction (verify in mockito)</li>
+</ul>
+</li>
+<li>Given / When / Then is not enough to implement an executable specification. We need examples, detail</li>
+<li>OO: send messages to distribute responsibility.
+
+<ul>
+<li>A Then is an unique responsibility</li>
+</ul>
+</li>
+<li>Topmost object: no one connects with it</li>
+<li>Put the work where the data is</li>
+<li>Tell, don&rsquo;t ask <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> vs data driven design (tell a collaborator what to do vs ask for values and do the work yourself)</li>
+<li>You want as few interactions as possible (related to the tell, don&rsquo;t ask)</li>
+<li>More objects than outcomes is a bad thing (design smell) (?)</li>
+<li>CRC is a very mechanical exercise, do not over think it</li>
+<li>Describe outcomes as changes in OO (new, destroy, relationships, modify fields / state)</li>
+<li>Continuous integration is not necessarily about shipping the code at each commit but having it shippable at each commit, as always having a product that is ready for its production phase</li>
+</ul>
+
+
+<h2>Exercises</h2>
+
+<p>All exercises were done in pairs, always switching one half of the pair. He asked for someone in the pair to raise, especially if you were not a programmer (e.g., tester, manager)</p>
+
+<h3>First exercise: Banking</h3>
+
+<blockquote><p>Write a program that is capable of transferring money from an account to another</p></blockquote>
+
+<p>A chance to practice arrange, act, assert</p>
+
+<p>Later, he did it some live coding to develop the same kata, practicing &ldquo;<a href="http://www.infoq.com/presentations/TDD-as-if-You-Meant-It">TDD as if you meant it</a>&rdquo; (<a href="https://twitter.com/keithb_b">Keith Braithwaite</a>&rsquo;s original idea). We discovered together the &ldquo;primitive obsession&rdquo; and &ldquo;feature envy&rdquo; smells. We tried doing as few decisions as possible.</p>
+
+<h3>Second exercise: Fibonacci sequence generator</h3>
+
+<blockquote><p>Write a program that is capable of generating Fibonacci sequences, no shorter that 8 and no longer than 50</p></blockquote>
+
+<p>A chance to practice baby steps.</p>
+
+<p>My pair and I had the chance of discovering the importance of understanding correctly the requirements before writing a line of code. Also, I learned about the different ways of doing TDD. In this case, my pair executed the tests via a main (java class) and saw the failures on the console. When proposed to do it in the JUnit runner the IDE has, he said he preferred it in his own ways.</p>
+
+<p>Jason did some live coding to show how he approached and triangulated this exercise.</p>
+
+<p>I really liked some of what he said: I like to make the API correct from the first moment so I will ask questions that are correct but only check answers for things that I have already implemented. Example:</p>
+
+<p>As the generated sequence can only have <code>8 &lt;= x &lt;= 50</code> elements, a list returning a single element would not be correct. So</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//class FibonacciTests</span>
+</span><span class='line'><span class="nd">@Test</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">theFirstElementIsOne</span><span class="o">(){</span>
+</span><span class='line'>  <span class="n">assertThat</span><span class="o">(</span><span class="k">new</span> <span class="nf">FibonacciSequence</span><span class="o">().</span><span class="na">generate</span><span class="o">(</span><span class="mi">8</span><span class="o">)[</span><span class="mi">0</span><span class="o">],</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Third exercise: FizzBuzz</h3>
+
+<blockquote><p>Write a program that is capable of returning a string with all numbers less than 100 that are using the FizzBuzz pattern. This FizzBuzz pattern converts the divisors of 3 to &lsquo;fizz&rsquo;, divisors of 5 to &lsquo;buzz&rsquo; and divisors to both to &lsquo;fizzbuzz&rsquo;</p></blockquote>
+
+<p>I discovered that this FizzBuzz is a drinking game in the UK.</p>
+
+<h3>Fourth exercise: CRC cards</h3>
+
+<p>Before this exercise there was a short introduction on <a href="http://en.wikipedia.org/wiki/Class-responsibility-collaboration_card">Class-responsibility-collaboration card</a>, explained above</p>
+
+<p>Following an example about a movie library, there were six user stories, described at high level, without acceptance criteria.</p>
+
+<p>We had to create an acceptance criteria for this user story. Later create a set of CRC cards and finally partially implement said feature.</p>
+
+<p>Very interesting exercise, such a pity that there wasn&rsquo;t more time to complete this exercise or see him doing it</p>
+
+<h2>Knowledge pearls</h2>
+
+<p>He dropped some knowledge pearls (that I&rsquo;m going to use myself):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nl">Q:</span> <span class="n">When</span> <span class="n">are</span> <span class="n">you</span> <span class="n">done</span> <span class="n">with</span> <span class="n">TDD</span><span class="o">?</span>
+</span><span class='line'><span class="nl">A:</span> <span class="n">When</span> <span class="n">you</span> <span class="n">can</span> <span class="n">not</span> <span class="n">think</span> <span class="n">of</span> <span class="n">more</span> <span class="n">tests</span> <span class="k">for</span> <span class="n">your</span> <span class="n">suite</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nl">Q:</span> <span class="n">What</span> <span class="k">do</span> <span class="n">we</span> <span class="k">do</span> <span class="n">after</span> <span class="n">TDD</span><span class="o">?</span>
+</span><span class='line'><span class="nl">A:</span> <span class="o">(</span><span class="n">No</span> <span class="n">answer</span><span class="o">)</span>
+</span><span class='line'><span class="nl">Q:</span> <span class="n">Starts</span> <span class="n">with</span> <span class="s">&quot;T&quot;</span><span class="o">.</span> <span class="n">Any</span> <span class="n">idea</span><span class="o">?</span>
+</span><span class='line'><span class="nl">A:</span> <span class="n">Testing</span><span class="o">.</span> <span class="n">Test</span> <span class="k">for</span> <span class="n">the</span> <span class="n">purpose</span> <span class="n">of</span> <span class="n">testing</span><span class="o">,</span> <span class="n">not</span> <span class="n">TDD</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Close concepts interested in responsibilities:</p>
+
+<ul>
+<li>Conceptual diagram and class diagram</li>
+<li>Instance diagram</li>
+<li>Knowledge map and tag cloud</li>
+</ul>
+
+
+<p>Regarding legacy code:</p>
+
+<ul>
+<li>Isolate big balls of mud into parts and test these as end-to-end. Also connected to isolating groups of nodes into the class graph</li>
+<li>Understand what the code does, not the architecture</li>
+<li>Do not use a mock to help you test legacy code, use it just as a design tool. (It might be a good idea to use it temporarily while you refactor, but remove it afterwards)</li>
+<li>Tests with mocks double down on the design: if it is broken, it will be a drag more than help</li>
+</ul>
+
+
+<p>Test on the boundaries. Many times we test in the middle of the algorithm but forget the boundaries, where many special cases hide</p>
+
+<p>The GOOS book is pronounced like the goose animal (&ldquo;/gús/&rdquo;) in English</p>
+
+<p>He said he never copy pastes <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
+
+<h2>Conclusions</h2>
+
+<ul>
+<li>This is a two day workshop condensed on a single day. It shows. In my opinion, it would be better to do fewer exercises and dig deeper in them rather than try so many approaches / exercises</li>
+<li>The CRC exercise was well thought and really massaged. It touches the right spots and makes you want to learn more about the subject</li>
+<li>Promiscuously pairing is always a good idea, as you don&rsquo;t know what level have your attendees. Get stuck for the whole day with someone who has a (very) different knowledge level than you might spoil the workshop</li>
+<li>I don&rsquo;t see the benefit of doing the fizzbuzz kata after having done the Fibonacci sequence one</li>
+<li>In my opinion, there were too many breaks. Doing a break in the morning (10-15 mins), lunch (30 mins) and afternoon (10-15 mins) is enough</li>
+</ul>
+
+
+<p>On a personal note:</p>
+
+<ul>
+<li>It is not enough to attend the workshop. You have to take notes and study them at home later. (Thanks <a href="http://spines.me">spines</a> for this lesson)</li>
+<li>I really had a great time, learned a lot, even though I already know something about TDD</li>
+<li>Met very interesting people</li>
+<li>Would attend to the workshop again</li>
+</ul>
+
+
+<p>In general, I&rsquo;d like to thank Jason and the other attendees for making this workshop possible. I had a blast there.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>As described by <a href="http://martinfowler.com/bliki/TellDontAsk.html">Martin Fowler</a> and the <a href="https://pragprog.com/articles/tell-dont-ask">Pragmatic Bookshelf</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Copy pasting this post&rsquo;s structure resulted in a wrong title that had to be fixed. Maybe the extra effort of not copy pasting has a good ROI, as long as you do not copy paste by typing the text you&rsquo;re reading from somewhere else<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/01/category-flow/">Category: Flow</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-01T05:09:43+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:09 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202/">Flow: The Psychology of Optimal Experience</a>&rsquo;, written by Mihaly Csikszentmihalyi</p>
+
+<p>Note: This has been created a posteriori with a previous date</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/trimming-your-plants/">Trimming Your Plants</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T21:13:45+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>9:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This post belongs to the <a href="/blog/categories/growing-software">growing-software series</a></p>
+
+<p>Imagine this situation: the code works. You are at <a href="https://github.com/alvarogarcia7/refactoring_a-first-example/commit/1ff7df4d45ee1ac5bc483b90da7ed1b68f27aef9">this stage</a></p>
+
+<p>Disregarding the tests, the production code is complete. Could be better, but it is ready if you are in a hurry.</p>
+
+<p>Now, picture your test as a plant in a plant pot: it might be healthy on the outside (external quality) but how are their roots (internal quality)?</p>
+
+<p>Do you imagine them in an ordered fashion or in a jungle of roots? Everything on the outside is connected to one or several roots? In case it is several, what / how much do they share?</p>
+
+<h2>Trimming the roots</h2>
+
+<p>Now, let&rsquo;s imagine you want to put the plant in a different plant pot. You don&rsquo;t want the plant to be altered in any way: keep producing fruits as it was before, as green and shiny, etc. Just alter the container for business reasons.</p>
+
+<p>The more tidy and organized the roots are related to the outside plant itself, the easier it is to reshape (or refactor) it.</p>
+
+<p>So this is exactly what refactoring is about: &ldquo;keeping the same external behaviour, modifying the internal structure&rdquo;. I like to explain as &ldquo;modify how it is done but not what it does&rdquo;.</p>
+
+<p>When you trim the roots but leave unaltered the top, you are making it cheaper to modify the internal shape without affecting the rest. The plant will continue to grow, requiring more and more nutrients from the ground. Small increases that do not warrant a bigger plant pot, as the current one can withstand the new requirements.</p>
+
+<p>This is where the analogy is no longer useful: when writing software, you&rsquo;re also making it easier to reuse, modify and maintain.</p>
+
+<h3>Conclusion</h3>
+
+<p>The more tidied up you have your plants, the cheaper to maintain and modify.</p>
+
+<p>Software implementation details are like roots: they expand to find any small hole where to expand. Even to scaffold expected behaviour</p>
+
+<p>Trim your plants early and often, always with the help of a test suite</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/tdd-microexercise-tire-pressure/">TDD Microexercise: Tire Pressure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T21:13:45+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>9:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday, <a href="http://twitter.com/@trikitrok">Manuel Rivero</a> and I facilitated a <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/events/221463037/">workshop</a> using the <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises/Java/TirePressureMonitoringSystem">tire pressure</a> TDD microexercise. (More microexercises can be found in <a href="/blog/categories/microexercise">this category</a>, also <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises">here</a>)</p>
+
+<p>We scheduled the session as follows:</p>
+
+<ul>
+<li>10 minutes introduction to the exercise</li>
+<li>10 minutes to download the code and take a first look</li>
+<li>10 minutes explanation about the exercise, what the problem is, etc</li>
+<li>30 minutes for the attendees to explore the solution (on their own)</li>
+<li>10 minutes for commenting the explored solutions, comments about it</li>
+<li>40 minutes of prepared kata format</li>
+<li>10 minutes of final explanations, questions and answers (Q&amp;A)</li>
+</ul>
+
+
+<p>Total: 120 minutes or two hours, approximately</p>
+
+<p>We decided that one would be mostly at the keyboard and the other mostly explaining. This allows for the speaker to introduce some concepts while the driver is performing a larger refactor / step.</p>
+
+<p>Some of our own feedback:</p>
+
+<ul>
+<li>Have the kata prepared, clear all your doubts before doing it live</li>
+<li>Be very specific about the goal of the kata: the narrower the focus, the more we will learn</li>
+<li>If necessary, exercise your shortcuts / practices one last time</li>
+<li>Set up the font as big as needed. Even remove some whitelines (present in your usual code) so more text can fit in the screen.</li>
+<li>It was very useful for us to have a small script of what we would perform: what was the idea, where to stop to explain things, etc</li>
+<li>A prepared kata is a show (like a movie), so the dialogs between the performing pair are important. Do not be afraid to tell the reasons why you did this last refactor.</li>
+<li>Answer the questions as you go, do not wait until the end of the session</li>
+</ul>
+
+
+<p>Some feedback we received:</p>
+
+<ul>
+<li>It would have been useful to do a recap at the end of the session, to refresh the most important concepts</li>
+<li>In general the session was good, they were satisfied with the techniques shown there</li>
+<li>The exercise was concise and small, perfect for two hours' time</li>
+</ul>
+
+
+<p>Many thanks to all the attendees and to Manuel: I learnt a lot from the session and renewed my energies to keep doing these workshop sessions. Also thanks to Luca Minudel for writing these awesome exercises.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/books-read-in-2015q1/">Books Read in 2015Q1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T10:49:49+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:49 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html">post</a>:</p>
+
+<ul>
+<li><a href="https://leanpub.com/50quickideas">Fifty Quick Ideas to Improve your User Stories</a>, by Gojko Adzic and David Evans</li>
+<li><a href="https://leanpub.com/funretrospectives">Fun retrospectives</a> by Taina Caetano and Paulo Caroli</li>
+<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091">Implementation patterns</a> by Kent Beck</li>
+<li><a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">Clean code</a> by Robert C. Martin;  again</li>
+</ul>
+
+
+<p>Books started, not yet finished (WIP):</p>
+
+<ul>
+<li><a href="http://www.manning.com/evans/">The Well-Grounded Java Developer</a>, by Benjamin J. Evans and Martijn Verburg</li>
+<li><a href="http://martinfowler.com/books/refactoring.html">Refactoring</a>, by Martin Fowler, (with Kent Beck, John Brant, William Opdyke, and Don Roberts)</li>
+<li><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>, by Steve Freeman and Nat Pryce</li>
+<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202">Flow</a>, by Mihaly Csikszentmihalyi</li>
+</ul>
+
+
+<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/29/growing-software-according-to-the-season/">Growing Software According to the Season</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-29T16:13:45+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is the first post is of the <a href="/blog/categories/growing-software">growing-software series</a></p>
+
+<p>A few weeks ago, while reading the book <a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> by <a href="https://twitter.com/@natpryce">Nat Pryce</a> and <a href="https://twitter.com/@sf105">Steve Freeman</a>, I finally understood why the software needs to be grown and not built:</p>
+
+<blockquote class="twitter-tweet" lang="en"><p>.<a href="https://twitter.com/natpryce">@natpryce</a> <a href="https://twitter.com/sf105">@sf105</a> With the <a href="https://twitter.com/hashtag/goos?src=hash">#goos</a> book I finally grasped the importance of growing, not building software. Thanks for writing it</p>&mdash; Alvaro Garcia (@alvarobiz) <a href="https://twitter.com/alvarobiz/status/570835142136049664">February 26, 2015</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>A few days ago, I was thinking about new inspiration sources and this came to my mind:</p>
+
+<blockquote class="twitter-tweet" lang="en"><p>If we want to grow software instead of building it, should we start looking at gardening and agriculture for new inspiration? <a href="https://twitter.com/hashtag/goos?src=hash">#goos</a></p>&mdash; Alvaro Garcia (@alvarobiz) <a href="https://twitter.com/alvarobiz/status/581005906667687938">March 26, 2015</a></blockquote>
+
+
+<p>In agriculture, at least in this latitude, there are different seasons. Different plants have different temporal schedules: you need to plant, wait for it to bloom, produce fruits then collect. Maybe remove the plant and wait for the next time slot to appear.</p>
+
+<p>When growing software, things are different (or we think so):</p>
+
+<ul>
+<li>Do we need to plant? Yes, seed the project with resources</li>
+<li>Wait for it to bloom? Yes, from an outside actor perspective, there is no result for a while, even if it is one sprint</li>
+<li>Wait to produce fruits? Yes, usually some sprints past the minimum viable product (MVP) until the minimum lovable product (MLP)</li>
+<li>Do we need to collect it? Yes, usually the final tests (e.g., regression) and ship it to production to be used.</li>
+</ul>
+
+
+<p>After all, we might say that the process is not so different in both activities. Nothing to do related to tools or materials, etc.</p>
+
+<p>As in agriculture, seasons vary in productivity for a certain activity or crop: during the cold months, not many plants are able to produce fruits. Meanwhile, during the hot months, harvest is much higher. (This only applies to outdoors gardening.)</p>
+
+<p>When producing software, there might be seasons too:</p>
+
+<ul>
+<li>Seasons where productivity (harvest) varies
+
+<ul>
+<li>Lowers when a new team member joins (see the Mythical Man-Month), the pressure is too high, salaries are low, &hellip;</li>
+<li>Increases when there are no information silos, the bus factor is high, the team is not affected by external distractions, &hellip;</li>
+</ul>
+</li>
+<li>Seasons where different harvests can be planted, but a subset of them will be the most effective
+
+<ul>
+<li>A front-end developer can do back-end, but it won&rsquo;t be as productive. In this area, one can learn other disciplines and get as effective as other professionals.</li>
+<li>There are many tasks to be done but the prioritized ones are more effective</li>
+</ul>
+</li>
+<li>Some harvests are more intense on the fields than others. After that, there is a required rest so the next season is as productive as the previous one
+
+<ul>
+<li>Some projects produce burn-out so some slack time is more productive than getting to work again.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>But there might be differences too:</p>
+
+<ul>
+<li>Geographical distribution: some crops cannot grow in certain conditions. I believe any geographic area (e.g., country) can produce any type of work (e.g., back-end, front-end, quality assurance, project management, etc)</li>
+<li>Quality distribution: same as before, many crops do not grow in Iceland (due to the harsh environment) or do it with lower quality as nearer to the Equator.</li>
+</ul>
+
+
+<p><a href="https://twitter.com/@XaV1uzz">Xavi Gost</a> responded to my tweet:</p>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/alvarobiz">@alvarobiz</a> Conceptos como darle a las cosas su tiempo de crecer y madurar nos vendrian bien en la industria</p>&mdash; Xaviuzz (@XaV1uzz) <a href="https://twitter.com/XaV1uzz/status/581063149203394560">March 26, 2015</a></blockquote>
+
+
+<p>[Roughly translated: Concepts like allowing some time for things to grow and ripe would benefit the industry]</p>
+
+<p>Get the tools out of the tool-shed and start buying seeds for this spring.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/9">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/7">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: Automate the Blog Publishing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/self-study-in-december-2015/">Self-Study in December 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/functional-implementation-patterns/">Functional Implementation Patterns</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: Calling All Methods in an Object in Ruby</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Operator | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/operator/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-07T22:19:14+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Language Was Prepared for That]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/09/the-language-was-prepared-for-that/"/>
+    <updated>2015-08-09T22:58:33+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/09/the-language-was-prepared-for-that</id>
+    <content type="html"><![CDATA[<p>Many times I&rsquo;ve written this function:</p>
+
+<pre><code class="java">public boolean between(int lowerBound, int n, int upperBound){
+    return lowerBound &lt;= n &amp;&amp;
+        n &lt;= upperBound;
+}
+</code></pre>
+
+<p>It may depend on the case, whether it is <code>[]</code>, <code>[)</code>, <code>(]</code> or <code>()</code>, to use mathematical terms.</p>
+
+<p>When the two comparisons are the same (<code>[]</code> and <code>()</code>), there is duplication in the comparisons.</p>
+
+<p>Investigating a little bit on this in clojure, I&rsquo;ve found this function:</p>
+
+<pre><code class="lisp">&lt;=
+</code></pre>
+
+<p>And its <a href="https://clojuredocs.org/clojure.core/%3C=">clojuredocs</a>: Returns non-nil if nums are in monotonically non-decreasing order,
+otherwise false.</p>
+
+<p>A sample usage:</p>
+
+<pre><code class="lisp">(&lt;= 1 2)
+; true
+
+(&lt;= 1 2 1)
+; false
+</code></pre>
+
+<p>The last part is the most interesting one. As this function is prepared to receive more than two parameters, it is very easy for the programmer to use it. We could say that the language was prepared for that.</p>
+
+<p>The <a href="https://github.com/clojure/clojure/blob/clojure-1.7.0/src/clj/clojure/core.clj#L1020">implementation</a>:</p>
+
+<pre><code class="lisp">(defn &lt;=
+  ([x] true)
+  ([x y] (. clojure.lang.Numbers (lte x y)))
+  ([x y &amp; more]
+   (if (&lt;= x y)
+     (if (next more)
+       (recur y (first more) (next more))
+       (&lt;= y (first more)))
+     false)))
+</code></pre>
+
+<p>Inspired by this, I&rsquo;ve implemented the same function in haskell (for the repl):</p>
+
+<pre><code class="haskell">let isBigger acc ele = (snd acc) &amp;&amp; (fst acc) &lt; ele in
+   foldl (\acc ele -&gt; (ele, isBigger acc ele)) (1, True) [1,2,1,3] 
+</code></pre>
+
+<p>and a simpler solution I&rsquo;ve found on <a href="http://codereview.stackexchange.com/questions/46606/is-a-list-sorted/46608#46608">Stack Overflow</a>:</p>
+
+<pre><code class="haskell">isSorted :: (Ord a) =&gt; [a] -&gt; Bool
+isSorted xs = all (\(x, y) -&gt; x &lt;= y) $ zip xs (tail xs)
+</code></pre>
+
+<p>or</p>
+
+<pre><code class="haskell">isSorted :: (Ord a) =&gt; [a] -&gt; Bool
+isSorted xs = and $ zipWith (&lt;=) xs (tail xs)
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>Unless a more elegant, language-provided solution exists in haskell, the clojure one is way simpler. This is one of the benefits of prefix notation, that operators (e.g., <code>+</code>, <code>-</code>, <code>*</code>, <code>&lt;=</code>) are overloaded to take more arguments than before.</p>
+]]></content>
+  </entry>
+  
+</feed>
