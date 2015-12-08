@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Training | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/training/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-08T17:44:44+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Brown Bag Session: Clojure's Data and Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/23/brown-bag-session-clojures-data-and-code/"/>
+    <updated>2015-09-23T19:24:58+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/23/brown-bag-session-clojures-data-and-code</id>
+    <content type="html"><![CDATA[<p>Today, at a client, I&rsquo;ve facilitated the brown-bag session on Clojure, introducing Lisp&rsquo;s <a href="https://en.wikipedia.org/wiki/Homoiconicity">homoiconicity</a>.</p>
+
+<h2>Session Structure</h2>
+
+<p>The session was designed as a kata, first introducing participants in the problem, letting some time to read the initial version and to think about possible solutions.</p>
+
+<p>Then, I structured the rest of the time as a prepared kata, where I was explaining in the beamer our current problems (day-to-day tasks) and possible solutions in Clojure.</p>
+
+<p>Among them:</p>
+
+<ul>
+<li>Configuration and extensibility: allowing for flexibility, define at configuration time new features without recompiling or modifying the system.</li>
+<li>Persisting and restoring certain state: this is a problem that could easily be solved persisting data in Lisp</li>
+</ul>
+
+
+<p>I explained, in private to those who asked, about <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a> and its dialects <a href="https://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a>, <a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a> and <a href="https://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a>.</p>
+
+<h2>Feedback</h2>
+
+<ul>
+<li>They liked the effort of investigating new languages to solve problems we have in our current stack</li>
+<li>They liked introducing the language features with a back-story to better understand the concepts</li>
+<li>They suggested to improve the level of the session: as the group as a whole is still starting with Clojure, leaving them on their own with code is too much. They asked for more guidance</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code/"/>
+    <updated>2015-07-01T11:18:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have done a brown bag session about refactoring legacy code. It includes:</p>
+
+<ul>
+<li>legacy code definition. There is no agreement about this in the team.</li>
+<li>the legacy code change algorithm (source is Feathers, Working effectively with legacy code). Plus an example about it.</li>
+<li>working with legacy code</li>
+<li>experience with it.</li>
+</ul>
+
+
+<p>The slides are available <a href="../../../../uploads/refactoring-legacy-code-slides.pdf">here</a> (PDF format)</p>
+
+<p>We also did a practical session, whose experience report is <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">here</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/"/>
+    <updated>2015-06-23T17:19:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+
+<p>The contents of the session:</p>
+
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
+
+<p>I prepared a small script:</p>
+
+<pre><code class="bash">while test true; do
+  git add --all;
+  git commit --all -m "save process - uknown state";
+  sleep 120;
+done;
+</code></pre>
+
+<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Docker]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker/"/>
+    <updated>2015-06-16T16:52:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker</id>
+    <content type="html"><![CDATA[<p>Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including:</p>
+
+<ul>
+<li>the difference between a container and an image</li>
+<li>diffing image contents</li>
+<li>AUFS (Another Union FS)</li>
+<li>persistent vs non-persistent (volatile) filesystems</li>
+<li>running CMD and other commands on the instance</li>
+<li>problems of running with permission = root (or its group)</li>
+<li>downsides of it</li>
+<li>how to compare it with a virtual machine</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Internal Training: BPM: Process and Tools for Developers]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/02/internal-training-bpm-tool-and-process/"/>
+    <updated>2015-06-02T20:20:09+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/02/internal-training-bpm-tool-and-process</id>
+    <content type="html"><![CDATA[<p>At a client, I&rsquo;ve presented today an internal training on &ldquo;BPM: Process and tools for developers&rdquo;</p>
+
+<p>In it, we have introduced the BPM concept and the main ideas in Activiti BPM.</p>
+
+<p>Also techniques for hotswapping processes, tips and how-tos.</p>
+]]></content>
+  </entry>
+  
+</feed>
