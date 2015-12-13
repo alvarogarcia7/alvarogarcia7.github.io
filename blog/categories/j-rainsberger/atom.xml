@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: J-rainsberger | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/j-rainsberger/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-13T14:01:54+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in November 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/11/02/self-study-in-november-2015/"/>
+    <updated>2015-11-02T13:25:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/11/02/self-study-in-november-2015</id>
+    <content type="html"><![CDATA[<h2>Call me maybe: RabbitMQ</h2>
+
+<p>I&rsquo;ve read <a href="https://aphyr.com/posts/315-call-me-maybe-rabbitmq">this article</a> by Kyle Kingsbury on using RabbitMQ as a lock service. It investigates and gives a counterexample of using it for this purpose.</p>
+
+<p>Uses Knossos to do the testing and surfaces a problem with it. Explains specific problems on locking: at-most-once and at-least-once message delivery</p>
+
+<p>Note: References Jepsen (I guess an inside joke to the song &ldquo;Call me maybe&rdquo; by Carly Rae Jepsen) for at-most-once and at-least-once message delivery.</p>
+
+<p>Tags: rabbitmq, kyle-kingsbury, lock, cap-theorem, distributed-system, jepsen, knossos, at-most-once-delivery, at-least-once-delivery, counterexample, mutex</p>
+
+<h2>Everyone is potentially a teacher</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/09/everyone-is-potentially-a-teacher">this article</a> by Carlos Blé where he explains that everyone can have ideas worth spreading and that the knowledge not only comes from others but also from the relationships that tie you to other people.</p>
+
+<p>Tags: carlos-ble, teaching, pedagogy, idea, teacher, relationship</p>
+
+<h2>Ragel State Machine Compiler</h2>
+
+<p>I&rsquo;ve read <a href="http://www.colm.net/open-source/ragel/">this article</a> explaining what the Ragel project is about: a code generator from regex to code in languages such as C#, Java, etc. It is limited to finite state machines (FSM), with determinism. It can also handle some indeterminism. Written by Adrian D. Thurston</p>
+
+<p>Tags: adrian-thurston, fsm, state-machine, finite-state-machine, code-generation, ragel</p>
+
+<h2>HTTP is obsolete. It&rsquo;s time for the distributed, permanent web</h2>
+
+<p>I&rsquo;ve read <a href="https://ipfs.io/ipfs/QmNhFJjGcMPqpuYfxL62VVB9528NXqDNMFXiqN5bgFYiZ1/its-time-for-the-permanent-web.html">this article</a> by Kyle Drake explaining the need for a permanent, distributed web archive.</p>
+
+<p>Using a distributed file system (IPFS) and software similar to Bitcoin, they can host parts of the web locally, making it immutable and distributed</p>
+
+<p>Tags: kyle-drake, web-archive, centralization, decentralization, distribution, permanent-web, ipfs, federation,</p>
+
+<h2>Recovering From the Integrated Tests Scam</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive1.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=42e61e203e&amp;e=4a925444f9">this article</a> from J. B. Rainsberger on the integrated test scam and how to solve it: refactoring.</p>
+
+<p>Tags: jbrains, tdd, integrated-test, integration-test, j-rainsberger</p>
+
+<h2>Broken windows theory</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Broken_windows_theory">this wikipedia article</a> that talks about the broken windows theory, that states that controlling and monitoring public spaces leads to lowering the serious crimes.</p>
+
+<p>Cites three causes for this:</p>
+
+<ul>
+<li>Social norms and conformity</li>
+<li>Lack of routing monitoring</li>
+<li>Social signaling and signal crime</li>
+</ul>
+
+
+<p>Also discusses examples in the US and in the Netherlands, as well as criticisms.</p>
+
+<p>I&rsquo;ve read it to better understand how to apply this theory to software development, on a day-to-day basis.</p>
+
+<p>Tags: wikipedia, theory, broken-window</p>
+
+<h2>Scsh</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Scsh">the wikipedia page</a> for Scsh, the Scheme shell.</p>
+
+<h2>Why is Scala&rsquo;s type inference not as powerful as Haskell&rsquo;s?</h2>
+
+<p>I&rsquo;ve read the reasoning why Haskell supports other type inferences that are not present in Scala, in <a href="http://stackoverflow.com/questions/7234095/why-is-scalas-type-inference-not-as-powerful-as-haskells">this StackOverflow question</a></p>
+
+<p>Tags: scala, haskell, type-inference, hindley-milner, type-inference-algorithm</p>
+
+<h2>The Future of the LispM</h2>
+
+<p>I&rsquo;ve read <a href="http://arrdem.com/2014/11/28/the_future_of_the_lispm/">this article</a> explaining the past and current situation in the Lisp world: from Lisp, to LispM, to the MIT and Symbolics Inc., to Clojure and Scheme.</p>
+
+<p>Also talks about integration with the operating system and its execution in the microprocessor. Written by Reid McKenzie</p>
+
+<p>Tags: reid-mckenzie, lisp, lispm, clojure, scheme, symbolics</p>
+
+<h2>The Lisp Curse</h2>
+
+<p>I&rsquo;ve read <a href="http://www.winestockwebdesign.com/Essays/Lisp_Curse.html">this essay</a> by Rudolf Winestock, where he explains the low barrier (or low cost) for people in powerful languages (such as Lisp) to not accept the status quo in their project and fork / start their own.</p>
+
+<p>It also compares languages and the people attracted to them. Cites Mark Tarver&rsquo;s essays several times, including the Brilliant Bipolar Mind (BBM) in <a href="https://web.archive.org/web/20150308085419/http://www.lambdassociates.org/blog/bipolar.htm">this other</a> essay (from WebArchive). Compares the BBM and the normal worker in usefulness to companies.</p>
+
+<p>Cites the Pareto principle (80-20 rule): a single hacker will port 80% the library from another language, leaving it buggy, undocumented and only understandable by the original author (assuming this is only 20% of the work). The rest (e.g., documentation, bugfixing, maintenance) are dropped and never taken care of.</p>
+
+<p>Cites that this could be somewhat based on the facility of creating new features for the language. A small effort implies small implementation time, leaving no margin for thinking it through and seeing other corner cases. Also, a single person working on the project means no code review. The style might be coherent (always the same one), but might not be idiomatic, understandable by others, maintainable, etc.</p>
+
+<p>Closes the essay with this quote:</p>
+
+<blockquote><p>The expressive power of Lisp has drawbacks. There is no such thing as a free lunch.</p></blockquote>
+
+<p>Tags: rudolf-winestock, essay, pareto-principle, hacking, one-man-band, lisp, no-free-lunch, quote</p>
+
+<h2>The Bipolar Lisp Programmer</h2>
+
+<p>I&rsquo;ve read <a href="https://web.archive.org/web/20150308085419/http://www.lambdassociates.org/blog/bipolar.htm">this essay</a> by Mark Tarver on the Bipolar Lisp programmmer or the koan of Lisp.</p>
+
+<p>It explains the history of the Brilliant Bipolar Mind (BBM) when they attend high school and college. The freedom they&rsquo;re given, exactly the same as in Lisp, as you don&rsquo;t need to mix and socialize with others to create a good-enough solution.</p>
+
+<p>In this fashion, he says, most of the projects are 80% finished, not documented, not maintained. The same problems that worry enterprises.</p>
+
+<p>Cites the article &ldquo;Lisp: Good News, Bad News, How to Win Big&rdquo;</p>
+
+<p>Tags: essay, mark-tarver, bipolar-lisp-programmer, lisp-programmer, programmer, brillian-bipolar-mind, blp, bbm, koan</p>
+
+<p>Note: this article was no longer present on its original site. Fetched it from the Web Archive (WayBack Machine).</p>
+
+<h2>Writing readable Clojure code</h2>
+
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/jiriknesl/writing-readable-clojure-code">these slides</a> by Jiří Knesl, that explains how to write better clojure code:</p>
+
+<ul>
+<li>Macros</li>
+<li>HOFs</li>
+<li>left-to-right vs right-to-left code</li>
+</ul>
+
+
+<p>Tags: clojure, jiri-knesl, macro, hof, thread, slide</p>
+
+<h2>How can I get a reference to a method?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/485151/how-can-i-get-a-reference-to-a-method">this question</a>, <a href="http://stackoverflow.com/questions/4294485/how-do-i-reference-a-function-in-ruby">another question</a> from StackOverflow</p>
+
+<p>Tags: stackoverflow, question, ruby, functional-programming, method-reference</p>
+
+<h2>Implicit and Explicit Blocks</h2>
+
+<p>I&rsquo;ve read <a href="https://rubymonk.com/learning/books/4-ruby-primer-ascent/chapters/18-blocks/lessons/55-new-lesson">this lesson from rubyMonk</a></p>
+
+<p>Tags: rubymonk, lesson, block, ruby</p>
+
+<h2>What&rsquo;s Point-free Programing?</h2>
+
+<p>I&rsquo;ve read <a href="http://xahlee.info/comp/point-free_programing.html">this article</a> by Xah Lee explaining point-free programming, which requires a glance at function decomposition (currying)</p>
+
+<blockquote><p>[&hellip;] “point-free programing” is:</p>
+
+<ul>
+<li>It is about a particular <strong>syntax</strong> for <strong>function definition</strong>.</li>
+<li>When <strong>defining a function</strong>, no symbol is used for function parameter.</li>
+</ul>
+</blockquote>
+
+<h2>Oracle’s “planned obsolescence” for Java</h2>
+
+<p>I&rsquo;ve read <a href="https://jaxenter.com/oracle-and-javas-planned-obsolescence-121144.html">this article</a> by Coman Hamilton on the possible Java&rsquo;s planned obsolescence by Oracle.</p>
+
+<p>Discusses features pushed to future releases, comparing it to other legacy languages.</p>
+
+<p>Tags: obsolescence, legacy-language, planned-obsolescence, java, java-ee, oracle, fortran, cobol, coman-hamilton</p>
+
+<h2>Your first Ruby native extension: C</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.jcoglan.com/2012/07/29/your-first-ruby-native-extension-c/">this article</a> about writing a native extension for ruby. Written by James Coglan</p>
+
+<p>Tags: james-coglan, ruby, c, native-extension</p>
+
+<h2>What&rsquo;s the difference between equal?, eql?, ===, and ==?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">this stackoverflow</a> question regarding Ruby operators: equal?, eql?, ===, ==:</p>
+
+<ul>
+<li>==: generic equality</li>
+<li>===: case equality (for case - when)</li>
+<li>eql?: hash equality</li>
+<li>equal?: identity comparison (pointer comparison)</li>
+</ul>
+
+
+<p>Tags: comparison, stackoverflow, ruby, equal, eq, ==, ===, question, answer, jtbandes</p>
+
+<h2>Kanban</h2>
+
+<p>I&rsquo;ve read <a href="https://es.wikipedia.org/wiki/Kanban">the wikipedia page</a> for Kanban (Spanish)</p>
+
+<p>Tags: wikipedia, kanban, agile-methodology, management</p>
+
+<h2>Is your Scrum team Agile?</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.thesoftwarecraft.com/2014/04/is-your-scrum-team-agile.html">this article</a> by  Bart Bakker where he discusses some common patterns in Agile implementations (in software companies)</p>
+
+<p>Tags: scrum, team, agile, scrum-implementation, bart-bakker</p>
+
+<h2>Mejora tu trabajo en equipo con el método Kanban</h2>
+
+<p>I&rsquo;ve read <a href="http://hipertextual.com/archivo/2013/11/que-es-kanban/">this article</a> that explains then kanban management framework, with its principles and its values. Written by Jose López (in Spanish)</p>
+
+<p>Tags: kanban, management, agile-methodology, management-framework, principle, value, jose-lopez</p>
+
+<h2>¿Qué es el método Kanban para la gestión de proyectos?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javiergarzas.com/2011/11/kanban.html">this article</a> (Spanish) written by Javier Garzás where it is explained the kanban methodology and three of its main rules:</p>
+
+<ul>
+<li>visualize workflow</li>
+<li>limit WIP</li>
+<li>measure {lead, cycle} time</li>
+</ul>
+
+
+<p>Tags: kanban, management, agile-methodology, management-framework, principle, value, javier-garzas</p>
+
+<h2>describe vs. context in rspec</h2>
+
+<p>I&rsquo;ve read <a href="http://lmws.net/describe-vs-context-in-rspec">this article</a> that explains the (lack of) functional difference between RSpec&rsquo;s <code>describe</code> and <code>context</code> methods. The difference is contextual (i.e., the amount of information they convey). Written by LM</p>
+
+<p>Tags: rspec, ruby, describe, context, difference</p>
+]]></content>
+  </entry>
+  
+</feed>
