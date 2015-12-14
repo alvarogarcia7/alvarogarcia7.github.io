@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Refactor | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/refactor/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-14T20:32:02+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/"/>
+    <updated>2015-06-23T17:19:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+
+<p>The contents of the session:</p>
+
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
+
+<p>I prepared a small script:</p>
+
+<pre><code class="bash">while test true; do
+  git add --all;
+  git commit --all -m "save process - uknown state";
+  sleep 120;
+done;
+</code></pre>
+
+<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Demand for TDD and Refactor]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor/"/>
+    <updated>2015-04-25T11:28:20+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor</id>
+    <content type="html"><![CDATA[<p>When I went to the Jason Gorman&rsquo;s TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), he said something interesting regarding refactor and TDD:</p>
+
+<blockquote><p>In job offers / advertisements, TDD is much more in demand than refactor. But the latter is included in the former as an integral part.</p>
+
+<p>Jason Gorman</p></blockquote>
+
+<p>I agree with the second thought: you cannot properly do TDD without refactoring, as it is an integral part; also the third phase.</p>
+
+<p>For me, sometimes refactoring is the difference between code and &ldquo;Clean Code&rdquo; (as defined in the book by the same title). If I cannot find the (algorithmic) pattern for the software I&rsquo;m writing, I try to introduce scaffolds to keep investigating until I can find a viable, general solution (if the problem requires it.)</p>
+
+<p>Even after doing the refactor <code>replace algorithm</code>, the code might not have the responsibilities in the right place, the methods might be long, value objects not extracted yet, etc. This is where further refactor is needed to introduce all those qualities in the piece of software.</p>
+
+<p>I believe that we programmers have done a bad job of communicating with the rest of the organization what refactoring is about. It has nothing to do with beauty, style or design (in the visual sense) but is related to maintainability, coupling, defects and quality. Money, in the long run, as its objective is to make it cheaper to change in the future, a better investment and ROI. This is the common language that the rest of the company understands.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Destructuring as a Refactor in Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/"/>
+    <updated>2015-04-14T21:36:23+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure</id>
+    <content type="html"><![CDATA[<p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
+
+<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
+
+<pre><code>user=&gt; (def point {:x 5 :y 7})
+#'user/point
+
+(let [{:keys [x y] :as the-point} point]
+         (println "x:" x "y:" y "point:" the-point))
+
+x: 5 y: 7 point: {:x 5, :y 7}
+</code></pre>
+
+<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
+
+<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
+
+<p>This has been used for a method like this one:</p>
+
+<pre><code class="lisp">(defn all-access[k]
+  (do (:a k))
+  (do (:b k)))
+</code></pre>
+
+<p>this has been refactored to this</p>
+
+<pre><code class="lisp">(defn all-access[k]
+  (let [{:keys [a b] :as k}]
+      (do a)
+      (do (:b k))))
+</code></pre>
+
+<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trimming Your Plants]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/03/31/trimming-your-plants/"/>
+    <updated>2015-03-31T21:13:45+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/03/31/trimming-your-plants</id>
+    <content type="html"><![CDATA[<p>This post belongs to the <a href="/blog/categories/growing-software">growing-software series</a></p>
+
+<p>Imagine this situation: the code works. You are at <a href="https://github.com/alvarogarcia7/refactoring_a-first-example/commit/1ff7df4d45ee1ac5bc483b90da7ed1b68f27aef9">this stage</a></p>
+
+<p>Disregarding the tests, the production code is complete. Could be better, but it is ready if you are in a hurry.</p>
+
+<p>Now, picture your test as a plant in a plant pot: it might be healthy on the outside (external quality) but how are their roots (internal quality)?</p>
+
+<p>Do you imagine them in an ordered fashion or in a jungle of roots? Everything on the outside is connected to one or several roots? In case it is several, what / how much do they share?</p>
+
+<h2>Trimming the roots</h2>
+
+<p>Now, let&rsquo;s imagine you want to put the plant in a different plant pot. You don&rsquo;t want the plant to be altered in any way: keep producing fruits as it was before, as green and shiny, etc. Just alter the container for business reasons.</p>
+
+<p>The more tidy and organized the roots are related to the outside plant itself, the easier it is to reshape (or refactor) it.</p>
+
+<p>So this is exactly what refactoring is about: &ldquo;keeping the same external behaviour, modifying the internal structure&rdquo;. I like to explain as &ldquo;modify how it is done but not what it does&rdquo;.</p>
+
+<p>When you trim the roots but leave unaltered the top, you are making it cheaper to modify the internal shape without affecting the rest. The plant will continue to grow, requiring more and more nutrients from the ground. Small increases that do not warrant a bigger plant pot, as the current one can withstand the new requirements.</p>
+
+<p>This is where the analogy is no longer useful: when writing software, you&rsquo;re also making it easier to reuse, modify and maintain.</p>
+
+<h3>Conclusion</h3>
+
+<p>The more tidied up you have your plants, the cheaper to maintain and modify.</p>
+
+<p>Software implementation details are like roots: they expand to find any small hole where to expand. Even to scaffold expected behaviour</p>
+
+<p>Trim your plants early and often, always with the help of a test suite</p>
+]]></content>
+  </entry>
+  
+</feed>

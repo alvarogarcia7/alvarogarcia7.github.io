@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Functional-programming | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/functional-programming/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-14T20:32:02+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in November 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/11/02/self-study-in-november-2015/"/>
+    <updated>2015-11-02T13:25:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/11/02/self-study-in-november-2015</id>
+    <content type="html"><![CDATA[<h2>Call me maybe: RabbitMQ</h2>
+
+<p>I&rsquo;ve read <a href="https://aphyr.com/posts/315-call-me-maybe-rabbitmq">this article</a> by Kyle Kingsbury on using RabbitMQ as a lock service. It investigates and gives a counterexample of using it for this purpose.</p>
+
+<p>Uses Knossos to do the testing and surfaces a problem with it. Explains specific problems on locking: at-most-once and at-least-once message delivery</p>
+
+<p>Note: References Jepsen (I guess an inside joke to the song &ldquo;Call me maybe&rdquo; by Carly Rae Jepsen) for at-most-once and at-least-once message delivery.</p>
+
+<p>Tags: rabbitmq, kyle-kingsbury, lock, cap-theorem, distributed-system, jepsen, knossos, at-most-once-delivery, at-least-once-delivery, counterexample, mutex</p>
+
+<h2>Everyone is potentially a teacher</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/09/everyone-is-potentially-a-teacher">this article</a> by Carlos Blé where he explains that everyone can have ideas worth spreading and that the knowledge not only comes from others but also from the relationships that tie you to other people.</p>
+
+<p>Tags: carlos-ble, teaching, pedagogy, idea, teacher, relationship</p>
+
+<h2>Ragel State Machine Compiler</h2>
+
+<p>I&rsquo;ve read <a href="http://www.colm.net/open-source/ragel/">this article</a> explaining what the Ragel project is about: a code generator from regex to code in languages such as C#, Java, etc. It is limited to finite state machines (FSM), with determinism. It can also handle some indeterminism. Written by Adrian D. Thurston</p>
+
+<p>Tags: adrian-thurston, fsm, state-machine, finite-state-machine, code-generation, ragel</p>
+
+<h2>HTTP is obsolete. It&rsquo;s time for the distributed, permanent web</h2>
+
+<p>I&rsquo;ve read <a href="https://ipfs.io/ipfs/QmNhFJjGcMPqpuYfxL62VVB9528NXqDNMFXiqN5bgFYiZ1/its-time-for-the-permanent-web.html">this article</a> by Kyle Drake explaining the need for a permanent, distributed web archive.</p>
+
+<p>Using a distributed file system (IPFS) and software similar to Bitcoin, they can host parts of the web locally, making it immutable and distributed</p>
+
+<p>Tags: kyle-drake, web-archive, centralization, decentralization, distribution, permanent-web, ipfs, federation,</p>
+
+<h2>Recovering From the Integrated Tests Scam</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive1.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=42e61e203e&amp;e=4a925444f9">this article</a> from J. B. Rainsberger on the integrated test scam and how to solve it: refactoring.</p>
+
+<p>Tags: jbrains, tdd, integrated-test, integration-test, j-rainsberger</p>
+
+<h2>Broken windows theory</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Broken_windows_theory">this wikipedia article</a> that talks about the broken windows theory, that states that controlling and monitoring public spaces leads to lowering the serious crimes.</p>
+
+<p>Cites three causes for this:</p>
+
+<ul>
+<li>Social norms and conformity</li>
+<li>Lack of routing monitoring</li>
+<li>Social signaling and signal crime</li>
+</ul>
+
+
+<p>Also discusses examples in the US and in the Netherlands, as well as criticisms.</p>
+
+<p>I&rsquo;ve read it to better understand how to apply this theory to software development, on a day-to-day basis.</p>
+
+<p>Tags: wikipedia, theory, broken-window</p>
+
+<h2>Scsh</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Scsh">the wikipedia page</a> for Scsh, the Scheme shell.</p>
+
+<h2>Why is Scala&rsquo;s type inference not as powerful as Haskell&rsquo;s?</h2>
+
+<p>I&rsquo;ve read the reasoning why Haskell supports other type inferences that are not present in Scala, in <a href="http://stackoverflow.com/questions/7234095/why-is-scalas-type-inference-not-as-powerful-as-haskells">this StackOverflow question</a></p>
+
+<p>Tags: scala, haskell, type-inference, hindley-milner, type-inference-algorithm</p>
+
+<h2>The Future of the LispM</h2>
+
+<p>I&rsquo;ve read <a href="http://arrdem.com/2014/11/28/the_future_of_the_lispm/">this article</a> explaining the past and current situation in the Lisp world: from Lisp, to LispM, to the MIT and Symbolics Inc., to Clojure and Scheme.</p>
+
+<p>Also talks about integration with the operating system and its execution in the microprocessor. Written by Reid McKenzie</p>
+
+<p>Tags: reid-mckenzie, lisp, lispm, clojure, scheme, symbolics</p>
+
+<h2>The Lisp Curse</h2>
+
+<p>I&rsquo;ve read <a href="http://www.winestockwebdesign.com/Essays/Lisp_Curse.html">this essay</a> by Rudolf Winestock, where he explains the low barrier (or low cost) for people in powerful languages (such as Lisp) to not accept the status quo in their project and fork / start their own.</p>
+
+<p>It also compares languages and the people attracted to them. Cites Mark Tarver&rsquo;s essays several times, including the Brilliant Bipolar Mind (BBM) in <a href="https://web.archive.org/web/20150308085419/http://www.lambdassociates.org/blog/bipolar.htm">this other</a> essay (from WebArchive). Compares the BBM and the normal worker in usefulness to companies.</p>
+
+<p>Cites the Pareto principle (80-20 rule): a single hacker will port 80% the library from another language, leaving it buggy, undocumented and only understandable by the original author (assuming this is only 20% of the work). The rest (e.g., documentation, bugfixing, maintenance) are dropped and never taken care of.</p>
+
+<p>Cites that this could be somewhat based on the facility of creating new features for the language. A small effort implies small implementation time, leaving no margin for thinking it through and seeing other corner cases. Also, a single person working on the project means no code review. The style might be coherent (always the same one), but might not be idiomatic, understandable by others, maintainable, etc.</p>
+
+<p>Closes the essay with this quote:</p>
+
+<blockquote><p>The expressive power of Lisp has drawbacks. There is no such thing as a free lunch.</p></blockquote>
+
+<p>Tags: rudolf-winestock, essay, pareto-principle, hacking, one-man-band, lisp, no-free-lunch, quote</p>
+
+<h2>The Bipolar Lisp Programmer</h2>
+
+<p>I&rsquo;ve read <a href="https://web.archive.org/web/20150308085419/http://www.lambdassociates.org/blog/bipolar.htm">this essay</a> by Mark Tarver on the Bipolar Lisp programmmer or the koan of Lisp.</p>
+
+<p>It explains the history of the Brilliant Bipolar Mind (BBM) when they attend high school and college. The freedom they&rsquo;re given, exactly the same as in Lisp, as you don&rsquo;t need to mix and socialize with others to create a good-enough solution.</p>
+
+<p>In this fashion, he says, most of the projects are 80% finished, not documented, not maintained. The same problems that worry enterprises.</p>
+
+<p>Cites the article &ldquo;Lisp: Good News, Bad News, How to Win Big&rdquo;</p>
+
+<p>Tags: essay, mark-tarver, bipolar-lisp-programmer, lisp-programmer, programmer, brillian-bipolar-mind, blp, bbm, koan</p>
+
+<p>Note: this article was no longer present on its original site. Fetched it from the Web Archive (WayBack Machine).</p>
+
+<h2>Writing readable Clojure code</h2>
+
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/jiriknesl/writing-readable-clojure-code">these slides</a> by Jiří Knesl, that explains how to write better clojure code:</p>
+
+<ul>
+<li>Macros</li>
+<li>HOFs</li>
+<li>left-to-right vs right-to-left code</li>
+</ul>
+
+
+<p>Tags: clojure, jiri-knesl, macro, hof, thread, slide</p>
+
+<h2>How can I get a reference to a method?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/485151/how-can-i-get-a-reference-to-a-method">this question</a>, <a href="http://stackoverflow.com/questions/4294485/how-do-i-reference-a-function-in-ruby">another question</a> from StackOverflow</p>
+
+<p>Tags: stackoverflow, question, ruby, functional-programming, method-reference</p>
+
+<h2>Implicit and Explicit Blocks</h2>
+
+<p>I&rsquo;ve read <a href="https://rubymonk.com/learning/books/4-ruby-primer-ascent/chapters/18-blocks/lessons/55-new-lesson">this lesson from rubyMonk</a></p>
+
+<p>Tags: rubymonk, lesson, block, ruby</p>
+
+<h2>What&rsquo;s Point-free Programing?</h2>
+
+<p>I&rsquo;ve read <a href="http://xahlee.info/comp/point-free_programing.html">this article</a> by Xah Lee explaining point-free programming, which requires a glance at function decomposition (currying)</p>
+
+<blockquote><p>[&hellip;] “point-free programing” is:</p>
+
+<ul>
+<li>It is about a particular <strong>syntax</strong> for <strong>function definition</strong>.</li>
+<li>When <strong>defining a function</strong>, no symbol is used for function parameter.</li>
+</ul>
+</blockquote>
+
+<h2>Oracle’s “planned obsolescence” for Java</h2>
+
+<p>I&rsquo;ve read <a href="https://jaxenter.com/oracle-and-javas-planned-obsolescence-121144.html">this article</a> by Coman Hamilton on the possible Java&rsquo;s planned obsolescence by Oracle.</p>
+
+<p>Discusses features pushed to future releases, comparing it to other legacy languages.</p>
+
+<p>Tags: obsolescence, legacy-language, planned-obsolescence, java, java-ee, oracle, fortran, cobol, coman-hamilton</p>
+
+<h2>Your first Ruby native extension: C</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.jcoglan.com/2012/07/29/your-first-ruby-native-extension-c/">this article</a> about writing a native extension for ruby. Written by James Coglan</p>
+
+<p>Tags: james-coglan, ruby, c, native-extension</p>
+
+<h2>What&rsquo;s the difference between equal?, eql?, ===, and ==?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">this stackoverflow</a> question regarding Ruby operators: equal?, eql?, ===, ==:</p>
+
+<ul>
+<li>==: generic equality</li>
+<li>===: case equality (for case - when)</li>
+<li>eql?: hash equality</li>
+<li>equal?: identity comparison (pointer comparison)</li>
+</ul>
+
+
+<p>Tags: comparison, stackoverflow, ruby, equal, eq, ==, ===, question, answer, jtbandes</p>
+
+<h2>Kanban</h2>
+
+<p>I&rsquo;ve read <a href="https://es.wikipedia.org/wiki/Kanban">the wikipedia page</a> for Kanban (Spanish)</p>
+
+<p>Tags: wikipedia, kanban, agile-methodology, management</p>
+
+<h2>Is your Scrum team Agile?</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.thesoftwarecraft.com/2014/04/is-your-scrum-team-agile.html">this article</a> by  Bart Bakker where he discusses some common patterns in Agile implementations (in software companies)</p>
+
+<p>Tags: scrum, team, agile, scrum-implementation, bart-bakker</p>
+
+<h2>Mejora tu trabajo en equipo con el método Kanban</h2>
+
+<p>I&rsquo;ve read <a href="http://hipertextual.com/archivo/2013/11/que-es-kanban/">this article</a> that explains then kanban management framework, with its principles and its values. Written by Jose López (in Spanish)</p>
+
+<p>Tags: kanban, management, agile-methodology, management-framework, principle, value, jose-lopez</p>
+
+<h2>¿Qué es el método Kanban para la gestión de proyectos?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javiergarzas.com/2011/11/kanban.html">this article</a> (Spanish) written by Javier Garzás where it is explained the kanban methodology and three of its main rules:</p>
+
+<ul>
+<li>visualize workflow</li>
+<li>limit WIP</li>
+<li>measure {lead, cycle} time</li>
+</ul>
+
+
+<p>Tags: kanban, management, agile-methodology, management-framework, principle, value, javier-garzas</p>
+
+<h2>describe vs. context in rspec</h2>
+
+<p>I&rsquo;ve read <a href="http://lmws.net/describe-vs-context-in-rspec">this article</a> that explains the (lack of) functional difference between RSpec&rsquo;s <code>describe</code> and <code>context</code> methods. The difference is contextual (i.e., the amount of information they convey). Written by LM</p>
+
+<p>Tags: rspec, ruby, describe, context, difference</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-study in May 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/05/09/self-study-in-may-2015/"/>
+    <updated>2015-05-09T14:41:10+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/05/09/self-study-in-may-2015</id>
+    <content type="html"><![CDATA[<p>Update: I&rsquo;ve grouped all small posts related to the self-study from May 2015
+into a single post</p>
+
+<h2>Programmer passion considered harmful</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/on-coding/programmer-passion-considered-harmful-5c5d4e3a9b28">this article</a> on why programmer passion could be negative. The title is similar to a paper by Dijkstra.</p>
+
+<h2>Software Craftsmanship: Are Bootcamps Enough?</h2>
+
+<p>I&rsquo;ve read <a href="https://www.coursereport.com/blog/software-craftsmanship-are-bootcamps-enough">this article</a> on software craftsmanship, development bootcamps and passion by <a href="https://twitter.com/kauerrolemodel">Ken Auer</a></p>
+
+<h2>Improve your development environments with virtualization</h2>
+
+<p>I have seen this video: <a href="https://www.youtube.com/watch?v=Dg_vPMnC7_k&amp;feature=youtu.be">Improve your development environments with virtualization</a> by Luke Sneeringer.</p>
+
+<p>My notes:</p>
+
+<ul>
+<li>development should be exactly like production.</li>
+<li>except where it is too painful. there it should be different</li>
+</ul>
+
+
+<h2>Buffer&rsquo;s take on values</h2>
+
+<p>I have found these <a href="http://www.slideshare.net/Bufferapp/buffer-culture-04">values</a>, written by Buffer, very interesting.</p>
+
+<h2>Public static void</h2>
+
+<p>I&rsquo;ve watched this video: <a href="https://www.youtube.com/watch?v=5kj5ApnhPAE">&ldquo;Public, static void&rdquo;</a> by Rob Pike. The slides can be found <a href="http://www.oscon.com/oscon2010/public/schedule/detail/13423">here</a></p>
+
+<h3>My notes</h3>
+
+<ul>
+<li>too much bureaucracy</li>
+<li>fighting the compiler</li>
+<li>dynamic vs static typing</li>
+<li>language too verbose</li>
+<li><p>do not mix the two of them</p></li>
+<li><p>a language niche:</p>
+
+<ul>
+<li>comprehensible</li>
+<li>statically typed</li>
+<li>light on the page</li>
+<li>fast to work in</li>
+<li>scales well</li>
+<li>doesn&rsquo;t require tools but supports them well</li>
+<li>good at networking and multiprocessing</li>
+</ul>
+
+
+<p>(minute 10:09)​</p></li>
+<li><p><a href="http://golang.org">Go</a> was born to fill this niche</p></li>
+</ul>
+
+
+<h2>Nothing is something</h2>
+
+<p>This video has been extracted to a <a href="../../../../2015/05/04/video-nothing-is-something/">post</a> of its own.</p>
+
+<h2>Software is eating the world</h2>
+
+<p>This video has been extracted to a <a href="../../../../2015/05/10/talk-software-is-eating-the-world/">post</a> of its own.</p>
+
+<h2>The Cost of Test Driven Development</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.typemock.com/2009/03/the-cost-of-test-driven-development.html">this article</a>, on the cost of doing TDD, which refers to <a href="http://www.msr-waypoint.net/en-us/groups/ese/nagappan_tdd.pdf">this paper</a>: Realizing quality improvement through test driven development: results and experiences of four industrial teams (below)</p>
+
+<h2>Realizing quality improvement through test driven development: results and experiences of four industrial teams</h2>
+
+<p>This paper has been extracted to a <a href="../../../../2015/05/12/paper-tdd-in-industrial-teams/">post</a> of its own.</p>
+
+<h2>Learn You Some Lisp for Great Good</h2>
+
+<p>I&rsquo;ve watched the video <a href="https://www.youtube.com/watch?v=3T00X_sNg4Q">Learn You Some Lisp for Great Good</a>, by Howard Abrams.</p>
+
+<p>I guess this is a reference to the popular <a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good!</a>.</p>
+
+<p>He suggests many interesting resources for learning Lisp dialects. The live coding is in Clojure:</p>
+
+<ul>
+<li><a href="http://landoflisp.com/">The land of Lisp</a></li>
+<li><a href="https://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs</a>. See also <a href="https://twitter.com/SICPQuotes">SICPQuotes</a></li>
+<li><a href="http://mitpress.mit.edu/books/little-schemer">The Little Schemer</a></li>
+<li><a href="https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf">An Introduction to Programming in Emacs Lisp</a></li>
+<li><a href="https://www.4clojure.com/">4clojure Questions</a></li>
+<li><a href="http://clojurekoans.com/">Clojure Koans</a></li>
+</ul>
+
+
+<p>On another topic, in the <a href="http://www.meetup.com/ClojureBCN/events/222418104/">Bank accounts exercise from Exercism</a> meetup, we discussed the book <a href="https://pragprog.com/book/shcloj2/programming-clojure">Programming Clojure (2nd edition)</a> by Stuart Halloway</p>
+
+<h2>Professor Frisby&rsquo;s Mostly Adequate Guide to Functional Programming</h2>
+
+<p>I&rsquo;ve read <a href="https://github.com/DrBoolean/mostly-adequate-guide">this guide</a> to functional programming. It is still work in progress (WIP) but still interesting. Written in javascript, so you can REPL in the browser.</p>
+
+<h2>Learning Code Good</h2>
+
+<p>I&rsquo;ve watched this video, by Saron Yitbarek: <a href="https://www.youtube.com/watch?v=-nsnAYRqYLA">Learn Code Good</a>.</p>
+
+<h2>Why You Don&rsquo;t Get Mock Objects</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=R9FOchgTtLM">Why You Don&rsquo;t Get Mock Objects</a>, by Gregory Moeck.</p>
+
+<p>In it, they point to the <a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> book (<a href="/blog/categories/goos">category here</a>), the paper <a href="www.jmock.org/oopsla2004.pdf">Mock Roles, not Objects</a> (also present in the GOOS book).</p>
+
+<h2>Technical Debt: A Repayment Plan</h2>
+
+<p>I&rsquo;ve read <a href="http://www.infoq.com/articles/tech-debt-repayment">this article</a> by <a href="https://twitter.com/@jeremyjarrell">Jeremy Jarrell</a> on technical debt how to repay it: schedule, taxes, default, etc</p>
+
+<p>This has made me think of the <a href="http://scbcn.ideascale.com/a/dtd/Deuda-t%C3%A9cnica-origen-y-consecuencias/69782-25568">&ldquo;Deuda técnica, origen y consecuencias&rdquo; talk</a> (Technical debt: origin and consequences) (Spanish), that was delivered by <a href="https://twitter.com/@jgomezz">Javier Gómez</a> at the Software Craftsmanship 2014.</p>
+
+<h2>Revisiting XP: be a thoughtful programmer by exercising more collective ownership</h2>
+
+<p>I&rsquo;ve read <a href="http://www.infoq.com/articles/revisit-p-collective">this article</a> by <a href="https://twitter.com/tiagooo_romero">Tiago Garcia</a> on the collective code ownership, as stated by Xtreme Programming (XP), with some example and guidelines.</p>
+
+<h2>Where&rsquo;s the Real Bottleneck in Scientific Computing?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.americanscientist.org/issues/pub/wheres-the-real-bottleneck-in-scientific-computing/99999">this article</a> by Greg Wilson on the tools and procedures investigators use to produce software.</p>
+
+<h2>Testing inside the Sprint</h2>
+
+<p>I&rsquo;ve read <a href="http://ronjeffries.com/articles/2015-03-01-testing-in-sprints/">this article</a> by Ron Jeffries.</p>
+
+<p>Discusses the need for testing and why this hasn&rsquo;t been communicated enough, as there still are people who have not understood it.</p>
+
+<p>Also about why people equal something failing when using scrum with scrum failing.</p>
+
+<h2>DTO vs Domain Models</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/05/dto-vs-domain-models/">this article</a> by Carlos Blé</p>
+
+<h2>Homoiconicity isn’t the point</h2>
+
+<p>I&rsquo;ve read <a href="http://calculist.org/blog/2012/04/17/homoiconicity-isnt-the-point/">this article</a> by David Herman about homoiconicity, comparing Lisp dialects (have it) to others that don&rsquo;t. The main point is at the end, where it says:</p>
+
+<blockquote><p>[&hellip;] homoiconicity isn’t the point, read is</p></blockquote>
+
+<h2>So You Don&rsquo;t Want to be a Programmer After All</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/so-you-dont-want-to-be-a-programmer-after-all/">this article</a> by Jeff Atwood. Cites the golden handcuffs (also known as golden shackles), reasons to be and not to be a programmer, and how to be an average and outstanding programmer</p>
+
+<h2>The Nature of Lisp</h2>
+
+<p>I&rsquo;ve read <a href="http://www.defmacro.org/ramblings/lisp.html">this article / introduction</a> to Lisp by Slava Akhmechet</p>
+
+<h2>[David Pollak&rsquo;s] My Thoughts on Go</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.goodstuff.im/golang">these comments</a> on Go Lang from David Pollak</p>
+
+<h2>The Well-Rounded Technologist</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/04/02/the-well-rounded-technologist.html">this article</a> by Michael Bernstein</p>
+
+<h2>Should I read papers?</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/10/21/should-i-read-papers.html">this article</a> by Michael Bernstein</p>
+
+<h2>Lisp-1 vs Lisp-2</h2>
+
+<p>I&rsquo;ve read <a href="https://hornbeck.wordpress.com/2009/07/05/lisp-1-vs-lisp-2/">this article</a> by <a href="https://twitter.com/hornbeck">@Hornbeck</a> about the lisp 1 and lisp 2.</p>
+
+<h2>Science Corps</h2>
+
+<p>I&rsquo;ve watched this <a href="https://www.youtube.com/watch?v=dkQkafxFoIQ">TEDx talk</a> by Aza Raskin, featuring Data Banks and Science corps</p>
+
+<h2>Healthy Codebase and Preparatory Refactoring</h2>
+
+<p> I&rsquo;ve read <a href="http://brewhouse.io/blog/2014/11/10/healthy-codebase-and-preparatory-refactoring.html">this article</a> by Philippe Creux about preparatory refactoring</p>
+
+<h2>You Are Learning Haskell Right Now (Or Anything You Want Really)</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/12/11/you-are-learning-haskell-right-now.html">this article</a> by Michael Bernstein</p>
+
+<h2>Lisp is Abstract Syntax</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/04/16/lisp-is-abstract-syntax.html">this article</a> by Michael Bernstein</p>
+
+<h2>Two Things Types Have Taught Me</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/10/30/two-things-types-have-taught-me.html">this article</a> by Michael Bernstein</p>
+
+<h2>Don&rsquo;t Bet Against Yourself</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/04/15/dont-bet-against-yourself.html">this article</a> by Michael Bernstein</p>
+
+<h2>Learning Math: A Blank Is A Blank With A Blank</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/04/15/dont-bet-against-yourself.html">this article</a> by Michael Bernstein</p>
+
+<h2>The False Economy Of Metaprogramming</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/03/06/the-false-economy-of-generated-methods.html">this article</a> by Michael Bernstein</p>
+
+<h2>Management and Engineering, overlapping</h2>
+
+<p>I&rsquo;ve read <a href="http://www.quora.com/Does-Adam-DAngelo-feel-comfortable-with-the-transition-from-an-engineer-to-a-management-position?srid=3OC&amp;share=1">this Quora answer</a> by Adam D'Angelo. The original title is: Does Adam D'Angelo feel comfortable with the transition from an engineer to a management position?</p>
+
+<h2>Evolution of The Twitter Stack</h2>
+
+<p>I&rsquo;ve read <a href="https://www.slideshare.net/slideshow/embed_code/key/ly83zQkBjCxnIX">these slides</a> about changing the technology stack in Twitter: from Rails to JVM-based</p>
+]]></content>
+  </entry>
+  
+</feed>
