@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Code | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/code/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-15T12:06:51+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Propagate the Failure in Bash]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/"/>
+    <updated>2015-10-02T06:53:29+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash</id>
+    <content type="html"><![CDATA[<p>In bash, the usual behavior is to return the last status code:</p>
+
+<pre><code class="bash">bash-3.1$ tr
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+1
+</code></pre>
+
+<p>But this also applies to pipes:</p>
+
+<pre><code class="bash">bash-3.1$ tr|tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+0
+</code></pre>
+
+<p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
+
+<pre><code class="bash">bash-3.1$ set -o pipefail
+bash-3.1$ tr|tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+1
+</code></pre>
+
+<p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
+
+<h2>Set Builtin Reference</h2>
+
+<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a>:</p>
+
+<h3>-e</h3>
+
+<blockquote><p>-e</p>
+
+<p>Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;&amp; or || list except the command following the final &amp;&amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.</p>
+
+<p>This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.</p>
+
+<p>If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.</p></blockquote>
+
+<h3>-o pipefail</h3>
+
+<blockquote><p>-o pipefail</p>
+
+<p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What Defines a Dependency]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/"/>
+    <updated>2015-07-13T05:48:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency</id>
+    <content type="html"><![CDATA[<p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java">fragment</a>):</p>
+
+<pre><code class="java">public void register (final String userName)  {
+    try {
+        registeredUsers.add(new User(userName));
+    } catch (AlreadyRegisteredUserException e) {
+        resultListener.alreadyRegistered(userName);
+    }
+}
+</code></pre>
+
+<p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
+
+<p>He suggested that:</p>
+
+<ul>
+<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
+<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
+</ul>
+
+
+<p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
+
+<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java">fragment</a>)</p>
+
+<pre><code class="java">public void add (User user, final RegistryResultListener resultListener) {
+    if(contains(user)) {
+        resultListener.alreadyRegistered(user.name());
+        return;
+    }
+
+    users.add(user);
+    resultListener.successfullyRegistered(user.name());
+}
+</code></pre>
+
+<p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
+
+<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Inserting Clojure Code in Octopress]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress/"/>
+    <updated>2015-04-14T21:48:27+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress</id>
+    <content type="html"><![CDATA[<p>Inserting this code in the blog:</p>
+
+<pre><code>```clojure
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;the octopress processor throws the error:&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;Error: Pygments can't parse unknown language: clojure
+</span><span class='line'>Error: Run jekyll build --trace for more information.
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;A solution would be to include it as lisp code:&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;```lisp
+</span><span class='line'>(defn all-access[k]
+</span><span class='line'>    (let [{:keys [a b] :as k}]
+</span><span class='line'>        (do a)
+</span><span class='line'>        (do (:b k))))</span></code></pre></td></tr></table></div></figure>
+</code></pre>
+
+<p>this is an example:</p>
+
+<pre><code class="lisp">(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
