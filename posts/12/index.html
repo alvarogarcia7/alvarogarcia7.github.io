@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="In this lexical scope, TDD by example is referring to this book1, available on Amazon The TDD cycle Altough Kent Beck in his book Test-Driven &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/posts/12">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/">Should We Start the TDD Cycle on Refactor?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-29T19:30:01+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:30 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In this lexical scope, TDD by example is referring to this book<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, available <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">on Amazon</a></p>
+
+<h3>The TDD cycle</h3>
+
+<p>Altough <a href="https://twitter.com/KentBeck">Kent Beck</a> in his book Test-Driven Development by example explains in &ldquo;Part I: the money example&rdquo;<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> that one should</p>
+
+<blockquote><p>quickly add a test;</p>
+
+<p>run all the tests and see the new one fail [&hellip;]</p>
+
+<p><cite>Kent Beck </cite></p></blockquote>
+
+<p>Implying that the TDD cycle starts with the red. Later on he explains that the cycle continues with green and refactor and back to red.</p>
+
+<p>But I&rsquo;ve been hearing for a while that there&rsquo;re some useful refactors to be done before introducing new code. Rings in my head but the only example I have is Xavi Gost&rsquo;s &ldquo;La economía del refactoring<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>&rdquo;</p>
+
+<h3>Refactoring</h3>
+
+<p>Let&rsquo;s take a look at the definition of refactor (found <a href="http://www.refactoring.com/">here</a>):</p>
+
+<blockquote><p>[Refactoring] is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.</p>
+
+<p> <cite>Martin Fowler</cite></p></blockquote>
+
+<p>I&rsquo;ve found some info on <a href="http://stackoverflow.com/questions/1355101/test-code-refactor-when-should-we-start-a-refactoring">stackoverflow</a> about the subject. The currently <a href="http://stackoverflow.com/a/1355782">accepted answer</a> points out some interesting comments:</p>
+
+<ul>
+<li>Do not refactor on red. Always a good reminder</li>
+<li>If you are refactoring for introducing a feature, how much refactor is enough? This is speculative development, possibly taking much time from needed development</li>
+</ul>
+
+
+<p>The last point is the one that interests me the most:</p>
+
+<ul>
+<li>Your refactoring might not be where you&rsquo;re going to introduce new production code<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup> (spatial caché)</li>
+<li>You might end up introducing features after a few hours/days of refactoring, therefore losing focus on the refactor you did and why (local caché)</li>
+<li>Given that I&rsquo;ve already &ldquo;cleaned up&rdquo; this, I could also go somewhere else (slippery slope). Heard from <a href="https://twitter.com/xav1uzz">Xavi Gost</a> at the CAS2014 at his talk <a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/">La economía del refactoring</a></li>
+</ul>
+
+
+<blockquote><p>No está justificado hacer cambios fuera de la rebanada.</p></blockquote>
+
+<p>Roughly translated to &ldquo;It&rsquo;s not justified to change outside the bread slice&rdquo;, as Xavi was referring to software as sliced bread instead of layers, vertical rather than horizontal</p>
+
+<h3>Should you do it?</h3>
+
+<ul>
+<li>Doing it would be a good thing, as long as you know in advance what will be affected by the next feature.</li>
+<li>It can allow for less refactoring at the end of the cycle. This is not about duplication but refactoring to patterns. There might be a gain in refactoring to a pattern before introducing another feature. An example might be adding a new strategy when it&rsquo;s currently coded as if-then-else</li>
+<li>The last responsible moment might be before or after introducing the feature. You decide.</li>
+<li>Work less as there&rsquo;s no need for adding new cases to old structures and then simplifying</li>
+</ul>
+
+
+<h3>Should you not do it?</h3>
+
+<ul>
+<li>Foreseeing the future is difficult, therefore you might end with unused development, as it is speculating</li>
+<li>Related to the last point, you might end refactoring in the wrong places. There&rsquo;s no current business value to it.</li>
+<li>Not useful on first round of a new feature, you can use a lambda transition to the red again. But then, this is not a general pattern, only applicable to a big percent of cases.</li>
+</ul>
+
+
+<h2>Conclusions</h2>
+
+<p>Short answer: it mainly depends on your environment:</p>
+
+<ul>
+<li>You: experience, common sense (sadly) &mdash;another post coming&mdash;, benefit/time-wasted ratio</li>
+<li>Your project: how tight are deadlines, how critical that code is, the team&rsquo;s pressure</li>
+</ul>
+
+
+<p>Long answer: Yes, as long as:
+ 1. You realize there is a fine line between fixing code and rewriting code (Egoless programming #4). Don&rsquo;t be a lone enforcer
+ 2. Strictly follow the boy scout rule but only around your campfire, not outside of it.
+ 1. You know your domain, pitfalls and team well
+ 1. You want to test this hypothesis and post an answer</p>
+
+<h3>Sources</h3>
+
+<ul>
+<li><a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/">La economía del refactoring</a>, <a href="https://twitter.com/xav1uzz">Xavi Gost</a></li>
+<li><a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">Test-Driven Development by example</a>, <a href="https://twitter.com/KentBeck">Kent Beck</a></li>
+<li><a href="http://refactoring.com">Refactoring.com</a>, <a href="https://twitter.com/martinfowler">Martin Fowler</a></li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Test-Driven Development by example; Beck, K. (ISBN-13: 078-5342146530)<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>from the book, description of part I, before chapter I<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>That talk is not yet available (AFAIK), but there&rsquo;s a <a href="http://ocana.github.io/articles/Conferencia-Agile-Spain-2014-primer-dia/">post</a> about it (Spanish)<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+<li id="fn:4">
+<p>The &ldquo;pains&rdquo; you might feel before introducing new features might not be real<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/18/global-day-of-code-retreat/">Global Day of Code Retreat 2014</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-18T06:33:59+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:33 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One month ago (on November 15th) I facilitated my first <a href="http://globalday.coderetreat.org/">Global Day of Code Retreat</a> at <a href="http://www.ebayenterprise.com/contact/locations.php">eBay Enterprise International</a> and had such a blast. <a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/218211672/">Link to the event (Spanish)</a></p>
+
+<h2>Some thoughts</h2>
+
+<p>After a month of thinking about it, here are some thoughts:</p>
+
+<ol>
+<li><p>This year&rsquo;s GDCR was quite different that last one&rsquo;s:</p>
+
+<p>It&rsquo;s OK: do not strive for repeating the same each year</p></li>
+<li><p>Heat map (in several dimensions): TDD x language</p>
+
+<p>Usually meetups have a clear goal, for the limited amount of time they run (see another bullet point).</p>
+
+<p>This single goal can span across multiple skill sets (e.g., TDD and language specific), therefore we did a two-dimensional heat map: first dimension is TDD skill level and second dimension (discreet) would be language you master</p>
+
+<p><a href="https://docs.google.com/spreadsheets/d/1LRmjLbvFEtqDskDwb3gVBKDfXckqDylAMJA7HB6ZLC8/edit">Example can be found here</a></p></li>
+<li><p>As a facilitator, have a clear goal for the meetup, even though you don&rsquo;t need to share it with the assistants</p>
+
+<p>Mine was to have fun and introduce some people to TDD</p>
+
+<p>I shared the goal with the attendants because I wanted to explain the purpose of that day to newcomers.</p>
+
+<p>Also, as a result of that day, I&rsquo;ve discovered some very motivated people in our host (eBay). Personally, I&rsquo;d like to continue doing meetups with their developers.</p></li>
+<li><p>You need a mix of more seasoned attendants and more unexperienced ones.</p>
+
+<p>This way, the knowledge is being transferred both ways; not only about the language but about strategies, patterns, shortcuts &amp; editors, languages, etc</p>
+
+<p>If doing TDD in these events, it&rsquo;s even more important to mix people, as it&rsquo;s difficult for an unexperienced pair to start doing TDD for themselves.</p></li>
+<li><p>You should only do your job as facilitator</p>
+
+<p>Let others discuss, ask and answer questions. Your job should be as thin as possible. Don&rsquo;t try to answer too many questions</p>
+
+<p>There will be attendants with more experience / expertise than you (most of them were in my case), so don&rsquo;t strive to teach them but to manage the discussions to the right place</p>
+
+<p>Be strict about timing but find the balance. Sometimes it&rsquo;s useful to invest more time (~5 minutes) to a rich discussion and then reduce the next iteration.</p>
+
+<p>Many people will complain about having to delete their code the first time. Explain to them that&rsquo;s part of the game and don&rsquo;t give in. The following iterations most of the people won&rsquo;t complain anymore</p>
+
+<p>Last but not least, have fun!</p></li>
+</ol>
+
+
+<h2>Some critiques</h2>
+
+<p>We organized the event a little bit late</p>
+
+<ul>
+<li><p>The difference from last year (<a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/153967432/">December</a>) vs this year (<a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/218211672/">November</a>) was relevant. We were expecting to do it later so it surprised us.</p></li>
+<li><p>Due to that, many people couldn&rsquo;t come and I&rsquo;m sorry for it</p></li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<p>We totally, definitely should do this more often.</p>
+
+<p>You need to reinvent yourself for every global day or people will stop coming</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/15/the-joys-of-the-craft/">The Joys of the Craft</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-15T21:46:50+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:46 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Quoting the book,</p>
+
+<blockquote><p>Why is programming fun? What delights may its practitioner expect as his reward?</p>
+
+<p>First is the sheer joy of making things. As the child delights in his mud pie, so the adult enjoys building things, especially things of his own design [&hellip;]</p>
+
+<p>Second is the pleasure of making things that are useful to other people. Deep within, we want other to use our work and to find it helpful. [&hellip;]</p>
+
+<p>Third is the fascination of fashioning complex puzzle-like objects of interlocking moving parts and watching them work in subtle cycles, playing out the consequences of principles built in from the beginning. [&hellip;]</p>
+
+<p>Fourth is the joy of always learning, which springs from the nonrepeating nature of the task. In one way or another the problem is ever new, and its solver learns something: sometimes practical, sometimes theoretical, and sometimes both.</p>
+
+<p>Finally, there is the delight of working in such a tractable medium. The programmer, like the poet, works only slightly removed from the pure thought-stuff. He builds his castles in the air, from air, creating by exertion of the imagination. Few media of creating are so flexible, so easy to polish and rework, so readily capable of realizing grand conceptual structures. (As we shall see later, this very tractability has its own problems.)</p>
+
+<p><cite>Frederick P. Brooks, Jr</cite> in the <a href="http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959">&ldquo;The Mythical Man-Month&rdquo;</a></p></blockquote>
+
+<p>Update: <a href="https://twitter.com/jmbeas">J.M. Beas</a> did an awesome take on this subject on <a href="http://blog.jmbeas.es/2010/11/01/por-que-programar-es-divertido/">his blog</a> (Spanish)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/08/pocket-application/">'Pocket' Application</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-08T22:40:13+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is a free application I use quite often: <a href="http://getpocket.com/">pocket</a></p>
+
+<p>They promote it as &ldquo;When you find something you want to view later, put it in Pocket.&rdquo;</p>
+
+<p>I really use for that. Once you install it in your phone, some handy shortcuts appear both on Chrome for saving the page and on twitter when you hit the &ldquo;share&rdquo; button.</p>
+
+<p>It is especially useful when you&rsquo;re on the tube and have no connection, as pocket saves an offline version of the page (warning: this doesn&rsquo;t work for video sites like youtube)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/08/cas2014-wrap-up/">CAS2014 Wrap Up</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-08T18:18:28+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This year&rsquo;s edition of the CAS 2014 has been awesome. There were several tracks:</p>
+
+<ul>
+<li>Enterprise Agile</li>
+<li>Collaboration, Culture and Teams</li>
+<li>Delighting Products</li>
+<li>Agile+</li>
+<li>Development Practices and Craftsmanship</li>
+</ul>
+
+
+<p>The last one is where I spent most of the time.</p>
+
+<h2>The schedule</h2>
+
+<p> The first day:</p>
+
+<ul>
+<li><a href="https://twitter.com/sandromancuso">Sandro Mancuso</a>: talking about Software Craftsmanship</li>
+<li><a href="https://twitter.com/fiunchinho">Jose Manuel Armesto</a>: talking about Unit Testing sucks (and it&rsquo;s our fault)</li>
+<li><a href="https://twitter.com/rmarpozo">Rubén Martín Pozo</a>: talking about Specification by example - Historia de un equipo que no odia documentar</li>
+<li><a href="https://twitter.com/XaV1uzz">Xavi Gost</a>: talking about La economía del refactoring. Una visión desde la gestión económica del proyecto.</li>
+<li><a href="https://twitter.com/_pedro_torres">Pedro Gustavo Torres</a>: talking about Pair Programming</li>
+</ul>
+
+
+<p> The second day:</p>
+
+<ul>
+<li><a href="https://twitter.com/rafadc">Rafael de Castro</a>: talking about Generando tests</li>
+<li><a href="https://twitter.com/borillo">Ricardo Borillo</a>: talking about CQRS y los beneficios surgidos de la necesidad.</li>
+<li><a href="https://twitter.com/cupcicm">Manu Cupcic</a> and <a href="https://twitter.com/eidrien">Adrian Perreau de Pinninck</a>: talking about Delivery at Scale.</li>
+<li><a href="https://twitter.com/jgabardini">Juan Gabardini</a>: talking about Testing en equipos infectados de test. This talk was also prepared by Juan Diego Vasco Moncada but he couldn&rsquo;t come.</li>
+</ul>
+
+
+<h2> Some thoughts</h2>
+
+<p> The conferences were awesome, but I&rsquo;d preferred if most (if not all) were in English so this conference can attract more international speakers</p>
+
+<p> There were 600+ people in the <a href="http://www.cccb.org/">CCCB</a>. That was only possible due to all the volunteers, organizers, caterers and the assistants.</p>
+
+<h2> More info</h2>
+
+<p> You can find more information on the <a href="http://cas2014.agile-spain.org/">official website</a> and on twitter using the hashtag <a href="https://twitter.com/search?q=%23cas2k14&amp;src=tyah">#cas2014</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/08/hello-world/">Hello World!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-08T16:20:59+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is the obligatory &ldquo;Hello World!&rdquo; post</p>
+
+<p>To get here and create your own blog using <a href="http://octopress.org/">octopress</a>, follow the
+instructions below:</p>
+
+<ul>
+<li>Install ruby, as explained on the guide
+<a href="http://octopress.org/docs/setup/">here</a></li>
+<li>I&rsquo;ve used Ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+(<code>ruby --version</code>)</li>
+<li>Configure your blog. See
+<a href="http://octopress.org/docs/configuring/">here</a></li>
+<li>Install octopress: <code>rake install</code></li>
+<li>Start the server with <code>rake preview</code>. You should see a basic
+template (CSS) with your blog name, the author, etcetera</li>
+<li>Create your first post.</li>
+</ul>
+
+
+<pre><code class="`cmd">rake new_post["Hello World!"]
+</code></pre>
+
+<ul>
+<li>Refresh the browser and see the new post appear</li>
+<li>Edit the .markdown file in &ldquo;source\_posts&rdquo; using a markup editor</li>
+<li>Execute <code>rake preview</code> to see your first post (this)</li>
+<li>Execute <code>rake setup_github_pages</code> for every computer you want to
+publish from</li>
+<li><p>Execute <code>rake generate &amp;&amp; rake deploy</code>. After a few minutes, you
+should go to
+<username>.github.io to find your new blog in there</p></li>
+<li><p>Happy blogging!</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/11">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/12/15/validating-data-clojure/">Validating CSV Data in Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the Macro And</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: Automate the Blog Publishing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/self-study-in-december-2015/">Self-Study in December 2015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/11/02/functional-implementation-patterns/">Functional Implementation Patterns</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Legacy-code | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/legacy-code/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-17T23:09:43+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code/"/>
+    <updated>2015-07-01T11:18:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have done a brown bag session about refactoring legacy code. It includes:</p>
+
+<ul>
+<li>legacy code definition. There is no agreement about this in the team.</li>
+<li>the legacy code change algorithm (source is Feathers, Working effectively with legacy code). Plus an example about it.</li>
+<li>working with legacy code</li>
+<li>experience with it.</li>
+</ul>
+
+
+<p>The slides are available <a href="../../../../uploads/refactoring-legacy-code-slides.pdf">here</a> (PDF format)</p>
+
+<p>We also did a practical session, whose experience report is <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">here</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/"/>
+    <updated>2015-06-23T17:19:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+
+<p>The contents of the session:</p>
+
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
+
+<p>I prepared a small script:</p>
+
+<pre><code class="bash">while test true; do
+  git add --all;
+  git commit --all -m "save process - uknown state";
+  sleep 120;
+done;
+</code></pre>
+
+<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-study in June 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015/"/>
+    <updated>2015-06-03T11:13:10+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015</id>
+    <content type="html"><![CDATA[<p>Update: I&rsquo;ve grouped all small posts related to the self-study from June 2015
+into a single post</p>
+
+<h2>Le monitoring de flux par l’exemple</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.octo.com/le-monitoring-de-flux-par-lexemple/">this article</a> about monitoring, in the way of &ldquo;by example&rdquo;, by Cédrick Lunven and Julien Kirch (French)</p>
+
+<h2>The First Micro-service Architecture</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2015/05/28/TheFirstMicroserviceArchitecture.html">this article</a> about microservices and how they were implemented many years ago by Robert C. Martin</p>
+
+<h2>How I Learned to Balance My Life With Remote Work</h2>
+
+<p>I&rsquo;ve read <a href="https://open.bufferapp.com/remote-work/?utm_content=bufferaa5a2&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about balancing life and work, either physical or remote by Michael Erasmus</p>
+
+<h2>Demystified CQRS</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.codecentric.de/en/2015/05/demystified-cqrs/?utm_content=buffer35b18&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about CQRS by Nino Martincevic</p>
+
+<h2>The perils of programmer education in the bazaar</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.practicingruby.com/2015/06/04/the-perils-of-programmer-education-in-the-bazaar/">this article</a> by Gregory Brown</p>
+
+<h2>6 useful and lesser-known git commands</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.joncairns.com/2015/05/6-useful-and-lesser-known-git-commands/">this article</a> about git commands (log, checkout, stash, cherry-pick, annotate) by Jon Cairns</p>
+
+<h2>Is Your Scrum Standup Slowing You Down?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.sitepoint.com/scrum-standup-slowing-down/">this article</a> by M. David Green</p>
+
+<h2>Me duele Indra</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=374c664073e1a1fa3deca53b4&amp;id=67ce79e01b">this Bonilista</a> (Spanish) by David Bonilla</p>
+
+<h2>TDD, BDD, [add every other method that promises software quality here] and the tea tasting lady</h2>
+
+<p>I&rsquo;ve read <a href="https://blinkingcaret.wordpress.com/2012/10/02/tdd-bdd-add-every-other-method-that-promises-software-quality-here-and-the-tea-tasting-lady/">this article</a> by Rui Figueiredo about the scientific method, TDD / BDD and how to scientifically detect if the &lsquo;how&rsquo; affects the result. In this case, exemplified by how to prepare your tea</p>
+
+<h2>The Art of Metaprogramming in Java</h2>
+
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/PolymathicCoder/the-art-of-metaprogramming-in-java">these slides</a> by Abdelmonaim Remani</p>
+
+<h2>When TDD does not work</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/04/30/When-tdd-does-not-work.html">this article</a> by Uncle Bob on situations where TDD might not be appropiate, especially around the borders</p>
+
+<h2>Mi primera semana como aprendiz</h2>
+
+<p>I&rsquo;ve read <a href="http://ronnyancorini.es/blog/index.php/2015/06/08/mi-primera-semana-como-aprendiz/">Ronny Ancorini&rsquo;s experiences</a> in his first week as apprentince with Carlos Blé &amp; Associates (Spanish)</p>
+
+<h2>Refactoring without good tests</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codeclimate.com/blog/2013/12/05/refactoring-without-good-tests/">this article</a> by Peter Bell on how to deal with a legacy codebase, what are the effects of not having tests and how to deal with. How to add tests to a codebase that is not ready for it.</p>
+
+<h2>Big Ball of Mud</h2>
+
+<p>I&rsquo;ve read <a href="http://www.laputan.org/mud/">this paper</a>, containing a collection of patterns and antipatterns (disguised as notes) by Brian Foote and Joseph Yoder</p>
+
+<h2>Comparision of different concurrency models: Actors, CSP, Disruptor and Threads [sic]</h2>
+
+<p>I&rsquo;ve read <a href="http://java-is-the-new-c.blogspot.com.es/2014/01/comparision-of-different-concurrency.html">this comparison of concurrency models</a> by Rüdiger Möller</p>
+
+<h2>5 Whys</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/5_Whys">this wikipedia</a> article on the technique called &ldquo;5 Whys&rdquo;</p>
+
+<h2>Expectations, Outcomes, and Challenges of Modern Code Review</h2>
+
+<p>I&rsquo;ve read <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=180283">this paper</a>, <a href="http://research.microsoft.com/pubs/180283/ICSE%202013-codereview.pdf">direct link</a>, by Alberto Bacchelli and Christian Bird on code review at Microsoft.</p>
+
+<p>They explain how they do it, the exact methodology they are using and why they do it.</p>
+
+<p>The main reasons to code review are:</p>
+
+<ul>
+<li>finding defects</li>
+<li>code improvement</li>
+<li>alternative solutions</li>
+<li>knowledge transfer</li>
+<li>team awareness and transparency</li>
+<li>also:
+
+<ul>
+<li>improve development process</li>
+<li>avoid build breaks</li>
+<li>share code ownership</li>
+<li>track rationale</li>
+<li>team assessment</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>The quality wheel</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jessitron.com/2015/04/the-quality-wheel.html">this article</a> by Jessica Kerr about the qualities of beautiful code</p>
+
+<h2>5 Minute Physics</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=n6FKT-KafRk">this video</a> on interactions with the mobile devices and related to physics by David DeSandro</p>
+
+<h2>Rise of the Transpilers</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=DspYurD75Ns">this video</a> on the rise of the transpilers and coffeescript by Jeremy Ashkenas</p>
+
+<h2>Drawing Lines with Bresenham&rsquo;s Line Algorithm</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=zytBpLlSHms">this video</a> about how to apply the Bresenham&rsquo;s algorithm to draw lines (implemented in pseudo-code and javascript) by Jenn Schiffer</p>
+
+<h2>Working with Minified JavaScript</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=SuFNR7-XjKI">this video</a> by John Crepezzi on how to mix javascript files (clients and yours), how to decompile javascript in chrome, dev &amp; debug tools</p>
+
+<h2>How we ran our Legacy Code Retreat</h2>
+
+<p>I&rsquo;ve read <a href="https://pboop.wordpress.com/2012/02/19/how-we-ran-our-legacy-code-retreat/">this article</a> by Andreas Leidig, looking for inspiration on running a legacy code retreat / brown-bag session. The experience report <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">is here</a></p>
+
+<h2>Shift Left: Testing Earlier in Development</h2>
+
+<p>I&rsquo;ve read <a href="http://wirfs-brock.com/blog/2015/06/18/shift-left">this article</a> by Rebecca Wirfs-Brock</p>
+
+<h2>Polymorphic Equality</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/06/polymorphic-equality/">this article</a> on implementing polymorphic equality on C#, by Carlos Blé</p>
+
+<h2>Commit messages are not titles</h2>
+
+<p>I&rsquo;ve read <a href="http://antirez.com/news/90">this article</a> on git commit messages and how to use them, by antirez</p>
+
+<h2>Oracle Considers G1 Garbage Collector for Java 9</h2>
+
+<p>I&rsquo;ve read this <a href="https://adtmag.com/articles/2015/06/22/oracle-java-9.aspx">press article</a> on the G1 and CMS collector, by John K. Waters</p>
+
+<h2>What Tech Newbies Need</h2>
+
+<p>I&rsquo;ve read <a href="https://storify.com/jesslynnrose/what-tech-newbies-need">this set of tweets</a>, grouped by Jessica Rose about the most helpful things beginners can do to improve their programming skills.</p>
+
+<h2>JavaScript For Cats</h2>
+
+<p>I&rsquo;ve read <a href="http://jsforcats.com/">this introductory guide</a> to javascript by <a href="https://twitter.com/maxogden">Max Ogden</a></p>
+
+<h2>Why Doesn&rsquo;t Python Have Switch/Case?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.pydanny.com/why-doesnt-python-have-switch-case.html">this article</a> on the switch case in the python language by Daniel Roy Greenfeld</p>
+
+<h2>[Joseph Moniz&rsquo;s] Notes on Clojure</h2>
+
+<p>I&rsquo;ve read Joseph Moniz&rsquo;s <a href="http://blog.plasmaconduit.com/notes-on-clojure/">Notes on Clojure</a>.</p>
+
+<h2>Chemical Computing with Clojure</h2>
+
+<p>I&rsquo;ve read <a href="http://gigasquidsoftware.com/chemical-computing/index.html">an article</a> on performing abstract computations with chemicals, written in Clojure by Carin Meier</p>
+
+<h2>Lenses</h2>
+
+<p>I&rsquo;ve read <a href="http://www.haskellforall.com/2012/01/haskell-for-mainstream-programmers_28.html">this tutorial</a> on writing lenses for haskell, a way of importing imperative getters / setters to a Data. Written by Gabriel Gonzalez.</p>
+
+<p>On another note, the first part, about writing getters and setters in the naive way, is also explained in Learn you a Haskell > Chapter 8 Making Our Own Types and Typeclasses > Record syntax</p>
+
+<h2>Microservices in Haskell</h2>
+
+<p>I&rsquo;ve read <a href="https://github.com/AlexanderAA/haskell-microservices/blob/gh-pages/haskell-microservices.md">these notes</a> on implementing a microservice in haskell, by <a href="https://github.com/AlexanderAA">AlexanderAA</a></p>
+
+<h2>Overcoming Resistance to Change - Isn&rsquo;t It Obvious?</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=hcz1aZ60k7w">this video</a> in the channel of The World with Theory of Constraints</p>
+
+<h2>Bacon is bad for you</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/bacon-is-bad-for-you">these slides</a>
+ on professionalism and the programmer culture, by Garann Means</p>
+
+<h2>Code is a job</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
+
+<h2>The Great Newline Schism</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
+
+<h2>Top ten reasons why I won’t use your open source project</h2>
+
+<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What Legacy Code Is About]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/"/>
+    <updated>2015-04-21T20:09:54+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about</id>
+    <content type="html"><![CDATA[<p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers">Michael Feathers</a> describes:</p>
+
+<blockquote><p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
+
+<p>M Feathers, in the preface of Working effectively with legacy code</p></blockquote>
+
+<p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
+
+<p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
+
+<p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
+
+<ul>
+<li>some test the test framework</li>
+<li>some the language</li>
+<li>some test a happy path that works by pure luck</li>
+<li>some functionalities are tested (not all happy paths)</li>
+<li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
+</ul>
+
+
+<p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
+
+<p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
+
+<p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
+
+<p>This is why I would like to update the definition:</p>
+
+<blockquote><p>Legacy code is code without tests that provide trust to all your stakeholders</p></blockquote>
+
+<p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
+
+<p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
+
+<p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Legacy Code Introduction]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/02/21/a-legacy-code-introduction/"/>
+    <updated>2015-02-21T19:05:46+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/02/21/a-legacy-code-introduction</id>
+    <content type="html"><![CDATA[<p>This is one of the best legacy code introductions I&rsquo;ve seen:</p>
+
+<blockquote><p>The Grand Redesign in the Sky</p>
+
+<p>Eventually the team rebels. They inform management that they cannot continue to develop in this odious code base. They demand a redesign. Management does not want to expend the resources on a whole new redesign of the project, but they cannot deny that productivity is terrible. Eventually they bend to the demands of the developers and authorize the grand redesign in the sky.</p>
+
+<p>A new tiger team is selected. Everyone wants to be on this team because it&rsquo;s a greenfield project. They get to start over and create something truly beautiful. But only the best and brightest are chosen for the tiger team. Everyone else must continue to maintain the current system.</p>
+
+<p>Now the two teams are in a race. The tiger team must build a new system that does everything that the old system does. Not only that, they have to keep up with the changes that are continuously being made to the old system. Management will not replace the old system until the new system can do everything that the old system does.</p>
+
+<p>This race can go on for a very long time. I&rsquo;ve seen it take 10 years. And by the time it&rsquo;s done, the original members of the tiger team are long gone, and the current members are demanding that the new system be redesigned because it&rsquo;s such a mess.</p>
+
+<p><cite> Robert C. Martin </cite> in the chapter 1: Clean Code from the book by <a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/">the same name</a></p></blockquote>
+
+<p>Also, why should you estimate the new tiger team abilities better than the old tiger team? Is it because the language, tools, or just because they are &ldquo;plain better&rdquo;?</p>
+
+<p>What guarantees that the resulting software is going to be better than the old one?</p>
+
+<p>Another interesting definition of legacy code is Michael Feather&rsquo;s one (code without tests).</p>
+]]></content>
+  </entry>
+  
+</feed>
