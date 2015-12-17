@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tip | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/tip/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-17T23:03:45+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Java Tips & Gotchas]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas/"/>
+    <updated>2015-10-07T10:06:58+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas</id>
+    <content type="html"><![CDATA[<h2>JVM default encoding as UTF-8</h2>
+
+<p>Make the JVM use UTF-8 character encoding by default</p>
+
+<p>Set up the system property <code>JAVA_TOOL_OPTIONS</code> to <code>-Dfile.encoding=UTF8</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Differences in Maven Test Execution]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/"/>
+    <updated>2015-10-05T16:18:55+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution</id>
+    <content type="html"><![CDATA[<p>There are times when you only want to have the production code:</p>
+
+<ul>
+<li>downstream job after a successful build</li>
+<li>compiling in local after checkout from DVCS</li>
+<li>spiking (possibly the tests are broken)</li>
+<li>speeding up the process</li>
+</ul>
+
+
+<p>For that, maven allows to skip the tests, selectively:</p>
+
+<ul>
+<li><code>-DskipTests</code> compiles the tests, but skips running them</li>
+<li><code>-Dmaven.test.skip</code> skips compiling the tests and does not run them. This can also be written as <code>-Dmaven.test.skip=true</code></li>
+</ul>
+
+
+<p>In case some of your tests depend on tests from another artifact (e.g. Object Mother, test infrastructure) and the latter has changed, you must compile the tests. You need to not execute the tests</p>
+
+<p>For more information:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/25639336/whats-the-difference-between-dskiptests-and-dmaven-test-skip-true">this stackoverflow</a> post is useful</li>
+<li><a href="http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html">Documentation for skipping tests</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Propagate the Failure in Bash]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/"/>
+    <updated>2015-10-02T06:53:29+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash</id>
+    <content type="html"><![CDATA[<p>In bash, the usual behavior is to return the last status code:</p>
+
+<pre><code class="bash">bash-3.1$ tr
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+1
+</code></pre>
+
+<p>But this also applies to pipes:</p>
+
+<pre><code class="bash">bash-3.1$ tr|tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+0
+</code></pre>
+
+<p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
+
+<pre><code class="bash">bash-3.1$ set -o pipefail
+bash-3.1$ tr|tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ echo $?
+1
+</code></pre>
+
+<p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
+
+<h2>Set Builtin Reference</h2>
+
+<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a>:</p>
+
+<h3>-e</h3>
+
+<blockquote><p>-e</p>
+
+<p>Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;&amp; or || list except the command following the final &amp;&amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.</p>
+
+<p>This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.</p>
+
+<p>If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.</p></blockquote>
+
+<h3>-o pipefail</h3>
+
+<blockquote><p>-o pipefail</p>
+
+<p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in September 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/09/01/self-study-in-september-2015/"/>
+    <updated>2015-09-01T13:25:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/09/01/self-study-in-september-2015</id>
+    <content type="html"><![CDATA[<h2>The 30 second habit with a lifelong impact</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.growth.supply/the-30-second-habit-with-a-lifelong-impact-2c3f948ead98">this article</a> list of patterns, by Robyn Scott, in which it is explained why to compress information in a few ideas, investing 30 seconds to condense the article.</p>
+
+<p>Tags: 30-second, habit, robyn-scott</p>
+
+<h2>The Strengths and Weaknesses of Extreme Programming</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=LkhLZ7_KZ5w">this video</a> explaining the strengths and weaknesses of extreme programming. By William Matheson</p>
+
+<p>Tags: extreme-programming, xp, william-matheson, video, strength, weakness</p>
+
+<h2>Poster de Extreme Programming</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=4nN6Gh79Yg8">this video</a> introducing eXtreme Programming. By Martín Salías</p>
+
+<p>Tags: martin-salias, kleer, extreme-programming, xp</p>
+
+<h2>Good Tech Lead, Bad Tech Lead</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.growth.supply/good-tech-lead-bad-tech-lead-948b2b806d86">this comparison</a> of good and bad traits in tech leads. By Jason Liszka.</p>
+
+<p>Explains the differences between good and bad tech leads, even though many of these qualities are shared by plain team members</p>
+
+<p>Tags: jason-liszka, tech-lead, comparison</p>
+
+<h2>Why Procrastinators Procrastinate</h2>
+
+<p>I&rsquo;ve read <a href="http://waitbutwhy.com/2013/10/why-procrastinators-procrastinate.html">this article</a> by Tim Urban on procrastination: this article compares the procrastinator and the non-procrastinator brain with pictures, introducing the Rational part, the Instant Gratification Monkey and the Panic Monster. Shows some reasons why.</p>
+
+<p>There is more on part 2: <a href="http://waitbutwhy.com/2013/11/how-to-beat-procrastination.html">How to beat procrastination</a></p>
+
+<p>Tags: tim-urban, procrastination, rational-part, instant-gratification-monkey, panic-monster, brain, comparison</p>
+
+<h2>Algebraic data type</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">this wikipedia page</a>, that explains what this is, a few examples and the theory behind it.</p>
+
+<p>Tags: wikipedia, data-type, algebraic-data-type</p>
+
+<h2>Recursion</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">this wikipedia page</a>, that explains the recursion basic concepts, such as:</p>
+
+<ul>
+<li>induction, coinduction</li>
+<li>recursion, corecursion</li>
+<li>implementation details in iterative vs recursive programs:
+
+<ul>
+<li>shortcutting recursion (i.e., arm-length&rsquo;s recursion)</li>
+<li>wrapper function</li>
+<li>tail-call optimization, related to tail-recursive functions</li>
+</ul>
+</li>
+<li>recursion and its relation to data structures</li>
+<li>base case / recursive case and removing the need of the base one in corecursion or in non-strict languages</li>
+<li>types of recursion:
+
+<ul>
+<li>direct, indirect, mutual</li>
+<li>generative, structural</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Tags: recursion, corecursion, induction, coinduction, tail-call-optimization, tail-recursion, direct-recursion, indirect-recursion, mutual-recursion, generative-recursion, structural-recursion, arm-length-recursion, iterative-function, recursive-function, base-case, recursive-case, wikipedia, data-structure</p>
+
+<h2>Anonymous function</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Anonymous_function">this wikipedia page</a>, that describes what is a lambda expression or an anonymous function. How it can be used (e.g., currying, higher-order function, closures) and gives examples in many languages.</p>
+
+<p>Cites its invention (Church, 1936, lambda-calculus) and its first implementation (Lisp, 1958)</p>
+
+<p>Tags: alonzo-church, anonymous-function, lambda-expression, closure, lambda-calculus, lisp, currying, higher-order-function, wikipedia</p>
+
+<h2>Closure</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">this wikipedia page</a>, that explains the concept of closures and the usual confusion between closure and lambda. Also some applications.</p>
+
+<p>Discusses closures as a way of deferring execution and implementing object-oriented (OO) systems</p>
+
+<p>Tags: wikipedia, closure, object-orientation, lambda-expression</p>
+
+<h2>Zen Story: The Master Archer</h2>
+
+<p>I&rsquo;ve read <a href="http://www.thedailyzen.org/2015/06/23/zen-story-the-master-archer/">this story</a> by Charlie Ambler about perfectionism and deep study, exemplified by the general that retires to study archery and the child who draws targets around the arrows.</p>
+
+<p>Tags: charlie-amber, master, student, zen, story</p>
+
+<h2>Loosely Coupled</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.bwhaley.com/loosely-coupled">this article</a> by Ben Whaley about how to loosely couple services introducing a queue and the difference in patterns between push and pull communication.</p>
+
+<p>Tags: ben-whaley, push, pull, coupling, loose-coupling, service, queue, aws</p>
+
+<h2>Being good at programming competitions correlates negatively with being good on the job</h2>
+
+<p>I&rsquo;ve watched the small video and the discussion about programmers' talent at <a href="http://www.catonmat.net/blog/programming-competitions-work-performance/">this page</a>. By Peteris Krumins.</p>
+
+<p>The original video explains that being good at a programming contest correlates negatively with skill at a programming job, even if the company hires them.</p>
+
+<p>The discussion explains the analogy with height and the NBA and concludes that this parameter should be preponderated with less importance than others.</p>
+
+<p>Tags: google, peter-norvig, nba, analogy, programming-contest, programming-skill, peteris-krumins</p>
+
+<h2>On Functors</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/on-functors/">this comparison</a> by Peteris Krumins of what the functors are in different languages:</p>
+
+<ul>
+<li>C++: function objects</li>
+<li>Standard ML: generic implementation of interfaces. They allow to compose structures</li>
+<li>Haskell: structure containing zero or more objects that can be converted to another structure containing the other objects. It&rsquo;s an homomorphism between two categories.</li>
+<li>Prolog: built-in predicate for self-inspection and the atom at the start of the structure</li>
+</ul>
+
+
+<p>Tags: peteris-krumins, comparison, haskell, c-plus-plus, standard-ml, prolog, functor</p>
+
+<h2>Recursive Regular Expressions</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/recursive-regular-expressions/">this article</a> on recursive regular expressions by Peteris Krumins.</p>
+
+<p>In it, he lightly describes how a regular expression relates to a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-Free Grammar</a> and the language support for Perl to include recursive regular expressions. Based on the examples (e.g., <code>0^n1^n</code>), it really clicked to me that this could be expressed as a recursive function, with its base case and the recursive one. Also that it &ldquo;depends on solutions to smaller instances of the same problem&rdquo; (<a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">wikipedia</a>)</p>
+
+<p>Tags: peteris-krumins, regular-expression, recursion, recursive-regular-expression, perl, context-free-grammar, formal-language-theory</p>
+
+<h2>In Functional Programming, what is a functor?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/2030863/in-functional-programming-what-is-a-functor/2031421#2031421">this answer</a>, by Norman Ramsey, on what is a functor.</p>
+
+<p>He explains in simple words what the concept is and how a type can belong to the class functor. Examples in haskell.</p>
+
+<p>Tags: norman-ramsey, functor, stack-overflow, haskell, type-class, class, map, fmap</p>
+
+<h2>Functors</h2>
+
+<p>I&rsquo;ve read <a href="http://www.clojure.net/2013/01/19/Functors/">this article</a> by Jim Duey explaining functors in Clojure. He introduces a couple of notes of Haskell but all of the examples are in Clojure. Explains functors, a subset of it called applicatives, and the two libraries he has created.</p>
+
+<p>Tags: jim-duey, functor, clojure, haskell</p>
+
+<h2>10 Tips for Proper Application Logging</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javacodegeeks.com/2011/01/10-tips-proper-application-logging.html">this article</a> by Tomasz Nurkiewicz about tips on logging:</p>
+
+<ul>
+<li>reduce side effects</li>
+<li>use categories and levels</li>
+<li>connection with external systems</li>
+<li>handling exceptions</li>
+<li>automatically / manually reading logging files</li>
+</ul>
+
+
+<p>Tags: tomasz-nurkiewicz, logging, sl4j, log4j, tip</p>
+
+<h2>What is &ldquo;duck typing&rdquo;?</h2>
+
+<p>I&rsquo;ve read <a href="http://ericlippert.com/2014/01/02/what-is-duck-typing/">this article</a> by Eric Lippert about duck typing</p>
+
+<p>Tags: duck-typing, eric-lippert, type-system, c-sharp</p>
+
+<h2>Yagni</h2>
+
+<p>I&rsquo;ve reread <a href="http://martinfowler.com/bliki/Yagni.html">this article</a> by Martin Fowler on the cost of developing features that are not needed</p>
+
+<p>Tags: martin-fowler, yagni, article, misunderstanding</p>
+
+<h2>Learn Haskell</h2>
+
+<p>I&rsquo;ve seen <a href="https://www.youtube.com/watch?v=JJlI5FPTbgE">this video</a> by Jordan Medlock on learning haskell, explaining the basics and how to use the REPL</p>
+
+<p>Tags: haskell, repl, jordan-medlock, beginner, video</p>
+
+<h2>Learn Haskell</h2>
+
+<p>I&rsquo;ve seen <a href="https://www.youtube.com/watch?v=JJlI5FPTbgE">this video</a> by Jordan Medlock on learning haskell, explaining the basics and how to use the REPL</p>
+
+<p>Tags: haskell, repl, jordan-medlock, beginner, video</p>
+
+<h2>TMUX - The Terminal Multiplexer</h2>
+
+<p>I&rsquo;ve read these two parts: (<a href="http://blog.hawkhost.com/2010/06/28/tmux-the-terminal-multiplexer/">one</a>, <a href="http://blog.hawkhost.com/2010/07/02/tmux-%E2%80%93-the-terminal-multiplexer-part-2">two</a>) of an introduction guide to <code>tmux</code> (the unix terminal multiplexer) by Cody from Hawk Host.</p>
+
+<p>In it, he explains the basics of tmux and the main differences with <code>screen</code></p>
+
+<p>Tags: cody, hawk-host, tmux, how-to</p>
+
+<h2>Thermodynamics and Garbage Collection</h2>
+
+<p>I&rsquo;ve read <a href="http://www.pipeline.com/~hbaker1/ThermoGC.html">this paper</a> by Henry G. Baker that explains the analogy of the garbage collection (&ldquo;a freezer&rdquo;) and thermodynamics, where the state mutator (th program, also an oven) modifies the garbage heap and introduces / extracts entropy into the system.</p>
+
+<p>Comparison between entropy and lack of information, using the theories from Shannon, Maxwell-Boltzmann. There&rsquo;s a reference to the knapsack problem and to simulated annealing.</p>
+
+<p>There&rsquo;s also a gentle introduction to thermodynamics in layman terms: heat, temperature, microstates, macrostates, reversability, etc.</p>
+
+<p>In this paper it is also reflected (in macro vs micro states) that the sum all parts is simpler than the single ones (i.e., Information Hiding)</p>
+
+<p>Tags: henry-baker, thermodynamics, microstate, macrostate, analogy, simulated-annealing, garbage-collection, shannon, information, maxwell-boltzmann, freezer, oven, entropy</p>
+
+<h2>How we ended up with microservices</h2>
+
+<p>I&rsquo;ve read <a href="http://philcalcado.com/2015/09/08/how_we_ended_up_with_microservices.html">this article</a>, by Phil Calçado, where he talks about his stay at SoundCloud:</p>
+
+<ul>
+<li>the value stream map: from X days to Y</li>
+<li>reorganizing teams into service teams</li>
+<li>conway&rsquo;s law and teams being responsible for support. Also, being given full authority</li>
+</ul>
+
+
+<p>  Tags: phil-calcado, soundcloud, microservice, team-split, value-stream-mapping, conversion, reorganization</p>
+
+<h2>Lisp is still a secret weapon</h2>
+
+<p>I&rsquo;ve read <a href="http://kep.io/is-lisp-still-a-secret-weapon/">this article</a> by Judd Keppel where he explains it is a good idea that Clojure / ClojureScript continues to be a secret, not known among developers. Cites the article &lsquo;Beating the averages&rsquo; by Paul Graham and the amount of available packages in npm, maven central, etc</p>
+
+<p>Tags: paul-graham, judd-keppel, clojure, clojurescript, weapon, developer</p>
+
+<h2>Perceptron</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Perceptron">this wikipedia</a> article that explains the single-layer and multi-layer perceptron. First designed to be a machine (hardware), but later an algorithm for supervised machine learning. Worked by Minsky &amp; Papert and invented by Frank Rosenblatt in 1958.</p>
+
+<p>Tags: peceptron, artificial-intelligence, machine-learning, frank-rosenblatt, 1958, marvin-minsky, seymour-papert</p>
+
+<h2>Is C# a strongly typed or a weakly typed language?</h2>
+
+<p>I&rsquo;ve read <a href="http://ericlippert.com/2012/10/15/is-c-a-strongly-typed-or-a-weakly-typed-language/">this article</a>, in the form of a dialogue between Eric Lippert and himself about the C# language and its type system.</p>
+
+<p>Tags: type-system, c-sharp, eric-lippert, dialogue, strongly-typed, weakly-typed, language</p>
+
+<h2>Diseño por contratos: construyendo software confiable</h2>
+
+<p>I&rsquo;ve read <a href="http://www.revista.unam.mx/vol.4/num5/art11/sep_art11.pdf">this paper</a> that explains design by contract, based on the Hoare triplet, pre-post condition, method and class invariant. With examples in Eiffel, Java about a package sender company. Also explains pre/post with inheritance. By Gerardo Rossel and Andrea Manna. In Spanish.</p>
+
+<p>Tags: gerardo-rossel, andrea-manna, design-by-contract, unam-mx, eiffel, java, precondition, postcondition, trust, quality, hoare-triplet, method-invariant, class-invariant</p>
+
+<h2>The Inevitable Return of COBOL</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.hackerrank.com/the-inevitable-return-of-cobol/">this article</a> that explains the current state of COBOL in programming and systems. Written by Ritika Trikha</p>
+
+<p>Tags: ritika-trikha, cobol, programming-language, retirement, median-age</p>
+
+<h2>The Risky Eclipse of Statisticians</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.hackerrank.com/the-risky-eclipse-of-statisticians/">this article</a> where Ritika Trikha explains the current situation regarding Big Data and the statiscian jobs. How Big Data is in demand but the latter are not and what effects this might have.</p>
+
+<p>Tags: ritika-trikha, bootcamp, programming, hiring, big-data, analysis, statistics</p>
+
+<h2>Give it five minutes</h2>
+
+<p>I&rsquo;ve read <a href="https://signalvnoise.com/posts/3124-give-it-five-minutes">this article</a> by Jason Fried where he explains why we should give ideas time to sink in and marinate, before dismissing them. Ideas are so fragile that it is better to let them live for a while before dismissing them. This also applies for thoughts (other people&rsquo;s or your own).</p>
+
+<p>Tags: jason-fried, idea, think, startup, blue-hat, thinking-hat,  six-thinking-hats, red-hat</p>
+
+<h2>Reading Clojure Stacktraces</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jayfields.com/2012/06/reading-clojure-stacktraces.html">this article</a> by Jay Fields on reading clojure stacktraces. Very similar to &ldquo;Clojure Stack Traces for the Uninitiated&rdquo;</p>
+
+<p>Tags: jay-fields, clojure, stacktrace</p>
+
+<h2>Clojure Stack Traces for the Uninitiated</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/connor-mendenhall/2014/09/12/clojure-stacktraces.html">this article</a> on how to interpret clojure stacktraces. Written by Connor Mendenhall</p>
+
+<p>Tags: connor-mendenhall, clojure, stacktrace</p>
+
+<h2>JavaScript type inference</h2>
+
+<p>I&rsquo;ve found (and played) with <a href="http://www.ccs.neu.edu/home/dimvar/jstypes.html">this JavaScript type inference engine</a>. Written in Javascript (and available online). Written by Dimitrios Vardoulakis.</p>
+
+<p>Tags: javascript-type-inference, type-inference, type-inference-algorithm, dimitrios-vardoulakis, cfa2</p>
+
+<h2>Alternatives to boolean parameters</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/dariusz-pasciak/2015/05/28/alternatives-to-boolean-parameters.html">this article</a> explaining alternatives to sending a boolean parameter to decide on the contents of the function. Written by Dariusz Pasciak</p>
+
+<p>As I heard some time ago, if a function receives a boolean to decide on what to do, it will for sure have more than one responsibility: one for the false value and one for the true value.</p>
+
+<p>Tags: dariusz-pasciak, boolean, srp, boolean-parameter</p>
+
+<h2>Why Are Web Uploads So Painful?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/why-are-web-uploads-so-painful/">this article</a> on web uploads being painful. By Jeff Atwood. The screenshots feel old (2007) and some of the problems have already been solved.</p>
+
+<p>Tags: jeff-atwood, article, upload, browser</p>
+
+<h2>Can Your Team Pass The Elevator Test?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/can-your-team-pass-the-elevator-test/">this article</a> on the elevator test by Jeff Atwood.</p>
+
+<p>Tags: jeff-atwood, article, elevator-test, assumption, microsoft-bob, vision, product, feature</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Searching on a Suite of Failing Tests]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/"/>
+    <updated>2015-08-13T14:45:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests</id>
+    <content type="html"><![CDATA[<h2>Motivation</h2>
+
+<p>Today, at a client, in the green phase, we had a test suite which was failing: the whole suite fails but the test cases, individually, succeed.</p>
+
+<p>So my first impression was that something was being shared between tests. Also confirmed because the failing class was an EndToEnd test, in which we load the whole spring context</p>
+
+<p>A quick glance was not revealing anything interesting, so I decided to find which is the minimum suite (as opposed as to the whole suite) that makes the new testcase fail, expecting to narrow the search for possible causes. This is very similar to what QuickCheck does, to generate the minimum testcase that breaks your property. In this way, you can focus in a possibly simpler<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> feature.</p>
+
+<p>This post covers how to perform this search.</p>
+
+<h2>Mathematical formulation</h2>
+
+<p>Let <code>T</code> be a sequence of tests: <code>i1, i2, ..., in, F, j1, j2, ..., jm</code></p>
+
+<p>where:
+  * <code>i</code> are green tests
+  *  <code>F</code> is first failing test
+    * when executed in isolation, is green
+    * when executed in the sequence, is red
+  *  <code>j</code> are tests after the failed test.</p>
+
+<p>In this case, the order is important, as the failed test suite (presumably) comes from a shared state set by a previous test.</p>
+
+<p>The first search-space pruning is to remove the <code>j</code>, as they supposedly don&rsquo;t have any effect (as they are after the failed test)</p>
+
+<p>let <code>T1</code> be a subsequence of <code>T</code> that includes <code>i</code> and <code>F</code>: <code>i1, i2, ..., in, F</code></p>
+
+<p>Then it is assumed that one (or more) of the <code>i</code> generates an inconsistent state that makes <code>F</code> fail.</p>
+
+<p>In the sequence <code>T1</code>, <code>F</code> fails, but in the sequence <code>TF</code> composed by <code>F</code> only, the test succeeds. This can be thought as the equivalent of the <a href="https://en.wikipedia.org/wiki/Intermediate_value_theorem">Intermediate value theorem</a>, also called Bolzano&rsquo;s theorem, where the <code>T1</code> is at one side ot the axis and the <code>TF</code> at another. The theorem proves that there must be at least one value where the domain of the function crosses the axis</p>
+
+<p>I say &ldquo;thought of&rdquo; because that theorem is only for continous functions and sets are not (are discrete) but the analogy is good enough: if one sequence is OK but the other isn&rsquo;t, there must be a minimum sequence where the result is OK and another one where the results are not. They two sequences must not be the same case as one result cannot be OK and not OK at the same time.</p>
+
+<h2>Naïve search</h2>
+
+<p>The first way of searching would be find the minimum set that fails:</p>
+
+<ul>
+<li>include <code>F</code>, then another from <code>i1,...,in</code> that makes the <code>F</code> fail. <code>F</code> the last one, because it needs to be affected by the side effects from the preceding test.</li>
+<li>if the first strategy does not work, for each of the above cases, add another from the <code>i1,...,in</code> (except the one that was added)</li>
+</ul>
+
+
+<p>For the first step, it takes <code>O(n * 2)</code>, assuming executing a single test costs <code>O(1)</code>. Reduces to <code>O(n)</code></p>
+
+<p>For the second step, <code>O(n * n-1 * 3)</code>. Reduces to <code>O(n^2)</code></p>
+
+<p>For the third step, <code>O(n * n-1 * n-2 * 4)</code>. Reduces to <code>O(n^3)</code></p>
+
+<p>For the nth step, it costs <code>O(n * n-1 * n-2 * ... * n-(n-1) * (n+1))</code>. Reduces to <code>O(n^n)</code>. Which is polynomical but not feasible for medium-sized <code>n</code> (in an automatic fashion) or small <code>n</code> (in a manual fashion)</p>
+
+<h2>Dichotomous search</h2>
+
+<p>(This is also known as <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary search</a>)</p>
+
+<p>Inspired by <code>git-bisect</code>, I decided to treat the sequence <code>i1, ..., in</code> as the source for the dicotomical search, applying the subsequences to <code>F</code>.</p>
+
+<p>The first step, it takes <code>O(n/2 * n/2)</code> = <code>O(n^2)</code> to execute half the tests</p>
+
+<p>The second step, is to execute half the number of the tests previously executed, either from the sequence before (if the <code>F</code> fails) or from the other half (if <code>F</code> does not fail). The cost is <code>O(n/4 * n/4)</code> = <code>O(n^2)</code></p>
+
+<p>For the nth step, the cost is <code>O(n/2^n * n/2^n)</code> = <code>O(n^2/2^n)</code> = <code>O(0)</code></p>
+
+<p>This n in the nth step is smaller than the other n, as each step divides by two the amount of tests to be included.</p>
+
+<p>The amount of tests to be executed is <code>n + n/2 + n/4 + n/8 + ... + 1</code> which is roughly <code>2n</code>. Executing each test costs <code>O(1)</code> (by the assumption before), so the total cost is <code>O(2n)</code> = <code>O(n)</code></p>
+
+<p>If we take it by the amount of steps we need to manually execute is 1 for the whole, 1 for the half, 1 for the quarter, &hellip;. = <code>O(log2 n)</code></p>
+
+<h2>Procedure</h2>
+
+<p>To keep the executed tests, I created a support branch where I deleted the tests that were selected to be excluded. Always executed &ldquo;all tests in the suite&rdquo; as this makes it faster to select in the IDE.</p>
+
+<p>When the half taken was wrong, I reverted the last commit and selected the other half.</p>
+
+<p>After finding the minimum sequence and solving the issue, this support branch was discarded</p>
+
+<h2>Conclusion</h2>
+
+<p>In the real scenario, with around 100 tests, searching manually in the naïve way would not have been possible. It would have cost 100 steps, as the minimum set that produces <code>F</code> had size 2 (so only one step was necessary).</p>
+
+<p>Applying the dichotomous search, in 8-10 steps I had finished, with the guarantee that no matter how many tests produced the <code>F</code> I would have found it in a reasonable amount of time.</p>
+
+<h2>Comments</h2>
+
+<p>Finally, the root cause for the failing test <code>F</code> was the OrientDB InMemory implementation with Spring context, as the former does not allow two instances at the same time in the same JVM.</p>
+
+<p>It was solved using <code>@DirtiesContext</code> in both cases of the minimum sequence that forms <code>F</code>, so no matter which order the executor decides, the context will always be clean for the next execution.</p>
+
+<p>We found this thanks to a teammate&rsquo;s intuition.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Because maybe the minimum testcase is more difficult than another.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

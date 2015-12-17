@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cas2k14 | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/cas2k14/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-17T23:03:45+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Should We Start the TDD Cycle on Refactor?]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/"/>
+    <updated>2014-12-29T19:30:01+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor</id>
+    <content type="html"><![CDATA[<p>In this lexical scope, TDD by example is referring to this book<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, available <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">on Amazon</a></p>
+
+<h3>The TDD cycle</h3>
+
+<p>Altough <a href="https://twitter.com/KentBeck">Kent Beck</a> in his book Test-Driven Development by example explains in &ldquo;Part I: the money example&rdquo;<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> that one should</p>
+
+<blockquote><p>quickly add a test;</p>
+
+<p>run all the tests and see the new one fail [&hellip;]</p>
+
+<p><cite>Kent Beck </cite></p></blockquote>
+
+<p>Implying that the TDD cycle starts with the red. Later on he explains that the cycle continues with green and refactor and back to red.</p>
+
+<p>But I&rsquo;ve been hearing for a while that there&rsquo;re some useful refactors to be done before introducing new code. Rings in my head but the only example I have is Xavi Gost&rsquo;s &ldquo;La economía del refactoring<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>&rdquo;</p>
+
+<h3>Refactoring</h3>
+
+<p>Let&rsquo;s take a look at the definition of refactor (found <a href="http://www.refactoring.com/">here</a>):</p>
+
+<blockquote><p>[Refactoring] is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.</p>
+
+<p> <cite>Martin Fowler</cite></p></blockquote>
+
+<p>I&rsquo;ve found some info on <a href="http://stackoverflow.com/questions/1355101/test-code-refactor-when-should-we-start-a-refactoring">stackoverflow</a> about the subject. The currently <a href="http://stackoverflow.com/a/1355782">accepted answer</a> points out some interesting comments:</p>
+
+<ul>
+<li>Do not refactor on red. Always a good reminder</li>
+<li>If you are refactoring for introducing a feature, how much refactor is enough? This is speculative development, possibly taking much time from needed development</li>
+</ul>
+
+
+<p>The last point is the one that interests me the most:</p>
+
+<ul>
+<li>Your refactoring might not be where you&rsquo;re going to introduce new production code<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup> (spatial caché)</li>
+<li>You might end up introducing features after a few hours/days of refactoring, therefore losing focus on the refactor you did and why (local caché)</li>
+<li>Given that I&rsquo;ve already &ldquo;cleaned up&rdquo; this, I could also go somewhere else (slippery slope). Heard from <a href="https://twitter.com/xav1uzz">Xavi Gost</a> at the CAS2014 at his talk <a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/">La economía del refactoring</a></li>
+</ul>
+
+
+<blockquote><p>No está justificado hacer cambios fuera de la rebanada.</p></blockquote>
+
+<p>Roughly translated to &ldquo;It&rsquo;s not justified to change outside the bread slice&rdquo;, as Xavi was referring to software as sliced bread instead of layers, vertical rather than horizontal</p>
+
+<h3>Should you do it?</h3>
+
+<ul>
+<li>Doing it would be a good thing, as long as you know in advance what will be affected by the next feature.</li>
+<li>It can allow for less refactoring at the end of the cycle. This is not about duplication but refactoring to patterns. There might be a gain in refactoring to a pattern before introducing another feature. An example might be adding a new strategy when it&rsquo;s currently coded as if-then-else</li>
+<li>The last responsible moment might be before or after introducing the feature. You decide.</li>
+<li>Work less as there&rsquo;s no need for adding new cases to old structures and then simplifying</li>
+</ul>
+
+
+<h3>Should you not do it?</h3>
+
+<ul>
+<li>Foreseeing the future is difficult, therefore you might end with unused development, as it is speculating</li>
+<li>Related to the last point, you might end refactoring in the wrong places. There&rsquo;s no current business value to it.</li>
+<li>Not useful on first round of a new feature, you can use a lambda transition to the red again. But then, this is not a general pattern, only applicable to a big percent of cases.</li>
+</ul>
+
+
+<h2>Conclusions</h2>
+
+<p>Short answer: it mainly depends on your environment:</p>
+
+<ul>
+<li>You: experience, common sense (sadly) &mdash;another post coming&mdash;, benefit/time-wasted ratio</li>
+<li>Your project: how tight are deadlines, how critical that code is, the team&rsquo;s pressure</li>
+</ul>
+
+
+<p>Long answer: Yes, as long as:
+ 1. You realize there is a fine line between fixing code and rewriting code (Egoless programming #4). Don&rsquo;t be a lone enforcer
+ 2. Strictly follow the boy scout rule but only around your campfire, not outside of it.
+ 1. You know your domain, pitfalls and team well
+ 1. You want to test this hypothesis and post an answer</p>
+
+<h3>Sources</h3>
+
+<ul>
+<li><a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/">La economía del refactoring</a>, <a href="https://twitter.com/xav1uzz">Xavi Gost</a></li>
+<li><a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">Test-Driven Development by example</a>, <a href="https://twitter.com/KentBeck">Kent Beck</a></li>
+<li><a href="http://refactoring.com">Refactoring.com</a>, <a href="https://twitter.com/martinfowler">Martin Fowler</a></li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Test-Driven Development by example; Beck, K. (ISBN-13: 078-5342146530)<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>from the book, description of part I, before chapter I<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>That talk is not yet available (AFAIK), but there&rsquo;s a <a href="http://ocana.github.io/articles/Conferencia-Agile-Spain-2014-primer-dia/">post</a> about it (Spanish)<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+<li id="fn:4">
+<p>The &ldquo;pains&rdquo; you might feel before introducing new features might not be real<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CAS2014 Wrap Up]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2014/12/08/cas2014-wrap-up/"/>
+    <updated>2014-12-08T18:18:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2014/12/08/cas2014-wrap-up</id>
+    <content type="html"><![CDATA[<p>This year&rsquo;s edition of the CAS 2014 has been awesome. There were several tracks:</p>
+
+<ul>
+<li>Enterprise Agile</li>
+<li>Collaboration, Culture and Teams</li>
+<li>Delighting Products</li>
+<li>Agile+</li>
+<li>Development Practices and Craftsmanship</li>
+</ul>
+
+
+<p>The last one is where I spent most of the time.</p>
+
+<h2>The schedule</h2>
+
+<p> The first day:</p>
+
+<ul>
+<li><a href="https://twitter.com/sandromancuso">Sandro Mancuso</a>: talking about Software Craftsmanship</li>
+<li><a href="https://twitter.com/fiunchinho">Jose Manuel Armesto</a>: talking about Unit Testing sucks (and it&rsquo;s our fault)</li>
+<li><a href="https://twitter.com/rmarpozo">Rubén Martín Pozo</a>: talking about Specification by example - Historia de un equipo que no odia documentar</li>
+<li><a href="https://twitter.com/XaV1uzz">Xavi Gost</a>: talking about La economía del refactoring. Una visión desde la gestión económica del proyecto.</li>
+<li><a href="https://twitter.com/_pedro_torres">Pedro Gustavo Torres</a>: talking about Pair Programming</li>
+</ul>
+
+
+<p> The second day:</p>
+
+<ul>
+<li><a href="https://twitter.com/rafadc">Rafael de Castro</a>: talking about Generando tests</li>
+<li><a href="https://twitter.com/borillo">Ricardo Borillo</a>: talking about CQRS y los beneficios surgidos de la necesidad.</li>
+<li><a href="https://twitter.com/cupcicm">Manu Cupcic</a> and <a href="https://twitter.com/eidrien">Adrian Perreau de Pinninck</a>: talking about Delivery at Scale.</li>
+<li><a href="https://twitter.com/jgabardini">Juan Gabardini</a>: talking about Testing en equipos infectados de test. This talk was also prepared by Juan Diego Vasco Moncada but he couldn&rsquo;t come.</li>
+</ul>
+
+
+<h2> Some thoughts</h2>
+
+<p> The conferences were awesome, but I&rsquo;d preferred if most (if not all) were in English so this conference can attract more international speakers</p>
+
+<p> There were 600+ people in the <a href="http://www.cccb.org/">CCCB</a>. That was only possible due to all the volunteers, organizers, caterers and the assistants.</p>
+
+<h2> More info</h2>
+
+<p> You can find more information on the <a href="http://cas2014.agile-spain.org/">official website</a> and on twitter using the hashtag <a href="https://twitter.com/search?q=%23cas2k14&amp;src=tyah">#cas2014</a></p>
+]]></content>
+  </entry>
+  
+</feed>
