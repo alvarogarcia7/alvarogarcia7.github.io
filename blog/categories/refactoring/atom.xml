@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Refactoring | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/refactoring/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2015-12-27T20:42:44+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code/"/>
+    <updated>2015-07-01T11:18:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have done a brown bag session about refactoring legacy code. It includes:</p>
+
+<ul>
+<li>legacy code definition. There is no agreement about this in the team.</li>
+<li>the legacy code change algorithm (source is Feathers, Working effectively with legacy code). Plus an example about it.</li>
+<li>working with legacy code</li>
+<li>experience with it.</li>
+</ul>
+
+
+<p>The slides are available <a href="../../../../uploads/refactoring-legacy-code-slides.pdf">here</a> (PDF format)</p>
+
+<p>We also did a practical session, whose experience report is <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">here</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring Legacy Code]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/"/>
+    <updated>2015-06-23T17:19:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code</id>
+    <content type="html"><![CDATA[<p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+
+<p>The contents of the session:</p>
+
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
+
+<p>I prepared a small script:</p>
+
+<pre><code class="bash">while test true; do
+  git add --all;
+  git commit --all -m "save process - uknown state";
+  sleep 120;
+done;
+</code></pre>
+
+<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Refactoring]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/11/brownbag-session-refactoring/"/>
+    <updated>2015-06-11T18:22:16+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/11/brownbag-session-refactoring</id>
+    <content type="html"><![CDATA[<p>At a client, today we&rsquo;ve done a brown-bag session on refactoring: we&rsquo;ve gone through
+and a live demo, including refactoring a core piece of our code.</p>
+
+<p>We&rsquo;ve done some mob programming to help identify some smells and how to fix them.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-study in June 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015/"/>
+    <updated>2015-06-03T11:13:10+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015</id>
+    <content type="html"><![CDATA[<p>Update: I&rsquo;ve grouped all small posts related to the self-study from June 2015
+into a single post</p>
+
+<h2>Le monitoring de flux par l’exemple</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.octo.com/le-monitoring-de-flux-par-lexemple/">this article</a> about monitoring, in the way of &ldquo;by example&rdquo;, by Cédrick Lunven and Julien Kirch (French)</p>
+
+<h2>The First Micro-service Architecture</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2015/05/28/TheFirstMicroserviceArchitecture.html">this article</a> about microservices and how they were implemented many years ago by Robert C. Martin</p>
+
+<h2>How I Learned to Balance My Life With Remote Work</h2>
+
+<p>I&rsquo;ve read <a href="https://open.bufferapp.com/remote-work/?utm_content=bufferaa5a2&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about balancing life and work, either physical or remote by Michael Erasmus</p>
+
+<h2>Demystified CQRS</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.codecentric.de/en/2015/05/demystified-cqrs/?utm_content=buffer35b18&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about CQRS by Nino Martincevic</p>
+
+<h2>The perils of programmer education in the bazaar</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.practicingruby.com/2015/06/04/the-perils-of-programmer-education-in-the-bazaar/">this article</a> by Gregory Brown</p>
+
+<h2>6 useful and lesser-known git commands</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.joncairns.com/2015/05/6-useful-and-lesser-known-git-commands/">this article</a> about git commands (log, checkout, stash, cherry-pick, annotate) by Jon Cairns</p>
+
+<h2>Is Your Scrum Standup Slowing You Down?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.sitepoint.com/scrum-standup-slowing-down/">this article</a> by M. David Green</p>
+
+<h2>Me duele Indra</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=374c664073e1a1fa3deca53b4&amp;id=67ce79e01b">this Bonilista</a> (Spanish) by David Bonilla</p>
+
+<h2>TDD, BDD, [add every other method that promises software quality here] and the tea tasting lady</h2>
+
+<p>I&rsquo;ve read <a href="https://blinkingcaret.wordpress.com/2012/10/02/tdd-bdd-add-every-other-method-that-promises-software-quality-here-and-the-tea-tasting-lady/">this article</a> by Rui Figueiredo about the scientific method, TDD / BDD and how to scientifically detect if the &lsquo;how&rsquo; affects the result. In this case, exemplified by how to prepare your tea</p>
+
+<h2>The Art of Metaprogramming in Java</h2>
+
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/PolymathicCoder/the-art-of-metaprogramming-in-java">these slides</a> by Abdelmonaim Remani</p>
+
+<h2>When TDD does not work</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/04/30/When-tdd-does-not-work.html">this article</a> by Uncle Bob on situations where TDD might not be appropiate, especially around the borders</p>
+
+<h2>Mi primera semana como aprendiz</h2>
+
+<p>I&rsquo;ve read <a href="http://ronnyancorini.es/blog/index.php/2015/06/08/mi-primera-semana-como-aprendiz/">Ronny Ancorini&rsquo;s experiences</a> in his first week as apprentince with Carlos Blé &amp; Associates (Spanish)</p>
+
+<h2>Refactoring without good tests</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codeclimate.com/blog/2013/12/05/refactoring-without-good-tests/">this article</a> by Peter Bell on how to deal with a legacy codebase, what are the effects of not having tests and how to deal with. How to add tests to a codebase that is not ready for it.</p>
+
+<h2>Big Ball of Mud</h2>
+
+<p>I&rsquo;ve read <a href="http://www.laputan.org/mud/">this paper</a>, containing a collection of patterns and antipatterns (disguised as notes) by Brian Foote and Joseph Yoder</p>
+
+<h2>Comparision of different concurrency models: Actors, CSP, Disruptor and Threads [sic]</h2>
+
+<p>I&rsquo;ve read <a href="http://java-is-the-new-c.blogspot.com.es/2014/01/comparision-of-different-concurrency.html">this comparison of concurrency models</a> by Rüdiger Möller</p>
+
+<h2>5 Whys</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/5_Whys">this wikipedia</a> article on the technique called &ldquo;5 Whys&rdquo;</p>
+
+<h2>Expectations, Outcomes, and Challenges of Modern Code Review</h2>
+
+<p>I&rsquo;ve read <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=180283">this paper</a>, <a href="http://research.microsoft.com/pubs/180283/ICSE%202013-codereview.pdf">direct link</a>, by Alberto Bacchelli and Christian Bird on code review at Microsoft.</p>
+
+<p>They explain how they do it, the exact methodology they are using and why they do it.</p>
+
+<p>The main reasons to code review are:</p>
+
+<ul>
+<li>finding defects</li>
+<li>code improvement</li>
+<li>alternative solutions</li>
+<li>knowledge transfer</li>
+<li>team awareness and transparency</li>
+<li>also:
+
+<ul>
+<li>improve development process</li>
+<li>avoid build breaks</li>
+<li>share code ownership</li>
+<li>track rationale</li>
+<li>team assessment</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>The quality wheel</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jessitron.com/2015/04/the-quality-wheel.html">this article</a> by Jessica Kerr about the qualities of beautiful code</p>
+
+<h2>5 Minute Physics</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=n6FKT-KafRk">this video</a> on interactions with the mobile devices and related to physics by David DeSandro</p>
+
+<h2>Rise of the Transpilers</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=DspYurD75Ns">this video</a> on the rise of the transpilers and coffeescript by Jeremy Ashkenas</p>
+
+<h2>Drawing Lines with Bresenham&rsquo;s Line Algorithm</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=zytBpLlSHms">this video</a> about how to apply the Bresenham&rsquo;s algorithm to draw lines (implemented in pseudo-code and javascript) by Jenn Schiffer</p>
+
+<h2>Working with Minified JavaScript</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=SuFNR7-XjKI">this video</a> by John Crepezzi on how to mix javascript files (clients and yours), how to decompile javascript in chrome, dev &amp; debug tools</p>
+
+<h2>How we ran our Legacy Code Retreat</h2>
+
+<p>I&rsquo;ve read <a href="https://pboop.wordpress.com/2012/02/19/how-we-ran-our-legacy-code-retreat/">this article</a> by Andreas Leidig, looking for inspiration on running a legacy code retreat / brown-bag session. The experience report <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">is here</a></p>
+
+<h2>Shift Left: Testing Earlier in Development</h2>
+
+<p>I&rsquo;ve read <a href="http://wirfs-brock.com/blog/2015/06/18/shift-left">this article</a> by Rebecca Wirfs-Brock</p>
+
+<h2>Polymorphic Equality</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/06/polymorphic-equality/">this article</a> on implementing polymorphic equality on C#, by Carlos Blé</p>
+
+<h2>Commit messages are not titles</h2>
+
+<p>I&rsquo;ve read <a href="http://antirez.com/news/90">this article</a> on git commit messages and how to use them, by antirez</p>
+
+<h2>Oracle Considers G1 Garbage Collector for Java 9</h2>
+
+<p>I&rsquo;ve read this <a href="https://adtmag.com/articles/2015/06/22/oracle-java-9.aspx">press article</a> on the G1 and CMS collector, by John K. Waters</p>
+
+<h2>What Tech Newbies Need</h2>
+
+<p>I&rsquo;ve read <a href="https://storify.com/jesslynnrose/what-tech-newbies-need">this set of tweets</a>, grouped by Jessica Rose about the most helpful things beginners can do to improve their programming skills.</p>
+
+<h2>JavaScript For Cats</h2>
+
+<p>I&rsquo;ve read <a href="http://jsforcats.com/">this introductory guide</a> to javascript by <a href="https://twitter.com/maxogden">Max Ogden</a></p>
+
+<h2>Why Doesn&rsquo;t Python Have Switch/Case?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.pydanny.com/why-doesnt-python-have-switch-case.html">this article</a> on the switch case in the python language by Daniel Roy Greenfeld</p>
+
+<h2>[Joseph Moniz&rsquo;s] Notes on Clojure</h2>
+
+<p>I&rsquo;ve read Joseph Moniz&rsquo;s <a href="http://blog.plasmaconduit.com/notes-on-clojure/">Notes on Clojure</a>.</p>
+
+<h2>Chemical Computing with Clojure</h2>
+
+<p>I&rsquo;ve read <a href="http://gigasquidsoftware.com/chemical-computing/index.html">an article</a> on performing abstract computations with chemicals, written in Clojure by Carin Meier</p>
+
+<h2>Lenses</h2>
+
+<p>I&rsquo;ve read <a href="http://www.haskellforall.com/2012/01/haskell-for-mainstream-programmers_28.html">this tutorial</a> on writing lenses for haskell, a way of importing imperative getters / setters to a Data. Written by Gabriel Gonzalez.</p>
+
+<p>On another note, the first part, about writing getters and setters in the naive way, is also explained in Learn you a Haskell > Chapter 8 Making Our Own Types and Typeclasses > Record syntax</p>
+
+<h2>Microservices in Haskell</h2>
+
+<p>I&rsquo;ve read <a href="https://github.com/AlexanderAA/haskell-microservices/blob/gh-pages/haskell-microservices.md">these notes</a> on implementing a microservice in haskell, by <a href="https://github.com/AlexanderAA">AlexanderAA</a></p>
+
+<h2>Overcoming Resistance to Change - Isn&rsquo;t It Obvious?</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=hcz1aZ60k7w">this video</a> in the channel of The World with Theory of Constraints</p>
+
+<h2>Bacon is bad for you</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/bacon-is-bad-for-you">these slides</a>
+ on professionalism and the programmer culture, by Garann Means</p>
+
+<h2>Code is a job</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
+
+<h2>The Great Newline Schism</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
+
+<h2>Top ten reasons why I won’t use your open source project</h2>
+
+<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-study in May 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/05/09/self-study-in-may-2015/"/>
+    <updated>2015-05-09T14:41:10+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/05/09/self-study-in-may-2015</id>
+    <content type="html"><![CDATA[<p>Update: I&rsquo;ve grouped all small posts related to the self-study from May 2015
+into a single post</p>
+
+<h2>Programmer passion considered harmful</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/on-coding/programmer-passion-considered-harmful-5c5d4e3a9b28">this article</a> on why programmer passion could be negative. The title is similar to a paper by Dijkstra.</p>
+
+<h2>Software Craftsmanship: Are Bootcamps Enough?</h2>
+
+<p>I&rsquo;ve read <a href="https://www.coursereport.com/blog/software-craftsmanship-are-bootcamps-enough">this article</a> on software craftsmanship, development bootcamps and passion by <a href="https://twitter.com/kauerrolemodel">Ken Auer</a></p>
+
+<h2>Improve your development environments with virtualization</h2>
+
+<p>I have seen this video: <a href="https://www.youtube.com/watch?v=Dg_vPMnC7_k&amp;feature=youtu.be">Improve your development environments with virtualization</a> by Luke Sneeringer.</p>
+
+<p>My notes:</p>
+
+<ul>
+<li>development should be exactly like production.</li>
+<li>except where it is too painful. there it should be different</li>
+</ul>
+
+
+<h2>Buffer&rsquo;s take on values</h2>
+
+<p>I have found these <a href="http://www.slideshare.net/Bufferapp/buffer-culture-04">values</a>, written by Buffer, very interesting.</p>
+
+<h2>Public static void</h2>
+
+<p>I&rsquo;ve watched this video: <a href="https://www.youtube.com/watch?v=5kj5ApnhPAE">&ldquo;Public, static void&rdquo;</a> by Rob Pike. The slides can be found <a href="http://www.oscon.com/oscon2010/public/schedule/detail/13423">here</a></p>
+
+<h3>My notes</h3>
+
+<ul>
+<li>too much bureaucracy</li>
+<li>fighting the compiler</li>
+<li>dynamic vs static typing</li>
+<li>language too verbose</li>
+<li><p>do not mix the two of them</p></li>
+<li><p>a language niche:</p>
+
+<ul>
+<li>comprehensible</li>
+<li>statically typed</li>
+<li>light on the page</li>
+<li>fast to work in</li>
+<li>scales well</li>
+<li>doesn&rsquo;t require tools but supports them well</li>
+<li>good at networking and multiprocessing</li>
+</ul>
+
+
+<p>(minute 10:09)​</p></li>
+<li><p><a href="http://golang.org">Go</a> was born to fill this niche</p></li>
+</ul>
+
+
+<h2>Nothing is something</h2>
+
+<p>This video has been extracted to a <a href="../../../../2015/05/04/video-nothing-is-something/">post</a> of its own.</p>
+
+<h2>Software is eating the world</h2>
+
+<p>This video has been extracted to a <a href="../../../../2015/05/10/talk-software-is-eating-the-world/">post</a> of its own.</p>
+
+<h2>The Cost of Test Driven Development</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.typemock.com/2009/03/the-cost-of-test-driven-development.html">this article</a>, on the cost of doing TDD, which refers to <a href="http://www.msr-waypoint.net/en-us/groups/ese/nagappan_tdd.pdf">this paper</a>: Realizing quality improvement through test driven development: results and experiences of four industrial teams (below)</p>
+
+<h2>Realizing quality improvement through test driven development: results and experiences of four industrial teams</h2>
+
+<p>This paper has been extracted to a <a href="../../../../2015/05/12/paper-tdd-in-industrial-teams/">post</a> of its own.</p>
+
+<h2>Learn You Some Lisp for Great Good</h2>
+
+<p>I&rsquo;ve watched the video <a href="https://www.youtube.com/watch?v=3T00X_sNg4Q">Learn You Some Lisp for Great Good</a>, by Howard Abrams.</p>
+
+<p>I guess this is a reference to the popular <a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good!</a>.</p>
+
+<p>He suggests many interesting resources for learning Lisp dialects. The live coding is in Clojure:</p>
+
+<ul>
+<li><a href="http://landoflisp.com/">The land of Lisp</a></li>
+<li><a href="https://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs</a>. See also <a href="https://twitter.com/SICPQuotes">SICPQuotes</a></li>
+<li><a href="http://mitpress.mit.edu/books/little-schemer">The Little Schemer</a></li>
+<li><a href="https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf">An Introduction to Programming in Emacs Lisp</a></li>
+<li><a href="https://www.4clojure.com/">4clojure Questions</a></li>
+<li><a href="http://clojurekoans.com/">Clojure Koans</a></li>
+</ul>
+
+
+<p>On another topic, in the <a href="http://www.meetup.com/ClojureBCN/events/222418104/">Bank accounts exercise from Exercism</a> meetup, we discussed the book <a href="https://pragprog.com/book/shcloj2/programming-clojure">Programming Clojure (2nd edition)</a> by Stuart Halloway</p>
+
+<h2>Professor Frisby&rsquo;s Mostly Adequate Guide to Functional Programming</h2>
+
+<p>I&rsquo;ve read <a href="https://github.com/DrBoolean/mostly-adequate-guide">this guide</a> to functional programming. It is still work in progress (WIP) but still interesting. Written in javascript, so you can REPL in the browser.</p>
+
+<h2>Learning Code Good</h2>
+
+<p>I&rsquo;ve watched this video, by Saron Yitbarek: <a href="https://www.youtube.com/watch?v=-nsnAYRqYLA">Learn Code Good</a>.</p>
+
+<h2>Why You Don&rsquo;t Get Mock Objects</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=R9FOchgTtLM">Why You Don&rsquo;t Get Mock Objects</a>, by Gregory Moeck.</p>
+
+<p>In it, they point to the <a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> book (<a href="/blog/categories/goos">category here</a>), the paper <a href="www.jmock.org/oopsla2004.pdf">Mock Roles, not Objects</a> (also present in the GOOS book).</p>
+
+<h2>Technical Debt: A Repayment Plan</h2>
+
+<p>I&rsquo;ve read <a href="http://www.infoq.com/articles/tech-debt-repayment">this article</a> by <a href="https://twitter.com/@jeremyjarrell">Jeremy Jarrell</a> on technical debt how to repay it: schedule, taxes, default, etc</p>
+
+<p>This has made me think of the <a href="http://scbcn.ideascale.com/a/dtd/Deuda-t%C3%A9cnica-origen-y-consecuencias/69782-25568">&ldquo;Deuda técnica, origen y consecuencias&rdquo; talk</a> (Technical debt: origin and consequences) (Spanish), that was delivered by <a href="https://twitter.com/@jgomezz">Javier Gómez</a> at the Software Craftsmanship 2014.</p>
+
+<h2>Revisiting XP: be a thoughtful programmer by exercising more collective ownership</h2>
+
+<p>I&rsquo;ve read <a href="http://www.infoq.com/articles/revisit-p-collective">this article</a> by <a href="https://twitter.com/tiagooo_romero">Tiago Garcia</a> on the collective code ownership, as stated by Xtreme Programming (XP), with some example and guidelines.</p>
+
+<h2>Where&rsquo;s the Real Bottleneck in Scientific Computing?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.americanscientist.org/issues/pub/wheres-the-real-bottleneck-in-scientific-computing/99999">this article</a> by Greg Wilson on the tools and procedures investigators use to produce software.</p>
+
+<h2>Testing inside the Sprint</h2>
+
+<p>I&rsquo;ve read <a href="http://ronjeffries.com/articles/2015-03-01-testing-in-sprints/">this article</a> by Ron Jeffries.</p>
+
+<p>Discusses the need for testing and why this hasn&rsquo;t been communicated enough, as there still are people who have not understood it.</p>
+
+<p>Also about why people equal something failing when using scrum with scrum failing.</p>
+
+<h2>DTO vs Domain Models</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/05/dto-vs-domain-models/">this article</a> by Carlos Blé</p>
+
+<h2>Homoiconicity isn’t the point</h2>
+
+<p>I&rsquo;ve read <a href="http://calculist.org/blog/2012/04/17/homoiconicity-isnt-the-point/">this article</a> by David Herman about homoiconicity, comparing Lisp dialects (have it) to others that don&rsquo;t. The main point is at the end, where it says:</p>
+
+<blockquote><p>[&hellip;] homoiconicity isn’t the point, read is</p></blockquote>
+
+<h2>So You Don&rsquo;t Want to be a Programmer After All</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/so-you-dont-want-to-be-a-programmer-after-all/">this article</a> by Jeff Atwood. Cites the golden handcuffs (also known as golden shackles), reasons to be and not to be a programmer, and how to be an average and outstanding programmer</p>
+
+<h2>The Nature of Lisp</h2>
+
+<p>I&rsquo;ve read <a href="http://www.defmacro.org/ramblings/lisp.html">this article / introduction</a> to Lisp by Slava Akhmechet</p>
+
+<h2>[David Pollak&rsquo;s] My Thoughts on Go</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.goodstuff.im/golang">these comments</a> on Go Lang from David Pollak</p>
+
+<h2>The Well-Rounded Technologist</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/04/02/the-well-rounded-technologist.html">this article</a> by Michael Bernstein</p>
+
+<h2>Should I read papers?</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/10/21/should-i-read-papers.html">this article</a> by Michael Bernstein</p>
+
+<h2>Lisp-1 vs Lisp-2</h2>
+
+<p>I&rsquo;ve read <a href="https://hornbeck.wordpress.com/2009/07/05/lisp-1-vs-lisp-2/">this article</a> by <a href="https://twitter.com/hornbeck">@Hornbeck</a> about the lisp 1 and lisp 2.</p>
+
+<h2>Science Corps</h2>
+
+<p>I&rsquo;ve watched this <a href="https://www.youtube.com/watch?v=dkQkafxFoIQ">TEDx talk</a> by Aza Raskin, featuring Data Banks and Science corps</p>
+
+<h2>Healthy Codebase and Preparatory Refactoring</h2>
+
+<p> I&rsquo;ve read <a href="http://brewhouse.io/blog/2014/11/10/healthy-codebase-and-preparatory-refactoring.html">this article</a> by Philippe Creux about preparatory refactoring</p>
+
+<h2>You Are Learning Haskell Right Now (Or Anything You Want Really)</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/12/11/you-are-learning-haskell-right-now.html">this article</a> by Michael Bernstein</p>
+
+<h2>Lisp is Abstract Syntax</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/04/16/lisp-is-abstract-syntax.html">this article</a> by Michael Bernstein</p>
+
+<h2>Two Things Types Have Taught Me</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/10/30/two-things-types-have-taught-me.html">this article</a> by Michael Bernstein</p>
+
+<h2>Don&rsquo;t Bet Against Yourself</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/04/15/dont-bet-against-yourself.html">this article</a> by Michael Bernstein</p>
+
+<h2>Learning Math: A Blank Is A Blank With A Blank</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/04/15/dont-bet-against-yourself.html">this article</a> by Michael Bernstein</p>
+
+<h2>The False Economy Of Metaprogramming</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/03/06/the-false-economy-of-generated-methods.html">this article</a> by Michael Bernstein</p>
+
+<h2>Management and Engineering, overlapping</h2>
+
+<p>I&rsquo;ve read <a href="http://www.quora.com/Does-Adam-DAngelo-feel-comfortable-with-the-transition-from-an-engineer-to-a-management-position?srid=3OC&amp;share=1">this Quora answer</a> by Adam D'Angelo. The original title is: Does Adam D'Angelo feel comfortable with the transition from an engineer to a management position?</p>
+
+<h2>Evolution of The Twitter Stack</h2>
+
+<p>I&rsquo;ve read <a href="https://www.slideshare.net/slideshow/embed_code/key/ly83zQkBjCxnIX">these slides</a> about changing the technology stack in Twitter: from Rails to JVM-based</p>
+]]></content>
+  </entry>
+  
+</feed>
