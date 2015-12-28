@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="After reading (in a specific order - below) part of the patterns in Apprenticeship Patterns,
+I stumbled upon the &ldquo;Your First Language&rdquo; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/posts/11">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/02/your-first-language/">Your First Language</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-02T20:25:37+00:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:25 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After reading (in a specific order - below) part of the patterns in <a href="http://shop.oreilly.com/product/9780596518387.do">Apprenticeship Patterns</a>,
+I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch02.html#your_first_language">&ldquo;Your First Language&rdquo;</a></p>
+
+<p>First of all, the illustration with the baby reading a Java book is priceless.</p>
+
+<p>Having said that, I came to the realization that you might not know a paradigm but just an implementation
+(e.g., you don&rsquo;t know about Object-Oriented programming but just about Java), in the same fashion as you could not know about LISPs but only about an implementation, such as clojure.</p>
+
+<p>Also, clicks with the idea of &ldquo;code to interfaces, not implementations&rdquo;. Does it also click with you?</p>
+
+<p>PS: What a great book this is. I&rsquo;m reading it as explained <a href="../../../../2015/04/25/how-i-read-apprenticeship-patterns/">here</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<p>PPS: you can read it online for free, <a href="http://chimera.labs.oreilly.com/books/1234000001813/">here</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This post was extracted on 2015-04-25. The refactor techniques are very useful, not only for programming<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/24/podcast-basta-ya-de-picar-spanish/">Podcast: Basta Ya De Picar (Spanish)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-24T20:03:03+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:03 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some weeks ago I listened to some podcasts from <a href="http://www.bastayadepicar.com">BastaYaDePicar</a> (episodes 1 to 8) and now I&rsquo;m listening more (9 to 10). I really recommend these to you, and I imagine that the newer episodes (also new format) will be interesting too.</p>
+
+<p>They&rsquo;re in Spanish and narrated by <a href="https://twitter.com/sbastn">Sebastian Hermida</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/24/code-snippets-stash/">Code Snippets Stash</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-24T19:49:55+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Following a team member&rsquo;s recommendation, I recently started a repository to save all my useful snippets.</p>
+
+<p>I&rsquo;ve decided that the examples should be designed guided by tests or at least to have a working example exercised by tests. Also, that I should not reinvent the wheel and use as many open source libraries as possible, reducing the amount of code I have to write myself.</p>
+
+<p>Ideally, every snippet should be a maven project (where applicable) and be imported as a small library, therefore being able to reuse the functionality incrementally across projects.</p>
+
+<p>For the time being, I&rsquo;m saving my snippets into a private repository and later I might decide to publish it for common usage.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/22/bank-kata-in-java/">Bank Kata in Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-22T21:52:01+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:52 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://twitter.com/trikitrok">Manuel Rivero</a> and I did a subset of the <a href="https://github.com/sandromancuso/Bank-kata">bank kata</a>, proposed by <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a>.</p>
+
+<p>We&rsquo;ve used java (mockito, hamcrest, junit), outside-in TDD. The code is spread among several sessions. We have not committed after each step, only at the end of the session.</p>
+
+<p>The source code is on <a href="https://github.com/alvarogarcia7/bank-kata">github</a></p>
+
+<p>You can read Manuel&rsquo;s take on the kata on <a href="http://garajeando.blogspot.com.es/2015/01/kata-bank-account-in-java.html">his blog</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/12/gmaur-code-jam/">GMaur Code Jam 2015: 01 - Mini-Power Swapper</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-12T03:25:22+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:25 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last year we started the program 12 months, 12 katas (as inspired by this <a href="https://github.com/12meses12katas">repository</a>). This year we want to propose something different: an asynchronous code jam</p>
+
+<h2>New problem: Mini-Power Swapper</h2>
+
+<p>This post belongs to a series: <a href="/blog/categories/code-jam">code-jam</a></p>
+
+<p>Each month (or so) we at GMaur will publish a new problem (and announce it on <a href="https://twitter.com/gmaurcom">twitter</a>) and post a solution to the last problem.</p>
+
+<p>This month, the <a href="https://github.com/GMaur/code-jam-2015/tree/master/problem-01">Mini-Power Swapper</a></p>
+
+<p>You can fork the repo, commit there and send a pull request. We&rsquo;ll review the code (if you want) and merge the solution to a branch in &ldquo;solutions/&rdquo;.</p>
+
+<p>Happy katas and happy code jamming!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/12/kata-reverse-polish-notation-in-java/">Kata: Reverse Polish Notation in Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-12T02:56:58+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:56 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve written a <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">RPN</a> string calculator in java, using TDD with these: mockito, hamcrest, junit</p>
+
+<p>It&rsquo;s close to the <a href="http://osherove.com/tdd-kata-1/">String Calculator kata</a>, by <a href="https://twitter.com/RoyOsherove">Roy Osherove</a>. This RPN is using mocks (so more difficult than the String calculator)</p>
+
+<p>I&rsquo;ve tried to practice <a href="http://us2.campaign-archive1.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=42f9a0b66f&amp;e=6ca6702beb">&ldquo;Your tests are dragging you down&rdquo;</a> by <a href="https://twitter.com/jbrains">J.B Rainsberger</a> (mainly, to use something to write on). This behavior is also explained in the book <a href="http://www.carlosble.com/libro-tdd/">Dirigido por tests</a> (Spanish) by <a href="https://twitter.com/carlosble">Carlos Blé</a>.</p>
+
+<p>My solution is <a href="https://github.com/alvarogarcia7/kata-rpn-calculator-java">here</a>. Every step (red, green, refactor) has been saved.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/06/listening-to-the-tests/">Listening to the Tests</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-06T21:05:55+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:05 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Specifically the chapter no. 20 (&ldquo;Listening to the tests&rdquo;) from <a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> available <a href="http://www.amazon.com/dp/0321503627/ref=as_sl_pd_tf_lc?tag=httpwwwm3pcou-20&amp;camp=213381&amp;creative=390973&amp;linkCode=as4&amp;creativeASIN=0321503627&amp;adid=12B4KPA3REF515ASAZN8&amp;&amp;ref-refURL=http%3A%2F%2Fwww.growing-object-oriented-software.com%2F">here</a> is so good to learn to hear to your tests.</p>
+
+<p>To hear what they&rsquo;re trying to tell you, the authors (<a href="https://twitter.com/sf105">Steve Freeman</a> and <a href="https://twitter.com/natpryce">Nat Pryce</a>) explain this to you:</p>
+
+<ul>
+<li>I Need to Mock an Object I Can’t Replace</li>
+<li>Logging Is a Feature</li>
+<li>Mocking Concrete Classes</li>
+<li>Don’t Mock Values</li>
+<li>Bloated Constructor</li>
+<li>Confused Object</li>
+<li>Too Many Dependencies</li>
+<li>Too Many Expectations</li>
+</ul>
+
+
+<p>To close, a quote:</p>
+
+<blockquote><p>[&hellip;] We’ve found that the qualities that make an object easy to test also make our code responsive to change</p>
+
+<p><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>, chapter 20, page 229</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/06/kata-prime-factors/">Kata: Prime Factors</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-06T20:47:04+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:47 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I just did the prime factors kata, in java using TDD. Results: <a href="https://github.com/alvarogarcia7/primeFactors">https://github.com/alvarogarcia7/primeFactors</a></p>
+
+<p>Code review, comments, pull requests are more than welcome</p>
+
+<p>Source: <a href="http://craftsmanship.sv.cmu.edu/katas/prime-factors-kata">http://craftsmanship.sv.cmu.edu/katas/prime-factors-kata</a></p>
+
+<p>Source: <a href="http://butunclebob.com/ArticleS.UncleBob.ThePrimeFactorsKata">http://butunclebob.com/ArticleS.UncleBob.ThePrimeFactorsKata</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/06/talk-is-tdd-dead-of-course-not-by-emily-bache/">Talk: 'Is TDD Dead? Of Course Not! But What´s All the Fuzz About Then?' by Emily Bache</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-06T14:47:47+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:47 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve just seen this talk: <a href="https://www.youtube.com/watch?v=PCEHRFHKZSk">Is TDD dead? Of course not! But what´s all the fuzz about then?</a> by <a href="https://twitter.com/emilybache">Emily Bache</a></p>
+
+<h3>My notes</h3>
+
+<ul>
+<li>deliberate vs accidental learning (around minute 19)</li>
+<li><p>do not be an evangelist for tdd but rather &ldquo;come learn tdd, come at a dojo with us!&rdquo;</p></li>
+<li><p>points to <a href="https://twitter.com/tastapod">Dan North</a>&rsquo;s <a href="www.youtube.com/watch?v=SPj-23z-hQA">talk</a> (at the same foo café)</p></li>
+<li>points to her book - <a href="https://leanpub.com/codingdojohandbook">The Coding Dojo Handbook</a></li>
+<li><p>points to <a href="http://cyber-dojo.org/">cyber dojo</a></p></li>
+<li><p>design is hard whether you do TDD or not</p></li>
+<li><a href="https://twitter.com/dhh">dhh</a>: too much focus on unit test.</li>
+</ul>
+
+
+<blockquote><p>I thought we got rid of best practices in agile</p></blockquote>
+
+<ul>
+<li>different kinds of advice for each kind of target (eg, based on experience level)</li>
+<li>points to self-testing code (by <a href="https://twitter.com/martinfowler">Martin Fowler</a>)</li>
+<li>problem: the test suite is no longer in sync with the production code</li>
+<li>points to approval testing:
+
+<ul>
+<li>code kata &ldquo;minesweeper&rdquo;</li>
+<li>test data + code produces output data</li>
+<li>I approve the data</li>
+<li>Useful for full features</li>
+<li>Useful for asserting on difficult parts like images</li>
+<li>realistic users to generate tests</li>
+<li>tool to manage these &ldquo;approval tests&rdquo;. Easy way of managing tests cases</li>
+<li><a href="http://texttest.org">TextTest</a> is one of these tools</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Her conclusions</h3>
+
+<ul>
+<li>Watch out the fundamentalism</li>
+<li>TDD might take you to too many layers of indirection</li>
+<li>The share of each test (end to end, integration, unit) depends on each project / part</li>
+<li>Many TDD pieces of advice is directed to novices. When you&rsquo;re not, you should know when to stop listening</li>
+</ul>
+
+
+<p>PS: I&rsquo;ve first seen this video in <a href="http://garajeando.blogspot.com/2015/01/interesting-talk-is-tdd-dead-of-course.html">garajeando</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/01/category-goos/">Category: Goos</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-01T05:09:43+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:09 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a>&rsquo;, by Nat Pryce and Steve Freeman</p>
+
+<p>Note: This has been created a posteriori with a previous date</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/12">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/10">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/12/31/books-read-in-2015q4/">Books Read in 2015Q4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/15/validating-data-clojure/">Validating CSV Data in Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the Macro And</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: Automate the Blog Publishing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/self-study-in-december-2015/">Self-Study in December 2015</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
