@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Sample | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/sample/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-01-04T19:40:17+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tool to Find Duplicate Values in Constants]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/"/>
+    <updated>2015-07-30T11:42:44+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants</id>
+    <content type="html"><![CDATA[<p>Imagine having this java class:</p>
+
+<pre><code class="java">private static class RepeatedConstants {
+    public static final String A = "A";
+    public static final String A_1 = A;
+    public static final String A_2 = "A";
+
+    public static final Integer _3 = 3;
+    public static final Integer THREE = 3;
+}
+</code></pre>
+
+<p>I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (> 4000 constants). A way of doing this is basing the differences on the values, directly. To do this, remove all text that is not a value:</p>
+
+<p>find what, regex mode: <code>^.*=\s*(.*);</code>
+replace with: $1</p>
+
+<p>Explanation:</p>
+
+<ul>
+<li><code>^.*=\s*</code>: any character before the equal sign. Any whitespace right after it.</li>
+<li><code>(.*);</code>: capture everything that is before the semicolon (;)</li>
+</ul>
+
+
+<p>You end up with this:</p>
+
+<pre><code>"A"
+A
+"A"
+
+3
+3
+</code></pre>
+
+<p>Copy it to <code>a.txt</code>, <code>sort</code> it and <code>uniq</code> it (to remove duplication):</p>
+
+<pre><code class="bash">cat a.txt | sort | uniq &gt; uniq.txt
+</code></pre>
+
+<p>then sort the non-uniq version:</p>
+
+<pre><code class="bash">cat a.txt | sort &gt; sorted.txt
+</code></pre>
+
+<p>and diff among them, to find the repeated values:</p>
+
+<pre><code class="bash">diff sorted.txt uniq.txt
+
+3,4d2
+&lt; "A"
+&lt; 3
+</code></pre>
+
+<p>These are the repeated values. The variable <code>   public static final String A_1 = A;</code> was not caught by this as it only has the same value in execution, not staticly.</p>
+
+<p>For this, at Gmaur, we have developed a small <a href="https://github.com/GMaur/java-duplicates-detector">module to detect duplicates</a>. The main code is this:</p>
+
+<pre><code class="java">public class RepeatedFinder {
+
+  private final Class aClass;
+
+  public RepeatedFinder(Class aClass) {
+    this.aClass = aClass;
+  }
+
+  public MultiMap findDuplicates() throws IllegalAccessException {
+    return generateMapFromValueToVariables(aClass).valuesWithMoreThanOneVariable();
+  }
+
+  private ValueToNameRepository generateMapFromValueToVariables(Class&lt;?&gt; clazz) throws IllegalAccessException {
+    ValueToNameRepository valueToNames = new ValueToNameRepository();
+    Field[] fields = clazz.getDeclaredFields();
+    Object object = new Object();
+    for (Field field : fields) {
+      Object value = field.get(object);
+      valueToNames.add(value, field.getName());
+    }
+    return valueToNames;
+  }
+</code></pre>
+
+<p>The tests and the source code can be found here: <a href="https://github.com/GMaur/java-duplicates-detector">https://github.com/GMaur/java-duplicates-detector</a></p>
+
+<p>Hope you enjoy it, as much as we have enjoyed writing it!</p>
+
+<p>Any feedback is welcome.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Use the Same Import Order in IntelliJ IDEA as Eclipse's]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/"/>
+    <updated>2015-07-30T11:22:44+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses</id>
+    <content type="html"><![CDATA[<p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:</p>
+
+<p>While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.</p>
+
+<p>To solve it, see <a href="http://stackoverflow.com/questions/14716283/is-it-possible-for-intellij-to-organize-imports-the-same-way-as-in-eclipse">this link</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Massively Reverting Local Changes]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/"/>
+    <updated>2015-07-08T00:40:24+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes</id>
+    <content type="html"><![CDATA[<p>I was changing a massive amount of files (>1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests.</p>
+
+<p>Here&rsquo;s how to do it automatically:</p>
+
+<p>Copy all the failing tests to a text editor:</p>
+
+<p>Input:</p>
+
+<pre><code>testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest)
+testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest)
+testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest)
+testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest)
+testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest)
+testDeleteDocument(io.company.controller.dms.DocumentControllerTest)
+testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest)
+testUpdateXML(io.company.controller.dms.DocumentControllerTest)
+testSearchXFPage(io.company.controller.dms.DocumentControllerTest)
+testCreateXFPage(io.company.controller.dms.DocumentControllerTest)
+testUpdatePage(io.company.controller.dms.DocumentControllerTest)
+testSearchCrop(io.company.controller.dms.DocumentControllerTest)
+testUpdateCrop(io.company.controller.dms.DocumentControllerTest)
+testMoveDocument(io.company.controller.dms.DocumentControllerTest)
+testGetDocument(io.company.controller.dms.DocumentControllerTest)
+</code></pre>
+
+<p>regex:</p>
+
+<p>(tested in Sublime 3, build 3083, Windows 64)</p>
+
+<p>find what: <code>^[^(]+\([a-Z.]*\.(.*)\)</code></p>
+
+<p>replace with: <code>$1</code></p>
+
+<p>Regex explanation for <code>^[^(]+\([a-Z.]*\.(.*)\)</code>:</p>
+
+<ul>
+<li><code>^</code>: beginning of line</li>
+<li><code>[^(]+</code>: every character except parenthesis, one or more times</li>
+<li><code>\([a-Z.]*</code>: start with one parenthesis, any number of a-z, A-Z</li>
+<li>`.``: a dot, as I&rsquo;m using regex replacement</li>
+<li><code>(.*)</code>: any character, zero or more times, captured in group <code>$1</code></li>
+<li><code>\)</code>: closing parenthesis</li>
+</ul>
+
+
+<p>Output:</p>
+
+<pre><code>DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+</code></pre>
+
+<p>copy that to file <code>a.txt</code></p>
+
+<p>Revert all the changes in these files:</p>
+
+<pre><code class="bash">for i in $(cat a.txt | uniq); do
+  git checkout -- *$i*
+done
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Iterate With Index in Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/"/>
+    <updated>2015-07-04T12:34:37+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure</id>
+    <content type="html"><![CDATA[<p>Scenario: iterate a sequence (<code>seq</code>) with its index</p>
+
+<p>The lines have an implicit line number (starting by 1, in most editors):</p>
+
+<pre><code>[1] line1
+[2] line2
+[3] hello
+</code></pre>
+
+<p>When you read it from file to a variable, it is converted to:</p>
+
+<pre><code class="lisp">("line1" "line2" "hello")
+</code></pre>
+
+<p> This implicit line number value is not present, therefore you need to assign them one.</p>
+
+<p> In ruby, you have this construct:</p>
+
+<pre><code class="ruby">array = ["A", "B", "C"]
+array.each_with_index {|val, index| puts "#{val} =&gt; #{index}" }
+</code></pre>
+
+<p><a href="http://stackoverflow.com/questions/310634/what-is-the-right-way-to-iterate-through-an-array-in-ruby/310638#310638">Source</a></p>
+
+<p>In clojure, there is a similar function:</p>
+
+<pre><code class="lisp">(map-indexed (fn [idx itm] [idx itm]) '(:f :o))
+; ([0 "line1"] [1 "line2"] [2 "hello"])
+</code></pre>
+
+<p>If you want to shift the collection to the right so it starts with 1 (for the REPL):</p>
+
+<pre><code class="lisp">(def lines '("line1" "line2" "hello"))
+; ("line1" "line2" "hello")
+
+(defn shift-one [lines] 
+  (cons "" lines))
+(def lines (shift-one lines))
+lines
+; ("" "line1" "line2" "hello")
+
+(map-indexed (fn [idx itm] [idx itm])
+  lines)  
+; ([0 ""] [1 "line1"] [2 "line2"] [3 "hello"])
+</code></pre>
+
+<p><a href="https://clojuredocs.org/clojure.core/map-indexed">Source</a>, especially <a href="https://clojuredocs.org/clojure.core/map-indexed#example-542692cdc026201cdc326d25">this one</a></p>
+
+<p>But if you only need to get the lines at certain indexes, it is also possible to get the values directly, using <code>map</code> on the sequence of desired indexes:</p>
+
+<pre><code class="lisp">lines
+; ("" "line1" "line2" "hello")
+
+(defn get-all [lines indexes]
+  (map #(nth lines %) indexes))
+(get-all lines '(1 2))
+; ("line1" "line2")
+
+(get-all lines '(1 1))
+; ("line1" "line1")
+</code></pre>
+
+<p>Note: the original source code for this post is <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/iterate-with-index.clj">here</a></p>
+]]></content>
+  </entry>
+  
+</feed>
