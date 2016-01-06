@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Composition-vs-inheritance | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/composition-vs-inheritance/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-01-06T00:37:30+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Video: Nothing Is Something]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/05/04/video-nothing-is-something/"/>
+    <updated>2015-05-04T05:43:14+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/05/04/video-nothing-is-something</id>
+    <content type="html"><![CDATA[<p>I have seen this video: <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A">Nothing is something</a> by <a href="https://twitter.com/@sandimetz">Sandi Metz</a>, as I saw it recommended <a href="http://garajeando.blogspot.com.es/2015/04/interesting-talk-nothing-is-something.html">here</a></p>
+
+<p>In the video, she talks programming in this fashion: (it is a stack, not an unordered list)</p>
+
+<ul>
+<li>Abstraction seeking</li>
+<li>Message centric</li>
+<li>Condition Averse</li>
+<li>Smalltalk Infected</li>
+</ul>
+
+
+<blockquote><p>Not here to change the language but change you</p></blockquote>
+
+<p>This is a pattern I&rsquo;ve also heard from <a href="https://twitter.com/@old_sound">Alvaro Videla</a>, where he said that other, more powerful languages can change your mind and help you bring some of those concepts to your own language. He was talking about Haskell, she, about Smalltalk.</p>
+
+<p>She shows how to smell the <code>null object pattern</code> (that she independently discovered herself too - can be improved studying the classics<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>), also called <code>active nothing</code>. Decorates the <code>Animal</code> with a wrapper, to call it <code>GuaranteedAnimal</code></p>
+
+<p>Later on, shows how to code an example on a &lsquo;tail&rsquo;, extending behaviour with inheritance and how to get rid of it: prefer composition versus inheritance. The importance of roles.</p>
+
+<blockquote><p>Inheritance is for specialization, not for sharing code</p></blockquote>
+
+<p>Steps to convert inheritance into composition:</p>
+
+<ol>
+<li>Isolate the difference</li>
+<li>Name the concept</li>
+<li>Define the role</li>
+<li>Inject the players</li>
+</ol>
+
+
+<p>This is a trick I discovered here: when you don&rsquo;t know what name put here, create a spreadsheet and ask yourself what name the row should have. There is an example <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A#t=1959">at this minute</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>a reference to a pattern by the same name at <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

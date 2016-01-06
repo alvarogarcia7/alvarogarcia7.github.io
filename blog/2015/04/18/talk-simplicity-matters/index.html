@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Talk: Simplicity Matters - The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="I&rsquo;ve seen this video by Rich Hickey: &ldquo;Simplicity matters&rdquo;, taken from Manuel Rivero&rsquo;s google plus' site here are my notes: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Talk: Simplicity Matters</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-18T12:44:06+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus' <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
+
+<p>here are my notes:</p>
+
+<ul>
+<li>the software is the elephant</li>
+<li>do more, do it differently, do it better</li>
+<li>complexity of the elephant is going to dominate what you can do</li>
+<li>your ability to reason about your program is critical</li>
+<li>design is about pulling things apart</li>
+<li>become familiar by learning, trying</li>
+<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
+</ul>
+
+
+<p>Complexity vs simplicity:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complexity     </th>
+<th> Simplicity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state, objects </td>
+<td> values</td>
+</tr>
+<tr>
+<td>methods </td>
+<td> functions, namespaces</td>
+</tr>
+<tr>
+<td>variables </td>
+<td> managed refs</td>
+</tr>
+<tr>
+<td>inheritance, switch, matching  </td>
+<td> polymorphism à la carte</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>imperative loops, fold </td>
+<td> set functions</td>
+</tr>
+<tr>
+<td>actors </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>ORM </td>
+<td> declarative data manipulation</td>
+</tr>
+<tr>
+<td>conditionals </td>
+<td> rules</td>
+</tr>
+<tr>
+<td>inconsistency </td>
+<td> consistency </td>
+</tr>
+</tbody>
+</table>
+
+
+<ul>
+<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
+<li>simplicity is not about you. simplicity is a lot of hard work
+
+<ul>
+<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
+</ul>
+</li>
+<li>simplicity is not an objective</li>
+</ul>
+
+
+<p>Order is all over the place:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complex  </th>
+<th> Simple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>positional arguments </td>
+<td> named arguments or map</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>product types  </td>
+<td> associate records</td>
+</tr>
+<tr>
+<td>imperative programs </td>
+<td> declarative programs</td>
+</tr>
+<tr>
+<td>prolog </td>
+<td> datalog</td>
+</tr>
+<tr>
+<td>call chains </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>XML </td>
+<td> JSON, Clojure literals</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">alvaro garcia</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-04-18T12:44:06+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:44 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/keynote/'>keynote</a>, <a class='category' href='/blog/categories/rails-conf/'>rails-conf</a>, <a class='category' href='/blog/categories/rich-hickey/'>rich-hickey</a>, <a class='category' href='/blog/categories/talk/'>talk</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/04/17/the-guardian-of-the-source/" title="Previous Post: The Guardian of the Source">&laquo; The Guardian of the Source</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/04/19/logging-is-a-feature/" title="Next Post: Logging is a feature">Logging is a feature &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/01/self-study-in-january-2016/">Self-Study in January 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/31/books-read-in-2015q4/">Books Read in 2015Q4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/15/validating-data-clojure/">Validating CSV Data in Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the Macro And</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: Automate the Blog Publishing</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/';
+        var disqus_url = 'http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
