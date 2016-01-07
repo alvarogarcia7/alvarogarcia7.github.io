@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: January | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/january/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-01-07T08:37:37+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in January 2016]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/01/01/self-study-in-january-2016/"/>
+    <updated>2016-01-01T14:55:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/01/01/self-study-in-january-2016</id>
+    <content type="html"><![CDATA[<p></p>
+
+<p></p>
+
+<h2>Test cases in inner classes with JUnit</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/8758294/test-cases-in-inner-classes-with-junit">this answer</a> in stackoverflow about nested test runners in JUnit</p>
+
+<p>Tags: junit, stackoverflow, answer, nested-runner</p>
+
+<h2>Recording a Great Coding Screencast</h2>
+
+<p>I&rsquo;ve read <a href="https://egghead.io/articles/recording-a-great-coding-screencast">this article</a> by John Lindquist where he explains how he sets up the recording environment for egghead.</p>
+
+<p>Tags: john-lindquist, record, screencast, egghead, code-screencast, record-video, video</p>
+
+<h2>React Testing Course</h2>
+
+<p>I&rsquo;ve watched <a href="https://egghead.io/lessons/react-testing-jsx-error-diffs">the full course</a> by Trevor D. Miller on how to test react components and the libraries to make it possible.</p>
+
+<p>Tags: trevor-miller, online-course, screencast, mooc, react, flux, egghead</p>
+
+<h2>What Is Functional Programming?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jenkster.com/2015/12/what-is-functional-programming.html">this article</a> by Kris Jenkins where the author describes functional programming from an input &amp; output point of view.</p>
+
+<p>Describes state of the system (maybe global or local) is input &amp; output of the function</p>
+
+<p>Produced state changes are called side effects. the author calls the state inputs as &ldquo;side causes&rdquo;.</p>
+
+<p>Side effects and causes are called complexity iceberg, as they are not visible under the water level (surface)</p>
+
+<p>Also what a pure function is: one with no side causes or side effects; e.g., all its inputs are declared inputs (i.e., parameters) and all outputs are declared outputs (i.e., return value).</p>
+
+<p>notes on jobbing programmer:</p>
+
+<ul>
+<li><a href="https://www.safaribooksonline.com/library/view/becoming-a-better/9781491905562/ch32.html">at Becoming a Better Programmer</a>, by Pete Goodliffe</li>
+<li><a href="https://books.google.es/books?id=P-09CgAAQBAJ&amp;pg=PA67&amp;lpg=PA67&amp;dq=%22jobbing+programmer%22&amp;source=bl&amp;ots=U6Gvi9OSda&amp;sig=J4qWDUtnk768SMjAK3yuEeWUv5Y&amp;hl=es&amp;sa=X&amp;ved=0ahUKEwjz58K615DKAhUFVRQKHfyhAZAQ6AEIOTAE#v=onepage&amp;q=%22jobbing%20programmer%22&amp;f=false">at Mastering Julia</a>, by Malcolm Sherrington</li>
+<li><a href="http://joshsymonds.com/blog/2013/11/03/what-makes-a-good-programmer-good/">at What Makes a Good Programmer Good?</a> by Josh Symonds</li>
+</ul>
+
+
+<p>Tags: kris-jenkins, functional-programming, input, output, function, complexity-iceberg, pure-function, impure-function, side-effect, side-cause</p>
+
+<h2>Which Programming Languages Are Functional?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jenkster.com/2015/12/which-programming-languages-are-functional.html">this article</a> by Kris Jenkins where the author analyses languages, determining whether they are functional or not.</p>
+
+<p>Describes how functional languages deal with side effects and side causes, and to identify them (was also explained in part one<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>).</p>
+
+<p></p>
+
+<p>Tags: kris-jenkins, functional-programming, side-effect, side-cause, comparison, haskell, clojure, python, perl, javascript, java, map, reduce, hof, scala, moc</p>
+
+<h2>Argument from the &ldquo;Real World&rdquo;</h2>
+
+<p>I&rsquo;ve read <a href="http://ronjeffries.com/xprog/articles/argument-from-the-real-world/">this article</a> by Ron Jeffries that dismantles the &ldquo;real world&rdquo;, as an excuse to use good practices: as in &ldquo;we could use that, but we live in the real world&rdquo;.</p>
+
+<blockquote><p> [&hellip;] our job is to create the “real world” and not to imagine that our present situation is the only situation there is</p></blockquote>
+
+<p>This is exactly our day to day task, to imagine a real world solution to present problems, maybe involving software in between.</p>
+
+<p>Can&rsquo;t we do this for product and team management?</p>
+
+<p>Tags: ron-jeffries, agile, scrum, tdd, bdd, incremental-iterative-development, product-management, team-management</p>
+
+<h2>Self-Contained Systems</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/rstrangh/self-contained-systems-1">these slides</a> about a self-contained system (SCS), an architecture choice to split monolithic systems in parts. It includes the use of microservices in the business logic to solve domain specific problems. Written by Roman Stranghöner</p>
+
+<blockquote><p>development, operation and maintenance [&hellip;] by a single team</p></blockquote>
+
+<p>Tags: big-bang-release, roman-stranghoner, self-contained-system, scs, microservice, monolith, monolithic-system, architecture</p>
+
+<h2>What Makes a Good Programmer Good?</h2>
+
+<p>I&rsquo;ve read <a href="http://joshsymonds.com/blog/2013/11/03/what-makes-a-good-programmer-good/">this article</a> by Josh Symonds on the characteristics that differentiate a good programmer from the jobbing programmers, the list of skills to be a good programmer.</p>
+
+<p>Explains what factors are related and not related to being a good one<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>:</p>
+
+<ul>
+<li>knowing that most programming problems have already been solved. You have to know where to look for the solution</li>
+<li>not to be afraid to dig deep into problems: detect a problem and be eager to solve it; figure out what is wrong</li>
+<li>go to the source: use the source as a fact, as analysis needs to be based on facts, not beliefs</li>
+<li>just do it: to be driven to act</li>
+<li>instinctively tackle problems head-on, grabbing the bull by the horns instead of waiting for it to be solved automagically; start solving the problem</li>
+<li>excited about grabbing problems, about facing the cutting edge</li>
+<li>taking the time to reflect and understand it before moving one to the next one</li>
+<li>communicate well: succintly and eloquently expressing your thoughts. The author thinks this might be the most important aspect of all.</li>
+<li>to be truly caring about what you do: not just a job, but a hobby, an interest, even a fascination; great programmers are always programming</li>
+<li>thinking of programming of a way to shape the world, not just a money-making activity</li>
+</ul>
+
+
+<p>Tags: jobbing-programmer, good-programmer, career, career-management, skill, josh-symonds, quote</p>
+
+<h2>The Best Programming Language (or How to Stop Worrying and Love the Code)</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.fourthbit.com/2014/03/01/the-best-programming-language-or-how-to-stop-worrying-and-love-the-code">this article</a> by Álvaro Castro-Castilla analysing different programming languages and what to choose each of them.</p>
+
+<p>Tags: alvaro-castro-castilla, programming-language, language, analysis, comparison</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><code>What Is Functional Programming?</code><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>many of these fragments are quotes or paraphrased quotes<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
