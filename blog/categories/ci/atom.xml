@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ci | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/ci/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-01-20T09:31:53+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Automate the Blog Publishing]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/"/>
+    <updated>2015-12-02T18:10:40+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve automated the generation of the blog using <a href="https://travis-ci.org/">Travis CI</a>. Using this new way, each commit generates a new version of the pages.</p>
+
+<p>These resources have been very useful:</p>
+
+<ul>
+<li><a href="http://darvin.github.io/2013/01/13/Prose_Octopress_TravisIO">Prose.io + Octopress + Travis-CI + GitHub Pages = ♥</a>. First post (in this set) that explains how this automation is possible</li>
+<li><a href="https://harimenon.com/blog/2013/01/27/auto-deploying-to-my-octopress-blog/">Auto-deploying to My Octopress Blog With Travis-CI</a>. Explains how to generate your key, encript it with travis</li>
+<li><a href="http://blog.yasuoza.com/2014/01/13/octopress-plus-github-pages-plus-travis/">Octopress + GitHub Pages + Travis</a>: The most useful page, explains step by step what to do for mac and linux.</li>
+<li><a href="https://disqus.com/home/discussion/codez/octopressprosegithubtravis_ci_coders_blog_human_not_octopus/">Octopress+Prose+Github+Travis CI = coders' blog - Human, not octopus</a>.Altough the page is not available anymore, this discussion explains why it is safe to store your private key in the file <code>.travis.yml</code>.</li>
+</ul>
+
+
+<p><a href="https://github.com/floydpink?tab=repositories">An example</a> of the resulting repository, by <a href="https://github.com/floydpink">Hari Menon</a>.</p>
+
+<h2>My own modifications</h2>
+
+<p>The full diff for making this change is <a href="https://github.com/alvarogarcia7/blog_source/compare/8414267a1e8e1f0ef588602121f32da3f6eb9f9e...9f60c76d6d9faca8cff8bce2f0a00bf8f2eafb30">here</a>. Disregard the changes in:</p>
+
+<ul>
+<li><code>partial/1444939871_diff.txt</code></li>
+<li><code>partial/1444939871_msg.txt</code></li>
+<li><code>source/_posts/2015-12-02-self-study-in-december-2015.markdown</code></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

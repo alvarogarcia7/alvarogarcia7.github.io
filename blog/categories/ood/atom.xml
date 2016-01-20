@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ood | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/ood/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-01-20T09:31:53+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Practical Object-Oriented Design in Ruby: Chapter 4]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/"/>
+    <updated>2015-07-26T20:40:29+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4</id>
+    <content type="html"><![CDATA[<p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
+
+<p>These are the concepts and links brought up during the discussion:</p>
+
+<ul>
+<li>The craftsmanship analogy, as exposed in <a href="https://twitter.com/sarahmei/status/625089415812022272">these tweets</a></li>
+<li>Difference between function and method</li>
+<li>What vs How (also present in the GOOS)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quote: Organizing Code to Allow for Easy Changes]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/"/>
+    <updated>2015-07-08T00:41:54+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes</id>
+    <content type="html"><![CDATA[<h2>Organizing Code to Allow for Easy Changes</h2>
+
+<blockquote><p>Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code.
+If you define easy to change as</p>
+
+<ul>
+<li>Changes have no unexpected side effects</li>
+<li>Small changes in requirements require correspondingly small changes in code</li>
+<li>Existing code is easy to reuse</li>
+<li>The easiest way to make a change is to add code that in itself is easy to change</li>
+</ul>
+
+
+<p>Then the code you write should have the following qualities. Code should be:</p>
+
+<ul>
+<li><strong>Transparent</strong> The consequences of change should be obvious in the code that is changing and in distant code that relies upon it</li>
+<li><strong>Reasonable</strong> The cost of any change should be proportional to the benefits the change achieves</li>
+<li><strong>Usable</strong> Existing code should be usable in new and unexpected contexts</li>
+<li><strong>Exemplary</strong> The code itself should encourage those who change it to perpetuate
+these qualities</li>
+</ul>
+
+
+<p>Code that is Transparent, Reasonable, Usable, and Exemplary (TRUE) not only meets today’s needs but can also be changed to meet the needs of the future. The first step in creating code that is TRUE is to ensure that each class has a single, well-defined responsibility.</p>
+
+<p>Practical Object Oriented Design in Ruby, by Sandi Metz</p></blockquote>
+
+<p>This can be found the in POODR > Chapter 2. Designing Classes with a Single Responsibility > Organizing Code to Allow for Easy Changes</p>
+
+<p>Note: Bold is mine</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Practical Object-Oriented Design in Ruby: Chapter 1]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/06/28/practical-object-oriented-design-in-ruby-chapter-1/"/>
+    <updated>2015-06-28T22:07:29+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/06/28/practical-object-oriented-design-in-ruby-chapter-1</id>
+    <content type="html"><![CDATA[<p>We&rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
+
+<p>These are the concepts and links brought up during the discussion:</p>
+
+<blockquote><p>Walking on water and developing software from a specification are easy if both are frozen.</p>
+
+<p>Edward V Berard, source is <a href="https://en.wikiquote.org/wiki/Edward_V._Berard">Wikiquote</a></p></blockquote>
+
+<p>Two cited papers on metrics for design:</p>
+
+<ul>
+<li><a href="http://www.pitt.edu/~ckemerer/CK%20research%20papers/MetricForOOD_ChidamberKemerer94.pdf">A metrics suite for object oriented design</a> by Chidamber and Kemerer</li>
+<li><a href="http://www.cs.umd.edu/~basili/publications/technical/T102.pdf">A validation of object-oriented design metrics as quality indicators</a> by Basili, Briand and Melo</li>
+</ul>
+
+
+<p> The video for the &lsquo;churn&rsquo; as a measure:</p>
+
+<ul>
+<li><a href="http://www.ustream.tv/recorded/61483799">The Hidden Dimension Of Refactoring</a> by Michael Feathers</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Fragment | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/fragment/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-01-20T09:31:53+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What Defines a Dependency]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/"/>
+    <updated>2015-07-13T05:48:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency</id>
+    <content type="html"><![CDATA[<p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java">fragment</a>):</p>
+
+<pre><code class="java">public void register (final String userName)  {
+    try {
+        registeredUsers.add(new User(userName));
+    } catch (AlreadyRegisteredUserException e) {
+        resultListener.alreadyRegistered(userName);
+    }
+}
+</code></pre>
+
+<p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
+
+<p>He suggested that:</p>
+
+<ul>
+<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
+<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
+</ul>
+
+
+<p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
+
+<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java">fragment</a>)</p>
+
+<pre><code class="java">public void add (User user, final RegistryResultListener resultListener) {
+    if(contains(user)) {
+        resultListener.alreadyRegistered(user.name());
+        return;
+    }
+
+    users.add(user);
+    resultListener.successfullyRegistered(user.name());
+}
+</code></pre>
+
+<p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
+
+<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
+]]></content>
+  </entry>
+  
+</feed>
