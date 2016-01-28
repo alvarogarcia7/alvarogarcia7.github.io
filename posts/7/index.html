@@ -1,0 +1,1024 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="I&rsquo;ve watched this talk by Erik Meijer My notes Agile!: The Good, the Hype and the Ugly
+The hacker way code always wins vs manager always wins &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/posts/7">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/10/talk-software-is-eating-the-world/">Talk: Software Is Eating the World</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-10T19:00:52+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve watched <a href="http://reaktor.com/blog/erik-meijer-software-eating-world/">this talk</a> by Erik Meijer</p>
+
+<h2>My notes</h2>
+
+<ul>
+<li><p><a href="http://www.amazon.com/Agile-The-Good-Hype-Ugly/dp/3319051547">Agile!: The Good, the Hype and the Ugly</a></p></li>
+<li><p>The hacker way</p>
+
+<ul>
+<li>code always wins vs manager always wins</li>
+<li>source: <a href="http://www.wired.com/2012/02/zuck-letter/">http://www.wired.com/2012/02/zuck-letter/</a></li>
+</ul>
+</li>
+<li>we&rsquo;re doing maths => we&rsquo;re building a proof</li>
+<li>reinforcement learning
+
+<ul>
+<li>agent is the company</li>
+</ul>
+</li>
+<li>related to &ldquo;build, measure, learn&rdquo; by Eric Ries (<a href="http://theleanstartup.com/book">the lean startup</a>)</li>
+</ul>
+
+
+<h3>Feedback systems</h3>
+
+<ul>
+<li>Open (no) feedback system, such as timed sprinklers</li>
+<li>Closed feedback system</li>
+<li>Output only system</li>
+</ul>
+
+
+<h3>Why everything is software</h3>
+
+<ul>
+<li>Examples of everything is software</li>
+<li>Software is eating the world</li>
+<li>Even hardware is modeled as software</li>
+</ul>
+
+
+<h3>Modeling as a Finite State Machine (FSM)</h3>
+
+<ul>
+<li>There&rsquo;s memory in the feedback loop. See the <a href="http://en.wikipedia.org/wiki/Finite-state_machine">finite state machine</a></li>
+<li>A lesson from &ldquo;World War Z&rdquo;: &ldquo;When nine people agree on something, it&rsquo;s the tenth man&rsquo;s responsibility to disagree no matter how improbable the idea&rdquo;. &ldquo;You don&rsquo;t believe your own [ideas]&rdquo;. There&rsquo;s an article <a href="http://lifehacker.com/plan-more-effectively-with-the-tenth-man-rule-1689738373">here</a> and <a href="http://evidencemag.com/world-war-z/">here</a>, but they don&rsquo;t cite any official source related to this. The second one cites World War Z again, so it might be <a href="http://en.wikipedia.org/wiki/Confirmation_bias">confirmation bias</a>.</li>
+<li>Test in production (e.g., <a href="https://github.com/Netflix/SimianArmy/wiki/Chaos-Monkey">chaos monkey</a> from Netflix) rather than doing TDD</li>
+<li>No evidence of TDD as effective, he sees it as waste</li>
+<li>Move fast and break things</li>
+</ul>
+
+
+<h3>About layered organizations</h3>
+
+<ul>
+<li>Layered architecture. Examples: OSI, Catholic Church, Army</li>
+<li>Analogy: Software development as a professional team structure (also cited from Netflix)</li>
+<li>Book: Creativity from Constraints: the psychology of breakthrough. Focus, constraint, creativity</li>
+<li>Presentation: <a href="http://www.infoq.com/presentations/Developing-Expertise-Dave-Thomas">Developing Expertise: Herding Racehorses, Racing Sheep</a></li>
+<li>Analogy: Developers are like junkies, we want to be high all the time</li>
+<li>Answering a new proposal: instead of &ldquo;no, but&rdquo; (black hat), &ldquo;yes and&rdquo; (blue hat). Reference to <a href="http://www.amazon.com/Bossypants-Tina-Fey-ebook/dp/B0047Y0FGY">Bossypants</a> by Tina Fey</li>
+<li>Your knives, your tools. &ldquo;How can we make millions if we don&rsquo;t value our tools?&rdquo;</li>
+</ul>
+
+
+<h3>Conclusion</h3>
+
+<p>About software:</p>
+
+<blockquote><p>software will take over the world, and developers are the ones who make it happen.</p></blockquote>
+
+<p>About methodologies:</p>
+
+<blockquote><p>&ldquo;Programming, motherfucker. Do you speak it?&rdquo; (<a href="http://programming-motherfucker.com/">Source</a>)</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/09/self-study-in-may-2015/">Self-study in May 2015</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-09T14:41:10+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:41 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Update: I&rsquo;ve grouped all small posts related to the self-study from May 2015
+into a single post</p>
+
+<h2>Programmer passion considered harmful</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/on-coding/programmer-passion-considered-harmful-5c5d4e3a9b28">this article</a> on why programmer passion could be negative. The title is similar to a paper by Dijkstra.</p>
+
+<h2>Software Craftsmanship: Are Bootcamps Enough?</h2>
+
+<p>I&rsquo;ve read <a href="https://www.coursereport.com/blog/software-craftsmanship-are-bootcamps-enough">this article</a> on software craftsmanship, development bootcamps and passion by <a href="https://twitter.com/kauerrolemodel">Ken Auer</a></p>
+
+<h2>Improve your development environments with virtualization</h2>
+
+<p>I have seen this video: <a href="https://www.youtube.com/watch?v=Dg_vPMnC7_k&amp;feature=youtu.be">Improve your development environments with virtualization</a> by Luke Sneeringer.</p>
+
+<p>My notes:</p>
+
+<ul>
+<li>development should be exactly like production.</li>
+<li>except where it is too painful. there it should be different</li>
+</ul>
+
+
+<h2>Buffer&rsquo;s take on values</h2>
+
+<p>I have found these <a href="http://www.slideshare.net/Bufferapp/buffer-culture-04">values</a>, written by Buffer, very interesting.</p>
+
+<h2>Public static void</h2>
+
+<p>I&rsquo;ve watched this video: <a href="https://www.youtube.com/watch?v=5kj5ApnhPAE">&ldquo;Public, static void&rdquo;</a> by Rob Pike. The slides can be found <a href="http://www.oscon.com/oscon2010/public/schedule/detail/13423">here</a></p>
+
+<h3>My notes</h3>
+
+<ul>
+<li>too much bureaucracy</li>
+<li>fighting the compiler</li>
+<li>dynamic vs static typing</li>
+<li>language too verbose</li>
+<li><p>do not mix the two of them</p></li>
+<li><p>a language niche:</p>
+
+<ul>
+<li>comprehensible</li>
+<li>statically typed</li>
+<li>light on the page</li>
+<li>fast to work in</li>
+<li>scales well</li>
+<li>doesn&rsquo;t require tools but supports them well</li>
+<li>good at networking and multiprocessing</li>
+</ul>
+
+
+<p>(minute 10:09)​</p></li>
+<li><p><a href="http://golang.org">Go</a> was born to fill this niche</p></li>
+</ul>
+
+
+<h2>Nothing is something</h2>
+
+<p>This video has been extracted to a <a href="../../../../2015/05/04/video-nothing-is-something/">post</a> of its own.</p>
+
+<h2>Software is eating the world</h2>
+
+<p>This video has been extracted to a <a href="../../../../2015/05/10/talk-software-is-eating-the-world/">post</a> of its own.</p>
+
+<h2>The Cost of Test Driven Development</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.typemock.com/2009/03/the-cost-of-test-driven-development.html">this article</a>, on the cost of doing TDD, which refers to <a href="http://www.msr-waypoint.net/en-us/groups/ese/nagappan_tdd.pdf">this paper</a>: Realizing quality improvement through test driven development: results and experiences of four industrial teams (below)</p>
+
+<h2>Realizing quality improvement through test driven development: results and experiences of four industrial teams</h2>
+
+<p>This paper has been extracted to a <a href="../../../../2015/05/12/paper-tdd-in-industrial-teams/">post</a> of its own.</p>
+
+<h2>Learn You Some Lisp for Great Good</h2>
+
+<p>I&rsquo;ve watched the video <a href="https://www.youtube.com/watch?v=3T00X_sNg4Q">Learn You Some Lisp for Great Good</a>, by Howard Abrams.</p>
+
+<p>I guess this is a reference to the popular <a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good!</a>.</p>
+
+<p>He suggests many interesting resources for learning Lisp dialects. The live coding is in Clojure:</p>
+
+<ul>
+<li><a href="http://landoflisp.com/">The land of Lisp</a></li>
+<li><a href="https://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs</a>. See also <a href="https://twitter.com/SICPQuotes">SICPQuotes</a></li>
+<li><a href="http://mitpress.mit.edu/books/little-schemer">The Little Schemer</a></li>
+<li><a href="https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf">An Introduction to Programming in Emacs Lisp</a></li>
+<li><a href="https://www.4clojure.com/">4clojure Questions</a></li>
+<li><a href="http://clojurekoans.com/">Clojure Koans</a></li>
+</ul>
+
+
+<p>On another topic, in the <a href="http://www.meetup.com/ClojureBCN/events/222418104/">Bank accounts exercise from Exercism</a> meetup, we discussed the book <a href="https://pragprog.com/book/shcloj2/programming-clojure">Programming Clojure (2nd edition)</a> by Stuart Halloway</p>
+
+<h2>Professor Frisby&rsquo;s Mostly Adequate Guide to Functional Programming</h2>
+
+<p>I&rsquo;ve read <a href="https://github.com/DrBoolean/mostly-adequate-guide">this guide</a> to functional programming. It is still work in progress (WIP) but still interesting. Written in javascript, so you can REPL in the browser.</p>
+
+<h2>Learning Code Good</h2>
+
+<p>I&rsquo;ve watched this video, by Saron Yitbarek: <a href="https://www.youtube.com/watch?v=-nsnAYRqYLA">Learn Code Good</a>.</p>
+
+<h2>Why You Don&rsquo;t Get Mock Objects</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=R9FOchgTtLM">Why You Don&rsquo;t Get Mock Objects</a>, by Gregory Moeck.</p>
+
+<p>In it, they point to the <a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> book (<a href="/blog/categories/goos">category here</a>), the paper <a href="www.jmock.org/oopsla2004.pdf">Mock Roles, not Objects</a> (also present in the GOOS book).</p>
+
+<h2>Technical Debt: A Repayment Plan</h2>
+
+<p>I&rsquo;ve read <a href="http://www.infoq.com/articles/tech-debt-repayment">this article</a> by <a href="https://twitter.com/@jeremyjarrell">Jeremy Jarrell</a> on technical debt how to repay it: schedule, taxes, default, etc</p>
+
+<p>This has made me think of the <a href="http://scbcn.ideascale.com/a/dtd/Deuda-t%C3%A9cnica-origen-y-consecuencias/69782-25568">&ldquo;Deuda técnica, origen y consecuencias&rdquo; talk</a> (Technical debt: origin and consequences) (Spanish), that was delivered by <a href="https://twitter.com/@jgomezz">Javier Gómez</a> at the Software Craftsmanship 2014.</p>
+
+<h2>Revisiting XP: be a thoughtful programmer by exercising more collective ownership</h2>
+
+<p>I&rsquo;ve read <a href="http://www.infoq.com/articles/revisit-p-collective">this article</a> by <a href="https://twitter.com/tiagooo_romero">Tiago Garcia</a> on the collective code ownership, as stated by Xtreme Programming (XP), with some example and guidelines.</p>
+
+<h2>Where&rsquo;s the Real Bottleneck in Scientific Computing?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.americanscientist.org/issues/pub/wheres-the-real-bottleneck-in-scientific-computing/99999">this article</a> by Greg Wilson on the tools and procedures investigators use to produce software.</p>
+
+<h2>Testing inside the Sprint</h2>
+
+<p>I&rsquo;ve read <a href="http://ronjeffries.com/articles/2015-03-01-testing-in-sprints/">this article</a> by Ron Jeffries.</p>
+
+<p>Discusses the need for testing and why this hasn&rsquo;t been communicated enough, as there still are people who have not understood it.</p>
+
+<p>Also about why people equal something failing when using scrum with scrum failing.</p>
+
+<h2>DTO vs Domain Models</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/05/dto-vs-domain-models/">this article</a> by Carlos Blé</p>
+
+<h2>Homoiconicity isn’t the point</h2>
+
+<p>I&rsquo;ve read <a href="http://calculist.org/blog/2012/04/17/homoiconicity-isnt-the-point/">this article</a> by David Herman about homoiconicity, comparing Lisp dialects (have it) to others that don&rsquo;t. The main point is at the end, where it says:</p>
+
+<blockquote><p>[&hellip;] homoiconicity isn’t the point, read is</p></blockquote>
+
+<h2>So You Don&rsquo;t Want to be a Programmer After All</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/so-you-dont-want-to-be-a-programmer-after-all/">this article</a> by Jeff Atwood. Cites the golden handcuffs (also known as golden shackles), reasons to be and not to be a programmer, and how to be an average and outstanding programmer</p>
+
+<h2>The Nature of Lisp</h2>
+
+<p>I&rsquo;ve read <a href="http://www.defmacro.org/ramblings/lisp.html">this article / introduction</a> to Lisp by Slava Akhmechet</p>
+
+<h2>[David Pollak&rsquo;s] My Thoughts on Go</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.goodstuff.im/golang">these comments</a> on Go Lang from David Pollak</p>
+
+<h2>The Well-Rounded Technologist</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/04/02/the-well-rounded-technologist.html">this article</a> by Michael Bernstein</p>
+
+<h2>Should I read papers?</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/10/21/should-i-read-papers.html">this article</a> by Michael Bernstein</p>
+
+<h2>Lisp-1 vs Lisp-2</h2>
+
+<p>I&rsquo;ve read <a href="https://hornbeck.wordpress.com/2009/07/05/lisp-1-vs-lisp-2/">this article</a> by <a href="https://twitter.com/hornbeck">@Hornbeck</a> about the lisp 1 and lisp 2.</p>
+
+<h2>Science Corps</h2>
+
+<p>I&rsquo;ve watched this <a href="https://www.youtube.com/watch?v=dkQkafxFoIQ">TEDx talk</a> by Aza Raskin, featuring Data Banks and Science corps</p>
+
+<h2>Healthy Codebase and Preparatory Refactoring</h2>
+
+<p> I&rsquo;ve read <a href="http://brewhouse.io/blog/2014/11/10/healthy-codebase-and-preparatory-refactoring.html">this article</a> by Philippe Creux about preparatory refactoring</p>
+
+<h2>You Are Learning Haskell Right Now (Or Anything You Want Really)</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/12/11/you-are-learning-haskell-right-now.html">this article</a> by Michael Bernstein</p>
+
+<h2>Lisp is Abstract Syntax</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/04/16/lisp-is-abstract-syntax.html">this article</a> by Michael Bernstein</p>
+
+<h2>Two Things Types Have Taught Me</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2014/10/30/two-things-types-have-taught-me.html">this article</a> by Michael Bernstein</p>
+
+<h2>Don&rsquo;t Bet Against Yourself</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/04/15/dont-bet-against-yourself.html">this article</a> by Michael Bernstein</p>
+
+<h2>Learning Math: A Blank Is A Blank With A Blank</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/04/15/dont-bet-against-yourself.html">this article</a> by Michael Bernstein</p>
+
+<h2>The False Economy Of Metaprogramming</h2>
+
+<p>I&rsquo;ve read <a href="http://michaelrbernste.in/2015/03/06/the-false-economy-of-generated-methods.html">this article</a> by Michael Bernstein</p>
+
+<h2>Management and Engineering, overlapping</h2>
+
+<p>I&rsquo;ve read <a href="http://www.quora.com/Does-Adam-DAngelo-feel-comfortable-with-the-transition-from-an-engineer-to-a-management-position?srid=3OC&amp;share=1">this Quora answer</a> by Adam D'Angelo. The original title is: Does Adam D'Angelo feel comfortable with the transition from an engineer to a management position?</p>
+
+<h2>Evolution of The Twitter Stack</h2>
+
+<p>I&rsquo;ve read <a href="https://www.slideshare.net/slideshow/embed_code/key/ly83zQkBjCxnIX">these slides</a> about changing the technology stack in Twitter: from Rails to JVM-based</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/06/what-versus-how/">What Versus How</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-06T05:15:08+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:15 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After reading the GOOS<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, the more and more I get this feeling of what vs how:</p>
+
+<ul>
+<li>Information hiding</li>
+<li>The total simpler than the sum of the parts</li>
+<li>Extracting a concept so you can think about this. Makes you find better names:
+
+<ul>
+<li>test name</li>
+<li>variable name</li>
+<li>method name</li>
+<li>interface / protocol name</li>
+</ul>
+</li>
+</ul>
+
+
+<p>I also got this feeling when reading Clean Code. But with this other book the smell is much harder, stronger. This same concept is repeated all over the book. In our discussions about the book, this concept appears again and again. I&rsquo;m thinking of adding a sub-title to the book:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Growing Object-Oriented Software, Guided by Tests
+</span><span class='line'>What and not How</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Applying this in your team</h2>
+
+<p>Now, there might be a problem if your team has a split opinion on &lsquo;what vs how&rsquo; (i.e., part of the team prefers what and another prefers how)</p>
+
+<p>Reasons I&rsquo;ve heard to defend how:</p>
+
+<ul>
+<li>The ones cited above</li>
+<li>Concision / shortness</li>
+<li>Code reusability</li>
+<li>Easier to test, extracting to collaborators<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
+</ul>
+
+
+<p>Reasons I&rsquo;ve heard to defend what:</p>
+
+<ul>
+<li>Knowing exactly what the code is doing: i.e., do not have to think what the name means and to what this corresponds</li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Altough I believe you shouldn&rsquo;t do anything <em>just</em> for the purpose of tests. If it also improves your design, OK, but only for the tests, no.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/">Internal Training: Testing Is Hard - Just Do It</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-05T21:00:17+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/">Testing is hard - just do it</a></p>
+
+<h2>Our thoughts</h2>
+
+<blockquote><p>When a bug is found, prove it exists with a test</p></blockquote>
+
+<p>This immediately reduces defect rate: the same regression cannot be introduced again</p>
+
+<blockquote><p> fix a bug a second time</p></blockquote>
+
+<p>If fixing a bug (having defects in your code) was &lsquo;waste&rsquo;, as defined by lean methodologies, it also is wast fixing it for the following times</p>
+
+<blockquote><p>testing requires discipline</p></blockquote>
+
+<p>Agree. See quote by Larry Wall (this same article)</p>
+
+<blockquote><p>[Three requirements for a good test suite]:</p>
+
+<ol>
+<li>The tests need to be easier to write</li>
+<li>The test suite must run, and pass, before any code is allowed out the door</li>
+<li>Support from the project&rsquo;s leadership</li>
+</ol>
+</blockquote>
+
+<p>Agree.</p>
+
+<blockquote><p>Programming is like drawing water from a well</p></blockquote>
+
+<p>Good analogy</p>
+
+<blockquote><p>I&rsquo;m going to assume you are smarter than me [&hellip;]</p></blockquote>
+
+<p>This is related to &lsquo;doing clever things&rsquo;: when I write &lsquo;clever code&rsquo;, that has neither comments, nor it is massaged to be Clean Code, it will cost me many times more to modify / understand in the future vs massage it a little bit.</p>
+
+<p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
+
+<p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vs</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="o">(</span><span class="n">elements</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">validElements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Open questions / other ideas</h2>
+
+<ul>
+<li>There are tests that are more important than others. Is there a tool to assign them weights and inform about which preponderation of the codebase is broken? The same (i.e., more importance) can happen for production code.</li>
+<li>Is SCRUM apt for junior developers? In the sense of the increased autonomy, more decisions, more required technical skills / values, etc</li>
+<li>We discussed what differentiates a project with a shorter deadline from one with a longer deadline. The consensus was: you should do tests for any kind of project, the shorter deadline project won&rsquo;t allow as much time for refactoring</li>
+<li>Tests iff (i.e., if and only if) working code</li>
+<li>Tests do not guarantee lack of defects</li>
+<li>Bijectiveness between tests and features (production code)</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/04/video-nothing-is-something/">Video: Nothing Is Something</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-04T05:43:14+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:43 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have seen this video: <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A">Nothing is something</a> by <a href="https://twitter.com/@sandimetz">Sandi Metz</a>, as I saw it recommended <a href="http://garajeando.blogspot.com.es/2015/04/interesting-talk-nothing-is-something.html">here</a></p>
+
+<p>In the video, she talks programming in this fashion: (it is a stack, not an unordered list)</p>
+
+<ul>
+<li>Abstraction seeking</li>
+<li>Message centric</li>
+<li>Condition Averse</li>
+<li>Smalltalk Infected</li>
+</ul>
+
+
+<blockquote><p>Not here to change the language but change you</p></blockquote>
+
+<p>This is a pattern I&rsquo;ve also heard from <a href="https://twitter.com/@old_sound">Alvaro Videla</a>, where he said that other, more powerful languages can change your mind and help you bring some of those concepts to your own language. He was talking about Haskell, she, about Smalltalk.</p>
+
+<p>She shows how to smell the <code>null object pattern</code> (that she independently discovered herself too - can be improved studying the classics<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>), also called <code>active nothing</code>. Decorates the <code>Animal</code> with a wrapper, to call it <code>GuaranteedAnimal</code></p>
+
+<p>Later on, shows how to code an example on a &lsquo;tail&rsquo;, extending behaviour with inheritance and how to get rid of it: prefer composition versus inheritance. The importance of roles.</p>
+
+<blockquote><p>Inheritance is for specialization, not for sharing code</p></blockquote>
+
+<p>Steps to convert inheritance into composition:</p>
+
+<ol>
+<li>Isolate the difference</li>
+<li>Name the concept</li>
+<li>Define the role</li>
+<li>Inject the players</li>
+</ol>
+
+
+<p>This is a trick I discovered here: when you don&rsquo;t know what name put here, create a spreadsheet and ask yourself what name the row should have. There is an example <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A#t=1959">at this minute</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>a reference to a pattern by the same name at <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/30/internal-training-introduction-to-angularjs/">Internal Training: Introduction to AngularJs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-30T18:22:16+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:22 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, today I&rsquo;ve done an internal training on <a href="https://angularjs.org/">angular js</a>: we&rsquo;ve prepared some <a href="https://github.com/alvarogarcia7/demo-frontend-angularjs/tree/master/slides">slides</a> and a live demo.</p>
+
+<p>The repository with all the information can be found <a href="https://github.com/alvarogarcia7/demo-frontend-angularjs">here</a>.</p>
+
+<p>Apparently, the training has been a success, given that most of the talent in the team is backend focused (as opposed to full-stack) and changing from java to javascript is not straight-forward.</p>
+
+<p>Note: this post has been created a posteriori, dated with the correct training timestamp.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/whose-fault-is-this/">Whose Fault Is This?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T12:10:31+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the prologue of the book, while thanking everyone that has made the book possible:</p>
+
+<blockquote><p>[&hellip;], none of the people mentioned here would be responsible for any inaccuracy that might exist in the book, as this responsibility is exclusively mine</p>
+
+<p>Mihaly Csikszentmihalyi (translated)<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, prologue of &ldquo;<a href="http://www.amazon.com/Flow-The-Psychology-Optimal-Experience/dp/0061339202">Flow</a>&rdquo;</p></blockquote>
+
+<p>(More posts on this same book, <a href="/blog/categories/flow">here</a>)</p>
+
+<p>This connects with what <a href="http://twitter.com/@tastapod">Dan North</a> said in the Craft Conf about this idea of the &ldquo;I&rsquo;m the only one in the company producing good quality work, the rest are not doing the same&rdquo;. Of course, he was quoting greedy, selfish people who think this instead of attributing the success to the whole team.</p>
+
+<p>Regarding the whole team, if I recall correctly, it was <a href="http://twitter.com/@svenpet">Sven Peters</a> who explained that &ldquo;[&hellip;] either the team wins or looses. There are no individual wins [&hellip;]&rdquo; <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>In this sense, Csikszentmihalyi assumes all responsibility when quoting and reflecting on other&rsquo;s works. It was his idea to develop on top of others, so any imperfection is his.</p>
+
+<p>This is similar as when approving a pull request: you make sure that the code works and you stand by it. It is no longer the original owner&rsquo;s cause, but yours too, as you have signed this request. On the pull request, though, the code ownership is already distributed among the whole team, but approvals ensures the presence of the <a href="/blog/categories/guardian-of-the-source">guardian of the source</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>I had to translate the quote, because I did not borrow the book in English<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>When the talks are available, we will be able the ensure the correct attribution of this idea.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/how-i-read-apprenticeship-patterns/">How I Read Apprenticeship Patterns</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T11:49:01+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:49 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At the Craft Conf 2015 I saw someone with the book <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382">Apprenticeship Patterns</a> by <a href="http://twitter.com/@davehoover">Dave Hoover</a> and <a href="http://twitter.com/@ade_oshineye">Adewale Oshineye</a> and asked them about the book. After praising the contents, they asked me how to approach the book.</p>
+
+<p>I recalled reading it non-sequentially, and explained it to them:</p>
+
+<ul>
+<li>Read the introduction, preface, etc first</li>
+<li>When you get to the patterns, pick one at random</li>
+<li><code>10</code>: Read it and navigate through the <code>see also</code>.</li>
+<li>If there are unread chapters from the <code>see also</code>, <code>goto 10</code></li>
+<li>Find the remaining unread chapters and read them, try to apply the same algorithm</li>
+<li>Read the appendices and finishing words</li>
+</ul>
+
+
+<p>Reading a connected chapter after the first one made me connect the dots and understand it much better than reading them sequentially.</p>
+
+<p>PS: This post was extracted from this one: <a href="../../../../2015/02/02/your-first-language/">here</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/demand-for-tdd-and-refactor/">Demand for TDD and Refactor</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T11:28:20+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:28 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When I went to the Jason Gorman&rsquo;s TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), he said something interesting regarding refactor and TDD:</p>
+
+<blockquote><p>In job offers / advertisements, TDD is much more in demand than refactor. But the latter is included in the former as an integral part.</p>
+
+<p>Jason Gorman</p></blockquote>
+
+<p>I agree with the second thought: you cannot properly do TDD without refactoring, as it is an integral part; also the third phase.</p>
+
+<p>For me, sometimes refactoring is the difference between code and &ldquo;Clean Code&rdquo; (as defined in the book by the same title). If I cannot find the (algorithmic) pattern for the software I&rsquo;m writing, I try to introduce scaffolds to keep investigating until I can find a viable, general solution (if the problem requires it.)</p>
+
+<p>Even after doing the refactor <code>replace algorithm</code>, the code might not have the responsibilities in the right place, the methods might be long, value objects not extracted yet, etc. This is where further refactor is needed to introduce all those qualities in the piece of software.</p>
+
+<p>I believe that we programmers have done a bad job of communicating with the rest of the organization what refactoring is about. It has nothing to do with beauty, style or design (in the visual sense) but is related to maintainability, coupling, defects and quality. Money, in the long run, as its objective is to make it cheaper to change in the future, a better investment and ROI. This is the common language that the rest of the company understands.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/">Talks I Have Attended at the Craft Conf 2015</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T10:25:09+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:25 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>These are the talks I&rsquo;ve attended at the Craft Conf 2015:</p>
+
+<h2>Thursday 23th</h2>
+
+<ul>
+<li>Opening keynote by <a href="http://twitter.com/@tastapod">Dan North</a> and <a href="http://twitter.com/@jessitron">Jessica Kerr</a></li>
+<li>Writing testable code - A functional programming point of view, by <a href="http://twitter.com/@old_sound">Alvaro Videla</a></li>
+<li>Coding Culture, by <a href="http://twitter.com/@svenpet">Sven Peters</a></li>
+<li>OnConnectionLost: the life of an offline web application, by <a href="http://twitter.com/@sgrewenig">Stefanie Grewenig</a> and <a href="http://twitter.com/@jthoenes">Johannes Thönes</a></li>
+<li>Concurrency: It&rsquo;s harder (and easier) than you think, by <a href="http://twitter.com/@paulrabutcher">Paul Butcher</a></li>
+<li>Testing and Integration (the remix), by <a href="http://twitter.com/@randommood">Inés Sombra</a></li>
+<li>Beyond Features: Rethinking agile planning and tracking, by <a href="http://twitter.com/@tastapod">Dan North</a></li>
+<li>Closing keynote by <a href="http://twitter.com/@alfrehn">Alf Rehn</a></li>
+</ul>
+
+
+<h2>Friday 24th</h2>
+
+<ul>
+<li>Opening keynote: The New New Software development game: Containers, Microservices and Contract tests, by <a href="http://twitter.com/@mpoppendieck">Mary Poppendieck</a></li>
+<li>Apprenticeship patterns, revisited, by <a href="http://twitter.com/@davehoover">Dave Hoover</a></li>
+<li>Interaction Driven Design, by <a href="http://twitter.com/@sandromancuso">Sandro Mancuso</a></li>
+<li>The hidden dimension of refactoring, by <a href="http://twitter.com/@mfeathers">Michael Feathers</a></li>
+<li>Why is an API like a puppy, by <a href="http://twitter.com/@ade_oshineye">Adewale Oshineye</a></li>
+<li>Microservice antipatterns, by <a href="http://twitter.com/@tsaleh">Tammer Saleh</a></li>
+</ul>
+
+
+<p>I couldn&rsquo;t attend the last talk nor the keynote as I had to get to the airport</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/8">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/6">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/01/self-study-in-january-2016/">Self-Study in January 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/31/books-read-in-2015q4/">Books Read in 2015Q4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/15/validating-data-clojure/">Validating CSV Data in Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the Macro And</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: Automate the Blog Publishing</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

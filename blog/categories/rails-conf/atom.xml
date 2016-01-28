@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails-conf | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/rails-conf/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-01-28T11:58:45+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Talk: Simplicity Matters]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/"/>
+    <updated>2015-04-18T12:44:06+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus' <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
+
+<p>here are my notes:</p>
+
+<ul>
+<li>the software is the elephant</li>
+<li>do more, do it differently, do it better</li>
+<li>complexity of the elephant is going to dominate what you can do</li>
+<li>your ability to reason about your program is critical</li>
+<li>design is about pulling things apart</li>
+<li>become familiar by learning, trying</li>
+<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
+</ul>
+
+
+<p>Complexity vs simplicity:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complexity     </th>
+<th> Simplicity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state, objects </td>
+<td> values</td>
+</tr>
+<tr>
+<td>methods </td>
+<td> functions, namespaces</td>
+</tr>
+<tr>
+<td>variables </td>
+<td> managed refs</td>
+</tr>
+<tr>
+<td>inheritance, switch, matching  </td>
+<td> polymorphism à la carte</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>imperative loops, fold </td>
+<td> set functions</td>
+</tr>
+<tr>
+<td>actors </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>ORM </td>
+<td> declarative data manipulation</td>
+</tr>
+<tr>
+<td>conditionals </td>
+<td> rules</td>
+</tr>
+<tr>
+<td>inconsistency </td>
+<td> consistency </td>
+</tr>
+</tbody>
+</table>
+
+
+<ul>
+<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
+<li>simplicity is not about you. simplicity is a lot of hard work
+
+<ul>
+<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
+</ul>
+</li>
+<li>simplicity is not an objective</li>
+</ul>
+
+
+<p>Order is all over the place:</p>
+
+<table>
+<thead>
+<tr>
+<th>Complex  </th>
+<th> Simple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>positional arguments </td>
+<td> named arguments or map</td>
+</tr>
+<tr>
+<td>syntax </td>
+<td> data</td>
+</tr>
+<tr>
+<td>product types  </td>
+<td> associate records</td>
+</tr>
+<tr>
+<td>imperative programs </td>
+<td> declarative programs</td>
+</tr>
+<tr>
+<td>prolog </td>
+<td> datalog</td>
+</tr>
+<tr>
+<td>call chains </td>
+<td> queues</td>
+</tr>
+<tr>
+<td>XML </td>
+<td> JSON, Clojure literals</td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+</feed>
