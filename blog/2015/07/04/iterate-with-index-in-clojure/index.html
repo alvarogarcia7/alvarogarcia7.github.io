@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Iterate With Index in Clojure - The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="Scenario: iterate a sequence (seq) with its index The lines have an implicit line number (starting by 1, in most editors): 1
+2
+3
+[1] line1
+[2] line2 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Iterate With Index in Clojure</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-04T12:34:37+00:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:34 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Scenario: iterate a sequence (<code>seq</code>) with its index</p>
+
+<p>The lines have an implicit line number (starting by 1, in most editors):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[1] line1
+</span><span class='line'>[2] line2
+</span><span class='line'>[3] hello</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you read it from file to a variable, it is converted to:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="s">&quot;line1&quot;</span> <span class="s">&quot;line2&quot;</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> This implicit line number value is not present, therefore you need to assign them one.</p>
+
+<p> In ruby, you have this construct:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">each_with_index</span> <span class="p">{</span><span class="o">|</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">val</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://stackoverflow.com/questions/310634/what-is-the-right-way-to-iterate-through-an-array-in-ruby/310638#310638">Source</a></p>
+
+<p>In clojure, there is a similar function:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">map-indexed</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[idx</span> <span class="nv">itm]</span> <span class="nv">[idx</span> <span class="nv">itm]</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">:f</span> <span class="ss">:o</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; ([0 &quot;line1&quot;] [1 &quot;line2&quot;] [2 &quot;hello&quot;])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to shift the collection to the right so it starts with 1 (for the REPL):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="p">(</span><span class="nv">def</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;line1&quot;</span> <span class="s">&quot;line2&quot;</span> <span class="s">&quot;hello&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; (&quot;line1&quot; &quot;line2&quot; &quot;hello&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">shift-one</span> <span class="nv">[lines]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">cons</span> <span class="s">&quot;&quot;</span> <span class="nv">lines</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">def</span> <span class="nv">lines</span> <span class="p">(</span><span class="nv">shift-one</span> <span class="nv">lines</span><span class="p">))</span>
+</span><span class='line'><span class="nv">lines</span>
+</span><span class='line'><span class="c1">; (&quot;&quot; &quot;line1&quot; &quot;line2&quot; &quot;hello&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">map-indexed</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[idx</span> <span class="nv">itm]</span> <span class="nv">[idx</span> <span class="nv">itm]</span><span class="p">)</span>
+</span><span class='line'>  <span class="nv">lines</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; ([0 &quot;&quot;] [1 &quot;line1&quot;] [2 &quot;line2&quot;] [3 &quot;hello&quot;])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://clojuredocs.org/clojure.core/map-indexed">Source</a>, especially <a href="https://clojuredocs.org/clojure.core/map-indexed#example-542692cdc026201cdc326d25">this one</a></p>
+
+<p>But if you only need to get the lines at certain indexes, it is also possible to get the values directly, using <code>map</code> on the sequence of desired indexes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='lisp'><span class='line'><span class="nv">lines</span>
+</span><span class='line'><span class="c1">; (&quot;&quot; &quot;line1&quot; &quot;line2&quot; &quot;hello&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">defn</span> <span class="nv">get-all</span> <span class="nv">[lines</span> <span class="nv">indexes]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">map</span> <span class="o">#(</span><span class="nb">nth</span> <span class="nv">lines</span> <span class="nv">%</span><span class="p">)</span> <span class="nv">indexes</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">get-all</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; (&quot;line1&quot; &quot;line2&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">get-all</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; (&quot;line1&quot; &quot;line1&quot;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: the original source code for this post is <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/iterate-with-index.clj">here</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">alvaro garcia</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-07-04T12:34:37+00:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:34 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/iterate/'>iterate</a>, <a class='category' href='/blog/categories/language-comparison/'>language-comparison</a>, <a class='category' href='/blog/categories/protip/'>protip</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/sample/'>sample</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/07/01/brownbag-session-refactoring-legacy-code/" title="Previous Post: Brown-bag session: refactoring legacy code">&laquo; Brown-bag session: refactoring legacy code</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/" title="Next Post: Paper: Fundamental concepts on programming languages">Paper: Fundamental concepts on programming languages &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/01/self-study-in-january-2016/">Self-Study in January 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/31/books-read-in-2015q4/">Books Read in 2015Q4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/15/validating-data-clojure/">Validating CSV Data in Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the Macro And</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: Automate the Blog Publishing</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/';
+        var disqus_url = 'http://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
