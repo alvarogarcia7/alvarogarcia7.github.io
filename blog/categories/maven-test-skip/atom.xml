@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Maven-test-skip | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/maven-test-skip/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-02-10T14:36:07+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Differences in Maven Test Execution]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/"/>
+    <updated>2015-10-05T16:18:55+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution</id>
+    <content type="html"><![CDATA[<p>There are times when you only want to have the production code:</p>
+
+<ul>
+<li>downstream job after a successful build</li>
+<li>compiling in local after checkout from DVCS</li>
+<li>spiking (possibly the tests are broken)</li>
+<li>speeding up the process</li>
+</ul>
+
+
+<p>For that, maven allows to skip the tests, selectively:</p>
+
+<ul>
+<li><code>-DskipTests</code> compiles the tests, but skips running them</li>
+<li><code>-Dmaven.test.skip</code> skips compiling the tests and does not run them. This can also be written as <code>-Dmaven.test.skip=true</code></li>
+</ul>
+
+
+<p>In case some of your tests depend on tests from another artifact (e.g. Object Mother, test infrastructure) and the latter has changed, you must compile the tests. You need to not execute the tests</p>
+
+<p>For more information:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/25639336/whats-the-difference-between-dskiptests-and-dmaven-test-skip-true">this stackoverflow</a> post is useful</li>
+<li><a href="http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html">Documentation for skipping tests</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
