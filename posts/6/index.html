@@ -1,0 +1,911 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="We&rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz. These are the concepts and links brought up &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/posts/6">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/28/practical-object-oriented-design-in-ruby-chapter-1/">Practical Object-Oriented Design in Ruby: Chapter 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-28T22:07:29+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:07 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We&rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
+
+<p>These are the concepts and links brought up during the discussion:</p>
+
+<blockquote><p>Walking on water and developing software from a specification are easy if both are frozen.</p>
+
+<p>Edward V Berard, source is <a href="https://en.wikiquote.org/wiki/Edward_V._Berard">Wikiquote</a></p></blockquote>
+
+<p>Two cited papers on metrics for design:</p>
+
+<ul>
+<li><a href="http://www.pitt.edu/~ckemerer/CK%20research%20papers/MetricForOOD_ChidamberKemerer94.pdf">A metrics suite for object oriented design</a> by Chidamber and Kemerer</li>
+<li><a href="http://www.cs.umd.edu/~basili/publications/technical/T102.pdf">A validation of object-oriented design metrics as quality indicators</a> by Basili, Briand and Melo</li>
+</ul>
+
+
+<p> The video for the &lsquo;churn&rsquo; as a measure:</p>
+
+<ul>
+<li><a href="http://www.ustream.tv/recorded/61483799">The Hidden Dimension Of Refactoring</a> by Michael Feathers</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag Session: Refactoring Legacy Code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-23T17:19:28+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>5:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+
+<p>The contents of the session:</p>
+
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session</li>
+</ul>
+</li>
+</ul>
+
+
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
+
+<p>I prepared a small script:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">while</span> <span class="nb">test true</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>  git add --all<span class="p">;</span>
+</span><span class='line'>  git commit --all -m <span class="s2">&quot;save process - uknown state&quot;</span><span class="p">;</span>
+</span><span class='line'>  sleep 120<span class="p">;</span>
+</span><span class='line'><span class="k">done</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/16/brown-bag-session-docker/">Brown-bag Session: Docker</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-16T16:52:28+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:52 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including:</p>
+
+<ul>
+<li>the difference between a container and an image</li>
+<li>diffing image contents</li>
+<li>AUFS (Another Union FS)</li>
+<li>persistent vs non-persistent (volatile) filesystems</li>
+<li>running CMD and other commands on the instance</li>
+<li>problems of running with permission = root (or its group)</li>
+<li>downsides of it</li>
+<li>how to compare it with a virtual machine</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/14/types-of-defects/">Types of Defects</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-14T14:16:51+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:16 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some time ago, while researching types of defects and the cost of fixing them<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, I stumbled upon this:</p>
+
+<blockquote><p>Years ago I worked with a bunch of economists in the US Federal Government - they categorized &lsquo;bugs&rsquo; in their memos into three types:</p>
+
+<ul>
+<li><p>Typos: Simple misspellings of words. Infrequent, easy to detect, easy to fix.</p></li>
+<li><p>Writos: Incoherent sentences. More frequent, hard to detect, harder to fix.</p></li>
+<li><p>Thinkos: Conceptually bonkers. Very frequent, subtle and hard to detect; almost impossible to fix.</p></li>
+</ul>
+
+
+<p>Most &lsquo;late&rsquo; bugs that I&rsquo;ve seen in software projects belong in the last category - a lack of design or the failure to make a working mock-up leads to &lsquo;thinkos&rsquo; which are only obvious when the application is nearly completed. These are expensive to fix.</p>
+
+<p>Source: <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more</a></p></blockquote>
+
+<p>I would also add a new category to this:</p>
+
+<ul>
+<li>Ethos: Morally wrong, although possibly legal. These may take different forms: vary from a company to the next one,
+from society to society, etc. Even harder to fix than &lsquo;thinkos&rsquo;,
+as there is a reason (mainly economic) to keep them in place.</li>
+</ul>
+
+
+<p>  On a technical note,
+  these are not usually well-known artifacts in the company, therefore not everyone
+  should know about them. Only a few developers know the correct reasons behind them and
+  the rest might be sold a fake reason, so the latter cannot fix these &lsquo;ethos&rsquo;, as they
+  assume they are present for a good reason</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This is also a chapter in the book <a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit: &lsquo;Chapter 10: The cost of defects: an illustrated history&rsquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/11/brownbag-session-refactoring/">Brown-bag Session: Refactoring</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-11T18:22:16+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:22 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, today we&rsquo;ve done a brown-bag session on refactoring: we&rsquo;ve gone through
+and a live demo, including refactoring a core piece of our code.</p>
+
+<p>We&rsquo;ve done some mob programming to help identify some smells and how to fix them.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/03/self-study-in-june-2015/">Self-study in June 2015</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-03T11:13:10+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Update: I&rsquo;ve grouped all small posts related to the self-study from June 2015
+into a single post</p>
+
+<h2>Le monitoring de flux par l’exemple</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.octo.com/le-monitoring-de-flux-par-lexemple/">this article</a> about monitoring, in the way of &ldquo;by example&rdquo;, by Cédrick Lunven and Julien Kirch (French)</p>
+
+<h2>The First Micro-service Architecture</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2015/05/28/TheFirstMicroserviceArchitecture.html">this article</a> about microservices and how they were implemented many years ago by Robert C. Martin</p>
+
+<h2>How I Learned to Balance My Life With Remote Work</h2>
+
+<p>I&rsquo;ve read <a href="https://open.bufferapp.com/remote-work/?utm_content=bufferaa5a2&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about balancing life and work, either physical or remote by Michael Erasmus</p>
+
+<h2>Demystified CQRS</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.codecentric.de/en/2015/05/demystified-cqrs/?utm_content=buffer35b18&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about CQRS by Nino Martincevic</p>
+
+<h2>The perils of programmer education in the bazaar</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.practicingruby.com/2015/06/04/the-perils-of-programmer-education-in-the-bazaar/">this article</a> by Gregory Brown</p>
+
+<h2>6 useful and lesser-known git commands</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.joncairns.com/2015/05/6-useful-and-lesser-known-git-commands/">this article</a> about git commands (log, checkout, stash, cherry-pick, annotate) by Jon Cairns</p>
+
+<h2>Is Your Scrum Standup Slowing You Down?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.sitepoint.com/scrum-standup-slowing-down/">this article</a> by M. David Green</p>
+
+<h2>Me duele Indra</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=374c664073e1a1fa3deca53b4&amp;id=67ce79e01b">this Bonilista</a> (Spanish) by David Bonilla</p>
+
+<h2>TDD, BDD, [add every other method that promises software quality here] and the tea tasting lady</h2>
+
+<p>I&rsquo;ve read <a href="https://blinkingcaret.wordpress.com/2012/10/02/tdd-bdd-add-every-other-method-that-promises-software-quality-here-and-the-tea-tasting-lady/">this article</a> by Rui Figueiredo about the scientific method, TDD / BDD and how to scientifically detect if the &lsquo;how&rsquo; affects the result. In this case, exemplified by how to prepare your tea</p>
+
+<h2>The Art of Metaprogramming in Java</h2>
+
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/PolymathicCoder/the-art-of-metaprogramming-in-java">these slides</a> by Abdelmonaim Remani</p>
+
+<h2>When TDD does not work</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/04/30/When-tdd-does-not-work.html">this article</a> by Uncle Bob on situations where TDD might not be appropiate, especially around the borders</p>
+
+<h2>Mi primera semana como aprendiz</h2>
+
+<p>I&rsquo;ve read <a href="http://ronnyancorini.es/blog/index.php/2015/06/08/mi-primera-semana-como-aprendiz/">Ronny Ancorini&rsquo;s experiences</a> in his first week as apprentince with Carlos Blé &amp; Associates (Spanish)</p>
+
+<h2>Refactoring without good tests</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codeclimate.com/blog/2013/12/05/refactoring-without-good-tests/">this article</a> by Peter Bell on how to deal with a legacy codebase, what are the effects of not having tests and how to deal with. How to add tests to a codebase that is not ready for it.</p>
+
+<h2>Big Ball of Mud</h2>
+
+<p>I&rsquo;ve read <a href="http://www.laputan.org/mud/">this paper</a>, containing a collection of patterns and antipatterns (disguised as notes) by Brian Foote and Joseph Yoder</p>
+
+<h2>Comparision of different concurrency models: Actors, CSP, Disruptor and Threads [sic]</h2>
+
+<p>I&rsquo;ve read <a href="http://java-is-the-new-c.blogspot.com.es/2014/01/comparision-of-different-concurrency.html">this comparison of concurrency models</a> by Rüdiger Möller</p>
+
+<h2>5 Whys</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/5_Whys">this wikipedia</a> article on the technique called &ldquo;5 Whys&rdquo;</p>
+
+<h2>Expectations, Outcomes, and Challenges of Modern Code Review</h2>
+
+<p>I&rsquo;ve read <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=180283">this paper</a>, <a href="http://research.microsoft.com/pubs/180283/ICSE%202013-codereview.pdf">direct link</a>, by Alberto Bacchelli and Christian Bird on code review at Microsoft.</p>
+
+<p>They explain how they do it, the exact methodology they are using and why they do it.</p>
+
+<p>The main reasons to code review are:</p>
+
+<ul>
+<li>finding defects</li>
+<li>code improvement</li>
+<li>alternative solutions</li>
+<li>knowledge transfer</li>
+<li>team awareness and transparency</li>
+<li>also:
+
+<ul>
+<li>improve development process</li>
+<li>avoid build breaks</li>
+<li>share code ownership</li>
+<li>track rationale</li>
+<li>team assessment</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>The quality wheel</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jessitron.com/2015/04/the-quality-wheel.html">this article</a> by Jessica Kerr about the qualities of beautiful code</p>
+
+<h2>5 Minute Physics</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=n6FKT-KafRk">this video</a> on interactions with the mobile devices and related to physics by David DeSandro</p>
+
+<h2>Rise of the Transpilers</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=DspYurD75Ns">this video</a> on the rise of the transpilers and coffeescript by Jeremy Ashkenas</p>
+
+<h2>Drawing Lines with Bresenham&rsquo;s Line Algorithm</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=zytBpLlSHms">this video</a> about how to apply the Bresenham&rsquo;s algorithm to draw lines (implemented in pseudo-code and javascript) by Jenn Schiffer</p>
+
+<h2>Working with Minified JavaScript</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=SuFNR7-XjKI">this video</a> by John Crepezzi on how to mix javascript files (clients and yours), how to decompile javascript in chrome, dev &amp; debug tools</p>
+
+<h2>How we ran our Legacy Code Retreat</h2>
+
+<p>I&rsquo;ve read <a href="https://pboop.wordpress.com/2012/02/19/how-we-ran-our-legacy-code-retreat/">this article</a> by Andreas Leidig, looking for inspiration on running a legacy code retreat / brown-bag session. The experience report <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">is here</a></p>
+
+<h2>Shift Left: Testing Earlier in Development</h2>
+
+<p>I&rsquo;ve read <a href="http://wirfs-brock.com/blog/2015/06/18/shift-left">this article</a> by Rebecca Wirfs-Brock</p>
+
+<h2>Polymorphic Equality</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/06/polymorphic-equality/">this article</a> on implementing polymorphic equality on C#, by Carlos Blé</p>
+
+<h2>Commit messages are not titles</h2>
+
+<p>I&rsquo;ve read <a href="http://antirez.com/news/90">this article</a> on git commit messages and how to use them, by antirez</p>
+
+<h2>Oracle Considers G1 Garbage Collector for Java 9</h2>
+
+<p>I&rsquo;ve read this <a href="https://adtmag.com/articles/2015/06/22/oracle-java-9.aspx">press article</a> on the G1 and CMS collector, by John K. Waters</p>
+
+<h2>What Tech Newbies Need</h2>
+
+<p>I&rsquo;ve read <a href="https://storify.com/jesslynnrose/what-tech-newbies-need">this set of tweets</a>, grouped by Jessica Rose about the most helpful things beginners can do to improve their programming skills.</p>
+
+<h2>JavaScript For Cats</h2>
+
+<p>I&rsquo;ve read <a href="http://jsforcats.com/">this introductory guide</a> to javascript by <a href="https://twitter.com/maxogden">Max Ogden</a></p>
+
+<h2>Why Doesn&rsquo;t Python Have Switch/Case?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.pydanny.com/why-doesnt-python-have-switch-case.html">this article</a> on the switch case in the python language by Daniel Roy Greenfeld</p>
+
+<h2>[Joseph Moniz&rsquo;s] Notes on Clojure</h2>
+
+<p>I&rsquo;ve read Joseph Moniz&rsquo;s <a href="http://blog.plasmaconduit.com/notes-on-clojure/">Notes on Clojure</a>.</p>
+
+<h2>Chemical Computing with Clojure</h2>
+
+<p>I&rsquo;ve read <a href="http://gigasquidsoftware.com/chemical-computing/index.html">an article</a> on performing abstract computations with chemicals, written in Clojure by Carin Meier</p>
+
+<h2>Lenses</h2>
+
+<p>I&rsquo;ve read <a href="http://www.haskellforall.com/2012/01/haskell-for-mainstream-programmers_28.html">this tutorial</a> on writing lenses for haskell, a way of importing imperative getters / setters to a Data. Written by Gabriel Gonzalez.</p>
+
+<p>On another note, the first part, about writing getters and setters in the naive way, is also explained in Learn you a Haskell > Chapter 8 Making Our Own Types and Typeclasses > Record syntax</p>
+
+<h2>Microservices in Haskell</h2>
+
+<p>I&rsquo;ve read <a href="https://github.com/AlexanderAA/haskell-microservices/blob/gh-pages/haskell-microservices.md">these notes</a> on implementing a microservice in haskell, by <a href="https://github.com/AlexanderAA">AlexanderAA</a></p>
+
+<h2>Overcoming Resistance to Change - Isn&rsquo;t It Obvious?</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=hcz1aZ60k7w">this video</a> in the channel of The World with Theory of Constraints</p>
+
+<h2>Bacon is bad for you</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/bacon-is-bad-for-you">these slides</a>
+ on professionalism and the programmer culture, by Garann Means</p>
+
+<h2>Code is a job</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
+
+<h2>The Great Newline Schism</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
+
+<h2>Top ten reasons why I won’t use your open source project</h2>
+
+<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/02/internal-training-bpm-tool-and-process/">Internal Training: BPM: Process and Tools for Developers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-02T20:20:09+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, I&rsquo;ve presented today an internal training on &ldquo;BPM: Process and tools for developers&rdquo;</p>
+
+<p>In it, we have introduced the BPM concept and the main ideas in Activiti BPM.</p>
+
+<p>Also techniques for hotswapping processes, tips and how-tos.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/01/category-poodr/">Category: Poodr</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-01T05:09:43+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>5:09 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.poodr.com/">Practical Object-Oriented Design in Ruby</a>&rsquo;, by Sandi Metz</p>
+
+<p>Note: This has been created a posteriori with a previous date</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal Training: QA &amp; How to Test</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-18T20:20:09+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At a client, we&rsquo;ve done today an internal training on &ldquo;QA &amp; how to test&rdquo;. In it, the most skilled person with the QA role in the dev team has explained to us some techniques and concepts for testing</p>
+
+<h2>My notes</h2>
+
+<p>Verification vs validation: building the product right vs building the right product.</p>
+
+<h3>Principles</h3>
+
+<p>Extracted from <a href="http://www.istqb.org/">ISTQB</a>:</p>
+
+<ul>
+<li>testing shows presence of defects</li>
+<li>exhaustive testing is impossible</li>
+<li>early testing is better than later testing</li>
+<li>defect clustering: areas with bigger defect ratio or more critical, etc should be tested more thoroughly</li>
+<li>pesticide paradox</li>
+<li>testing is context-dependent</li>
+<li>absence of errors fallacy: the absence of defects does not imply perfect software. There are also problems with validation.</li>
+</ul>
+
+
+<h3>Techniques</h3>
+
+<h4>People-based</h4>
+
+<ul>
+<li>bug bashes: e.g., time-constrained</li>
+<li>subject-matter expert testing</li>
+<li>eat your own dogfood</li>
+<li>others</li>
+</ul>
+
+
+<h4>Activity-based</h4>
+
+<ul>
+<li>regression</li>
+<li>scripted (manual)</li>
+<li>smoke</li>
+<li>exploratory</li>
+<li>installation</li>
+<li>load</li>
+<li>long sequence</li>
+<li>performance</li>
+</ul>
+
+
+<h4>Coverage-based</h4>
+
+<ul>
+<li>menu tour: exploration based on menus (especially on websites)</li>
+<li>functional and system testing</li>
+<li>integration</li>
+<li>logic</li>
+<li>state-based</li>
+</ul>
+
+
+<h4>Requirements-based</h4>
+
+<ul>
+<li>Equivalence partitioning: examples in the same set are considered equivalent</li>
+<li>Boundary based: there are interesting examples around and on the boundaries</li>
+<li>Decision tables: truth table</li>
+<li>State transition tables: state diagram</li>
+</ul>
+
+
+<h4>Risk-based</h4>
+
+<ul>
+<li>make a prioritized list: probability and impact</li>
+<li>perform testing exploring each risk</li>
+<li>after a risk disappears, another opens. Adjust your test effort to stay focused on the current crop</li>
+</ul>
+
+
+<h4>Use case tests</h4>
+
+<ul>
+<li>use case: a common case that represents one of your customer&rsquo;s cases</li>
+<li>use busines language</li>
+</ul>
+
+
+<h4>Structure-based</h4>
+
+<ul>
+<li>test coverage is different than code coverage</li>
+<li>test coverage is based on decision tables</li>
+</ul>
+
+
+<h4>Defining testing priorities</h4>
+
+<ul>
+<li>customer and contractual requirements</li>
+<li>regulatory</li>
+<li>experience-based</li>
+<li>&ldquo;Best representative&rdquo;</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/17/software-gardening-manifesto/">Software Gardening Manifesto</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-17T10:41:18+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:41 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A friend sent this <a href="http://softwaregarden.io/manifesto/">Software Gardening Manifesto</a> to me.</p>
+
+<p>This is related to the idea of growing software vs building it, greatly exemplified by the <a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a> book (<a href="/blog/categories/goos">category here</a>).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/7">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/5">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/02/01/self-study-in-february-2016/">Self-Study in February 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/01/self-study-in-january-2016/">Self-Study in January 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/31/books-read-in-2015q4/">Books Read in 2015Q4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/15/validating-data-clojure/">Validating CSV Data in Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the Macro And</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
