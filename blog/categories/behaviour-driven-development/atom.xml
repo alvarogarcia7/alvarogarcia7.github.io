@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Behaviour-driven-development | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/behaviour-driven-development/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-02-22T00:30:22+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Open Discussion: Behaviour-Driven Development]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/"/>
+    <updated>2015-02-15T01:30:38+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development</id>
+    <content type="html"><![CDATA[<p>This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on requirements, via automatically tested specifications. For more information, see the <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">wikipedia&rsquo;s article on the subject</a></p>
+
+<p>I forgot to mention that this is the perfect start to TDD, as this is usually called the double-loop TDD. See a post on it on <a href="http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/">coding is like cooking</a></p>
+
+<p>In this double-loop TDD, the first thing is to create a BDD scenario, run it (red-1), create a unit test that reflects this red (red-2), pass it, refactor; go to red-1 as many times as you need, doing TDD cycles. When you think the feature is done, execute the BDD scenarios and go to green (outer layer) and refactor.</p>
+
+<h2>(Our) Common setting</h2>
+
+<p>Going back to BDD, a common scenario would be the following:</p>
+
+<p>Layers of software:</p>
+
+<ul>
+<li>Domain-Specific Language (DSL). See <a href="http://en.wikipedia.org/wiki/Domain-specific_language">wikipedia&rsquo;s article</a></li>
+<li>Test adapter: an interpreter for this DSL</li>
+<li>Test software: test fixtures, methods, structures to arrange, act, and assert on the sut</li>
+<li>Production software (system under test - SUT): thing being tested</li>
+</ul>
+
+
+<h2>A BDD test vs A TDD test</h2>
+
+<p>Let&rsquo;s imagine a BDD test for a <a href="http://en.wikipedia.org/wiki/Linked_list">linked list</a>:</p>
+
+<pre><code>Given I have an empty list
+When I add an element
+Then I have an element on the list
+</code></pre>
+
+<p>now, the same test in TDD [using java, junit 4, hamcrest]</p>
+
+<pre><code class="java">@Test
+public void add_an_element_to_an_empty_list(){
+    MyLinkedList linkedList = new MyLinkedList();
+
+    linkedList.add("something");
+
+    assertThat(linkedList.size(), is(1));
+}
+</code></pre>
+
+<p>In some aspects, a BDD and a TDD test are similar:</p>
+
+<ul>
+<li>the given is the arrange, i.e., the prerequisite</li>
+<li>the when is the act, i.e., the command</li>
+<li>the then is the assertion, i.e., the postcondition</li>
+</ul>
+
+
+<p>(for more information on this, see <a href="http://en.wikipedia.org/wiki/Hoare_logic">Hoare&rsquo;s triple</a>)</p>
+
+<p>But in others, they are not. In BDD you do not specify the APIs, methods, etc. You only care about behavior.</p>
+
+<h2>Conclusion</h2>
+
+<p>Benefits:</p>
+
+<ul>
+<li>everyone might involved in the specification by example workshops (source: <a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154">ATDD by example</a>)</li>
+<li>live specifications. managers can now understand the real state</li>
+<li><a href="http://en.wikipedia.org/wiki/Regression_testing">regression tests</a> are much cheaper (from automation)</li>
+</ul>
+
+
+<p>Gotchas:</p>
+
+<ul>
+<li>Test only the happy paths</li>
+<li>This has a cost, do not overdo it</li>
+<li>Doesn&rsquo;t remove manual tests</li>
+<li>How do you manage multiple scenarios</li>
+<li>How fast should it be?</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
