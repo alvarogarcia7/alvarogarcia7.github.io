@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress-3 | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/octopress-3/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-02-22T22:39:52+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Faster Site Generation for Octopress 2]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/"/>
+    <updated>2015-07-13T05:49:23+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2</id>
+    <content type="html"><![CDATA[<p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
+
+<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
+
+<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
+
+<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
+
+<pre><code class="bash">cp -R blog_source blog_post_factory
+</code></pre>
+
+<p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
+
+<pre><code class="bash">cd blog_post_factory/source/_posts
+git update-index --assume-unchanged $(ls *markdown)
+</code></pre>
+
+<p>Delete all existing markdown files</p>
+
+<pre><code class="bash">rm *markdown
+</code></pre>
+
+<p>Check that git doesn&rsquo;t realize about the difference:</p>
+
+<pre><code class="bash">git status
+
+# On branch source
+nothing to commit (working directory clean)
+</code></pre>
+
+<p>Create a new post:</p>
+
+<pre><code class="bash">rake new_post["Faster site generation for Octopress 2"]
+</code></pre>
+
+<pre><code class="bash"># On branch source
+# Untracked files:
+#   (use "git add &lt;file&gt;..." to include in what will be committed)
+#
+#   2015-07-13-faster-site-generation-for-octopress-2.markdown
+nothing added to commit but untracked files present (use "git add" to track)
+</code></pre>
+
+<p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
+
+<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
+
+<pre><code class="bash">rake generate &amp;&amp; rake deploy
+</code></pre>
+
+<p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
+
+<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
+
+<pre><code class="ruby">desc "Cleans all *.markdown files for a faster site generation"
+task :ignore do
+  cd "#{source_dir}/#{posts_dir}"
+  system "git update-index --assume-unchanged $(ls *.markdown)"
+  system "rm $(ls *.markdown)"
+end
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
+
+<pre><code>Regenerating: 1 file(s) changed at 2015-07-13 08:03:29 ...done in 0.617269045 seconds.
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
