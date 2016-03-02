@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Method | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/method/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-02T15:21:36+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Calling All Methods in an Object in Ruby]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/12/calling-all-methods-in-a-ruby-object/"/>
+    <updated>2015-10-12T09:55:17+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/12/calling-all-methods-in-a-ruby-object</id>
+    <content type="html"><![CDATA[<p>In Ruby, you can query the methods an object accepts:</p>
+
+<pre><code class="ruby">pry(main)&gt; 1.methods 
+=&gt; [:to_s,               
+ :-@,                    
+ :+,                     
+ :-,                     
+ :*,                     
+ :/,                     
+ :div,                   
+ :%,                     
+ :modulo,                
+ :divmod,                
+ :fdiv,                  
+ ...
+</code></pre>
+
+<p>In case you want to call all methods, <a href="https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods.rb">this</a> can be useful (plus its <a href="https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods_spec.rb">tests</a>):</p>
+
+<pre><code class="ruby">def call_all_methods(object, *args)
+  # remove methods that modify the PRY environment or are too verbose
+  success = {}
+  error = {}
+  exclusions = [:pry,
+                :methods,
+                :private_methods,
+                :public_methods,
+                :gem].map { |x| x.to_s}
+  object.methods.each { |x|
+    unless exclusions.include? x.to_s then
+      begin
+        if (args.empty?) then
+          success[x] = object.__send__(x)
+        else
+          success[x] = object.__send__(x, *args)
+        end
+      rescue StandardError =&gt; ex
+        error[x] = ex
+      end
+    end
+  }
+
+  success.select! { |x| not x.nil?}
+  error.select! { |x| not x.nil?}
+
+  {success: success, error: error}
+end
+</code></pre>
+
+<p>usage:</p>
+
+<pre><code class="ruby">[51] pry(main)&gt; call_all_methods(1)
+=&gt; {:success =&gt; 
+[[:to_s, "1"],
+ [:-@, -1],
+ [:abs, 1],
+ [:magnitude, 1],
+ [:~, -2],
+ [:to_f, 1.0],
+ [:size, 4],
+ [:zero?, false],
+ [:odd?, true],
+ [:even?, false],
+ [:succ, 2],
+ ...
+</code></pre>
+
+<p>also with parameters:</p>
+
+<pre><code class="ruby">[4] pry(main)&gt; call_all_methods(1,1)
+☺=&gt; {:success=&gt;
+  [[:+, 2],
+   [:-, 0],
+   [:*, 1],
+   [:/, 1],
+</code></pre>
+
+<p>Should you be interested in having this as a gem, please tell me (comments or <a href="https://twitter.com/@alvarobiz">@alvarobiz</a>)</p>
+]]></content>
+  </entry>
+  
+</feed>
