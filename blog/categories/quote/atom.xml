@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Quote | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/quote/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-02T11:44:28+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in January 2016]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/01/01/self-study-in-january-2016/"/>
+    <updated>2016-01-01T14:55:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/01/01/self-study-in-january-2016</id>
+    <content type="html"><![CDATA[<h2>Test cases in inner classes with JUnit</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/8758294/test-cases-in-inner-classes-with-junit">this answer</a> in stackoverflow about nested test runners in JUnit</p>
+
+<p>Tags: junit, stackoverflow, answer, nested-runner</p>
+
+<h2>Recording a Great Coding Screencast</h2>
+
+<p>I&rsquo;ve read <a href="https://egghead.io/articles/recording-a-great-coding-screencast">this article</a> by John Lindquist where he explains how he sets up the recording environment for egghead.</p>
+
+<p>Tags: john-lindquist, record, screencast, egghead, code-screencast, record-video, video</p>
+
+<h2>React Testing Course</h2>
+
+<p>I&rsquo;ve watched <a href="https://egghead.io/lessons/react-testing-jsx-error-diffs">the full course</a> by Trevor D. Miller on how to test react components and the libraries to make it possible.</p>
+
+<p>Tags: trevor-miller, online-course, screencast, mooc, react, flux, egghead</p>
+
+<h2>What Is Functional Programming?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jenkster.com/2015/12/what-is-functional-programming.html">this article</a> by Kris Jenkins where the author describes functional programming from an input &amp; output point of view.</p>
+
+<p>Describes state of the system (maybe global or local) is input &amp; output of the function</p>
+
+<p>Produced state changes are called side effects. the author calls the state inputs as &ldquo;side causes&rdquo;.</p>
+
+<p>Side effects and causes are called complexity iceberg, as they are not visible under the water level (surface)</p>
+
+<p>Also what a pure function is: one with no side causes or side effects; e.g., all its inputs are declared inputs (i.e., parameters) and all outputs are declared outputs (i.e., return value).</p>
+
+<p>notes on jobbing programmer:</p>
+
+<ul>
+<li><a href="https://www.safaribooksonline.com/library/view/becoming-a-better/9781491905562/ch32.html">at Becoming a Better Programmer</a>, by Pete Goodliffe</li>
+<li><a href="https://books.google.es/books?id=P-09CgAAQBAJ&amp;pg=PA67&amp;lpg=PA67&amp;dq=%22jobbing+programmer%22&amp;source=bl&amp;ots=U6Gvi9OSda&amp;sig=J4qWDUtnk768SMjAK3yuEeWUv5Y&amp;hl=es&amp;sa=X&amp;ved=0ahUKEwjz58K615DKAhUFVRQKHfyhAZAQ6AEIOTAE#v=onepage&amp;q=%22jobbing%20programmer%22&amp;f=false">at Mastering Julia</a>, by Malcolm Sherrington</li>
+<li><a href="http://joshsymonds.com/blog/2013/11/03/what-makes-a-good-programmer-good/">at What Makes a Good Programmer Good?</a> by Josh Symonds</li>
+</ul>
+
+
+<p>Tags: kris-jenkins, functional-programming, input, output, function, complexity-iceberg, pure-function, impure-function, side-effect, side-cause</p>
+
+<h2>Which Programming Languages Are Functional?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jenkster.com/2015/12/which-programming-languages-are-functional.html">this article</a> by Kris Jenkins where the author analyses languages, determining whether they are functional or not.</p>
+
+<p>Describes how functional languages deal with side effects and side causes, and to identify them (was also explained in part one<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>).</p>
+
+<p></p>
+
+<p>Tags: kris-jenkins, functional-programming, side-effect, side-cause, comparison, haskell, clojure, python, perl, javascript, java, map, reduce, hof, scala, moc</p>
+
+<h2>Argument from the &ldquo;Real World&rdquo;</h2>
+
+<p>I&rsquo;ve read <a href="http://ronjeffries.com/xprog/articles/argument-from-the-real-world/">this article</a> by Ron Jeffries that dismantles the &ldquo;real world&rdquo;, as an excuse to use good practices: as in &ldquo;we could use that, but we live in the real world&rdquo;.</p>
+
+<blockquote><p> [&hellip;] our job is to create the “real world” and not to imagine that our present situation is the only situation there is</p></blockquote>
+
+<p>This is exactly our day to day task, to imagine a real world solution to present problems, maybe involving software in between.</p>
+
+<p>Can&rsquo;t we do this for product and team management?</p>
+
+<p>Tags: ron-jeffries, agile, scrum, tdd, bdd, incremental-iterative-development, product-management, team-management</p>
+
+<h2>Self-Contained Systems</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/rstrangh/self-contained-systems-1">these slides</a> about a self-contained system (SCS), an architecture choice to split monolithic systems in parts. It includes the use of microservices in the business logic to solve domain specific problems. Written by Roman Stranghöner</p>
+
+<blockquote><p>development, operation and maintenance [&hellip;] by a single team</p></blockquote>
+
+<p>Tags: big-bang-release, roman-stranghoner, self-contained-system, scs, microservice, monolith, monolithic-system, architecture</p>
+
+<h2>What Makes a Good Programmer Good?</h2>
+
+<p>I&rsquo;ve read <a href="http://joshsymonds.com/blog/2013/11/03/what-makes-a-good-programmer-good/">this article</a> by Josh Symonds on the characteristics that differentiate a good programmer from the jobbing programmers, the list of skills to be a good programmer.</p>
+
+<p>Explains what factors are related and not related to being a good one<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>:</p>
+
+<ul>
+<li>knowing that most programming problems have already been solved. You have to know where to look for the solution</li>
+<li>not to be afraid to dig deep into problems: detect a problem and be eager to solve it; figure out what is wrong</li>
+<li>go to the source: use the source as a fact, as analysis needs to be based on facts, not beliefs</li>
+<li>just do it: to be driven to act</li>
+<li>instinctively tackle problems head-on, grabbing the bull by the horns instead of waiting for it to be solved automagically; start solving the problem</li>
+<li>excited about grabbing problems, about facing the cutting edge</li>
+<li>taking the time to reflect and understand it before moving one to the next one</li>
+<li>communicate well: succintly and eloquently expressing your thoughts. The author thinks this might be the most important aspect of all.</li>
+<li>to be truly caring about what you do: not just a job, but a hobby, an interest, even a fascination; great programmers are always programming</li>
+<li>thinking of programming of a way to shape the world, not just a money-making activity</li>
+</ul>
+
+
+<p>Tags: jobbing-programmer, good-programmer, career, career-management, skill, josh-symonds, quote</p>
+
+<h2>The Best Programming Language (or How to Stop Worrying and Love the Code)</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.fourthbit.com/2014/03/01/the-best-programming-language-or-how-to-stop-worrying-and-love-the-code">this article</a> by Álvaro Castro-Castilla analysing different programming languages and what to choose each of them.</p>
+
+<p>Tags: alvaro-castro-castilla, programming-language, language, analysis, comparison</p>
+
+<h2>Tomates en el campo</h2>
+
+<p>I&rsquo;ve read <a href="http://www.presionblogosferica.com/2011/02/20/tomates-en-el-campo/">this article</a> by Ángel Medinilla, about how to cultivate teams, instead of creating or building them. Talks about the mandatory conditions, necessary factors and how to enable it, not guaranteeing success.</p>
+
+<p>Tags: angel-medinilla, team-management, spanish, team, analogy</p>
+
+<h2>Default constructors in Java</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/17068389/default-constructors-in-java">this answer</a> in stackoverflow about extending a java class that has a private constructor.</p>
+
+<p>Tags: stackoverflow, answer, java, constructor, syntax</p>
+
+<h2>What&rsquo;s So Great About Reducers?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.guillermowinkler.com/blog/2013/12/01/whats-so-great-about-reducers/">this article</a> by Guillermo Winkler explaining reducers, a type of divide and conquer strategy clojure.</p>
+
+<p>Tags: guillermo-winkler, reducer, clojure, parallelism, concurrency</p>
+
+<h2>Don’t use Slack?</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/hacker-daily/don-t-use-slack-8e70452f3eed">this article</a> by Christian Heilmann about the relation between open / closed software and accessibility.</p>
+
+<p>Tags: slack, christian-heilmann, accessibility, open-source, propietary-software, closed-source</p>
+
+<h2>Towards an understanding of technical debt</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@kellan/towards-an-understanding-of-technical-debt-ae0f97cc0553">this article</a> by Kellan Elliott-McCrea about some definitions of technical debt and why taking care of it matters for the future.</p>
+
+<p>Talks about the way of inheriting projects by other teams and the paradox of &ldquo;investing more time to fix the problem than originally invested in coding it.&rdquo; Also about judgement.</p>
+
+<p>I find it related to the &ldquo;theory building&rdquo; by Naur.</p>
+
+<blockquote><p>There are at least 5 distinct things we mean we say “technical debt”.</p>
+
+<ol>
+<li>Maintenance work: buying breathing room</li>
+<li>Features of the codebase that resist change</li>
+<li>Operability choices that resist change</li>
+<li>Code choices that suck the will to live</li>
+<li>Dependencies that resist upgrading</li>
+</ol>
+</blockquote>
+
+<p>Tags: kellan-elliott-mccrea, kellan, technical-debt, list, definition, quote</p>
+
+<h2>Lifetimes of cryptographic hash functions</h2>
+
+<p>I&rsquo;ve read <a href="http://valerieaurora.org/hash.html">this article</a> by Valerie Aurora where she explains the lifetimes of cryptographic hash functions up to 2012.</p>
+
+<p>Tags: hash-function, valerie-aurora</p>
+
+<h2>Collisions for Hash Functions - MD4, MD5, HAVAL-128 and RIPEMD</h2>
+
+<p>I&rsquo;ve read <a href="https://eprint.iacr.org/2004/199.pdf">this paper</a> that explains some collisions found for MD4, MD5, HAVAL-128 and RIPEMD. By Xiaoyun Wang, Dengguo Feng, Xuejia Lai, Hongbo Yu.</p>
+
+<p>Tags: collision, hash-function, xiaoyun-wang, dengguo-feng, xuejia-lai, hongbo-yu, paper</p>
+
+<h2>The future is parallel: What&rsquo;s a programmer to do?</h2>
+
+<p>I&rsquo;ve read <a href="http://groups.csail.mit.edu/mac/users/gjs/6.945/readings/MITApril2009Steele.pdf">these slides</a> by Guy Steele about the differences in linear vs parallel computing and about the old habits that we still have.</p>
+
+<p>Some quotes:</p>
+
+<h3>Motivation</h3>
+
+<blockquote><ul>
+<li>Good sequential code minimizes total number of operations.
+
+<ul>
+<li>Clever tricks to reuse previously computed results.</li>
+<li>Good parallel code often performs redundant operations to reduce communication.</li>
+</ul>
+</li>
+<li>Good sequential algorithms minimize space usage.
+
+<ul>
+<li>Clever tricks to reuse storage.</li>
+<li>Good parallel code often requires extra space to permit temporal decoupling.</li>
+</ul>
+</li>
+<li>Sequential idioms stress linear problem decomposition.
+
+<ul>
+<li>Process one thing at a time and accumulate results.</li>
+<li>Good parallel code usually requires multiway problem decomposition and multiway aggregation of results.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+<h3>A New Mindset</h3>
+
+<blockquote><ul>
+<li>DO loops are so 1950s! (Literally: Fortran is now 50 years old.)</li>
+<li>So are linear linked lists! (Literally: Lisp is now 50 years old.)</li>
+<li>Java-style iterators are so last millennium!</li>
+<li>Even arrays are suspect!</li>
+<li>As soon as you say <code>first, SUM = 0</code> you are hosed. Accumulators are BAD.</li>
+<li>If you say, “process subproblems in order,” you lose.</li>
+<li>The great tricks of the sequential past DON’T WORK.</li>
+<li>The programming idioms that have become second nature to us as everyday tools DON’T WORK.</li>
+</ul>
+</blockquote>
+
+<h3>The Parallel Future</h3>
+
+<blockquote><ul>
+<li>We need new strategies for problem decomposition.</li>
+<li>Data structure design/object relationships</li>
+<li>Algorithmic organization</li>
+<li>Don’t split a problem into “the first” and “the rest.”</li>
+<li>Do split a problem into roughly equal pieces. Then figure out how to combine general subsolutions.</li>
+<li>Often this makes combining the results a bit harder.</li>
+<li>We need programming languages and runtime implementations that support parallel strategies and hybrid sequential/parallel strategies.</li>
+<li>We must learn to manage new space-time tradeoffs</li>
+</ul>
+</blockquote>
+
+<h3>Conclusion</h3>
+
+<blockquote><ul>
+<li>A program organized according to linear problem decomposition principles can be really hard to parallelize.</li>
+<li>A program organized according to parallel problem decomposition principles is easily run either in parallel or sequentially, according to available resources.</li>
+<li>The new strategy has costs and overheads. They will be reduced over time but will not disappear.</li>
+<li>In a world of parallel computers of wildly varying sizes, this is our only hope for program portability in the future.</li>
+<li>Better language design can encourage better parallel programming.</li>
+</ul>
+</blockquote>
+
+<p>Tags: representation, computation, catamorphism, list, associativity
+commutativity, idempotency, abstract-data-type, slide, operator, mapreduce, mindset, comparison, parallel, guy-steele,  linear-computing, parallel-computing</p>
+
+<h2>Surviving being senior (tech) management.</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@kellan/surviving-being-senior-tech-management-aa6654efd027">this article</a> by Kellan Elliott-McCrea about the basic things to do as management to retain the best performance:</p>
+
+<ul>
+<li>exercise</li>
+<li>someone to talk to</li>
+<li>discuss with peers, in petit commité</li>
+<li>personal mastery project</li>
+</ul>
+
+
+<p>Tags: kellan-elliott-mccrea, kellan, list, management, tip, exercise, pet-project</p>
+
+<h2>You Don’t Need More Free Time</h2>
+
+<p>I&rsquo;ve read <a href="http://www.nytimes.com/2016/01/10/opinion/sunday/you-dont-need-more-free-time.html">this article</a> about the quality of life, work-life balance by Cristobal Young on why the time where we have more fun is spent together, in company.</p>
+
+<p>Tags: cristobal-young, time-management, work-life-balance</p>
+
+<h2>Taking Longer to Reach the Top Has Its Benefits</h2>
+
+<p>​I&rsquo;ve read <a href="https://hbr.org/2015/12/taking-longer-to-reach-the-top-has-its-benefits">this article</a> that explains how having work life balance and preventing burn out syndrome, aided by a patient career, can help with reaching a higher destination on your career. By Karen Firestone</p>
+
+<p>Tags: career-management, patience, burnout, burn-out, ceo, karen-firestone, professional-career, improvement</p>
+
+<h2>All bugs lead to Rome</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@nickbaum/all-bugs-lead-to-rome-505a1205bb9">this article</a> that explains how the author tracks down a bug present in mail communication, just for a handful of client. By Nick Baum</p>
+
+<p>Tags: track-down, bug, defect, mailgun, rot13, nick-baum</p>
+
+<h2>Design Patterns — Coming Full Circle</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/swlh/design-patterns-coming-full-circle-d8292e261dc6">this article</a> that explains what a design pattern is, where does it come from, the figure of Christopher Alexander and the architecture design patterns. By Jen Carlile</p>
+
+<p>Tags: design-pattern, christopher-alexander, jen-carlile, comparison, example, proxy, command, observer</p>
+
+<h2>React + Performance = ?</h2>
+
+<p>I&rsquo;ve read <a href="https://aerotwist.com/blog/react-plus-performance-equals-what/">this article</a> by Paul Lewis comparing the performance and developer experience of react.js and vanilla js.</p>
+
+<p>Conclusion: under his measurements, react is too slow once the amount of elements is big on mobile devices</p>
+
+<p>Tags: paul-lewis, comparison, javascript, react, mobile, perfomance, jsperf, js-perf, vanilla-javascript</p>
+
+<h2>Full speed, then stop, gracefully</h2>
+
+<p>I&rsquo;ve read <a href="http://sethgodin.typepad.com/seths_blog/2015/12/full-speed-then-stop.html">this article</a> about how to end professional relationships with an employer or a team.</p>
+
+<p>Makes an analogy to the hockey sport attitude: &ldquo;full speed, then stop&rdquo;</p>
+
+<p>Tags: seth-godin, professional, employer, team-management, team, analogy</p>
+
+<h2>Por qué tendrás que facturar 55.000€ para cobrar una nómina de 26.000€</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive1.com/?u=374c664073e1a1fa3deca53b4&amp;id=7e79a27689">this bonilista</a> by David Bonilla on why freelancers need to bill more to clients to achieve the same (economic) results as being hired by a company.</p>
+
+<p>Tags: david-bonilla, bonilista, freelancer, contractor, employee</p>
+
+<h2>Principles Of Microservices</h2>
+
+<p>I&rsquo;ve watched <a href="https://vimeo.com/131632250">this talk</a> by Sam Newman on microservices at the NDC 2015 at Oslo</p>
+
+<p>Describes a microservice as a small, autonomous services that work together, modelled around a business domain</p>
+
+<p>Microservices can mix technology, persistence stack, idioms, options</p>
+
+<p>reference to the twelve factors (by heroku).</p>
+
+<p>At a client:</p>
+
+<blockquote><p>Design and delivery practices:</p>
+
+<ul>
+<li>standard http/rest</li>
+<li>encapsulate legacy</li>
+<li>eliminate integration databases</li>
+<li>consolidate and cleanse data</li>
+<li>published integration model</li>
+<li>small independent devices</li>
+<li>continous deployment</li>
+<li>minimal customization of COTS/SAAS</li>
+</ul>
+
+
+<p>Architectural principles:</p>
+
+<ul>
+<li>reduce inertia</li>
+<li>eliminate accidential complexity</li>
+<li>consistent interfaces and data flows</li>
+<li>no silver bullets</li>
+</ul>
+
+
+<p>Strategic goals:</p>
+
+<ul>
+<li>enable scalable businesses</li>
+<li>support entry into new markets</li>
+<li>support innovation in existing markets</li>
+</ul>
+</blockquote>
+
+<p>Principles of microservices:</p>
+
+<ul>
+<li>modelled around a business domain</li>
+<li>culture of automation</li>
+<li>hide implementation details</li>
+<li>decentralise all the things</li>
+<li>deploy independently</li>
+<li>consumer first</li>
+<li>isolate failure</li>
+<li>highly observable</li>
+</ul>
+
+
+<h3>Notes</h3>
+
+<p>the business domain changes more slowly. find these boundaries (reference to IDDD)</p>
+
+<p>bounded contexts is about concepts which are shared and others who are hidden</p>
+
+<p>consumer driven contracts as a way to express to consumer expectations, written as tests. this is a high-trust pattern (requires it). reduces end to end testing, considerably. Using tools as [pact][github.com/realestate]</p>
+
+<p>parallel change for endpoints (or APIs) for avoiding lock step release (expand contract pattern). high cost to change an API: apply upfront thought to it.</p>
+
+<p>explains about a case writing a strangler application:</p>
+
+<ul>
+<li>circuit breakers</li>
+<li>one thread pool per application</li>
+<li>bulkhead downstream connections</li>
+</ul>
+
+
+<p>references:</p>
+
+<ul>
+<li>the book &ldquo;Release It!&rdquo;</li>
+<li>the book &ldquo;Implementing Domain-Driven Design (IDDD)&rdquo;</li>
+</ul>
+
+
+<h3>Other</h3>
+
+<p>correlation ids, parent and child ids
+extracting information from logs (e.g., kibana, splunk, new relic)
+see how services connect to each other based on logs instead of based on documentation</p>
+
+<p>Tags: lock-step-release, autonomy, sam-newman, consumer-driven-contract, team, zookeper, etcd, consul, service-discovery, distributed-consensus, talk, ndc, humane-registry, bulkhead-pattern, circuit-breaker</p>
+
+<h2>The Website Obesity Crisis</h2>
+
+<p>I&rsquo;ve read <a href="http://idlewords.com/talks/website_obesity.htm">this transcription</a> of <a href="http://www.webdirections.org/blog/the-website-obesity-crisis/">this presentation</a> about the increase of weight of websites and how this connects with new needs for automation and other services. How the solution is to keep the pages lightweight and open for everybody to use and learn; without invading our privacy. By Maciej Ceglowski</p>
+
+<p>Tags: obesity, fat-page, slide, transcription, slide-transcription, maciej-ceglowski, simplicity, speed</p>
+
+<h2>Command-line tools can be 235x faster than your Hadoop cluster</h2>
+
+<p>I&rsquo;ve read <a href="http://aadrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html">this article</a> on how using command-line based (<code>find</code>, <code>grep</code>, <code>awk</code>) can have a better performance as compared to Hadoop for a specific case, which is analyzing 2 million chess games. By Adam Drake</p>
+
+<p>Tags: adam-drake, chess, comparison, performance, cli-commands, unix, nix, hadoop, awk</p>
+
+<h2>The Serializable Isolation Level</h2>
+
+<p>I&rsquo;ve read <a href="http://sqlperformance.com/2014/04/t-sql-queries/the-serializable-isolation-level">this article</a> by Paul White about the serializable isolation level and how it is implemented in some databases.</p>
+
+<p>Tags: serializable, isolation level, paul-white, oracle, mssql, database, sql</p>
+
+<h2>Academic Writing With Markdown, Pandoc and Emacs</h2>
+
+<p>I&rsquo;ve read <a href="http://milinda.svbtle.com/academic-writing-with-markdown-pandoc-and-emacs">this article</a> by Milinda Pathirage that explains an alternative way of writing LaTeX in a user-friendly manner, writing markdown then converting it to the output format (he provides <a href="https://gist.github.com/milinda/d9272e67711d324f18ba">such a script</a>).</p>
+
+<p>Tags: latex, milinda-pathirage, academia, research, paper, markdown, script</p>
+
+<h2>Rest, DDD, layers, JSF, microservices sizing a Umejug conversation</h2>
+
+<p>I&rsquo;ve watched <a href="http://www.adam-bien.com/roller/abien/entry/rest_ddd_layers_jsf_a">this talk</a> by Adam Bien on topics related to microservices and architecture. Discusses:</p>
+
+<ul>
+<li>What do you think a typical web application should look like? How should it be built?</li>
+<li>When using REST, which level of REST is appropriate when, is HATEOAS something to strive for, how to implement it?</li>
+<li>Which patterns do you recommend, hexagonal architecture, layers, &hellip;?</li>
+<li>What do you think of the DDD strategic and tactical patterns?</li>
+<li>Microservices vs right-sized services, is transactions over several services always a bad idea?</li>
+<li>When use JSF? Is it still useful?</li>
+<li>Entity-Control-Boundary Pattern (ECB) (around <a href="https://youtu.be/VkcLpRs0i0g?t=995">16:37</a>). <a href="http://www.cs.sjsu.edu/~pearce/modules/patterns/enterprise/ecb/ecb.htm">More info</a> on the pattern</li>
+</ul>
+
+
+<p>Tags: hateoas, rest, microservice, pattern, architecture, umejug, hexagonal-architecture, ddd, adam-bien, ecb-pattern, mvc-pattern</p>
+
+<h2>How To Go Remote</h2>
+
+<p>I&rsquo;ve read <a href="http://workdifferent.com/how-to-remote/">this article</a> by Sebastian Kade that explains how to go remote: where the possibility of working anywhere is a luxury, even if it is in an office.</p>
+
+<p>Explains the case of Automattic, some examples of communication, culture. Suggests using some tools to accomplish this cultural change.</p>
+
+<p>Tags: remote-work, sebastian-kade, remote, work, asynchronous-communication, communication, automattic, tool, culture, team-management</p>
+
+<h2>Why Your Company Should Have a Creed</h2>
+
+<p>I&rsquo;ve read <a href="http://ma.tt/2011/09/automattic-creed/">this essay</a> by Matt Mullenweg about the importance of having a company creed (a belief system, ethos), which ideally would be shared by the colleagues. These should be the values that help deciding, when in doubt, so everyone is aligned.</p>
+
+<p>At Automattic, this is theirs (as of September 19th, 2011):</p>
+
+<blockquote><p>I will never stop learning. I won’t just work on things that are assigned to me. I know there’s no such thing as a status quo. I will build our business sustainably through passionate and loyal customers. I will never pass up an opportunity to help out a colleague, and I’ll remember the days before I knew everything. I am more motivated by impact than money, and I know that Open Source is one of the most powerful ideas of our generation. I will communicate as much as possible, because it’s the oxygen of a distributed company. I am in a marathon, not a sprint, and no matter how far away the goal is, the only way to get there is by putting one foot in front of another every day. Given time, there is no problem that’s insurmountable.</p></blockquote>
+
+<p>Tags: quote, matt-mullenweg, automattic, creed, ethos, learning, team-management, startup, communication, essay</p>
+
+<h2>Mob Programming: The Unruly Experience</h2>
+
+<p>I&rsquo;ve read <a href="http://wirfs-brock.com/blog/2015/06/05/mob-programming/">this article</a> by Rebecca Wirfs-Brock on mob programming and the experience report (+ <a href="http://www.xp2015.org/wp-content/uploads/2015/06/TH2.3_Wilson.pdf">slides</a>) at the company called Unruly.</p>
+
+<p>She explains what works for them and what does not.</p>
+
+<p>Also, she makes a difference on complex vs complicated work:</p>
+
+<blockquote><p>complex work (where there is the potential for errors) over complicated work (where the solution is known, but is merely time consuming)</p></blockquote>
+
+<p>Explains some characteristics of learning organizations:</p>
+
+<blockquote><p>Teams in learning organizations perform ongoing experiments. While they settle on a core set of practices, they also try to build upon them. They keep innovating, improving, and reflecting. And how they work continues to evolve.</p></blockquote>
+
+<p>Tags: learning, learning-organization, xp, rebecca-wirfs-brock, mob-programming, pair-programming, complex-work, complicated-work, experience-report, unruly, team-management, team-building, team-dysfunction, comparison</p>
+
+<h2>What You’re Hiding from When You Constantly Check Your Phone</h2>
+
+<p>I&rsquo;ve read <a href="https://hbr.org/2016/01/what-youre-hiding-from-when-you-constantly-check-your-phone">this article</a> by Charlotte Lieberman where she explains the technology-stress paradox and the fact of replacing one addiction with another, as some addictions are more socially than others.</p>
+
+<p>Explains that the constant connection to social media allow us to avoid ourselves, and the connection to mindfulness.</p>
+
+<p>On the paradox:</p>
+
+<blockquote><p>technology-stress paradox: we share the desire for greater freedom from our devices, and yet that very freedom itself causes anxiety</p></blockquote>
+
+<p>On the work-life balance:</p>
+
+<blockquote><p> work-life balance [is]  [&hellip;] about noticing those moments in which you really don&rsquo;t want to deal with yourself</p></blockquote>
+
+<p>Tags: charlotte-lieberman, paradox, quote, social-media, mindfulness, technology-stress-paradox, stress, addiction, time-management</p>
+
+<h2>Testing myth #1: Writing tests slows you down</h2>
+
+<p>I&rsquo;ve read <a href="http://arhohuttunen.fi/testing/testing-myth-1-writing-tests-slows-you-down/">this article</a> by Arho Huttunen on an excuse to not test: there is no time.</p>
+
+<p>In the article, he explains the false assumptions based on that reason and the gains (short term and long term) from doing it.</p>
+
+<p>Tags: arho-huttunen, test, excuse</p>
+
+<h2>BeCodeWeek by José Manuel Beas</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jmbeas.es/category/becodeweek/">this category of posts</a> by José Manuel Beas about his BeCodeWeek, a desk-surfing experience at BeCode.</p>
+
+<p>Analyses facts and publishes one entry per day detailing his activities.</p>
+
+<p>Tags: becodeweek, jmbeas, jose-manuel-beas, desk-surfing, experience, experience-report, analysis</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><code>What Is Functional Programming?</code><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>many of these fragments are quotes or paraphrased quotes<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in November 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/11/02/self-study-in-november-2015/"/>
+    <updated>2015-11-02T13:25:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/11/02/self-study-in-november-2015</id>
+    <content type="html"><![CDATA[<h2>Call me maybe: RabbitMQ</h2>
+
+<p>I&rsquo;ve read <a href="https://aphyr.com/posts/315-call-me-maybe-rabbitmq">this article</a> by Kyle Kingsbury on using RabbitMQ as a lock service. It investigates and gives a counterexample of using it for this purpose.</p>
+
+<p>Uses Knossos to do the testing and surfaces a problem with it. Explains specific problems on locking: at-most-once and at-least-once message delivery</p>
+
+<p>Note: References Jepsen (I guess an inside joke to the song &ldquo;Call me maybe&rdquo; by Carly Rae Jepsen) for at-most-once and at-least-once message delivery.</p>
+
+<p>Tags: rabbitmq, kyle-kingsbury, lock, cap-theorem, distributed-system, jepsen, knossos, at-most-once-delivery, at-least-once-delivery, counterexample, mutex</p>
+
+<h2>Everyone is potentially a teacher</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/09/everyone-is-potentially-a-teacher">this article</a> by Carlos Blé where he explains that everyone can have ideas worth spreading and that the knowledge not only comes from others but also from the relationships that tie you to other people.</p>
+
+<p>Tags: carlos-ble, teaching, pedagogy, idea, teacher, relationship</p>
+
+<h2>Ragel State Machine Compiler</h2>
+
+<p>I&rsquo;ve read <a href="http://www.colm.net/open-source/ragel/">this article</a> explaining what the Ragel project is about: a code generator from regex to code in languages such as C#, Java, etc. It is limited to finite state machines (FSM), with determinism. It can also handle some indeterminism. Written by Adrian D. Thurston</p>
+
+<p>Tags: adrian-thurston, fsm, state-machine, finite-state-machine, code-generation, ragel</p>
+
+<h2>HTTP is obsolete. It&rsquo;s time for the distributed, permanent web</h2>
+
+<p>I&rsquo;ve read <a href="https://ipfs.io/ipfs/QmNhFJjGcMPqpuYfxL62VVB9528NXqDNMFXiqN5bgFYiZ1/its-time-for-the-permanent-web.html">this article</a> by Kyle Drake explaining the need for a permanent, distributed web archive.</p>
+
+<p>Using a distributed file system (IPFS) and software similar to Bitcoin, they can host parts of the web locally, making it immutable and distributed</p>
+
+<p>Tags: kyle-drake, web-archive, centralization, decentralization, distribution, permanent-web, ipfs, federation,</p>
+
+<h2>Recovering From the Integrated Tests Scam</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive1.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=42e61e203e&amp;e=4a925444f9">this article</a> from J. B. Rainsberger on the integrated test scam and how to solve it: refactoring.</p>
+
+<p>Tags: jbrains, tdd, integrated-test, integration-test, j-rainsberger</p>
+
+<h2>Broken windows theory</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Broken_windows_theory">this wikipedia article</a> that talks about the broken windows theory, that states that controlling and monitoring public spaces leads to lowering the serious crimes.</p>
+
+<p>Cites three causes for this:</p>
+
+<ul>
+<li>Social norms and conformity</li>
+<li>Lack of routing monitoring</li>
+<li>Social signaling and signal crime</li>
+</ul>
+
+
+<p>Also discusses examples in the US and in the Netherlands, as well as criticisms.</p>
+
+<p>I&rsquo;ve read it to better understand how to apply this theory to software development, on a day-to-day basis.</p>
+
+<p>Tags: wikipedia, theory, broken-window</p>
+
+<h2>Scsh</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Scsh">the wikipedia page</a> for Scsh, the Scheme shell.</p>
+
+<h2>Why is Scala&rsquo;s type inference not as powerful as Haskell&rsquo;s?</h2>
+
+<p>I&rsquo;ve read the reasoning why Haskell supports other type inferences that are not present in Scala, in <a href="http://stackoverflow.com/questions/7234095/why-is-scalas-type-inference-not-as-powerful-as-haskells">this StackOverflow question</a></p>
+
+<p>Tags: scala, haskell, type-inference, hindley-milner, type-inference-algorithm</p>
+
+<h2>The Future of the LispM</h2>
+
+<p>I&rsquo;ve read <a href="http://arrdem.com/2014/11/28/the_future_of_the_lispm/">this article</a> explaining the past and current situation in the Lisp world: from Lisp, to LispM, to the MIT and Symbolics Inc., to Clojure and Scheme.</p>
+
+<p>Also talks about integration with the operating system and its execution in the microprocessor. Written by Reid McKenzie</p>
+
+<p>Tags: reid-mckenzie, lisp, lispm, clojure, scheme, symbolics</p>
+
+<h2>The Lisp Curse</h2>
+
+<p>I&rsquo;ve read <a href="http://www.winestockwebdesign.com/Essays/Lisp_Curse.html">this essay</a> by Rudolf Winestock, where he explains the low barrier (or low cost) for people in powerful languages (such as Lisp) to not accept the status quo in their project and fork / start their own.</p>
+
+<p>It also compares languages and the people attracted to them. Cites Mark Tarver&rsquo;s essays several times, including the Brilliant Bipolar Mind (BBM) in <a href="https://web.archive.org/web/20150308085419/http://www.lambdassociates.org/blog/bipolar.htm">this other</a> essay (from WebArchive). Compares the BBM and the normal worker in usefulness to companies.</p>
+
+<p>Cites the Pareto principle (80-20 rule): a single hacker will port 80% the library from another language, leaving it buggy, undocumented and only understandable by the original author (assuming this is only 20% of the work). The rest (e.g., documentation, bugfixing, maintenance) are dropped and never taken care of.</p>
+
+<p>Cites that this could be somewhat based on the facility of creating new features for the language. A small effort implies small implementation time, leaving no margin for thinking it through and seeing other corner cases. Also, a single person working on the project means no code review. The style might be coherent (always the same one), but might not be idiomatic, understandable by others, maintainable, etc.</p>
+
+<p>Closes the essay with this quote:</p>
+
+<blockquote><p>The expressive power of Lisp has drawbacks. There is no such thing as a free lunch.</p></blockquote>
+
+<p>Tags: rudolf-winestock, essay, pareto-principle, hacking, one-man-band, lisp, no-free-lunch, quote</p>
+
+<h2>The Bipolar Lisp Programmer</h2>
+
+<p>I&rsquo;ve read <a href="https://web.archive.org/web/20150308085419/http://www.lambdassociates.org/blog/bipolar.htm">this essay</a> by Mark Tarver on the Bipolar Lisp programmmer or the koan of Lisp.</p>
+
+<p>It explains the history of the Brilliant Bipolar Mind (BBM) when they attend high school and college. The freedom they&rsquo;re given, exactly the same as in Lisp, as you don&rsquo;t need to mix and socialize with others to create a good-enough solution.</p>
+
+<p>In this fashion, he says, most of the projects are 80% finished, not documented, not maintained. The same problems that worry enterprises.</p>
+
+<p>Cites the article &ldquo;Lisp: Good News, Bad News, How to Win Big&rdquo;</p>
+
+<p>Tags: essay, mark-tarver, bipolar-lisp-programmer, lisp-programmer, programmer, brillian-bipolar-mind, blp, bbm, koan</p>
+
+<p>Note: this article was no longer present on its original site. Fetched it from the Web Archive (WayBack Machine).</p>
+
+<h2>Writing readable Clojure code</h2>
+
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/jiriknesl/writing-readable-clojure-code">these slides</a> by Jiří Knesl, that explains how to write better clojure code:</p>
+
+<ul>
+<li>Macros</li>
+<li>HOFs</li>
+<li>left-to-right vs right-to-left code</li>
+</ul>
+
+
+<p>Tags: clojure, jiri-knesl, macro, hof, thread, slide</p>
+
+<h2>How can I get a reference to a method?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/485151/how-can-i-get-a-reference-to-a-method">this question</a>, <a href="http://stackoverflow.com/questions/4294485/how-do-i-reference-a-function-in-ruby">another question</a> from StackOverflow</p>
+
+<p>Tags: stackoverflow, question, ruby, functional-programming, method-reference</p>
+
+<h2>Implicit and Explicit Blocks</h2>
+
+<p>I&rsquo;ve read <a href="https://rubymonk.com/learning/books/4-ruby-primer-ascent/chapters/18-blocks/lessons/55-new-lesson">this lesson from rubyMonk</a></p>
+
+<p>Tags: rubymonk, lesson, block, ruby</p>
+
+<h2>What&rsquo;s Point-free Programing?</h2>
+
+<p>I&rsquo;ve read <a href="http://xahlee.info/comp/point-free_programing.html">this article</a> by Xah Lee explaining point-free programming, which requires a glance at function decomposition (currying)</p>
+
+<blockquote><p>[&hellip;] “point-free programing” is:</p>
+
+<ul>
+<li>It is about a particular <strong>syntax</strong> for <strong>function definition</strong>.</li>
+<li>When <strong>defining a function</strong>, no symbol is used for function parameter.</li>
+</ul>
+</blockquote>
+
+<h2>Oracle’s “planned obsolescence” for Java</h2>
+
+<p>I&rsquo;ve read <a href="https://jaxenter.com/oracle-and-javas-planned-obsolescence-121144.html">this article</a> by Coman Hamilton on the possible Java&rsquo;s planned obsolescence by Oracle.</p>
+
+<p>Discusses features pushed to future releases, comparing it to other legacy languages.</p>
+
+<p>Tags: obsolescence, legacy-language, planned-obsolescence, java, java-ee, oracle, fortran, cobol, coman-hamilton</p>
+
+<h2>Your first Ruby native extension: C</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.jcoglan.com/2012/07/29/your-first-ruby-native-extension-c/">this article</a> about writing a native extension for ruby. Written by James Coglan</p>
+
+<p>Tags: james-coglan, ruby, c, native-extension</p>
+
+<h2>What&rsquo;s the difference between equal?, eql?, ===, and ==?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">this stackoverflow</a> question regarding Ruby operators: equal?, eql?, ===, ==:</p>
+
+<ul>
+<li>==: generic equality</li>
+<li>===: case equality (for case - when)</li>
+<li>eql?: hash equality</li>
+<li>equal?: identity comparison (pointer comparison)</li>
+</ul>
+
+
+<p>Tags: comparison, stackoverflow, ruby, equal, eq, ==, ===, question, answer, jtbandes</p>
+
+<h2>Kanban</h2>
+
+<p>I&rsquo;ve read <a href="https://es.wikipedia.org/wiki/Kanban">the wikipedia page</a> for Kanban (Spanish)</p>
+
+<p>Tags: wikipedia, kanban, agile-methodology, management</p>
+
+<h2>Is your Scrum team Agile?</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.thesoftwarecraft.com/2014/04/is-your-scrum-team-agile.html">this article</a> by  Bart Bakker where he discusses some common patterns in Agile implementations (in software companies)</p>
+
+<p>Tags: scrum, team, agile, scrum-implementation, bart-bakker</p>
+
+<h2>Mejora tu trabajo en equipo con el método Kanban</h2>
+
+<p>I&rsquo;ve read <a href="http://hipertextual.com/archivo/2013/11/que-es-kanban/">this article</a> that explains then kanban management framework, with its principles and its values. Written by Jose López (in Spanish)</p>
+
+<p>Tags: kanban, management, agile-methodology, management-framework, principle, value, jose-lopez</p>
+
+<h2>¿Qué es el método Kanban para la gestión de proyectos?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.javiergarzas.com/2011/11/kanban.html">this article</a> (Spanish) written by Javier Garzás where it is explained the kanban methodology and three of its main rules:</p>
+
+<ul>
+<li>visualize workflow</li>
+<li>limit WIP</li>
+<li>measure {lead, cycle} time</li>
+</ul>
+
+
+<p>Tags: kanban, management, agile-methodology, management-framework, principle, value, javier-garzas</p>
+
+<h2>describe vs. context in rspec</h2>
+
+<p>I&rsquo;ve read <a href="http://lmws.net/describe-vs-context-in-rspec">this article</a> that explains the (lack of) functional difference between RSpec&rsquo;s <code>describe</code> and <code>context</code> methods. The difference is contextual (i.e., the amount of information they convey). Written by LM</p>
+
+<p>Tags: rspec, ruby, describe, context, difference</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Animal Laborans and the Homo Faber]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/09/the-animal-laborans-and-the-homo-faber/"/>
+    <updated>2015-08-09T23:19:58+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/09/the-animal-laborans-and-the-homo-faber</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve found this quote very interesting from the book &ldquo;The Craftsman&rdquo;, by Richard Sennett:</p>
+
+<blockquote><p><em>Animal laborans</em> is, as the name implies, the human being akin to a beast of burden,
+a drudge condemned to routine. Arendt enriched this image by imagining him or her absorbed
+in a task that shuts out the world, a state well exemplified by Oppenheimer&rsquo;s feeling that the
+atomic bomb was a &ldquo;sweet&rdquo; problem, or Eichmann&rsquo;s obsession with making the gas chambers
+efficient. In the act of making it work, nothing else matters; Animal laborans takes the work as
+end end it itself.</p>
+
+<p>By contrast, <em>Homo faber</em> is her image of men and women doing another kind of work, making
+a life in common. Again Arendt enriched an inherited idea. The Lating tag Homo faber
+means simple &ldquo;man as maker&rdquo;. [&hellip;] Homo faber is the judge of material labor and practice, not
+Animal laborans&rsquo;s colleague but his supertior. Thus, in her view, we human beings live in two
+dimensions, In one we make things; in this condition we are amoral, absorbed in a task. We
+also harbor another, higher way of life in which we stop producing and start discussion and
+judging together. Whereas Animal laborans is fixated in the question &ldquo;How?&rdquo; Homo faber
+asks &ldquo;Why?&rdquo;</p>
+
+<p>Richard Sennett, The Craftsman, Prologue, page 7</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Recognizing Dependencies]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/"/>
+    <updated>2015-08-08T12:11:29+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies</id>
+    <content type="html"><![CDATA[<p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:</p>
+
+<blockquote><p>An object has a dependency when it knows:</p>
+
+<ul>
+<li>The name of another class. [&hellip;]</li>
+<li>The name of a message that it intends to send to someone other than self. [&hellip;]</li>
+<li>The arguments that a message requires. [&hellip;]</li>
+<li>The order of those arguments. [&hellip;]</li>
+</ul>
+</blockquote>
+
+<p>If an object knows any of these facts about another object, it has dependencies to the other.</p>
+
+<p>This is not to say that having dependencies to others is bad, as</p>
+
+<blockquote><p>A single object cannot know everything, so inevitably it will have to talk to another object.
+Chapter 3, Managing Dependencies, Introduction</p></blockquote>
+
+<p>For this latter purpose, there is the section &ldquo;Writing loosely coupled code&rdquo;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in August 2015]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/02/self-study-in-august-2015/"/>
+    <updated>2015-08-02T19:45:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/02/self-study-in-august-2015</id>
+    <content type="html"><![CDATA[<h2>Humble Object</h2>
+
+<p>I&rsquo;ve read the <a href="http://xunitpatterns.com/Humble%20Object.html">Humble Object</a> list of patterns, by Gerard Meszaros, including:</p>
+
+<ul>
+<li>humble dialog</li>
+<li>humble executable</li>
+<li>humble transaction controller</li>
+<li>humble container adapter</li>
+</ul>
+
+
+<p>Tags: pattern, gerard-meszaros</p>
+
+<h2>How you know</h2>
+
+<p>I&rsquo;ve reread <a href="http://www.paulgraham.com/know.html">this small essay</a> by Paul Graham on storing information in our heads, based on the context. On the importance of rereading, to add more contexts to the initial one.</p>
+
+<p>Tags: paul-graham, reread, read</p>
+
+<h2>Protected Variation: The Importance of Being Closed</h2>
+
+<p>I&rsquo;ve read <a href="http://www.martinfowler.com/ieeeSoftware/protectedVariation.pdf">this article</a> by Craig Larman in the magazine IEEE Software > Design.</p>
+
+<p>Discusses Information Hiding, Protected Variation and the Open-Closed Principle.</p>
+
+<p>Tags: craig-larman, ocp, open-closed principle, design, information-hiding, ih, protected-variation, pv,</p>
+
+<h2>Lambda, Javascript Micro-Services on AWS</h2>
+
+<p>I&rsquo;ve read <a href="http://www.jayway.com/2014/12/18/lambda-javascript-micro-services-aws/">this post</a> explaining how to deploy a microservice on AWS on top of Lambda. Written by Anders Janmyr</p>
+
+<p>The cool thing is that you get billed by milliseconds!</p>
+
+<p>Tags: anders-janmyr, devops, microservice, lambda, aws</p>
+
+<h2>Migrating To Clojure. So Much Fn</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=Hv4slaRydRM">this talk</a> by Jan Stępień where he talks about his experience on migrating part of an application to clojure from ruby on rails</p>
+
+<p>Tags: jan-stepien, clojure, migration, ruby-on-rails, talk, wrocloverb</p>
+
+<h2>Te recomiendo escribir en un blog</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/07/te-recomiendo-escribir-en-un-blog/">this article</a> from Carlos Blé in which he recommends writing a blog, on things we discover along the way. (Spanish)</p>
+
+<p>Tags: carlos-ble, meta, blog, long-way</p>
+
+<h2>We need enough technical debt</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.svpino.com/2015/08/05/we-need-enough-technical-debt">this article</a> on why we need to accumulate a bit of technical debt, as a way of being less perfectionist and deliver more features / value to our stakeholders. Written by Santiago L. Valdarrama.</p>
+
+<p>Tags: santiago-valdarrama, technical-debt, perfectionism</p>
+
+<h2>Escribe mejores tests en Javascript</h2>
+
+<p>I&rsquo;ve read <a href="http://carlosvillu.com/escribe-mejores-tests-en-javascript/">this list</a> of tips to write better javascript tests (Spanish). By Carlos Villuendas</p>
+
+<p>Tags: carlos-villuendas, javascript, test</p>
+
+<h2>Down the Rabbit Hole</h2>
+
+<p>I&rsquo;ve read <a href="https://github.com/brettwooldridge/HikariCP/wiki/Down-the-Rabbit-Hole">this wiki</a> page on how to tune some aspects of the server hotspot JVM, by Brett Wooldridge</p>
+
+<p>Tags: performance, jvm, hotspot, inline, bytecode, brett-wooldridge</p>
+
+<h2>XP Manchester Lightning Talks 2015 Live broadcast</h2>
+
+<p>I have watched the first two <a href="https://www.youtube.com/watch?v=VD4UEW2i7hU">lightning talks</a> from XP Manchester, edition number 61.</p>
+
+<p>Tags: lightning-talk, broadcast, simplicity, manchester, 2015</p>
+
+<h2>Counting hash collisions with the birthday paradox</h2>
+
+<p>I&rsquo;ve read <a href="http://matt.might.net/articles/counting-hash-collisions/">this article</a> on the birthday paradox, or the percentage of chance of people sharing the same birthday. This could be applied to hash function, as the title says, but is not included in the article. Written by Matt Might</p>
+
+<h2>Why I&rsquo;m The Best Programmer In The World*</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/why-im-the-best-programmer-in-the-world/">this ironically-titled article</a> by Jeff Atwood on humility and how to improve as a programmer.</p>
+
+<p>Tags: jeff-atwood</p>
+
+<h2>The Key to Giving and Receiving Negative Feedback</h2>
+
+<p>I&rsquo;ve read <a href="https://hbr.org/2015/08/the-key-to-giving-and-receiving-negative-feedback?">this article</a> by Joseph Grenny about how to give and receive negative feedback. It is exemplified by the plant manager who was expecting another kind of feedback from his subordinates and was surprised by their negative feedback.</p>
+
+<p>Tags: joseph-grenny, negative-feedback, feedback, by-example</p>
+
+<h2>Testing Clojure web applications with Kerodon</h2>
+
+<p>I&rsquo;ve read <a href="https://semaphoreci.com/community/tutorials/testing-clojure-web-applications-with-kerodon">this guide</a> on how to test compojure-based applications with kerodon. Written by Nebojša Stričević</p>
+
+<p>Tags: nebojsa-stricevic, compojure, kerodon, clojure, testing, guide</p>
+
+<h2>Using The Option Type Effectively</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uku-taht/2015/04/29/using-the-option-type-effectively.html">this article</a> on how to use the <code>Option</code> type (in rust), similar to <code>Optional</code> in java or <code>Maybe</code> in haskell. Written by Uku Taht.</p>
+
+<p>Tags: uku-taht, option, maybe, optional, rust</p>
+
+<h2>When Should You Think?</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/03/11/when-to-think.html">this post</a> by Robert C Martin on when to think and the hypothesis that TDD does not allow you to think before coding.</p>
+
+<p>Tags: tdd, robert-c-martin, design, hypothesis</p>
+
+<h2>Orthogonal latin squares: an application of experiment design to compiler testing</h2>
+
+<p>I&rsquo;ve read <a href="http://barbie.uta.edu/~mehra/20_an%20application%20of%20experiment%20design%20to%20compiler%20testing.pdf">this paper</a> by Robert Mandl on techniques that can be applied to reduce the burden of exhaustive testing to compilers. Preferring &ldquo;surely all relevant distinct combinations&rdquo; we can reduce the amount of testing. This paper tries to formalize the concept of &ldquo;near-exhaustive testing&rdquo;</p>
+
+<p>Tags: latin-square, robert-mandl, compiler, testing, near-exhaustive-testing, optimization, exhaustive-testing</p>
+
+<h2>  Practical Type System Benefits</h2>
+
+<p>I&rsquo;ve read <a href="https://themonadreader.files.wordpress.com/2014/04/nccb.pdf">this article</a> by Neil Brown on benefits of the type system, with examples in haskell. He goes on to explore the benefits of involving the type-checker at compile time to remove type errors and ease the programming effort:</p>
+
+<blockquote><p>I find that several problems in Haskell can be solved by involving the type system
+further: The trick is to involve the type system in ways that provide a big benefit
+for the cost, but not going so far that the type system gets in the way of code
+that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p></blockquote>
+
+<p>I&rsquo;ve also learned the concept of the quasi-quoter: similar to a preprocessor, executed at compile time and type-checked</p>
+
+<p>Tags: neil-brown, quote, quasi-quoter, preprocessor, haskell, monad-reader</p>
+
+<h2>ClojureScript and the Blub Paradox</h2>
+
+<p>I&rsquo;ve read this article comparing javascript and clojurescript using the fizzbuzz kata. There is a nice example of the pattern matching for the cases (i.e. &ldquo;switch&rdquo;) of the fizz, buzz. Written by Nate Wildermuth</p>
+
+<p>Tags: clojurescript, javascript, fizzbuzz, kata, nate-wildermuth</p>
+
+<h2>No malinterpretes tu carrera</h2>
+
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2011/02/no-malinterpretes-tu-carrera/">this article</a> on (not) changing careers from programmer to designer, analyst, team manager. About the programmer&rsquo;s passion and why not to misinterpret your career. Written by Carlos Blé. In Spanish.</p>
+
+<p>Tags: carlos-ble, career, programming, management, career-change</p>
+
+<h2>Just Haskell or Nothing</h2>
+
+<p>I&rsquo;ve read <a href="https://cheecheeo.github.io/just_haskell_or_nothing.html">these slides</a> on packaging values in (Just a) or Nothing for possibly failed computations in haskell. Written by John Chee</p>
+
+<p>Tags: john-chee, haskell, just, nothing, maybe, functor</p>
+
+<h2>Tracking Joy at Work</h2>
+
+<p>I&rsquo;ve read <a href="http://begriffs.com/posts/2015-03-15-tracking-joy-at-work.html">this article</a> about quantifying happiness at the office (or at work). Joe Nelson, the author of the article, uses the quantifying method described int the book <a href="http://www.amazon.com/Experience-Sampling-Method-Measuring-Everyday/dp/1412925576/">Experience Sampling Method</a> (<a href="https://en.wikipedia.org/wiki/Experience_sampling_method">wikipedia page</a>) by Hektner, Schmidt, Csikszentmihalyi.</p>
+
+<p>The last one, not coincidentally is the author of <a href="http://www.amazon.com/Flow-The-Psychology-Optimal-Experience/dp/0061339202">Flow: The Psychology of Optimal Experience</a>.</p>
+
+<p>Tags: mihaly-csikszentmihalyi, flow, quantification, data, experience-sampling, article, joe-nelson</p>
+
+<h2>Going &ldquo;Write-Only&rdquo;</h2>
+
+<p>I&rsquo;ve read <a href="http://begriffs.com/posts/2015-04-20-going-write-only.html">this article</a> by Joe Nelson on going &ldquo;write-only&rdquo; on social media, blogs, news, etc, as opposed to read-only (only consuming media) or read-write (consuming and producing). He cites another programmer, <a href="http://joey.hess.usesthis.com/">Joey Hess</a> and about the quality and durability of your work.</p>
+
+<p>Tags: article, joe-nelson, write-only, social-media, reading, philosophy, thoreau, nietzsche, joey-hess</p>
+
+<h2>Create a static site with Hakyll, Github and Travis CI</h2>
+
+<p>I&rsquo;ve read <a href="http://begriffs.com/posts/2014-08-12-create-static-site-with-hakyll-github.html">this article</a> on how to create your blog with hakyll and travis ci. Written by Joe Nelson</p>
+
+<p>Travis ci is used to do continuous integration and automatically deploy each commit to production (github pages).</p>
+
+<p>Tags: hakyll, haskell, joe-nelson, meta, blog, continuous-deployment, github, github-pages, travis-ci</p>
+
+<h2>Falling in Love with Computer Science</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=haxusGuUyt4">this video</a> by Kathy Pham, an American that discovered her passion, her love to computer science a few years ago. She tells the events around computer science from the beginning of college to the current moment.</p>
+
+<p>Tags: kathy-pham, passion, love, computer-science, autobiography, time-lapse, google-developers</p>
+
+<h2>Duck Typing</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=h0rTF__RNo4">this video</a> by Dan Grossman, part of the <a href="https://www.coursera.org/course/proglang">&ldquo;Programming Languages&rdquo; MOOC</a>, in which he explains what is a Duck Type and how to use (and abuse) them in ruby.</p>
+
+<p>Tags: ruby, dan-grossman, mooc, mooc-programming-languages</p>
+
+<h2>Not-So-Private Clojure Functions</h2>
+
+<p>I&rsquo;ve read <a href="http://christophermaier.name/blog/2011/04/30/not-so-private-clojure-functions">this article</a> explaining how to bypass private functions in clojure: either create a lambda or create a different namespace. Written by Christopher Maier</p>
+
+<p>Tags: private-variable, clojure, testing, joy-of-clojure, christopher-maier, private-function, namespace</p>
+
+<h2>Frege (and Clojure)</h2>
+
+<p>I&rsquo;ve read <a href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/">this article</a> that tells the Pragmatic Programmer&rsquo;s advice to learn a new language every year and the author (Sean Corfield) explains his trajectory learning them. He also cites the Lein plugin he&rsquo;s built: <code>lein-fregec</code> and how to connect clojure and frege (a.k.a JVM&rsquo;s haskell).</p>
+
+<p>Tags: haskell, frege, jvm, clojure, ffi, pragmatic-programmer, advice, lein-fregec,  sean-corfield, comparison</p>
+
+<h2>Two months early. 300k under budget</h2>
+
+<p>I&rsquo;ve read <a href="https://thoughtworks.github.io/p2/issue09/two-months-early/">the tale</a> of a Thoughtworks Project Manager who convinced his client to start using clojure to deliver a custom-made CMS. Written by Dave Elliman.</p>
+
+<p>Tags: dave-elliman, thoughtworks, project-manager, clojure, cms, microservice</p>
+
+<h2>Convince your boss to use Clojure</h2>
+
+<p>I&rsquo;ve read <a href="http://www.lispcast.com/convince-your-boss-to-use-clojure">this guide</a> by Eric Normand on how to convince your boss or your company to start using clojure.</p>
+
+<p>Tags: company, clojure, eric-normand, how-to, guide</p>
+
+<h2>A brief introduction to Prolog</h2>
+
+<p>I&rsquo;ve read <a href="https://docs.google.com/presentation/d/1NAUo8nWLfNvvW3Wb7HJMunljjDJbzu7mo-5twKeGDvc/edit#slide=id.g63daf4745_0_56">these slides</a> about a brief introduction to prolog and how to do web development in it. By Jaelle Scheuerman</p>
+
+<p>Tags: jaelle-scheuerman, prolog, web-development, rest, slide</p>
+
+<h2>Arrayzing - The JavaScript array cheatsheet</h2>
+
+<p>I&rsquo;ve read <a href="https://gist.github.com/ourmaninamsterdam/1be9a5590c9cf4a0ab42">this cheatsheet</a> for javascript arrays. Written by Justin Perry</p>
+
+<p>Tags: cheatsheet, array, javascript, gist, justin-perry</p>
+
+<h2>Some words on lazy evaluation and sharing</h2>
+
+<p>I&rsquo;ve read <a href="http://pseudo.fixme.fi/~opqdonut/blog/Some_words_on_lazy_evaluation_and_sharing.html">this article</a> comparing the <code>fix</code> definition with a hand-made one and its &ldquo;sharing&rdquo; problems. Written by Joel E. Kaasinen</p>
+
+<p>Tags: joel-kaasinen, haskell, fix, sharing, non-strictness, lazy-evaluation</p>
+
+<h2>Hammock Driven Development</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=f84n5oFoZBc">this video</a> by Rich Hickey. A few notes:</p>
+
+<p>A: identifying a problem that we&rsquo;re trying to solve</p>
+
+<p>D: assessing if the proposed solution solves the problem</p>
+
+<p>the union of the features is not the purpose of the product / is not the product</p>
+
+<p>proramming is not completing features</p>
+
+<p>avoiding problems /= solving problems</p>
+
+<p>book: how to solve it - G. Polya. Practices &amp; techniques for solving mathematic problems</p>
+
+<p>How to solve the problem</p>
+
+<ul>
+<li>state the problem</li>
+<li>understand the problem:
+
+<ul>
+<li>what do you know: facts, context, constraints.</li>
+<li>what do you don&rsquo;t know</li>
+<li>are there related problems? solutions to related problems. find an analogy: starting from scratch vs incremental step</li>
+</ul>
+</li>
+<li>be discerning</li>
+<li>more input, better output:
+
+<ul>
+<li>read about your domain problem, research papers (maybe ACM)</li>
+</ul>
+</li>
+<li>tradeoffs:
+
+<ul>
+<li>find at least two options (ups and downs) to compare before taking a decision</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Focus time for programmers like alone time for kids. Hammock time is important mind&rsquo;s eye time</p>
+
+<p>Waking mind:</p>
+
+<ul>
+<li>critical thinking</li>
+<li>analysis</li>
+<li>tactics</li>
+<li>prone to local maxima</li>
+<li>feed work to background mind</li>
+<li>analyze its products</li>
+</ul>
+
+
+<p>Background mind:</p>
+
+<ul>
+<li>making connections</li>
+<li>synthesis</li>
+<li>strategy</li>
+<li>abstracts, analogies</li>
+<li>solves most non-trivial problems</li>
+</ul>
+
+
+<p>loading it: work it hard in the waking mind to be included in the background mind</p>
+
+<p>abstraction = software strategy</p>
+
+<p>tip: small answer is better than big answer (occam&rsquo;s razor?)​</p>
+
+<p>Tags: rich-hickey, hammock-driven-development, background-mind, waking-mind, solve-problem, george-polya, book, analysis, design, talk</p>
+
+<h2>Parallelism /= Concurrency</h2>
+
+<p>I&rsquo;ve read <a href="https://ghcmutterings.wordpress.com/2009/10/06/parallelism-concurrency/">this article</a> on the differences between parallelism and concurrency, with examples in the haskell compiler GHC. Written by <a href="https://ghcmutterings.wordpress.com/author/simonmar/">simonmar</a></p>
+
+<p>Tags: haskell, concurrency, parallelism, ghc, simonmar, comparison</p>
+
+<h2>Parallelism vs. Concurrency</h2>
+
+<p>I&rsquo;ve read <a href="https://wiki.haskell.org/Parallelism_vs._Concurrency">this page</a> from the haskell wiki.</p>
+
+<p>Tags: haskell, concurrency, parallelism, ghc, comparison</p>
+
+<h2>Writing code that writes code — with Hack Codegen</h2>
+
+<p>I&rsquo;ve read <a href="https://code.facebook.com/posts/1624644147776541/writing-code-that-writes-code-with-hack-codegen/">this article</a> about metaprogramming (code that generates code) in PHP. Written by Alejandro Marcu.</p>
+
+<p>I&rsquo;ve arrived to this from this tweet:</p>
+
+<blockquote class="twitter-tweet" data-cards="hidden" lang="en"><p lang="en" dir="ltr">This is what happens when your programming language doesn&#39;t have macros <a href="https://t.co/ZfsEe2EJIj">https://t.co/ZfsEe2EJIj</a>. Yuck.</p>&mdash; David Nolen (@swannodette) <a href="https://twitter.com/swannodette/status/634495099607613440">August 20, 2015</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>Tags: alejandro-marcu, metaprogramming, php, macro, lisp, clojure</p>
+
+<h2>How katas can help you learn</h2>
+
+<p>I&rsquo;ve read <a href="http://codurance.com/2015/08/18/How-katas-can-help-you-learn/">this article</a> on learning from katas, with the example of the Roman Numerals kata in Objective-C. Written by Sandro Mancuso.</p>
+
+<p>Tags: sandro-mancuso, kata, learning, roman-numeral, objective-c</p>
+
+<h2>Java 8: Definitive guide to CompletableFuture</h2>
+
+<p>I&rsquo;ve read <a href="http://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html">this article</a> about Java 8&rsquo;s feature, the <code>CompletableFeature</code>. Written by Tomasz Nurkiewicz</p>
+
+<p>Tags: tomasz-nurkiewicz, java-8, completable-future, future, non-blocking, reactive-programming</p>
+
+<h2>Are You Making These 10 DDD Mistakes?</h2>
+
+<p>I&rsquo;ve read <a href="http://danielwhittaker.me/2015/07/05/are-you-making-these-10-ddd-mistakes/#">this infographic</a> on 10 DDD common mistakes, by Daniel Whittaker.</p>
+
+<p>Tags: ddd, daniel-whittaker, bounded-context, ubiquitous-language, infographic</p>
+
+<h2>Haste: Full-Stack Haskell for Non-PhD Candidates</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=3v03NFcyvzc">this talk</a> at the Strange Loop Conference 2014 about Haste language, a haskell version that compiles to javascript, therefore letting you write haskell in the browser. By Erin Swenson-Healey and James Cooper</p>
+
+<p>In this talk they recommend the <a href="http://www.seas.upenn.edu/~cis194/lectures.html">CIS194 course</a></p>
+
+<p>Tags: haste, haskell, james-cooper, erin-swenson-healey, strange-loop, 2014, talk</p>
+
+<h2>A Year of Haskell</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=wZ0RQG3mFPw">this talk</a> about experiences using haskell professionally, by the American Justin Leitgeb in a Equatorian company in Quito, Stack Builders. He goes on to explain the haskell language in comparison to ruby on rails, what he mostly used with his clients.</p>
+
+<p>Also explains what sells and doesn&rsquo;t (mostly productivity, not security) and gives pointer for applying it to a company</p>
+
+<p>Tags: justin-leitgeb, ecuador, haskell, stack-builders, lambda-days, 2015, client, professional, consulting, consultancy</p>
+
+<h2>A Taste of Haskell</h2>
+
+<p>I&rsquo;ve watched a lesson by Simon Peyton-Jones, that introduces haskell to experienced programmers, not in the language but in programming in general. At the conference OSCON 2007</p>
+
+<p>Links: <a href="https://www.youtube.com/watch?v=jLj1QV11o9g">part 1</a>, <a href="https://www.youtube.com/watch?v=IqXTUbdLig0">part 2</a>, <a href="http://www.slideshare.net/oscon2007/os-peytonjones">slides</a></p>
+
+<p>Tags: oscon, 2007, haskell, introduction, lesson, simon-peyton-jones</p>
+
+<h2>Programming - Why Haskell is Great</h2>
+
+<p>I&rsquo;ve seen <a href="https://www.youtube.com/watch?v=RqvCNb7fKsg">this video</a> introducing some features of haskell. The most basic features, the REPL,  function composition. By FrungyKing</p>
+
+<p>Tags: haskell, introduction, video, screencast, repl, frungyking</p>
+
+<h2>History of Haskell: being lazy with class</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=3bjXGrycMhQ">this video</a> by Simon Peyton-Jones at the &ldquo;History of Programming Languages Conference III&rdquo; which explains how the language was designed and written, a language timeline, what options they took, how they decided about monadic IO, etc.</p>
+
+<p>Tags: simon-peyton-jones, 2007, history-of-programming-languages-conference, haskell, talk</p>
+
+<h2>The Humble Programmer</h2>
+
+<p>​I&rsquo;ve read [this EWD][ewd-340]​ about the necessary humbleness for being a programmer and the slow expansion of the trade, as compared to hardware engineers.</p>
+
+<p>He cites six reasons for preferring to be a humble programmer:</p>
+
+<ul>
+<li>the programmer only needs to manage simple programs</li>
+<li>simple programs imply reducing the search space</li>
+<li>construct a program from a mathematical proof instead of test its properties after building the software. see quote below</li>
+<li>a good abstraction can hide much complexity and difficulty</li>
+<li>the importance of the used tool in the final product</li>
+<li>&ldquo;the only problems we can satisfactory solve are the ones that admit a factored solution&rdquo;</li>
+</ul>
+
+
+<p>In this essay I&rsquo;ve found the idea of</p>
+
+<blockquote><p>Testing shows the presence, not the absence of bugs</p></blockquote>
+
+<p>That <a href="https://en.wikiquote.org/wiki/Edsger_W._Dijkstra">Wikiquote</a> attributes to an earlier paper (in 1969). In this paper, the verbatim quote is:</p>
+
+<blockquote><p>program testing can be a very effective way to show the presence of bugs, but is hopelessly inadequate for showing their absence.</p></blockquote>
+
+<p>This idea also connects to the &ldquo;lower bounds&rdquo; and &ldquo;upper bounds&rdquo; of program correctness expressed in the article <a href="https://cdsmith.wordpress.com/2011/01/09/an-old-article-i-wrote/">An Old Article I Wrote</a> which is about static types, by Cdsmith. Admittedly, much later, in 2008, so this idea could be inspired by the Dijkstra&rsquo;s article.</p>
+
+<p>Tags: edsger-dijkstra, ewd, dijkstra, humble-programmer, essay, comparison, absence-of-bugs, quote</p>
+
+<h2>Building a Link Shortener with Snaplets</h2>
+
+<p>I&rsquo;ve seen <a href="https://vimeo.com/59109358">this video</a> of how to build a link shortener webapp in haskell with the framework snap. By Ryan Trinkle. Found it in the <a href="http://snapframework.com/docs">snap docs</a> page.</p>
+
+<p>Tags: snap, haskell, link-shortener, talk, webapp, framework, ryan-trinkle</p>
+
+<h2>Comparing Haskell Web Frameworks</h2>
+
+<p>I&rsquo;ve read <a href="http://www.edofic.com/posts/2014-02-23-haskell-web.html">this comparison</a> of haskell web frameworks, by Andraz Bajt (a.k.a, edofic)</p>
+
+<p>Tags: andraz-bajt, edofic, haskell, web-framework, framework, comparison</p>
+]]></content>
+  </entry>
+  
+</feed>

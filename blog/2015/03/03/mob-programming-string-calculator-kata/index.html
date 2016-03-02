@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mob Programming String Calculator Kata - The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="Last Friday we did a kata1 using a projector the string calculator 2 using pair programming, TDD and some mob-programming for the last refactoring. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2015/03/03/mob-programming-string-calculator-kata">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mob Programming String Calculator Kata</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-03T03:46:48+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>3:46 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Last Friday we did a kata<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> using a projector the string calculator <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> using pair programming, TDD and some mob-programming for the last refactoring.</p>
+
+<p>We used a projector (beamer) so everyone could see it. I tried to take really small baby steps but the adding part was done in ~6 cycles<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
+
+<p>We&rsquo;ve all learnt about shotcuts, live user templates for the IDE <sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>, TDD methodology, other ways of tackling the problem, how to refactor as a group, clean code, etc</p>
+
+<p>These sessions are necessary to share some knowledge among the teammates and have another chance of doing code review, releasing some pressure from daily practices or bad abstractions / designs (that will be taken care of in the future)</p>
+
+<p>We&rsquo;ve had such a great time, learning together, that would be a candidate for a weekly interaction.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Mob_programming">Mob programming</a> is such an eye opening practice. It forces you to reconsider your previous dogma and to understand the others' positions. Wikipedia reads &ldquo;early use of phrase [&hellip;] was made in &lsquo;Extreme Programming Perspectives&rsquo;&rdquo; but this practice is practiced by some, such as <a href="https://twitter.com/carlosble">Carlos Blé</a>, <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a> among others; also at the <a href="http://www.softwarecraftsmanshipbarcelona.org/">Software Craftsmanship Barcelona</a> <a href="https://twitter.com/hashtag/scbcn2013?src=hash">2013</a> and <a href="https://twitter.com/hashtag/SCBCN14?src=hash">2014</a> and the <a href="https://twitter.com/hashtag/socracan?src=hash">SoCra Canaries 2015</a></p>
+
+<h2>One goal</h2>
+
+<p>Our goal for this session was to practice TDD and baby steps, so the team can improve its ability on these skills.</p>
+
+<p>In any case, my objective for the katas (or deliberate practice) is not to get there as fast as we can but to improve our automated routines. This can affect our daily performance, as it becomes natural. It is not about the getting to the destination but enjoying the path along the way. In this manner, you are not so hurried up about a slow train but enjoy the views across the window.</p>
+
+<p>It was good that QA people in the team came to the session. He even participated with some tips / implementations during the refactors. Always fruitful to discuss (and learn) mixed skills (QA / dev) from the other side of the wall</p>
+
+<h2>Conclusion</h2>
+
+<p>I still haven&rsquo;t mastered the recipe (algorithm) for knowing when it is a scaffold and when it&rsquo;s time to refactor using &ldquo;replace algorithm&rdquo;. For know, I just use the three (3) rule and a bit of gut feeling on the side. The bad thing is that this can not be easily taught to someone else. Just learnt by osmosis and practice.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>matching none of the styles explained in <a href="http://johannesbrodwall.com/2011/12/18/how-to-start-a-coding-dojo/">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>This is a very good beginner&rsquo;s kata, created by <a href="https://twitter.com/royosherove">Roy Osherove</a>. Can be found <a href="http://osherove.com/tdd-kata-1/">here</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>One piece of feedback I received is that I talk too much while coding, as these 6 cycles took us about 45 minutes, total<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+<li id="fn:4">
+<p>There are some for <a href="https://www.jetbrains.com/idea/help/live-templates.html">IntelliJ IDEA</a>, <a href="http://stackoverflow.com/questions/4022367/what-is-the-eclipse-equivalent-of-intellij-live-templates">Eclipse</a> too<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">alvaro garcia</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-03T03:46:48+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>3:46 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/kata/'>kata</a>, <a class='category' href='/blog/categories/mob-programming/'>mob-programming</a>, <a class='category' href='/blog/categories/pair-programming/'>pair-programming</a>, <a class='category' href='/blog/categories/string-calculator/'>string-calculator</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>, <a class='category' href='/blog/categories/training/'>training</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2015/03/03/mob-programming-string-calculator-kata/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2015/03/03/mob-programming-string-calculator-kata/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/02/24/the-purple-wire/" title="Previous Post: The purple wire">&laquo; The purple wire</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/03/04/kata-mars-rover-in-clojure/" title="Next Post: Kata: Mars Rover in Clojure">Kata: Mars Rover in Clojure &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/03/02/using-tortoise-credentials-from-cli/">Tip: Using Tortoise Credentials in Git CLI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/01/kata-formulation-find-comments/">Kata Formulation: Find the Comments</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two Persons Involved in a Git Commit, in Github</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/01/self-study-in-february-2016/">Self-Study in February 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/01/self-study-in-january-2016/">Self-Study in January 2016</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2015/03/03/mob-programming-string-calculator-kata/';
+        var disqus_url = 'http://alvarogarcia7.github.io/blog/2015/03/03/mob-programming-string-calculator-kata/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
