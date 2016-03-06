@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Validation | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/validation/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-06T21:11:39+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Validating CSV Data in Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/12/15/validating-data-clojure/"/>
+    <updated>2015-12-15T10:52:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/12/15/validating-data-clojure</id>
+    <content type="html"><![CDATA[<p>At a client, we have CSVs of data that can be simplified to this <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>:</p>
+
+<pre><code class="lisp">(def data [
+           ["total" 6 8 13]
+           ["0"     1 2 3]
+           ["0"     2 0 4]
+           ["0"     3 0 6]
+          ])
+</code></pre>
+
+<p>In this case, some of the row named <code>total</code> is the sum of the rest of the rows, but only for some columns (second and fourth). We do not want to get rid of the columns, as they need to be printed at the end.</p>
+
+<p>This is what we need to validate:</p>
+
+<p><code>sum (rest [1]) = total [1]</code></p>
+
+<p><code>sum (rest [3]) = total [3]</code></p>
+
+<p>this could be written as a one-off program but a better alternative for us was to write a program and let users decide what columns to validate. In the future, power users will write their own validations <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>, thus creating an environment where users are no longer dependent on programmers as coupling business users to programmers does not scale.</p>
+
+<p></p>
+
+<h2>Implementation</h2>
+
+<p>The full <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj">source code is here</a></p>
+
+<pre><code class="lisp">(defn sum-eq-total [selector dataset]
+  (letfn [(total-and-rest [coll]
+             [(first coll) (rest coll)])]
+  (let [[total rest-dataset] (total-and-rest dataset)
+        selected-total (selector total)
+        selected-column (map selector rest-dataset)
+        sum-of-column (reduce + selected-column)]
+        (= selected-total sum-of-column))))
+
+(defn validate-columns [indices data]
+  (let [generate-selector #(fn [dataset] (nth dataset %))
+         selectors (map generate-selector indices)
+         check-selector #(sum-eq-total % data)]
+         (map check-selector selectors)))
+</code></pre>
+
+<p>We define the domain concept of <code>selector</code> for pointing to a dataset column</p>
+
+<pre><code class="lisp">generate-selector #(fn [dataset] (nth dataset %))
+</code></pre>
+
+<p>This expression creates selectors based on a given index. It is a lambda that returns a function, thus being a HOF</p>
+
+<p>Users can use the application in this fashion:</p>
+
+<pre><code class="lisp">simple.core=&gt; (validate-columns [1 3] data)
+(true true)
+</code></pre>
+
+<p>The full <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj">source code is here</a></p>
+
+<h2>Conclusion</h2>
+
+<p>Working on the REPL for this problem has been a very good idea, but working in a spreadsheet software has been even better. Even faster feedback cycle <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
+
+<p>The inclusion of the HOF for validating the data has paid its cost (good RoI)</p>
+
+<p>Do not limit what your users can do, let them decide but do not complicate things unnecessarily. Know when to stop adding features and limit work to prevent YAGNI.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>for more information and a spike on reading CSV data in clojure, <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/src/simple/check-media-csv.clj">this spike</a> may be useful<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>for the time being, there are no power users and no need to enable these custom validators. Doing it now would be YAGNI<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>in the case here, the data and business rules are so simple that there is no need for this software.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
