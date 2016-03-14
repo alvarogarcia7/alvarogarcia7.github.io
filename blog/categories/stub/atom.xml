@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Stub | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/stub/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-14T16:55:11+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Multiple Return Values in a Mockito Stub]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/"/>
+    <updated>2015-08-07T09:31:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.</p>
+
+<pre><code class="java">package com.example.spike;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+import org.mockito.Spy;
+
+public class DifferentReturnValues {
+
+    @Spy
+    private Spike1 spike1 = new Spike1();
+
+
+    @Test
+    public void spike1() {
+        spike1 = spy(spike1);
+        when(spike1.getBool()).thenReturn(false, true);
+
+        assertThat(spike1.getBool(), is(false));
+        assertThat(spike1.getBool(), is(true));
+
+        assertThat(spike1.getBool(), is(true));
+        assertThat(spike1.getBool(), is(true));
+    }
+
+
+    private class Spike1 {
+        public boolean getBool() {
+            return true;
+        }
+    }
+}
+</code></pre>
+
+<p>The key line is:</p>
+
+<pre><code class="java">when(spike1.getBool()).thenReturn(false, true);
+</code></pre>
+
+<p>this makes the stubbed function to return multiple values:</p>
+
+<pre><code class="java">assertThat(spike1.getBool(), is(false));
+assertThat(spike1.getBool(), is(true));
+</code></pre>
+
+<p>The last value is repeated after the last defined value:</p>
+
+<pre><code class="java">@Test
+public void spike1() {
+    spike1 = spy(spike1);
+    when(spike1.getBool()).thenReturn(false, true);
+
+    assertThat(spike1.getBool(), is(false));
+    assertThat(spike1.getBool(), is(true));
+
+    assertThat(spike1.getBool(), is(true));
+    assertThat(spike1.getBool(), is(true));
+}
+</code></pre>
+
+<p>If you want to loop over the values, you can implement it with the <code>doAnswer</code> method:</p>
+
+<pre><code class="java">@Test
+public void spike1() {
+    spike1 = spy(spike1);
+    when(spike1.getBool()).thenReturn(false, true);
+
+    final boolean[] value = {true};
+
+    doAnswer(invocation -&gt; {
+        value[0] = !value[0];
+        return value[0];
+    }).when(spike1).getBool();
+
+    assertThat(spike1.getBool(), is(false));
+    assertThat(spike1.getBool(), is(true));
+
+    assertThat(spike1.getBool(), is(false));
+    assertThat(spike1.getBool(), is(true));
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
