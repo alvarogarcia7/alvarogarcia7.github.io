@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Blogging | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/blogging/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-16T10:57:15+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Inserting Clojure Code in Octopress]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress/"/>
+    <updated>2015-04-14T21:48:27+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress</id>
+    <content type="html"><![CDATA[<p>Inserting this code in the blog:</p>
+
+<pre><code>```clojure
+(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;the octopress processor throws the error:&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;Error: Pygments can't parse unknown language: clojure
+</span><span class='line'>Error: Run jekyll build --trace for more information.
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;A solution would be to include it as lisp code:&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;```lisp
+</span><span class='line'>(defn all-access[k]
+</span><span class='line'>    (let [{:keys [a b] :as k}]
+</span><span class='line'>        (do a)
+</span><span class='line'>        (do (:b k))))</span></code></pre></td></tr></table></div></figure>
+</code></pre>
+
+<p>this is an example:</p>
+
+<pre><code class="lisp">(defn all-access[k]
+    (let [{:keys [a b] :as k}]
+        (do a)
+        (do (:b k))))
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
