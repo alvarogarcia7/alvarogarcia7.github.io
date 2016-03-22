@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Author | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/author/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-22T12:31:56+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Two Persons Involved in a Git Commit, in Github]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/"/>
+    <updated>2016-02-14T16:12:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit</id>
+    <content type="html"><![CDATA[<h2>On git</h2>
+
+<p>You can have multiple persons involved in a single git commit: an author and a committer.</p>
+
+<p>The difference is explained by <a href="https://groups.google.com/forum/#!topic/repo-discuss/6aH9rH8nUdo">Manuel Doninger</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>:</p>
+
+<blockquote><p>The author is the one who did the code change.
+The committer is the person who committed that change to a repository.</p></blockquote>
+
+<p>an example, by the same author:</p>
+
+<blockquote><p>Example: I&rsquo;m not a committer in the EGit project, so i have no rights
+to push directly to the EGit repository at Eclipse. But i contribute
+to EGit, so my changes have the author set to my name and email. If my
+change gets reviewed by the EGit team, and submitted, the committer
+field contains the name and email of the person who submitted the
+change</p></blockquote>
+
+<h2>On github</h2>
+
+<p>This is represented in github with this format:</p>
+
+<p><img src="/blog/categories/../uploads/commit-with-two-persons.png" alt="two persons involved" /></p>
+
+<p>One of them is &ldquo;sharplet&rdquo; and the other one is &ldquo;gfontenot&rdquo;. Both are github users that match a github-registered mail.</p>
+
+<p>On a shallow inspection, the commit does not reveal anything special:</p>
+
+<pre><code class="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
+commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
+Author: XXXX &lt;xxxx@example.com&gt;
+Date:   Wed Dec 2 14:44:52 2015 +1100
+
+    Clarify specs by defining • as the composition operator
+</code></pre>
+
+<p>but looking a bit closer<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>,</p>
+
+<pre><code class="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format="%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B" | less
+17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec 2 14:44:52 2015 +1100, Wed, 2 Dec 2015 14:44:52 +1100, 3 months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec 15 09:30:28 2015 -0800, Tue, 15 Dec 2015 09:30:28 -0800, 9 weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
+</code></pre>
+
+<p>or, just the emails:</p>
+
+<pre><code class="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format='%ae %ce'
+xxxx@example.com yyyy@example.com
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>For a single commit:</p>
+
+<pre><code class="bash">$ GIT_COMMITTER_NAME='John Doe' GIT_COMMITTER_EMAIL='john@example.com' git commit -m "..."
+</code></pre>
+
+<p>For a session:
+<code>
+export GIT_COMMITTER_NAME='John Doe'
+export GIT_COMMITTER_EMAIL='john@example.com'
+</code></p>
+
+<p>Taken from <a href="http://stackoverflow.com/a/23108169/1181094">this StackOverflow answer</a></p>
+
+<p>This can be useful for a pairing session or for some kinds of git history rewrite.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>also explained in <a href="http://stackoverflow.com/questions/6755824/what-is-the-difference-between-author-and-committer-in-git">this StackOverflow post</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>this list has been generated from the available arguments at the <a href="https://git-scm.com/docs/git-log">&ldquo;pretty formats&rdquo; at the git-log page</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
