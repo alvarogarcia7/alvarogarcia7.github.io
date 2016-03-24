@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Draft | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/draft/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-24T21:31:14+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Exploring Testing With Java 8 Lambdas]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/"/>
+    <updated>2015-07-30T11:04:10+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas</id>
+    <content type="html"><![CDATA[<p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:</p>
+
+<p>(source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/ef00a220f427900e3180dcbeec51248845446248">here</a>)</p>
+
+<pre><code class="java">@Test
+public void log_when_sending_greeting_letters() {
+
+    sut.send(mock(GreetingLetter.class));
+
+    verify(logger).sentGreetingLetter();
+}
+
+@Test
+public void log_when_sending_love_letters() {
+
+    sut.send(mock(LoveLetter.class));
+
+    verify(logger).sentLoveLetter();
+}
+</code></pre>
+
+<p>and the production code:</p>
+
+<pre><code class="java">public class MailSender {
+    private final EventLogger eventLogger;
+
+    public MailSender (final EventLogger eventLogger) {
+        this.eventLogger = eventLogger;
+    }
+
+    public void send (final GreetingLetter letter) {
+        // more business logic
+        eventLogger.sentGreetingLetter();
+    }
+
+    public void send (final LoveLetter letter) {
+        // more business logic
+        eventLogger.sentLoveLetter();
+    }
+}
+</code></pre>
+
+<p>Note: this is an adapted code, so the business logic is not complete and seems simple.</p>
+
+<p>So I decided to explore a bit on refactoring these tests to use lambdas and reduce repetition:</p>
+
+<pre><code class="java">private MailSender sut;
+private Consumer&lt;MailSender&gt; arrange;
+private Consumer&lt;EventLogger&gt; verify;
+
+@Test
+public void log_greetings_letter() {
+    arrange = (MailSender sut) -&gt; sut.send(mock(GreetingLetter.class));
+
+    verify = EventLogger::sentGreetingLetter;
+
+    assertAndVerify();
+}
+
+@Test
+public void log_love_letter() {
+    arrange = (MailSender sut) -&gt; sut.send(mock(LoveLetter.class));
+
+    verify = EventLogger::sentLoveLetter;
+
+    assertAndVerify();
+}
+
+private void assertAndVerify() {
+    arrange.accept(sut);
+    verify.accept(logger);
+}
+</code></pre>
+
+<p>Some comments, mine and my teammates:</p>
+
+<ul>
+<li>The tests are not very readable, maybe because we&rsquo;re still not used to java 8 lambdas</li>
+<li><code>assertAndVerify</code> has multiple purposes / responsibilities</li>
+<li>The gain of usability does not outweight the loss of readability</li>
+</ul>
+
+
+<p>Finally, the refactor was discarded and we are using the initial version.</p>
+
+<p>Later, in the dojo, <a href="https://twitter.com/@trikitrok">Manuel</a> and I have refactored this a little bit more. Source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9">here</a></p>
+
+<pre><code class="java">public class MailSenderShould {
+
+    private EventLogger eventLogger;
+    private MailSender mailSender;
+
+    @Before
+    public void setUp () {
+        eventLogger = mock(EventLogger.class);
+        mailSender = new MailSender(eventLogger);
+    }
+
+    @Test
+    public void log_greetings_letter() {
+        checkThat(aLoggingLine().forA(greetingLetter()).wasLoggedWhen(aGreetingLetterWasSent()));
+    }
+
+    @Test
+    public void log_love_letter() {
+        checkThat(aLoggingLine().forA(loveLetter()).wasLoggedWhen(aLoveLetterWasSent()));
+    }
+
+    private void checkThat (final Check check) {
+        check.checkFor(mailSender, eventLogger);
+    }
+
+    private Consumer&lt;EventLogger&gt; aGreetingLetterWasSent () {
+        return EventLogger::sentGreetingLetter;
+    }
+
+    private Consumer&lt;MailSender&gt; greetingLetter () {
+        return (MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class));
+    }
+
+    private Consumer&lt;MailSender&gt; loveLetter () {
+        return (MailSender sut) -&gt; sut.sendLoveLetter(mock(LoveLetter.class));
+    }
+
+    private Consumer&lt;EventLogger&gt; aLoveLetterWasSent () {
+        return EventLogger::sentLoveLetter;
+    }
+}
+</code></pre>
+
+<p>(the logger is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9/src/test/java/com/example/lambdatesting/CheckBuilder.java">here</a>)</p>
+
+<p>Later, we have created a simpler functional DSL for the logging, joining the <code>act</code> and <code>verify</code> into an object called <code>Check</code></p>
+
+<pre><code class="java">public class MailSenderShould {
+
+    private EventLogger eventLogger;
+    private MailSender mailSender;
+
+    @Before
+    public void setUp () {
+        eventLogger = mock(EventLogger.class);
+        mailSender = new MailSender(eventLogger);
+    }
+
+    @Test
+    public void log_greetings_letter() {
+        mailSenderLogs(whenSendingAGreetingLetter());
+    }
+
+    @Test
+    public void log_love_letter() {
+        mailSenderLogs(whenSendingALoveLetter());
+    }
+
+    private Check whenSendingALoveLetter () {
+        return new Check(
+            (MailSender sut) -&gt; sut.send(letter(LoveLetter.class)),
+            EventLogger::sentLoveLetter
+        );
+    }
+
+    private void mailSenderLogs (Check check) {
+        check.checkFor(mailSender, eventLogger);
+    }
+
+    private Check whenSendingAGreetingLetter () {
+        return new Check(
+            (MailSender sut) -&gt; sut.send(letter(GreetingLetter.class)),
+            EventLogger::sentGreetingLetter
+        );
+    }
+
+    private &lt;T&gt; T letter (final Class&lt;T&gt; typeOfLetter) {
+        return mock(typeOfLetter);
+    }
+}
+</code></pre>
+
+<p>and the <code>Check</code>, just a placeholder for two <code>Consumer</code>s:</p>
+
+<pre><code class="java">public class Check {
+
+    private final Consumer&lt;MailSender&gt; act;
+    private final Consumer&lt;EventLogger&gt; verify;
+
+    public Check (final Consumer&lt;MailSender&gt; act, final Consumer&lt;EventLogger&gt; verify) {
+        this.act = act;
+        this.verify = verify;
+    }
+
+    public void checkFor(MailSender mailSender, EventLogger eventLogger) {
+        act.accept(mailSender);
+        verify.accept(eventLogger);
+    }
+}
+</code></pre>
+
+<h2>Comparison</h2>
+
+<p>Comparison between the original form and the three refactored forms of the test:</p>
+
+<pre><code class="java">@Test
+public void log_when_sending_greeting_letters() {
+
+    sut.send(mock(GreetingLetter.class));
+
+    verify(logger).sentGreetingLetter();
+}
+</code></pre>
+
+<p>This reads like a classical JUnit tests, using the interaction (with mocks).</p>
+
+<pre><code class="java">@Test
+public void log_greetings_letter() {
+    arrange = (MailSender sut) -&gt; sut.send(mock(GreetingLetter.class));
+
+    verify = EventLogger::sentGreetingLetter;
+
+    assertAndVerify();
+}
+</code></pre>
+
+<p>This is the first step towards more cohesion, at the cost of readability. You save the verify at the end, but the repeated method <code>assertAndVerify</code> is still present.</p>
+
+<pre><code class="java">@Test
+public void log_greetings_letter() {
+    checkThat(aLoggingLine().forA(greetingLetter()).wasLoggedWhen(aGreetingLetterWasSent()));
+}
+</code></pre>
+
+<p>This one reads more like a classical DSL, but is harder to read compared to a classical test.</p>
+
+<pre><code class="java">@Test
+public void log_greetings_letter() {
+    mailSenderLogs(whenSendingAGreetingLetter());
+}
+</code></pre>
+
+<p>This one reads more like a business requirement.</p>
+
+<h2>Other</h2>
+
+<p>Other ideas we have tested:</p>
+
+<pre><code class="java">Builder.aNew().sendGreetingLetter()
+
+assertAndVerifyThat(
+    theLoggingLine()
+        .for(aGreetingLetter())
+        .isLoggedWhen(greetingLetterIsSent()
+    )
+);
+
+public Consumer&lt;MailSender&gt; aGreetingLetter(){
+    return (MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class));
+}
+
+public Consumer&lt;EventLogger&gt; greetingLetterIsSent(){
+    return EventLogger::sentGreetingLetter;
+}
+</code></pre>
+
+<pre><code class="java">assertAndVerifyThat(
+    theLoggingLine()
+        .for(
+            (MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class))
+        )
+        .isLoggedWhen(EventLogger::sentGreetingLetter)
+    )
+);
+</code></pre>
+
+<pre><code class="java">public void assertAndVerifyThat(TestContext testContext){
+    testContext.assert();
+    testContext.verify();
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

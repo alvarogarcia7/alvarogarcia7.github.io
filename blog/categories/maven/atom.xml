@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Maven | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/maven/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-24T21:31:14+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Differences in Maven Test Execution]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/"/>
+    <updated>2015-10-05T16:18:55+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution</id>
+    <content type="html"><![CDATA[<p>There are times when you only want to have the production code:</p>
+
+<ul>
+<li>downstream job after a successful build</li>
+<li>compiling in local after checkout from DVCS</li>
+<li>spiking (possibly the tests are broken)</li>
+<li>speeding up the process</li>
+</ul>
+
+
+<p>For that, maven allows to skip the tests, selectively:</p>
+
+<ul>
+<li><code>-DskipTests</code> compiles the tests, but skips running them</li>
+<li><code>-Dmaven.test.skip</code> skips compiling the tests and does not run them. This can also be written as <code>-Dmaven.test.skip=true</code></li>
+</ul>
+
+
+<p>In case some of your tests depend on tests from another artifact (e.g. Object Mother, test infrastructure) and the latter has changed, you must compile the tests. You need to not execute the tests</p>
+
+<p>For more information:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/25639336/whats-the-difference-between-dskiptests-and-dmaven-test-skip-true">this stackoverflow</a> post is useful</li>
+<li><a href="http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html">Documentation for skipping tests</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Packing Your Own Maven Dependencies]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/"/>
+    <updated>2015-07-30T21:21:18+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies</id>
+    <content type="html"><![CDATA[<p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.</p>
+
+<p>This is how most of them look like:</p>
+
+<pre><code class="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.gmaur.legacycode&lt;/groupId&gt;
+  &lt;artifactId&gt;legacyutils&lt;/artifactId&gt;
+  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+
+  &lt;dependencies&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.hamcrest&lt;/groupId&gt;
+        &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt;
+        &lt;version&gt;1.3&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.11&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mockito&lt;/groupId&gt;
+        &lt;artifactId&gt;mockito-all&lt;/artifactId&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+        &lt;version&gt;2.0.2-beta&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.18.1&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;includes&gt;
+                        &lt;include&gt;**/**Test.java&lt;/include&gt;
+                        &lt;include&gt;**/**Should.java&lt;/include&gt;
+                    &lt;/includes&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>Note: the <code>org.apache.maven.plugins:maven-surefire-plugin</code> is to make maven execute the tests that end in <code>*Should</code>.</p>
+
+<p>Now, the dependency versions and plugin configuration is repeated in all the projects, which is plenty of repetition.</p>
+
+<h2>Enter JitPack.io</h2>
+
+<p>With the tool <a href="https://JitPack.io">JitPack.io</a>, you can generate your own dependencies. A guide on how to use it can be found <a href="https://jitpack.io/docs/">here</a></p>
+
+<p>I&rsquo;ve published my own java dependency (originally <a href="https://github.com/alvarogarcia7/java-parent/releases/tag/v0.0.1">a github release</a>)</p>
+
+<p>A <code>pom.xml</code> in the new style is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/master/pom.xml">here</a>:</p>
+
+<pre><code class="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.example.spike&lt;/groupId&gt;
+    &lt;artifactId&gt;lambdatesting&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;com.github.alvarogarcia7&lt;/groupId&gt;
+        &lt;artifactId&gt;java-parent&lt;/artifactId&gt;
+        &lt;version&gt;v0.0.1&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;jitpack.io&lt;/id&gt;
+            &lt;url&gt;https://jitpack.io&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.github.alvarogarcia7&lt;/groupId&gt;
+            &lt;artifactId&gt;java-parent&lt;/artifactId&gt;
+            &lt;version&gt;v0.0.1&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.hamcrest&lt;/groupId&gt;
+            &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mockito&lt;/groupId&gt;
+            &lt;artifactId&gt;mockito-all&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+</code></pre>
+
+<p>It does not need the plugin configuration nor the dependency versions. The downside is that it needs to be as the <code>parent pom</code>.</p>
+
+<h2>Acknowledgments</h2>
+
+<p>Thanks to Manuel for encouraging me to write this article</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Maven Module Base for Cucumber in Java]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/03/10/maven-module-base-for-cucumber-in-java/"/>
+    <updated>2015-03-10T06:24:38+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/03/10/maven-module-base-for-cucumber-in-java</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve built a small maven module, to be used directly with cucumber. You can fork the repository <a href="https://github.com/alvarogarcia7/base-bdd-cucumber">here</a></p>
+
+<p>This is the setup I&rsquo;ve proposed for the meetup <a href="http://www.meetup.com/Agile-Barcelona-Meetup/events/220673134/">&ldquo;BDD Cucumber kata (gherkin + code)&rdquo;</a>. Will see if this code is successfully used by the ~40 participants in a couple of weeks</p>
+
+<p>(Quote from the <a href="https://github.com/alvarogarcia7/base-bdd-cucumber/blob/master/README.md">README.md</a>):</p>
+
+<p>This maven project has been possible due to <a href="https://twitter.com/@thomassundberg">Thomas Sundberg</a> and <a href="https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world">this post</a></p>
+
+<p>Should you want to, there&rsquo;s a tweet to thank him the effort: <a href="https://twitter.com/intent/tweet?text=@thomassundberg%20thanks%20for%20the%20cucumber%20bdd%20tutorial!%20Will%20be%20using%20it%20from%20@agilebcn;Keep%20up%0Athe%20good%20work&amp;url=https://thomassundberg.wordpress.com/2014/05/29/cucumber-jvm-hello-world/">tweet intent here</a></p>
+
+<p>Happy katas and happy bdd'ing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brown-bag Session: Maven]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/03/06/brown-bag-session-maven/"/>
+    <updated>2015-03-06T20:18:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/03/06/brown-bag-session-maven</id>
+    <content type="html"><![CDATA[<p>Yesterday we did a training about the maven tool. One of the team members explained to us some topics including:</p>
+
+<ul>
+<li>lifecycles</li>
+<li>profiles and how to create one
+
+<ul>
+<li>slowTests for integration tests (this client only)</li>
+<li>downloadJavadoc</li>
+<li>downloadSources</li>
+</ul>
+</li>
+<li>convention over configuration</li>
+<li>scopes of the dependencies (test, runtime, compile, provided)</li>
+<li>tricks about the tool:
+
+<ul>
+<li>order of the dependencies (especially junit, hamcrest)</li>
+</ul>
+</li>
+<li>plugins and how to build one</li>
+<li>destination folders
+
+<ul>
+<li>target, classes, test-classes, etc</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Note: this post was created a posteriori, with the original date</p>
+]]></content>
+  </entry>
+  
+</feed>
