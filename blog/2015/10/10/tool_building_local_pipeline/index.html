@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tool: Building a Local Pipeline - The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="Motivation At a client, one of the projects has a long building process and the tests are mostly slow, so I use a local building pipeline, an example &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Tool: Building a Local Pipeline</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-10T10:06:58+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:06 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Motivation</h2>
+
+<p>At a client, one of the projects has a long building process and the tests are mostly slow, so I use a local building <a href="https://en.wikipedia.org/wiki/Pipeline_(software)">pipeline</a>, an example of the <a href="https://msdn.microsoft.com/library/dn568100.aspx">Pipes and Filters</a> pattern.</p>
+
+<p>This allows for executing manually only the fast unit tests, then automatically (no user intervention, no time spent) executing the rest of them before pushing. In case the latter fails, it is possible to do <code>git push -f</code> to the <code>pipeline</code> without corrupting the central repository (<code>origin</code>) history, possibly disturbing others.</p>
+
+<p>This strategy also allows for parallel modification of sources: you can continue working on your IDE while the compiler is working on the other working directory. Should you introduce any syntax / logical error on your working code, the compiler is not affected, as it has a working copy just for itself.</p>
+
+<h2>Implementation</h2>
+
+<p>This requires two git repositories:</p>
+
+<ul>
+<li><code>local</code> or working copy. Configure it so it has a remote called <code>pipeline</code> and the <code>origin</code>, the repository you cloned from. This is a non-bare repository.</li>
+<li><code>pipeline</code>, used for building. This also is a non-bare repository.</li>
+</ul>
+
+
+<p>In the <code>local</code> you can do the development and local commits.</p>
+
+<p>When you&rsquo;re done, instead of</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git push origin <span class="nv">$branch</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>do</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git push pipeline <span class="nv">$branch</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After the git hook is installed, this will trigger the pipeline execution.</p>
+
+<h3>Git hook</h3>
+
+<p>In the <code>pipeline</code>, in the <code>.git/hooks/post-receive</code> file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>chmod +x pipeline.sh
+</span><span class='line'><span class="k">while</span> <span class="nb">read </span>oldrev newrev refname
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'>  <span class="c"># whatever you want to execute</span>
+</span><span class='line'>   <span class="nv">branch</span><span class="o">=</span><span class="k">$(</span>git rev-parse --symbolic --abbrev-ref <span class="nv">$refname</span><span class="k">)</span>
+</span><span class='line'>  ./pipeline.sh <span class="nv">$branch</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above script, we&rsquo;re telling git to execute the <code>pipeline.sh</code> with the received branch as argument.</p>
+
+<h3>Pipeline executor</h3>
+
+<p>In the <code>pipeline</code> repository, in <code>.git/pipeline.sh</code> file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">set</span> -e
+</span><span class='line'><span class="nb">set</span> -o pipefail
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> cleanup <span class="o">{</span>
+</span><span class='line'>  git checkout develop
+</span><span class='line'>  git pull develop
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># upon failure, tell the user</span>
+</span><span class='line'><span class="k">function</span> err <span class="o">{</span>
+</span><span class='line'>  cleanup
+</span><span class='line'>  growlnotify <span class="s2">&quot;pipeline fails&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># trap signal ERR, executing function &#39;err&#39;</span>
+</span><span class='line'><span class="nb">trap</span> <span class="s2">&quot;err&quot;</span> ERR
+</span><span class='line'>
+</span><span class='line'><span class="nv">branch</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$branch</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;need to specify a branch&quot;</span>
+</span><span class='line'>    <span class="nb">exit</span> -1
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'>git checkout <span class="nv">$branch</span>
+</span><span class='line'>mvn clean install <span class="p">|</span> tee output.log
+</span><span class='line'>git push --set-upstream origin <span class="nv">$branch</span>
+</span><span class='line'>cleanup
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Pipeline executor explanation</h4>
+
+<ul>
+<li><p>We prepare the bash environment:</p>
+
+<ul>
+<li><code>-e</code>: fail the script when a command fails</li>
+<li><code>-o pipefail</code>: fail the script when some command fails in a pipe</li>
+<li><code>err</code> and <code>trap</code>: create a hook to be executed when the signal is trapped</li>
+</ul>
+</li>
+<li><p>We require a branch to execute this script.</p></li>
+<li>Checkout to that branch</li>
+<li>Clean, compile &amp; execute tests</li>
+<li>Push to origin</li>
+<li>Clean up</li>
+<li>In case this fails, the script will stop and notify the user with <code>growl</code> and clean up.</li>
+</ul>
+
+
+<p>Clean up: checkout to develop (or any other branch that always exists), leaving the system prepared to execute again.</p>
+
+<h3>Notifications: telling the user</h3>
+
+<p>The program <code>growlnotify</code> is a <a href="http://www.growlforwindows.com/gfw/help/growlnotify.aspx">CLI notifier</a> to <code>growl</code> (<a href="http://www.growlforwindows.com/gfw/default.aspx">windows</a>, <a href="http://mattn.github.io/growl-for-linux/">linux</a>)</p>
+
+<h2>Conclusions</h2>
+
+<p>Ideally, the tests should be faster, and executing them locally should always be possible, maybe in the <code>pre-commit</code> hook. Whenever this is not possible, a local pipeline can reduce the time spent waiting for test execution and remove the lock on the working directory while the compiler is working.</p>
+
+<p>This pipeline aims to be simple, without many customizations and being single-user. For more complex workflows and other restrictions, it might be better to drop this project and start investigating continuous integration (CI) tools such as e.g., <a href="https://jenkins-ci.org/">Jenkins</a>, <a href="https://travis-ci.org/">Travis</a>, <a href="https://atlassian.com/software/bamboo">Bamboo</a></p>
+
+<h2>Further work</h2>
+
+<p>The jobs in the <code>pipeline</code> could be queued, so it is possible to push to the pipeline before the previous job has started. See reference below.</p>
+
+<h2>Reference</h2>
+
+<ul>
+<li><a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html">Trap</a></li>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a></li>
+<li><a href="http://idolinux.blogspot.com/2008/08/bash-script-error-handling.html">Sample bash error handling</a></li>
+<li><a href="http://superuser.com/questions/220364/how-to-run-commands-as-in-a-queue">Queuing bash jobs</a></li>
+</ul>
+
+
+<h2>Appendix</h2>
+
+<p>This script will push to the pipeline:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'>git push pipeline  2&gt;<span class="p">&amp;</span><span class="m">1</span> &gt; /dev/null <span class="p">&amp;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">alvaro garcia</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-10-10T10:06:58+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:06 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/automation/'>automation</a>, <a class='category' href='/blog/categories/building-pipeline/'>building-pipeline</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/git-hook/'>git-hook</a>, <a class='category' href='/blog/categories/growl/'>growl</a>, <a class='category' href='/blog/categories/notification/'>notification</a>, <a class='category' href='/blog/categories/pipeline/'>pipeline</a>, <a class='category' href='/blog/categories/pipes-and-filters/'>pipes-and-filters</a>, <a class='category' href='/blog/categories/polish-your-tool/'>polish-your-tool</a>, <a class='category' href='/blog/categories/repository/'>repository</a>, <a class='category' href='/blog/categories/signal-trapping/'>signal-trapping</a>, <a class='category' href='/blog/categories/tool/'>tool</a>, <a class='category' href='/blog/categories/trap/'>trap</a>, <a class='category' href='/blog/categories/trigger/'>trigger</a>, <a class='category' href='/blog/categories/working-directory/'>working-directory</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/10/07/java-tips-gotchas/" title="Previous Post: Java Tips & Gotchas">&laquo; Java Tips & Gotchas</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/10/12/calling-all-methods-in-a-ruby-object/" title="Next Post: Tip: calling all methods in an Object in Ruby">Tip: calling all methods in an Object in Ruby &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/03/02/using-tortoise-credentials-from-cli/">Tip: Using Tortoise Credentials in Git CLI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/02/self-study-in-march-2016/">Self-Study in March 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/01/kata-formulation-find-comments/">Kata Formulation: Find the Comments</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two Persons Involved in a Git Commit, in Github</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/01/self-study-in-february-2016/">Self-Study in February 2016</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/';
+        var disqus_url = 'http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
