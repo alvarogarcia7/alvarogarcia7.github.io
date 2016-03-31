@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Destructuring | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/destructuring/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-03-31T18:19:25+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Destructuring as a Refactor in Clojure]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/"/>
+    <updated>2015-04-14T21:36:23+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure</id>
+    <content type="html"><![CDATA[<p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
+
+<blockquote><p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p></blockquote>
+
+<pre><code>user=&gt; (def point {:x 5 :y 7})
+#'user/point
+
+(let [{:keys [x y] :as the-point} point]
+         (println "x:" x "y:" y "point:" the-point))
+
+x: 5 y: 7 point: {:x 5, :y 7}
+</code></pre>
+
+<blockquote><p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p></blockquote>
+
+<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
+
+<p>This has been used for a method like this one:</p>
+
+<pre><code class="lisp">(defn all-access[k]
+  (do (:a k))
+  (do (:b k)))
+</code></pre>
+
+<p>this has been refactored to this</p>
+
+<pre><code class="lisp">(defn all-access[k]
+  (let [{:keys [a b] :as k}]
+      (do a)
+      (do (:b k))))
+</code></pre>
+
+<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+]]></content>
+  </entry>
+  
+</feed>
