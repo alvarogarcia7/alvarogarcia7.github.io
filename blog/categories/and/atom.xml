@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: And | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/and/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-01T09:31:38+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure and the Macro And]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and/"/>
+    <updated>2015-12-08T15:37:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and</id>
+    <content type="html"><![CDATA[<p>While on the REPL, I tried this:</p>
+
+<pre><code class="lisp">simple.core=&gt; (reduce and true [true])
+CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clojure.core/and, compiling:(form-init7116694665186998245.clj:1:1)
+</code></pre>
+
+<p>Reading the <a href="https://clojuredocs.org/clojure.core/and">clojuredocs for <code>and</code></a>, you can find this:</p>
+
+<blockquote><p>Note add is a macro, so you cannot apply it. For example, there is a vector of some Boolean values [true true false true], which you want to test to see if they are all true. The code below will not work:</p>
+
+<p>(apply add [true true false true]) ;won&rsquo;t work</p>
+
+<p>Instead, use this:</p>
+
+<p>(every? identity [true  true false true])</p></blockquote>
+
+<p>I tried it with success. Digging a bit deeper:</p>
+
+<pre><code class="lisp">simple.core=&gt; (defn all-truthy? [&amp; elements] (every? identity elements))
+#'simple.core/all-truthy?
+simple.core=&gt; (all-truthy? nil false)
+false
+simple.core=&gt; (all-truthy? nil 0)
+false
+simple.core=&gt; (all-truthy? nil 1)
+false
+simple.core=&gt; (all-truthy? 2 1)
+true
+simple.core=&gt; (all-truthy? [nil false])
+true
+</code></pre>
+
+<p>Was also tempted to try this:</p>
+
+<pre><code class="lisp">simple.core=&gt; (reduce (fn [acc element] (and acc element)) true [true true false true])
+false
+simple.core=&gt; (reduce (fn [acc element] (and acc element)) true [true true true true])
+true
+</code></pre>
+
+<p>Encapsulate it into a function:</p>
+
+<pre><code class="lisp">simple.core=&gt; (defn all-true [&amp; elements] (reduce (fn [acc element] (and acc element)) true elements))
+#'simple.core/all-true
+simple.core=&gt; (all-true true)
+true
+simple.core=&gt; (all-true true false)
+false
+simple.core=&gt; (all-true true false true)
+false
+</code></pre>
+
+<p>What happens with the non-boolean values?</p>
+
+<pre><code class="lisp">simple.core=&gt; (all-true 1 2 3)
+3
+simple.core=&gt; (all-true 1 2 3 76)
+76
+simple.core=&gt; (all-true 1 2 3 64)
+64
+simple.core=&gt; (all-true 1 2 3 64)
+64
+</code></pre>
+
+<p>This is because:</p>
+
+<pre><code class="lisp">simple.core=&gt; (and 64 3)
+3
+simple.core=&gt; (and 3 64)
+64
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p><code>all-truthy?</code> exploits the falsy values in clojure (<code>nil</code>, <code>false</code>), while <code>all-true</code> uses the true boolean values, although the function does not work properly with non-boolean values (i.e. its domain is the booleans)</p>
+
+<h2>Appendix A: Source code</h2>
+
+<p><code>and</code>:</p>
+
+<pre><code class="lisp">simple.core=&gt; (source and)
+(defmacro and
+  "Evaluates exprs one at a time, from left to right. If a form
+  returns logical false (nil or false), and returns that value and
+  doesn't evaluate any of the other expressions, otherwise it returns
+  the value of the last expr. (and) returns true."
+  {:added "1.0"}
+  ([] true)
+  ([x] x)
+  ([x &amp; next]
+   `(let [and# ~x]
+      (if and# (and ~@next) and#))))
+</code></pre>
+
+<p><code>identity</code>:</p>
+
+<pre><code class="lisp">simple.core=&gt; (source identity)
+(defn identity
+  "Returns its argument."
+  {:added "1.0"
+   :static true}
+  [x] x)
+</code></pre>
+
+<p><code>every</code>:</p>
+
+<pre><code class="lisp">simple.core=&gt; (source every?)
+(defn every?
+  "Returns true if (pred x) is logical true for every x in coll, else
+  false."
+  {:tag Boolean
+   :added "1.0"
+   :static true}
+  [pred coll]
+  (cond
+   (nil? (seq coll)) true
+   (pred (first coll)) (recur pred (next coll))
+   :else false))
+</code></pre>
+
+<p><code>-&gt;</code>:</p>
+
+<pre><code class="lisp">simple.core=&gt; (source -&gt;)
+(defmacro -&gt;
+  "Threads the expr through the forms. Inserts x as the
+  second item in the first form, making a list of it if it is not a
+  list already. If there are more forms, inserts the first form as the
+  second item in second form, etc."
+  {:added "1.0"}
+  [x &amp; forms]
+  (loop [x x, forms forms]
+    (if forms
+      (let [form (first forms)
+            threaded (if (seq? form)
+                       (with-meta `(~(first form) ~x ~@(next form)) (meta form))
+                       (list form x))]
+        (recur threaded (next forms)))
+      x)))
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
