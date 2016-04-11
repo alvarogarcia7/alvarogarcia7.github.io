@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cli | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/cli/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-11T09:09:35+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tip: Using Tortoise Credentials in Git CLI]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/03/02/using-tortoise-credentials-from-cli/"/>
+    <updated>2016-03-02T11:41:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/03/02/using-tortoise-credentials-from-cli</id>
+    <content type="html"><![CDATA[<h2>TortoiseGit part</h2>
+
+<ul>
+<li>Go to a repo</li>
+<li>right button, Settings</li>
+<li>Git -> Credential</li>
+<li>Add a creadential</li>
+<li>Config type: global</li>
+<li>Helper: wincred</li>
+</ul>
+
+
+<p>Sync once using your HTTPS password</p>
+
+<h2>CLI part</h2>
+
+<p>Open the <code>$REPO/.git/config</code> and add</p>
+
+<pre><code>[credential]
+    helper = wincred
+</code></pre>
+
+<p>Remote git operations should not ask for credentials anymore</p>
+]]></content>
+  </entry>
+  
+</feed>
