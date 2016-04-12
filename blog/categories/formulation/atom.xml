@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Formulation | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/formulation/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-12T06:47:38+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Kata Formulation: Find the Comments]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/"/>
+    <updated>2016-03-01T06:57:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments</id>
+    <content type="html"><![CDATA[<p>Little Johnny is inspecting a PHP source code that contains comments. These comments contains words that he doesn&rsquo;t understand, as it written in another language.</p>
+
+<h2>Rules and constraints</h2>
+
+<p>The source code in the PHP files does not need to be correct.</p>
+
+<p>A comment (a subset of PHP comments) is defined as:</p>
+
+<ul>
+<li>A line containing C-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code>// hello C-style</code> is a valid comment</li>
+<li><code>echo "//";</code> is not a comment</li>
+<li><code>echo '//';</code> is not a comment</li>
+</ul>
+</li>
+<li>A line containing Perl-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code># hello Perl-style</code> is a valid comment</li>
+<li><code>echo "#";</code> is not a comment</li>
+<li><code>echo '#';</code> is not a comment</li>
+</ul>
+</li>
+<li>There are no multi-line comments
+
+<ul>
+<li><code>/* ... */</code> is not a comment</li>
+</ul>
+</li>
+</ul>
+
+
+<p>You can do this kata in any language you want. In any case it is not allowed to use a PHP parser. This task must be done manually.</p>
+
+<h2>How to start</h2>
+
+<ul>
+<li>Clone/fork (any stars are welcome) <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments">this repo</a></li>
+<li>Run the tests. <a href="https://github.com/alvarogarcia7/cli-app-base-clojure/blob/master/README.md#tests">See this</a> for help</li>
+<li>They should be red.</li>
+<li>Go to production code and fix it</li>
+<li>Have fun (happy kata and happy koding!)</li>
+</ul>
+
+
+<h2>Requirements</h2>
+
+<p>Please do not read ahead, just read the current assignment, do it, then read the next one:</p>
+
+<ol>
+<li>Can you help Little Johnny fetch all those comments?</li>
+<li>These messages have not been audited yet and we want to publish the code, so it is better to remove the comments. Can you do it?</li>
+</ol>
+
+
+<h2>Optional requirement</h2>
+
+<p>As an optional task, when the problem is finished (you can attack in your preferred order), there must be an executable jar with some parameters to process the current folder with the &lsquo;working modes&rsquo; specified above.</p>
+
+<p>(This formulation is also present at the <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments/blob/master/README.md">repository</a> )</p>
+]]></content>
+  </entry>
+  
+</feed>
