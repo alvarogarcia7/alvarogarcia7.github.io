@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Search | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/search/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-13T10:28:03+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Searching on a Suite of Failing Tests]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/"/>
+    <updated>2015-08-13T14:45:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests</id>
+    <content type="html"><![CDATA[<h2>Motivation</h2>
+
+<p>Today, at a client, in the green phase, we had a test suite which was failing: the whole suite fails but the test cases, individually, succeed.</p>
+
+<p>So my first impression was that something was being shared between tests. Also confirmed because the failing class was an EndToEnd test, in which we load the whole spring context</p>
+
+<p>A quick glance was not revealing anything interesting, so I decided to find which is the minimum suite (as opposed as to the whole suite) that makes the new testcase fail, expecting to narrow the search for possible causes. This is very similar to what QuickCheck does, to generate the minimum testcase that breaks your property. In this way, you can focus in a possibly simpler<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> feature.</p>
+
+<p>This post covers how to perform this search.</p>
+
+<h2>Mathematical formulation</h2>
+
+<p>Let <code>T</code> be a sequence of tests: <code>i1, i2, ..., in, F, j1, j2, ..., jm</code></p>
+
+<p>where:</p>
+
+<ul>
+<li><code>i</code> are green tests</li>
+<li> <code>F</code> is first failing test
+
+<ul>
+<li>when executed in isolation, is green</li>
+<li>when executed in the sequence, is red</li>
+</ul>
+</li>
+<li> <code>j</code> are tests after the failed test.</li>
+</ul>
+
+
+<p>In this case, the order is important, as the failed test suite (presumably) comes from a shared state set by a previous test.</p>
+
+<p>The first search-space pruning is to remove the <code>j</code>, as they supposedly don&rsquo;t have any effect (as they are after the failed test)</p>
+
+<p>let <code>T1</code> be a subsequence of <code>T</code> that includes <code>i</code> and <code>F</code>: <code>i1, i2, ..., in, F</code></p>
+
+<p>Then it is assumed that one (or more) of the <code>i</code> generates an inconsistent state that makes <code>F</code> fail.</p>
+
+<p>In the sequence <code>T1</code>, <code>F</code> fails, but in the sequence <code>TF</code> composed by <code>F</code> only, the test succeeds. This can be thought as the equivalent of the <a href="https://en.wikipedia.org/wiki/Intermediate_value_theorem">Intermediate value theorem</a>, also called Bolzano&rsquo;s theorem, where the <code>T1</code> is at one side ot the axis and the <code>TF</code> at another. The theorem proves that there must be at least one value where the domain of the function crosses the axis</p>
+
+<p>I say &ldquo;thought of&rdquo; because that theorem is only for continous functions and sets are not (are discrete) but the analogy is good enough: if one sequence is OK but the other isn&rsquo;t, there must be a minimum sequence where the result is OK and another one where the results are not. They two sequences must not be the same case as one result cannot be OK and not OK at the same time.</p>
+
+<h2>Naïve search</h2>
+
+<p>The first way of searching would be find the minimum set that fails:</p>
+
+<ul>
+<li>include <code>F</code>, then another from <code>i1,...,in</code> that makes the <code>F</code> fail. <code>F</code> the last one, because it needs to be affected by the side effects from the preceding test.</li>
+<li>if the first strategy does not work, for each of the above cases, add another from the <code>i1,...,in</code> (except the one that was added)</li>
+</ul>
+
+
+<p>For the first step, it takes <code>O(n * 2)</code>, assuming executing a single test costs <code>O(1)</code>. Reduces to <code>O(n)</code></p>
+
+<p>For the second step, <code>O(n * n-1 * 3)</code>. Reduces to <code>O(n^2)</code></p>
+
+<p>For the third step, <code>O(n * n-1 * n-2 * 4)</code>. Reduces to <code>O(n^3)</code></p>
+
+<p>For the nth step, it costs <code>O(n * n-1 * n-2 * ... * n-(n-1) * (n+1))</code>. Reduces to <code>O(n^n)</code>. Which is polynomical but not feasible for medium-sized <code>n</code> (in an automatic fashion) or small <code>n</code> (in a manual fashion)</p>
+
+<h2>Dichotomous search</h2>
+
+<p>(This is also known as <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary search</a>)</p>
+
+<p>Inspired by <code>git-bisect</code>, I decided to treat the sequence <code>i1, ..., in</code> as the source for the dicotomical search, applying the subsequences to <code>F</code>.</p>
+
+<p>The first step, it takes <code>O(n/2 * n/2)</code> = <code>O(n^2)</code> to execute half the tests</p>
+
+<p>The second step, is to execute half the number of the tests previously executed, either from the sequence before (if the <code>F</code> fails) or from the other half (if <code>F</code> does not fail). The cost is <code>O(n/4 * n/4)</code> = <code>O(n^2)</code></p>
+
+<p>For the nth step, the cost is <code>O(n/2^n * n/2^n)</code> = <code>O(n^2/2^n)</code> = <code>O(0)</code></p>
+
+<p>This n in the nth step is smaller than the other n, as each step divides by two the amount of tests to be included.</p>
+
+<p>The amount of tests to be executed is <code>n + n/2 + n/4 + n/8 + ... + 1</code> which is roughly <code>2n</code>. Executing each test costs <code>O(1)</code> (by the assumption before), so the total cost is <code>O(2n)</code> = <code>O(n)</code></p>
+
+<p>If we take it by the amount of steps we need to manually execute is 1 for the whole, 1 for the half, 1 for the quarter, &hellip;. = <code>O(log2 n)</code></p>
+
+<h2>Procedure</h2>
+
+<p>To keep the executed tests, I created a support branch where I deleted the tests that were selected to be excluded. Always executed &ldquo;all tests in the suite&rdquo; as this makes it faster to select in the IDE.</p>
+
+<p>When the half taken was wrong, I reverted the last commit and selected the other half.</p>
+
+<p>After finding the minimum sequence and solving the issue, this support branch was discarded</p>
+
+<h2>Conclusion</h2>
+
+<p>In the real scenario, with around 100 tests, searching manually in the naïve way would not have been possible. It would have cost 100 steps, as the minimum set that produces <code>F</code> had size 2 (so only one step was necessary).</p>
+
+<p>Applying the dichotomous search, in 8-10 steps I had finished, with the guarantee that no matter how many tests produced the <code>F</code> I would have found it in a reasonable amount of time.</p>
+
+<h2>Comments</h2>
+
+<p>Finally, the root cause for the failing test <code>F</code> was the OrientDB InMemory implementation with Spring context, as the former does not allow two instances at the same time in the same JVM.</p>
+
+<p>It was solved using <code>@DirtiesContext</code> in both cases of the minimum sequence that forms <code>F</code>, so no matter which order the executor decides, the context will always be clean for the next execution.</p>
+
+<p>We found this thanks to a teammate&rsquo;s intuition.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Because maybe the minimum testcase is more difficult than another.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
