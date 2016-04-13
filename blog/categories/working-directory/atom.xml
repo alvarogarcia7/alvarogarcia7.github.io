@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Working-directory | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/working-directory/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-13T19:40:36+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tool: Building a Local Pipeline]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/"/>
+    <updated>2015-10-10T10:06:58+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline</id>
+    <content type="html"><![CDATA[<h2>Motivation</h2>
+
+<p>At a client, one of the projects has a long building process and the tests are mostly slow, so I use a local building <a href="https://en.wikipedia.org/wiki/Pipeline_(software)">pipeline</a>, an example of the <a href="https://msdn.microsoft.com/library/dn568100.aspx">Pipes and Filters</a> pattern.</p>
+
+<p>This allows for executing manually only the fast unit tests, then automatically (no user intervention, no time spent) executing the rest of them before pushing. In case the latter fails, it is possible to do <code>git push -f</code> to the <code>pipeline</code> without corrupting the central repository (<code>origin</code>) history, possibly disturbing others.</p>
+
+<p>This strategy also allows for parallel modification of sources: you can continue working on your IDE while the compiler is working on the other working directory. Should you introduce any syntax / logical error on your working code, the compiler is not affected, as it has a working copy just for itself.</p>
+
+<h2>Implementation</h2>
+
+<p>This requires two git repositories:</p>
+
+<ul>
+<li><code>local</code> or working copy. Configure it so it has a remote called <code>pipeline</code> and the <code>origin</code>, the repository you cloned from. This is a non-bare repository.</li>
+<li><code>pipeline</code>, used for building. This also is a non-bare repository.</li>
+</ul>
+
+
+<p>In the <code>local</code> you can do the development and local commits.</p>
+
+<p>When you&rsquo;re done, instead of</p>
+
+<pre><code class="bash">git push origin $branch
+</code></pre>
+
+<p>do</p>
+
+<pre><code class="bash">git push pipeline $branch
+</code></pre>
+
+<p>After the git hook is installed, this will trigger the pipeline execution.</p>
+
+<h3>Git hook</h3>
+
+<p>In the <code>pipeline</code>, in the <code>.git/hooks/post-receive</code> file:</p>
+
+<pre><code class="bash">#!/bin/bash
+chmod +x pipeline.sh
+while read oldrev newrev refname
+do
+  # whatever you want to execute
+   branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+  ./pipeline.sh $branch
+done
+</code></pre>
+
+<p>In the above script, we&rsquo;re telling git to execute the <code>pipeline.sh</code> with the received branch as argument.</p>
+
+<h3>Pipeline executor</h3>
+
+<p>In the <code>pipeline</code> repository, in <code>.git/pipeline.sh</code> file:</p>
+
+<pre><code class="bash">#!/bin/bash
+
+set -e
+set -o pipefail
+
+function cleanup {
+  git checkout develop
+  git pull develop
+}
+
+# upon failure, tell the user
+function err {
+  cleanup
+  growlnotify "pipeline fails"
+}
+
+# trap signal ERR, executing function 'err'
+trap "err" ERR
+
+branch=$1
+
+if [[ -z $branch ]]; then
+    echo "need to specify a branch"
+    exit -1
+fi
+
+git checkout $branch
+mvn clean install | tee output.log
+git push --set-upstream origin $branch
+cleanup
+</code></pre>
+
+<h4>Pipeline executor explanation</h4>
+
+<ul>
+<li><p>We prepare the bash environment:</p>
+
+<ul>
+<li><code>-e</code>: fail the script when a command fails</li>
+<li><code>-o pipefail</code>: fail the script when some command fails in a pipe</li>
+<li><code>err</code> and <code>trap</code>: create a hook to be executed when the signal is trapped</li>
+</ul>
+</li>
+<li><p>We require a branch to execute this script.</p></li>
+<li>Checkout to that branch</li>
+<li>Clean, compile &amp; execute tests</li>
+<li>Push to origin</li>
+<li>Clean up</li>
+<li>In case this fails, the script will stop and notify the user with <code>growl</code> and clean up.</li>
+</ul>
+
+
+<p>Clean up: checkout to develop (or any other branch that always exists), leaving the system prepared to execute again.</p>
+
+<h3>Notifications: telling the user</h3>
+
+<p>The program <code>growlnotify</code> is a <a href="http://www.growlforwindows.com/gfw/help/growlnotify.aspx">CLI notifier</a> to <code>growl</code> (<a href="http://www.growlforwindows.com/gfw/default.aspx">windows</a>, <a href="http://mattn.github.io/growl-for-linux/">linux</a>)</p>
+
+<h2>Conclusions</h2>
+
+<p>Ideally, the tests should be faster, and executing them locally should always be possible, maybe in the <code>pre-commit</code> hook. Whenever this is not possible, a local pipeline can reduce the time spent waiting for test execution and remove the lock on the working directory while the compiler is working.</p>
+
+<p>This pipeline aims to be simple, without many customizations and being single-user. For more complex workflows and other restrictions, it might be better to drop this project and start investigating continuous integration (CI) tools such as e.g., <a href="https://jenkins-ci.org/">Jenkins</a>, <a href="https://travis-ci.org/">Travis</a>, <a href="https://atlassian.com/software/bamboo">Bamboo</a></p>
+
+<h2>Further work</h2>
+
+<p>The jobs in the <code>pipeline</code> could be queued, so it is possible to push to the pipeline before the previous job has started. See reference below.</p>
+
+<h2>Reference</h2>
+
+<ul>
+<li><a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html">Trap</a></li>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a></li>
+<li><a href="http://idolinux.blogspot.com/2008/08/bash-script-error-handling.html">Sample bash error handling</a></li>
+<li><a href="http://superuser.com/questions/220364/how-to-run-commands-as-in-a-queue">Queuing bash jobs</a></li>
+</ul>
+
+
+<h2>Appendix</h2>
+
+<p>This script will push to the pipeline:</p>
+
+<pre><code class="bash">#!/bin/bash
+
+git push pipeline  2&gt;&amp;1 &gt; /dev/null &amp;
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
