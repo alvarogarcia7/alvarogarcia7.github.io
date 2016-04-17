@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Category: Post-mortem-analysis - The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="Category: post-mortem-analysis">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/categories/post-mortem-analysis">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Category: Post-mortem-analysis</h1>
+    
+  </header>
+  
+  <div id="blog-archives" class="category">
+
+
+
+  
+  <h2>2015</h2>
+
+<article>
+  
+<h1><a href="/blog/2015/06/30/self-study-in-july-2015/">Self-study in July 2015</a></h1>
+<time datetime="2015-06-30T23:08:10+00:00" pubdate><span class='month'>Jun</span> <span class='day'>30</span> <span class='year'>2015</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/1967/'>1967</a>, <a class='category' href='/blog/categories/2015/'>2015</a>, <a class='category' href='/blog/categories/8th-light/'>8th-light</a>, <a class='category' href='/blog/categories/agile/'>agile</a>, <a class='category' href='/blog/categories/airbrake/'>airbrake</a>, <a class='category' href='/blog/categories/alejandro-gomez/'>alejandro-gomez</a>, <a class='category' href='/blog/categories/alex-zhitnitsky/'>alex-zhitnitsky</a>, <a class='category' href='/blog/categories/algorithmic-complexity/'>algorithmic-complexity</a>, <a class='category' href='/blog/categories/algosaurus/'>algosaurus</a>, <a class='category' href='/blog/categories/analogy/'>analogy</a>, <a class='category' href='/blog/categories/andrew-montalenti/'>andrew-montalenti</a>, <a class='category' href='/blog/categories/andrey-antukh/'>andrey-antukh</a>, <a class='category' href='/blog/categories/angelika-langer/'>angelika-langer</a>, <a class='category' href='/blog/categories/angularjs/'>angularjs</a>, <a class='category' href='/blog/categories/apache-kafka/'>apache-kafka</a>, <a class='category' href='/blog/categories/apprenticeship/'>apprenticeship</a>, <a class='category' href='/blog/categories/attila-mihaly-balazs/'>attila-mihaly-balazs</a>, <a class='category' href='/blog/categories/backwards-compatibility/'>backwards-compatibility</a>, <a class='category' href='/blog/categories/ben-nadel/'>ben-nadel</a>, <a class='category' href='/blog/categories/benchmark/'>benchmark</a>, <a class='category' href='/blog/categories/big-o-notation/'>big-o-notation</a>, <a class='category' href='/blog/categories/big-oh-notation/'>big-oh-notation</a>, <a class='category' href='/blog/categories/bjorn-tipling/'>bjorn-tipling</a>, <a class='category' href='/blog/categories/black-box-testing/'>black-box-testing</a>, <a class='category' href='/blog/categories/bliki/'>bliki</a>, <a class='category' href='/blog/categories/book-review/'>book-review</a>, <a class='category' href='/blog/categories/bozhidar-bozhanov/'>bozhidar-bozhanov</a>, <a class='category' href='/blog/categories/c-sharp/'>c-sharp</a>, <a class='category' href='/blog/categories/carin-meier/'>carin-meier</a>, <a class='category' href='/blog/categories/carlos-ble/'>carlos-ble</a>, <a class='category' href='/blog/categories/christopher-strachey/'>christopher-strachey</a>, <a class='category' href='/blog/categories/clean-code/'>clean-code</a>, <a class='category' href='/blog/categories/clipperz/'>clipperz</a>, <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/clojure-unraveled/'>clojure-unraveled</a>, <a class='category' href='/blog/categories/clojurescript/'>clojurescript</a>, <a class='category' href='/blog/categories/cohesion/'>cohesion</a>, <a class='category' href='/blog/categories/comparison/'>comparison</a>, <a class='category' href='/blog/categories/considered-harmful/'>considered-harmful</a>, <a class='category' href='/blog/categories/cory-berg/'>cory-berg</a>, <a class='category' href='/blog/categories/coupling/'>coupling</a>, <a class='category' href='/blog/categories/course/'>course</a>, <a class='category' href='/blog/categories/craftsmanship/'>craftsmanship</a>, <a class='category' href='/blog/categories/danijel-arsenovski/'>danijel-arsenovski</a>, <a class='category' href='/blog/categories/data-structure/'>data-structure</a>, <a class='category' href='/blog/categories/ddd/'>ddd</a>, <a class='category' href='/blog/categories/design/'>design</a>, <a class='category' href='/blog/categories/dmitri-tikhanski/'>dmitri-tikhanski</a>, <a class='category' href='/blog/categories/dominic-krimmer/'>dominic-krimmer</a>, <a class='category' href='/blog/categories/dripstat/'>dripstat</a>, <a class='category' href='/blog/categories/edson-yanaga/'>edson-yanaga</a>, <a class='category' href='/blog/categories/elvira-mayordomo/'>elvira-mayordomo</a>, <a class='category' href='/blog/categories/eric-meyer/'>eric-meyer</a>, <a class='category' href='/blog/categories/eric-normand/'>eric-normand</a>, <a class='category' href='/blog/categories/federated-wiki/'>federated-wiki</a>, <a class='category' href='/blog/categories/federation/'>federation</a>, <a class='category' href='/blog/categories/fred-zemke/'>fred-zemke</a>, <a class='category' href='/blog/categories/fundamental-concepts/'>fundamental-concepts</a>, <a class='category' href='/blog/categories/hashcode/'>hashcode</a>, <a class='category' href='/blog/categories/headless/'>headless</a>, <a class='category' href='/blog/categories/headless-test/'>headless-test</a>, <a class='category' href='/blog/categories/incremental-stream/'>incremental-stream</a>, <a class='category' href='/blog/categories/integrated-test/'>integrated-test</a>, <a class='category' href='/blog/categories/integration-test/'>integration-test</a>, <a class='category' href='/blog/categories/intellij-idea/'>intellij-idea</a>, <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/java-9/'>java-9</a>, <a class='category' href='/blog/categories/java-agent/'>java-agent</a>, <a class='category' href='/blog/categories/java-ee/'>java-ee</a>, <a class='category' href='/blog/categories/java-one/'>java-one</a>, <a class='category' href='/blog/categories/jeff-knupp/'>jeff-knupp</a>, <a class='category' href='/blog/categories/jeremy-miller/'>jeremy-miller</a>, <a class='category' href='/blog/categories/jmeter/'>jmeter</a>, <a class='category' href='/blog/categories/joanne-wilson/'>joanne-wilson</a>, <a class='category' href='/blog/categories/josh-szmajda/'>josh-szmajda</a>, <a class='category' href='/blog/categories/json/'>json</a>, <a class='category' href='/blog/categories/julie-zelensky/'>julie-zelensky</a>, <a class='category' href='/blog/categories/july/'>july</a>, <a class='category' href='/blog/categories/justin-weiss/'>justin-weiss</a>, <a class='category' href='/blog/categories/kafka/'>kafka</a>, <a class='category' href='/blog/categories/kata/'>kata</a>, <a class='category' href='/blog/categories/koan/'>koan</a>, <a class='category' href='/blog/categories/kris-jenkins/'>kris-jenkins</a>, <a class='category' href='/blog/categories/lambda/'>lambda</a>, <a class='category' href='/blog/categories/lambda-calculus/'>lambda-calculus</a>, <a class='category' href='/blog/categories/language/'>language</a>, <a class='category' href='/blog/categories/linked-list/'>linked-list</a>, <a class='category' href='/blog/categories/localstorage/'>localstorage</a>, <a class='category' href='/blog/categories/lucia-moura/'>lucia-moura</a>, <a class='category' href='/blog/categories/manuel-chakravarty/'>manuel-chakravarty</a>, <a class='category' href='/blog/categories/manuel-rivero/'>manuel-rivero</a>, <a class='category' href='/blog/categories/mark-hibberd/'>mark-hibberd</a>, <a class='category' href='/blog/categories/martin-fowler/'>martin-fowler</a>, <a class='category' href='/blog/categories/meagan-waller/'>meagan-waller</a>, <a class='category' href='/blog/categories/mentor/'>mentor</a>, <a class='category' href='/blog/categories/michael-bernstein/'>michael-bernstein</a>, <a class='category' href='/blog/categories/michael-church/'>michael-church</a>, <a class='category' href='/blog/categories/mike-caulfield/'>mike-caulfield</a>, <a class='category' href='/blog/categories/mike-cavaliere/'>mike-cavaliere</a>, <a class='category' href='/blog/categories/misko-hevery/'>misko-hevery</a>, <a class='category' href='/blog/categories/mit/'>mit</a>, <a class='category' href='/blog/categories/mock/'>mock</a>, <a class='category' href='/blog/categories/mock-framework/'>mock-framework</a>, <a class='category' href='/blog/categories/monogamy/'>monogamy</a>, <a class='category' href='/blog/categories/np-complete/'>np-complete</a>, <a class='category' href='/blog/categories/ocw/'>ocw</a>, <a class='category' href='/blog/categories/oleg-shelajev/'>oleg-shelajev</a>, <a class='category' href='/blog/categories/oliver-white/'>oliver-white</a>, <a class='category' href='/blog/categories/open-courseware/'>open-courseware</a>, <a class='category' href='/blog/categories/outsourcing/'>outsourcing</a>, <a class='category' href='/blog/categories/p-vs-np/'>p-vs-np</a>, <a class='category' href='/blog/categories/pair-programming/'>pair-programming</a>, <a class='category' href='/blog/categories/paper/'>paper</a>, <a class='category' href='/blog/categories/parsely/'>parsely</a>, <a class='category' href='/blog/categories/paymill/'>paymill</a>, <a class='category' href='/blog/categories/pete-mcbreen/'>pete-mcbreen</a>, <a class='category' href='/blog/categories/peter-provost/'>peter-provost</a>, <a class='category' href='/blog/categories/plugin/'>plugin</a>, <a class='category' href='/blog/categories/podcast/'>podcast</a>, <a class='category' href='/blog/categories/post-mortem-analysis/'>post-mortem-analysis</a>, <a class='category' href='/blog/categories/programming-language/'>programming-language</a>, <a class='category' href='/blog/categories/property-based-testing/'>property-based-testing</a>, <a class='category' href='/blog/categories/protobuffer/'>protobuffer</a>, <a class='category' href='/blog/categories/protocol-buffer/'>protocol-buffer</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/quickcheck/'>quickcheck</a>, <a class='category' href='/blog/categories/radhika-ghosal/'>radhika-ghosal</a>, <a class='category' href='/blog/categories/rainsberger/'>rainsberger</a>, <a class='category' href='/blog/categories/ralf-sternbergd/'>ralf-sternbergd</a>, <a class='category' href='/blog/categories/raul-rojas/'>raul-rojas</a>, <a class='category' href='/blog/categories/raygun/'>raygun</a>, <a class='category' href='/blog/categories/reading/'>reading</a>, <a class='category' href='/blog/categories/recursion/'>recursion</a>, <a class='category' href='/blog/categories/reification/'>reification</a>, <a class='category' href='/blog/categories/rest-api/'>rest-api</a>, <a class='category' href='/blog/categories/rich-hickey/'>rich-hickey</a>, <a class='category' href='/blog/categories/rob-austin/'>rob-austin</a>, <a class='category' href='/blog/categories/robert-c-martin/'>robert-c-martin</a>, <a class='category' href='/blog/categories/rockstar/'>rockstar</a>, <a class='category' href='/blog/categories/role-model/'>role-model</a>, <a class='category' href='/blog/categories/santiago-pino/'>santiago-pino</a>, <a class='category' href='/blog/categories/self-study/'>self-study</a>, <a class='category' href='/blog/categories/self-study-aggregation/'>self-study-aggregation</a>, <a class='category' href='/blog/categories/sentry/'>sentry</a>, <a class='category' href='/blog/categories/shortcut/'>shortcut</a>, <a class='category' href='/blog/categories/skill/'>skill</a>, <a class='category' href='/blog/categories/slides/'>slides</a>, <a class='category' href='/blog/categories/sql/'>sql</a>, <a class='category' href='/blog/categories/sql-2011/'>sql-2011</a>, <a class='category' href='/blog/categories/stackhunter/'>stackhunter</a>, <a class='category' href='/blog/categories/stanford/'>stanford</a>, <a class='category' href='/blog/categories/stream/'>stream</a>, <a class='category' href='/blog/categories/summer-training/'>summer-training</a>, <a class='category' href='/blog/categories/takipi/'>takipi</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>, <a class='category' href='/blog/categories/tdd-mistake/'>tdd-mistake</a>, <a class='category' href='/blog/categories/test-check/'>test-check</a>, <a class='category' href='/blog/categories/testability/'>testability</a>, <a class='category' href='/blog/categories/testable-code/'>testable-code</a>, <a class='category' href='/blog/categories/theoretical-computation/'>theoretical-computation</a>, <a class='category' href='/blog/categories/theory/'>theory</a>, <a class='category' href='/blog/categories/tom-leighton/'>tom-leighton</a>, <a class='category' href='/blog/categories/tomas-rybing/'>tomas-rybing</a>, <a class='category' href='/blog/categories/tomasz-nurkiewicz/'>tomasz-nurkiewicz</a>, <a class='category' href='/blog/categories/tpp/'>tpp</a>, <a class='category' href='/blog/categories/tracking-tools/'>tracking-tools</a>, <a class='category' href='/blog/categories/transformation-priority-premise/'>transformation-priority-premise</a>, <a class='category' href='/blog/categories/type-erasure/'>type-erasure</a>, <a class='category' href='/blog/categories/type-theory/'>type-theory</a>, <a class='category' href='/blog/categories/unsafe/'>unsafe</a>, <a class='category' href='/blog/categories/variant/'>variant</a>, <a class='category' href='/blog/categories/vasco-duarte/'>vasco-duarte</a>, <a class='category' href='/blog/categories/venkat-subramaniam/'>venkat-subramaniam</a>, <a class='category' href='/blog/categories/video/'>video</a>, <a class='category' href='/blog/categories/white-box-testing/'>white-box-testing</a>, <a class='category' href='/blog/categories/wip/'>wip</a>, <a class='category' href='/blog/categories/xavi-hidalgo/'>xavi-hidalgo</a>, <a class='category' href='/blog/categories/yitz-schaffer/'>yitz-schaffer</a>, <a class='category' href='/blog/categories/zero-knowledge/'>zero-knowledge</a></span>
+</footer>
+
+
+</article>
+
+</div>
+
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/17/quote-characterization-tests/">Quote: Characterization Tests</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/17/brownish-greenfield-gilded-rose-kata-formulation/">Brownish Greenfield Gilded Rose Kata</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/17/faster-site-generation-native-octopress/">Faster Site Generation With a Native Octopress 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/31/self-study/">Self-Study in April 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/31/books-read-in-2016q1/">Books Read in 2016Q1</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
