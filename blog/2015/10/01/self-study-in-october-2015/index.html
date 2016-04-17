@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Self-Study in October 2015 - The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="Blazing Fast HTML: Virtual DOM in Elm I&rsquo;ve read this article explaining how Elm works in relation to the virtual DOM. By Evan Czaplicki. Tags: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Self-Study in October 2015</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-01T13:25:19+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>1:25 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Blazing Fast HTML: Virtual DOM in Elm</h2>
+
+<p>I&rsquo;ve read <a href="http://elm-lang.org/blog/blazing-fast-html">this article</a> explaining how Elm works in relation to the virtual DOM. By Evan Czaplicki.</p>
+
+<p>Tags: elm, dom, virtual-dom, comparison, speed, haskell, evan-czaplicki</p>
+
+<h2>Why you should never, ever, ever use MongoDB</h2>
+
+<p>I&rsquo;ve read <a href="http://cryto.net/~joepie91/blog/2015/07/19/why-you-should-never-ever-ever-use-mongodb/">this article</a> stating the downsides of using MongoDB. Written by Sven Slootweg</p>
+
+<p>Tags: mongodb, downside, sven-slootweg, json, document-store, postgresql, acid</p>
+
+<h2>Do you really get classloaders?</h2>
+
+<p>I&rsquo;ve watched <a href="http://zeroturnaround.com/rebellabs/rebel-labs-tutorial-do-you-really-get-classloaders/">this video</a> by Jevgeny Kabanov on classloaders: what they are, how they work nad some tips to solve common issues.</p>
+
+<p>My notes:</p>
+
+<ul>
+<li>the classloading is lazy: the resources are not loaded until they are mentioned</li>
+<li>every classloader has a parent</li>
+<li>every class has a classloader associated with it</li>
+<li>every object has a class associated with it</li>
+<li>classloading delegation: the parent is consulted before loading a class. if it has it, it will load it. If not, I will delegate it</li>
+</ul>
+
+
+<p>There is also <a href="http://www.javaworld.com/article/2074396/core-java/javaone-2011--do-you-really-get-classloaders-.html">this article</a> on the same video</p>
+
+<p>Tags: jevgeny-kabanov, classloader, java,</p>
+
+<h2>Truth table</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Truth_table">the wikipedia article</a> about the truth table and the 16 possible binary boolean operators:</p>
+
+<ul>
+<li>Contradiction</li>
+<li>NOR</li>
+<li>Converse nonimplication</li>
+<li>Negation (of p)</li>
+<li>Material nonimplication</li>
+<li>Negation (of q)</li>
+<li>XOR (exclusive disjunction)</li>
+<li>NAND</li>
+<li>AND (conjunction)</li>
+<li>XNOR (biconditional)</li>
+<li>Projection (of p)</li>
+<li>Implication</li>
+<li>Projection (of q)</li>
+<li>Converse implication</li>
+<li>OR (disjunction)</li>
+<li>Tautology</li>
+</ul>
+
+
+<h2>7 lines of code, 3 minutes: Implement a programming language from scratch</h2>
+
+<p>I&rsquo;ve read <a href="http://matt.might.net/articles/implementing-a-programming-language/">this article</a> by Matt Might about the benefits of implementing a language (from scratch but on top of another existing language used as framework). Chooses lambda calculus as the desired DSL</p>
+
+<p>Tags: matt-might, lambda-calculus, racket, domain-specific-language</p>
+
+<h2>Turing completeness</h2>
+
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Turing_completeness">this wikipedia article</a> (both main and discussion) about this subject.</p>
+
+<p>It has sounded strange to me the reference to S-expressions:</p>
+
+<blockquote><p>Data languages
+The notion of Turing-completeness does not apply to languages such as XML, HTML, JSON, YAML and S-expressions because they are typically used to represent structured data, not describe computation [&hellip;]</p></blockquote>
+
+<p>If data (S-expression) is represented as the same format as code (e.g., Lisp&rsquo;s S-expression) and the latter is used to represent a computation, shouldn&rsquo;t be &ldquo;data languages that also are used as computation languages&rdquo; excluded from that list?</p>
+
+<p>As a side note, Lisp is Turing Complete (see <a href="https://en.wikipedia.org/wiki/Turing_completeness#Examples">Turing Complete#Examples</a>)</p>
+
+<h2>The Prize Is Won; The Simplest Universal Turing Machine Is Proved</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.wolfram.com/2007/10/24/the-prize-is-won-the-simplest-universal-turing-machine-is-proved/?year=2007&amp;monthnum=10">this article</a> by Stephen Wolfram about the proof of a Turing Machine 2,3 being universal by Alex Smith.</p>
+
+<p>Tags: stephen-wolfram, turing-machine, universal-turing-machine, proof, paper, alex-smith</p>
+
+<h2>Making a successful commitment in each Sprint</h2>
+
+<p>I&rsquo;ve read <a href="http://succeeding-with-agile.blogspot.com/2015/07/making-successful-commitment-in-each.html">this article</a> by Nikolaos Raptis on committing to work in each sprint.</p>
+
+<p>Tags: nikolaos-raptis, sprint, agile, commitment</p>
+
+<h2>No increment operator (++) in Ruby?</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/3717519/no-increment-operator-in-ruby">this stackoverflow</a> question about the lack of post-increment operator (i++) in Ruby:</p>
+
+<blockquote><p>++ and &ndash; are NOT reserved operator in Ruby.</p>
+
+<p>Mailing list from <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/2710">Yukihiro Matsumoto aka matz</a></p></blockquote>
+
+<h2>Code is Data, Data is Code</h2>
+
+<p>I&rsquo;ve read <a href="http://blogs.mulesoft.com/dev/news-dev/code-is-data-data-is-code/">this article</a> by James Donelan on the equivalence of code and data in homoiconic languages, including Clojure.</p>
+
+<p>The article talks about homoiconicity, manually creating Abstract Syntax Trees (AST) out of data and the macro environment. Also, compares the difference between macros and functions.</p>
+
+<p>Tags: code=data, data=code, james-donelan, clojure, homoiconicity, abstract-syntax-tree, ast, macro, function</p>
+
+<h2>Agile in Practice: Test Driven Development</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=uGaNkTahrIw">this video</a> introducing TDD by the Agile Academy. Explains its motivations and the basic cyclical fashion.</p>
+
+<p>Tags: agile-academy, video, tdd, introduction</p>
+
+<h2>Agile in Practice: Pair Programming</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=ET3Q6zNK3Io">this video</a> by Agile Academy on practicing pair programming. Explains the destination and how to get there.</p>
+
+<p>Tags: agile-academy, pair-programming, video, introduction</p>
+
+<h2>A low cost approach to working on side projects</h2>
+
+<p>I&rsquo;ve read <a href="https://practicingruby.com/articles/low-cost-approach-to-side-projects">this article</a> by Gregory Brown on how to apply the MVP and Lean Startup principles to side projects (a.k.a. pet projects). Try to start with a brainstorming session of all the features you want your product to have, then prioritise, picking the most important ones.</p>
+
+<p>Most projects' needs can be solved with a minimal version, in the form of a script that took half an hour to develop.</p>
+
+<p>Tags: gregory-brown, mvp, lean-startup, script, proof-of-concept, priority, backlog, side-project, pet-project, low-cost, cost-reduction</p>
+
+<h2>Extreme Programming</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=kFM2Vcu-BRo">this video</a> by STAR Videos on the basic principles behind Extreme Programming and how to use it to improve software quality</p>
+
+<p>Tags: star-videos, extreme-programming, xp, software-quality</p>
+
+<h2>Disruptor: High performance alternative to bounded queues for exchanging data between concurrent threads</h2>
+
+<p>I&rsquo;ve read <a href="http://lmax-exchange.github.io/disruptor/files/Disruptor-1.0.pdf">this white paper</a> describing the disruptor framework: a way of exchanging data between concurrent threads.</p>
+
+<p>It uses a ring buffer and other techniques to eliminate write contention, reduce read contention and produces good results. It was developed for a financial exchange environment but it&rsquo;s general purpose.</p>
+
+<p>Tags: martin-thompson, dave-farley, michael-barker, patricia-gee, andrew-stewart, trisha-gee, disruptor, contention, framework, concurrency, parallelism, white-paper, comparison, arrayblockingqueue, concurrentlinkedqueue, doug-lea, benchmark, lmax, low-level-optimization, optimization</p>
+
+<h2>Dissecting the Disruptor: What&rsquo;s so special about a ring buffer?</h2>
+
+<p>I&rsquo;ve read <a href="http://mechanitis.blogspot.com.es/2011/06/dissecting-disruptor-whats-so-special.html">this article</a> about the ring buffer data structure. A FIFO data structure where elements get overwritten to reduce pressure on the garbage collector. Every message gets sent to every consumer.</p>
+
+<p>Tags: patricia-gee, trisha-gee, disruptor, ring-buffer, data-structure</p>
+
+<h2>The Dependency Inversion Principle</h2>
+
+<p>I&rsquo;ve read <a href="http://www.objectmentor.com/resources/articles/dip.pdf">this paper</a> about the Dependency Inversion Principle (DIP) written Robert C. Martin.</p>
+
+<p>It explains the theory, philosophy behind it. Also, creates an example with a copy buffer and different output locations</p>
+
+<p>Tags: robert-martin, dependency-inversion-principle, dip, example, comparison, object-oriented, principle, solid, design-principle</p>
+
+<h2>DIP in the Wild</h2>
+
+<p>I&rsquo;ve read <a href="http://martinfowler.com/articles/dipInTheWild.html">this article</a> about the Dependency Inversion Principle (DIP) written by Brett L. Schuchert.</p>
+
+<p>It is explained non-canonical representations of this principle, how in other cases he has solved it and conclusions of using it day to day.</p>
+
+<p>Tags: brett-l.-schuchert, dependency-inversion-principle, dip, example, object-oriented, solid, design-principle</p>
+
+<h2>The New New Product Development Game</h2>
+
+<p>I&rsquo;ve read <a href="https://hbr.org/1986/01/the-new-new-product-development-game">this paper</a> about the holistic approach to product development, considered seminal for Scrum and other Agile methodologies. Written by Hirotaka Takeuchi and Ikujiro Nonaka</p>
+
+<p>In it, they describe how teams are distributed, the responsibilities for each one, and the degrees of freedom.</p>
+
+<p>Cites the six basic characteristics:</p>
+
+<ul>
+<li>built-in instability</li>
+<li>self-organizing project teams</li>
+<li>overlapping development phases</li>
+<li>multilearning</li>
+<li>subtle control</li>
+<li>organizational transfer of learning</li>
+</ul>
+
+
+<p>Tags: hirotaka-takeuchi, ikujiro-nonaka, scrum, agile, product-development, management, 1986</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">alvaro garcia</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-10-01T13:25:19+00:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>1:25 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/1986/'>1986</a>, <a class='category' href='/blog/categories/2015/'>2015</a>, <a class='category' href='/blog/categories/abstract-syntax-tree/'>abstract-syntax-tree</a>, <a class='category' href='/blog/categories/acid/'>acid</a>, <a class='category' href='/blog/categories/agile/'>agile</a>, <a class='category' href='/blog/categories/agile-academy/'>agile-academy</a>, <a class='category' href='/blog/categories/alex-smith/'>alex-smith</a>, <a class='category' href='/blog/categories/andrew-stewart/'>andrew-stewart</a>, <a class='category' href='/blog/categories/arrayblockingqueue/'>arrayblockingqueue</a>, <a class='category' href='/blog/categories/ast/'>ast</a>, <a class='category' href='/blog/categories/backlog/'>backlog</a>, <a class='category' href='/blog/categories/benchmark/'>benchmark</a>, <a class='category' href='/blog/categories/brett-l-dot-schuchert/'>brett-l.-schuchert</a>, <a class='category' href='/blog/categories/classloader/'>classloader</a>, <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/code-equals-data/'>code=data</a>, <a class='category' href='/blog/categories/commitment/'>commitment</a>, <a class='category' href='/blog/categories/comparison/'>comparison</a>, <a class='category' href='/blog/categories/concurrency/'>concurrency</a>, <a class='category' href='/blog/categories/concurrentlinkedqueue/'>concurrentlinkedqueue</a>, <a class='category' href='/blog/categories/contention/'>contention</a>, <a class='category' href='/blog/categories/cost-reduction/'>cost-reduction</a>, <a class='category' href='/blog/categories/data-structure/'>data-structure</a>, <a class='category' href='/blog/categories/data-equals-code/'>data=code</a>, <a class='category' href='/blog/categories/dave-farley/'>dave-farley</a>, <a class='category' href='/blog/categories/dependency-inversion-principle/'>dependency-inversion-principle</a>, <a class='category' href='/blog/categories/design-principle/'>design-principle</a>, <a class='category' href='/blog/categories/dip/'>dip</a>, <a class='category' href='/blog/categories/disruptor/'>disruptor</a>, <a class='category' href='/blog/categories/document-store/'>document-store</a>, <a class='category' href='/blog/categories/dom/'>dom</a>, <a class='category' href='/blog/categories/domain-specific-language/'>domain-specific-language</a>, <a class='category' href='/blog/categories/doug-lea/'>doug-lea</a>, <a class='category' href='/blog/categories/downside/'>downside</a>, <a class='category' href='/blog/categories/elm/'>elm</a>, <a class='category' href='/blog/categories/evan-czaplicki/'>evan-czaplicki</a>, <a class='category' href='/blog/categories/example/'>example</a>, <a class='category' href='/blog/categories/extreme-programming/'>extreme-programming</a>, <a class='category' href='/blog/categories/framework/'>framework</a>, <a class='category' href='/blog/categories/function/'>function</a>, <a class='category' href='/blog/categories/gregory-brown/'>gregory-brown</a>, <a class='category' href='/blog/categories/haskell/'>haskell</a>, <a class='category' href='/blog/categories/hirotaka-takeuchi/'>hirotaka-takeuchi</a>, <a class='category' href='/blog/categories/homoiconicity/'>homoiconicity</a>, <a class='category' href='/blog/categories/ikujiro-nonaka/'>ikujiro-nonaka</a>, <a class='category' href='/blog/categories/introduction/'>introduction</a>, <a class='category' href='/blog/categories/james-donelan/'>james-donelan</a>, <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/jevgeny-kabanov/'>jevgeny-kabanov</a>, <a class='category' href='/blog/categories/json/'>json</a>, <a class='category' href='/blog/categories/lambda-calculus/'>lambda-calculus</a>, <a class='category' href='/blog/categories/lean-startup/'>lean-startup</a>, <a class='category' href='/blog/categories/lmax/'>lmax</a>, <a class='category' href='/blog/categories/low-cost/'>low-cost</a>, <a class='category' href='/blog/categories/low-level-optimization/'>low-level-optimization</a>, <a class='category' href='/blog/categories/macro/'>macro</a>, <a class='category' href='/blog/categories/management/'>management</a>, <a class='category' href='/blog/categories/martin-thompson/'>martin-thompson</a>, <a class='category' href='/blog/categories/matt-might/'>matt-might</a>, <a class='category' href='/blog/categories/michael-barker/'>michael-barker</a>, <a class='category' href='/blog/categories/mongodb/'>mongodb</a>, <a class='category' href='/blog/categories/mvp/'>mvp</a>, <a class='category' href='/blog/categories/nikolaos-raptis/'>nikolaos-raptis</a>, <a class='category' href='/blog/categories/object-oriented/'>object-oriented</a>, <a class='category' href='/blog/categories/october/'>october</a>, <a class='category' href='/blog/categories/optimization/'>optimization</a>, <a class='category' href='/blog/categories/pair-programming/'>pair-programming</a>, <a class='category' href='/blog/categories/paper/'>paper</a>, <a class='category' href='/blog/categories/parallelism/'>parallelism</a>, <a class='category' href='/blog/categories/patricia-gee/'>patricia-gee</a>, <a class='category' href='/blog/categories/pet-project/'>pet-project</a>, <a class='category' href='/blog/categories/postgresql/'>postgresql</a>, <a class='category' href='/blog/categories/principle/'>principle</a>, <a class='category' href='/blog/categories/priority/'>priority</a>, <a class='category' href='/blog/categories/product-development/'>product-development</a>, <a class='category' href='/blog/categories/proof/'>proof</a>, <a class='category' href='/blog/categories/proof-of-concept/'>proof-of-concept</a>, <a class='category' href='/blog/categories/racket/'>racket</a>, <a class='category' href='/blog/categories/read/'>read</a>, <a class='category' href='/blog/categories/ring-buffer/'>ring-buffer</a>, <a class='category' href='/blog/categories/robert-martin/'>robert-martin</a>, <a class='category' href='/blog/categories/script/'>script</a>, <a class='category' href='/blog/categories/scrum/'>scrum</a>, <a class='category' href='/blog/categories/self-study-aggregation/'>self-study-aggregation</a>, <a class='category' href='/blog/categories/side-project/'>side-project</a>, <a class='category' href='/blog/categories/software-quality/'>software-quality</a>, <a class='category' href='/blog/categories/solid/'>solid</a>, <a class='category' href='/blog/categories/speed/'>speed</a>, <a class='category' href='/blog/categories/sprint/'>sprint</a>, <a class='category' href='/blog/categories/star-videos/'>star-videos</a>, <a class='category' href='/blog/categories/stephen-wolfram/'>stephen-wolfram</a>, <a class='category' href='/blog/categories/sven-slootweg/'>sven-slootweg</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>, <a class='category' href='/blog/categories/trisha-gee/'>trisha-gee</a>, <a class='category' href='/blog/categories/turing-machine/'>turing-machine</a>, <a class='category' href='/blog/categories/universal-turing-machine/'>universal-turing-machine</a>, <a class='category' href='/blog/categories/video/'>video</a>, <a class='category' href='/blog/categories/virtual-dom/'>virtual-dom</a>, <a class='category' href='/blog/categories/white-paper/'>white-paper</a>, <a class='category' href='/blog/categories/xp/'>xp</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/09/30/books-read-in-2015q3/" title="Previous Post: Books read in 2015Q3">&laquo; Books read in 2015Q3</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/10/02/tip-propagate-the-failure-in-bash/" title="Next Post: Tip: Propagate the failure in bash">Tip: Propagate the failure in bash &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/17/faster-site-generation-native-octopress/">Faster Site Generation With a Native Octopress 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/31/self-study/">Self-Study in April 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/31/books-read-in-2016q1/">Books Read in 2016Q1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/02/using-tortoise-credentials-from-cli/">Tip: Using Tortoise Credentials in Git CLI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/02/self-study-in-march-2016/">Self-Study in March 2016</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/';
+        var disqus_url = 'http://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
