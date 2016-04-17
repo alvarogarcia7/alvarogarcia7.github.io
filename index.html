@@ -1,1 +1,1567 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The long way through Software Craftsmanship</title>
+  <meta name="author" content="alvaro garcia">
+
+  
+  <meta name="description" content="In Working effectively with legacy code, Michael Feathers talks a type of tests to define or characterize the current behavior of the legacy system: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://alvarogarcia7.github.io">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41008374-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = $(form_).find("input")[0];
+        input.value = "site:alvarogarcia7.github.io " + input.value;
+    }
+</script>
+
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/talks">Talks / Events</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/17/quote-characterization-tests/">Quote: Characterization Tests</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-17T22:56:54+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:56 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In Working effectively with legacy code, Michael Feathers talks a type of tests to define or characterize the current behavior of the legacy system:</p>
+
+<blockquote><p>In nearly every legacy system, what the system does is more important than what it is supposed to do.</p>
+
+<p>A <em>characterization test</em> is a test that characterizes the actual behavior of a piece of code. [&hellip;] The test document the actual current behavior of the system. Here is a little algorithm for writing algorithm for writing characterization tests:</p>
+
+<ul>
+<li>Use a piece of code in a test harness</li>
+<li>Write an assertion that you know will fail</li>
+<li>Let the failure tell you what the behavior is.</li>
+<li>Change the test so that it expects the behavior that the code produces</li>
+<li>Repeat</li>
+</ul>
+
+
+<p>M Feathers, in the chapter 13<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, section &ldquo;Characterization tests&rdquo; of Working effectively with legacy code. Actual page, 186.</p></blockquote>
+
+<p>Later on, he goes to describe them in a bigger environment:</p>
+
+<blockquote><p>Characterization tests record the actual behavior of a piece of code. If we find something unexpected when we write them, it pays to get some clarification. It could be a bu. That doesn&rsquo;t mean that we don&rsquo;t include the test in our test suite; instead, we should mark it as suspicious an find out what th effect would be of fixing it.</p>
+
+<p>M Feathers, in the chapter 13[^1], section &ldquo;Characterization tests&rdquo; of Working effectively with legacy code. Actual page, 188.</p></blockquote>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Chapter 13, &ldquo;I need to make a change, but I don&rsquo;t know what tests to write&rdquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/17/brownish-greenfield-gilded-rose-kata-formulation/">Brownish Greenfield Gilded Rose Kata</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-17T21:44:19+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>(This formulation has been copied and adapted from <a href="https://twitter.com/NotMyself">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes">Terry Hughes</a>&rsquo;s <a href="https://github.com/NotMyself/GildedRose">repository</a>)</p>
+
+<h1>Brownish Greenfield Gilded Rose Kata</h1>
+
+<p>Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.</p>
+
+<p>Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us. It was developed by a no-nonsense type named Leeroy, who has moved on to new adventures.</p>
+
+<p>Your task is to rewrite the system using an old class, that already exists.
+First an introduction to our system:</p>
+
+<ul>
+<li>All items have a <code>SellIn</code> value which denotes the number of days we have to sell the item</li>
+<li>All items have a <code>Quality</code> value which denotes how valuable the item is</li>
+<li>At the end of each day our system lowers both values for every item</li>
+</ul>
+
+
+<p>Pretty simple, right? Well this is where it gets interesting:</p>
+
+<ul>
+<li>Once the sell by date has passed, <code>Quality</code> degrades twice as fast</li>
+<li>The <code>Quality</code> of an item is never negative</li>
+<li>&ldquo;Aged Brie&rdquo; actually increases in <code>Quality</code> the older it gets</li>
+<li>&ldquo;Sulfuras&rdquo;, being a legendary item, never has to be sold or decreases in <code>Quality</code></li>
+<li>The <code>Quality</code> of an item is never more than 50, however &ldquo;Sulfuras&rdquo; is a legendary item and as such its <code>Quality</code> is 80 and it never alters.</li>
+<li>&ldquo;Backstage passes&rdquo;, like aged brie, increases in <code>Quality</code> as it&rsquo;s <code>SellIn</code> value approaches; <code>Quality</code> increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but <code>Quality</code> drops to 0 after the concert</li>
+<li>&ldquo;Conjured&rdquo; items degrade in <code>Quality</code> twice as fast as normal items</li>
+</ul>
+
+
+<p>Your task is to create the system from scratch, with only a restriction: you must use the class <code>Item</code> that Leeroy developed. This class is:</p>
+
+<ul>
+<li>unmodifiable, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in shared code ownership. This prohibition applies to modifying it, deleting it, adding new methods, deleting methodts, changing visibility of stuff, etc</li>
+<li>cannot be inherited, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in code inheritance</li>
+</ul>
+
+
+<p>The <code>Item</code> class can be found in many programming languages in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Emily Bache&rsquo;s repository</a>. You are looking for the class / type <code>Item</code></p>
+
+<p>Happy katas and happy koding. Please be careful with the goblin!</p>
+
+<h2>How to start</h2>
+
+<ul>
+<li>Create a new repo</li>
+<li>Find the class <code>Item</code> in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">this repo</a></li>
+<li>Use TDD to develop the functionality. Remember, <code>Item</code> will stay as it is.</li>
+<li>Have fun</li>
+</ul>
+
+
+<h2>Acknowledgements</h2>
+
+<p>Thanks to <a href="https://twitter.com/@trikitrok">@trikitrok</a> for the idea, <a href="https://twitter.com/NotMyself">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes">Terry Hughes</a> for allowing me to copy and modify their kata.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/17/faster-site-generation-native-octopress/">Faster Site Generation With a Native Octopress 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-17T21:39:23+00:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:39 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Note: this article is an answer to <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a previous one</a>, about the same topic: a tool for a faster site generation while developing / writing articles, using octopress 2.</p>
+
+<h2>Introduction</h2>
+
+<p>Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles:</p>
+
+<p>Isolate a post:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># usage rake isolate[my-post]</span>
+</span><span class='line'><span class="n">desc</span> <span class="s2">&quot;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&quot;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:isolate</span><span class="p">,</span> <span class="ss">:filename</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">stash_dir</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="no">FileUtils</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span> <span class="k">unless</span> <span class="no">File</span><span class="o">.</span><span class="n">exist?</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span>
+</span><span class='line'>  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/*.*&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">stash_dir</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Integrate with the rest of the posts:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">desc</span> <span class="s2">&quot;Move all stashed posts back into the posts directory, ready for site generation.&quot;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:integrate</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">posts_dir</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/&quot;</span>
+</span><span class='line'>  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">/*.*&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+</span><span class='line'>    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">posts_dir</span>
+</span><span class='line'>    <span class="n">full_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reverse</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git update-index --no-assume-unchanged </span><span class="si">#{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Usage</h2>
+
+<p>(at the folder where the Rakefile is located)</p>
+
+<ul>
+<li>isolate the selected file. Specify the pattern to keep.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake isolate<span class="o">[</span><span class="s2">&quot;draft&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>write the new content</li>
+<li>commit to git</li>
+<li>integrate with the rest of the files</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake integrate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>git push</li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<p>When I created <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a small tool for this same purpose</a>, I didn&rsquo;t find any that did this job. It was so close to my nose that I could not find it. I was reinventing the wheel.</p>
+
+<p>It is better to switch to a tool that has been tested by more users, that has received the community&rsquo;s approval than a custom-made tool.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/03/31/self-study/">Self-Study in April 2016</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-03-31T21:08:19+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>9:08 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Deliberate Practice: What It Is and Why You Need It</h2>
+
+<p>I&rsquo;ve read this article by Corbett Barr on what is deliberate practice and why it is needed to become an expert in a given domain field.</p>
+
+<p>The four essential components:</p>
+
+<ul>
+<li>Motivation</li>
+<li>Tailored (practice)</li>
+<li>Feedback</li>
+<li>Repetion</li>
+</ul>
+
+
+<p>Tags: corbett-barr, deliberate-practice, expert, practice, anders-ericsson, talent, professional-development, career</p>
+
+<h2>10 Features I Wish Java Would Steal From the Kotlin Language</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jooq.org/2016/03/31/10-features-i-wish-java-would-steal-from-the-kotlin-language/">this list of features</a> that the Kotlin Language has that would be an improvement for the Java language. By Lukas Eder</p>
+
+<p>Tags: list, lukas-eder, kotlin, java, comparison, language, jooq</p>
+
+<h2>How we built Uber engineering&rsquo;s highest query per second service using Go</h2>
+
+<p>I&rsquo;ve read <a href="https://eng.uber.com/go-geofence/">this post</a> by Kai Wei on a microservice they&rsquo;ve built using Go.</p>
+
+<p>Explains the reasons for choosing that algorithm for geofencing, the performance they&rsquo;re achieving, and the architecture.</p>
+
+<p>Tags: uber, go, microservice, performance, geofence, geofencing, rps, go-memory-model, kai-wei</p>
+
+<h2>Unwinding Uber&rsquo;s Most Efficient Service</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@buckhx/unwinding-uber-s-most-efficient-service-406413c5871d">this article</a> by Buck Heroux commenting on the decisions of Uber for building the geofencing microservice (above read).</p>
+
+<p>Explains the different alternatives for algorithms in this problem space and has implemented them in go. Provides a benchmark for comparing those, including a profiling session.</p>
+
+<p>Tags: s2, quadtree, rtree, brute-force, geofence, geofencing, uber, comment, buck-heroux, go, read-on-read, meta-read</p>
+
+<h2>Lawful Hacking and Continuing Vulnerabilities</h2>
+
+<p>I&rsquo;ve read <a href="https://www.schneier.com/blog/archives/2016/03/lawful_hacking_.html">this article</a> by Bruce Schneier on the stance the FBI is taking in regards to vulnerabilities discovered in Apple&rsquo;s devices.</p>
+
+<p>Tags: bruce-schneier, apple, security, fbi, vulnerability, exploit, law, hacking</p>
+
+<h2>A Side Project Helped Jumpstart My Career — Life Learning</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/life-learning/a-side-project-helped-jumpstart-my-career-7cd6f8e9b07f">this article</a> by Dave Gerhardt on how making a side project happen affected his life and his skills.</p>
+
+<p>Some of the reasons for doing it include:</p>
+
+<ul>
+<li>It forces you to figure stuff out</li>
+<li>The only way to learn is by doing</li>
+<li>It gets your brain working on something other than your job</li>
+<li>You have to create your own network</li>
+<li>You are the CEO</li>
+</ul>
+
+
+<p>Tags: long-life-learning, continuous-learning, side-project, dave-gerhardt, drift, professional-development, personal-development, business, career</p>
+
+<h2>Fun Jekyll Tricks</h2>
+
+<p>I&rsquo;ve read <a href="http://www.madebymarket.com/blog/dev/fun-jekyll-tricks.html">this article</a> by Brian Knapp where he explains some tips and tricks of jekyll (in which octopress is based on): speed, deployment, subcategories inside the blog, <em>data, </em>includes.</p>
+
+<p>Tags: brian-knapp, jekyll, octopress, tip-and-trick, improvement, subcategory, meta, automation, deployment</p>
+
+<h2>La ola que llega</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=374c664073e1a1fa3deca53b4&amp;id=f8a8ee92cc">this bonilista</a> by David Bonilla, where he explains (in Spanish) the &lsquo;contractor&rsquo; phenomenon arriving to Spain, 2-3 years after being in other countries and the effects that this could have both for workers and companies.</p>
+
+<p>Tags: bonilista, david-bonilla, contractor</p>
+
+<h2>10 razones por las que este sábado deberías ir a un code retreat</h2>
+
+<p>I&rsquo;ve read <a href="http://francho.org/2015/11/10/10-razones-para-ir-a-un-coderetreat/">this list</a> of reasons for attending a code retreat, by Francho Joven, who I met in the Global Day Of Code Retreat (GDCR) &lsquo;15 in Zaragoza</p>
+
+<p>Tags: francho-joven, list, zaragoza, code-retreat, gdcr</p>
+
+<h2>Meaningful Work through Passion, not Genius</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=pIYUMwxKFzo">this talk</a> on the importance of hard work and how it can be mistaken as genious. By Malcolm Gladwell</p>
+
+<p>Tags: malcolm-gladwell, passion, genius, work, time-management, productivity, career, mastery-autonomy-purpose</p>
+
+<h2>How to ask your wife for permission to spend $250,000 on a domain name</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@Stockphoto.com/how-to-ask-your-wife-for-permission-to-spend-250-000-on-a-domain-name-c27a3c2852e1">this article</a> by Jon Yau on how they started StockPhoto.com, buying a $250,000 domain name.</p>
+
+<p>Tags: startup, domain, stockphoto, jon-yau</p>
+
+<h2>Sorry, developer bootcamps: I was wrong</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@dillonforrest/sorry-developer-bootcamps-i-was-wrong-ea37fcc5572c">this article</a> by Dillon Forrest on the topic of developer bootcamps. Explains why developers should not be threatened by recent graduates of these programs and describes how people pursuing these programs usually are:</p>
+
+<ul>
+<li>Intelligence</li>
+<li>Risk appetite</li>
+<li>Resilience</li>
+<li>Self-investment</li>
+<li>Entrepreneurship</li>
+<li>Growth trajectory</li>
+</ul>
+
+
+<p>Tags: bootcamp, developer-bootcamp, dev-bootcamp, dillon-forrest, intelligence, risk-appetite, resilience, self-investment, entrepreneurship, growth-trajectory</p>
+
+<h2>The JVM and Java Garbage Collection</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=DoJr5QQYsl8">this webcast</a> about how the JVM garbage collection works. By Michael W Williams</p>
+
+<p>Tags: michael-williams, oracle, webcast, jvm, garbage-collection, gc,</p>
+
+<h2>Files Are Hard</h2>
+
+<p>I&rsquo;ve read <a href="http://danluu.com/file-consistency/">this article</a> on why software that writes on files is difficult, based on the different filesystems that are below, and the operating system. Written by Dan Luu.</p>
+
+<p>Uses software product to find bugs in filesystems</p>
+
+<p>Tags: filesystem, file, dan-luu, analysis</p>
+
+<h2>Applying a ceiling to the bug count</h2>
+
+<p>I&rsquo;ve read <a href="https://techblog.king.com/applying-a-ceiling-to-the-bug-count/">this interview</a>, written by Susanna Berg, on how King has reduced the amount of bugs in their backlog using an agile technique, measuring and setting a limit.</p>
+
+<p>Tags: susanna-berg, king, agile, bug, bug-count, defect, defect-count, per-malmen</p>
+
+<h2>Coming up in 2016: Spring Framework 4.3 &amp; 5.0</h2>
+
+<p>I&rsquo;ve read <a href="https://spring.io/blog/2015/08/03/coming-up-in-2016-spring-framework-4-3-5-0">this announcement</a> of Spring&rsquo;s new release, 5.0, which will require java 8 and will turn most of the features into the reactive programming paradigm. By Juergen Hoeller.</p>
+
+<p>Tags: Juergen Hoeller, spring, reactive programming, release, announcement</p>
+
+<h2>Why offices are where work goes to die</h2>
+
+<p>I&rsquo;ve read <a href="http://swizec.com/blog/why-offices-are-where-work-goes-to-die/swizec/6695">this article</a> by Swizec Teller explaining the downsides of working in an office as compared to working remotely.</p>
+
+<p>Tags: swizec-teller, remote, home-office, office, comparison, time-management</p>
+
+<h2>The Myth of the Passionate Developer</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@bm2yogi/the-myth-of-the-passionate-developer-76a41d457304">this article</a> by Michael Ibarra on what are the implications of being a passionate developer, how it affects your tasks and what are the factors to a job.</p>
+
+<p>Tags: michael-ibarra, passion, development, job, motivation, myth</p>
+
+<h2>Mossack Fonseca Breach – WordPress Revolution Slider Plugin Possible Cause</h2>
+
+<p>I&rsquo;ve read <a href="https://www.wordfence.com/blog/2016/04/mossack-fonseca-breach-vulnerable-slider-revolution/">this article</a> by Mark Maunder, which describes an hypothesis on how the Mossack Fonseca breach could have happened. Also describes and shows how to breach a Wordpress installation with a vulnerable Revolution Slider plugin.</p>
+
+<p>Tags: mark-maunder, security, breach, mossack-fonseca-breach, mossack-fonseca, hypothesis, attack, plugin, revolution-slider, wordpress</p>
+
+<h2>Tim Urban: Inside the mind of a master procrastinator</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator">this TED talk</a> from Tim Urban on how the procrastinator&rsquo;s mind works, exemplified by his own career.</p>
+
+<p>Tags: procrastinator, procrastination, mind, time-management, tim-urban</p>
+
+<h2>PEP 20 &ndash; The Zen of Python</h2>
+
+<p>I&rsquo;ve read <a href="https://www.python.org/dev/peps/pep-0020/">the PEP20</a>, the zen of python, with special attention to this:</p>
+
+<blockquote><p>Explicit is better than implicit.</p></blockquote>
+
+<h2>Why I switched from Octopress 2 to Hugo</h2>
+
+<p>I&rsquo;ve read <a href="http://conscientiousprogrammer.com/blog/2015/05/31/why-i-switched-from-octopress-2-to-hugo/">this article</a> by Franklin Chen on the change he made on the static site generator (SSG) he used. He considered hakyll, octopress, jekyll, hugo. Was decided between hakyll and hugo for their speed but, finally, decided to use hugo for their bigger community.</p>
+
+<p>Tags: franklin-chen, comparison, ssg, static-site-generator, hakyll, octopress, jekyll, hugo, change, speed, statically-typed, dynamically-typed, golang, performance</p>
+
+<h2>Why incremental regeneration in Jekyll 3.0 is such a big deal</h2>
+
+<p>I&rsquo;ve read <a href="http://idratherbewriting.com/2015/11/04/jekyll-30-released-incremental-regeneration-rocks/">this article</a> by Tom Johnson on one of the new features that jekyll 3.0 brings: incremental generation. How this can speed up the generation</p>
+
+<p>Tags: tom-johnson, incremental-generation, speed, performance, octopress-2, octopress-3, jekyll-3</p>
+
+<h2>Hugo, S3, Travis CI, oh boy!</h2>
+
+<p>I&rsquo;ve read <a href="http://continuousfailure.com/post/s3_blog/">this guide</a> by Alan Scherger on how to set up a specific stack for developing and deploying a static site blog.</p>
+
+<p>Tags: alan-scherger, static-site-generator, ssg, travis, hugo, s3</p>
+
+<h2>Deploy your blog to github pages automatically using Hugo and Travis</h2>
+
+<p>I&rsquo;ve read <a href="http://rcoedo.com/post/hugo-static-site-generator/">this article</a> by Roman Coedo on how to deploy a hugo blog to github pages, using travis.</p>
+
+<p>Tags: roman-coedo, travis, hugo, github, github-pages, ssg, static-site-generator</p>
+
+<h2>Improve Octopress with Advanced Tweaks &amp; Tips</h2>
+
+<p>I&rsquo;ve read <a href="https://www.narga.net/improve-octopress-advanced-tweaks-tips/">this list</a> of tips on how to improve the octopress (2) installation. By Nguyễn Đình Quân.</p>
+
+<p>Tags: nguyen-dinh-quan, octopress-2, tip, tweak</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/03/31/books-read-in-2016q1/">Books Read in 2016Q1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-03-31T10:49:50+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>10:49 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Books I&rsquo;ve read this quarter<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>:</p>
+
+<ul>
+<li><a href="http://www.amazon.es/cosas-sabes-siempre-olvidas-Pr%C3%A1cticos/dp/8408104314">101 cosas que ya sabes, pero siempre olvidas</a> by Ernie J. Zelinski; in Spanish</li>
+<li><a href="http://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs</a> by Abelson, Sussman, and Sussman, with the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/blog/categories/sicp">sicp</a>. Only chapters 1 and 2.</li>
+</ul>
+
+
+<p>Books started, not yet finished (WIP):</p>
+
+<ul>
+<li>Building microservices, by Sam Newman, with the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/blog/categories/building-microservices">building-microservices</a></li>
+<li><a href="https://leanpub.com/nightowls">Why programmers work at night</a> by Swizec Teller</li>
+<li><a href="http://www.redbook.io/">Readings in Database Systems, 5th Edition</a> by Peter Bailis, Joseph M. Hellerstein, Michael Stonebraker, editors</li>
+</ul>
+
+
+<p>Books I want to finish:</p>
+
+<p>Books that have entered the queue:</p>
+
+<ul>
+<li><a href="http://shop.oreilly.com/product/0636920028468.do">RESTful Web APIs</a> by Leonard Richardson, Mike Amundsen, Sam Ruby</li>
+<li><a href="http://shop.oreilly.com/product/9780596801694.do">RESTful Web Services Cookbook</a> by Subbu Allamaraju</li>
+<li><a href="https://www.sig.eu/en/building-maintainable-software">Building Maintainable Software</a> by Joost Visser</li>
+</ul>
+
+
+<p>Learning paths that have entered the queue:</p>
+
+<ul>
+<li><a href="http://shop.oreilly.com/category/learning-path/software-architecture-fundamentals.do">Software Architecture Fundamentals</a></li>
+<li><a href="http://shop.oreilly.com/category/learning-path/html5-fundamentals.do">HTML5 Fundamentals</a></li>
+<li><a href="http://shop.oreilly.com/category/learning-path/designing-web-apis.do">Designing Web APIs</a></li>
+<li><a href="http://shop.oreilly.com/category/learning-path/dive-deeper-php-programming.do">Dive Deeper into PHP Programming</a></li>
+<li><a href="http://shop.oreilly.com/category/learning-path/intro-modern-front-end-web.do">Introduction to the Modern Front-End Web</a></li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>The ending date of the quarter is the same as the publication date<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/03/02/using-tortoise-credentials-from-cli/">Tip: Using Tortoise Credentials in Git CLI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-03-02T11:41:28+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>11:41 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>TortoiseGit part</h2>
+
+<ul>
+<li>Go to a repo</li>
+<li>right button, Settings</li>
+<li>Git -> Credential</li>
+<li>Add a creadential</li>
+<li>Config type: global</li>
+<li>Helper: wincred</li>
+</ul>
+
+
+<p>Sync once using your HTTPS password</p>
+
+<h2>CLI part</h2>
+
+<p>Open the <code>$REPO/.git/config</code> and add</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[credential]
+</span><span class='line'>  helper = wincred</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Remote git operations should not ask for credentials anymore</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/03/02/self-study-in-march-2016/">Self-Study in March 2016</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-03-02T10:58:19+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2016</span></span> <span class='time'>10:58 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Learning Programming Isn’t That Hard, Deep Work Is Hard</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@benedictfritz/learning-programming-isn-t-that-hard-deep-work-is-hard-40a4cf3104f4">this article</a> by Benedict Fritz on two types of work (i.e., deep and shallow) and how programming is of the deep type. He links the difficulty of learning to program to the difficulty of practicing deep work.</p>
+
+<p>Tags: analogy, benedict-fritz, deep-work, shallow-work, learn-to-program, psychology</p>
+
+<h2>BeCodeWeek by Yeray Darias</h2>
+
+<p>I&rsquo;ve read <a href="http://developerscookbook.blogspot.com.es/search/label/desk-surfing">this category of posts</a> by Yeray Darias about his BeCodeWeek, a desk-surfing experience at BeCode.</p>
+
+<p>Publishes one entry per day detailing his activities: working for an open-source library, discussions, etc</p>
+
+<p>Tags: becodeweek, yeray-darias, desk-surfing, experience, experience-report, analysis</p>
+
+<h2>BeCodeWeek by Yeray Darias</h2>
+
+<p>I&rsquo;ve read <a href="http://developerscookbook.blogspot.com.es/search/label/desk-surfing">this category of posts</a> by Yeray Darias about his BeCodeWeek, a desk-surfing experience at BeCode.</p>
+
+<p>Publishes one entry per day detailing his activities: working for an open-source library, discussions, etc</p>
+
+<p>Tags: becodeweek, yeray-darias, desk-surfing, experience, experience-report, analysis</p>
+
+<h2>Tracer Bullets</h2>
+
+<p>I&rsquo;ve read <a href="http://c2.com/cgi/wiki?TracerBullets">this page</a> about tracer bullets, an analogy from the military warfare to a software project.</p>
+
+<p>Serves the purpose of adjusting the aim of the cannon to better reach the target.</p>
+
+<p>Tags: analogy, metaphor, warfare, management</p>
+
+<h2>Cohesion - the cornerstone of software design</h2>
+
+<p>I&rsquo;ve read <a href="http://codurance.com/2016/03/03/cohesion-cornerstone-software-design/">this article</a> by Sandro Mancuso on the topic of cohesion. Describes the 7 types of cohesion, as described in Structured Design<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, from worst to best:</p>
+
+<ul>
+<li>Coincidental cohesion</li>
+<li>Logical cohesion</li>
+<li>Temporal cohesion</li>
+<li>Procedural cohesion</li>
+<li>Communicational/informational cohesion</li>
+<li>Sequential cohesion</li>
+<li>Functional cohesion</li>
+</ul>
+
+
+<p>and about Design-Level Cohesion:</p>
+
+<ul>
+<li>Coincidental relation (R1)</li>
+<li>Conditional relation (R2)</li>
+<li>Iterative relation (R3)</li>
+<li>Communication relation (R4)</li>
+<li>Sequential relation (R5)</li>
+<li>Functional (R6)</li>
+</ul>
+
+
+<p>Tags: cohesion, codurance, edward-yourdon, larry-constantine, list, sandro-mancuso, software-design, design-level-cohesion, smc-cohesion, dlc-cohesion</p>
+
+<h2>Etsy CTO Q&amp;A: We Need Software Engineers, Not Developers</h2>
+
+<p>I&rsquo;ve read <a href="http://thenewstack.io/etsy-cto-qa-need-software-engineers-not-developers/">this interview</a> with John Allspaw, where they explain the onboarding experience for new hires at Etsy, the DevOps philosophy and the need for engineering skills, more than developer skills. This can be exemplified in the need to know more, defining the boundaries of your job and finding the right tool for the job.</p>
+
+<p>Tags: devops, interview, q-and-a, john-allspaw, etsy, onboarding, hire, team-management, deploy</p>
+
+<h2>Frequency Reduces Difficulty</h2>
+
+<p>I&rsquo;ve read <a href="http://martinfowler.com/bliki/FrequencyReducesDifficulty.html">this article</a> by Martin Fowler on why we should repeat things that are difficult for us:</p>
+
+<ul>
+<li>Perfectioning the technique</li>
+<li>Internalizing the details</li>
+<li>Easing its automation</li>
+</ul>
+
+
+<p>Tags: martin-fowler, automation, process, perfection, internalizing, technique, detail, process-theory, agile</p>
+
+<h2>Lambdas are confusing</h2>
+
+<p>I&rsquo;ve watched this video where Coman Hamilton from JAXenter interviews Dr. Heinz Kabutz about Java&rsquo;s lambda syntax. Cites the problem with exceptions, generics, method overloading.</p>
+
+<p>Tags: java, lambda, coman-hamilton, jaxenter, heinz-kabutz, problem</p>
+
+<p><a href="https://www.youtube.com/watch?v=WcHom1eVhi4&amp;feature=youtu.be">https://www.youtube.com/watch?v=WcHom1eVhi4&amp;feature=youtu.be</a></p>
+
+<h2>El full-stack developer en 2016</h2>
+
+<p>I&rsquo;ve read <a href="http://www.developerdepueblo.com/development/full-stack-developer-2016/">this article</a> by Jose Ignacio Andrés about the job descriptions of 2016.</p>
+
+<blockquote><p>El principal valor de un full-stack es poder simplificar el trabajo a los demás miembros del equipo.</p></blockquote>
+
+<p>My translation:</p>
+
+<blockquote><p>The main value of a full-stack developer is to be able to simplify other teammates' work</p></blockquote>
+
+<p>Tags: teamwork, teammate, fullstack, simplification, work, team-management, jose andres</p>
+
+<h2>I am a software craftsman</h2>
+
+<p>I&rsquo;ve read <a href="http://www.dirv.me/i-am-a-software-craftsman/index.html">this article</a> by Daniel Irvine about calling yourself a craftsman or not. He says that if you adhere to their values, you should.</p>
+
+<p>Tags: craftsmanship, label, daniel-irvine, craftsman, group-belonging</p>
+
+<h2>Teaching Programming Languages in a Post-Linnaean Age</h2>
+
+<p>I&rsquo;ve read <a href="http://cs.brown.edu/~sk/Publications/Papers/Published/sk-teach-pl-post-linnaean/paper.pdf">this paper</a> by Shriram Krishnamurthi where he explains the need for books like <a href="http://www.plai.org/">PLAI</a>:</p>
+
+<ul>
+<li>lack of paradigms in new languages, and its separation (or lack of)</li>
+<li>design of languages cheaper and cheaper these days</li>
+<li>rigor level in publications</li>
+<li>inductive and deductive learning</li>
+</ul>
+
+
+<h2>Notes</h2>
+
+<p><code>post-Linnaean</code> refers to the <a href="https://en.wikipedia.org/wiki/Carl_Linnaeus">Carl Linnaeus</a>:</p>
+
+<blockquote><p>He is known as the father of modern taxonomy</p></blockquote>
+
+<p>Tags: inductive-learning, deductive-learning, dsl, domain-specific-language, type-soundness, continuation-style, garbage-collection, reactive-programming, scheme, plai, teaching, programming-language, shriram-krishnamurthi</p>
+
+<h2>Lazy Ruby</h2>
+
+<p>I&rsquo;ve read <a href="http://sonnym.github.io/2014/04/05/lazy-ruby/">this article</a> by sonnym about using ruby&rsquo;s lazy (non-strict) features, detailing an example with Fibonacci&rsquo;s sequence.</p>
+
+<p>Tags: laziness, strictness, non-strictness, ruby, fibonacci, comparison</p>
+
+<h2>Jessica Livingston</h2>
+
+<p>I&rsquo;ve read <a href="http://paulgraham.com/jessica.html">this essay</a> by Paul Graham about his co-founder at the Y-combinator: Jessica Livingston. She was considered the Social Radar at YC</p>
+
+<p>The essay also talks about the non-existent separation between working hours and not and about her implication and personality.</p>
+
+<p>Tags: jessica-livingston, paul-graham, y-combinator, feminism, yc, essay</p>
+
+<h2>Four Laws Of Software Economics (Part 1)</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@RichMironov/four-laws-of-software-economics-part-1-e162aa0ea9e5">this article</a> by Rich Mironov on why the development team will never be big enough (because of economics, because there are more things to be done than time to do them, so we have to prioritize them) and about the communication problems between the dev team and the client(s).</p>
+
+<p>Also talks about the general personality of clients and devs and task prioritization</p>
+
+<p>Tags: exclusive-or, magical-thinking, tnstaafl, management, agile, team, capacity, death-march, estj, intp, software-economics, product-strategy, law-of-ruthless-prioritization, law, rich-mironov, slack, myers-briggs-type</p>
+
+<h2>You Should Take A Codecation</h2>
+
+<p>I&rsquo;ve read <a href="https://robots.thoughtbot.com/you-should-take-a-codecation">this article</a> by Ben Orenstein explaining what is a codecation and what he&rsquo;s done in the two codecations he&rsquo;s taken.</p>
+
+<p>Tags: codecation, ben-orenstein, vacation, holiday, coding, shipping, in-company</p>
+
+<h2>Giving Up on TDD</h2>
+
+<p>I&rsquo;ve read <a href="http://iansommerville.com/systems-software-and-technology/giving-up-on-test-first-development/">this article</a> by Ian Sommerville about the problems he&rsquo;s found while doing TDD, mainly about design, but also about being conservative in the amount of tests you allow yourself to break while refactoring.</p>
+
+<p>Tags: tdd, ian-sommerville, refactoring, problem, design-problem, design, giving-up-tdd</p>
+
+<h2>Giving Up on TDD - answer</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2016/03/19/GivingUpOnTDD.html">this article</a> by Robert C. Martin on the common issues for people adopting TDD:</p>
+
+<ul>
+<li>The Fragile Test Problem</li>
+<li>The Design Problem</li>
+<li>The Testable Design Problem</li>
+<li>The Magic Bullet Problem</li>
+</ul>
+
+
+<p>This article is an answer to another by Ian Sommerville.</p>
+
+<p>Tags: tdd, uncle-bob, robert-martin, adoption, ian-sommerville, fragile-test-problem, giving-up-tdd, design-problem, testable-design-problem, magic-bullet-problem</p>
+
+<h2>Seek out jobs with fast learning cycles</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@sarahtavel/seek-out-jobs-with-fast-learning-cycles-f923c8d8a4be#.7bxx65a4x">this article</a> by Sarah Tavel on learning on the job and how fast these learning cycles can happen at companies at different stages of maturity.</p>
+
+<blockquote><p>So if you’re thinking of changing jobs, or taking your first, my advice: find a place with a fast learning cycle, and a steep learning curve.</p></blockquote>
+
+<p>Tags: learning, job, hypothesis, sarah-tavel, learning-cycle, maturity-level, learning-process, product-management</p>
+
+<h2>Clean Code Vs. Implementation Patterns</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.xebia.com/clean-code-vs-implementation-patterns/">this comparison</a> of Clean Code vs Implementation Pattern books, by Vincent Partington.</p>
+
+<p>In it, the author explains the differences in style in both books, and how they compare to others.</p>
+
+<p>Tags: clean-code, implementation-patterns, comparison, book-review, book-comparison, vincent-partington</p>
+
+<h2>Stuck in Traffic vlog #103 - New Spammer Techniques</h2>
+
+<p>I&rsquo;ve seen <a href="https://www.peerlyst.com/posts/stuck-in-traffic-vlog-103-new-spammer-techniques-j-wolfgang-goerlich">this vlog entry</a> on machines fighting machines (exemplified with the spam producing and filtering) and how some spammers are trying more direct techniques focusing on higher-value targets, sometimes even handcrafting messages and modifying them every few units.</p>
+
+<p>Tags: wolfgang-goerlich, spam, vlog, spammer, machine-learning</p>
+
+<h2>Becoming A Finisher</h2>
+
+<p>I&rsquo;ve read <a href="http://christopherdbui.com/becoming-a-finisher/">this article</a> by Christopher Bui where he explains that projects that are too ambitious stall your productivity and make you lose your focus.</p>
+
+<p>Tags: christopher-bui, pomodoro, time-management, productivity, motivation, ambition, paul-graham, quote</p>
+
+<h2>Hanging around with red-black tree implementations: the beginnings</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.fraixed.es/post/hanging-around-red-black-trees-implementations/">this article</a> by Ivan Fraixedes where he details the progress of implementing a red-black tree, and also his motivation for doing it.</p>
+
+<p>Tags: ivan-fraixedes, red-black-tree, abstract-data-structure, adt, deliberate-practice, pet-project</p>
+
+<h2>Some Tools for Faster Blogging in Octopress</h2>
+
+<p>I&rsquo;ve read <a href="http://dgmstuart.github.io/blog/2015/03/27/some-tools-for-faster-blogging-in-octopress/">this article</a> for tips and tricks on how to blog faster with octopress. Written by Duncan Stuart.</p>
+
+<p>Tags: duncan-stuart, blog, improvement, meta, octopress, tip-and-trick</p>
+
+<h2>The veil of ignorance</h2>
+
+<p>I&rsquo;ve read <a href="http://mrmrs.io/writing/2016/03/23/the-veil-of-ignorance/">this article</a> by Adam Morse on how not being on the top of the skills performance can affect your design and your user experience. Also, references the concept of &ldquo;The Veil of Ignorance&rdquo;, a concept by John Rawls.</p>
+
+<p>Tags: john-rawls, veil-of-ignorance, user-experience, design</p>
+
+<h2>To Smile Again &ndash; Recovering from the paralysis of burnout</h2>
+
+<p>I&rsquo;ve read <a href="https://m.signalvnoise.com/to-smile-again-ae0ba9f2198c">this article</a> by Jamis Buck on his story of burnout, what symptoms had on him and how he got out of it.</p>
+
+<p>Tags: burnout, jamis-buck, psychology, productivity, personal, story, analogy</p>
+
+<h2>Beyond email: could startup Slack change the way you work?</h2>
+
+<p>I&rsquo;ve read <a href="http://www.theguardian.com/technology/2016/mar/25/slack-butterfield-emoji-chat-nasa-harvard-silicon-valley">this article</a> on Slack&rsquo;s office culture, with their diversity, policies and values after a high people growth in a short period of time. By Jemima Kiss</p>
+
+<p>Tags: culture, office-culture, slack, jemima-kiss</p>
+
+<h2>Slack: Work This Way</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@iaintait/slack-work-this-way-9221284472dd">this article</a>, a response to my above read, about the office culture at Slack.</p>
+
+<p>Tags: iain-tait, response, slack, office-culture</p>
+
+<h2>BEM 101</h2>
+
+<p>I&rsquo;ve read <a href="https://css-tricks.com/bem-101/">this introduction</a> to a CSS style called Block, Element, Modifier methodology (BEM).</p>
+
+<p>In it,</p>
+
+<blockquote><ul>
+<li>a block is a top-level abstraction of a new component</li>
+<li>Child items, or elements, can be placed inside and these are denoted by two underscores following the name of the block [&hellip;].
+modifiers can manipulate the block so that we can theme or style that particular component without inflicting changes on a completely unrelated module. This is done by appending two hyphens to the name of the block [&hellip;].</li>
+</ul>
+</blockquote>
+
+<p>By Joe Richardson, Robin Rendle et al.</p>
+
+<p>Tags: joe-richardson, robin-rendle, bem, css, css-methodology, introduction, css-architecture, sass</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Structured Design: Fundamentals of a Discipline of Computer Program and Systems Design by Yourdon and Constantine.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/03/01/kata-formulation-find-comments/">Kata Formulation: Find the Comments</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-03-01T06:57:28+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>6:57 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Little Johnny is inspecting a PHP source code that contains comments. These comments contains words that he doesn&rsquo;t understand, as it written in another language.</p>
+
+<h2>Rules and constraints</h2>
+
+<p>The source code in the PHP files does not need to be correct.</p>
+
+<p>A comment (a subset of PHP comments) is defined as:</p>
+
+<ul>
+<li>A line containing C-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code>// hello C-style</code> is a valid comment</li>
+<li><code>echo "//";</code> is not a comment</li>
+<li><code>echo '//';</code> is not a comment</li>
+</ul>
+</li>
+<li>A line containing Perl-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code># hello Perl-style</code> is a valid comment</li>
+<li><code>echo "#";</code> is not a comment</li>
+<li><code>echo '#';</code> is not a comment</li>
+</ul>
+</li>
+<li>There are no multi-line comments
+
+<ul>
+<li><code>/* ... */</code> is not a comment</li>
+</ul>
+</li>
+</ul>
+
+
+<p>You can do this kata in any language you want. In any case it is not allowed to use a PHP parser. This task must be done manually.</p>
+
+<h2>How to start</h2>
+
+<ul>
+<li>Clone/fork (any stars are welcome) <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments">this repo</a></li>
+<li>Run the tests. <a href="https://github.com/alvarogarcia7/cli-app-base-clojure/blob/master/README.md#tests">See this</a> for help</li>
+<li>They should be red.</li>
+<li>Go to production code and fix it</li>
+<li>Have fun (happy kata and happy koding!)</li>
+</ul>
+
+
+<h2>Requirements</h2>
+
+<p>Please do not read ahead, just read the current assignment, do it, then read the next one:</p>
+
+<ol>
+<li>Can you help Little Johnny fetch all those comments?</li>
+<li>These messages have not been audited yet and we want to publish the code, so it is better to remove the comments. Can you do it?</li>
+</ol>
+
+
+<h2>Optional requirement</h2>
+
+<p>As an optional task, when the problem is finished (you can attack in your preferred order), there must be an executable jar with some parameters to process the current folder with the &lsquo;working modes&rsquo; specified above.</p>
+
+<p>(This formulation is also present at the <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments/blob/master/README.md">repository</a> )</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two Persons Involved in a Git Commit, in Github</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-02-14T16:12:28+00:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:12 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>On git</h2>
+
+<p>You can have multiple persons involved in a single git commit: an author and a committer.</p>
+
+<p>The difference is explained by <a href="https://groups.google.com/forum/#!topic/repo-discuss/6aH9rH8nUdo">Manuel Doninger</a> <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>:</p>
+
+<blockquote><p>The author is the one who did the code change.
+The committer is the person who committed that change to a repository.</p></blockquote>
+
+<p>an example, by the same author:</p>
+
+<blockquote><p>Example: I&rsquo;m not a committer in the EGit project, so i have no rights
+to push directly to the EGit repository at Eclipse. But i contribute
+to EGit, so my changes have the author set to my name and email. If my
+change gets reviewed by the EGit team, and submitted, the committer
+field contains the name and email of the person who submitted the
+change</p></blockquote>
+
+<h2>On github</h2>
+
+<p>This is represented in github with this format:</p>
+
+<p><img src="/blog/categories/../uploads/commit-with-two-persons.png" alt="two persons involved" /></p>
+
+<p>One of them is &ldquo;sharplet&rdquo; and the other one is &ldquo;gfontenot&rdquo;. Both are github users that match a github-registered mail.</p>
+
+<p>On a shallow inspection, the commit does not reveal anything special:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
+</span><span class='line'>commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
+</span><span class='line'>Author: XXXX &lt;xxxx@example.com&gt;
+</span><span class='line'>Date:   Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100
+</span><span class='line'>
+</span><span class='line'>    Clarify specs by defining • as the composition operator
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>but looking a bit closer<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s2">&quot;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&quot;</span> <span class="p">|</span> less
+</span><span class='line'>17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> 14:44:52 +1100, <span class="m">3</span> months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> 09:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> 09:30:28 -0800, <span class="m">9</span> weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or, just the emails:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s1">&#39;%ae %ce&#39;</span>
+</span><span class='line'>xxxx@example.com yyyy@example.com
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Usage</h2>
+
+<p>For a single commit:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span> git commit -m <span class="s2">&quot;...&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For a session:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Taken from <a href="http://stackoverflow.com/a/23108169/1181094">this StackOverflow answer</a></p>
+
+<p>This can be useful for a pairing session or for some kinds of git history rewrite.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>also explained in <a href="http://stackoverflow.com/questions/6755824/what-is-the-difference-between-author-and-committer-in-git">this StackOverflow post</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>this list has been generated from the available arguments at the <a href="https://git-scm.com/docs/git-log">&ldquo;pretty formats&rdquo; at the git-log page</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/02/01/self-study-in-february-2016/">Self-Study in February 2016</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-02-01T00:55:19+00:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>12:55 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Software and all that comes with it</h2>
+
+<p>I&rsquo;ve read <a href="http://lanyrd.com/2011/fromthefront/sgfgw/">these slides</a> about creating software and asking questions to deliver value, by Alberto Brandolini</p>
+
+<p>Tags: alberto-brandolini, software, slide, team-management, agile</p>
+
+<h2>Driving your DBA crazy in 3 easy steps</h2>
+
+<p>I&rsquo;ve read <a href="http://lanyrd.com/2011/ddd-day-it/shzym">these slides</a> about dealing with the knowledge that is present in the database, not expressed in ubiquitous language and cause of the low bus factor, by Alberto Brandolini</p>
+
+<p>Analogy between the movie The Shining and a model / entities / aggregates.</p>
+
+<p>Tags: ddd, model, entity, aggregate, team-management, dba, agile, ubiquitous-language, alberto-brandolini, bus-factor, slide</p>
+
+<h2>Shorter Feedback is not Always Bett</h2>
+
+<p>I&rsquo;ve read <a href="https://facebook.com/notes/kent-beck/shorter-feedback-is-not-always-bett/1097086386990891">this note</a> from Kent Beck on why shorter feedback loops might not always be better. I.e., why some processes take time to set in and results are not observable until that time.</p>
+
+<p>Tags:  kent-beck, feedback-loops, open-question, analogy</p>
+
+<h2>La Regla del Triple Check para ir a eventos</h2>
+
+<p>I&rsquo;ve read <a href="http://www.bonillaware.com/regla-triple-check-para-ir-a-eventos">this article</a> by David Bonilla about a rule to help you decide attendance to events, in Spanish</p>
+
+<p>Tags: rule, time-management, david-bonilla, event, spanish, triple-check</p>
+
+<h2>An interview with Charles Wetherell</h2>
+
+<p>I&rsquo;ve read <a href="http://demin.ws/blog/english/2012/08/25/interview-with-charles-wetherell/">this interview</a> by Alexander Demin about the interviewee&rsquo;s book &ldquo;Etudes for Programmers&rdquo;. In it, they talk about the origin of the études, the author&rsquo;s research interests and activities. Also about the book (written in 1978) and how computer science has changed since then.</p>
+
+<p>When asked about three things a programmer should know:</p>
+
+<blockquote><p>Some ability to do formal mathematics. The level necessary to understand Hopcroft and Ullman combined with a little graph theory is enough. Discrete mathematics is essential; calculus is only necessary for folks working in special application areas.</p>
+
+<p>Some ability to write clearly in their native language. Dijkstra said that if a person couldn’t write their own language, they couldn’t write a correct program. (Well, that’s what I hope Dijkstra said!). Writing programs is essentially the same as writing a non-fiction essay. If you can’t make the step-by-step connections clearly in your own language, why would we think you could in C, for example?</p>
+
+<p>Remember that a program is primarily for communication with humans, not computers. When you write a program, the computer will do whatever you say. You must convince the humans who read the program that what you have asked the computer to do is the correct thing to do. Remember, the computer doesn’t care about correctness.</p>
+
+<p> The answer to the last question means that programs should always have the form of paragraphs of comments that describe the intention of the program followed by paragraphs of code that implement that intention. All of the formatting should be designed to make readers as able as possible to read the code easily; the compiler doesn’t care. In particular, follow conventions of mathematics and your native language, not those you found in some random language manual. Write the comments first and then write the code, not the other way around. If you don’t know what you want to achieve and why, any code you write is, by definition, incorrect.</p></blockquote>
+
+<p>Tags: charles-wetherell, alexander-demin, interview, book, etude, etudes-for-programmers, practice, ability, skill, list</p>
+
+<h2>How to fix Javascript… maybe</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@wob/how-to-fix-javascript-maybe-8857819bfa16">this article</a> by Drew Hamlett about the lack of style guide for javascript and how this affects the adoption of the language and the sprout of similar libraries.</p>
+
+<p>Suggests the creation of a standard style guide for javascript.</p>
+
+<p>Tags: drew-hamlett, javascript, style-guide, analysis</p>
+
+<h2>Isomorphic JavaScript: #DevBeat Master Class</h2>
+
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/spikebrehm/a-28174727">these slides</a> by Spike Brehm on Isomorphic JavaScript and why it&rsquo;s important: initial pageload and speed, reducing effort and duplication, SEO (crawlability).</p>
+
+<p>Tags: isomorphic-javascript, isomorphism, javascript, seo, crawler, frontend, app, application, fat-client, fat-server, thin-client, thin-server, ria-spike-brehm, slide</p>
+
+<h2>Open-sourcing our docker images</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.modulus.io/open-sourcing-our-docker-images">this article</a> by Brandon Cannaday about the Docker images that they have.</p>
+
+<p>Tags: docker, brandon-annaday, open-ource, image, container, modulus</p>
+
+<h2>growing up in an open source world</h2>
+
+<p>I&rsquo;ve read <a href="http://fiveisprime.me/2015/02/18/growing-up-in-open-source/">this article</a> by Matt Hernandez where he explains that fixing the style guide can limit your creativity and how the software is written in enterprise and open-source environments.</p>
+
+<p>Also about how developers grow when exposed to different style guides.</p>
+
+<p>Tags: style-guide, matt-hernandez, creativity, dreyfus-model, enterprise, open-source, programming</p>
+
+<h2>Hanlon&rsquo;s Razor and working with young engineers</h2>
+
+<p>I&rsquo;ve read <a href="http://fiveisprime.me/2013/07/27/young-engineers/">this article</a> by Matt Hernandez on the importance of understanding (and empathising) towards others' positions and worries.</p>
+
+<p>Cites the Hanlon Razor:</p>
+
+<blockquote><p>Never attribute to malice that which is adequately explained by ignorance.</p></blockquote>
+
+<p> Tags:  hanlon-razor, empathy, team-management, ignorance, malice, matt-hernandez</p>
+
+<h2>Intro to sails.js</h2>
+
+<p>I&rsquo;ve watched <a href="https://youtu.be/GK-tFvpIR7c">this video</a>, an introduction to the sails.js framework: a realtime nodejs server for creating REST APIs, inspired by Ruby on Rails.</p>
+
+<p>Tags: sailsjs, ruby-on-rails, ror, framework, video, introduction, mvc, rest-api, realtime, nodejs,</p>
+
+<h2>Node.js and hapi - creating a rest api</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.modulus.io/nodejs-and-hapi-create-rest-api">this article</a> about creating a REST API using <a href="http://hapijs.com/">Hapi</a>, a nodejs framework. Written by Matt Hernandez</p>
+
+<p>Tags: matt-hernandez, rest-api, nodejs, hapi, framework</p>
+
+<h2>Introducing Pokedex.org: a progressive webapp for Pokémon fans</h2>
+
+<p>I&rsquo;ve read <a href="http://www.pocketjavascript.com/blog/2015/11/23/introducing-pokedex-org">this article</a> by Nolan Lawson about the challenge of having a 60 fps application on a mobile device, making it offline.</p>
+
+<p>Uses Angular 2, javascript 7, PouchDB as well as LocalForage for storage. All processing on WebWorkers, except for DOM manipulation.</p>
+
+<p>Tags: angular-2, javascript-7, angular, javascript, pouchdb, localforage, cloudant, 60fps, mobile, app, offline-first, offline, pokemon, api, nolan-lawson, web-worker, flip-technique, css, progressive, pokedex, svgomg, frontend</p>
+
+<h2>LambdaConf 2015 - How to Learn Haskell in Less Than 5 Years Chris Allen</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=Bg9ccYzMbxc">this video</a> by Chris Allen on how to learn haskell, what are some common pitfalls while learning it and how learning and teaching (it) are different.</p>
+
+<p>Talks about his (with a coauthor) book, focused on not reducing the readers that make it to the end and, finally, increasing the amount of haskell users.</p>
+
+<p>References <a href="https://yow.eventer.com/yow-2014-1222/stop-treading-water-learning-to-learn-by-edward-kmett-1750">this talk</a> by Kmett.</p>
+
+<p>Tags: chris-allen, haskell, learning-to-learn, meta-learning, lambda-conf, talk</p>
+
+<h2>Extreme Continuous Delivery - at Unruly</h2>
+
+<p>I&rsquo;ve read <a href="http://www.xpdays.de/2014/downloads/002-extreme-continuous-delivery-at-unruly/cd_javaone.pdf">these slides</a> about how the company Unruly does continuous delivery (CD), maximizing business value, minimizing time to market (TTM). Also describes how they do deployments and how to organize teams.</p>
+
+<p>References: Extreme Programming Explained (Beck), Continuous Delivery (Humble &amp; Farley)</p>
+
+<p>Tags: silo, team-management, culture, continuous-delivery, tdd, nagdd, shared-infrastructure, acceptance-testing, module-testing, conway-law, cross-pollination, continuous-investment, slide</p>
+
+<h2>Building chat applications and robots for Skype</h2>
+
+<p>I&rsquo;ve read <a href="https://opensourcehacker.com/2013/03/28/building-chat-applications-and-robots-for-skype/">this article</a> on building robots for skype. By Mikko Ohtamaa</p>
+
+<p>Tags: skype, robot, bot, mikko-ohtamaa, slack, integration, api</p>
+
+<h2>Why I never wrote down our company values</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/swlh/why-i-never-wrote-down-our-company-values-8143520497e8">this article</a> by Mikael Cho on the subject of having company values, preaching or writing them down. Also, what happens when hard times come, regarding your values.</p>
+
+<p>Tags: mikael-cho, value, company-value, analogy</p>
+
+<h2>Interview with Jesper Louis Andersen about Erlang, Haskell, OCaml, Go, Idris, the JVM, software and protocol design </h2>
+
+<p>I&rsquo;ve read this interview (<a href="https://medium.com/this-is-not-a-monad-tutorial/interview-with-jesper-louis-andersen-about-erlang-haskell-ocaml-go-idris-the-jvm-software-and-b0de06440fbd">part 1</a>, <a href="https://medium.com/this-is-not-a-monad-tutorial/interview-with-jesper-louis-andersen-about-erlang-haskell-ocaml-go-idris-the-jvm-software-and-5628fe591295">part 2</a>) to Jesper Louis Andersen, interviewed by Federico Carrone.</p>
+
+<p>The first part is about a comparison of languages, what/why he uses them, and protocol design. The second is more about the Erlang language, the BEAM VM, and some experiences.</p>
+
+<p>Tags: federico-carrone, erlang, interview, jesper-andersen, jesper-louis-andersen, haskell, ocaml, go, idris, the-jvm, protocol-design, software-design, language, functional-programming, protocol, land-of-lisp, northern-war</p>
+
+<h2>Migrating to Hugo From Octopress</h2>
+
+<p>I&rsquo;ve read <a href="http://nathanleclaire.com/blog/2014/12/22/migrating-to-hugo-from-octopress/">this guide</a> by Nathan LeClaire on migrating the blog from Octopress to Hugo</p>
+
+<p>Tags: static-site-generator, hugo, go, octopress, ruby, jekyll, nathan-leclaire, migration, blog, meta</p>
+
+<h2>Dynamic Static Site Generators strategies</h2>
+
+<p>I&rsquo;ve read <a href="https://timnash.co.uk/dynamic-static-site-generators-strategies/">this article</a> explaining what are static site generators, and an example with Jekyll. By Tim Nash</p>
+
+<p>Tags: tim-nash, static-site-generator, jekyll, strategy, explanation, comparison</p>
+
+<h2>Blog like a confused hacker</h2>
+
+<p>I&rsquo;ve read <a href="https://timnash.co.uk/using-wordpress-static-site-generator/">this article</a> by Tim Nash on what tools he recomends for static site generation.</p>
+
+<p>Tags: tim-nash, static-site-generator, jekyll, hide, strategy, explanation, comparison, sublime, wordpress, amazon-s3, cdn</p>
+
+<h2>Resolving the Frontend/Backend API Design Conflict</h2>
+
+<p>I&rsquo;ve read <a href="http://launchany.com/resolving-the-frontendbackend-api-design-conflict/">this article</a> that explains the &ldquo;Backend for Frontend&rdquo; (BFF) pattern, for solving the different needs of data depending on each device / client. By James Higginbotham</p>
+
+<p>Tags: james-higginbotham, bff, pattern, backend-for-frontend, api, soa, microservice, frontend, backend, architecture</p>
+
+<h2>What If We Forget To Write The Tests?</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=f70f14b644&amp;e=4a925444f9">this article</a> by J. B. Rainsberger on the trust issues related to starting to use a new methodology (TDD in this case) and how to see what impacts it might have in your day to day.</p>
+
+<p>Tags: j-b-rainsberger, j-brains, rainsberger, tdd, motivation, team-management</p>
+
+<h2>API microservices, the Unix philosophy, and the Richardson Maturity Model - a practical perspective</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@chrstphrhrt/microservices-the-unix-philosophy-and-the-richardson-maturity-model-425abed44826">this article</a> by Chris Hart on why startups and companies alike should be careful when choosing th latest technology and how this applies to microservices.</p>
+
+<p>Tags: microservice, chris-hart, startup, analysis, company, technical-debt, bounded-context, ddd, rest-api</p>
+
+<h2>Effective programming</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@sebas5384/effective-programming-d7e5bb2f3b80">this article</a> by Sebastian Ferrari on the importance of clean code, systems thinking and functional programming.</p>
+
+<p>Specifies the important difference between effectiveness and efficiency.</p>
+
+<p>Links to this talk by <a href="https://youtu.be/OqEeIG8aPPk">Russ Ackoff</a>. States the difference between &ldquo;the right thing&rdquo; and &ldquo;the thing right&rdquo;, by Drucker.</p>
+
+<p>Tags: drucker, thing-right, right-thing, sebastian-ferrari, system-thinking, russ-ackoff, video, ted, difference, clean-code, functional-programming</p>
+
+<h2>Learning how to learn</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@thejameskyle/learning-how-to-learn-7f04d6f42c1e">this article</a> by James Kyle about the &ldquo;how to learn&rdquo; as one important skill for programmers and how having the solution at a few keystrokes limits / handicaps this ability.</p>
+
+<p>Tags: programmer, learn-to-learn, james-kyle, stack-overflow, skill</p>
+
+<h2>Why do some functional programmers criticize design patterns in OOP languages as a sign of language deficiency, while Monad is also a design pattern?</h2>
+
+<p>I&rsquo;ve read <a href="https://www.quora.com/Why-do-some-functional-programmers-criticize-design-patterns-in-OOP-languages-as-a-sign-of-language-deficiency-while-Monad-is-also-a-design-pattern/answer/Edward-Kmett?srid=hVnO&amp;share=12410d1e">this answer</a> by Edward Kmett comparing the design patterns in OOP to the design patterns in functional languages.</p>
+
+<p>Tags: functional-language, object-oriented-language, edward-kmett, oop, pattern, monad, interface, quora, answer</p>
+
+<h2>Should We Even Debate Refactoring With Stakeholders?</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=215f7f649b&amp;e=4a925444f9">this article</a> by J. B. Rainsberger on the power balance between stakeholders and programmers and how it can be inclined to a &lsquo;more trust&rsquo; / &lsquo;less trust&rsquo; by following some actions. The analogy is to a trade you cannot understand, therefore you have to hope that the taken decisions are in your best interest.</p>
+
+<p>Tags: j-b-rainsberger, j-brains, rainsberger, refactor, business-need, communication, stakeholder</p>
+
+<h2>The Eternal Struggle Between Business and Programmers</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.thecodewhisperer.com/permalink/the-eternal-struggle-between-business-and-programmers">this article</a> by J. B. Rainsberger on the discussion between business (&lsquo;we want more features, now&rsquo;) and the programmers (&lsquo;we want more refactoring, now&rsquo;). Concludes that both players need each other, in a symbiotic fashion, to keep their jobs at the company.</p>
+
+<p>He suggests that Scrum cannot work without the XP practices and that we need to refactor aggressively after having finished our initial design, to keep the costs down. In fact, agreeing with both parts in this discussion.</p>
+
+<p>References one of his own videos, at Oredev'13, &ldquo;Fundamental Theorem of Agile Software Development&rdquo;, where he describes the relationship between accidental / essential complexity in the cost of a feature, attributing most of it to accidental (&lsquo;we&rsquo;re not good at our jobs&rsquo;) and describing the need for more design / refactor after the initial design.</p>
+
+<p>Tags: j-b-rainsberger, j-brains, rainsberger, refactor, business-need, design, oredev, talk, agile, xp, scrum, software-development, accidental-complexity, essential-complexity, mythical-man-month</p>
+
+<h2>Turning code to cash — How to make money as a Web Developer and live to tell the tale.</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@kurtrohlandt/turning-code-to-cash-how-to-make-money-as-a-web-developer-and-live-to-tell-the-tale-f5eedc557b3e">this article</a> by Kurt Rohlandt with a list of items to check while dealing with clients as a freelancer:</p>
+
+<ul>
+<li>Nothing is simple</li>
+<li>Know your skill set — and let your client know it</li>
+<li>Be clear about what they are buying</li>
+<li>Learn to use the best tool for the job</li>
+<li>To your client you’re more than just a developer</li>
+<li>Sign off your jobs</li>
+</ul>
+
+
+<p>Tags: freelancer, kurt-rohlandt, list, tip, client</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/2">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/17/quote-characterization-tests/">Quote: Characterization Tests</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/17/brownish-greenfield-gilded-rose-kata-formulation/">Brownish Greenfield Gilded Rose Kata</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/17/faster-site-generation-native-octopress/">Faster Site Generation With a Native Octopress 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/31/self-study/">Self-Study in April 2016</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/31/books-read-in-2016q1/">Books Read in 2016Q1</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'alvarogarcia7',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - alvaro garcia -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

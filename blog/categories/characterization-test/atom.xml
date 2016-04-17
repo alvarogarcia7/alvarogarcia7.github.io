@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Characterization-test | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/characterization-test/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-17T23:17:58+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quote: Characterization Tests]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/04/17/quote-characterization-tests/"/>
+    <updated>2016-04-17T22:56:54+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/04/17/quote-characterization-tests</id>
+    <content type="html"><![CDATA[<p>In Working effectively with legacy code, Michael Feathers talks a type of tests to define or characterize the current behavior of the legacy system:</p>
+
+<blockquote><p>In nearly every legacy system, what the system does is more important than what it is supposed to do.</p>
+
+<p>A <em>characterization test</em> is a test that characterizes the actual behavior of a piece of code. [&hellip;] The test document the actual current behavior of the system. Here is a little algorithm for writing algorithm for writing characterization tests:</p>
+
+<ul>
+<li>Use a piece of code in a test harness</li>
+<li>Write an assertion that you know will fail</li>
+<li>Let the failure tell you what the behavior is.</li>
+<li>Change the test so that it expects the behavior that the code produces</li>
+<li>Repeat</li>
+</ul>
+
+
+<p>M Feathers, in the chapter 13<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, section &ldquo;Characterization tests&rdquo; of Working effectively with legacy code. Actual page, 186.</p></blockquote>
+
+<p>Later on, he goes to describe them in a bigger environment:</p>
+
+<blockquote><p>Characterization tests record the actual behavior of a piece of code. If we find something unexpected when we write them, it pays to get some clarification. It could be a bu. That doesn&rsquo;t mean that we don&rsquo;t include the test in our test suite; instead, we should mark it as suspicious an find out what th effect would be of fixing it.</p>
+
+<p>M Feathers, in the chapter 13[^1], section &ldquo;Characterization tests&rdquo; of Working effectively with legacy code. Actual page, 188.</p></blockquote>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Chapter 13, &ldquo;I need to make a change, but I don&rsquo;t know what tests to write&rdquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
