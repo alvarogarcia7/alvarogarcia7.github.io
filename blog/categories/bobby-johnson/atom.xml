@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bobby-johnson | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/bobby-johnson/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-27T19:48:25+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Brownish Greenfield Gilded Rose Kata]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/04/17/brownish-greenfield-gilded-rose-kata-formulation/"/>
+    <updated>2016-04-17T21:44:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/04/17/brownish-greenfield-gilded-rose-kata-formulation</id>
+    <content type="html"><![CDATA[<p>(This formulation has been copied and adapted from <a href="https://twitter.com/NotMyself">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes">Terry Hughes</a>&rsquo;s <a href="https://github.com/NotMyself/GildedRose">repository</a>)</p>
+
+<h2>Formulation</h2>
+
+<p>Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.</p>
+
+<p>Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us. It was developed by a no-nonsense type named Leeroy, who has moved on to new adventures.</p>
+
+<p>Your task is to rewrite the system using an old class, that already exists.
+First an introduction to our system:</p>
+
+<ul>
+<li>All items have a <code>SellIn</code> value which denotes the number of days we have to sell the item</li>
+<li>All items have a <code>Quality</code> value which denotes how valuable the item is</li>
+<li>At the end of each day our system lowers both values for every item</li>
+</ul>
+
+
+<p>Pretty simple, right? Well this is where it gets interesting:</p>
+
+<ul>
+<li>Once the sell by date has passed, <code>Quality</code> degrades twice as fast</li>
+<li>The <code>Quality</code> of an item is never negative</li>
+<li>&ldquo;Aged Brie&rdquo; actually increases in <code>Quality</code> the older it gets</li>
+<li>&ldquo;Sulfuras&rdquo;, being a legendary item, never has to be sold or decreases in <code>Quality</code></li>
+<li>The <code>Quality</code> of an item is never more than 50, however &ldquo;Sulfuras&rdquo; is a legendary item and as such its <code>Quality</code> is 80 and it never alters.</li>
+<li>&ldquo;Backstage passes&rdquo;, like aged brie, increases in <code>Quality</code> as it&rsquo;s <code>SellIn</code> value approaches; <code>Quality</code> increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but <code>Quality</code> drops to 0 after the concert</li>
+<li>&ldquo;Conjured&rdquo; items degrade in <code>Quality</code> twice as fast as normal items</li>
+</ul>
+
+
+<p>Your task is to create the system from scratch, with only a restriction: you must use the class <code>Item</code> that Leeroy developed. This class is:</p>
+
+<ul>
+<li>unmodifiable, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in shared code ownership. This prohibition applies to modifying it, deleting it, adding new methods, deleting methodts, changing visibility of stuff, etc</li>
+<li>cannot be inherited, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in code inheritance</li>
+</ul>
+
+
+<p>The <code>Item</code> class can be found in many programming languages in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Emily Bache&rsquo;s repository</a>. You are looking for the class / type <code>Item</code></p>
+
+<p>Happy katas and happy koding. Please be careful with the goblin!</p>
+
+<h2>How to start</h2>
+
+<ul>
+<li>Create a new repo</li>
+<li>Find the class <code>Item</code> in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">this repo</a></li>
+<li>Use TDD to develop the functionality. Remember, <code>Item</code> will stay as it is.</li>
+<li>Have fun</li>
+</ul>
+
+
+<h2>Acknowledgements</h2>
+
+<p>Thanks to <a href="https://twitter.com/@trikitrok">@trikitrok</a> for the idea, <a href="https://twitter.com/NotMyself">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes">Terry Hughes</a> for allowing me to copy and modify their kata.</p>
+]]></content>
+  </entry>
+  
+</feed>
