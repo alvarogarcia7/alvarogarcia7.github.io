@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Source | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/source/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-29T13:38:40+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Guardian of the Source]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/17/the-guardian-of-the-source/"/>
+    <updated>2015-04-17T20:01:48+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/17/the-guardian-of-the-source</id>
+    <content type="html"><![CDATA[<p>Overheard today at the office, while they were discussing the approval of a pull request:</p>
+
+<blockquote><p>[Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this?</p>
+
+<p>[Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source</p>
+
+<p>[PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase.</p></blockquote>
+
+<p>This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;<a href="http://knowyourmeme.com/memes/you-shall-not-pass">you shall not pass</a>&rdquo; while on top of the bridge.</p>
+
+<p>This is part of the objectives of doing a pull request before merging code: stop the bad code<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> before it is merged to the codebase.</p>
+
+<p>Later, as you start having <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows</a> in your codebase, it is easier that you start introducing more. Exactly about this is the <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows theory</a>.</p>
+
+<p>On the other hand, if you try to block that bad code before it is merged, it is cheaper to remove it: nothing depends on it, you introduce no repetition, etc<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>This also connects with the idea present in <a href="http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501">Software Craftsmanship, now called The Software Craftsman</a>, about preserving value for investors and treat software as an investment (with positive ROI) rather than a sunk cost.</p>
+
+<p>It is being picky and, to the most of our possibilities, do not letting any defects nor bad code into the codebase. A hedge fund manager would not let any toxic or dubious asset into the managed funds. This would be counterproductive in the long run (maybe even in the short one) and would be not doing their job correctly. Why is it that some developers suggest or accept these toxic assets?</p>
+
+<p>So, at least for me, would be an honor to be called the &ldquo;Guardian of the Source&rdquo; by someone I respect, as long as this is a serious proposition (i.e., not a joke of some kind).</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Bad code can be expressed in many ways: long methods, bad naming, breaking design principles (e.g., SOLID, KISS, DRY - OAOO), code with defects, no tests or no coverage, etc.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>A source is <a href="http://c2.com/cgi/wiki?DiscoverDefectsEarly">Discover defects early</a>. Another is <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">this paper</a> that cites the ratio of fixing it later to 5:1 (five times more expensive).<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
