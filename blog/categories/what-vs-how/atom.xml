@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: What-vs-how | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/what-vs-how/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-30T19:04:38+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What Versus How]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/05/06/what-versus-how/"/>
+    <updated>2015-05-06T05:15:08+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/05/06/what-versus-how</id>
+    <content type="html"><![CDATA[<p>After reading the GOOS<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, the more and more I get this feeling of what vs how:</p>
+
+<ul>
+<li>Information hiding</li>
+<li>The total simpler than the sum of the parts</li>
+<li>Extracting a concept so you can think about this. Makes you find better names:
+
+<ul>
+<li>test name</li>
+<li>variable name</li>
+<li>method name</li>
+<li>interface / protocol name</li>
+</ul>
+</li>
+</ul>
+
+
+<p>I also got this feeling when reading Clean Code. But with this other book the smell is much harder, stronger. This same concept is repeated all over the book. In our discussions about the book, this concept appears again and again. I&rsquo;m thinking of adding a sub-title to the book:</p>
+
+<pre><code>Growing Object-Oriented Software, Guided by Tests
+What and not How
+</code></pre>
+
+<h2>Applying this in your team</h2>
+
+<p>Now, there might be a problem if your team has a split opinion on &lsquo;what vs how&rsquo; (i.e., part of the team prefers what and another prefers how)</p>
+
+<p>Reasons I&rsquo;ve heard to defend how:</p>
+
+<ul>
+<li>The ones cited above</li>
+<li>Concision / shortness</li>
+<li>Code reusability</li>
+<li>Easier to test, extracting to collaborators<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
+</ul>
+
+
+<p>Reasons I&rsquo;ve heard to defend what:</p>
+
+<ul>
+<li>Knowing exactly what the code is doing: i.e., do not have to think what the name means and to what this corresponds</li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="http://www.growing-object-oriented-software.com/">Growing Object-Oriented Software Guided by Tests</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Altough I believe you shouldn&rsquo;t do anything <em>just</em> for the purpose of tests. If it also improves your design, OK, but only for the tests, no.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
