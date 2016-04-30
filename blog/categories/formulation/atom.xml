@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Formulation | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/formulation/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-04-30T18:46:13+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Brownish Greenfield Gilded Rose Kata]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/04/17/brownish-greenfield-gilded-rose-kata-formulation/"/>
+    <updated>2016-04-17T21:44:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/04/17/brownish-greenfield-gilded-rose-kata-formulation</id>
+    <content type="html"><![CDATA[<p>(This formulation has been copied and adapted from <a href="https://twitter.com/NotMyself">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes">Terry Hughes</a>&rsquo;s <a href="https://github.com/NotMyself/GildedRose">repository</a>)</p>
+
+<h2>Formulation</h2>
+
+<p>Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.</p>
+
+<p>Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us. It was developed by a no-nonsense type named Leeroy, who has moved on to new adventures.</p>
+
+<p>Your task is to rewrite the system using an old class, that already exists.
+First an introduction to our system:</p>
+
+<ul>
+<li>All items have a <code>SellIn</code> value which denotes the number of days we have to sell the item</li>
+<li>All items have a <code>Quality</code> value which denotes how valuable the item is</li>
+<li>At the end of each day our system lowers both values for every item</li>
+</ul>
+
+
+<p>Pretty simple, right? Well this is where it gets interesting:</p>
+
+<ul>
+<li>Once the sell by date has passed, <code>Quality</code> degrades twice as fast</li>
+<li>The <code>Quality</code> of an item is never negative</li>
+<li>&ldquo;Aged Brie&rdquo; actually increases in <code>Quality</code> the older it gets</li>
+<li>&ldquo;Sulfuras&rdquo;, being a legendary item, never has to be sold or decreases in <code>Quality</code></li>
+<li>The <code>Quality</code> of an item is never more than 50, however &ldquo;Sulfuras&rdquo; is a legendary item and as such its <code>Quality</code> is 80 and it never alters.</li>
+<li>&ldquo;Backstage passes&rdquo;, like aged brie, increases in <code>Quality</code> as it&rsquo;s <code>SellIn</code> value approaches; <code>Quality</code> increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but <code>Quality</code> drops to 0 after the concert</li>
+<li>&ldquo;Conjured&rdquo; items degrade in <code>Quality</code> twice as fast as normal items</li>
+</ul>
+
+
+<p>Your task is to create the system from scratch, with only a restriction: you must use the class <code>Item</code> that Leeroy developed. This class is:</p>
+
+<ul>
+<li>unmodifiable, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in shared code ownership. This prohibition applies to modifying it, deleting it, adding new methods, deleting methodts, changing visibility of stuff, etc</li>
+<li>cannot be inherited, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in code inheritance</li>
+</ul>
+
+
+<p>The <code>Item</code> class can be found in many programming languages in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Emily Bache&rsquo;s repository</a>. You are looking for the class / type <code>Item</code></p>
+
+<p>Happy katas and happy koding. Please be careful with the goblin!</p>
+
+<h2>How to start</h2>
+
+<ul>
+<li>Create a new repo</li>
+<li>Find the class <code>Item</code> in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">this repo</a></li>
+<li>Use TDD to develop the functionality. Remember, <code>Item</code> will stay as it is.</li>
+<li>Have fun</li>
+</ul>
+
+
+<h2>Acknowledgements</h2>
+
+<p>Thanks to <a href="https://twitter.com/@trikitrok">@trikitrok</a> for the idea, <a href="https://twitter.com/NotMyself">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes">Terry Hughes</a> for allowing me to copy and modify their kata.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kata Formulation: Find the Comments]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/"/>
+    <updated>2016-03-01T06:57:28+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments</id>
+    <content type="html"><![CDATA[<p>Little Johnny is inspecting a PHP source code that contains comments. These comments contains words that he doesn&rsquo;t understand, as it written in another language.</p>
+
+<h2>Rules and constraints</h2>
+
+<p>The source code in the PHP files does not need to be correct.</p>
+
+<p>A comment (a subset of PHP comments) is defined as:</p>
+
+<ul>
+<li>A line containing C-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code>// hello C-style</code> is a valid comment</li>
+<li><code>echo "//";</code> is not a comment</li>
+<li><code>echo '//';</code> is not a comment</li>
+</ul>
+</li>
+<li>A line containing Perl-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code># hello Perl-style</code> is a valid comment</li>
+<li><code>echo "#";</code> is not a comment</li>
+<li><code>echo '#';</code> is not a comment</li>
+</ul>
+</li>
+<li>There are no multi-line comments
+
+<ul>
+<li><code>/* ... */</code> is not a comment</li>
+</ul>
+</li>
+</ul>
+
+
+<p>You can do this kata in any language you want. In any case it is not allowed to use a PHP parser. This task must be done manually.</p>
+
+<h2>How to start</h2>
+
+<ul>
+<li>Clone/fork (any stars are welcome) <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments">this repo</a></li>
+<li>Run the tests. <a href="https://github.com/alvarogarcia7/cli-app-base-clojure/blob/master/README.md#tests">See this</a> for help</li>
+<li>They should be red.</li>
+<li>Go to production code and fix it</li>
+<li>Have fun (happy kata and happy koding!)</li>
+</ul>
+
+
+<h2>Requirements</h2>
+
+<p>Please do not read ahead, just read the current assignment, do it, then read the next one:</p>
+
+<ol>
+<li>Can you help Little Johnny fetch all those comments?</li>
+<li>These messages have not been audited yet and we want to publish the code, so it is better to remove the comments. Can you do it?</li>
+</ol>
+
+
+<h2>Optional requirement</h2>
+
+<p>As an optional task, when the problem is finished (you can attack in your preferred order), there must be an executable jar with some parameters to process the current folder with the &lsquo;working modes&rsquo; specified above.</p>
+
+<p>(This formulation is also present at the <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments/blob/master/README.md">repository</a> )</p>
+]]></content>
+  </entry>
+  
+</feed>
