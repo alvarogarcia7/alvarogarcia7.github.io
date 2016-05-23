@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rakefile | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/rakefile/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-05-23T09:45:11+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Faster Site Generation With a Native Octopress 2]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/"/>
+    <updated>2016-04-17T21:39:23+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress</id>
+    <content type="html"><![CDATA[<p>Note: this article is an answer to <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a previous one</a>, about the same topic: a tool for a faster site generation while developing / writing articles, using octopress 2.</p>
+
+<h2>Introduction</h2>
+
+<p>Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles:</p>
+
+<p>Isolate a post:</p>
+
+<pre><code class="ruby"># usage rake isolate[my-post]
+desc "Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly."
+task :isolate, :filename do |t, args|
+  stash_dir = "#{source_dir}/#{stash_dir}"
+  FileUtils.mkdir(stash_dir) unless File.exist?(stash_dir)
+  Dir.glob("#{source_dir}/#{posts_dir}/*.*") do |post|
+    system "git update-index --assume-unchanged #{post}" unless post.include?(args.filename)
+    FileUtils.mv post, stash_dir unless post.include?(args.filename)
+  end
+end
+</code></pre>
+
+<p>Integrate with the rest of the posts:</p>
+
+<pre><code class="ruby">desc "Move all stashed posts back into the posts directory, ready for site generation."
+task :integrate do
+  posts_dir = "#{source_dir}/#{posts_dir}/"
+  Dir.glob("#{source_dir}/#{stash_dir}/*.*") do |post|
+    FileUtils.mv post, posts_dir
+    full_path = "#{posts_dir}/#{post.split("/").reverse.first}"
+    system "git update-index --no-assume-unchanged #{full_path}"
+  end
+end
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>(at the folder where the Rakefile is located)</p>
+
+<ul>
+<li>isolate the selected file. Specify the pattern to keep.</li>
+</ul>
+
+
+<pre><code class="bash">rake isolate["draft"]
+</code></pre>
+
+<ul>
+<li>write the new content</li>
+<li>commit to git</li>
+<li>integrate with the rest of the files</li>
+</ul>
+
+
+<pre><code class="bash">rake integrate
+</code></pre>
+
+<ul>
+<li>git push</li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<p>When I needed this tool, to speed up my feedback cycle, I didn&rsquo;t find any that did this job, so I created <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a small tool for this same purpose</a>. Unfortunately, there was one, so close to my nose that I could not find it. I was reinventing the wheel.</p>
+
+<p>It is better to switch to a tool that has been tested by more users, that has received the community&rsquo;s approval than a custom-made tool.</p>
+]]></content>
+  </entry>
+  
+</feed>
