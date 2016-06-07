@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Circuit-breaker | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/circuit-breaker/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-06-07T01:32:19+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Self-Study in January 2016]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/01/01/self-study-in-january-2016/"/>
+    <updated>2016-01-01T14:55:19+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/01/01/self-study-in-january-2016</id>
+    <content type="html"><![CDATA[<h2>Test cases in inner classes with JUnit</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/8758294/test-cases-in-inner-classes-with-junit">this answer</a> in stackoverflow about nested test runners in JUnit</p>
+
+<p>Tags: junit, stackoverflow, answer, nested-runner</p>
+
+<h2>Recording a Great Coding Screencast</h2>
+
+<p>I&rsquo;ve read <a href="https://egghead.io/articles/recording-a-great-coding-screencast">this article</a> by John Lindquist where he explains how he sets up the recording environment for egghead.</p>
+
+<p>Tags: john-lindquist, record, screencast, egghead, code-screencast, record-video, video</p>
+
+<h2>React Testing Course</h2>
+
+<p>I&rsquo;ve watched <a href="https://egghead.io/lessons/react-testing-jsx-error-diffs">the full course</a> by Trevor D. Miller on how to test react components and the libraries to make it possible.</p>
+
+<p>Tags: trevor-miller, online-course, screencast, mooc, react, flux, egghead</p>
+
+<h2>What Is Functional Programming?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jenkster.com/2015/12/what-is-functional-programming.html">this article</a> by Kris Jenkins where the author describes functional programming from an input &amp; output point of view.</p>
+
+<p>Describes state of the system (maybe global or local) is input &amp; output of the function</p>
+
+<p>Produced state changes are called side effects. the author calls the state inputs as &ldquo;side causes&rdquo;.</p>
+
+<p>Side effects and causes are called complexity iceberg, as they are not visible under the water level (surface)</p>
+
+<p>Also what a pure function is: one with no side causes or side effects; e.g., all its inputs are declared inputs (i.e., parameters) and all outputs are declared outputs (i.e., return value).</p>
+
+<p>notes on jobbing programmer:</p>
+
+<ul>
+<li><a href="https://www.safaribooksonline.com/library/view/becoming-a-better/9781491905562/ch32.html">at Becoming a Better Programmer</a>, by Pete Goodliffe</li>
+<li><a href="https://books.google.es/books?id=P-09CgAAQBAJ&amp;pg=PA67&amp;lpg=PA67&amp;dq=%22jobbing+programmer%22&amp;source=bl&amp;ots=U6Gvi9OSda&amp;sig=J4qWDUtnk768SMjAK3yuEeWUv5Y&amp;hl=es&amp;sa=X&amp;ved=0ahUKEwjz58K615DKAhUFVRQKHfyhAZAQ6AEIOTAE#v=onepage&amp;q=%22jobbing%20programmer%22&amp;f=false">at Mastering Julia</a>, by Malcolm Sherrington</li>
+<li><a href="http://joshsymonds.com/blog/2013/11/03/what-makes-a-good-programmer-good/">at What Makes a Good Programmer Good?</a> by Josh Symonds</li>
+</ul>
+
+
+<p>Tags: kris-jenkins, functional-programming, input, output, function, complexity-iceberg, pure-function, impure-function, side-effect, side-cause</p>
+
+<h2>Which Programming Languages Are Functional?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jenkster.com/2015/12/which-programming-languages-are-functional.html">this article</a> by Kris Jenkins where the author analyses languages, determining whether they are functional or not.</p>
+
+<p>Describes how functional languages deal with side effects and side causes, and to identify them (was also explained in part one<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>).</p>
+
+<p></p>
+
+<p>Tags: kris-jenkins, functional-programming, side-effect, side-cause, comparison, haskell, clojure, python, perl, javascript, java, map, reduce, hof, scala, moc</p>
+
+<h2>Argument from the &ldquo;Real World&rdquo;</h2>
+
+<p>I&rsquo;ve read <a href="http://ronjeffries.com/xprog/articles/argument-from-the-real-world/">this article</a> by Ron Jeffries that dismantles the &ldquo;real world&rdquo;, as an excuse to use good practices: as in &ldquo;we could use that, but we live in the real world&rdquo;.</p>
+
+<blockquote><p> [&hellip;] our job is to create the “real world” and not to imagine that our present situation is the only situation there is</p></blockquote>
+
+<p>This is exactly our day to day task, to imagine a real world solution to present problems, maybe involving software in between.</p>
+
+<p>Can&rsquo;t we do this for product and team management?</p>
+
+<p>Tags: ron-jeffries, agile, scrum, tdd, bdd, incremental-iterative-development, product-management, team-management</p>
+
+<h2>Self-Contained Systems</h2>
+
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/rstrangh/self-contained-systems-1">these slides</a> about a self-contained system (SCS), an architecture choice to split monolithic systems in parts. It includes the use of microservices in the business logic to solve domain specific problems. Written by Roman Stranghöner</p>
+
+<blockquote><p>development, operation and maintenance [&hellip;] by a single team</p></blockquote>
+
+<p>Tags: big-bang-release, roman-stranghoner, self-contained-system, scs, microservice, monolith, monolithic-system, architecture</p>
+
+<h2>What Makes a Good Programmer Good?</h2>
+
+<p>I&rsquo;ve read <a href="http://joshsymonds.com/blog/2013/11/03/what-makes-a-good-programmer-good/">this article</a> by Josh Symonds on the characteristics that differentiate a good programmer from the jobbing programmers, the list of skills to be a good programmer.</p>
+
+<p>Explains what factors are related and not related to being a good one<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>:</p>
+
+<ul>
+<li>knowing that most programming problems have already been solved. You have to know where to look for the solution</li>
+<li>not to be afraid to dig deep into problems: detect a problem and be eager to solve it; figure out what is wrong</li>
+<li>go to the source: use the source as a fact, as analysis needs to be based on facts, not beliefs</li>
+<li>just do it: to be driven to act</li>
+<li>instinctively tackle problems head-on, grabbing the bull by the horns instead of waiting for it to be solved automagically; start solving the problem</li>
+<li>excited about grabbing problems, about facing the cutting edge</li>
+<li>taking the time to reflect and understand it before moving one to the next one</li>
+<li>communicate well: succintly and eloquently expressing your thoughts. The author thinks this might be the most important aspect of all.</li>
+<li>to be truly caring about what you do: not just a job, but a hobby, an interest, even a fascination; great programmers are always programming</li>
+<li>thinking of programming of a way to shape the world, not just a money-making activity</li>
+</ul>
+
+
+<p>Tags: jobbing-programmer, good-programmer, career, career-management, skill, josh-symonds, quote</p>
+
+<h2>The Best Programming Language (or How to Stop Worrying and Love the Code)</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.fourthbit.com/2014/03/01/the-best-programming-language-or-how-to-stop-worrying-and-love-the-code">this article</a> by Álvaro Castro-Castilla analysing different programming languages and what to choose each of them.</p>
+
+<p>Tags: alvaro-castro-castilla, programming-language, language, analysis, comparison</p>
+
+<h2>Tomates en el campo</h2>
+
+<p>I&rsquo;ve read <a href="http://www.presionblogosferica.com/2011/02/20/tomates-en-el-campo/">this article</a> by Ángel Medinilla, about how to cultivate teams, instead of creating or building them. Talks about the mandatory conditions, necessary factors and how to enable it, not guaranteeing success.</p>
+
+<p>Tags: angel-medinilla, team-management, spanish, team, analogy</p>
+
+<h2>Default constructors in Java</h2>
+
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/17068389/default-constructors-in-java">this answer</a> in stackoverflow about extending a java class that has a private constructor.</p>
+
+<p>Tags: stackoverflow, answer, java, constructor, syntax</p>
+
+<h2>What&rsquo;s So Great About Reducers?</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.guillermowinkler.com/blog/2013/12/01/whats-so-great-about-reducers/">this article</a> by Guillermo Winkler explaining reducers, a type of divide and conquer strategy clojure.</p>
+
+<p>Tags: guillermo-winkler, reducer, clojure, parallelism, concurrency</p>
+
+<h2>Don’t use Slack?</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/hacker-daily/don-t-use-slack-8e70452f3eed">this article</a> by Christian Heilmann about the relation between open / closed software and accessibility.</p>
+
+<p>Tags: slack, christian-heilmann, accessibility, open-source, propietary-software, closed-source</p>
+
+<h2>Towards an understanding of technical debt</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@kellan/towards-an-understanding-of-technical-debt-ae0f97cc0553">this article</a> by Kellan Elliott-McCrea about some definitions of technical debt and why taking care of it matters for the future.</p>
+
+<p>Talks about the way of inheriting projects by other teams and the paradox of &ldquo;investing more time to fix the problem than originally invested in coding it.&rdquo; Also about judgement.</p>
+
+<p>I find it related to the &ldquo;theory building&rdquo; by Naur.</p>
+
+<blockquote><p>There are at least 5 distinct things we mean we say “technical debt”.</p>
+
+<ol>
+<li>Maintenance work: buying breathing room</li>
+<li>Features of the codebase that resist change</li>
+<li>Operability choices that resist change</li>
+<li>Code choices that suck the will to live</li>
+<li>Dependencies that resist upgrading</li>
+</ol>
+</blockquote>
+
+<p>Tags: kellan-elliott-mccrea, kellan, technical-debt, list, definition, quote</p>
+
+<h2>Lifetimes of cryptographic hash functions</h2>
+
+<p>I&rsquo;ve read <a href="http://valerieaurora.org/hash.html">this article</a> by Valerie Aurora where she explains the lifetimes of cryptographic hash functions up to 2012.</p>
+
+<p>Tags: hash-function, valerie-aurora</p>
+
+<h2>Collisions for Hash Functions - MD4, MD5, HAVAL-128 and RIPEMD</h2>
+
+<p>I&rsquo;ve read <a href="https://eprint.iacr.org/2004/199.pdf">this paper</a> that explains some collisions found for MD4, MD5, HAVAL-128 and RIPEMD. By Xiaoyun Wang, Dengguo Feng, Xuejia Lai, Hongbo Yu.</p>
+
+<p>Tags: collision, hash-function, xiaoyun-wang, dengguo-feng, xuejia-lai, hongbo-yu, paper</p>
+
+<h2>The future is parallel: What&rsquo;s a programmer to do?</h2>
+
+<p>I&rsquo;ve read <a href="http://groups.csail.mit.edu/mac/users/gjs/6.945/readings/MITApril2009Steele.pdf">these slides</a> by Guy Steele about the differences in linear vs parallel computing and about the old habits that we still have.</p>
+
+<p>Some quotes:</p>
+
+<h3>Motivation</h3>
+
+<blockquote><ul>
+<li>Good sequential code minimizes total number of operations.
+
+<ul>
+<li>Clever tricks to reuse previously computed results.</li>
+<li>Good parallel code often performs redundant operations to reduce communication.</li>
+</ul>
+</li>
+<li>Good sequential algorithms minimize space usage.
+
+<ul>
+<li>Clever tricks to reuse storage.</li>
+<li>Good parallel code often requires extra space to permit temporal decoupling.</li>
+</ul>
+</li>
+<li>Sequential idioms stress linear problem decomposition.
+
+<ul>
+<li>Process one thing at a time and accumulate results.</li>
+<li>Good parallel code usually requires multiway problem decomposition and multiway aggregation of results.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+<h3>A New Mindset</h3>
+
+<blockquote><ul>
+<li>DO loops are so 1950s! (Literally: Fortran is now 50 years old.)</li>
+<li>So are linear linked lists! (Literally: Lisp is now 50 years old.)</li>
+<li>Java-style iterators are so last millennium!</li>
+<li>Even arrays are suspect!</li>
+<li>As soon as you say <code>first, SUM = 0</code> you are hosed. Accumulators are BAD.</li>
+<li>If you say, “process subproblems in order,” you lose.</li>
+<li>The great tricks of the sequential past DON’T WORK.</li>
+<li>The programming idioms that have become second nature to us as everyday tools DON’T WORK.</li>
+</ul>
+</blockquote>
+
+<h3>The Parallel Future</h3>
+
+<blockquote><ul>
+<li>We need new strategies for problem decomposition.</li>
+<li>Data structure design/object relationships</li>
+<li>Algorithmic organization</li>
+<li>Don’t split a problem into “the first” and “the rest.”</li>
+<li>Do split a problem into roughly equal pieces. Then figure out how to combine general subsolutions.</li>
+<li>Often this makes combining the results a bit harder.</li>
+<li>We need programming languages and runtime implementations that support parallel strategies and hybrid sequential/parallel strategies.</li>
+<li>We must learn to manage new space-time tradeoffs</li>
+</ul>
+</blockquote>
+
+<h3>Conclusion</h3>
+
+<blockquote><ul>
+<li>A program organized according to linear problem decomposition principles can be really hard to parallelize.</li>
+<li>A program organized according to parallel problem decomposition principles is easily run either in parallel or sequentially, according to available resources.</li>
+<li>The new strategy has costs and overheads. They will be reduced over time but will not disappear.</li>
+<li>In a world of parallel computers of wildly varying sizes, this is our only hope for program portability in the future.</li>
+<li>Better language design can encourage better parallel programming.</li>
+</ul>
+</blockquote>
+
+<p>Tags: representation, computation, catamorphism, list, associativity
+commutativity, idempotency, abstract-data-type, slide, operator, mapreduce, mindset, comparison, parallel, guy-steele,  linear-computing, parallel-computing</p>
+
+<h2>Surviving being senior (tech) management.</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@kellan/surviving-being-senior-tech-management-aa6654efd027">this article</a> by Kellan Elliott-McCrea about the basic things to do as management to retain the best performance:</p>
+
+<ul>
+<li>exercise</li>
+<li>someone to talk to</li>
+<li>discuss with peers, in petit commité</li>
+<li>personal mastery project</li>
+</ul>
+
+
+<p>Tags: kellan-elliott-mccrea, kellan, list, management, tip, exercise, pet-project</p>
+
+<h2>You Don’t Need More Free Time</h2>
+
+<p>I&rsquo;ve read <a href="http://www.nytimes.com/2016/01/10/opinion/sunday/you-dont-need-more-free-time.html">this article</a> about the quality of life, work-life balance by Cristobal Young on why the time where we have more fun is spent together, in company.</p>
+
+<p>Tags: cristobal-young, time-management, work-life-balance</p>
+
+<h2>Taking Longer to Reach the Top Has Its Benefits</h2>
+
+<p>​I&rsquo;ve read <a href="https://hbr.org/2015/12/taking-longer-to-reach-the-top-has-its-benefits">this article</a> that explains how having work life balance and preventing burn out syndrome, aided by a patient career, can help with reaching a higher destination on your career. By Karen Firestone</p>
+
+<p>Tags: career-management, patience, burnout, burn-out, ceo, karen-firestone, professional-career, improvement</p>
+
+<h2>All bugs lead to Rome</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/@nickbaum/all-bugs-lead-to-rome-505a1205bb9">this article</a> that explains how the author tracks down a bug present in mail communication, just for a handful of client. By Nick Baum</p>
+
+<p>Tags: track-down, bug, defect, mailgun, rot13, nick-baum</p>
+
+<h2>Design Patterns — Coming Full Circle</h2>
+
+<p>I&rsquo;ve read <a href="https://medium.com/swlh/design-patterns-coming-full-circle-d8292e261dc6">this article</a> that explains what a design pattern is, where does it come from, the figure of Christopher Alexander and the architecture design patterns. By Jen Carlile</p>
+
+<p>Tags: design-pattern, christopher-alexander, jen-carlile, comparison, example, proxy, command, observer</p>
+
+<h2>React + Performance = ?</h2>
+
+<p>I&rsquo;ve read <a href="https://aerotwist.com/blog/react-plus-performance-equals-what/">this article</a> by Paul Lewis comparing the performance and developer experience of react.js and vanilla js.</p>
+
+<p>Conclusion: under his measurements, react is too slow once the amount of elements is big on mobile devices</p>
+
+<p>Tags: paul-lewis, comparison, javascript, react, mobile, perfomance, jsperf, js-perf, vanilla-javascript</p>
+
+<h2>Full speed, then stop, gracefully</h2>
+
+<p>I&rsquo;ve read <a href="http://sethgodin.typepad.com/seths_blog/2015/12/full-speed-then-stop.html">this article</a> about how to end professional relationships with an employer or a team.</p>
+
+<p>Makes an analogy to the hockey sport attitude: &ldquo;full speed, then stop&rdquo;</p>
+
+<p>Tags: seth-godin, professional, employer, team-management, team, analogy</p>
+
+<h2>Por qué tendrás que facturar 55.000€ para cobrar una nómina de 26.000€</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive1.com/?u=374c664073e1a1fa3deca53b4&amp;id=7e79a27689">this bonilista</a> by David Bonilla on why freelancers need to bill more to clients to achieve the same (economic) results as being hired by a company.</p>
+
+<p>Tags: david-bonilla, bonilista, freelancer, contractor, employee</p>
+
+<h2>Principles Of Microservices</h2>
+
+<p>I&rsquo;ve watched <a href="https://vimeo.com/131632250">this talk</a> by Sam Newman on microservices at the NDC 2015 at Oslo</p>
+
+<p>Describes a microservice as a small, autonomous services that work together, modelled around a business domain</p>
+
+<p>Microservices can mix technology, persistence stack, idioms, options</p>
+
+<p>reference to the twelve factors (by heroku).</p>
+
+<p>At a client:</p>
+
+<blockquote><p>Design and delivery practices:</p>
+
+<ul>
+<li>standard http/rest</li>
+<li>encapsulate legacy</li>
+<li>eliminate integration databases</li>
+<li>consolidate and cleanse data</li>
+<li>published integration model</li>
+<li>small independent devices</li>
+<li>continous deployment</li>
+<li>minimal customization of COTS/SAAS</li>
+</ul>
+
+
+<p>Architectural principles:</p>
+
+<ul>
+<li>reduce inertia</li>
+<li>eliminate accidential complexity</li>
+<li>consistent interfaces and data flows</li>
+<li>no silver bullets</li>
+</ul>
+
+
+<p>Strategic goals:</p>
+
+<ul>
+<li>enable scalable businesses</li>
+<li>support entry into new markets</li>
+<li>support innovation in existing markets</li>
+</ul>
+</blockquote>
+
+<p>Principles of microservices:</p>
+
+<ul>
+<li>modelled around a business domain</li>
+<li>culture of automation</li>
+<li>hide implementation details</li>
+<li>decentralise all the things</li>
+<li>deploy independently</li>
+<li>consumer first</li>
+<li>isolate failure</li>
+<li>highly observable</li>
+</ul>
+
+
+<h3>Notes</h3>
+
+<p>the business domain changes more slowly. find these boundaries (reference to IDDD)</p>
+
+<p>bounded contexts is about concepts which are shared and others who are hidden</p>
+
+<p>consumer driven contracts as a way to express to consumer expectations, written as tests. this is a high-trust pattern (requires it). reduces end to end testing, considerably. Using tools as <a href="http://github.com/realestate">pact</a></p>
+
+<p>parallel change for endpoints (or APIs) for avoiding lock step release (expand contract pattern). high cost to change an API: apply upfront thought to it.</p>
+
+<p>explains about a case writing a strangler application:</p>
+
+<ul>
+<li>circuit breakers</li>
+<li>one thread pool per application</li>
+<li>bulkhead downstream connections</li>
+</ul>
+
+
+<p>references:</p>
+
+<ul>
+<li>the book &ldquo;Release It!&rdquo;</li>
+<li>the book &ldquo;Implementing Domain-Driven Design (IDDD)&rdquo;</li>
+</ul>
+
+
+<h3>Other</h3>
+
+<p>correlation ids, parent and child ids
+extracting information from logs (e.g., kibana, splunk, new relic)
+see how services connect to each other based on logs instead of based on documentation</p>
+
+<p>Tags: lock-step-release, autonomy, sam-newman, consumer-driven-contract, team, zookeper, etcd, consul, service-discovery, distributed-consensus, talk, ndc, humane-registry, bulkhead-pattern, circuit-breaker</p>
+
+<h2>The Website Obesity Crisis</h2>
+
+<p>I&rsquo;ve read <a href="http://idlewords.com/talks/website_obesity.htm">this transcription</a> of <a href="http://www.webdirections.org/blog/the-website-obesity-crisis/">this presentation</a> about the increase of weight of websites and how this connects with new needs for automation and other services. How the solution is to keep the pages lightweight and open for everybody to use and learn; without invading our privacy. By Maciej Ceglowski</p>
+
+<p>Tags: obesity, fat-page, slide, transcription, slide-transcription, maciej-ceglowski, simplicity, speed</p>
+
+<h2>Command-line tools can be 235x faster than your Hadoop cluster</h2>
+
+<p>I&rsquo;ve read <a href="http://aadrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html">this article</a> on how using command-line based (<code>find</code>, <code>grep</code>, <code>awk</code>) can have a better performance as compared to Hadoop for a specific case, which is analyzing 2 million chess games. By Adam Drake</p>
+
+<p>Tags: adam-drake, chess, comparison, performance, cli-commands, unix, nix, hadoop, awk</p>
+
+<h2>The Serializable Isolation Level</h2>
+
+<p>I&rsquo;ve read <a href="http://sqlperformance.com/2014/04/t-sql-queries/the-serializable-isolation-level">this article</a> by Paul White about the serializable isolation level and how it is implemented in some databases.</p>
+
+<p>Tags: serializable, isolation level, paul-white, oracle, mssql, database, sql</p>
+
+<h2>Academic Writing With Markdown, Pandoc and Emacs</h2>
+
+<p>I&rsquo;ve read <a href="http://milinda.svbtle.com/academic-writing-with-markdown-pandoc-and-emacs">this article</a> by Milinda Pathirage that explains an alternative way of writing LaTeX in a user-friendly manner, writing markdown then converting it to the output format (he provides <a href="https://gist.github.com/milinda/d9272e67711d324f18ba">such a script</a>).</p>
+
+<p>Tags: latex, milinda-pathirage, academia, research, paper, markdown, script</p>
+
+<h2>Rest, DDD, layers, JSF, microservices sizing a Umejug conversation</h2>
+
+<p>I&rsquo;ve watched <a href="http://www.adam-bien.com/roller/abien/entry/rest_ddd_layers_jsf_a">this talk</a> by Adam Bien on topics related to microservices and architecture. Discusses:</p>
+
+<ul>
+<li>What do you think a typical web application should look like? How should it be built?</li>
+<li>When using REST, which level of REST is appropriate when, is HATEOAS something to strive for, how to implement it?</li>
+<li>Which patterns do you recommend, hexagonal architecture, layers, &hellip;?</li>
+<li>What do you think of the DDD strategic and tactical patterns?</li>
+<li>Microservices vs right-sized services, is transactions over several services always a bad idea?</li>
+<li>When use JSF? Is it still useful?</li>
+<li>Entity-Control-Boundary Pattern (ECB) (around <a href="https://youtu.be/VkcLpRs0i0g?t=995">16:37</a>). <a href="http://www.cs.sjsu.edu/~pearce/modules/patterns/enterprise/ecb/ecb.htm">More info</a> on the pattern</li>
+</ul>
+
+
+<p>Tags: hateoas, rest, microservice, pattern, architecture, umejug, hexagonal-architecture, ddd, adam-bien, ecb-pattern, mvc-pattern</p>
+
+<h2>How To Go Remote</h2>
+
+<p>I&rsquo;ve read <a href="http://workdifferent.com/how-to-remote/">this article</a> by Sebastian Kade that explains how to go remote: where the possibility of working anywhere is a luxury, even if it is in an office.</p>
+
+<p>Explains the case of Automattic, some examples of communication, culture. Suggests using some tools to accomplish this cultural change.</p>
+
+<p>Tags: remote-work, sebastian-kade, remote, work, asynchronous-communication, communication, automattic, tool, culture, team-management</p>
+
+<h2>Why Your Company Should Have a Creed</h2>
+
+<p>I&rsquo;ve read <a href="http://ma.tt/2011/09/automattic-creed/">this essay</a> by Matt Mullenweg about the importance of having a company creed (a belief system, ethos), which ideally would be shared by the colleagues. These should be the values that help deciding, when in doubt, so everyone is aligned.</p>
+
+<p>At Automattic, this is theirs (as of September 19th, 2011):</p>
+
+<blockquote><p>I will never stop learning. I won’t just work on things that are assigned to me. I know there’s no such thing as a status quo. I will build our business sustainably through passionate and loyal customers. I will never pass up an opportunity to help out a colleague, and I’ll remember the days before I knew everything. I am more motivated by impact than money, and I know that Open Source is one of the most powerful ideas of our generation. I will communicate as much as possible, because it’s the oxygen of a distributed company. I am in a marathon, not a sprint, and no matter how far away the goal is, the only way to get there is by putting one foot in front of another every day. Given time, there is no problem that’s insurmountable.</p></blockquote>
+
+<p>Tags: quote, matt-mullenweg, automattic, creed, ethos, learning, team-management, startup, communication, essay</p>
+
+<h2>Mob Programming: The Unruly Experience</h2>
+
+<p>I&rsquo;ve read <a href="http://wirfs-brock.com/blog/2015/06/05/mob-programming/">this article</a> by Rebecca Wirfs-Brock on mob programming and the experience report (+ <a href="http://www.xp2015.org/wp-content/uploads/2015/06/TH2.3_Wilson.pdf">slides</a>) at the company called Unruly.</p>
+
+<p>She explains what works for them and what does not.</p>
+
+<p>Also, she makes a difference on complex vs complicated work:</p>
+
+<blockquote><p>complex work (where there is the potential for errors) over complicated work (where the solution is known, but is merely time consuming)</p></blockquote>
+
+<p>Explains some characteristics of learning organizations:</p>
+
+<blockquote><p>Teams in learning organizations perform ongoing experiments. While they settle on a core set of practices, they also try to build upon them. They keep innovating, improving, and reflecting. And how they work continues to evolve.</p></blockquote>
+
+<p>Tags: learning, learning-organization, xp, rebecca-wirfs-brock, mob-programming, pair-programming, complex-work, complicated-work, experience-report, unruly, team-management, team-building, team-dysfunction, comparison</p>
+
+<h2>What You’re Hiding from When You Constantly Check Your Phone</h2>
+
+<p>I&rsquo;ve read <a href="https://hbr.org/2016/01/what-youre-hiding-from-when-you-constantly-check-your-phone">this article</a> by Charlotte Lieberman where she explains the technology-stress paradox and the fact of replacing one addiction with another, as some addictions are more socially than others.</p>
+
+<p>Explains that the constant connection to social media allow us to avoid ourselves, and the connection to mindfulness.</p>
+
+<p>On the paradox:</p>
+
+<blockquote><p>technology-stress paradox: we share the desire for greater freedom from our devices, and yet that very freedom itself causes anxiety</p></blockquote>
+
+<p>On the work-life balance:</p>
+
+<blockquote><p> work-life balance [is]  [&hellip;] about noticing those moments in which you really don&rsquo;t want to deal with yourself</p></blockquote>
+
+<p>Tags: charlotte-lieberman, paradox, quote, social-media, mindfulness, technology-stress-paradox, stress, addiction, time-management</p>
+
+<h2>Testing myth #1: Writing tests slows you down</h2>
+
+<p>I&rsquo;ve read <a href="http://arhohuttunen.fi/testing/testing-myth-1-writing-tests-slows-you-down/">this article</a> by Arho Huttunen on an excuse to not test: there is no time.</p>
+
+<p>In the article, he explains the false assumptions based on that reason and the gains (short term and long term) from doing it.</p>
+
+<p>Tags: arho-huttunen, test, excuse</p>
+
+<h2>BeCodeWeek by José Manuel Beas</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.jmbeas.es/category/becodeweek/">this category of posts</a> by José Manuel Beas about his BeCodeWeek, a desk-surfing experience at BeCode.</p>
+
+<p>Analyses facts and publishes one entry per day detailing his activities.</p>
+
+<p>Tags: becodeweek, jmbeas, jose-manuel-beas, desk-surfing, experience, experience-report, analysis</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><code>What Is Functional Programming?</code><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>many of these fragments are quotes or paraphrased quotes<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
