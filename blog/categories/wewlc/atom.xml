@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Wewlc | The long way through Software Craftsmanship]]></title>
+  <link href="http://alvarogarcia7.github.io/blog/categories/wewlc/atom.xml" rel="self"/>
+  <link href="http://alvarogarcia7.github.io/"/>
+  <updated>2016-06-10T09:22:30+00:00</updated>
+  <id>http://alvarogarcia7.github.io/</id>
+  <author>
+    <name><![CDATA[alvaro garcia]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quote: Characterization Tests]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2016/04/17/quote-characterization-tests/"/>
+    <updated>2016-04-17T22:56:54+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2016/04/17/quote-characterization-tests</id>
+    <content type="html"><![CDATA[<p>In Working effectively with legacy code, Michael Feathers talks a type of tests to define or characterize the current behavior of the legacy system:</p>
+
+<blockquote><p>In nearly every legacy system, what the system does is more important than what it is supposed to do.</p>
+
+<p>A <em>characterization test</em> is a test that characterizes the actual behavior of a piece of code. [&hellip;] The test document the actual current behavior of the system. Here is a little algorithm for writing algorithm for writing characterization tests:</p>
+
+<ul>
+<li>Use a piece of code in a test harness</li>
+<li>Write an assertion that you know will fail</li>
+<li>Let the failure tell you what the behavior is.</li>
+<li>Change the test so that it expects the behavior that the code produces</li>
+<li>Repeat</li>
+</ul>
+
+
+<p>M Feathers, in the chapter 13<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, section &ldquo;Characterization tests&rdquo; of Working effectively with legacy code. Actual page, 186.</p></blockquote>
+
+<p>Later on, he goes to describe them in a bigger environment:</p>
+
+<blockquote><p>Characterization tests record the actual behavior of a piece of code. If we find something unexpected when we write them, it pays to get some clarification. It could be a bu. That doesn&rsquo;t mean that we don&rsquo;t include the test in our test suite; instead, we should mark it as suspicious an find out what th effect would be of fixing it.</p>
+
+<p>M Feathers, in the chapter 13<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>, section &ldquo;Characterization tests&rdquo; of Working effectively with legacy code. Actual page, 188.</p></blockquote>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Chapter 13, &ldquo;I need to make a change, but I don&rsquo;t know what tests to write&rdquo;<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Chapter 13, &ldquo;I need to make a change, but I don&rsquo;t know what tests to write&rdquo;<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What Legacy Code Is About]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/"/>
+    <updated>2015-04-21T20:09:54+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about</id>
+    <content type="html"><![CDATA[<p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers">Michael Feathers</a> describes:</p>
+
+<blockquote><p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
+
+<p>M Feathers, in the preface of Working effectively with legacy code</p></blockquote>
+
+<p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
+
+<p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
+
+<p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
+
+<ul>
+<li>some test the test framework</li>
+<li>some the language</li>
+<li>some test a happy path that works by pure luck</li>
+<li>some functionalities are tested (not all happy paths)</li>
+<li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
+</ul>
+
+
+<p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
+
+<p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
+
+<p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
+
+<p>This is why I would like to update the definition:</p>
+
+<blockquote><p>Legacy code is code without tests that provide trust to all your stakeholders</p></blockquote>
+
+<p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
+
+<p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
+
+<p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book: Diseño Ágil Con TDD (Spanish)]]></title>
+    <link href="http://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish/"/>
+    <updated>2015-02-02T20:32:21+00:00</updated>
+    <id>http://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve read this book <a href="http://www.carlosble.com/libro-tdd/">Diseño Ágil con TDD</a> (Spanish) by
+<a href="https://twitter.com/carlosble">Carlos Blé</a> from cover to cover,
+when previously I had only read the theoretical parts (Part I and Chapter 12 in Part II).</p>
+
+<p>It&rsquo;s worth noting that this is the first TDD book in Spanish (I haven&rsquo;t found any book in Spanish predating this one - also backed by the author; published in January 2010) and, as such, there are some translations that could be improved. Not that it makes it more difficult to read. Sometimes it&rsquo;s a good idea to roughly translate concepts into English and then you&rsquo;ll understand the point.</p>
+
+<h2>First part</h2>
+
+<p>The first part is very interesting, a theoretical introduction into TDD, ATDD and Agile methodologies. Points to some good books as a reference (e.g., Growing Object Oriented Software, Guided by Tests; Working Effectively with Legacy Code; Refactoring; etc)</p>
+
+<p>He explains the TDD algorithm (chapter 2) and the ATDD one (chapter 3). These two are maybe the two most important ones on the book. Should you read only a part of this book, I&rsquo;d recommend to read the motivational intro (the fable on the preface) and these two.</p>
+
+<p>He gives excellent pieces of advice who, correctly applied, would set the basis for good software development, such as SOLID, Object Oriented Design (OOD), Inversion of Control (IoC), etc. (See chapter 7, &ldquo;Diseño orientado a objetos&rdquo;).</p>
+
+<p>There&rsquo;s a chapter (number 6) on &ldquo;Mocks and other test doubles&rdquo; (translation is mine)</p>
+
+<h2>Second part</h2>
+
+<p>The second part, as many other books where the source code is printed, was dense for me. Other books, such as <a href="http://www.growing-object-oriented-software.com/">GOOS</a>, show differences in content with bold typeface, to ease the reader&rsquo;s task.  In my opinion, it would be useful to color the diffs, show them on the left and right, or even show the raw diff (e.g., <code>+++</code> <code>---</code>). I&rsquo;m envisioning a typing program as LaTeX where you could specify a commit with its parent and a range of lines to output.</p>
+
+<p>The second part is written in C# and python, to show a TDD session with him. Warning: it&rsquo;s much better in person than reading his book!</p>
+
+<p>The chapter 12 is a set of antipatterns you might find after starting with TDD. Even after you keep practicing TDD for a while, you will not get rid of these smells. Highly recommended.</p>
+
+<p>There&rsquo;s also an appendix on Continuous Integration, although there are better books for this.</p>
+
+<h2>Conclusion</h2>
+
+<p>Recommend this book if you are starting with TDD, or you are more advanced but it&rsquo;s difficult for you to read in English.</p>
+
+<p>Always good as a refresher to read the theoretical part and the antipatterns</p>
+
+<p>PS: This book is free to read, published under a Creative Commons license (don&rsquo;t know exactly which one)</p>
+]]></content>
+  </entry>
+  
+</feed>
