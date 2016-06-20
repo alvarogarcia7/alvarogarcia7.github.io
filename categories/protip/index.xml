@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Protip on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/protip/</link>
+    <description>Recent content in Protip on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Oct 2015 17:18:55 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/protip/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Tip: Differences in maven test execution</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/</link>
+      <pubDate>Mon, 05 Oct 2015 17:18:55 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/</guid>
+      <description>&lt;p&gt;There are times when you only want to have the production code:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;downstream job after a successful build&lt;/li&gt;
+&lt;li&gt;compiling in local after checkout from DVCS&lt;/li&gt;
+&lt;li&gt;spiking (possibly the tests are broken)&lt;/li&gt;
+&lt;li&gt;speeding up the process&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For that, maven allows to skip the tests, selectively:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-DskipTests&lt;/code&gt; compiles the tests, but skips running them&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-Dmaven.test.skip&lt;/code&gt; skips compiling the tests and does not run them. This can also be written as &lt;code&gt;-Dmaven.test.skip=true&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In case some of your tests depend on tests from another artifact (e.g. Object Mother, test infrastructure) and the latter has changed, you must compile the tests. You need to not execute the tests&lt;/p&gt;
+
+&lt;p&gt;For more information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/questions/25639336/whats-the-difference-between-dskiptests-and-dmaven-test-skip-true&#34; target=&#34;_blank&#34;&gt;this stackoverflow&lt;/a&gt; post is useful&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html&#34; target=&#34;_blank&#34;&gt;Documentation for skipping tests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Packing your own maven dependencies</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/</link>
+      <pubDate>Thu, 30 Jul 2015 23:21:18 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/</guid>
+      <description>
+
+&lt;p&gt;Lately, I&amp;rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.&lt;/p&gt;
+
+&lt;p&gt;This is how most of them look like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&#34;nt&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.gmaur.legacycode&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;legacyutils&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.0.1-SNAPSHOT&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+  
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+  
+  	&lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.hamcrest&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;hamcrest-all&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.3&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span class=&#34;nt&#34;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+  	&lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+  
+  	&lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;junit&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;junit&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.11&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span class=&#34;nt&#34;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+  	&lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+  	&lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.mockito&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;mockito-all&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span class=&#34;nt&#34;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+  		&lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.0.2-beta&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+	&lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+                &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-surefire-plugin&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                &lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.18.1&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+                &lt;span class=&#34;nt&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                    &lt;span class=&#34;nt&#34;&gt;&amp;lt;includes&amp;gt;&lt;/span&gt;
+                        &lt;span class=&#34;nt&#34;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;**/**Test.java&lt;span class=&#34;nt&#34;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+                        &lt;span class=&#34;nt&#34;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;**/**Should.java&lt;span class=&#34;nt&#34;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+                    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/includes&amp;gt;&lt;/span&gt;
+                &lt;span class=&#34;nt&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: the &lt;code&gt;org.apache.maven.plugins:maven-surefire-plugin&lt;/code&gt; is to make maven execute the tests that end in &lt;code&gt;*Should&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now, the dependency versions and plugin configuration is repeated in all the projects, which is plenty of repetition.&lt;/p&gt;
+
+&lt;h2 id=&#34;enter-jitpack-io&#34;&gt;Enter JitPack.io&lt;/h2&gt;
+
+&lt;p&gt;With the tool &lt;a href=&#34;https://JitPack.io&#34; target=&#34;_blank&#34;&gt;JitPack.io&lt;/a&gt;, you can generate your own dependencies. A guide on how to use it can be found &lt;a href=&#34;https://jitpack.io/docs/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve published my own java dependency (originally &lt;a href=&#34;https://github.com/alvarogarcia7/java-parent/releases/tag/v0.0.1&#34; target=&#34;_blank&#34;&gt;a github release&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;A &lt;code&gt;pom.xml&lt;/code&gt; in the new style is &lt;a href=&#34;https://github.com/alvarogarcia7/spike-lambda-testing/blob/master/pom.xml&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&#34;nt&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.example.spike&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;lambdatesting&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.0.1-SNAPSHOT&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;parent&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.github.alvarogarcia7&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;java-parent&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;v0.0.1&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/parent&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;jitpack.io&lt;span class=&#34;nt&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://jitpack.io&lt;span class=&#34;nt&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.github.alvarogarcia7&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;java-parent&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;v0.0.1&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;pom&lt;span class=&#34;nt&#34;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.hamcrest&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;hamcrest-all&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;junit&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;junit&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.mockito&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;mockito-all&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&#34;nt&#34;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span class=&#34;nt&#34;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It does not need the plugin configuration nor the dependency versions. The downside is that it needs to be as the &lt;code&gt;parent pom&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;acknowledgments&#34;&gt;Acknowledgments&lt;/h2&gt;
+
+&lt;p&gt;Thanks to Manuel for encouraging me to write this article&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tip: Use the same Import Order in IntelliJ IDEA as Eclipse&#39;s</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/</link>
+      <pubDate>Thu, 30 Jul 2015 13:22:44 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/</guid>
+      <description>&lt;p&gt;Organize IntelliJ IDEA&amp;rsquo;s import as Eclipse ones:&lt;/p&gt;
+
+&lt;p&gt;While working at a client, where everyone is using eclipse, while I&amp;rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.&lt;/p&gt;
+
+&lt;p&gt;To solve it, see &lt;a href=&#34;http://stackoverflow.com/questions/14716283/is-it-possible-for-intellij-to-organize-imports-the-same-way-as-in-eclipse&#34; target=&#34;_blank&#34;&gt;this link&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tip: committing to the repo file by file</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/</link>
+      <pubDate>Wed, 08 Jul 2015 02:37:08 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/</guid>
+      <description>&lt;p&gt;I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.&lt;/p&gt;
+
+&lt;p&gt;This is why I have some scripts to commit all the changes, even with the same message. This is one of them:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; f in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;git status -s &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;^M&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  git add &lt;span class=&#34;nv&#34;&gt;$f&lt;/span&gt;
+  git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;quot;generic commit for all files&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Iterate with index in clojure</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/</link>
+      <pubDate>Sat, 04 Jul 2015 14:34:37 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/</guid>
+      <description>&lt;p&gt;Scenario: iterate a sequence (&lt;code&gt;seq&lt;/code&gt;) with its index&lt;/p&gt;
+
+&lt;p&gt;The lines have an implicit line number (starting by 1, in most editors):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[1] line1
+[2] line2
+[3] hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you read it from file to a variable, it is converted to:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;line1&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;line2&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This implicit line number value is not present, therefore you need to assign them one.&lt;/p&gt;
+
+&lt;p&gt;In ruby, you have this construct:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;A&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;B&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;C&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;each_with_index&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; =&amp;gt; &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/310634/what-is-the-right-way-to-iterate-through-an-array-in-ruby/310638#310638&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In clojure, there is a similar function:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;map-indexed&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:f&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; ([0 &amp;quot;line1&amp;quot;] [1 &amp;quot;line2&amp;quot;] [2 &amp;quot;hello&amp;quot;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to shift the collection to the right so it starts with 1 (for the REPL):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;line1&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;line2&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;shift-one&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[lines]&lt;/span&gt; 
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;cons&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;shift-one&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;&amp;quot; &amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;map-indexed&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  
+&lt;span class=&#34;c1&#34;&gt;; ([0 &amp;quot;&amp;quot;] [1 &amp;quot;line1&amp;quot;] [2 &amp;quot;line2&amp;quot;] [3 &amp;quot;hello&amp;quot;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://clojuredocs.org/clojure.core/map-indexed&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;, especially &lt;a href=&#34;https://clojuredocs.org/clojure.core/map-indexed#example-542692cdc026201cdc326d25&#34; target=&#34;_blank&#34;&gt;this one&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;But if you only need to get the lines at certain indexes, it is also possible to get the values directly, using &lt;code&gt;map&lt;/code&gt; on the sequence of desired indexes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;&amp;quot; &amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[lines&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;indexes]&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;nth&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;indexes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot;)&lt;/span&gt;
+
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line1&amp;quot;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: the original source code for this post is &lt;a href=&#34;https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/iterate-with-index.clj&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The use of power tools</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/02/18/the-use-of-power-tools/</link>
+      <pubDate>Wed, 18 Feb 2015 23:25:25 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/02/18/the-use-of-power-tools/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m currently reading the Apprenticeship patterns book, out of order (explained here: TODO).&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m writing down the read chapters in a text file, to measure progress and also be able to backtrack if necessary. This also makes reading the book a &amp;ldquo;choose your own adventure&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;After reading approximately half the chapters, the navigation wasn&amp;rsquo;t so easy using only the &amp;ldquo;see also&amp;rdquo; part. So I decided to break free from that constraint and start reading other chapters. But how do you know which chapters you have left to read? Knowing the whole set (&lt;code&gt;all&lt;/code&gt;) and the read set (&lt;code&gt;read&lt;/code&gt;) this is just the &lt;code&gt;all - read&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Coming to a more practical way, how to know this is an automated (non-manual) way? There are &lt;code&gt;m&lt;/code&gt; in &lt;code&gt;read&lt;/code&gt; and n in &lt;code&gt;all&lt;/code&gt;, where &lt;code&gt;m &amp;lt;= n&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The simplest approach would be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for each current in read:
+  remove current from all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;as read is is no particular order, that would yield some &lt;code&gt;O(m*n)&lt;/code&gt;, worst case scenario (&lt;code&gt;m==n&lt;/code&gt;), &lt;code&gt;O(n^2)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;That is quite expensive, especially if you have to do it manually&lt;/p&gt;
+
+&lt;p&gt;If we use the same algorithm but sort the &lt;code&gt;read&lt;/code&gt; set (no longer a set, as sets have no order). Also, converting it to a &lt;code&gt;O(1)&lt;/code&gt; lookup table (e.g., a map), that would yield some &lt;code&gt;O(n log2 n + m)&lt;/code&gt; that is already better. Taking into account that the sorting can be automated by the computer, it would yield a &amp;ldquo;manual O notation cost&amp;rdquo; of &lt;code&gt;O(1 + m)&lt;/code&gt;. So, relative to the amount of chapters you have read.&lt;/p&gt;
+
+&lt;p&gt;But we can even do better in terms of this &amp;ldquo;manual big o notation&amp;rdquo;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;read &amp;lt;- sort read into a map ; cost O(1)
+all &amp;lt;- sort all into a map ; cost O(1)
+
+unread &amp;lt;- all - intersection(all, read) ; cost O(1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And this is where the power tools come into place: if we use &lt;code&gt;comm&lt;/code&gt; or &lt;code&gt;diff&lt;/code&gt;, the computer will create  the &lt;code&gt;unread&lt;/code&gt; set for us, in &amp;ldquo;manual&amp;rdquo; cost of &lt;code&gt;O(1)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;example-using-vim-sort-and-diff&#34;&gt;Example using vim, sort and diff&lt;/h2&gt;
+
+&lt;p&gt;This is the &lt;code&gt;read&lt;/code&gt; set (for the moment):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;the long road
+draw your own map
+find mentors
+the deep end
+create feedback loops
+the white belt
+practice, practice, practice
+concrete skills
+your first language
+use the source
+reflect as you work
+record what you learn
+kindred spirits
+nurture your passion
+study the classics
+expose your ignorance
+dig deeper
+be the worst
+rubbing elbows
+unleash your enthusiasm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and this is the all set (copy-paste from the book):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INTRODUCTION 1 What Is Software Craftsmanship? 3 What Is Apprenticeship? 8 What Is an Apprenticeship Pattern? 9 Where Did the Patterns Come From? 9 Where Do We Go from Here? 10
+2 EMPTYING THE CUP 11 Your First Language 13 The White Belt 18 Unleash Your Enthusiasm 22 Concrete Skills 24 Expose Your Ignorance 25 Confront Your Ignorance 28 The Deep End 30 Retreat into Competence 32 Wrapping Up 34
+3 WALKING THE LONG ROAD 37 The Long Road 38 Craft over Art 40 Sustainable Motivations 43 Nurture Your Passion 45 Draw Your Own Map 47 Use Your Title 50 Stay in the Trenches 52 A Different Road 53 Wrapping Up 55
+4 ACCURATE SELF-ASSESSMENT 57 Be the Worst 58 Find Mentors 61 Kindred Spirits 64 Rubbing Elbows 66 Sweep the Floor 68 Wrapping Up 71
+5 PERPETUAL LEARNING 73 Expand Your Bandwidth 74 Practice, Practice, Practice 77 Breakable Toys 79 Use the Source 82 Reflect As You Work 85 Record What You Learn 87 Share What You Learn 89 Create Feedback Loops 91 Learn How You Fail 94 Wrapping Up 95
+6 CONSTRUCT YOUR CURRICULUM 99 Reading List 100 Read Constantly 102 Study the Classics 104 Dig Deeper 105 Familiar Tools 109 Wrapping Up 111
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first line is not interesting to our purposes, so delete it with:&lt;/p&gt;
+
+&lt;p&gt;go to first line (&lt;code&gt;1G&lt;/code&gt;), then delete (&lt;code&gt;dd&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;After a quick inspection, there&amp;rsquo;s a number at the end of the desired line, so replace it with newline:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;%s/\d\+/\r/g&lt;/code&gt; (a snippet below):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;EMPTYING THE CUP 
+ Your First Language
+ The White Belt 
+ Unleash Your Enthusiasm 
+ Concrete Skills 
+ Expose Your Ignorance
+ Confront Your Ignorance 
+ The Deep End 
+ Retreat into Competence 
+ Wrapping Up 
+
+
+ WALKING THE LONG ROAD 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The title lines are all uppercase, so delete them with &lt;code&gt;:%g/^\s*\u\u/d&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; Your First Language 
+ The White Belt 
+ Unleash Your Enthusiasm
+ Concrete Skills 
+ Expose Your Ignorance
+ Confront Your Ignorance
+ The Deep End
+ Retreat into Competence
+ Wrapping Up 
+ 
+ 
+ The Long Road 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;explanation:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;:&lt;/code&gt; : command&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%&lt;/code&gt; : in all the file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;g&lt;/code&gt; : do (I remember it as &amp;lsquo;go&amp;rsquo;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;^&lt;/code&gt; : starting at the beginning&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\s*&lt;/code&gt;: whitespace, as much a possible&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\u\u&lt;/code&gt;: exactly two uppercase letters. Can also be expressed as &lt;code&gt;\u\{2}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt; : delete&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;for more information on vim&amp;rsquo;s regex, go &lt;a href=&#34;http://vimregex.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but there are empty lines. Delete them with: &lt;code&gt;%g/^$/d&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; Your First Language
+ The White Belt
+ Unleash Your Enthusiasm
+ Concrete Skills
+ Expose Your Ignorance 
+ Confront Your Ignorance
+ The Deep End 
+ Retreat into Competence
+ The Long Road
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;there is a space at the beginning of the line, delete it with &lt;code&gt;:%s/^ //&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Your First Language 
+The White Belt 
+Unleash Your Enthusiasm 
+Concrete Skills 
+Expose Your Ignorance  
+Confront Your Ignorance 
+The Deep End  
+Retreat into Competence 
+Wrapping Up  
+The Long Road  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;there are upper and lowercase letters. You could find a way of doing it with vi, but I prefer something that I can remember: save the document, then process it with &lt;code&gt;awk&lt;/code&gt; and &lt;code&gt;sort&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat all.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print tolower($0)&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort &amp;gt; all_sorted.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;(snippet):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a different road 
+be the worst 
+breakable toys 
+concrete skills 
+confront your ignorance 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If needed, sort and downcase the read.txt too.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print tolower($0)&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort &amp;gt; read_sorted.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I tried using &lt;code&gt;comm&lt;/code&gt;, but it wasn&amp;rsquo;t so useful (because of whitespace).&lt;/p&gt;
+
+&lt;p&gt;Tried &lt;code&gt;diff&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;diff read_sorted.txt all_sorted.txt  -bBw &amp;gt; to_read.txt
+
+0a1
+&amp;gt; a different road 
+1a3
+&amp;gt; breakable toys 
+2a5,6
+&amp;gt; confront your ignorance 
+&amp;gt; craft over art 
+5a10
+&amp;gt; expand your bandwidth 
+6a12
+&amp;gt; familiar tools 
+8a15
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to know which are the remain chapters:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat to_read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to count the number of remaining chapters:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat to_read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; wc -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The lesson learned here is to master your tools. This would have cost me a few minutes if done manually as the list was short, too much time if long (&amp;gt;1000 lines).&lt;/p&gt;
+
+&lt;p&gt;On a funny note, it has taken me approximately 2 min to do this processing but ~45 minutes to write this blog post. So I don&amp;rsquo;t recommend you write as many posts as processings you do.&lt;/p&gt;
+
+&lt;p&gt;To quote Apprenticeship patterns, &lt;a href=&#34;http://chimera.labs.oreilly.com/books/1234000001813/ch03.html#solution_id16&#34; target=&#34;_blank&#34;&gt;A different road&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If you walk away from software development, you will find that the habit of rigorous thinking and automating tasks involving large volumes of data will still be useful wherever you go&lt;/p&gt;
+
+&lt;p&gt;D Hoover, A Oshineye&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Code Snippets Stash</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/01/24/code-snippets-stash/</link>
+      <pubDate>Sat, 24 Jan 2015 20:49:55 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/01/24/code-snippets-stash/</guid>
+      <description>&lt;p&gt;Following a team member&amp;rsquo;s recommendation, I recently started a repository to save all my useful snippets.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve decided that the examples should be designed guided by tests or at least to have a working example exercised by tests. Also, that I should not reinvent the wheel and use as many open source libraries as possible, reducing the amount of code I have to write myself.&lt;/p&gt;
+
+&lt;p&gt;Ideally, every snippet should be a maven project (where applicable) and be imported as a small library, therefore being able to reuse the functionality incrementally across projects.&lt;/p&gt;
+
+&lt;p&gt;For the time being, I&amp;rsquo;m saving my snippets into a private repository and later I might decide to publish it for common usage.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

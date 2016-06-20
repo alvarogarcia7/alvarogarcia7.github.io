@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rails Conf on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/rails-conf/</link>
+    <description>Recent content in Rails Conf on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Apr 2015 14:44:06 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/rails-conf/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Talk: Simplicity matters</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/</link>
+      <pubDate>Sat, 18 Apr 2015 14:44:06 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve seen this video by &lt;a href=&#34;http://twitter.com/@richhickey&#34; target=&#34;_blank&#34;&gt;Rich Hickey&lt;/a&gt;: &amp;ldquo;&lt;a href=&#34;https://www.youtube.com/watch?v=rI8tNMsozo0&#34; target=&#34;_blank&#34;&gt;Simplicity matters&lt;/a&gt;&amp;rdquo;, taken from &lt;a href=&#34;http://twitter.com/@trikitrok&#34; target=&#34;_blank&#34;&gt;Manuel Rivero&lt;/a&gt;&amp;rsquo;s google plus&amp;rsquo; &lt;a href=&#34;https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1&#34; target=&#34;_blank&#34;&gt;site&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;here are my notes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the software is the elephant&lt;/li&gt;
+&lt;li&gt;do more, do it differently, do it better&lt;/li&gt;
+&lt;li&gt;complexity of the elephant is going to dominate what you can do&lt;/li&gt;
+&lt;li&gt;your ability to reason about your program is critical&lt;/li&gt;
+&lt;li&gt;design is about pulling things apart&lt;/li&gt;
+&lt;li&gt;become familiar by learning, trying&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;We can be creating the exact same programs out of significantly simpler components&amp;rdquo;. Rich Hickey&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Complexity vs simplicity:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Complexity&lt;/th&gt;
+&lt;th&gt;Simplicity&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;state, objects&lt;/td&gt;
+&lt;td&gt;values&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;methods&lt;/td&gt;
+&lt;td&gt;functions, namespaces&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;variables&lt;/td&gt;
+&lt;td&gt;managed refs&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;inheritance, switch, matching&lt;/td&gt;
+&lt;td&gt;polymorphism à la carte&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;syntax&lt;/td&gt;
+&lt;td&gt;data&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;imperative loops, fold&lt;/td&gt;
+&lt;td&gt;set functions&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;actors&lt;/td&gt;
+&lt;td&gt;queues&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ORM&lt;/td&gt;
+&lt;td&gt;declarative data manipulation&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;conditionals&lt;/td&gt;
+&lt;td&gt;rules&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;inconsistency&lt;/td&gt;
+&lt;td&gt;consistency&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;he does not agree on &amp;ldquo;simplicity&amp;rdquo; on the agile manifesto&lt;/li&gt;
+&lt;li&gt;simplicity is not about you. simplicity is a lot of hard work
+
+&lt;ul&gt;
+&lt;li&gt;clicked with paul graham&amp;rsquo;s &lt;a href=&#34;http://www.paulgraham.com/avg.html&#34; target=&#34;_blank&#34;&gt;LISP startup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;simplicity is not an objective&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Order is all over the place:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Complex&lt;/th&gt;
+&lt;th&gt;Simple&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;positional arguments&lt;/td&gt;
+&lt;td&gt;named arguments or map&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;syntax&lt;/td&gt;
+&lt;td&gt;data&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;product types&lt;/td&gt;
+&lt;td&gt;associate records&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;imperative programs&lt;/td&gt;
+&lt;td&gt;declarative programs&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;prolog&lt;/td&gt;
+&lt;td&gt;datalog&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;call chains&lt;/td&gt;
+&lt;td&gt;queues&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;XML&lt;/td&gt;
+&lt;td&gt;JSON, Clojure literals&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

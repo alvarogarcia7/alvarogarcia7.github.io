@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Naive Search on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/naive-search/</link>
+    <description>Recent content in Naive Search on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Aug 2015 16:45:19 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/naive-search/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Searching on a suite of failing tests</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/</link>
+      <pubDate>Thu, 13 Aug 2015 16:45:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/</guid>
+      <description>
+
+&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+
+&lt;p&gt;Today, at a client, in the green phase, we had a test suite which was failing: the whole suite fails but the test cases, individually, succeed.&lt;/p&gt;
+
+&lt;p&gt;So my first impression was that something was being shared between tests. Also confirmed because the failing class was an EndToEnd test, in which we load the whole spring context&lt;/p&gt;
+
+&lt;p&gt;A quick glance was not revealing anything interesting, so I decided to find which is the minimum suite (as opposed as to the whole suite) that makes the new testcase fail, expecting to narrow the search for possible causes. This is very similar to what QuickCheck does, to generate the minimum testcase that breaks your property. In this way, you can focus in a possibly simpler&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; feature.&lt;/p&gt;
+
+&lt;p&gt;This post covers how to perform this search.&lt;/p&gt;
+
+&lt;h2 id=&#34;mathematical-formulation&#34;&gt;Mathematical formulation&lt;/h2&gt;
+
+&lt;p&gt;Let &lt;code&gt;T&lt;/code&gt; be a sequence of tests: &lt;code&gt;i1, i2, ..., in, F, j1, j2, ..., jm&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;where:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;i&lt;/code&gt; are green tests&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;F&lt;/code&gt; is first failing test
+
+&lt;ul&gt;
+&lt;li&gt;when executed in isolation, is green&lt;/li&gt;
+&lt;li&gt;when executed in the sequence, is red&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;j&lt;/code&gt; are tests after the failed test.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this case, the order is important, as the failed test suite (presumably) comes from a shared state set by a previous test.&lt;/p&gt;
+
+&lt;p&gt;The first search-space pruning is to remove the &lt;code&gt;j&lt;/code&gt;, as they supposedly don&amp;rsquo;t have any effect (as they are after the failed test)&lt;/p&gt;
+
+&lt;p&gt;let &lt;code&gt;T1&lt;/code&gt; be a subsequence of &lt;code&gt;T&lt;/code&gt; that includes &lt;code&gt;i&lt;/code&gt; and &lt;code&gt;F&lt;/code&gt;: &lt;code&gt;i1, i2, ..., in, F&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then it is assumed that one (or more) of the &lt;code&gt;i&lt;/code&gt; generates an inconsistent state that makes &lt;code&gt;F&lt;/code&gt; fail.&lt;/p&gt;
+
+&lt;p&gt;In the sequence &lt;code&gt;T1&lt;/code&gt;, &lt;code&gt;F&lt;/code&gt; fails, but in the sequence &lt;code&gt;TF&lt;/code&gt; composed by &lt;code&gt;F&lt;/code&gt; only, the test succeeds. This can be thought as the equivalent of the &lt;a href=&#34;https://en.wikipedia.org/wiki/Intermediate_value_theorem&#34; target=&#34;_blank&#34;&gt;Intermediate value theorem&lt;/a&gt;, also called Bolzano&amp;rsquo;s theorem, where the &lt;code&gt;T1&lt;/code&gt; is at one side ot the axis and the &lt;code&gt;TF&lt;/code&gt; at another. The theorem proves that there must be at least one value where the domain of the function crosses the axis&lt;/p&gt;
+
+&lt;p&gt;I say &amp;ldquo;thought of&amp;rdquo; because that theorem is only for continous functions and sets are not (are discrete) but the analogy is good enough: if one sequence is OK but the other isn&amp;rsquo;t, there must be a minimum sequence where the result is OK and another one where the results are not. They two sequences must not be the same case as one result cannot be OK and not OK at the same time.&lt;/p&gt;
+
+&lt;h2 id=&#34;naïve-search&#34;&gt;Naïve search&lt;/h2&gt;
+
+&lt;p&gt;The first way of searching would be find the minimum set that fails:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;include &lt;code&gt;F&lt;/code&gt;, then another from &lt;code&gt;i1,...,in&lt;/code&gt; that makes the &lt;code&gt;F&lt;/code&gt; fail. &lt;code&gt;F&lt;/code&gt; the last one, because it needs to be affected by the side effects from the preceding test.&lt;/li&gt;
+&lt;li&gt;if the first strategy does not work, for each of the above cases, add another from the &lt;code&gt;i1,...,in&lt;/code&gt; (except the one that was added)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For the first step, it takes &lt;code&gt;O(n * 2)&lt;/code&gt;, assuming executing a single test costs &lt;code&gt;O(1)&lt;/code&gt;. Reduces to &lt;code&gt;O(n)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For the second step, &lt;code&gt;O(n * n-1 * 3)&lt;/code&gt;. Reduces to &lt;code&gt;O(n^2)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For the third step, &lt;code&gt;O(n * n-1 * n-2 * 4)&lt;/code&gt;. Reduces to &lt;code&gt;O(n^3)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For the nth step, it costs &lt;code&gt;O(n * n-1 * n-2 * ... * n-(n-1) * (n+1))&lt;/code&gt;. Reduces to &lt;code&gt;O(n^n)&lt;/code&gt;. Which is polynomical but not feasible for medium-sized &lt;code&gt;n&lt;/code&gt; (in an automatic fashion) or small &lt;code&gt;n&lt;/code&gt; (in a manual fashion)&lt;/p&gt;
+
+&lt;h2 id=&#34;dichotomous-search&#34;&gt;Dichotomous search&lt;/h2&gt;
+
+&lt;p&gt;(This is also known as &lt;a href=&#34;https://en.wikipedia.org/wiki/Binary_search_algorithm&#34; target=&#34;_blank&#34;&gt;binary search&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;Inspired by &lt;code&gt;git-bisect&lt;/code&gt;, I decided to treat the sequence &lt;code&gt;i1, ..., in&lt;/code&gt; as the source for the dicotomical search, applying the subsequences to &lt;code&gt;F&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first step, it takes &lt;code&gt;O(n/2 * n/2)&lt;/code&gt; = &lt;code&gt;O(n^2)&lt;/code&gt; to execute half the tests&lt;/p&gt;
+
+&lt;p&gt;The second step, is to execute half the number of the tests previously executed, either from the sequence before (if the &lt;code&gt;F&lt;/code&gt; fails) or from the other half (if &lt;code&gt;F&lt;/code&gt; does not fail). The cost is &lt;code&gt;O(n/4 * n/4)&lt;/code&gt; = &lt;code&gt;O(n^2)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For the nth step, the cost is &lt;code&gt;O(n/2^n * n/2^n)&lt;/code&gt; = &lt;code&gt;O(n^2/2^n)&lt;/code&gt; = &lt;code&gt;O(0)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This n in the nth step is smaller than the other n, as each step divides by two the amount of tests to be included.&lt;/p&gt;
+
+&lt;p&gt;The amount of tests to be executed is &lt;code&gt;n + n/2 + n/4 + n/8 + ... + 1&lt;/code&gt; which is roughly &lt;code&gt;2n&lt;/code&gt;. Executing each test costs &lt;code&gt;O(1)&lt;/code&gt; (by the assumption before), so the total cost is &lt;code&gt;O(2n)&lt;/code&gt; = &lt;code&gt;O(n)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If we take it by the amount of steps we need to manually execute is 1 for the whole, 1 for the half, 1 for the quarter, &amp;hellip;. = &lt;code&gt;O(log2 n)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;procedure&#34;&gt;Procedure&lt;/h2&gt;
+
+&lt;p&gt;To keep the executed tests, I created a support branch where I deleted the tests that were selected to be excluded. Always executed &amp;ldquo;all tests in the suite&amp;rdquo; as this makes it faster to select in the IDE.&lt;/p&gt;
+
+&lt;p&gt;When the half taken was wrong, I reverted the last commit and selected the other half.&lt;/p&gt;
+
+&lt;p&gt;After finding the minimum sequence and solving the issue, this support branch was discarded&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In the real scenario, with around 100 tests, searching manually in the naïve way would not have been possible. It would have cost 100 steps, as the minimum set that produces &lt;code&gt;F&lt;/code&gt; had size 2 (so only one step was necessary).&lt;/p&gt;
+
+&lt;p&gt;Applying the dichotomous search, in 8-10 steps I had finished, with the guarantee that no matter how many tests produced the &lt;code&gt;F&lt;/code&gt; I would have found it in a reasonable amount of time.&lt;/p&gt;
+
+&lt;h2 id=&#34;comments&#34;&gt;Comments&lt;/h2&gt;
+
+&lt;p&gt;Finally, the root cause for the failing test &lt;code&gt;F&lt;/code&gt; was the OrientDB InMemory implementation with Spring context, as the former does not allow two instances at the same time in the same JVM.&lt;/p&gt;
+
+&lt;p&gt;It was solved using &lt;code&gt;@DirtiesContext&lt;/code&gt; in both cases of the minimum sequence that forms &lt;code&gt;F&lt;/code&gt;, so no matter which order the executor decides, the context will always be clean for the next execution.&lt;/p&gt;
+
+&lt;p&gt;We found this thanks to a teammate&amp;rsquo;s intuition.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Because maybe the minimum testcase is more difficult than another.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

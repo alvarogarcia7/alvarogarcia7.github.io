@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Polish Your Tools on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/polish-your-tools/</link>
+    <description>Recent content in Polish Your Tools on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 08 Jul 2015 02:40:24 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/polish-your-tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Tip: massively reverting local changes</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/</link>
+      <pubDate>Wed, 08 Jul 2015 02:40:24 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/</guid>
+      <description>&lt;p&gt;I was changing a massive amount of files (&amp;gt;1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s how to do it automatically:&lt;/p&gt;
+
+&lt;p&gt;Copy all the failing tests to a text editor:&lt;/p&gt;
+
+&lt;p&gt;Input:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest)
+testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest)
+testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest)
+testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest)
+testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest)
+testDeleteDocument(io.company.controller.dms.DocumentControllerTest)
+testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest)
+testUpdateXML(io.company.controller.dms.DocumentControllerTest)
+testSearchXFPage(io.company.controller.dms.DocumentControllerTest)
+testCreateXFPage(io.company.controller.dms.DocumentControllerTest)
+testUpdatePage(io.company.controller.dms.DocumentControllerTest)
+testSearchCrop(io.company.controller.dms.DocumentControllerTest)
+testUpdateCrop(io.company.controller.dms.DocumentControllerTest)
+testMoveDocument(io.company.controller.dms.DocumentControllerTest)
+testGetDocument(io.company.controller.dms.DocumentControllerTest)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;regex:&lt;/p&gt;
+
+&lt;p&gt;(tested in Sublime 3, build 3083, Windows 64)&lt;/p&gt;
+
+&lt;p&gt;find what: &lt;code&gt;^[^(]+\([a-Z.]*\.(.*)\)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;replace with: &lt;code&gt;$1&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Regex explanation for &lt;code&gt;^[^(]+\([a-Z.]*\.(.*)\)&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;^&lt;/code&gt;: beginning of line&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[^(]+&lt;/code&gt;: every character except parenthesis, one or more times&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\([a-Z.]*&lt;/code&gt;: start with one parenthesis, any number of a-z, A-Z&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\.&lt;/code&gt;`: a dot, as I&amp;rsquo;m using regex replacement&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(.*)&lt;/code&gt;: any character, zero or more times, captured in group &lt;code&gt;$1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\)&lt;/code&gt;: closing parenthesis&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+DocumentControllerTest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;copy that to file &lt;code&gt;a.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Revert all the changes in these files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; i in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;cat a.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; uniq&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  git checkout -- *$i*
+&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tip: committing to the repo file by file</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/</link>
+      <pubDate>Wed, 08 Jul 2015 02:37:08 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/</guid>
+      <description>&lt;p&gt;I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.&lt;/p&gt;
+
+&lt;p&gt;This is why I have some scripts to commit all the changes, even with the same message. This is one of them:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; f in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;git status -s &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;^M&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  git add &lt;span class=&#34;nv&#34;&gt;$f&lt;/span&gt;
+  git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;quot;generic commit for all files&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

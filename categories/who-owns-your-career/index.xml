@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Who Owns Your Career on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/who-owns-your-career/</link>
+    <description>Recent content in Who Owns Your Career on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Feb 2015 09:30:20 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/who-owns-your-career/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Polishing your tools</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/02/22/polishing-your-tools/</link>
+      <pubDate>Sun, 22 Feb 2015 09:30:20 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/02/22/polishing-your-tools/</guid>
+      <description>
+
+&lt;h2 id=&#34;the-toolsmith&#34;&gt;The toolsmith&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Fred_Brooks&#34; target=&#34;_blank&#34;&gt;Frederick P Brooks, Jr&lt;/a&gt; quoted / explained a theory explained by Mills and Baker&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; around 1971-72:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Chapter 3: The Surgical Team&lt;/p&gt;
+
+&lt;p&gt;[&amp;hellip;] but the team be organized like a surgical team rather than a hog-butchering team. That is, instead of each member cutting away on the problem, one does the cutting and the others give him[her] every support that will enhance his[her] effectiveness and productivity.&lt;/p&gt;
+
+&lt;p&gt;[&amp;hellip;]&lt;/p&gt;
+
+&lt;p&gt;&lt;quote&gt; Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team &lt;/quote&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;(Text between square brackets is mine)&lt;/p&gt;
+
+&lt;p&gt;The author goes on to explain the job descriptions for the surgeon, copilot, administrator, editor, secretaries, program clerk, toolsmith, tester and the language lawyer.&lt;/p&gt;
+
+&lt;p&gt;The one that will be covered in this post is the toolsmith:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;The toolsmith&lt;/strong&gt;. File-editing, text-editing, and interactive debugging services are now readily available, so that a team will rarely need its own machine and machine-operating crew. But these services must be available with unquestionably satisfactory response and reliability; and the surgeon must be sole judge of the adequacy of the service available to him. He needs a toolsmith, responsible for ensuring this adequacy of the basic service and for constructing, maintaining, and upgrading special tools &amp;ndash;mostly interactive computer services&amp;ndash; needed by his team. Each team will need its own toolsmith, regardless of the excellence and reliability of any centrally provided service, for his job is to see to the tools needed or wanted by his surgeon, without regard to any other team&amp;rsquo;s needs. The tool-builder will often construct specialized utilities, cataloged procedures, macro libraries.&lt;/p&gt;
+
+&lt;p&gt;&lt;quote&gt; Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team &lt;/quote&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Even though the chapter reads a bit outdated, especially with the part about genders and methodologies (i.e., waterfall), the part about roles is interesting. The surgical team, as the author presents will be composed by 9 &amp;frac12; (nine and a half) as the language lawyer can be shared among two or three teams.&lt;/p&gt;
+
+&lt;h2 id=&#34;day-to-day-practices&#34;&gt;Day to day practices&lt;/h2&gt;
+
+&lt;p&gt;So, one full-time job is to build tools to service the surgeon and the copilot (1:8,5 ratio), or approximately 12% of a full-time position.&lt;/p&gt;
+
+&lt;p&gt;These tools can make the surgeon and the copilot more effective, ranging from a single digit percentage to orders of magnitude in other tasks.&lt;/p&gt;
+
+&lt;p&gt;As agile teams no longer have a toolsmith and the scrum master is not necessarily a technical expert who can build tools for the whole team, the tasks of creating tools must be taken care by everyone. No one better than yourself can know your needs and tailor solutions for them.&lt;/p&gt;
+
+&lt;p&gt;The only downside is you have to invest ~5h (for a full time position) per week into creating and polishing tools for your work: it is a need for achieving more productivity when working.&lt;/p&gt;
+
+&lt;p&gt;Nowadays that IDEs are configurable, this time might be invested on learning more advanced features as other shortcuts, refactoring techniques, other design patterns, etc. I like having my own live templates (see &lt;a href=&#34;https://www.jetbrains.com/idea/help/creating-and-editing-live-templates.html#d1333587e219&#34; target=&#34;_blank&#34;&gt;description&lt;/a&gt;), especially for tests, as I saw on the &lt;a href=&#34;https://skillsmatter.com/courses/503-sandro-mancuso-s-crafting-code-course#programme&#34; target=&#34;_blank&#34;&gt;Crafting Code workshop&lt;/a&gt; by &lt;a href=&#34;https://twitter.com/sandromancuso&#34; target=&#34;_blank&#34;&gt;Sandro Mancuso&lt;/a&gt;&lt;/p&gt;
+
+&lt;!--
+TODO: Add link to Sandro Mancuso&#39;s experience report, when I write it
+--&gt;
+
+&lt;p&gt;It may also include other activities as setting up your bash alias, cleaning your desk, trying a new UML diagram modeler, etc. Anything that improves the productivity of your main task.&lt;/p&gt;
+
+&lt;p&gt;If we consider our experience and knowledge part of our tools (as we are knowledge workers), training could be considered part of polishing our tools. Short, daily or weekly training sessions (even internal) can make a great impact on breadth (not depth) of knowledge among your teammates. This shallow knowledge can open doors for more knowledge to be gained outside of company time, or used to practice and test other methods.&lt;/p&gt;
+
+&lt;p&gt;This training is so useful for everyone (&amp;ldquo;when one teaches, two learn&amp;rdquo;) that I recommend my clients to do it. This has helped them cope with changing technologies, knowledge transfer and even some team building.&lt;/p&gt;
+
+&lt;h2 id=&#34;company-provided-or-not&#34;&gt;Company provided or not?&lt;/h2&gt;
+
+&lt;p&gt;Should the company provide for this time to improve? Although I don&amp;rsquo;t know the answer, it would greatly affect the programmers&amp;rsquo; productivity to do so. I would say, provide this time as long as what is produced is useful. How do you measure useful? This is a subjective opinion, so it depends on each one.&lt;/p&gt;
+
+&lt;p&gt;Some companies acknowledge that this is so important as to invest part of their resources (0-2 hours per week) into training.&lt;/p&gt;
+
+&lt;p&gt;Either way, should your company provide it for your or not, you are the one in charge of your career (from Mancuso, &lt;a href=&#34;https://leanpub.com/socra&#34; target=&#34;_blank&#34;&gt;Software Craftsmanship&lt;/a&gt; - now called &lt;a href=&#34;http://www.amazon.co.uk/Software-Craftsman-Professionalism-Pragmatism-Robert/dp/0134052501/ref=sr_1_1?ie=UTF8&amp;amp;qid=1416521895&amp;amp;sr=8-1&amp;amp;keywords=the+software+craftsman&#34; target=&#34;_blank&#34;&gt;The Software Craftsman&lt;/a&gt;). If you are not allowed to invest company time for your own benefit, you could use some of your personal time to do so. It is not required, but you will soon enjoy its profits.&lt;/p&gt;
+
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Every sprint, one of my clients (as of 2015-05) wants to review the work done using some slides and a live demo. The &amp;lsquo;sample&amp;rsquo; slides with the format, layout is useful. Everything that should be replaced (timestamp, contents, etc) is marked with a TODO&lt;/li&gt;
+&lt;li&gt;Every day, I commit plenty of times to the control version system (i.e., git). I have an alias for commit, diff, status, etc, that saves me some keystrokes on the most common commands&lt;/li&gt;
+&lt;li&gt;See the post &amp;ldquo;A basic working environment&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Deployment, even on local, is automated: a script for getting the latest &lt;code&gt;branch&lt;/code&gt;, &lt;code&gt;develop&lt;/code&gt; or &lt;code&gt;master&lt;/code&gt; code, build the Docker container, start the docker image, notify me the code is ready&lt;/li&gt;
+&lt;li&gt;Pipeline: I have a pipeline, in local, where I can push and the tests will be executed automatically. If the build fails (usually BDD tests), I can &lt;code&gt;push -f&lt;/code&gt; without affecting to the repo history.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Mills, H., &amp;ldquo;Chief programmer teams, principles, and procedures,&amp;rdquo; IBM Federal Systems Division Report FSC 715108, Gaithersburg, Md., 1971.&lt;/p&gt;
+
+&lt;p&gt;Baker, F. T., &amp;ldquo;Chief programmer team management of production programming,&amp;rdquo; IBM Sys. J., 11, 1 (1972).&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Original references in &amp;ldquo;The Mythical Man-Month&amp;rdquo; (Notes and References, page 294) point to these:
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overheard on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/overheard/</link>
+    <description>Recent content in Overheard on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 25 Apr 2015 13:28:20 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/overheard/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Demand for TDD and Refactor</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor/</link>
+      <pubDate>Sat, 25 Apr 2015 13:28:20 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor/</guid>
+      <description>&lt;p&gt;When I went to the Jason Gorman&amp;rsquo;s TDD workshop (experience report &lt;a href=&#34;../../../../2015/04/12/jason-gorman-tdd-intensive-workshop&#34;&gt;here&lt;/a&gt;), he said something interesting regarding refactor and TDD:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In job offers / advertisements, TDD is much more in demand than refactor. But the latter is included in the former as an integral part.&lt;/p&gt;
+
+&lt;p&gt;Jason Gorman&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I agree with the second thought: you cannot properly do TDD without refactoring, as it is an integral part; also the third phase.&lt;/p&gt;
+
+&lt;p&gt;For me, sometimes refactoring is the difference between code and &amp;ldquo;Clean Code&amp;rdquo; (as defined in the book by the same title). If I cannot find the (algorithmic) pattern for the software I&amp;rsquo;m writing, I try to introduce scaffolds to keep investigating until I can find a viable, general solution (if the problem requires it.)&lt;/p&gt;
+
+&lt;p&gt;Even after doing the refactor &lt;code&gt;replace algorithm&lt;/code&gt;, the code might not have the responsibilities in the right place, the methods might be long, value objects not extracted yet, etc. This is where further refactor is needed to introduce all those qualities in the piece of software.&lt;/p&gt;
+
+&lt;p&gt;I believe that we programmers have done a bad job of communicating with the rest of the organization what refactoring is about. It has nothing to do with beauty, style or design (in the visual sense) but is related to maintainability, coupling, defects and quality. Money, in the long run, as its objective is to make it cheaper to change in the future, a better investment and ROI. This is the common language that the rest of the company understands.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

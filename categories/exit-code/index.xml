@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Exit Code on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/exit-code/</link>
+    <description>Recent content in Exit Code on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Oct 2015 08:53:29 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/exit-code/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Tip: Propagate the failure in bash</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/</link>
+      <pubDate>Fri, 02 Oct 2015 08:53:29 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/</guid>
+      <description>
+
+&lt;p&gt;In bash, the usual behavior is to return the last status code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bash-3.1$ tr
+tr: two strings must be given when translating
+bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
+1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;But this also applies to pipes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
+0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: &lt;code&gt;set -o pipefail&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bash-3.1$ &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -o pipefail
+bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee 1.txt
+tr: two strings must be given when translating
+bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
+1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This might be useful if you stop on a non-zero status (&lt;code&gt;set -e&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;set-builtin-reference&#34;&gt;Set Builtin Reference&lt;/h2&gt;
+
+&lt;p&gt;Reference from the &lt;a href=&#34;https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin&#34; target=&#34;_blank&#34;&gt;Set Builtin&lt;/a&gt;:&lt;/p&gt;
+
+&lt;h3 id=&#34;e&#34;&gt;-e&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;-e&lt;/p&gt;
+
+&lt;p&gt;Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;amp;&amp;amp; or || list except the command following the final &amp;amp;&amp;amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.&lt;/p&gt;
+
+&lt;p&gt;This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.&lt;/p&gt;
+
+&lt;p&gt;If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;o-pipefail&#34;&gt;-o pipefail&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;-o pipefail&lt;/p&gt;
+
+&lt;p&gt;If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

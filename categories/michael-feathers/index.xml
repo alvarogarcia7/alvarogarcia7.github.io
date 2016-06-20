@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Michael Feathers on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/michael-feathers/</link>
+    <description>Recent content in Michael Feathers on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Apr 2016 00:56:54 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/michael-feathers/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Quote: Characterization tests</title>
+      <link>https://alvarogarcia7.github.io/blog/2016/04/18/quote-characterization-tests/</link>
+      <pubDate>Mon, 18 Apr 2016 00:56:54 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2016/04/18/quote-characterization-tests/</guid>
+      <description>&lt;p&gt;In Working effectively with legacy code, Michael Feathers talks a type of tests to define or characterize the current behavior of the legacy system:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In nearly every legacy system, what the system does is more important than what it is supposed to do.&lt;/p&gt;
+
+&lt;p&gt;A &lt;em&gt;characterization test&lt;/em&gt; is a test that characterizes the actual behavior of a piece of code. [&amp;hellip;] The test document the actual current behavior of the system. Here is a little algorithm for writing algorithm for writing characterization tests:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use a piece of code in a test harness&lt;/li&gt;
+&lt;li&gt;Write an assertion that you know will fail&lt;/li&gt;
+&lt;li&gt;Let the failure tell you what the behavior is.&lt;/li&gt;
+&lt;li&gt;Change the test so that it expects the behavior that the code produces&lt;/li&gt;
+&lt;li&gt;Repeat&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;M Feathers, in the chapter 13&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, section &amp;ldquo;Characterization tests&amp;rdquo; of Working effectively with legacy code. Actual page, 186.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Later on, he goes to describe them in a bigger environment:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Characterization tests record the actual behavior of a piece of code. If we find something unexpected when we write them, it pays to get some clarification. It could be a bu. That doesn&amp;rsquo;t mean that we don&amp;rsquo;t include the test in our test suite; instead, we should mark it as suspicious an find out what th effect would be of fixing it.&lt;/p&gt;
+
+&lt;p&gt;M Feathers, in the chapter 13&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, section &amp;ldquo;Characterization tests&amp;rdquo; of Working effectively with legacy code. Actual page, 188.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Chapter 13, &amp;ldquo;I need to make a change, but I don&amp;rsquo;t know what tests to write&amp;rdquo;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;Chapter 13, &amp;ldquo;I need to make a change, but I don&amp;rsquo;t know what tests to write&amp;rdquo;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Practical Object-Oriented Design in Ruby: Chapter 1</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/</link>
+      <pubDate>Mon, 29 Jun 2015 00:07:29 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.&lt;/p&gt;
+
+&lt;p&gt;These are the concepts and links brought up during the discussion:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Walking on water and developing software from a specification are easy if both are frozen.&lt;/p&gt;
+
+&lt;p&gt;Edward V Berard, source is &lt;a href=&#34;https://en.wikiquote.org/wiki/Edward_V._Berard&#34; target=&#34;_blank&#34;&gt;Wikiquote&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Two cited papers on metrics for design:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pitt.edu/~ckemerer/CK%20research%20papers/MetricForOOD_ChidamberKemerer94.pdf&#34; target=&#34;_blank&#34;&gt;A metrics suite for object oriented design&lt;/a&gt; by Chidamber and Kemerer&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cs.umd.edu/~basili/publications/technical/T102.pdf&#34; target=&#34;_blank&#34;&gt;A validation of object-oriented design metrics as quality indicators&lt;/a&gt; by Basili, Briand and Melo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The video for the &amp;lsquo;churn&amp;rsquo; as a measure:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ustream.tv/recorded/61483799&#34; target=&#34;_blank&#34;&gt;The Hidden Dimension Of Refactoring&lt;/a&gt; by Michael Feathers&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What legacy code is about</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/</link>
+      <pubDate>Tue, 21 Apr 2015 22:09:54 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/</guid>
+      <description>&lt;p&gt;In his book &lt;a href=&#34;http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;amp;qid=1429647115&amp;amp;sr=8-1&amp;amp;keywords=legacy+code+feathers&#34; target=&#34;_blank&#34;&gt;Working effectively with legacy code&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/mfeathers&#34; target=&#34;_blank&#34;&gt;Michael Feathers&lt;/a&gt; describes:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;[&amp;hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&amp;hellip;]&lt;/p&gt;
+
+&lt;p&gt;M Feathers, in the preface of Working effectively with legacy code&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I really like this definition. It is objective and measurable. But this is also a downside. Let&amp;rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&amp;rsquo;s take another example.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &amp;ldquo;Clean Code&amp;rdquo;, as defined per R.C. Martin&amp;rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.&lt;/p&gt;
+
+&lt;p&gt;After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;some test the test framework&lt;/li&gt;
+&lt;li&gt;some the language&lt;/li&gt;
+&lt;li&gt;some test a happy path that works by pure luck&lt;/li&gt;
+&lt;li&gt;some functionalities are tested (not all happy paths)&lt;/li&gt;
+&lt;li&gt;there&amp;rsquo;s actually a defect converted into a specification (test) (??)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?&lt;/p&gt;
+
+&lt;p&gt;I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.&lt;/p&gt;
+
+&lt;p&gt;Because for me, &lt;strong&gt;legacy code is about trust, not tests&lt;/strong&gt;. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)&lt;/p&gt;
+
+&lt;p&gt;This is why I would like to update the definition:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Legacy code is code without tests that provide trust to all your stakeholders&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&amp;rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?&lt;/p&gt;
+
+&lt;p&gt;These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Full disclosure: I&amp;rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&amp;rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

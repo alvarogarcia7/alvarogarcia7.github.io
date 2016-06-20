@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Purple Wire on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/purple-wire/</link>
+    <description>Recent content in Purple Wire on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Feb 2015 20:57:43 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/purple-wire/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The purple wire</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/</link>
+      <pubDate>Tue, 24 Feb 2015 20:57:43 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/</guid>
+      <description>&lt;p&gt;A quote from the &lt;a href=&#34;http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959&#34; target=&#34;_blank&#34;&gt;Mythical Man-Month&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Chapter 13: The Whole and the Parts&lt;/p&gt;
+
+&lt;p&gt;[&amp;hellip;] In System/360 engineering models, one saw occasional strands of purple wire among the routine yellow wires. When a bug was found, two things were done. A quick fix was devised and installed on the system, so testing could proceed. This change was put on in purple wire, so it stuck out like a sore thumb. It was entered in the log. Meanwhile, an official change document was prepared and started into the design automation mill. Eventually this resulted in updated drawings and wire lists, and a new back panel in which the change was implemented in printed circuitry or yellow wire. Now the physical model and the paper were together again, and the purple wire was gone.&lt;/p&gt;
+
+&lt;p&gt;Programming needs a purple-wire technique, and it badly needs tight control and deep respect for the paper that ultimately is the product. The vital ingredients of such technique are the logging of all changes in a journal and the distinction, carried conspicuously in source code, between quick patches and thought-through, tested, documented fixes.&lt;/p&gt;
+
+&lt;p&gt;[&amp;hellip;]&lt;/p&gt;
+
+&lt;p&gt;&lt;quote&gt; Brooks, F. - The Mythical Man-Month&lt;/quote&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This purple-wire the author talks about is extremely important even in the current age as the whole team should not be blocked by a single defect.&lt;/p&gt;
+
+&lt;p&gt;What I usually do is a commit containing a quick fix (purple-wire, scaffold, hackish if, etc) on a bugfix branch, push the changes so jenkins can verify that this purple-wire didn&amp;rsquo;t break any other case. Then integrate this bugfix into master if required&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. If this affects &lt;code&gt;develop&lt;/code&gt; branch of other developers, also merge into develop and or feature branches.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, in my opinion, fixing the defect should include an unit test so the defect does not reproduce again. If this is not reproducible through an unit one, escalate test levels (unit, integration, end to end, etc) until a suitable one is found.&lt;/p&gt;
+
+&lt;p&gt;Once that applying the purple-wire is done, I &lt;code&gt;checkout&lt;/code&gt; the last version where the defect is to be found (usually right before the bugfix branch) and create this test necessary to reproduce behavior. Only after this defect is found I fix it. Otherwise, I think the root cause might be in a different place and, therefore, fix a non-existing defect, effectively introducing a regression.&lt;/p&gt;
+
+&lt;p&gt;This test also serves to reproduce that the corrected behavior is not introduced anymore into the system.&lt;/p&gt;
+
+&lt;p&gt;As an ending phase for the defect, replace the purple wire with the new code and, after passing all tests, merge to master, develop and feature branches.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;If the found defect is not business critical, I try not to merge to master the purple wire, just leave master pointing to the defect and the bugfix branch with the solution. This bugfix branch will be deleted when a more stable fix is found.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

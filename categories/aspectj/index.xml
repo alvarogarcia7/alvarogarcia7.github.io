@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aspectj on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/aspectj/</link>
+    <description>Recent content in Aspectj on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 Apr 2015 07:23:23 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/aspectj/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Annotations and Aspects in Java</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/</link>
+      <pubDate>Tue, 21 Apr 2015 07:23:23 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.&lt;/p&gt;
+
+&lt;p&gt;The code provides a way of doing &lt;code&gt;try|catch&lt;/code&gt;, specifying an exception to be caught.&lt;/p&gt;
+
+&lt;p&gt;The source code is available &lt;a href=&#34;https://github.com/alvarogarcia7/annotation-aspect-java&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;in-the-process&#34;&gt;In the process&lt;/h2&gt;
+
+&lt;p&gt;This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.&lt;/p&gt;
+
+&lt;p&gt;If you want to see the raw details, the refactor has been committed step by step (the spike hasn&amp;rsquo;t). The unmassaged code can be found &lt;a href=&#34;https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. The massaged version is at the &lt;a href=&#34;https://github.com/alvarogarcia7/annotation-aspect-java/&#34; target=&#34;_blank&#34;&gt;tip of the arrow&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;more-information&#34;&gt;More information&lt;/h2&gt;
+
+&lt;p&gt;Regarding &lt;code&gt;annotations&lt;/code&gt; (like @Override):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/java/annotations/&#34; target=&#34;_blank&#34;&gt;This official article&lt;/a&gt; on annotations is useful.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.vogella.com/tutorials/JavaAnnotations/article.html&#34; target=&#34;_blank&#34;&gt;This article&lt;/a&gt; by Lars Vogel guides you step by step.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://tutorials.jenkov.com/java/annotations.html&#34; target=&#34;_blank&#34;&gt;This article&lt;/a&gt; by Jakov Jenkov is very nice.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://crunchify.com/understanding-java-annotation-annotation-examples/&#34; target=&#34;_blank&#34;&gt;This article&lt;/a&gt; helps you to understand what an annotation is and what to use it for.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Regarding &lt;code&gt;aspect&lt;/code&gt; (based on AspectJ):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation&#34; target=&#34;_blank&#34;&gt;This question&lt;/a&gt; has been my main source of information / inspiration for the spring + aspectj configuration
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;One of the drawbacks that I find to common examples or tutorials is that they&amp;rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including &lt;code&gt;pom.xml&lt;/code&gt; (dependencies) and tests.&lt;/p&gt;
+
+&lt;p&gt;Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redesign on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/redesign/</link>
+    <description>Recent content in Redesign on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Apr 2015 22:00:45 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/redesign/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Redesign as a new TDD phase</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/</link>
+      <pubDate>Mon, 13 Apr 2015 22:00:45 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/</guid>
+      <description>
+
+&lt;p&gt;In the last TDD workshop (experience report &lt;a href=&#34;../../../../2015/04/12/jason-gorman-tdd-intensive-workshop&#34;&gt;here&lt;/a&gt;), a conversation with &lt;a href=&#34;http://twitter.com/@garymcleanhall&#34; target=&#34;_blank&#34;&gt;Gary McLean Hall&lt;/a&gt; introduced to me this new concept of &amp;ldquo;Redesign&amp;rdquo; as a TDD phase.&lt;/p&gt;
+
+&lt;h2 id=&#34;concept&#34;&gt;Concept&lt;/h2&gt;
+
+&lt;p&gt;As Gary introduced it to me&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, it is a phase that might appear after refactor.&lt;/p&gt;
+
+&lt;p&gt;It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-i-do-redesign&#34;&gt;How I do redesign&lt;/h2&gt;
+
+&lt;p&gt;I usually do this &amp;ldquo;changing of the outside design&amp;rdquo; by applying a series of refactors &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.&lt;/p&gt;
+
+&lt;p&gt;The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).&lt;/p&gt;
+
+&lt;h2 id=&#34;other-thoughts&#34;&gt;Other thoughts&lt;/h2&gt;
+
+&lt;p&gt;Merriam-Webster defines &amp;ldquo;&lt;a href=&#34;http://www.merriam-webster.com/dictionary/redesign&#34; target=&#34;_blank&#34;&gt;redesign&lt;/a&gt;&amp;rdquo; as&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;to change the design of (something)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;to revise in appearance, function, or content&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;an example:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The book&amp;rsquo;s cover has been redesigned for the new edition.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The Refactoring book (by Martin Fowler) describes &amp;ldquo;refactoring&amp;rdquo; as&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &amp;ldquo;redesign&amp;rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?&lt;/p&gt;
+
+&lt;h2 id=&#34;other-references&#34;&gt;Other references&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve searched for redesign and refactor and &lt;a href=&#34;https://practicingruby.com/articles/refactoring-is-not-redesign&#34; target=&#34;_blank&#34;&gt;this blog post&lt;/a&gt; came up. They cite redesign as a way of rewriting&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/a/80758/1181094&#34; target=&#34;_blank&#34;&gt;This answer&lt;/a&gt; and the &lt;a href=&#34;http://stackoverflow.com/a/80758/1181094&#34; target=&#34;_blank&#34;&gt;original question&lt;/a&gt; in StackOverflow is interesting&lt;/p&gt;
+
+&lt;p&gt;Redesign also appears cited in &lt;a href=&#34;http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html&#34; target=&#34;_blank&#34;&gt;this blog post&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it &lt;a href=&#34;https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;thanks for the clarifying refactor vs refactoring &lt;a href=&#34;http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

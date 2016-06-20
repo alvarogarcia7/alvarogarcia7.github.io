@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Object Peer Stereotype on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/object-peer-stereotype/</link>
+    <description>Recent content in Object Peer Stereotype on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Jul 2015 07:36:14 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/object-peer-stereotype/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Object Peer Stereotypes</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/</link>
+      <pubDate>Mon, 13 Jul 2015 07:36:14 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;We categorize an object&amp;rsquo;s peers (loosely) into three types of relationship. An object might have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&amp;ndash;it doesn&amp;rsquo;t make sense without one.&lt;/li&gt;
+&lt;li&gt;Notifications: Peers that need to be kept up to date with the object&amp;rsquo;s activity. The object will notify interested peers whenever it changes state or performs a significant action. Notifications are &amp;ldquo;fire and forget&amp;rdquo;; the object neither knows nor cares which peers are listening. Notifications are so useful because they decouple objects from each other. For example, in a user interface system, a button component promises to notify any registered listeners when it&amp;rsquo;s clicked, but does not know what those listeners will do. Similarly, the listeners expect to be called but know nothing of the way the user interface dispatches its events.&lt;/li&gt;
+&lt;li&gt;Adjustments: Peers that adjust the object&amp;rsquo;s behavior to the wider needs of the system. This includes policy objects that make decisions on the object&amp;rsquo;s behalf (the Strategy pattern in [Gamma94]) and component parts of the object if it&amp;rsquo;s a composite. For example, a Swing JTable will ask a TableCellRenderer to draw a cell&amp;rsquo;s value, perhaps as RGB (Red, Green, Blue) values for a color. If we change the renderer, the table will change its presentation, now displaying the HSB (Hue, Saturation, Brightness) values.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Source is Growing Object-Oriented Software, Guided by Tests &amp;gt; Chapter 6, Object-Oriented Style &amp;gt; Object Peer Stereotypes, page 52&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

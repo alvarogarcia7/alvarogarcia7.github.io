@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Poodr on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/poodr/</link>
+    <description>Recent content in Poodr on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 Aug 2015 14:11:29 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/poodr/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Recognizing dependencies</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/</link>
+      <pubDate>Sat, 08 Aug 2015 14:11:29 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/</guid>
+      <description>&lt;p&gt;From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;An object has a dependency when it knows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The name of another class. [&amp;hellip;]&lt;/li&gt;
+&lt;li&gt;The name of a message that it intends to send to someone other than self. [&amp;hellip;]&lt;/li&gt;
+&lt;li&gt;The arguments that a message requires. [&amp;hellip;]&lt;/li&gt;
+&lt;li&gt;The order of those arguments. [&amp;hellip;]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If an object knows any of these facts about another object, it has dependencies to the other.&lt;/p&gt;
+
+&lt;p&gt;This is not to say that having dependencies to others is bad, as&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A single object cannot know everything, so inevitably it will have to talk to another object.
+Chapter 3, Managing Dependencies, Introduction&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;For this latter purpose, there is the section &amp;ldquo;Writing loosely coupled code&amp;rdquo;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Practical Object-Oriented Design in Ruby: Chapter 4</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/</link>
+      <pubDate>Sun, 26 Jul 2015 22:40:29 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.&lt;/p&gt;
+
+&lt;p&gt;These are the concepts and links brought up during the discussion:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The craftsmanship analogy, as exposed in &lt;a href=&#34;https://twitter.com/sarahmei/status/625089415812022272&#34; target=&#34;_blank&#34;&gt;these tweets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Difference between function and method&lt;/li&gt;
+&lt;li&gt;What vs How (also present in the GOOS)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Practical Object-Oriented Design in Ruby: Chapter 2</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/</link>
+      <pubDate>Sun, 12 Jul 2015 00:07:29 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.&lt;/p&gt;
+
+&lt;p&gt;These are the concepts and links brought up during the discussion:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://martinfowler.com/bliki/DataClump.html&#34; target=&#34;_blank&#34;&gt;Data Clump&lt;/a&gt; at the bliki&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://plus.google.com/117817370205182982732/posts/WaMWtp1Uetp&#34; target=&#34;_blank&#34;&gt;Refactoring with Loops and Collection Pipelines&lt;/a&gt;, indirect link to the article by Martin Fowler&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://plus.google.com/117817370205182982732/posts/6J9PPQpUjwY&#34; target=&#34;_blank&#34;&gt;When Worse Is Better: Incrementally Escaping Local Maxima&lt;/a&gt;, indirect link to the article by Kent Beck&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://plus.google.com/117817370205182982732/posts/Sk7DfYFPt5j&#34; target=&#34;_blank&#34;&gt;Getting It Right by Betting on Wrong&lt;/a&gt;, indirect link to an article by Sandi Metz
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Quote: Organizing Code to Allow for Easy Changes</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/</link>
+      <pubDate>Wed, 08 Jul 2015 02:41:54 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/</guid>
+      <description>
+
+&lt;h2 id=&#34;organizing-code-to-allow-for-easy-changes&#34;&gt;Organizing Code to Allow for Easy Changes&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code.
+If you define easy to change as&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Changes have no unexpected side effects&lt;/li&gt;
+&lt;li&gt;Small changes in requirements require correspondingly small changes in code&lt;/li&gt;
+&lt;li&gt;Existing code is easy to reuse&lt;/li&gt;
+&lt;li&gt;The easiest way to make a change is to add code that in itself is easy to change&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Then the code you write should have the following qualities. Code should be:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Transparent&lt;/strong&gt; The consequences of change should be obvious in the code that is changing and in distant code that relies upon it&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reasonable&lt;/strong&gt; The cost of any change should be proportional to the benefits the change achieves&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Usable&lt;/strong&gt; Existing code should be usable in new and unexpected contexts&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exemplary&lt;/strong&gt; The code itself should encourage those who change it to perpetuate
+these qualities&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Code that is Transparent, Reasonable, Usable, and Exemplary (TRUE) not only meets today’s needs but can also be changed to meet the needs of the future. The first step in creating code that is TRUE is to ensure that each class has a single, well-defined responsibility.&lt;/p&gt;
+
+&lt;p&gt;Practical Object Oriented Design in Ruby, by Sandi Metz&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This can be found the in POODR &amp;gt; Chapter 2. Designing Classes with a Single Responsibility &amp;gt; Organizing Code to Allow for Easy Changes&lt;/p&gt;
+
+&lt;p&gt;Note: Bold is mine&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Practical Object-Oriented Design in Ruby: Chapter 1</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/</link>
+      <pubDate>Mon, 29 Jun 2015 00:07:29 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.&lt;/p&gt;
+
+&lt;p&gt;These are the concepts and links brought up during the discussion:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Walking on water and developing software from a specification are easy if both are frozen.&lt;/p&gt;
+
+&lt;p&gt;Edward V Berard, source is &lt;a href=&#34;https://en.wikiquote.org/wiki/Edward_V._Berard&#34; target=&#34;_blank&#34;&gt;Wikiquote&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Two cited papers on metrics for design:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pitt.edu/~ckemerer/CK%20research%20papers/MetricForOOD_ChidamberKemerer94.pdf&#34; target=&#34;_blank&#34;&gt;A metrics suite for object oriented design&lt;/a&gt; by Chidamber and Kemerer&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cs.umd.edu/~basili/publications/technical/T102.pdf&#34; target=&#34;_blank&#34;&gt;A validation of object-oriented design metrics as quality indicators&lt;/a&gt; by Basili, Briand and Melo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The video for the &amp;lsquo;churn&amp;rsquo; as a measure:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ustream.tv/recorded/61483799&#34; target=&#34;_blank&#34;&gt;The Hidden Dimension Of Refactoring&lt;/a&gt; by Michael Feathers&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Category: Poodr</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/</link>
+      <pubDate>Mon, 01 Jun 2015 07:09:43 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/</guid>
+      <description>&lt;p&gt;This category is mainly dedicated to anything related or included in the book &amp;lsquo;&lt;a href=&#34;http://www.poodr.com/&#34; target=&#34;_blank&#34;&gt;Practical Object-Oriented Design in Ruby&lt;/a&gt;&amp;rsquo;, by Sandi Metz&lt;/p&gt;
+
+&lt;p&gt;Note: This has been created a posteriori with a previous date&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

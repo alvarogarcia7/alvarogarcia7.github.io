@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Behaviour Driven Development on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/behaviour-driven-development/</link>
+    <description>Recent content in Behaviour Driven Development on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Feb 2015 02:30:38 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/behaviour-driven-development/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Open discussion: Behaviour-Driven Development</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/</link>
+      <pubDate>Sun, 15 Feb 2015 02:30:38 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/</guid>
+      <description>
+
+&lt;p&gt;This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on requirements, via automatically tested specifications. For more information, see the &lt;a href=&#34;http://en.wikipedia.org/wiki/Behavior-driven_development&#34; target=&#34;_blank&#34;&gt;wikipedia&amp;rsquo;s article on the subject&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I forgot to mention that this is the perfect start to TDD, as this is usually called the double-loop TDD. See a post on it on &lt;a href=&#34;http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/&#34; target=&#34;_blank&#34;&gt;coding is like cooking&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In this double-loop TDD, the first thing is to create a BDD scenario, run it (red-1), create a unit test that reflects this red (red-2), pass it, refactor; go to red-1 as many times as you need, doing TDD cycles. When you think the feature is done, execute the BDD scenarios and go to green (outer layer) and refactor.&lt;/p&gt;
+
+&lt;h2 id=&#34;our-common-setting&#34;&gt;(Our) Common setting&lt;/h2&gt;
+
+&lt;p&gt;Going back to BDD, a common scenario would be the following:&lt;/p&gt;
+
+&lt;p&gt;Layers of software:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Domain-Specific Language (DSL). See &lt;a href=&#34;http://en.wikipedia.org/wiki/Domain-specific_language&#34; target=&#34;_blank&#34;&gt;wikipedia&amp;rsquo;s article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Test adapter: an interpreter for this DSL&lt;/li&gt;
+&lt;li&gt;Test software: test fixtures, methods, structures to arrange, act, and assert on the sut&lt;/li&gt;
+&lt;li&gt;Production software (system under test - SUT): thing being tested&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;a-bdd-test-vs-a-tdd-test&#34;&gt;A BDD test vs A TDD test&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s imagine a BDD test for a &lt;a href=&#34;http://en.wikipedia.org/wiki/Linked_list&#34; target=&#34;_blank&#34;&gt;linked list&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Given I have an empty list
+When I add an element
+Then I have an element on the list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;now, the same test in TDD [using java, junit 4, hamcrest]&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;add_an_element_to_an_empty_list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(){&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;MyLinkedList&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;linkedList&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MyLinkedList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+
+	&lt;span class=&#34;n&#34;&gt;linkedList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;something&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+
+	&lt;span class=&#34;n&#34;&gt;assertThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linkedList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;is&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In some aspects, a BDD and a TDD test are similar:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the given is the arrange, i.e., the prerequisite&lt;/li&gt;
+&lt;li&gt;the when is the act, i.e., the command&lt;/li&gt;
+&lt;li&gt;the then is the assertion, i.e., the postcondition&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(for more information on this, see &lt;a href=&#34;http://en.wikipedia.org/wiki/Hoare_logic&#34; target=&#34;_blank&#34;&gt;Hoare&amp;rsquo;s triple&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;But in others, they are not. In BDD you do not specify the APIs, methods, etc. You only care about behavior.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Benefits:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;everyone might involved in the specification by example workshops (source: &lt;a href=&#34;http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154&#34; target=&#34;_blank&#34;&gt;ATDD by example&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;live specifications. managers can now understand the real state&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Regression_testing&#34; target=&#34;_blank&#34;&gt;regression tests&lt;/a&gt; are much cheaper (from automation)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Gotchas:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Test only the happy paths&lt;/li&gt;
+&lt;li&gt;This has a cost, do not overdo it&lt;/li&gt;
+&lt;li&gt;Doesn&amp;rsquo;t remove manual tests&lt;/li&gt;
+&lt;li&gt;How do you manage multiple scenarios&lt;/li&gt;
+&lt;li&gt;How fast should it be?
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Power Tools on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/power-tools/</link>
+    <description>Recent content in Power Tools on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Feb 2015 23:25:25 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/power-tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The use of power tools</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/02/18/the-use-of-power-tools/</link>
+      <pubDate>Wed, 18 Feb 2015 23:25:25 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/02/18/the-use-of-power-tools/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m currently reading the Apprenticeship patterns book, out of order (explained here: TODO).&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m writing down the read chapters in a text file, to measure progress and also be able to backtrack if necessary. This also makes reading the book a &amp;ldquo;choose your own adventure&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;After reading approximately half the chapters, the navigation wasn&amp;rsquo;t so easy using only the &amp;ldquo;see also&amp;rdquo; part. So I decided to break free from that constraint and start reading other chapters. But how do you know which chapters you have left to read? Knowing the whole set (&lt;code&gt;all&lt;/code&gt;) and the read set (&lt;code&gt;read&lt;/code&gt;) this is just the &lt;code&gt;all - read&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Coming to a more practical way, how to know this is an automated (non-manual) way? There are &lt;code&gt;m&lt;/code&gt; in &lt;code&gt;read&lt;/code&gt; and n in &lt;code&gt;all&lt;/code&gt;, where &lt;code&gt;m &amp;lt;= n&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The simplest approach would be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for each current in read:
+  remove current from all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;as read is is no particular order, that would yield some &lt;code&gt;O(m*n)&lt;/code&gt;, worst case scenario (&lt;code&gt;m==n&lt;/code&gt;), &lt;code&gt;O(n^2)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;That is quite expensive, especially if you have to do it manually&lt;/p&gt;
+
+&lt;p&gt;If we use the same algorithm but sort the &lt;code&gt;read&lt;/code&gt; set (no longer a set, as sets have no order). Also, converting it to a &lt;code&gt;O(1)&lt;/code&gt; lookup table (e.g., a map), that would yield some &lt;code&gt;O(n log2 n + m)&lt;/code&gt; that is already better. Taking into account that the sorting can be automated by the computer, it would yield a &amp;ldquo;manual O notation cost&amp;rdquo; of &lt;code&gt;O(1 + m)&lt;/code&gt;. So, relative to the amount of chapters you have read.&lt;/p&gt;
+
+&lt;p&gt;But we can even do better in terms of this &amp;ldquo;manual big o notation&amp;rdquo;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;read &amp;lt;- sort read into a map ; cost O(1)
+all &amp;lt;- sort all into a map ; cost O(1)
+
+unread &amp;lt;- all - intersection(all, read) ; cost O(1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And this is where the power tools come into place: if we use &lt;code&gt;comm&lt;/code&gt; or &lt;code&gt;diff&lt;/code&gt;, the computer will create  the &lt;code&gt;unread&lt;/code&gt; set for us, in &amp;ldquo;manual&amp;rdquo; cost of &lt;code&gt;O(1)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;example-using-vim-sort-and-diff&#34;&gt;Example using vim, sort and diff&lt;/h2&gt;
+
+&lt;p&gt;This is the &lt;code&gt;read&lt;/code&gt; set (for the moment):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;the long road
+draw your own map
+find mentors
+the deep end
+create feedback loops
+the white belt
+practice, practice, practice
+concrete skills
+your first language
+use the source
+reflect as you work
+record what you learn
+kindred spirits
+nurture your passion
+study the classics
+expose your ignorance
+dig deeper
+be the worst
+rubbing elbows
+unleash your enthusiasm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and this is the all set (copy-paste from the book):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INTRODUCTION 1 What Is Software Craftsmanship? 3 What Is Apprenticeship? 8 What Is an Apprenticeship Pattern? 9 Where Did the Patterns Come From? 9 Where Do We Go from Here? 10
+2 EMPTYING THE CUP 11 Your First Language 13 The White Belt 18 Unleash Your Enthusiasm 22 Concrete Skills 24 Expose Your Ignorance 25 Confront Your Ignorance 28 The Deep End 30 Retreat into Competence 32 Wrapping Up 34
+3 WALKING THE LONG ROAD 37 The Long Road 38 Craft over Art 40 Sustainable Motivations 43 Nurture Your Passion 45 Draw Your Own Map 47 Use Your Title 50 Stay in the Trenches 52 A Different Road 53 Wrapping Up 55
+4 ACCURATE SELF-ASSESSMENT 57 Be the Worst 58 Find Mentors 61 Kindred Spirits 64 Rubbing Elbows 66 Sweep the Floor 68 Wrapping Up 71
+5 PERPETUAL LEARNING 73 Expand Your Bandwidth 74 Practice, Practice, Practice 77 Breakable Toys 79 Use the Source 82 Reflect As You Work 85 Record What You Learn 87 Share What You Learn 89 Create Feedback Loops 91 Learn How You Fail 94 Wrapping Up 95
+6 CONSTRUCT YOUR CURRICULUM 99 Reading List 100 Read Constantly 102 Study the Classics 104 Dig Deeper 105 Familiar Tools 109 Wrapping Up 111
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first line is not interesting to our purposes, so delete it with:&lt;/p&gt;
+
+&lt;p&gt;go to first line (&lt;code&gt;1G&lt;/code&gt;), then delete (&lt;code&gt;dd&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;After a quick inspection, there&amp;rsquo;s a number at the end of the desired line, so replace it with newline:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;%s/\d\+/\r/g&lt;/code&gt; (a snippet below):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;EMPTYING THE CUP 
+ Your First Language
+ The White Belt 
+ Unleash Your Enthusiasm 
+ Concrete Skills 
+ Expose Your Ignorance
+ Confront Your Ignorance 
+ The Deep End 
+ Retreat into Competence 
+ Wrapping Up 
+
+
+ WALKING THE LONG ROAD 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The title lines are all uppercase, so delete them with &lt;code&gt;:%g/^\s*\u\u/d&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; Your First Language 
+ The White Belt 
+ Unleash Your Enthusiasm
+ Concrete Skills 
+ Expose Your Ignorance
+ Confront Your Ignorance
+ The Deep End
+ Retreat into Competence
+ Wrapping Up 
+ 
+ 
+ The Long Road 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;explanation:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;:&lt;/code&gt; : command&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%&lt;/code&gt; : in all the file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;g&lt;/code&gt; : do (I remember it as &amp;lsquo;go&amp;rsquo;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;^&lt;/code&gt; : starting at the beginning&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\s*&lt;/code&gt;: whitespace, as much a possible&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\u\u&lt;/code&gt;: exactly two uppercase letters. Can also be expressed as &lt;code&gt;\u\{2}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt; : delete&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;for more information on vim&amp;rsquo;s regex, go &lt;a href=&#34;http://vimregex.com/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but there are empty lines. Delete them with: &lt;code&gt;%g/^$/d&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; Your First Language
+ The White Belt
+ Unleash Your Enthusiasm
+ Concrete Skills
+ Expose Your Ignorance 
+ Confront Your Ignorance
+ The Deep End 
+ Retreat into Competence
+ The Long Road
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;there is a space at the beginning of the line, delete it with &lt;code&gt;:%s/^ //&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Your First Language 
+The White Belt 
+Unleash Your Enthusiasm 
+Concrete Skills 
+Expose Your Ignorance  
+Confront Your Ignorance 
+The Deep End  
+Retreat into Competence 
+Wrapping Up  
+The Long Road  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;there are upper and lowercase letters. You could find a way of doing it with vi, but I prefer something that I can remember: save the document, then process it with &lt;code&gt;awk&lt;/code&gt; and &lt;code&gt;sort&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat all.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print tolower($0)&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort &amp;gt; all_sorted.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;(snippet):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a different road 
+be the worst 
+breakable toys 
+concrete skills 
+confront your ignorance 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If needed, sort and downcase the read.txt too.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print tolower($0)&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort &amp;gt; read_sorted.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I tried using &lt;code&gt;comm&lt;/code&gt;, but it wasn&amp;rsquo;t so useful (because of whitespace).&lt;/p&gt;
+
+&lt;p&gt;Tried &lt;code&gt;diff&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;diff read_sorted.txt all_sorted.txt  -bBw &amp;gt; to_read.txt
+
+0a1
+&amp;gt; a different road 
+1a3
+&amp;gt; breakable toys 
+2a5,6
+&amp;gt; confront your ignorance 
+&amp;gt; craft over art 
+5a10
+&amp;gt; expand your bandwidth 
+6a12
+&amp;gt; familiar tools 
+8a15
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to know which are the remain chapters:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat to_read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to count the number of remaining chapters:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat to_read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; wc -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The lesson learned here is to master your tools. This would have cost me a few minutes if done manually as the list was short, too much time if long (&amp;gt;1000 lines).&lt;/p&gt;
+
+&lt;p&gt;On a funny note, it has taken me approximately 2 min to do this processing but ~45 minutes to write this blog post. So I don&amp;rsquo;t recommend you write as many posts as processings you do.&lt;/p&gt;
+
+&lt;p&gt;To quote Apprenticeship patterns, &lt;a href=&#34;http://chimera.labs.oreilly.com/books/1234000001813/ch03.html#solution_id16&#34; target=&#34;_blank&#34;&gt;A different road&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If you walk away from software development, you will find that the habit of rigorous thinking and automating tasks involving large volumes of data will still be useful wherever you go&lt;/p&gt;
+
+&lt;p&gt;D Hoover, A Oshineye&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

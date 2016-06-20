@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Log on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/log/</link>
+    <description>Recent content in Log on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Apr 2015 23:43:10 +0000</lastBuildDate>
+    <atom:link href="https://alvarogarcia7.github.io/categories/log/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Logging is a feature</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/</link>
+      <pubDate>Sun, 19 Apr 2015 23:43:10 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/</guid>
+      <description>&lt;p&gt;At a client, we&amp;rsquo;re facing this challenge: we cannot access production logs, as we don&amp;rsquo;t have access to production environments. The solution we&amp;rsquo;ve chose is to implement the logging component as a layer on top of &lt;a href=&#34;http://www.splunk.com/&#34; target=&#34;_blank&#34;&gt;Splunk&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This formatter layer &amp;ndash;per component&amp;ndash; accesses a generic layer &amp;ndash;for the whole company&amp;ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&amp;rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.&lt;/p&gt;
+
+&lt;p&gt;Strategies for dealing with this:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;functional logger: no shared state
+
+&lt;ul&gt;
+&lt;li&gt;can only log information available in this scope: parameters, attributes, static information&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;stateful logger: information is added to the threadContext and logged whenever necessary
+
+&lt;ul&gt;
+&lt;li&gt;can log information in this scope plus any of the previous invokings.&lt;/li&gt;
+&lt;li&gt;the problem is precisely sharing state: you have to control all the possible parents to know where this data comes from. A piece of information may come from any source.&lt;/li&gt;
+&lt;li&gt;Lose the reference of who is invoking you, as there is no customization for this. (only using implementation)&lt;/li&gt;
+&lt;li&gt;Speak two different languages: one for logging and one for business logic&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;mixed: mix and match the best of both worlds.
+
+&lt;ul&gt;
+&lt;li&gt;The problem with the shared state can be solved if no data is overwritten and any information is stored in a map where the key is the fully qualified (FQ) method name (or FQ class name + FQ method name)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The GOOS book explains this very well on the 20th chapter, first half &amp;ldquo;logging is a feature&amp;rdquo;. If we log as described in chapters 19 and 20, some of the problems are reduced:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;multiple levels of abstraction&lt;/li&gt;
+&lt;li&gt;indirect control over logging. decide in a single place whether to log exceptions of each kind or not&lt;/li&gt;
+&lt;li&gt;remove &amp;ldquo;implementation details&amp;rdquo; such as &amp;ldquo;log.isDebugEnabled&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;remove performance issues: no need to build strings for logging every time, only need to pass objects. inside the logging layer, if the logger is enabled for that level, then spend the time building strings and print them
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We should remember that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.&lt;/li&gt;
+&lt;li&gt;Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
