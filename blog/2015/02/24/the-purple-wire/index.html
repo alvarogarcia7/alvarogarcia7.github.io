@@ -1,111 +1,146 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>The Purple Wire - The long way through Software Craftsmanship</title>
-  <meta name="author" content="alvaro garcia">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="description" content="A quote from the Mythical Man-Month: Chapter 13: The Whole and the Parts [&hellip;] In System/360 engineering models, one saw occasional strands of &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link rel="canonical" href="http://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="The long way through Software Craftsmanship" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
-  <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <title>The purple wire</title>
 
-    ga('create', 'UA-41008374-3', 'auto');
-    ga('send', 'pageview');
+  
+  
+  <link rel="stylesheet" href="http://example.com/css/hugo-octopress.css">
 
-  </script>
+  
+  
 
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link href="http://example.com/favicon.png" rel="icon">
+
+  
+  
+  
+
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <meta name="author" content="Alvaro Garcia">
+
+  
+  <meta name="generator" content="Hugo 0.16" />
+
+  
+  
 
 </head>
+<body>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">The long way through Software Craftsmanship</a></h1>
+
+<header role="banner"><hgroup>
   
-</hgroup>
+  <h1><a href="http://example.com/">The long way through Software Craftsmanship</a></h1>
+    <h2></h2>
+</hgroup></header>
 
-</header>
-  <nav role="navigation"><script type="text/javascript">
-    function addCustomSite(form_) {
-        var input = $(form_).find("input")[0];
-        input.value = "site:alvarogarcia7.github.io " + input.value;
-    }
-</script>
 
-<ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+<nav role="navigation">
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="http://example.com/blog/" target="_blank" title="Breadcrumbs">Breadcrumbs</a></li>
+    
+  
+    
+      <li><a href="http://example.com/articles/" target="_blank" title="Articles">Articles</a></li>
+    
+  
+    
+      <li><a href="http://example.com/blog/talks" target="_blank" title="Talks / Events">Talks / Events</a></li>
+    
+  
+    
+      <li><a href="http://example.com/categories/" target="_blank" title="Categories">Categories</a></li>
+    
+  
+    
+      <li><a href="http://example.com/blog/archives/" target="_blank" title="Archives">Archives</a></li>
+    
+  
+    
+      <li><a href="http://example.com/blog/about/" target="_blank" title="About">About</a></li>
+    
   
 </ul>
+
+
+<ul class="subscription">
+  <a href="http://example.com/index.xml" target="_blank" type="application/rss+xml" title="RSS"><i class="fa fa-rss-square fa-lg"></i></a>
+
   
-<form action="https://www.google.com/search" method="get" onsubmit="javascript: addCustomSite(this);">
+  
+
+</ul>
+
+
+<form action="https://www.google.com/search" method="get" target="_blank">
   <fieldset role="search">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  	<input class="search" type="text" name="q" results="0" placeholder="Search"/>
+    <input type="hidden" name="q" value="site:http://example.com/" />
   </fieldset>
 </form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/talks">Talks / Events</a></li>
-  <li><a href="/blog/categories">Categories</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/blog/about">About</a></li>
-</ul>
 
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">The Purple Wire</h1>
-    
-    
-      <p class="meta">
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
         
 
+<header>
+    <h1 class="entry-title">
+         The purple wire 
+    </h1>
+    <p>Feb 24, 2015
+         - 3 minute read 
+         - <a href="http://example.com/blog/2015/02/24/the-purple-wire/#disqus_thread">Comments</a>
 
-
-
-<time class='entry-date' datetime='2015-02-24T19:57:43+00:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:57 pm</span></time>
         
-      </p>
-    
-  </header>
+        
+        
+            - <a class="label" href="http://example.com/categories/debugging/">debugging</a><a class="label" href="http://example.com/categories/defect/">defect</a><a class="label" href="http://example.com/categories/purple-wire/">purple-wire</a><a class="label" href="http://example.com/categories/mythical-man-month/">mythical-man-month</a><a class="label" href="http://example.com/categories/quote/">quote</a><a class="label" href="http://example.com/categories/fred-brooks/">fred-brooks</a>
+        
+    </p>
+</header>
 
 
-<div class="entry-content"><p>A quote from the <a href="http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959">Mythical Man-Month</a>:</p>
+        <div class="entry-content">
+          
+          
+          
+          <p>A quote from the <a href="http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959" target="_blank">Mythical Man-Month</a>:</p>
 
-<blockquote><p>Chapter 13: The Whole and the Parts</p>
+<blockquote>
+<p>Chapter 13: The Whole and the Parts</p>
 
 <p>[&hellip;] In System/360 engineering models, one saw occasional strands of purple wire among the routine yellow wires. When a bug was found, two things were done. A quick fix was devised and installed on the system, so testing could proceed. This change was put on in purple wire, so it stuck out like a sore thumb. It was entered in the log. Meanwhile, an official change document was prepared and started into the design automation mill. Eventually this resulted in updated drawings and wire lists, and a new back panel in which the change was implemented in printed circuitry or yellow wire. Now the physical model and the paper were together again, and the purple wire was gone.</p>
 
@@ -113,11 +148,12 @@
 
 <p>[&hellip;]</p>
 
-<p><quote> Brooks, F. - The Mythical Man-Month</quote></p></blockquote>
+<p><quote> Brooks, F. - The Mythical Man-Month</quote></p>
+</blockquote>
 
 <p>This purple-wire the author talks about is extremely important even in the current age as the whole team should not be blocked by a single defect.</p>
 
-<p>What I usually do is a commit containing a quick fix (purple-wire, scaffold, hackish if, etc) on a bugfix branch, push the changes so jenkins can verify that this purple-wire didn&rsquo;t break any other case. Then integrate this bugfix into master if required<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. If this affects <code>develop</code> branch of other developers, also merge into develop and or feature branches.</p>
+<p>What I usually do is a commit containing a quick fix (purple-wire, scaffold, hackish if, etc) on a bugfix branch, push the changes so jenkins can verify that this purple-wire didn&rsquo;t break any other case. Then integrate this bugfix into master if required<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. If this affects <code>develop</code> branch of other developers, also merge into develop and or feature branches.</p>
 
 <p>On the other hand, in my opinion, fixing the defect should include an unit test so the defect does not reproduce again. If this is not reproducible through an unit one, escalate test levels (unit, integration, end to end, etc) until a suitable one is found.</p>
 
@@ -127,179 +163,183 @@
 
 <p>As an ending phase for the defect, replace the purple wire with the new code and, after passing all tests, merge to master, develop and feature branches.</p>
 <div class="footnotes">
-<hr/>
+
+<hr />
+
 <ol>
-<li id="fn:1">
-<p>If the found defect is not business critical, I try not to merge to master the purple wire, just leave master pointing to the defect and the bugfix branch with the solution. This bugfix branch will be deleted when a more stable fix is found.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:1">If the found defect is not business critical, I try not to merge to master the purple wire, just leave master pointing to the defect and the bugfix branch with the solution. This bugfix branch will be deleted when a more stable fix is found.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
 </ol>
 </div>
 
-</div>
+        </div>
+        
 
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">alvaro garcia</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2015-02-24T19:57:43+00:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:57 pm</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/debugging/'>debugging</a>, <a class='category' href='/blog/categories/defect/'>defect</a>, <a class='category' href='/blog/categories/fred-brooks/'>fred-brooks</a>, <a class='category' href='/blog/categories/mythical-man-month/'>mythical-man-month</a>, <a class='category' href='/blog/categories/purple-wire/'>purple-wire</a>, <a class='category' href='/blog/categories/quote/'>quote</a>
-  
-</span>
-
-
-    </p>
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Alvaro Garcia</span></span>
     
-      <div class="sharing">
+    <time>Feb 24, 2015</time>
+    <span class="categories">
+      Tags:
+        
+    </span>
+  </p>
+
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/" data-via="" data-counturl="http://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/" >Tweet</a>
   
+
   
-  
-</div>
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="http://example.com/blog/2015/02/23/kata-persistent-linked-list/" title="kata: persistent linked list">kata: persistent linked list</a>
+    
 
     
-    <p class="meta">
+      <a class="basic-alignment right" href="http://example.com/blog/2015/03/03/mob-programming-string-calculator-kata/" title="Mob programming String calculator kata">Mob programming String calculator kata</a>
+    
+  </p>
+  
+    
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    
+    
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>About this blog</h1>
+    
+
+    <p>
       
-        <a class="basic-alignment left" href="/blog/2015/02/23/kata-persistent-linked-list/" title="Previous Post: kata: persistent linked list">&laquo; kata: persistent linked list</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2015/03/03/mob-programming-string-calculator-kata/" title="Next Post: Mob programming String calculator kata">Mob programming String calculator kata &raquo;</a>
+        This blog contains two sections: <a href="/breadcrumbs/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
+        <br>
+        <br>
+         You can find me on:
       
     </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
   </section>
 
-</div>
 
-<aside class="sidebar">
+
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" href="https://github.com/alvarobiz/" title="https://github.com/alvarobiz/"><i class="fa fa-github fa-3x"></i></a>
+      
+      <a target="_blank" href="https://twitter.com/@alvarobiz/" title="https://twitter.com/@alvarobiz/"><i class="fa fa-twitter fa-3x"></i></a>
+       
+      <a target="_blank" href="https://es.linkedin.com/in/alvarogarcia7" title="https://es.linkedin.com/in/alvarogarcia7"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+
     
-      <li class="post">
-        <a href="/blog/2016/06/30/books-read-in-2016q2/">Books Read in 2016Q2</a>
-      </li>
     
-      <li class="post">
-        <a href="/blog/2016/06/10/role-software-consultant/">The Role of a Software Consultant</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/06/10/unwritten-principles-coaching/">Unwritten Principles for Coaching, a Quote</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/06/01/self-study/">Self-Study in June 2016</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/01/self-study/">Self-Study in May 2016</a>
-      </li>
-    
+    </li>
   </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/alvarogarcia7">@alvarogarcia7</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'alvarogarcia7',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
 
   
+
+  
+
+  
+  
+  
+    <section class="even">
+      <h1>Recent Posts</h1>
+      <ul id="recent_posts">
+        
+          <li class="post">
+            <a href="/blog/2016/06/30/books-read-in-2016q2/">Books read in 2016Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/06/10/the-role-of-a-software-consultant/">The role of a software consultant</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/06/10/unwritten-principles-for-coaching-a-quote/">Unwritten principles for coaching, a quote</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/06/01/self-study-in-june-2016/">Self-Study in June 2016</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/about/">About Alvaro Garcia</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/05/01/self-study-in-may-2016/">Self-Study in May 2016</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/04/18/quote-characterization-tests/">Quote: Characterization tests</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/04/18/brownish-greenfield-gilded-rose-kata/">Brownish Greenfield Gilded Rose Kata</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/04/17/faster-site-generation-with-a-native-octopress-2/">Faster site generation with a native Octopress 2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/04/01/self-study-in-april-2016/">Self-Study in April 2016</a>
+          </li>
+        
+      </ul>
+    </section>
+  
+
 </aside>
 
-
-    </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - alvaro garcia -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</div>
+
+<footer role="contentinfo">
+  <p>Copyright &copy; 2016 Alvaro Garcia - <a href="http://example.com/license/">License</a> -
+  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
 </p>
 
 </footer>
-  
 
-<script type="text/javascript">
-      var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/';
-        var disqus_url = 'http://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+
+<script>
+  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
 
 </body>
 </html>
+

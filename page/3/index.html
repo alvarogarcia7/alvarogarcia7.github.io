@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <title>The long way through Software Craftsmanship</title>
+
+  
+  
+  <link rel="stylesheet" href="http://example.com/css/hugo-octopress.css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link href="http://example.com/favicon.png" rel="icon">
+
+  
+  
+  
+
+  <link href="http://example.com/index.xml" rel="alternate" type="application/rss+xml" title="The long way through Software Craftsmanship" />
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <meta name="author" content="Alvaro Garcia">
+
+  
+  <meta name="generator" content="Hugo 0.16" />
+
+  
+  
+
+</head>
+<body>
+
+
+<header role="banner"><hgroup>
+  
+  <h1><a href="http://example.com/">The long way through Software Craftsmanship</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="http://example.com/blog/" target="_blank" title="Breadcrumbs">Breadcrumbs</a></li>
+    
+  
+    
+      <li><a href="http://example.com/articles/" target="_blank" title="Articles">Articles</a></li>
+    
+  
+    
+      <li><a href="http://example.com/blog/talks" target="_blank" title="Talks / Events">Talks / Events</a></li>
+    
+  
+    
+      <li><a href="http://example.com/categories/" target="_blank" title="Categories">Categories</a></li>
+    
+  
+    
+      <li><a href="http://example.com/blog/archives/" target="_blank" title="Archives">Archives</a></li>
+    
+  
+    
+      <li><a href="http://example.com/blog/about/" target="_blank" title="About">About</a></li>
+    
+  
+</ul>
+
+
+<ul class="subscription">
+  <a href="http://example.com/index.xml" target="_blank" type="application/rss+xml" title="RSS"><i class="fa fa-rss-square fa-lg"></i></a>
+
+  
+  
+
+</ul>
+
+
+<form action="https://www.google.com/search" method="get" target="_blank">
+  <fieldset role="search">
+  	<input class="search" type="text" name="q" results="0" placeholder="Search"/>
+    <input type="hidden" name="q" value="site:http://example.com/" />
+  </fieldset>
+</form>
+
+</nav>
+
+
+<div id="main">
+ <div id="content">
+  <div class="blog-index">
+
+    
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="http://example.com/blog/2016/03/02/tip-using-tortoise-credentials-in-git-cli/">Tip: using tortoise credentials in git CLI</a>
+    </h1>
+    <p>Mar 2, 2016
+         - 1 minute read 
+         - <a href="http://example.com/blog/2016/03/02/tip-using-tortoise-credentials-in-git-cli/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="http://example.com/categories/git/">git</a><a class="label" href="http://example.com/categories/how-to/">how-to</a><a class="label" href="http://example.com/categories/tip/">tip</a><a class="label" href="http://example.com/categories/cli/">cli</a><a class="label" href="http://example.com/categories/tortoisegit/">tortoisegit</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>TortoiseGit part Go to a repo right button, Settings Git -&gt; Credential Add a creadential Config type: global Helper: wincred Sync once using your HTTPS password CLI part Open the $REPO/.git/config and add [credential] helper = wincred Remote git operations should not ask for credentials anymore</p>
+
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="http://example.com/blog/2016/03/01/kata-formulation-find-the-comments/">Kata formulation: Find the comments</a>
+    </h1>
+    <p>Mar 1, 2016
+         - 2 minute read 
+         - <a href="http://example.com/blog/2016/03/01/kata-formulation-find-the-comments/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="http://example.com/categories/kata/">kata</a><a class="label" href="http://example.com/categories/formulation/">formulation</a><a class="label" href="http://example.com/categories/php/">php</a><a class="label" href="http://example.com/categories/comment/">comment</a><a class="label" href="http://example.com/categories/exercise/">exercise</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Little Johnny is inspecting a PHP source code that contains comments. These comments contains words that he doesn&rsquo;t understand, as it written in another language. Rules and constraints The source code in the PHP files does not need to be correct. A comment (a subset of PHP comments) is defined as: A line containing C-style comment delimiter, except when it is within a string // hello C-style is a valid comment echo &quot;//&quot;; is not a comment echo '//'; is not a comment A line containing Perl-style comment delimiter, except when it is within a string # hello Perl-style is a valid comment echo &quot;#&quot;; is not a comment echo '#'; is not a comment There are no multi-line comments /* ...</p>
+
+          
+              <footer>
+                  <a href="http://example.com/blog/2016/03/01/kata-formulation-find-the-comments/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="http://example.com/blog/2016/02/14/two-persons-involved-in-a-git-commit-in-github/">Two persons involved in a git commit, in github</a>
+    </h1>
+    <p>Feb 14, 2016
+         - 2 minute read 
+         - <a href="http://example.com/blog/2016/02/14/two-persons-involved-in-a-git-commit-in-github/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="http://example.com/categories/git/">git</a><a class="label" href="http://example.com/categories/pair-programming/">pair-programming</a><a class="label" href="http://example.com/categories/github/">github</a><a class="label" href="http://example.com/categories/how-to/">how-to</a><a class="label" href="http://example.com/categories/tip/">tip</a><a class="label" href="http://example.com/categories/committer/">committer</a><a class="label" href="http://example.com/categories/author/">author</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>On git You can have multiple persons involved in a single git commit: an author and a committer. The difference is explained by Manuel Doninger 1: The author is the one who did the code change. The committer is the person who committed that change to a repository. an example, by the same author: Example: I&rsquo;m not a committer in the EGit project, so i have no rights to push directly to the EGit repository at Eclipse.</p>
+
+          
+              <footer>
+                  <a href="http://example.com/blog/2016/02/14/two-persons-involved-in-a-git-commit-in-github/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="http://example.com/blog/2016/02/01/self-study-in-february-2016/">Self-Study in February 2016</a>
+    </h1>
+    <p>Feb 1, 2016
+         - 9 minute read 
+         - <a href="http://example.com/blog/2016/02/01/self-study-in-february-2016/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="http://example.com/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="http://example.com/categories/february/">February</a><a class="label" href="http://example.com/categories/2016/">2016</a><a class="label" href="http://example.com/categories/read/">read</a><a class="label" href="http://example.com/categories/60fps/">60fps</a><a class="label" href="http://example.com/categories/ability/">ability</a><a class="label" href="http://example.com/categories/acceptance-testing/">acceptance-testing</a><a class="label" href="http://example.com/categories/accidental-complexity/">accidental-complexity</a><a class="label" href="http://example.com/categories/aggregate/">aggregate</a><a class="label" href="http://example.com/categories/agile/">agile</a><a class="label" href="http://example.com/categories/alberto-brandolini/">alberto-brandolini</a><a class="label" href="http://example.com/categories/alexander-demin/">alexander-demin</a><a class="label" href="http://example.com/categories/amazon-s3/">amazon-s3</a><a class="label" href="http://example.com/categories/analogy/">analogy</a><a class="label" href="http://example.com/categories/analysis/">analysis</a><a class="label" href="http://example.com/categories/angular/">angular</a><a class="label" href="http://example.com/categories/angular-2/">angular-2</a><a class="label" href="http://example.com/categories/answer/">answer</a><a class="label" href="http://example.com/categories/api/">api</a><a class="label" href="http://example.com/categories/app/">app</a><a class="label" href="http://example.com/categories/application/">application</a><a class="label" href="http://example.com/categories/architecture/">architecture</a><a class="label" href="http://example.com/categories/backend/">backend</a><a class="label" href="http://example.com/categories/backend-for-frontend/">backend-for-frontend</a><a class="label" href="http://example.com/categories/bff/">bff</a><a class="label" href="http://example.com/categories/blog/">blog</a><a class="label" href="http://example.com/categories/book/">book</a><a class="label" href="http://example.com/categories/bot/">bot</a><a class="label" href="http://example.com/categories/bounded-context/">bounded-context</a><a class="label" href="http://example.com/categories/brandon-annaday/">brandon-annaday</a><a class="label" href="http://example.com/categories/bus-factor/">bus-factor</a><a class="label" href="http://example.com/categories/business-need/">business-need</a><a class="label" href="http://example.com/categories/cdn/">cdn</a><a class="label" href="http://example.com/categories/charles-wetherell/">charles-wetherell</a><a class="label" href="http://example.com/categories/chris-allen/">chris-allen</a><a class="label" href="http://example.com/categories/chris-hart/">chris-hart</a><a class="label" href="http://example.com/categories/clean-code/">clean-code</a><a class="label" href="http://example.com/categories/client/">client</a><a class="label" href="http://example.com/categories/cloudant/">cloudant</a><a class="label" href="http://example.com/categories/communication/">communication</a><a class="label" href="http://example.com/categories/company/">company</a><a class="label" href="http://example.com/categories/company-value/">company-value</a><a class="label" href="http://example.com/categories/comparison/">comparison</a><a class="label" href="http://example.com/categories/container/">container</a><a class="label" href="http://example.com/categories/continuous-delivery/">continuous-delivery</a><a class="label" href="http://example.com/categories/continuous-investment/">continuous-investment</a><a class="label" href="http://example.com/categories/conway-law/">conway-law</a><a class="label" href="http://example.com/categories/crawler/">crawler</a><a class="label" href="http://example.com/categories/creativity/">creativity</a><a class="label" href="http://example.com/categories/cross-pollination/">cross-pollination</a><a class="label" href="http://example.com/categories/css/">css</a><a class="label" href="http://example.com/categories/culture/">culture</a><a class="label" href="http://example.com/categories/david-bonilla/">david-bonilla</a><a class="label" href="http://example.com/categories/dba/">dba</a><a class="label" href="http://example.com/categories/ddd/">ddd</a><a class="label" href="http://example.com/categories/design/">design</a><a class="label" href="http://example.com/categories/difference/">difference</a><a class="label" href="http://example.com/categories/docker/">docker</a><a class="label" href="http://example.com/categories/drew-hamlett/">drew-hamlett</a><a class="label" href="http://example.com/categories/dreyfus-model/">dreyfus-model</a><a class="label" href="http://example.com/categories/drucker/">drucker</a><a class="label" href="http://example.com/categories/edward-kmett/">edward-kmett</a><a class="label" href="http://example.com/categories/empathy/">empathy</a><a class="label" href="http://example.com/categories/enterprise/">enterprise</a><a class="label" href="http://example.com/categories/entity/">entity</a><a class="label" href="http://example.com/categories/erlang/">erlang</a><a class="label" href="http://example.com/categories/essential-complexity/">essential-complexity</a><a class="label" href="http://example.com/categories/etude/">etude</a><a class="label" href="http://example.com/categories/etudes-for-programmers/">etudes-for-programmers</a><a class="label" href="http://example.com/categories/event/">event</a><a class="label" href="http://example.com/categories/explanation/">explanation</a><a class="label" href="http://example.com/categories/fat-client/">fat-client</a><a class="label" href="http://example.com/categories/fat-server/">fat-server</a><a class="label" href="http://example.com/categories/federico-carrone/">federico-carrone</a><a class="label" href="http://example.com/categories/feedback-loops/">feedback-loops</a><a class="label" href="http://example.com/categories/flip-technique/">flip-technique</a><a class="label" href="http://example.com/categories/framework/">framework</a><a class="label" href="http://example.com/categories/freelancer/">freelancer</a><a class="label" href="http://example.com/categories/frontend/">frontend</a><a class="label" href="http://example.com/categories/functional-language/">functional-language</a><a class="label" href="http://example.com/categories/functional-programming/">functional-programming</a><a class="label" href="http://example.com/categories/go/">go</a><a class="label" href="http://example.com/categories/hanlon-razor/">hanlon-razor</a><a class="label" href="http://example.com/categories/hapi/">hapi</a><a class="label" href="http://example.com/categories/haskell/">haskell</a><a class="label" href="http://example.com/categories/hide/">hide</a><a class="label" href="http://example.com/categories/hugo/">hugo</a><a class="label" href="http://example.com/categories/idris/">idris</a><a class="label" href="http://example.com/categories/ignorance/">ignorance</a><a class="label" href="http://example.com/categories/image/">image</a><a class="label" href="http://example.com/categories/integration/">integration</a><a class="label" href="http://example.com/categories/interface/">interface</a><a class="label" href="http://example.com/categories/interview/">interview</a><a class="label" href="http://example.com/categories/introduction/">introduction</a><a class="label" href="http://example.com/categories/isomorphic-javascript/">isomorphic-javascript</a><a class="label" href="http://example.com/categories/isomorphism/">isomorphism</a><a class="label" href="http://example.com/categories/j-b-rainsberger/">j-b-rainsberger</a><a class="label" href="http://example.com/categories/j-brains/">j-brains</a><a class="label" href="http://example.com/categories/james-higginbotham/">james-higginbotham</a><a class="label" href="http://example.com/categories/james-kyle/">james-kyle</a><a class="label" href="http://example.com/categories/javascript/">javascript</a><a class="label" href="http://example.com/categories/javascript-7/">javascript-7</a><a class="label" href="http://example.com/categories/jekyll/">jekyll</a><a class="label" href="http://example.com/categories/jesper-andersen/">jesper-andersen</a><a class="label" href="http://example.com/categories/jesper-louis-andersen/">jesper-louis-andersen</a><a class="label" href="http://example.com/categories/kent-beck/">kent-beck</a><a class="label" href="http://example.com/categories/kurt-rohlandt/">kurt-rohlandt</a><a class="label" href="http://example.com/categories/lambda-conf/">lambda-conf</a><a class="label" href="http://example.com/categories/land-of-lisp/">land-of-lisp</a><a class="label" href="http://example.com/categories/language/">language</a><a class="label" href="http://example.com/categories/learn-to-learn/">learn-to-learn</a><a class="label" href="http://example.com/categories/learning-to-learn/">learning-to-learn</a><a class="label" href="http://example.com/categories/list/">list</a><a class="label" href="http://example.com/categories/localforage/">localforage</a><a class="label" href="http://example.com/categories/malice/">malice</a><a class="label" href="http://example.com/categories/matt-hernandez/">matt-hernandez</a><a class="label" href="http://example.com/categories/meta/">meta</a><a class="label" href="http://example.com/categories/meta-learning/">meta-learning</a><a class="label" href="http://example.com/categories/microservice/">microservice</a><a class="label" href="http://example.com/categories/migration/">migration</a><a class="label" href="http://example.com/categories/mikael-cho/">mikael-cho</a><a class="label" href="http://example.com/categories/mikko-ohtamaa/">mikko-ohtamaa</a><a class="label" href="http://example.com/categories/mobile/">mobile</a><a class="label" href="http://example.com/categories/model/">model</a><a class="label" href="http://example.com/categories/module-testing/">module-testing</a><a class="label" href="http://example.com/categories/modulus/">modulus</a><a class="label" href="http://example.com/categories/monad/">monad</a><a class="label" href="http://example.com/categories/motivation/">motivation</a><a class="label" href="http://example.com/categories/mvc/">mvc</a><a class="label" href="http://example.com/categories/mythical-man-month/">mythical-man-month</a><a class="label" href="http://example.com/categories/nagdd/">nagdd</a><a class="label" href="http://example.com/categories/nathan-leclaire/">nathan-leclaire</a><a class="label" href="http://example.com/categories/nodejs/">nodejs</a><a class="label" href="http://example.com/categories/nolan-lawson/">nolan-lawson</a><a class="label" href="http://example.com/categories/northern-war/">northern-war</a><a class="label" href="http://example.com/categories/object-oriented-language/">object-oriented-language</a><a class="label" href="http://example.com/categories/ocaml/">ocaml</a><a class="label" href="http://example.com/categories/octopress/">octopress</a><a class="label" href="http://example.com/categories/offline/">offline</a><a class="label" href="http://example.com/categories/offline-first/">offline-first</a><a class="label" href="http://example.com/categories/oop/">oop</a><a class="label" href="http://example.com/categories/open-ource/">open-ource</a><a class="label" href="http://example.com/categories/open-question/">open-question</a><a class="label" href="http://example.com/categories/open-source/">open-source</a><a class="label" href="http://example.com/categories/oredev/">oredev</a><a class="label" href="http://example.com/categories/pattern/">pattern</a><a class="label" href="http://example.com/categories/pokedex/">pokedex</a><a class="label" href="http://example.com/categories/pokemon/">pokemon</a><a class="label" href="http://example.com/categories/pouchdb/">pouchdb</a><a class="label" href="http://example.com/categories/practice/">practice</a><a class="label" href="http://example.com/categories/programmer/">programmer</a><a class="label" href="http://example.com/categories/programming/">programming</a><a class="label" href="http://example.com/categories/progressive/">progressive</a><a class="label" href="http://example.com/categories/protocol/">protocol</a><a class="label" href="http://example.com/categories/protocol-design/">protocol-design</a><a class="label" href="http://example.com/categories/quora/">quora</a><a class="label" href="http://example.com/categories/rainsberger/">rainsberger</a><a class="label" href="http://example.com/categories/realtime/">realtime</a><a class="label" href="http://example.com/categories/refactor/">refactor</a><a class="label" href="http://example.com/categories/rest-api/">rest-api</a><a class="label" href="http://example.com/categories/ria-spike-brehm/">ria-spike-brehm</a><a class="label" href="http://example.com/categories/right-thing/">right-thing</a><a class="label" href="http://example.com/categories/robot/">robot</a><a class="label" href="http://example.com/categories/ror/">ror</a><a class="label" href="http://example.com/categories/ruby/">ruby</a><a class="label" href="http://example.com/categories/ruby-on-rails/">ruby-on-rails</a><a class="label" href="http://example.com/categories/rule/">rule</a><a class="label" href="http://example.com/categories/russ-ackoff/">russ-ackoff</a><a class="label" href="http://example.com/categories/sailsjs/">sailsjs</a><a class="label" href="http://example.com/categories/scrum/">scrum</a><a class="label" href="http://example.com/categories/sebastian-ferrari/">sebastian-ferrari</a><a class="label" href="http://example.com/categories/seo/">seo</a><a class="label" href="http://example.com/categories/shared-infrastructure/">shared-infrastructure</a><a class="label" href="http://example.com/categories/silo/">silo</a><a class="label" href="http://example.com/categories/skill/">skill</a><a class="label" href="http://example.com/categories/skype/">skype</a><a class="label" href="http://example.com/categories/slack/">slack</a><a class="label" href="http://example.com/categories/slide/">slide</a><a class="label" href="http://example.com/categories/soa/">soa</a><a class="label" href="http://example.com/categories/software/">software</a><a class="label" href="http://example.com/categories/software-design/">software-design</a><a class="label" href="http://example.com/categories/software-development/">software-development</a><a class="label" href="http://example.com/categories/spanish/">spanish</a><a class="label" href="http://example.com/categories/stack-overflow/">stack-overflow</a><a class="label" href="http://example.com/categories/stakeholder/">stakeholder</a><a class="label" href="http://example.com/categories/startup/">startup</a><a class="label" href="http://example.com/categories/static-site-generator/">static-site-generator</a><a class="label" href="http://example.com/categories/strategy/">strategy</a><a class="label" href="http://example.com/categories/style-guide/">style-guide</a><a class="label" href="http://example.com/categories/sublime/">sublime</a><a class="label" href="http://example.com/categories/svgomg/">svgomg</a><a class="label" href="http://example.com/categories/system-thinking/">system-thinking</a><a class="label" href="http://example.com/categories/talk/">talk</a><a class="label" href="http://example.com/categories/tdd/">tdd</a><a class="label" href="http://example.com/categories/team-management/">team-management</a><a class="label" href="http://example.com/categories/technical-debt/">technical-debt</a><a class="label" href="http://example.com/categories/ted/">ted</a><a class="label" href="http://example.com/categories/the-jvm/">the-jvm</a><a class="label" href="http://example.com/categories/thin-client/">thin-client</a><a class="label" href="http://example.com/categories/thin-server/">thin-server</a><a class="label" href="http://example.com/categories/thing-right/">thing-right</a><a class="label" href="http://example.com/categories/tim-nash/">tim-nash</a><a class="label" href="http://example.com/categories/time-management/">time-management</a><a class="label" href="http://example.com/categories/tip/">tip</a><a class="label" href="http://example.com/categories/triple-check/">triple-check</a><a class="label" href="http://example.com/categories/ubiquitous-language/">ubiquitous-language</a><a class="label" href="http://example.com/categories/value/">value</a><a class="label" href="http://example.com/categories/video/">video</a><a class="label" href="http://example.com/categories/web-worker/">web-worker</a><a class="label" href="http://example.com/categories/wordpress/">wordpress</a><a class="label" href="http://example.com/categories/xp/">xp</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Software and all that comes with it I&rsquo;ve read these slides about creating software and asking questions to deliver value, by Alberto Brandolini Tags: alberto-brandolini, software, slide, team-management, agile Driving your DBA crazy in 3 easy steps I&rsquo;ve read these slides about dealing with the knowledge that is present in the database, not expressed in ubiquitous language and cause of the low bus factor, by Alberto Brandolini Analogy between the movie The Shining and a model / entities / aggregates.</p>
+
+          
+              <footer>
+                  <a href="http://example.com/blog/2016/02/01/self-study-in-february-2016/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="http://example.com/blog/2016/01/01/self-study-in-january-2016/">Self-Study in January 2016</a>
+    </h1>
+    <p>Jan 1, 2016
+         - 15 minute read 
+         - <a href="http://example.com/blog/2016/01/01/self-study-in-january-2016/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="http://example.com/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="http://example.com/categories/january/">January</a><a class="label" href="http://example.com/categories/2016/">2016</a><a class="label" href="http://example.com/categories/read/">read</a><a class="label" href="http://example.com/categories/academia/">academia</a><a class="label" href="http://example.com/categories/accessibility/">accessibility</a><a class="label" href="http://example.com/categories/adam-bien/">adam-bien</a><a class="label" href="http://example.com/categories/adam-drake/">adam-drake</a><a class="label" href="http://example.com/categories/addiction/">addiction</a><a class="label" href="http://example.com/categories/agile/">agile</a><a class="label" href="http://example.com/categories/alvaro-castro-castilla/">alvaro-castro-castilla</a><a class="label" href="http://example.com/categories/analogy/">analogy</a><a class="label" href="http://example.com/categories/analysis/">analysis</a><a class="label" href="http://example.com/categories/angel-medinilla/">angel-medinilla</a><a class="label" href="http://example.com/categories/answer/">answer</a><a class="label" href="http://example.com/categories/architecture/">architecture</a><a class="label" href="http://example.com/categories/arho-huttunen/">arho-huttunen</a><a class="label" href="http://example.com/categories/associativity/">associativity</a><a class="label" href="http://example.com/categories/asynchronous-communication/">asynchronous-communication</a><a class="label" href="http://example.com/categories/automattic/">automattic</a><a class="label" href="http://example.com/categories/autonomy/">autonomy</a><a class="label" href="http://example.com/categories/awk/">awk</a><a class="label" href="http://example.com/categories/bdd/">bdd</a><a class="label" href="http://example.com/categories/becodeweek/">becodeweek</a><a class="label" href="http://example.com/categories/big-bang-release/">big-bang-release</a><a class="label" href="http://example.com/categories/bonilista/">bonilista</a><a class="label" href="http://example.com/categories/bug/">bug</a><a class="label" href="http://example.com/categories/bulkhead-pattern/">bulkhead-pattern</a><a class="label" href="http://example.com/categories/burn-out/">burn-out</a><a class="label" href="http://example.com/categories/burnout/">burnout</a><a class="label" href="http://example.com/categories/career/">career</a><a class="label" href="http://example.com/categories/career-management/">career-management</a><a class="label" href="http://example.com/categories/catamorphism/">catamorphism</a><a class="label" href="http://example.com/categories/ceo/">ceo</a><a class="label" href="http://example.com/categories/charlotte-lieberman/">charlotte-lieberman</a><a class="label" href="http://example.com/categories/chess/">chess</a><a class="label" href="http://example.com/categories/christian-heilmann/">christian-heilmann</a><a class="label" href="http://example.com/categories/christopher-alexander/">christopher-alexander</a><a class="label" href="http://example.com/categories/circuit-breaker/">circuit-breaker</a><a class="label" href="http://example.com/categories/cli-commands/">cli-commands</a><a class="label" href="http://example.com/categories/clojure/">clojure</a><a class="label" href="http://example.com/categories/closed-source/">closed-source</a><a class="label" href="http://example.com/categories/code-screencast/">code-screencast</a><a class="label" href="http://example.com/categories/collision/">collision</a><a class="label" href="http://example.com/categories/command/">command</a><a class="label" href="http://example.com/categories/communication/">communication</a><a class="label" href="http://example.com/categories/comparison/">comparison</a><a class="label" href="http://example.com/categories/complex-work/">complex-work</a><a class="label" href="http://example.com/categories/complexity-iceberg/">complexity-iceberg</a><a class="label" href="http://example.com/categories/complicated-work/">complicated-work</a><a class="label" href="http://example.com/categories/computation/">computation</a><a class="label" href="http://example.com/categories/concurrency/">concurrency</a><a class="label" href="http://example.com/categories/constructor/">constructor</a><a class="label" href="http://example.com/categories/consul/">consul</a><a class="label" href="http://example.com/categories/consumer-driven-contract/">consumer-driven-contract</a><a class="label" href="http://example.com/categories/contractor/">contractor</a><a class="label" href="http://example.com/categories/creed/">creed</a><a class="label" href="http://example.com/categories/cristobal-young/">cristobal-young</a><a class="label" href="http://example.com/categories/culture/">culture</a><a class="label" href="http://example.com/categories/database/">database</a><a class="label" href="http://example.com/categories/david-bonilla/">david-bonilla</a><a class="label" href="http://example.com/categories/ddd/">ddd</a><a class="label" href="http://example.com/categories/defect/">defect</a><a class="label" href="http://example.com/categories/definition/">definition</a><a class="label" href="http://example.com/categories/dengguo-feng/">dengguo-feng</a><a class="label" href="http://example.com/categories/design-pattern/">design-pattern</a><a class="label" href="http://example.com/categories/desk-surfing/">desk-surfing</a><a class="label" href="http://example.com/categories/distributed-consensus/">distributed-consensus</a><a class="label" href="http://example.com/categories/ecb-pattern/">ecb-pattern</a><a class="label" href="http://example.com/categories/egghead/">egghead</a><a class="label" href="http://example.com/categories/employee/">employee</a><a class="label" href="http://example.com/categories/employer/">employer</a><a class="label" href="http://example.com/categories/essay/">essay</a><a class="label" href="http://example.com/categories/etcd/">etcd</a><a class="label" href="http://example.com/categories/ethos/">ethos</a><a class="label" href="http://example.com/categories/example/">example</a><a class="label" href="http://example.com/categories/excuse/">excuse</a><a class="label" href="http://example.com/categories/exercise/">exercise</a><a class="label" href="http://example.com/categories/experience/">experience</a><a class="label" href="http://example.com/categories/experience-report/">experience-report</a><a class="label" href="http://example.com/categories/fat-page/">fat-page</a><a class="label" href="http://example.com/categories/flux/">flux</a><a class="label" href="http://example.com/categories/freelancer/">freelancer</a><a class="label" href="http://example.com/categories/function/">function</a><a class="label" href="http://example.com/categories/functional-programming/">functional-programming</a><a class="label" href="http://example.com/categories/good-programmer/">good-programmer</a><a class="label" href="http://example.com/categories/guillermo-winkler/">guillermo-winkler</a><a class="label" href="http://example.com/categories/hadoop/">hadoop</a><a class="label" href="http://example.com/categories/hash-function/">hash-function</a><a class="label" href="http://example.com/categories/haskell/">haskell</a><a class="label" href="http://example.com/categories/hateoas/">hateoas</a><a class="label" href="http://example.com/categories/hexagonal-architecture/">hexagonal-architecture</a><a class="label" href="http://example.com/categories/hof/">hof</a><a class="label" href="http://example.com/categories/hongbo-yu/">hongbo-yu</a><a class="label" href="http://example.com/categories/humane-registry/">humane-registry</a><a class="label" href="http://example.com/categories/improvement/">improvement</a><a class="label" href="http://example.com/categories/impure-function/">impure-function</a><a class="label" href="http://example.com/categories/incremental-iterative-development/">incremental-iterative-development</a><a class="label" href="http://example.com/categories/input/">input</a><a class="label" href="http://example.com/categories/isolationlevel/">isolationlevel</a><a class="label" href="http://example.com/categories/java/">java</a><a class="label" href="http://example.com/categories/javascript/">javascript</a><a class="label" href="http://example.com/categories/jen-carlile/">jen-carlile</a><a class="label" href="http://example.com/categories/jmbeas/">jmbeas</a><a class="label" href="http://example.com/categories/jobbing-programmer/">jobbing-programmer</a><a class="label" href="http://example.com/categories/john-lindquist/">john-lindquist</a><a class="label" href="http://example.com/categories/jose-manuel-beas/">jose-manuel-beas</a><a class="label" href="http://example.com/categories/josh-symonds/">josh-symonds</a><a class="label" href="http://example.com/categories/js-perf/">js-perf</a><a class="label" href="http://example.com/categories/jsperf/">jsperf</a><a class="label" href="http://example.com/categories/junit/">junit</a><a class="label" href="http://example.com/categories/karen-firestone/">karen-firestone</a><a class="label" href="http://example.com/categories/kellan/">kellan</a><a class="label" href="http://example.com/categories/kellan-elliott-mccrea/">kellan-elliott-mccrea</a><a class="label" href="http://example.com/categories/kris-jenkins/">kris-jenkins</a><a class="label" href="http://example.com/categories/language/">language</a><a class="label" href="http://example.com/categories/latex/">latex</a><a class="label" href="http://example.com/categories/learning/">learning</a><a class="label" href="http://example.com/categories/learning-organization/">learning-organization</a><a class="label" href="http://example.com/categories/list/">list</a><a class="label" href="http://example.com/categories/lock-step-release/">lock-step-release</a><a class="label" href="http://example.com/categories/maciej-ceglowski/">maciej-ceglowski</a><a class="label" href="http://example.com/categories/mailgun/">mailgun</a><a class="label" href="http://example.com/categories/management/">management</a><a class="label" href="http://example.com/categories/map/">map</a><a class="label" href="http://example.com/categories/markdown/">markdown</a><a class="label" href="http://example.com/categories/matt-mullenweg/">matt-mullenweg</a><a class="label" href="http://example.com/categories/microservice/">microservice</a><a class="label" href="http://example.com/categories/milinda-pathirage/">milinda-pathirage</a><a class="label" href="http://example.com/categories/mindfulness/">mindfulness</a><a class="label" href="http://example.com/categories/mob-programming/">mob-programming</a><a class="label" href="http://example.com/categories/mobile/">mobile</a><a class="label" href="http://example.com/categories/moc/">moc</a><a class="label" href="http://example.com/categories/monolith/">monolith</a><a class="label" href="http://example.com/categories/monolithic-system/">monolithic-system</a><a class="label" href="http://example.com/categories/mooc/">mooc</a><a class="label" href="http://example.com/categories/mssql/">mssql</a><a class="label" href="http://example.com/categories/mvc-pattern/">mvc-pattern</a><a class="label" href="http://example.com/categories/ndc/">ndc</a><a class="label" href="http://example.com/categories/nested-runner/">nested-runner</a><a class="label" href="http://example.com/categories/nick-baum/">nick-baum</a><a class="label" href="http://example.com/categories/nix/">nix</a><a class="label" href="http://example.com/categories/obesity/">obesity</a><a class="label" href="http://example.com/categories/observer/">observer</a><a class="label" href="http://example.com/categories/online-course/">online-course</a><a class="label" href="http://example.com/categories/open-source/">open-source</a><a class="label" href="http://example.com/categories/oracle/">oracle</a><a class="label" href="http://example.com/categories/output/">output</a><a class="label" href="http://example.com/categories/pair-programming/">pair-programming</a><a class="label" href="http://example.com/categories/paper/">paper</a><a class="label" href="http://example.com/categories/paradox/">paradox</a><a class="label" href="http://example.com/categories/parallelism/">parallelism</a><a class="label" href="http://example.com/categories/patience/">patience</a><a class="label" href="http://example.com/categories/pattern/">pattern</a><a class="label" href="http://example.com/categories/paul-lewis/">paul-lewis</a><a class="label" href="http://example.com/categories/paul-white/">paul-white</a><a class="label" href="http://example.com/categories/perfomance/">perfomance</a><a class="label" href="http://example.com/categories/performance/">performance</a><a class="label" href="http://example.com/categories/perl/">perl</a><a class="label" href="http://example.com/categories/pet-project/">pet-project</a><a class="label" href="http://example.com/categories/product-management/">product-management</a><a class="label" href="http://example.com/categories/professional/">professional</a><a class="label" href="http://example.com/categories/professional-career/">professional-career</a><a class="label" href="http://example.com/categories/programming-language/">programming-language</a><a class="label" href="http://example.com/categories/propietary-software/">propietary-software</a><a class="label" href="http://example.com/categories/proxy/">proxy</a><a class="label" href="http://example.com/categories/pure-function/">pure-function</a><a class="label" href="http://example.com/categories/python/">python</a><a class="label" href="http://example.com/categories/quote/">quote</a><a class="label" href="http://example.com/categories/react/">react</a><a class="label" href="http://example.com/categories/rebecca-wirfs-brock/">rebecca-wirfs-brock</a><a class="label" href="http://example.com/categories/record/">record</a><a class="label" href="http://example.com/categories/record-video/">record-video</a><a class="label" href="http://example.com/categories/reduce/">reduce</a><a class="label" href="http://example.com/categories/reducer/">reducer</a><a class="label" href="http://example.com/categories/remote/">remote</a><a class="label" href="http://example.com/categories/remote-work/">remote-work</a><a class="label" href="http://example.com/categories/representation/">representation</a><a class="label" href="http://example.com/categories/research/">research</a><a class="label" href="http://example.com/categories/rest/">rest</a><a class="label" href="http://example.com/categories/roman-stranghoner/">roman-stranghoner</a><a class="label" href="http://example.com/categories/ron-jeffries/">ron-jeffries</a><a class="label" href="http://example.com/categories/rot13/">rot13</a><a class="label" href="http://example.com/categories/sam-newman/">sam-newman</a><a class="label" href="http://example.com/categories/scala/">scala</a><a class="label" href="http://example.com/categories/screencast/">screencast</a><a class="label" href="http://example.com/categories/script/">script</a><a class="label" href="http://example.com/categories/scrum/">scrum</a><a class="label" href="http://example.com/categories/scs/">scs</a><a class="label" href="http://example.com/categories/sebastian-kade/">sebastian-kade</a><a class="label" href="http://example.com/categories/self-contained-system/">self-contained-system</a><a class="label" href="http://example.com/categories/serializable/">serializable</a><a class="label" href="http://example.com/categories/service-discovery/">service-discovery</a><a class="label" href="http://example.com/categories/seth-godin/">seth-godin</a><a class="label" href="http://example.com/categories/side-cause/">side-cause</a><a class="label" href="http://example.com/categories/side-effect/">side-effect</a><a class="label" href="http://example.com/categories/simplicity/">simplicity</a><a class="label" href="http://example.com/categories/skill/">skill</a><a class="label" href="http://example.com/categories/slack/">slack</a><a class="label" href="http://example.com/categories/slide/">slide</a><a class="label" href="http://example.com/categories/slide-transcription/">slide-transcription</a><a class="label" href="http://example.com/categories/social-media/">social-media</a><a class="label" href="http://example.com/categories/spanish/">spanish</a><a class="label" href="http://example.com/categories/speed/">speed</a><a class="label" href="http://example.com/categories/sql/">sql</a><a class="label" href="http://example.com/categories/stackoverflow/">stackoverflow</a><a class="label" href="http://example.com/categories/startup/">startup</a><a class="label" href="http://example.com/categories/stress/">stress</a><a class="label" href="http://example.com/categories/syntax/">syntax</a><a class="label" href="http://example.com/categories/talk/">talk</a><a class="label" href="http://example.com/categories/tdd/">tdd</a><a class="label" href="http://example.com/categories/team/">team</a><a class="label" href="http://example.com/categories/team-building/">team-building</a><a class="label" href="http://example.com/categories/team-dysfunction/">team-dysfunction</a><a class="label" href="http://example.com/categories/team-management/">team-management</a><a class="label" href="http://example.com/categories/technical-debt/">technical-debt</a><a class="label" href="http://example.com/categories/technology-stress-paradox/">technology-stress-paradox</a><a class="label" href="http://example.com/categories/test/">test</a><a class="label" href="http://example.com/categories/time-management/">time-management</a><a class="label" href="http://example.com/categories/tip/">tip</a><a class="label" href="http://example.com/categories/tool/">tool</a><a class="label" href="http://example.com/categories/track-down/">track-down</a><a class="label" href="http://example.com/categories/transcription/">transcription</a><a class="label" href="http://example.com/categories/trevor-miller/">trevor-miller</a><a class="label" href="http://example.com/categories/umejug/">umejug</a><a class="label" href="http://example.com/categories/unix/">unix</a><a class="label" href="http://example.com/categories/unruly/">unruly</a><a class="label" href="http://example.com/categories/valerie-aurora/">valerie-aurora</a><a class="label" href="http://example.com/categories/vanilla-javascript/">vanilla-javascript</a><a class="label" href="http://example.com/categories/video/">video</a><a class="label" href="http://example.com/categories/work/">work</a><a class="label" href="http://example.com/categories/work-life-balance/">work-life-balance</a><a class="label" href="http://example.com/categories/xiaoyun-wang/">xiaoyun-wang</a><a class="label" href="http://example.com/categories/xp/">xp</a><a class="label" href="http://example.com/categories/xuejia-lai/">xuejia-lai</a><a class="label" href="http://example.com/categories/zookeper/">zookeper</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Test cases in inner classes with JUnit I&rsquo;ve read this answer in stackoverflow about nested test runners in JUnit Tags: junit, stackoverflow, answer, nested-runner Recording a Great Coding Screencast I&rsquo;ve read this article by John Lindquist where he explains how he sets up the recording environment for egghead. Tags: john-lindquist, record, screencast, egghead, code-screencast, record-video, video React Testing Course I&rsquo;ve watched the full course by Trevor D. Miller on how to test react components and the libraries to make it possible.</p>
+
+          
+              <footer>
+                  <a href="http://example.com/blog/2016/01/01/self-study-in-january-2016/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="http://example.com/blog/2015/12/31/books-read-in-2015q4/">Books read in 2015Q4</a>
+    </h1>
+    <p>Dec 31, 2015
+         - 2 minute read 
+         - <a href="http://example.com/blog/2015/12/31/books-read-in-2015q4/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="http://example.com/categories/book/">book</a><a class="label" href="http://example.com/categories/reading/">reading</a><a class="label" href="http://example.com/categories/2015/">2015</a><a class="label" href="http://example.com/categories/q4/">Q4</a><a class="label" href="http://example.com/categories/self-study/">self-study</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Books I&rsquo;ve read this quarter1: Practical Object-Oriented Design in Ruby, An Agile Primer (POODR) by Sandi Metz, with the &lsquo;@deAprendices&rsquo;s reading club&rsquo;. Blog posts under the tag poodr. Books started, not yet finished (WIP): Haskell Programming, By Chris Allen and Julie Moronuki. This book is still in progress and I&rsquo;m reviewing it Pragmatic Thinking and Learning: Refactor Your Wetware by Andy Hunt Structure and Interpretation of Computer Programs by Abelson, Sussman, and Sussman, with the &lsquo;@deAprendices&rsquo;s reading club&rsquo;.</p>
+
+          
+              <footer>
+                  <a href="http://example.com/blog/2015/12/31/books-read-in-2015q4/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    
+    
+
+
+
+
+<div class="pagination">
+
+    
+        
+        
+        
+        <a href="/" aria-label="First" class="label-pagination"><i class="fa fa-angle-double-left fa-lg"></i></a>
+    
+
+    
+    
+        <a href="/page/2/" aria-label="Previous" class="label-pagination"><i class="fa fa-angle-left fa-lg"></i></a>
+    
+
+    
+        <a href="/" class="label-pagination">1</a>
+    
+        <a href="/page/2/" class="label-pagination">2</a>
+    
+        <a href="/page/3/" class="label-pagination">3</a>
+    
+        <a href="/page/4/" class="label-pagination">4</a>
+    
+        <a href="/page/5/" class="label-pagination">5</a>
+    
+        <a href="/page/6/" class="label-pagination">6</a>
+    
+        <a href="/page/7/" class="label-pagination">7</a>
+    
+        <a href="/page/8/" class="label-pagination">8</a>
+    
+        <a href="/page/9/" class="label-pagination">9</a>
+    
+        <a href="/page/10/" class="label-pagination">10</a>
+    
+        <a href="/page/11/" class="label-pagination">11</a>
+    
+        <a href="/page/12/" class="label-pagination">12</a>
+    
+        <a href="/page/13/" class="label-pagination">13</a>
+    
+        <a href="/page/14/" class="label-pagination">14</a>
+    
+        <a href="/page/15/" class="label-pagination">15</a>
+    
+        <a href="/page/16/" class="label-pagination">16</a>
+    
+        <a href="/page/17/" class="label-pagination">17</a>
+    
+        <a href="/page/18/" class="label-pagination">18</a>
+    
+        <a href="/page/19/" class="label-pagination">19</a>
+    
+        <a href="/page/20/" class="label-pagination">20</a>
+    
+        <a href="/page/21/" class="label-pagination">21</a>
+    
+        <a href="/page/22/" class="label-pagination">22</a>
+    
+        <a href="/page/23/" class="label-pagination">23</a>
+    
+        <a href="/page/24/" class="label-pagination">24</a>
+    
+
+    
+    
+        <a href="/page/4/" aria-label="Next" class="label-pagination"><i class="fa fa-angle-right fa-lg"></i></a>
+    
+
+    
+    
+        <a href="/page/24/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+    
+
+</div>
+
+  
+
+  </div>
+
+  
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>About this blog</h1>
+    
+
+    <p>
+      
+        This blog contains two sections: <a href="/breadcrumbs/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
+        <br>
+        <br>
+         You can find me on:
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" href="https://github.com/alvarobiz/" title="https://github.com/alvarobiz/"><i class="fa fa-github fa-3x"></i></a>
+      
+      <a target="_blank" href="https://twitter.com/@alvarobiz/" title="https://twitter.com/@alvarobiz/"><i class="fa fa-twitter fa-3x"></i></a>
+       
+      <a target="_blank" href="https://es.linkedin.com/in/alvarogarcia7" title="https://es.linkedin.com/in/alvarogarcia7"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+    <section class="even">
+      <h1>Recent Posts</h1>
+      <ul id="recent_posts">
+        
+          <li class="post">
+            <a href="/blog/2016/06/30/books-read-in-2016q2/">Books read in 2016Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/06/10/the-role-of-a-software-consultant/">The role of a software consultant</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/06/10/unwritten-principles-for-coaching-a-quote/">Unwritten principles for coaching, a quote</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/06/01/self-study-in-june-2016/">Self-Study in June 2016</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/about/">About Alvaro Garcia</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/05/01/self-study-in-may-2016/">Self-Study in May 2016</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/04/18/quote-characterization-tests/">Quote: Characterization tests</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/04/18/brownish-greenfield-gilded-rose-kata/">Brownish Greenfield Gilded Rose Kata</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/04/17/faster-site-generation-with-a-native-octopress-2/">Faster site generation with a native Octopress 2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/04/01/self-study-in-april-2016/">Self-Study in April 2016</a>
+          </li>
+        
+      </ul>
+    </section>
+  
+
+</aside>
+    
+ </div>
+</div>
+
+<footer role="contentinfo">
+  <p>Copyright &copy; 2016 Alvaro Garcia - <a href="http://example.com/license/">License</a> -
+  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
+</p>
+
+</footer>
+
+
+<script>
+  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+   
