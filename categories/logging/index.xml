@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Logging on The long way through Software Craftsmanship</title>
-    <link>http://example.com/categories/logging/</link>
+    <link>https://alvarogarcia7.github.io/categories/logging/</link>
     <description>Recent content in Logging on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 01 Sep 2015 15:25:19 +0000</lastBuildDate>
-    <atom:link href="http://example.com/categories/logging/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alvarogarcia7.github.io/categories/logging/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Self-Study in September 2015</title>
-      <link>http://example.com/blog/2015/09/01/self-study-in-september-2015/</link>
+      <link>https://alvarogarcia7.github.io/blog/2015/09/01/self-study-in-september-2015/</link>
       <pubDate>Tue, 01 Sep 2015 15:25:19 +0000</pubDate>
       
-      <guid>http://example.com/blog/2015/09/01/self-study-in-september-2015/</guid>
+      <guid>https://alvarogarcia7.github.io/blog/2015/09/01/self-study-in-september-2015/</guid>
       <description>
 
 &lt;h2 id=&#34;the-30-second-habit-with-a-lifelong-impact&#34;&gt;The 30 second habit with a lifelong impact&lt;/h2&gt;
@@ -310,10 +310,10 @@
     
     <item>
       <title>Logging is a feature</title>
-      <link>http://example.com/blog/2015/04/19/logging-is-a-feature/</link>
+      <link>https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/</link>
       <pubDate>Sun, 19 Apr 2015 23:43:10 +0000</pubDate>
       
-      <guid>http://example.com/blog/2015/04/19/logging-is-a-feature/</guid>
+      <guid>https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/</guid>
       <description>&lt;p&gt;At a client, we&amp;rsquo;re facing this challenge: we cannot access production logs, as we don&amp;rsquo;t have access to production environments. The solution we&amp;rsquo;ve chose is to implement the logging component as a layer on top of &lt;a href=&#34;http://www.splunk.com/&#34; target=&#34;_blank&#34;&gt;Splunk&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;This formatter layer &amp;ndash;per component&amp;ndash; accesses a generic layer &amp;ndash;for the whole company&amp;ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&amp;rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.&lt;/p&gt;
