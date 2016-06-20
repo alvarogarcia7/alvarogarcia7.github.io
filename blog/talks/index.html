@@ -97,11 +97,19 @@
 
 </ul>
 
+<script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = form_.getElementsByTagName("input")[0];
+        var siteURL = form_.getElementsByTagName("input")[1];
+        input.value = siteURL.value + " " + input.value;
+    }
+</script>
 
-<form action="https://www.google.com/search" method="get" target="_blank">
+
+<form action="https://www.google.com/search" method="get" target="_blank" onsubmit="javascript: addCustomSite(this);">
   <fieldset role="search">
   	<input class="search" type="text" name="q" results="0" placeholder="Search"/>
-    <input type="hidden" name="q" value="site:https://alvarogarcia7.github.io/" />
+    <input type="hidden" value="site:https://alvarogarcia7.github.io/" />
   </fieldset>
 </form>
 
