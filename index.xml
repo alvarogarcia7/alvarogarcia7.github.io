@@ -115,6 +115,30 @@ Learning paths that have entered the queue:
     </item>
     
     <item>
+      <title>Stability terms from &#34;Release it!&#34;, a quote</title>
+      <link>https://alvarogarcia7.github.io/blog/2016/06/26/stability-terms-from-release-it-a-quote/</link>
+      <pubDate>Sun, 26 Jun 2016 22:19:50 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2016/06/26/stability-terms-from-release-it-a-quote/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;https://pragprog.com/book/mnee/release-it&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;Release It!&lt;/strong&gt;&lt;/a&gt;, terms related to stability:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;transaction: is an abstract unit of work processed by the system&lt;/li&gt;
+&lt;li&gt;mixed workload is a combination of different transac- tion types processed by a system.&lt;/li&gt;
+&lt;li&gt;system, I mean the complete, interdependent set of hardware, applications, and services required to process transactions for users&lt;/li&gt;
+&lt;li&gt;stability: resilient system keeps processing transactions, even when there are transient impulses, persistent stresses, or component failures disrupt- ing normal processing&lt;/li&gt;
+&lt;li&gt;stress to the system is a force applied to the system over an extended period.&lt;/li&gt;
+&lt;li&gt;impulse is a rapid shock to the system.&lt;/li&gt;
+&lt;li&gt;a material changes shape when stress is applied. This change in shape is called the strain.&lt;/li&gt;
+&lt;li&gt;The original trigger and the way the crack spreads to the rest of the system, together with the result of the damage, failure mode.&lt;/li&gt;
+&lt;li&gt;crumple zones—areas designed to protect passengers by failing first. called crackstoppers&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All of these are quotes from the book.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>The role of a software consultant</title>
       <link>https://alvarogarcia7.github.io/blog/2016/06/10/role-software-consultant/</link>
       <pubDate>Fri, 10 Jun 2016 10:50:50 +0000</pubDate>
@@ -356,6 +380,14 @@ prosper and the Principal to suffer.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://blog.cleancoder.com/uncle-bob/2015/11/18/TheProgrammersOath.html&#34; target=&#34;_blank&#34;&gt;this oath&lt;/a&gt; by Robert C Martin.&lt;/p&gt;
 
 &lt;p&gt;Tags: oath, programmer, craft, manifesto, robert-martin, uncle-bob&lt;/p&gt;
+
+&lt;h2 id=&#34;intel-x86s-hide-another-cpu-that-can-take-over-your-machine-you-can-t-audit-it&#34;&gt;Intel x86s hide another CPU that can take over your machine (you can&amp;rsquo;t audit it)&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://boingboing.net/2016/06/15/intel-x86-processors-ship-with.html&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by Damien Zammit on the Intel Management Engine (ME), a hardware system that is embedded in the newer Intel chipsets. Its function is to provide low-level management services. ME (like Active Management Technology [AMT] in the past), provides great services, but has access to any memory location and to the TCP/IP stack, without any control from the operating system.&lt;/p&gt;
+
+&lt;p&gt;The firmware is currently checked before booting, but it is highly-valuable as a security risk, as it has full access to the physical hardware.&lt;/p&gt;
+
+&lt;p&gt;Tags: security, damien-zammit, intel-management-engine, active-management-technology, me, amt, tcp-ip, backdoor&lt;/p&gt;
 </description>
     </item>
     
@@ -1430,92 +1462,6 @@ modifiers can manipulate the block so that we can theme or style that particular
 &lt;p&gt;As an optional task, when the problem is finished (you can attack in your preferred order), there must be an executable jar with some parameters to process the current folder with the &amp;lsquo;working modes&amp;rsquo; specified above.&lt;/p&gt;
 
 &lt;p&gt;(This formulation is also present at the &lt;a href=&#34;https://github.com/alvarogarcia7/kata-formulation-find-comments/blob/master/README.md&#34; target=&#34;_blank&#34;&gt;repository&lt;/a&gt; )&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Two persons involved in a git commit, in github</title>
-      <link>https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/</link>
-      <pubDate>Sun, 14 Feb 2016 17:12:28 +0000</pubDate>
-      
-      <guid>https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/</guid>
-      <description>
-
-&lt;h2 id=&#34;on-git&#34;&gt;On git&lt;/h2&gt;
-
-&lt;p&gt;You can have multiple persons involved in a single git commit: an author and a committer.&lt;/p&gt;
-
-&lt;p&gt;The difference is explained by &lt;a href=&#34;https://groups.google.com/forum/#!topic/repo-discuss/6aH9rH8nUdo&#34; target=&#34;_blank&#34;&gt;Manuel Doninger&lt;/a&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The author is the one who did the code change.
-The committer is the person who committed that change to a repository.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;an example, by the same author:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Example: I&amp;rsquo;m not a committer in the EGit project, so i have no rights
-to push directly to the EGit repository at Eclipse. But i contribute
-to EGit, so my changes have the author set to my name and email. If my
-change gets reviewed by the EGit team, and submitted, the committer
-field contains the name and email of the person who submitted the
-change&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;on-github&#34;&gt;On github&lt;/h2&gt;
-
-&lt;p&gt;This is represented in github with this format:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://alvarogarcia7.github.io/{{site.category_dir}}/../uploads/commit-with-two-persons.png&#34; alt=&#34;two persons involved&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;One of them is &amp;ldquo;sharplet&amp;rdquo; and the other one is &amp;ldquo;gfontenot&amp;rdquo;. Both are github users that match a github-registered mail.&lt;/p&gt;
-
-&lt;p&gt;On a shallow inspection, the commit does not reveal anything special:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
-commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
-Author: XXXX &amp;lt;xxxx@example.com&amp;gt;
-Date:   Wed Dec &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; 14:44:52 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; +1100
-
-    Clarify specs by defining • as the composition operator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;but looking a bit closer&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; less
-17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; 14:44:52 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; +1100, Wed, &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; 14:44:52 +1100, &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; 09:30:28 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; -0800, Tue, &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; 09:30:28 -0800, &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;or, just the emails:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;%ae %ce&amp;#39;&lt;/span&gt;
-xxxx@example.com yyyy@example.com
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;For a single commit:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ &lt;span class=&#34;nv&#34;&gt;GIT_COMMITTER_NAME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;John Doe&amp;#39;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;GIT_COMMITTER_EMAIL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;john@example.com&amp;#39;&lt;/span&gt; git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;quot;...&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;For a session:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;export GIT_COMMITTER_NAME=&#39;John Doe&#39;
-export GIT_COMMITTER_EMAIL=&#39;john@example.com&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Taken from &lt;a href=&#34;http://stackoverflow.com/a/23108169/1181094&#34; target=&#34;_blank&#34;&gt;this StackOverflow answer&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This can be useful for a pairing session or for some kinds of git history rewrite.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;also explained in &lt;a href=&#34;http://stackoverflow.com/questions/6755824/what-is-the-difference-between-author-and-committer-in-git&#34; target=&#34;_blank&#34;&gt;this StackOverflow post&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;this list has been generated from the available arguments at the &lt;a href=&#34;https://git-scm.com/docs/git-log&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;pretty formats&amp;rdquo; at the git-log page&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     
