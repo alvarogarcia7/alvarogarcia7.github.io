@@ -129,6 +129,107 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/">Open discussion: Behaviour-Driven Development</a>
+    </h1>
+    <p >Feb 15, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/bdd/">bdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/open-discussion/">open-discussion</a><a class="label" href="https://alvarogarcia7.github.io/categories/behaviour-driven-development/">behaviour-driven-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/jbehave/">jbehave</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on requirements, via automatically tested specifications. For more information, see the <a href="http://en.wikipedia.org/wiki/Behavior-driven_development" target="_blank">wikipedia&rsquo;s article on the subject</a></p>
+
+<p>I forgot to mention that this is the perfect start to TDD, as this is usually called the double-loop TDD. See a post on it on <a href="http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/" target="_blank">coding is like cooking</a></p>
+
+<p>In this double-loop TDD, the first thing is to create a BDD scenario, run it (red-1), create a unit test that reflects this red (red-2), pass it, refactor; go to red-1 as many times as you need, doing TDD cycles. When you think the feature is done, execute the BDD scenarios and go to green (outer layer) and refactor.</p>
+
+<h2 id="our-common-setting">(Our) Common setting</h2>
+
+<p>Going back to BDD, a common scenario would be the following:</p>
+
+<p>Layers of software:</p>
+
+<ul>
+<li>Domain-Specific Language (DSL). See <a href="http://en.wikipedia.org/wiki/Domain-specific_language" target="_blank">wikipedia&rsquo;s article</a></li>
+<li>Test adapter: an interpreter for this DSL</li>
+<li>Test software: test fixtures, methods, structures to arrange, act, and assert on the sut</li>
+<li>Production software (system under test - SUT): thing being tested</li>
+</ul>
+
+<h2 id="a-bdd-test-vs-a-tdd-test">A BDD test vs A TDD test</h2>
+
+<p>Let&rsquo;s imagine a BDD test for a <a href="http://en.wikipedia.org/wiki/Linked_list" target="_blank">linked list</a>:</p>
+
+<pre><code>Given I have an empty list
+When I add an element
+Then I have an element on the list
+</code></pre>
+
+<p>now, the same test in TDD [using java, junit 4, hamcrest]</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">add_an_element_to_an_empty_list</span><span class="o">(){</span>
+	<span class="n">MyLinkedList</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyLinkedList</span><span class="o">();</span>
+
+	<span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;something&quot;</span><span class="o">);</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">linkedList</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>In some aspects, a BDD and a TDD test are similar:</p>
+
+<ul>
+<li>the given is the arrange, i.e., the prerequisite</li>
+<li>the when is the act, i.e., the command</li>
+<li>the then is the assertion, i.e., the postcondition</li>
+</ul>
+
+<p>(for more information on this, see <a href="http://en.wikipedia.org/wiki/Hoare_logic" target="_blank">Hoare&rsquo;s triple</a>)</p>
+
+<p>But in others, they are not. In BDD you do not specify the APIs, methods, etc. You only care about behavior.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Benefits:</p>
+
+<ul>
+<li>everyone might involved in the specification by example workshops (source: <a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154" target="_blank">ATDD by example</a>)</li>
+<li>live specifications. managers can now understand the real state</li>
+<li><a href="http://en.wikipedia.org/wiki/Regression_testing" target="_blank">regression tests</a> are much cheaper (from automation)</li>
+</ul>
+
+<p>Gotchas:</p>
+
+<ul>
+<li>Test only the happy paths</li>
+<li>This has a cost, do not overdo it</li>
+<li>Doesn&rsquo;t remove manual tests</li>
+<li>How do you manage multiple scenarios</li>
+<li>How fast should it be?
+<br /></li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/02/09/implementing-bdd-at-a-client/">Implementing BDD at a client</a>
     </h1>
     <p >Feb 9, 2015
@@ -448,37 +549,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/01/24/podcast-basta-ya-de-picar-spanish/">Podcast: Basta ya de picar (Spanish)</a>
-    </h1>
-    <p >Jan 24, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/01/24/podcast-basta-ya-de-picar-spanish/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/podcast/">podcast</a><a class="label" href="https://alvarogarcia7.github.io/categories/basta-ya-de-picar/">basta-ya-de-picar</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Some weeks ago I listened to some podcasts from <a href="http://www.bastayadepicar.com" target="_blank">BastaYaDePicar</a> (episodes 1 to 8) and now I&rsquo;m listening more (9 to 10). I really recommend these to you, and I imagine that the newer episodes (also new format) will be interesting too.</p>
-
-<p>They&rsquo;re in Spanish and narrated by <a href="https://twitter.com/sbastn" target="_blank">Sebastian Hermida</a></p>
-
-        
-
-    </article>
-    
     
     
 
@@ -616,6 +686,10 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2016/07/04/self-study-in-july-2016/">Self-Study in July 2016</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2016/06/30/books-read-in-2016q2/">Books read in 2016Q2</a>
           </li>
         
@@ -649,10 +723,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
         
           <li class="post">
             <a href="/blog/2016/04/18/brownish-greenfield-gilded-rose-kata-formulation/">Brownish Greenfield Gilded Rose Kata</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/04/17/faster-site-generation-native-octopress/">Faster site generation with a native Octopress 2</a>
           </li>
         
       </ul>
