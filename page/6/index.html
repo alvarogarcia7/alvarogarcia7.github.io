@@ -128,6 +128,41 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in maven test execution</a>
+    </h1>
+    <p >Oct 5, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/maven/">maven</a><a class="label" href="https://alvarogarcia7.github.io/categories/test/">test</a><a class="label" href="https://alvarogarcia7.github.io/categories/skip-tests/">skip-tests</a><a class="label" href="https://alvarogarcia7.github.io/categories/maven-test-skip/">maven-test-skip</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>There are times when you only want to have the production code: downstream job after a successful build compiling in local after checkout from DVCS spiking (possibly the tests are broken) speeding up the process For that, maven allows to skip the tests, selectively: -DskipTests compiles the tests, but skips running them -Dmaven.test.skip skips compiling the tests and does not run them. This can also be written as -Dmaven.test.skip=true In case some of your tests depend on tests from another artifact (e.g.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the failure in bash</a>
     </h1>
     <p >Oct 2, 2015
@@ -296,37 +331,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/">A basic working environment</a>
-    </h1>
-    <p >Sep 8, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/#disqus_thread">Comments</a>
-
-        
-    </p>
-</header>
-
-
-        
-          <p>Sometimes, when working out of somebody&rsquo;s else computer, I won&rsquo;t have my preferred IDE installed. In this case, what I usually do &ndash;as long as the programming session is more than 5 TDD cycles&ndash;, is to configure my own environment. It includes: text editor: $EDITOR is enough test runner. A simple bash script executing the tests will suffice git terminal: to commit, see differences, revert, etc [optional] REPL if the language has it If the system already has it, I will use screen to cycle around the sessions.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -466,6 +470,10 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2016/08/01/self-study-in-august-2016/">Self-Study in August 2016</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2016/07/04/self-study-in-july-2016/">Self-Study in July 2016</a>
           </li>
         
@@ -499,10 +507,6 @@
         
           <li class="post">
             <a href="/blog/2016/04/18/quote-characterization-tests/">Quote: Characterization tests</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/04/18/brownish-greenfield-gilded-rose-kata-formulation/">Brownish Greenfield Gilded Rose Kata</a>
           </li>
         
       </ul>
