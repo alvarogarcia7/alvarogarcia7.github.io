@@ -128,6 +128,41 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/">Faster site generation with a native Octopress 2</a>
+    </h1>
+    <p >Apr 17, 2016
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/native-octopress/">native-octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/rakefile/">rakefile</a><a class="label" href="https://alvarogarcia7.github.io/categories/reinventing-the-wheel/">reinventing-the-wheel</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Note: this article is an answer to a previous one, about the same topic: a tool for a faster site generation while developing / writing articles, using octopress 2. Introduction Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles: Isolate a post: # usage rake isolate[my-post] desc &quot;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&quot; task :isolate, :filename do |t, args| stash_dir = &quot;#{source_dir}/#{stash_dir}&quot; FileUtils.mkdir(stash_dir) unless File.exist?(stash_dir) Dir.glob(&quot;#{source_dir}/#{posts_dir}/*.*&quot;) do |post| system &quot;git update-index --assume-unchanged #{post}&quot; unless post.include?(args.filename) FileUtils.mv post, stash_dir unless post.include?(args.filename) end end Integrate with the rest of the posts: desc &quot;Move all stashed posts back into the posts directory, ready for site generation.&quot; task :integrate do posts_dir = &quot;#{source_dir}/#{posts_dir}/&quot; Dir.glob(&quot;#{source_dir}/#{stash_dir}/*.*&quot;) do |post| FileUtils.mv post, posts_dir full_path = &quot;#{posts_dir}/#{post.split(&quot;/&quot;).reverse.first}&quot; system &quot;git update-index --no-assume-unchanged #{full_path}&quot; end end Usage (at the folder where the Rakefile is located) isolate the selected file.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/04/01/self-study/">Self-Study in April 2016</a>
     </h1>
     <p >Apr 1, 2016
@@ -292,41 +327,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two persons involved in a git commit, in github</a>
-    </h1>
-    <p >Feb 14, 2016
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/how-to/">how-to</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/committer/">committer</a><a class="label" href="https://alvarogarcia7.github.io/categories/author/">author</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>On git You can have multiple persons involved in a single git commit: an author and a committer. The difference is explained by Manuel Doninger 1: The author is the one who did the code change. The committer is the person who committed that change to a repository. an example, by the same author: Example: I&rsquo;m not a committer in the EGit project, so i have no rights to push directly to the EGit repository at Eclipse.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -466,6 +466,10 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2016/08/01/self-study-in-august-2016/">Self-Study in August 2016</a>
           </li>
         
@@ -499,10 +503,6 @@
         
           <li class="post">
             <a href="/blog/2016/05/01/self-study/">Self-Study in May 2016</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/04/18/quote-characterization-tests/">Quote: Characterization tests</a>
           </li>
         
       </ul>
