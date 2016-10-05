@@ -129,6 +129,198 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/">Kata formulation: Find the comments</a>
+    </h1>
+    <p >Mar 1, 2016
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/formulation/">formulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/php/">php</a><a class="label" href="https://alvarogarcia7.github.io/categories/comment/">comment</a><a class="label" href="https://alvarogarcia7.github.io/categories/exercise/">exercise</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>Little Johnny is inspecting a PHP source code that contains comments. These comments contains words that he doesn&rsquo;t understand, as it written in another language.</p>
+
+<h2 id="rules-and-constraints">Rules and constraints</h2>
+
+<p>The source code in the PHP files does not need to be correct.</p>
+
+<p>A comment (a subset of PHP comments) is defined as:</p>
+
+<ul>
+<li>A line containing C-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code>// hello C-style</code> is a valid comment</li>
+<li><code>echo &quot;//&quot;;</code> is not a comment</li>
+<li><code>echo '//';</code> is not a comment</li>
+</ul></li>
+<li>A line containing Perl-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code># hello Perl-style</code> is a valid comment</li>
+<li><code>echo &quot;#&quot;;</code> is not a comment</li>
+<li><code>echo '#';</code> is not a comment</li>
+</ul></li>
+<li>There are no multi-line comments
+
+<ul>
+<li><code>/* ... */</code> is not a comment</li>
+</ul></li>
+</ul>
+
+<p>You can do this kata in any language you want. In any case it is not allowed to use a PHP parser. This task must be done manually.</p>
+
+<h2 id="how-to-start">How to start</h2>
+
+<ul>
+<li>Clone/fork (any stars are welcome) <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments" target="_blank">this repo</a></li>
+<li>Run the tests. <a href="https://github.com/alvarogarcia7/cli-app-base-clojure/blob/master/README.md#tests" target="_blank">See this</a> for help</li>
+<li>They should be red.</li>
+<li>Go to production code and fix it</li>
+<li>Have fun (happy kata and happy koding!)</li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Please do not read ahead, just read the current assignment, do it, then read the next one:</p>
+
+<ol>
+<li>Can you help Little Johnny fetch all those comments?</li>
+<li>These messages have not been audited yet and we want to publish the code, so it is better to remove the comments. Can you do it?</li>
+</ol>
+
+<h2 id="optional-requirement">Optional requirement</h2>
+
+<p>As an optional task, when the problem is finished (you can attack in your preferred order), there must be an executable jar with some parameters to process the current folder with the &lsquo;working modes&rsquo; specified above.</p>
+
+<p>(This formulation is also present at the <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments/blob/master/README.md" target="_blank">repository</a> )</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two persons involved in a git commit, in github</a>
+    </h1>
+    <p >Feb 14, 2016
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/how-to/">how-to</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/committer/">committer</a><a class="label" href="https://alvarogarcia7.github.io/categories/author/">author</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h2 id="on-git">On git</h2>
+
+<p>You can have multiple persons involved in a single git commit: an author and a committer.</p>
+
+<p>The difference is explained by <a href="https://groups.google.com/forum/#!topic/repo-discuss/6aH9rH8nUdo" target="_blank">Manuel Doninger</a> <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>:</p>
+
+<blockquote>
+<p>The author is the one who did the code change.
+The committer is the person who committed that change to a repository.</p>
+</blockquote>
+
+<p>an example, by the same author:</p>
+
+<blockquote>
+<p>Example: I&rsquo;m not a committer in the EGit project, so i have no rights
+to push directly to the EGit repository at Eclipse. But i contribute
+to EGit, so my changes have the author set to my name and email. If my
+change gets reviewed by the EGit team, and submitted, the committer
+field contains the name and email of the person who submitted the
+change</p>
+</blockquote>
+
+<h2 id="on-github">On github</h2>
+
+<p>This is represented in github with this format:</p>
+
+<p><img src="/uploads/commit-with-two-persons.png
+" alt="two persons involved" /></p>
+
+<p>One of them is &ldquo;sharplet&rdquo; and the other one is &ldquo;gfontenot&rdquo;. Both are github users that match a github-registered mail.</p>
+
+<p>On a shallow inspection, the commit does not reveal anything special:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
+commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
+Author: XXXX &lt;xxxx@example.com&gt;
+Date:   Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100
+
+    Clarify specs by defining • as the composition operator
+</code></pre></div>
+
+<p>but looking a bit closer<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>,</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s2">&quot;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&quot;</span> <span class="p">|</span> less
+17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> 14:44:52 +1100, <span class="m">3</span> months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> 09:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> 09:30:28 -0800, <span class="m">9</span> weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
+</code></pre></div>
+
+<p>or, just the emails:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s1">&#39;%ae %ce&#39;</span>
+xxxx@example.com yyyy@example.com
+</code></pre></div>
+
+<h2 id="usage">Usage</h2>
+
+<p>For a single commit:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">$ <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span> git commit -m <span class="s2">&quot;...&quot;</span>
+</code></pre></div>
+
+<p>For a session:</p>
+
+<pre><code>export GIT_COMMITTER_NAME='John Doe'
+export GIT_COMMITTER_EMAIL='john@example.com'
+</code></pre>
+
+<p>Taken from <a href="http://stackoverflow.com/a/23108169/1181094" target="_blank">this StackOverflow answer</a></p>
+
+<p>This can be useful for a pairing session or for some kinds of git history rewrite.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">also explained in <a href="http://stackoverflow.com/questions/6755824/what-is-the-difference-between-author-and-committer-in-git" target="_blank">this StackOverflow post</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">this list has been generated from the available arguments at the <a href="https://git-scm.com/docs/git-log" target="_blank">&ldquo;pretty formats&rdquo; at the git-log page</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/02/01/self-study-in-february-2016/">Self-Study in February 2016</a>
     </h1>
     <p >Feb 1, 2016
@@ -1143,219 +1335,6 @@ teach someone to fish vs fish for them
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the macro and</a>
-    </h1>
-    <p >Dec 8, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro/">macro</a><a class="label" href="https://alvarogarcia7.github.io/categories/and/">and</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/function/">function</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro-vs-function/">macro-vs-function</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>While on the REPL, I tried this:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="nb">and</span> <span class="nv">true</span> <span class="nv">[true]</span><span class="p">)</span>
-<span class="nv">CompilerException</span> <span class="nv">java.lang.RuntimeException:</span> <span class="nv">Can</span><span class="ss">&#39;t</span> <span class="nv">take</span> <span class="nv">value</span> <span class="nv">of</span> <span class="nv">a</span> <span class="nv">macro:</span> <span class="nf">#&#39;</span><span class="nv">clojure.core/and,</span> <span class="nv">compiling:</span><span class="p">(</span><span class="nv">form-init7116694665186998245.clj:1:1</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Reading the <a href="https://clojuredocs.org/clojure.core/and" target="_blank">clojuredocs for <code>and</code></a>, you can find this:</p>
-
-<blockquote>
-<p>Note add is a macro, so you cannot apply it. For example, there is a vector of some Boolean values [true true false true], which you want to test to see if they are all true. The code below will not work:</p>
-
-<p>(apply add [true true false true]) ;won&rsquo;t work</p>
-
-<p>Instead, use this:</p>
-
-<p>(every? identity [true  true false true])</p>
-</blockquote>
-
-<p>I tried it with success. Digging a bit deeper:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">defn</span> <span class="nv">all-truthy?</span> <span class="nv">[&amp;</span> <span class="nv">elements]</span> <span class="p">(</span><span class="nv">every?</span> <span class="nb">identity</span> <span class="nv">elements</span><span class="p">))</span>
-<span class="nf">#&#39;</span><span class="nv">simple.core/all-truthy?</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="nv">false</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="mi">0</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nv">true</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="nv">[nil</span> <span class="nv">false]</span><span class="p">)</span>
-<span class="nv">true</span>
-</code></pre></div>
-
-<p>Was also tempted to try this:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">[true</span> <span class="nv">true</span> <span class="nv">false</span> <span class="nv">true]</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">[true</span> <span class="nv">true</span> <span class="nv">true</span> <span class="nv">true]</span><span class="p">)</span>
-<span class="nv">true</span>
-</code></pre></div>
-
-<p>Encapsulate it into a function:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">defn</span> <span class="nv">all-true</span> <span class="nv">[&amp;</span> <span class="nv">elements]</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">elements</span><span class="p">))</span>
-<span class="nf">#&#39;</span><span class="nv">simple.core/all-true</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span><span class="p">)</span>
-<span class="nv">true</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span> <span class="nv">false</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span> <span class="nv">false</span> <span class="nv">true</span><span class="p">)</span>
-<span class="nv">false</span>
-</code></pre></div>
-
-<p>What happens with the non-boolean values?</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span>
-<span class="mi">3</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">76</span><span class="p">)</span>
-<span class="mi">76</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
-<span class="mi">64</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
-<span class="mi">64</span>
-</code></pre></div>
-
-<p>This is because:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">and</span> <span class="mi">64</span> <span class="mi">3</span><span class="p">)</span>
-<span class="mi">3</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">and</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
-<span class="mi">64</span>
-</code></pre></div>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p><code>all-truthy?</code> exploits the falsy values in clojure (<code>nil</code>, <code>false</code>), while <code>all-true</code> uses the true boolean values, although the function does not work properly with non-boolean values (i.e. its domain is the booleans)</p>
-
-<h2 id="appendix-a-source-code">Appendix A: Source code</h2>
-
-<p><code>and</code>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nb">and</span><span class="p">)</span>
-<span class="p">(</span><span class="nb">defmacro</span> <span class="nb">and</span>
-  <span class="s">&quot;Evaluates exprs one at a time, from left to right. If a form</span>
-<span class="s">  returns logical false (nil or false), and returns that value and</span>
-<span class="s">  doesn&#39;t evaluate any of the other expressions, otherwise it returns</span>
-<span class="s">  the value of the last expr. (and) returns true.&quot;</span>
-  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span><span class="nv">}</span>
-  <span class="p">(</span><span class="nv">[]</span> <span class="nv">true</span><span class="p">)</span>
-  <span class="p">(</span><span class="nv">[x]</span> <span class="nv">x</span><span class="p">)</span>
-  <span class="p">(</span><span class="nv">[x</span> <span class="nv">&amp;</span> <span class="nv">next]</span>
-   <span class="o">`</span><span class="p">(</span><span class="k">let</span> <span class="nv">[and#</span> <span class="nv">~x]</span>
-      <span class="p">(</span><span class="k">if</span> <span class="nv">and#</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">~@next</span><span class="p">)</span> <span class="nv">and#</span><span class="p">))))</span>
-</code></pre></div>
-
-<p><code>identity</code>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nb">identity</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">defn</span> <span class="nb">identity</span>
-  <span class="s">&quot;Returns its argument.&quot;</span>
-  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span>
-   <span class="ss">:static</span> <span class="nv">true}</span>
-  <span class="nv">[x]</span> <span class="nv">x</span><span class="p">)</span>
-</code></pre></div>
-
-<p><code>every</code>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nv">every?</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">defn</span> <span class="nv">every?</span>
-  <span class="s">&quot;Returns true if (pred x) is logical true for every x in coll, else</span>
-<span class="s">  false.&quot;</span>
-  <span class="nv">{:tag</span> <span class="nv">Boolean</span>
-   <span class="ss">:added</span> <span class="s">&quot;1.0&quot;</span>
-   <span class="ss">:static</span> <span class="nv">true}</span>
-  <span class="nv">[pred</span> <span class="nv">coll]</span>
-  <span class="p">(</span><span class="nb">cond</span>
-   <span class="p">(</span><span class="nv">nil?</span> <span class="p">(</span><span class="nv">seq</span> <span class="nv">coll</span><span class="p">))</span> <span class="nv">true</span>
-   <span class="p">(</span><span class="nv">pred</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">coll</span><span class="p">))</span> <span class="p">(</span><span class="nv">recur</span> <span class="nv">pred</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">coll</span><span class="p">))</span>
-   <span class="ss">:else</span> <span class="nv">false</span><span class="p">))</span>
-</code></pre></div>
-
-<p><code>-&gt;</code>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nv">-&gt;</span><span class="p">)</span>
-<span class="p">(</span><span class="nb">defmacro</span> <span class="nv">-&gt;</span>
-  <span class="s">&quot;Threads the expr through the forms. Inserts x as the</span>
-<span class="s">  second item in the first form, making a list of it if it is not a</span>
-<span class="s">  list already. If there are more forms, inserts the first form as the</span>
-<span class="s">  second item in second form, etc.&quot;</span>
-  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span><span class="nv">}</span>
-  <span class="nv">[x</span> <span class="nv">&amp;</span> <span class="nv">forms]</span>
-  <span class="p">(</span><span class="nb">loop</span> <span class="nv">[x</span> <span class="nv">x,</span> <span class="nv">forms</span> <span class="nv">forms]</span>
-    <span class="p">(</span><span class="k">if</span> <span class="nv">forms</span>
-      <span class="p">(</span><span class="k">let</span> <span class="nv">[form</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">forms</span><span class="p">)</span>
-            <span class="nv">threaded</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">seq?</span> <span class="nv">form</span><span class="p">)</span>
-                       <span class="p">(</span><span class="nv">with-meta</span> <span class="o">`</span><span class="p">(</span><span class="nv">~</span><span class="p">(</span><span class="nb">first</span> <span class="nv">form</span><span class="p">)</span> <span class="nv">~x</span> <span class="nv">~@</span><span class="p">(</span><span class="nv">next</span> <span class="nv">form</span><span class="p">))</span> <span class="p">(</span><span class="nv">meta</span> <span class="nv">form</span><span class="p">))</span>
-                       <span class="p">(</span><span class="nb">list</span> <span class="nv">form</span> <span class="nv">x</span><span class="p">))</span><span class="nv">]</span>
-        <span class="p">(</span><span class="nv">recur</span> <span class="nv">threaded</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">forms</span><span class="p">)))</span>
-      <span class="nv">x</span><span class="p">)))</span>
-</code></pre></div>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: automate the blog publishing</a>
-    </h1>
-    <p >Dec 2, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/blog/">blog</a><a class="label" href="https://alvarogarcia7.github.io/categories/travis/">travis</a><a class="label" href="https://alvarogarcia7.github.io/categories/ci/">ci</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>I&rsquo;ve automated the generation of the blog using <a href="https://travis-ci.org/" target="_blank">Travis CI</a>. Using this new way, each commit generates a new version of the pages.</p>
-
-<p>These resources have been very useful:</p>
-
-<ul>
-<li><a href="http://darvin.github.io/2013/01/13/Prose_Octopress_TravisIO" target="_blank">Prose.io + Octopress + Travis-CI + GitHub Pages = ♥</a>. First post (in this set) that explains how this automation is possible</li>
-<li><a href="https://harimenon.com/blog/2013/01/27/auto-deploying-to-my-octopress-blog/" target="_blank">Auto-deploying to My Octopress Blog With Travis-CI</a>. Explains how to generate your key, encript it with travis</li>
-<li><a href="http://blog.yasuoza.com/2014/01/13/octopress-plus-github-pages-plus-travis/" target="_blank">Octopress + GitHub Pages + Travis</a>: The most useful page, explains step by step what to do for mac and linux.</li>
-<li><a href="https://disqus.com/home/discussion/codez/octopressprosegithubtravis_ci_coders_blog_human_not_octopus/" target="_blank">Octopress+Prose+Github+Travis CI = coders&rsquo; blog - Human, not octopus</a>.Altough the page is not available anymore, this discussion explains why it is safe to store your private key in the file <code>.travis.yml</code>.</li>
-</ul>
-
-<p><a href="https://github.com/floydpink?tab=repositories" target="_blank">An example</a> of the resulting repository, by <a href="https://github.com/floydpink" target="_blank">Hari Menon</a>.</p>
-
-<h2 id="my-own-modifications">My own modifications</h2>
-
-<p>The full diff for making this change is <a href="https://github.com/alvarogarcia7/blog_source/compare/8414267a1e8e1f0ef588602121f32da3f6eb9f9e...9f60c76d6d9faca8cff8bce2f0a00bf8f2eafb30" target="_blank">here</a>. Disregard the changes in:</p>
-
-<ul>
-<li><code>partial/1444939871_diff.txt</code></li>
-<li><code>partial/1444939871_msg.txt</code></li>
-<li><code>source/_posts/2015-12-02-self-study-in-december-2015.markdown</code></li>
-</ul>
-
-        
-
-    </article>
-    
     
     
 
@@ -1493,11 +1472,23 @@ teach someone to fish vs fish for them
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/articles/2016/10/05/support-for-out-of-hours-on-call-support/">Support for out of hours on-call support</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/10/01/self-study-in-october-2016/">Self-Study in October 2016</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2016/09/30/books-read-in-2016q3/">Books read in 2016Q3</a>
           </li>
         
           <li class="post">
             <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/09/01/self-study-in-september-2016/">Self-Study in September 2016</a>
           </li>
         
           <li class="post">
@@ -1518,18 +1509,6 @@ teach someone to fish vs fish for them
         
           <li class="post">
             <a href="/blog/2016/06/10/role-software-consultant/">The role of a software consultant</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/06/10/unwritten-principles-coaching/">Unwritten principles for coaching, a quote</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/06/01/self-study/">Self-Study in June 2016</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/about/">About Alvaro Garcia</a>
           </li>
         
       </ul>

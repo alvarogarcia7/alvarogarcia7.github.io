@@ -128,6 +128,111 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a>
+    </h1>
+    <p >Apr 21, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/aspect/">aspect</a><a class="label" href="https://alvarogarcia7.github.io/categories/aspectj/">aspectj</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/annotation/">annotation</a><a class="label" href="https://alvarogarcia7.github.io/categories/snippet/">snippet</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it. The code provides a way of doing try|catch, specifying an exception to be caught. The source code is available here In the process This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit. If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t).</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/">Logging is a feature</a>
+    </h1>
+    <p >Apr 19, 2015
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/logging/">logging</a><a class="label" href="https://alvarogarcia7.github.io/categories/log/">log</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature/">feature</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/challenge/">challenge</a><a class="label" href="https://alvarogarcia7.github.io/categories/splunk/">splunk</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of Splunk. This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity matters</a>
+    </h1>
+    <p >Apr 18, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/rich-hickey/">rich-hickey</a><a class="label" href="https://alvarogarcia7.github.io/categories/talk/">talk</a><a class="label" href="https://alvarogarcia7.github.io/categories/keynote/">keynote</a><a class="label" href="https://alvarogarcia7.github.io/categories/rails-conf/">rails-conf</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>I&rsquo;ve seen this video by Rich Hickey: &ldquo;Simplicity matters&rdquo;, taken from Manuel Rivero&rsquo;s google plus&rsquo; site here are my notes: the software is the elephant do more, do it differently, do it better complexity of the elephant is going to dominate what you can do your ability to reason about your program is critical design is about pulling things apart become familiar by learning, trying &ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/04/17/the-guardian-of-the-source/">The Guardian of the Source</a>
     </h1>
     <p >Apr 17, 2015
@@ -226,111 +331,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a new TDD phase</a>
-    </h1>
-    <p >Apr 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/redesign/">redesign</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>In the last TDD workshop (experience report here), a conversation with Gary McLean Hall introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase. Concept As Gary introduced it to me1, it is a phase that might appear after refactor. It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase. How I do redesign I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors 2 to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/">Experience report: Test-driven development intensive, by Jason Gorman</a>
-    </h1>
-    <p >Apr 12, 2015
-         - 8 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop/">workshop</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-gorman/">jason-gorman</a><a class="label" href="https://alvarogarcia7.github.io/categories/uk/">uk</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/crc-card/">crc-card</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>This is an experience report on Jason Gorman&rsquo;s &ldquo;Test-driven development intensive workshop&rdquo; on the April 11th, 2015 I attended this training in the Greenfell housing &amp; training in South Wimbledon, London SW19 1JZ. The training spanned from 10:00 to 17:00 with a half an hour for lunch plus three or four 10-15 minute pauses. (7 - ,5 - 4 * 12/60 = ~5.7hours = 5 hours 45 minutes) Introduction There were 23 of us, including me.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/02/trimming-your-plants/">Trimming your plants</a>
-    </h1>
-    <p >Apr 2, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/02/trimming-your-plants/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/growing-software/">growing-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/trimming/">trimming</a><a class="label" href="https://alvarogarcia7.github.io/categories/agriculture/">agriculture</a><a class="label" href="https://alvarogarcia7.github.io/categories/gardening/">gardening</a><a class="label" href="https://alvarogarcia7.github.io/categories/software/">software</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>This post belongs to the growing-software series Imagine this situation: the code works. You are at this stage Disregarding the tests, the production code is complete. Could be better, but it is ready if you are in a hurry. Now, picture your test as a plant in a plant pot: it might be healthy on the outside (external quality) but how are their roots (internal quality)? Do you imagine them in an ordered fashion or in a jungle of roots?</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/04/02/trimming-your-plants/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -402,6 +402,8 @@
     
         <a href="/page/25/" class="label-pagination">25</a>
     
+        <a href="/page/26/" class="label-pagination">26</a>
+    
 
     
     
@@ -410,7 +412,7 @@
 
     
     
-        <a href="/page/25/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/page/26/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -470,11 +472,23 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/articles/2016/10/05/support-for-out-of-hours-on-call-support/">Support for out of hours on-call support</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/10/01/self-study-in-october-2016/">Self-Study in October 2016</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2016/09/30/books-read-in-2016q3/">Books read in 2016Q3</a>
           </li>
         
           <li class="post">
             <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/09/01/self-study-in-september-2016/">Self-Study in September 2016</a>
           </li>
         
           <li class="post">
@@ -495,18 +509,6 @@
         
           <li class="post">
             <a href="/blog/2016/06/10/role-software-consultant/">The role of a software consultant</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/06/10/unwritten-principles-coaching/">Unwritten principles for coaching, a quote</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/06/01/self-study/">Self-Study in June 2016</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/about/">About Alvaro Garcia</a>
           </li>
         
       </ul>
