@@ -211,9 +211,10 @@ DocumentControllerTest
 <p>copy that to file <code>a.txt</code></p>
 
 <p>Revert all the changes in these files:</p>
-for i in $(cat a.txt | uniq); do
-  git checkout -- *$i*
-done
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">for</span> i in <span class="k">$(</span>cat a.txt <span class="p">|</span> uniq<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+  git checkout -- *<span class="nv">$i</span>*
+<span class="k">done</span>
+</code></pre></div>
 
         </div>
         

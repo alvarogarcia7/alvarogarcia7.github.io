@@ -1229,10 +1229,11 @@ Error: Run jekyll build --trace for more information.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;this is an example:&lt;/p&gt;
-(defn all-access[k]
-	(let [{:keys [a b] :as k}]
-		(do a)
-		(do (:b k))))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;all-access[k]&lt;/span&gt;
+	&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[{:keys&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[a&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;b]&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:as&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;k}]&lt;/span&gt;
+		&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+		&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:b&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

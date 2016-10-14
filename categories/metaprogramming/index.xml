@@ -609,73 +609,77 @@ Tags: pull-request, james-reeves, tip, list&lt;/p&gt;
       
       <guid>https://alvarogarcia7.github.io/blog/2015/10/12/calling-all-methods-in-a-ruby-object/</guid>
       <description>&lt;p&gt;In Ruby, you can query the methods an object accepts:&lt;/p&gt;
-pry(main)&gt; 1.methods 
-=&gt; [:to_s,               
- :-@,                    
- :+,                     
- :-,                     
- :*,                     
- :/,                     
- :div,                   
- :%,                     
- :modulo,                
- :divmod,                
- :fdiv,                  
- ...
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;methods&lt;/span&gt; 
+&lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:to_s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;               
+ &lt;span class=&#34;ss&#34;&gt;:-@&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                    
+ &lt;span class=&#34;ss&#34;&gt;:+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
+ &lt;span class=&#34;ss&#34;&gt;:-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
+ &lt;span class=&#34;ss&#34;&gt;:*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
+ &lt;span class=&#34;ss&#34;&gt;:/&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
+ &lt;span class=&#34;ss&#34;&gt;:div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                   
+ &lt;span class=&#34;ss&#34;&gt;:%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
+ &lt;span class=&#34;ss&#34;&gt;:modulo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                
+ &lt;span class=&#34;ss&#34;&gt;:divmod&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                
+ &lt;span class=&#34;ss&#34;&gt;:fdiv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                  
+ &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;In case you want to call all methods, &lt;a href=&#34;https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods.rb&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; can be useful (plus its &lt;a href=&#34;https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods_spec.rb&#34; target=&#34;_blank&#34;&gt;tests&lt;/a&gt;):&lt;/p&gt;
-def call_all_methods(object, *args)
-  # remove methods that modify the PRY environment or are too verbose
-  success = {}
-  error = {}
-  exclusions = [:pry,
-                :methods,
-                :private_methods,
-                :public_methods,
-                :gem].map { |x| x.to_s}
-  object.methods.each { |x|
-    unless exclusions.include? x.to_s then
-      begin
-        if (args.empty?) then
-          success[x] = object.__send__(x)
-        else
-          success[x] = object.__send__(x, *args)
-        end
-      rescue StandardError =&gt; ex
-        error[x] = ex
-      end
-    end
-  }
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;call_all_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;c1&#34;&gt;# remove methods that modify the PRY environment or are too verbose&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;exclusions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:pry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+                &lt;span class=&#34;ss&#34;&gt;:methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+                &lt;span class=&#34;ss&#34;&gt;:private_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+                &lt;span class=&#34;ss&#34;&gt;:public_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+                &lt;span class=&#34;ss&#34;&gt;:gem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;methods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;each&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;unless&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;exclusions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;include?&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_s&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;empty?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+          &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__send__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+          &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__send__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;rescue&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;StandardError&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ex&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ex&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 
-  success.select! { |x| not x.nil?}
-  error.select! { |x| not x.nil?}
+  &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select!&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nil?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select!&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nil?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 
-  {success: success, error: error}
-end
+  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;usage:&lt;/p&gt;
-[51] pry(main)&gt; call_all_methods(1)
-=&gt; {:success =&gt; 
-[[:to_s, &#34;1&#34;],
- [:-@, -1],
- [:abs, 1],
- [:magnitude, 1],
- [:~, -2],
- [:to_f, 1.0],
- [:size, 4],
- [:zero?, false],
- [:odd?, true],
- [:even?, false],
- [:succ, 2],
- ...
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;51&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;call_all_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:success&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; 
+&lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:to_s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:-@&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:abs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:magnitude&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:~&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:to_f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:zero?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:odd?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:even?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:succ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;also with parameters:&lt;/p&gt;
-[4] pry(main)&gt; call_all_methods(1,1)
-☺=&gt; {:success=&gt;
-  [[:+, 2],
-   [:-, 0],
-   [:*, 1],
-   [:/, 1],
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;call_all_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;☺&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:success&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+   &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+   &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+   &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:/&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Should you be interested in having this as a gem, please tell me (comments or &lt;a href=&#34;https://twitter.com/@alvarobiz&#34; target=&#34;_blank&#34;&gt;@alvarobiz&lt;/a&gt;)&lt;/p&gt;
 </description>

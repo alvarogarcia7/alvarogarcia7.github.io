@@ -222,7 +222,7 @@ React Testing Course I&rsquo;ve watched the full course by Trevor D. Miller on h
 
         
           <p>At a client, we have CSVs of data that can be simplified to this 1:
-(def data [ ["total" 6 8 13] ["0" 1 2 3] ["0" 2 0 4] ["0" 3 0 6] ]) In this case, some of the row named total is the sum of the rest of the rows, but only for some columns (second and fourth). We do not want to get rid of the columns, as they need to be printed at the end.</p>
+(def data [ [&quot;total&quot; 6 8 13] [&quot;0&quot; 1 2 3] [&quot;0&quot; 2 0 4] [&quot;0&quot; 3 0 6] ])  In this case, some of the row named total is the sum of the rest of the rows, but only for some columns (second and fourth). We do not want to get rid of the columns, as they need to be printed at the end.</p>
 
           
               <footer>
@@ -258,7 +258,7 @@ React Testing Course I&rsquo;ve watched the full course by Trevor D. Miller on h
 
         
           <p>While on the REPL, I tried this:
-simple.core= (reduce and true [true]) CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clojure.core/and, compiling:(form-init7116694665186998245.clj:1:1) Reading the clojuredocs for and, you can find this:
+simple.core=&gt; (reduce and true [true]) CompilerException java.lang.RuntimeException: Can&#39;t take value of a macro: #&#39;clojure.core/and, compiling:(form-init7116694665186998245.clj:1:1)  Reading the clojuredocs for and, you can find this:
  Note add is a macro, so you cannot apply it. For example, there is a vector of some Boolean values [true true false true], which you want to test to see if they are all true. The code below will not work:</p>
 
           

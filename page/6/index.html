@@ -144,9 +144,9 @@
 
 
         
-          <p>Collection of HOFs Select Attribute class Array def select_attribute attr self.map { |unit| unit[attr] } end end usage:
-[71] pry(main) [ {:element = 1, :even? = false}, {:element = 2, :even? = true}, {:element = 3, :even? = false}] .select_attribute :even? = [false, true, false] Collection of patterns Decorating a collection Introduction You want to materialize properties from a collection
-Alternative names  Intermediary Functional decorator Collection Annotation (from Wallingford&rsquo;s Roundabout, especially Interface procedure)  Example [62] pry(main) [1,2,3] .</p>
+          <p>Collection of HOFs Select Attribute class Array def select_attribute attr self.map { |unit| unit[attr] } end end  usage:
+[71] pry(main)&gt; [ {:element =&gt; 1, :even? =&gt; false}, {:element =&gt; 2, :even? =&gt; true}, {:element =&gt; 3, :even? =&gt; false}] .select_attribute :even? =&gt; [false, true, false]  Collection of patterns Decorating a collection Introduction You want to materialize properties from a collection
+Alternative names  Intermediary Functional decorator Collection Annotation (from Wallingford&rsquo;s Roundabout, especially Interface procedure)  Example [62] pry(main)&gt; [1,2,3] .</p>
 
           
               <footer>
@@ -219,7 +219,7 @@ Note: References Jepsen (I guess an inside joke to the song &ldquo;Call me maybe
 
         
           <p>In Ruby, you can query the methods an object accepts:
-pry(main) 1.methods = [:to_s, :-@, :+, :-, :*, :/, :div, :%, :modulo, :divmod, :fdiv, ... In case you want to call all methods, this can be useful (plus its tests):
+pry(main)&gt; 1.methods =&gt; [:to_s, :-@, :+, :-, :*, :/, :div, :%, :modulo, :divmod, :fdiv, ...  In case you want to call all methods, this can be useful (plus its tests):
 def call_all_methods(object, *args) # remove methods that modify the PRY environment or are too verbose success = {} error = {} exclusions = [:pry, :methods, :private_methods, :public_methods, :gem].map { |x| x.</p>
 
           

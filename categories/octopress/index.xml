@@ -23,27 +23,29 @@
 &lt;p&gt;Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&amp;rsquo;re writing articles:&lt;/p&gt;
 
 &lt;p&gt;Isolate a post:&lt;/p&gt;
-# usage rake isolate[my-post]
-desc &#34;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&#34;
-task :isolate, :filename do |t, args|
-  stash_dir = &#34;#{source_dir}/#{stash_dir}&#34;
-  FileUtils.mkdir(stash_dir) unless File.exist?(stash_dir)
-  Dir.glob(&#34;#{source_dir}/#{posts_dir}/*.*&#34;) do |post|
-    system &#34;git update-index --assume-unchanged #{post}&#34; unless post.include?(args.filename)
-    FileUtils.mv post, stash_dir unless post.include?(args.filename)
-  end
-end
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# usage rake isolate[my-post]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;desc&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:isolate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:filename&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;stash_dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stash_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;no&#34;&gt;FileUtils&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mkdir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stash_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;unless&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exist?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stash_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;no&#34;&gt;Dir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;glob&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;posts_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/*.*&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;git update-index --assume-unchanged &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;unless&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;include?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;no&#34;&gt;FileUtils&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mv&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;stash_dir&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;unless&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;include?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Integrate with the rest of the posts:&lt;/p&gt;
-desc &#34;Move all stashed posts back into the posts directory, ready for site generation.&#34;
-task :integrate do
-  posts_dir = &#34;#{source_dir}/#{posts_dir}/&#34;
-  Dir.glob(&#34;#{source_dir}/#{stash_dir}/*.*&#34;) do |post|
-    FileUtils.mv post, posts_dir
-    full_path = &#34;#{posts_dir}/#{post.split(&#34;/&#34;).reverse.first}&#34;
-    system &#34;git update-index --no-assume-unchanged #{full_path}&#34;
-  end
-end
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;desc&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Move all stashed posts back into the posts directory, ready for site generation.&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:integrate&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;posts_dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;posts_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;no&#34;&gt;Dir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;glob&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stash_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/*.*&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;no&#34;&gt;FileUtils&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mv&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;posts_dir&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;full_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;posts_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;reverse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;first&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;git update-index --no-assume-unchanged &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;full_path&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
 
@@ -52,14 +54,16 @@ end
 &lt;ul&gt;
 &lt;li&gt;isolate the selected file. Specify the pattern to keep.&lt;/li&gt;
 &lt;/ul&gt;
-rake isolate[&#34;draft&#34;]
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;rake isolate&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;draft&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;ul&gt;
 &lt;li&gt;write the new content&lt;/li&gt;
 &lt;li&gt;commit to git&lt;/li&gt;
 &lt;li&gt;integrate with the rest of the files&lt;/li&gt;
 &lt;/ul&gt;
-rake integrate
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;rake integrate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;ul&gt;
 &lt;li&gt;git push&lt;/li&gt;
@@ -927,44 +931,52 @@ modifiers can manipulate the block so that we can theme or style that particular
 &lt;p&gt;Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them&lt;/p&gt;
 
 &lt;p&gt;For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:&lt;/p&gt;
-cp -R blog_source blog_post_factory
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;cp -R blog_source blog_post_factory
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Git ignore all existing markdown files in the folder &lt;code&gt;source/_posts&lt;/code&gt;&lt;/p&gt;
-cd blog_post_factory/source/_posts
-git update-index --assume-unchanged $(ls *markdown)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; blog_post_factory/source/_posts
+git update-index --assume-unchanged &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;ls *markdown&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Delete all existing markdown files&lt;/p&gt;
-rm *markdown
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;rm *markdown
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Check that git doesn&amp;rsquo;t realize about the difference:&lt;/p&gt;
-git status
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;git status
 
-# On branch source
-nothing to commit (working directory clean)
+&lt;span class=&#34;c1&#34;&gt;# On branch source&lt;/span&gt;
+nothing to commit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;working directory clean&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Create a new post:&lt;/p&gt;
-rake new_post[&#34;Faster site generation for Octopress 2&#34;]
-# On branch source
-# Untracked files:
-#   (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)
-#
-#	2015-07-13-faster-site-generation-for-octopress-2.markdown
-nothing added to commit but untracked files present (use &#34;git add&#34; to track)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;rake new_post&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;Faster site generation for Octopress 2&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# On branch source&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Untracked files:&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#   (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to include in what will be committed)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#	2015-07-13-faster-site-generation-for-octopress-2.markdown&lt;/span&gt;
+nothing added to commit but untracked files present &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;use &lt;span class=&#34;s2&#34;&gt;&amp;quot;git add&amp;quot;&lt;/span&gt; to track&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Edit as much as needed, reviewing changes in local. Push to the remote repository.&lt;/p&gt;
 
 &lt;p&gt;In the original (&lt;code&gt;blog_source&lt;/code&gt;) folder, pull, then generate:&lt;/p&gt;
-rake generate &amp;&amp; rake deploy
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;rake generate &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rake deploy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;[Optional: change the remote URL for the cloned repository, so the git push is faster.]&lt;/p&gt;
 
 &lt;p&gt;After each new post, you have to ignore old files again. I&amp;rsquo;ve created a new task in the &lt;code&gt;Rakefile&lt;/code&gt; for this purpose:&lt;/p&gt;
-desc &#34;Cleans all *.markdown files for a faster site generation&#34;
-task :ignore do
-  cd &#34;#{source_dir}/#{posts_dir}&#34;
-  system &#34;git update-index --assume-unchanged $(ls *.markdown)&#34;
-  system &#34;rm $(ls *.markdown)&#34;
-end
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;desc&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;Cleans all *.markdown files for a faster site generation&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;task&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:ignore&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;posts_dir&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;git update-index --assume-unchanged $(ls *.markdown)&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;rm $(ls *.markdown)&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
@@ -1008,10 +1020,11 @@ Error: Run jekyll build --trace for more information.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;this is an example:&lt;/p&gt;
-(defn all-access[k]
-	(let [{:keys [a b] :as k}]
-		(do a)
-		(do (:b k))))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;all-access[k]&lt;/span&gt;
+	&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[{:keys&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[a&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;b]&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:as&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;k}]&lt;/span&gt;
+		&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+		&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:b&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

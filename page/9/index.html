@@ -181,10 +181,9 @@
 
         
           <p>Many times I&rsquo;ve written this function:
-public boolean between(int lowerBound, int n, int upperBound){ return lowerBound It may depend on the case, whether it is [], [), (] or (), to use mathematical terms.
+public boolean between(int lowerBound, int n, int upperBound){ return lowerBound &lt;= n &amp;&amp; n &lt;= upperBound; }  It may depend on the case, whether it is [], [), (] or (), to use mathematical terms.
 When the two comparisons are the same ([] and ()), there is duplication in the comparisons.
-Investigating a little bit on this in clojure, I&rsquo;ve found this function:
-And its clojuredocs: Returns non-nil if nums are in monotonically non-decreasing order, otherwise false.</p>
+Investigating a little bit on this in clojure, I&rsquo;ve found this function:</p>
 
           
               <footer>
@@ -257,7 +256,7 @@ And its clojuredocs: Returns non-nil if nums are in monotonically non-decreasing
 
         
           <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.
-package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; import static org.hamcrest.Matchers.is; import static org.mockito.Mockito.spy; import static org.mockito.Mockito.when; import org.junit.Test; import org.mockito.Spy; public class DifferentReturnValues { @Spy private Spike1 spike1 = new Spike1(); @Test public void spike1() { spike1 = spy(spike1); when(spike1.getBool()).thenReturn(false, true); assertThat(spike1.getBool(), is(false)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); } private class Spike1 { public boolean getBool() { return true; } } } The key line is:</p>
+package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; import static org.hamcrest.Matchers.is; import static org.mockito.Mockito.spy; import static org.mockito.Mockito.when; import org.junit.Test; import org.mockito.Spy; public class DifferentReturnValues { @Spy private Spike1 spike1 = new Spike1(); @Test public void spike1() { spike1 = spy(spike1); when(spike1.getBool()).thenReturn(false, true); assertThat(spike1.getBool(), is(false)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); } private class Spike1 { public boolean getBool() { return true; } } }  The key line is:</p>
 
           
               <footer>

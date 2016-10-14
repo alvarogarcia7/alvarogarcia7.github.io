@@ -215,7 +215,7 @@ Inspired by their new features in Octopress 3, one of them being faster site gen
 
         
           <p>A friend and I were arguing about this code (fragment):
-public void register (final String userName) { try { registeredUsers.add(new User(userName)); } catch (AlreadyRegisteredUserException e) { resultListener.alreadyRegistered(userName); } } I would have said that resultListener is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).
+public void register (final String userName) { try { registeredUsers.add(new User(userName)); } catch (AlreadyRegisteredUserException e) { resultListener.alreadyRegistered(userName); } }  I would have said that resultListener is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).
 He suggested that:
  being injected through the constructor is usually what happens with dependencies, but does not make it one (i.</p>
 

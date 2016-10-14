@@ -148,52 +148,59 @@
           
 
 <p>Many times I&rsquo;ve written this function:</p>
-public boolean between(int lowerBound, int n, int upperBound){
-	return lowerBound <= n &&
-		n <= upperBound;
-}
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">between</span><span class="o">(</span><span class="kt">int</span> <span class="n">lowerBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upperBound</span><span class="o">){</span>
+	<span class="k">return</span> <span class="n">lowerBound</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&amp;&amp;</span>
+		<span class="n">n</span> <span class="o">&lt;=</span> <span class="n">upperBound</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>It may depend on the case, whether it is <code>[]</code>, <code>[)</code>, <code>(]</code> or <code>()</code>, to use mathematical terms.</p>
 
 <p>When the two comparisons are the same (<code>[]</code> and <code>()</code>), there is duplication in the comparisons.</p>
 
 <p>Investigating a little bit on this in clojure, I&rsquo;ve found this function:</p>
-<=
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nb">&lt;=</span>
+</code></pre></div>
 
 <p>And its <a href="https://clojuredocs.org/clojure.core/%3C=" target="_blank">clojuredocs</a>: Returns non-nil if nums are in monotonically non-decreasing order,
 otherwise false.</p>
 
 <p>A sample usage:</p>
-(<= 1 2)
-; true
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nb">&lt;=</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1">; true</span>
 
-(<= 1 2 1)
-; false
+<span class="p">(</span><span class="nb">&lt;=</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">; false</span>
+</code></pre></div>
 
 <p>The last part is the most interesting one. As this function is prepared to receive more than two parameters, it is very easy for the programmer to use it. We could say that the language was prepared for that.</p>
 
 <p>The <a href="https://github.com/clojure/clojure/blob/clojure-1.7.0/src/clj/clojure/core.clj#L1020" target="_blank">implementation</a>:</p>
-(defn <=
-  ([x] true)
-  ([x y] (. clojure.lang.Numbers (lte x y)))
-  ([x y & more]
-   (if (<= x y)
-     (if (next more)
-       (recur y (first more) (next more))
-       (<= y (first more)))
-     false)))
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nb">&lt;=</span>
+  <span class="p">(</span><span class="nv">[x]</span> <span class="nv">true</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">[x</span> <span class="nv">y]</span> <span class="p">(</span><span class="o">.</span> <span class="nv">clojure.lang.Numbers</span> <span class="p">(</span><span class="nv">lte</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">[x</span> <span class="nv">y</span> <span class="nv">&amp;</span> <span class="nv">more]</span>
+   <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;=</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">more</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">recur</span> <span class="nv">y</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">more</span><span class="p">)</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">more</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">&lt;=</span> <span class="nv">y</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">more</span><span class="p">)))</span>
+     <span class="nv">false</span><span class="p">)))</span>
+</code></pre></div>
 
 <p>Inspired by this, I&rsquo;ve implemented the same function in haskell (for the repl):</p>
-let isBigger acc ele = (snd acc) && (fst acc) < ele in
-   foldl (\acc ele -> (ele, isBigger acc ele)) (1, True) [1,2,1,3] 
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">let</span> <span class="n">isBigger</span> <span class="n">acc</span> <span class="n">ele</span> <span class="ow">=</span> <span class="p">(</span><span class="n">snd</span> <span class="n">acc</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">fst</span> <span class="n">acc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ele</span> <span class="kr">in</span>
+   <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">ele</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">ele</span><span class="p">,</span> <span class="n">isBigger</span> <span class="n">acc</span> <span class="n">ele</span><span class="p">))</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kt">True</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> 
+</code></pre></div>
 
 <p>and a simpler solution I&rsquo;ve found on <a href="http://codereview.stackexchange.com/questions/46606/is-a-list-sorted/46608#46608" target="_blank">Stack Overflow</a>:</p>
-isSorted :: (Ord a) => [a] -> Bool
-isSorted xs = all (\(x, y) -> x <= y) $ zip xs (tail xs)
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">isSorted</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+<span class="nf">isSorted</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">all</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">y</span><span class="p">)</span> <span class="o">$</span> <span class="n">zip</span> <span class="n">xs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>or</p>
-isSorted :: (Ord a) => [a] -> Bool
-isSorted xs = and $ zipWith (<=) xs (tail xs)
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">isSorted</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+<span class="nf">isSorted</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">and</span> <span class="o">$</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">&lt;=</span><span class="p">)</span> <span class="n">xs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">)</span>
+</code></pre></div>
 
 <h2 id="conclusion">Conclusion</h2>
 

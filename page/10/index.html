@@ -170,7 +170,7 @@ Protected Variation: The Importance of Being Closed I&rsquo;ve read this article
         <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing your own maven dependencies</a>
     </h1>
     <p >Jul 30, 2015
-         - 1 minute read 
+         - 2 minute read 
          - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/#disqus_thread">Comments</a>
 
         
@@ -185,7 +185,7 @@ Protected Variation: The Importance of Being Closed I&rsquo;ve read this article
         
           <p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.
 This is how most of them look like:
-4.0.0 com.gmaur.legacycode legacyutils 0.0.1-SNAPSHOT   org.hamcrest hamcrest-all 1.3 test   junit junit 4.11 test   org.mockito mockito-all test 2.0.2-beta      org.apache.maven.plugins maven-surefire-plugin 2.18.1   **/**Test.</p>
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;groupId&gt;com.gmaur.legacycode&lt;/groupId&gt; &lt;artifactId&gt;legacyutils&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.hamcrest&lt;/groupId&gt; &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt; &lt;version&gt;1.3&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;4.11&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.mockito&lt;/groupId&gt; &lt;artifactId&gt;mockito-all&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;version&gt;2.0.2-beta&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.</p>
 
           
               <footer>
@@ -221,7 +221,7 @@ This is how most of them look like:
 
         
           <p>Imagine having this java class:
-private static class RepeatedConstants { public static final String A = "A"; public static final String A_1 = A; public static final String A_2 = "A"; public static final Integer _3 = 3; public static final Integer THREE = 3; } I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly.</p>
+private static class RepeatedConstants { public static final String A = &quot;A&quot;; public static final String A_1 = A; public static final String A_2 = &quot;A&quot;; public static final Integer _3 = 3; public static final Integer THREE = 3; }  I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly.</p>
 
           
               <footer>
@@ -291,7 +291,7 @@ To solve it, see this link</p>
         
           <p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:
 (source code is here)
-@Test public void log_when_sending_greeting_letters() { sut.send(mock(GreetingLetter.class)); verify(logger).sentGreetingLetter(); } @Test public void log_when_sending_love_letters() { sut.send(mock(LoveLetter.class)); verify(logger).sentLoveLetter(); } and the production code:
+@Test public void log_when_sending_greeting_letters() { sut.send(mock(GreetingLetter.class)); verify(logger).sentGreetingLetter(); } @Test public void log_when_sending_love_letters() { sut.send(mock(LoveLetter.class)); verify(logger).sentLoveLetter(); }  and the production code:
 public class MailSender { private final EventLogger eventLogger; public MailSender (final EventLogger eventLogger) { this.eventLogger = eventLogger; } public void send (final GreetingLetter letter) { // more business logic eventLogger.</p>
 
           

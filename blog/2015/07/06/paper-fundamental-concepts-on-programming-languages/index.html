@@ -233,23 +233,26 @@
 <h3 id="conditional-expressions-vs-conditional-commands">Conditional expressions vs conditional commands</h3>
 
 <p>Introduces the concept of conditional expression, akin to the ternary operator (example in java):</p>
-y = x > 1 ? 1 : 2;
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span><span class="o">;</span>
+</code></pre></div>
 
 <p>this is equivalent to (example in java):</p>
-int y;
-if(x > 1) {
-	y = 1;
-} else {
-	y = 2;
-}
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+<span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+	<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>and the conditional command (example in java):</p>
-if (x > 1) {
-	f();
-	h(x);
-} else {
-	g();
-}
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">f</span><span class="o">();</span>
+	<span class="n">h</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+	<span class="n">g</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>The conditional expression is also known as &ldquo;functional if&rdquo;</p>
 

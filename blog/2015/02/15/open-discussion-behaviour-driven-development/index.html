@@ -176,14 +176,15 @@ Then I have an element on the list
 </code></pre>
 
 <p>now, the same test in TDD [using java, junit 4, hamcrest]</p>
-@Test
-public void add_an_element_to_an_empty_list(){
-	MyLinkedList linkedList = new MyLinkedList();
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">add_an_element_to_an_empty_list</span><span class="o">(){</span>
+	<span class="n">MyLinkedList</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyLinkedList</span><span class="o">();</span>
 
-	linkedList.add("something");
+	<span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;something&quot;</span><span class="o">);</span>
 
-	assertThat(linkedList.size(), is(1));
-}
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">linkedList</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>In some aspects, a BDD and a TDD test are similar:</p>
 

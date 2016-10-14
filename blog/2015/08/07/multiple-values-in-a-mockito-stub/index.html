@@ -146,81 +146,86 @@
           
           
           <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.</p>
-package com.example.spike;
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example.spike</span><span class="o">;</span>
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">MatcherAssert</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">Matchers</span><span class="o">.</span><span class="na">is</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">spy</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">when</span><span class="o">;</span>
 
-import org.junit.Test;
-import org.mockito.Spy;
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.Spy</span><span class="o">;</span>
 
-public class DifferentReturnValues {
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DifferentReturnValues</span> <span class="o">{</span>
 
-	@Spy
-	private Spike1 spike1 = new Spike1();
-
-
-	@Test
-	public void spike1() {
-		spike1 = spy(spike1);
-		when(spike1.getBool()).thenReturn(false, true);
-
-		assertThat(spike1.getBool(), is(false));
-		assertThat(spike1.getBool(), is(true));
-
-		assertThat(spike1.getBool(), is(true));
-		assertThat(spike1.getBool(), is(true));
-	}
+	<span class="nd">@Spy</span>
+	<span class="kd">private</span> <span class="n">Spike1</span> <span class="n">spike1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Spike1</span><span class="o">();</span>
 
 
-	private class Spike1 {
-		public boolean getBool() {
-			return true;
-		}
-	}
-}
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+		<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	<span class="o">}</span>
+
+
+	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">Spike1</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getBool</span><span class="o">()</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>The key line is:</p>
-when(spike1.getBool()).thenReturn(false, true);
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</code></pre></div>
 
 <p>this makes the stubbed function to return multiple values:</p>
-assertThat(spike1.getBool(), is(false));
-assertThat(spike1.getBool(), is(true));
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</code></pre></div>
 
 <p>The last value is repeated after the last defined value:</p>
-@Test
-public void spike1() {
-	spike1 = spy(spike1);
-	when(spike1.getBool()).thenReturn(false, true);
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 
-	assertThat(spike1.getBool(), is(false));
-	assertThat(spike1.getBool(), is(true));
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
 
-	assertThat(spike1.getBool(), is(true));
-	assertThat(spike1.getBool(), is(true));
-}
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>If you want to loop over the values, you can implement it with the <code>doAnswer</code> method:</p>
-@Test
-public void spike1() {
-	spike1 = spy(spike1);
-	when(spike1.getBool()).thenReturn(false, true);
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 
-	final boolean[] value = {true};
+	<span class="kd">final</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="kc">true</span><span class="o">};</span>
 
-	doAnswer(invocation -> {
-		value[0] = !value[0];
-		return value[0];
-	}).when(spike1).getBool();
+	<span class="n">doAnswer</span><span class="o">(</span><span class="n">invocation</span> <span class="o">-&gt;</span> <span class="o">{</span>
+		<span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+		<span class="k">return</span> <span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+	<span class="o">}).</span><span class="na">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">).</span><span class="na">getBool</span><span class="o">();</span>
 
-	assertThat(spike1.getBool(), is(false));
-	assertThat(spike1.getBool(), is(true));
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
 
-	assertThat(spike1.getBool(), is(false));
-	assertThat(spike1.getBool(), is(true));
-}
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div>
 
         </div>
         

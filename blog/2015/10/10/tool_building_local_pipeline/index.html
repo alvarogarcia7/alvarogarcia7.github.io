@@ -167,60 +167,64 @@
 <p>In the <code>local</code> you can do the development and local commits.</p>
 
 <p>When you&rsquo;re done, instead of</p>
-git push origin $branch
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>git push origin <span class="nv">$branch</span>
+</code></pre></div>
 
 <p>do</p>
-git push pipeline $branch
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>git push pipeline <span class="nv">$branch</span>
+</code></pre></div>
 
 <p>After the git hook is installed, this will trigger the pipeline execution.</p>
 
 <h3 id="git-hook">Git hook</h3>
 
 <p>In the <code>pipeline</code>, in the <code>.git/hooks/post-receive</code> file:</p>
-#!/bin/bash
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="ch">#!/bin/bash</span>
 chmod +x pipeline.sh
-while read oldrev newrev refname
-do
-  # whatever you want to execute
-   branch=$(git rev-parse --symbolic --abbrev-ref $refname)
-  ./pipeline.sh $branch
-done
+<span class="k">while</span> <span class="nb">read</span> oldrev newrev refname
+<span class="k">do</span>
+  <span class="c1"># whatever you want to execute</span>
+   <span class="nv">branch</span><span class="o">=</span><span class="k">$(</span>git rev-parse --symbolic --abbrev-ref <span class="nv">$refname</span><span class="k">)</span>
+  ./pipeline.sh <span class="nv">$branch</span>
+<span class="k">done</span>
+</code></pre></div>
 
 <p>In the above script, we&rsquo;re telling git to execute the <code>pipeline.sh</code> with the received branch as argument.</p>
 
 <h3 id="pipeline-executor">Pipeline executor</h3>
 
 <p>In the <code>pipeline</code> repository, in <code>.git/pipeline.sh</code> file:</p>
-#!/bin/bash
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="ch">#!/bin/bash</span>
 
-set -e
-set -o pipefail
+<span class="nb">set</span> -e
+<span class="nb">set</span> -o pipefail
 
-function cleanup {
+<span class="k">function</span> cleanup <span class="o">{</span>
   git checkout develop
   git pull develop
-}
+<span class="o">}</span>
 
-# upon failure, tell the user
-function err {
+<span class="c1"># upon failure, tell the user</span>
+<span class="k">function</span> err <span class="o">{</span>
   cleanup
-  growlnotify "pipeline fails"
-}
+  growlnotify <span class="s2">&quot;pipeline fails&quot;</span>
+<span class="o">}</span>
 
-# trap signal ERR, executing function 'err'
-trap "err" ERR
+<span class="c1"># trap signal ERR, executing function &#39;err&#39;</span>
+<span class="nb">trap</span> <span class="s2">&quot;err&quot;</span> ERR
 
-branch=$1
+<span class="nv">branch</span><span class="o">=</span><span class="nv">$1</span>
 
-if [[ -z $branch ]]; then
-    echo "need to specify a branch"
-    exit -1
-fi
+<span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$branch</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;need to specify a branch&quot;</span>
+    <span class="nb">exit</span> -1
+<span class="k">fi</span>
 
-git checkout $branch
-mvn clean install | tee output.log
-git push --set-upstream origin $branch
+git checkout <span class="nv">$branch</span>
+mvn clean install <span class="p">|</span> tee output.log
+git push --set-upstream origin <span class="nv">$branch</span>
 cleanup
+</code></pre></div>
 
 <h4 id="pipeline-executor-explanation">Pipeline executor explanation</h4>
 
@@ -274,9 +278,10 @@ cleanup
 <h2 id="appendix">Appendix</h2>
 
 <p>This script will push to the pipeline:</p>
-#!/bin/bash
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="ch">#!/bin/bash</span>
 
-git push pipeline  2>&1 > /dev/null &
+git push pipeline  2&gt;<span class="p">&amp;</span><span class="m">1</span> &gt; /dev/null <span class="p">&amp;</span>
+</code></pre></div>
 
         </div>
         

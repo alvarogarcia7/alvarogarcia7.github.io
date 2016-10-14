@@ -236,27 +236,29 @@ First an introduction to our system:</p>
 <p>Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles:</p>
 
 <p>Isolate a post:</p>
-# usage rake isolate[my-post]
-desc "Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly."
-task :isolate, :filename do |t, args|
-  stash_dir = "#{source_dir}/#{stash_dir}"
-  FileUtils.mkdir(stash_dir) unless File.exist?(stash_dir)
-  Dir.glob("#{source_dir}/#{posts_dir}/*.*") do |post|
-    system "git update-index --assume-unchanged #{post}" unless post.include?(args.filename)
-    FileUtils.mv post, stash_dir unless post.include?(args.filename)
-  end
-end
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="c1"># usage rake isolate[my-post]</span>
+<span class="n">desc</span> <span class="s2">&quot;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&quot;</span>
+<span class="n">task</span> <span class="ss">:isolate</span><span class="p">,</span> <span class="ss">:filename</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+  <span class="n">stash_dir</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="no">FileUtils</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span> <span class="k">unless</span> <span class="no">File</span><span class="o">.</span><span class="n">exist?</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span>
+  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/*.*&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+    <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">stash_dir</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
 
 <p>Integrate with the rest of the posts:</p>
-desc "Move all stashed posts back into the posts directory, ready for site generation."
-task :integrate do
-  posts_dir = "#{source_dir}/#{posts_dir}/"
-  Dir.glob("#{source_dir}/#{stash_dir}/*.*") do |post|
-    FileUtils.mv post, posts_dir
-    full_path = "#{posts_dir}/#{post.split("/").reverse.first}"
-    system "git update-index --no-assume-unchanged #{full_path}"
-  end
-end
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">desc</span> <span class="s2">&quot;Move all stashed posts back into the posts directory, ready for site generation.&quot;</span>
+<span class="n">task</span> <span class="ss">:integrate</span> <span class="k">do</span>
+  <span class="n">posts_dir</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/&quot;</span>
+  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">/*.*&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">posts_dir</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reverse</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nb">system</span> <span class="s2">&quot;git update-index --no-assume-unchanged </span><span class="si">#{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
 
 <h2 id="usage">Usage</h2>
 
@@ -265,14 +267,16 @@ end
 <ul>
 <li>isolate the selected file. Specify the pattern to keep.</li>
 </ul>
-rake isolate["draft"]
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake isolate<span class="o">[</span><span class="s2">&quot;draft&quot;</span><span class="o">]</span>
+</code></pre></div>
 
 <ul>
 <li>write the new content</li>
 <li>commit to git</li>
 <li>integrate with the rest of the files</li>
 </ul>
-rake integrate
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake integrate
+</code></pre></div>
 
 <ul>
 <li>git push</li>

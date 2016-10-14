@@ -148,8 +148,9 @@
           
 
 <p>While on the REPL, I tried this:</p>
-simple.core=> (reduce and true [true])
-CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clojure.core/and, compiling:(form-init7116694665186998245.clj:1:1)
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="nb">and</span> <span class="nv">true</span> <span class="nv">[true]</span><span class="p">)</span>
+<span class="nv">CompilerException</span> <span class="nv">java.lang.RuntimeException:</span> <span class="nv">Can</span><span class="ss">&#39;t</span> <span class="nv">take</span> <span class="nv">value</span> <span class="nv">of</span> <span class="nv">a</span> <span class="nv">macro:</span> <span class="nf">#&#39;</span><span class="nv">clojure.core/and,</span> <span class="nv">compiling:</span><span class="p">(</span><span class="nv">form-init7116694665186998245.clj:1:1</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Reading the <a href="https://clojuredocs.org/clojure.core/and" target="_blank">clojuredocs for <code>and</code></a>, you can find this:</p>
 
@@ -164,50 +165,55 @@ CompilerException java.lang.RuntimeException: Can't take value of a macro: #'clo
 </blockquote>
 
 <p>I tried it with success. Digging a bit deeper:</p>
-simple.core=> (defn all-truthy? [& elements] (every? identity elements))
-#'simple.core/all-truthy?
-simple.core=> (all-truthy? nil false)
-false
-simple.core=> (all-truthy? nil 0)
-false
-simple.core=> (all-truthy? nil 1)
-false
-simple.core=> (all-truthy? 2 1)
-true
-simple.core=> (all-truthy? [nil false])
-true
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">defn</span> <span class="nv">all-truthy?</span> <span class="nv">[&amp;</span> <span class="nv">elements]</span> <span class="p">(</span><span class="nv">every?</span> <span class="nb">identity</span> <span class="nv">elements</span><span class="p">))</span>
+<span class="nf">#&#39;</span><span class="nv">simple.core/all-truthy?</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="nv">false</span><span class="p">)</span>
+<span class="nv">false</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nv">false</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nv">false</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nv">true</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="nv">[nil</span> <span class="nv">false]</span><span class="p">)</span>
+<span class="nv">true</span>
+</code></pre></div>
 
 <p>Was also tempted to try this:</p>
-simple.core=> (reduce (fn [acc element] (and acc element)) true [true true false true])
-false
-simple.core=> (reduce (fn [acc element] (and acc element)) true [true true true true])
-true
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">[true</span> <span class="nv">true</span> <span class="nv">false</span> <span class="nv">true]</span><span class="p">)</span>
+<span class="nv">false</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">[true</span> <span class="nv">true</span> <span class="nv">true</span> <span class="nv">true]</span><span class="p">)</span>
+<span class="nv">true</span>
+</code></pre></div>
 
 <p>Encapsulate it into a function:</p>
-simple.core=> (defn all-true [& elements] (reduce (fn [acc element] (and acc element)) true elements))
-#'simple.core/all-true
-simple.core=> (all-true true)
-true
-simple.core=> (all-true true false)
-false
-simple.core=> (all-true true false true)
-false
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">defn</span> <span class="nv">all-true</span> <span class="nv">[&amp;</span> <span class="nv">elements]</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">elements</span><span class="p">))</span>
+<span class="nf">#&#39;</span><span class="nv">simple.core/all-true</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span><span class="p">)</span>
+<span class="nv">true</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span> <span class="nv">false</span><span class="p">)</span>
+<span class="nv">false</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span> <span class="nv">false</span> <span class="nv">true</span><span class="p">)</span>
+<span class="nv">false</span>
+</code></pre></div>
 
 <p>What happens with the non-boolean values?</p>
-simple.core=> (all-true 1 2 3)
-3
-simple.core=> (all-true 1 2 3 76)
-76
-simple.core=> (all-true 1 2 3 64)
-64
-simple.core=> (all-true 1 2 3 64)
-64
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span>
+<span class="mi">3</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">76</span><span class="p">)</span>
+<span class="mi">76</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
+<span class="mi">64</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
+<span class="mi">64</span>
+</code></pre></div>
 
 <p>This is because:</p>
-simple.core=> (and 64 3)
-3
-simple.core=> (and 3 64)
-64
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">and</span> <span class="mi">64</span> <span class="mi">3</span><span class="p">)</span>
+<span class="mi">3</span>
+<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">and</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
+<span class="mi">64</span>
+</code></pre></div>
 
 <h2 id="conclusion">Conclusion</h2>
 
@@ -216,58 +222,62 @@ simple.core=> (and 3 64)
 <h2 id="appendix-a-source-code">Appendix A: Source code</h2>
 
 <p><code>and</code>:</p>
-simple.core=> (source and)
-(defmacro and
-  "Evaluates exprs one at a time, from left to right. If a form
-  returns logical false (nil or false), and returns that value and
-  doesn't evaluate any of the other expressions, otherwise it returns
-  the value of the last expr. (and) returns true."
-  {:added "1.0"}
-  ([] true)
-  ([x] x)
-  ([x & next]
-   `(let [and# ~x]
-      (if and# (and ~@next) and#))))
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nb">and</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">defmacro</span> <span class="nb">and</span>
+  <span class="s">&quot;Evaluates exprs one at a time, from left to right. If a form</span>
+<span class="s">  returns logical false (nil or false), and returns that value and</span>
+<span class="s">  doesn&#39;t evaluate any of the other expressions, otherwise it returns</span>
+<span class="s">  the value of the last expr. (and) returns true.&quot;</span>
+  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span><span class="nv">}</span>
+  <span class="p">(</span><span class="nv">[]</span> <span class="nv">true</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">[x]</span> <span class="nv">x</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">[x</span> <span class="nv">&amp;</span> <span class="nv">next]</span>
+   <span class="o">`</span><span class="p">(</span><span class="k">let</span> <span class="nv">[and#</span> <span class="nv">~x]</span>
+      <span class="p">(</span><span class="k">if</span> <span class="nv">and#</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">~@next</span><span class="p">)</span> <span class="nv">and#</span><span class="p">))))</span>
+</code></pre></div>
 
 <p><code>identity</code>:</p>
-simple.core=> (source identity)
-(defn identity
-  "Returns its argument."
-  {:added "1.0"
-   :static true}
-  [x] x)
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nb">identity</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">defn</span> <span class="nb">identity</span>
+  <span class="s">&quot;Returns its argument.&quot;</span>
+  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span>
+   <span class="ss">:static</span> <span class="nv">true}</span>
+  <span class="nv">[x]</span> <span class="nv">x</span><span class="p">)</span>
+</code></pre></div>
 
 <p><code>every</code>:</p>
-simple.core=> (source every?)
-(defn every?
-  "Returns true if (pred x) is logical true for every x in coll, else
-  false."
-  {:tag Boolean
-   :added "1.0"
-   :static true}
-  [pred coll]
-  (cond
-   (nil? (seq coll)) true
-   (pred (first coll)) (recur pred (next coll))
-   :else false))
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nv">every?</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">defn</span> <span class="nv">every?</span>
+  <span class="s">&quot;Returns true if (pred x) is logical true for every x in coll, else</span>
+<span class="s">  false.&quot;</span>
+  <span class="nv">{:tag</span> <span class="nv">Boolean</span>
+   <span class="ss">:added</span> <span class="s">&quot;1.0&quot;</span>
+   <span class="ss">:static</span> <span class="nv">true}</span>
+  <span class="nv">[pred</span> <span class="nv">coll]</span>
+  <span class="p">(</span><span class="nb">cond</span>
+   <span class="p">(</span><span class="nv">nil?</span> <span class="p">(</span><span class="nv">seq</span> <span class="nv">coll</span><span class="p">))</span> <span class="nv">true</span>
+   <span class="p">(</span><span class="nv">pred</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">coll</span><span class="p">))</span> <span class="p">(</span><span class="nv">recur</span> <span class="nv">pred</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">coll</span><span class="p">))</span>
+   <span class="ss">:else</span> <span class="nv">false</span><span class="p">))</span>
+</code></pre></div>
 
 <p><code>-&gt;</code>:</p>
-simple.core=> (source ->)
-(defmacro ->
-  "Threads the expr through the forms. Inserts x as the
-  second item in the first form, making a list of it if it is not a
-  list already. If there are more forms, inserts the first form as the
-  second item in second form, etc."
-  {:added "1.0"}
-  [x & forms]
-  (loop [x x, forms forms]
-    (if forms
-      (let [form (first forms)
-            threaded (if (seq? form)
-                       (with-meta `(~(first form) ~x ~@(next form)) (meta form))
-                       (list form x))]
-        (recur threaded (next forms)))
-      x)))
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nv">-&gt;</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">defmacro</span> <span class="nv">-&gt;</span>
+  <span class="s">&quot;Threads the expr through the forms. Inserts x as the</span>
+<span class="s">  second item in the first form, making a list of it if it is not a</span>
+<span class="s">  list already. If there are more forms, inserts the first form as the</span>
+<span class="s">  second item in second form, etc.&quot;</span>
+  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span><span class="nv">}</span>
+  <span class="nv">[x</span> <span class="nv">&amp;</span> <span class="nv">forms]</span>
+  <span class="p">(</span><span class="nb">loop</span> <span class="nv">[x</span> <span class="nv">x,</span> <span class="nv">forms</span> <span class="nv">forms]</span>
+    <span class="p">(</span><span class="k">if</span> <span class="nv">forms</span>
+      <span class="p">(</span><span class="k">let</span> <span class="nv">[form</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">forms</span><span class="p">)</span>
+            <span class="nv">threaded</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">seq?</span> <span class="nv">form</span><span class="p">)</span>
+                       <span class="p">(</span><span class="nv">with-meta</span> <span class="o">`</span><span class="p">(</span><span class="nv">~</span><span class="p">(</span><span class="nb">first</span> <span class="nv">form</span><span class="p">)</span> <span class="nv">~x</span> <span class="nv">~@</span><span class="p">(</span><span class="nv">next</span> <span class="nv">form</span><span class="p">))</span> <span class="p">(</span><span class="nv">meta</span> <span class="nv">form</span><span class="p">))</span>
+                       <span class="p">(</span><span class="nb">list</span> <span class="nv">form</span> <span class="nv">x</span><span class="p">))</span><span class="nv">]</span>
+        <span class="p">(</span><span class="nv">recur</span> <span class="nv">threaded</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">forms</span><span class="p">)))</span>
+      <span class="nv">x</span><span class="p">)))</span>
+</code></pre></div>
 
         </div>
         

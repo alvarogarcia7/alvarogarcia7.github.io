@@ -167,15 +167,17 @@ x: 5 y: 7 point: {:x 5, :y 7}
 <p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html" target="_blank">Source</a></p>
 
 <p>This has been used for a method like this one:</p>
-(defn all-access[k]
-  (do (:a k))
-  (do (:b k)))
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
+</code></pre></div>
 
 <p>this has been refactored to this</p>
-(defn all-access[k]
-  (let [{:keys [a b] :as k}]
-	  (do a)
-	  (do (:b k))))
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+	  <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+	  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</code></pre></div>
 
 <p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
 

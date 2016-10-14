@@ -148,33 +148,35 @@
           <p>With my pairing mate we have refactored this piece of functional code.</p>
 
 <p>Original code:</p>
-function filterTokens (rawTokens) {
-  const cleanedTokens = rawTokens.map(token => (token.length && token[0] === '-') ? token.substring(1) : token)
-  return cleanedTokens.filter(token => token !== '' && stopWordsArray.indexOf(token) === -1)
-}
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">filterTokens</span> <span class="p">(</span><span class="nx">rawTokens</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">cleanedTokens</span> <span class="o">=</span> <span class="nx">rawTokens</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">token</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nx">token</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="nx">token</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">cleanedTokens</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">token</span> <span class="o">=&gt;</span> <span class="nx">token</span> <span class="o">!==</span> <span class="s1">&#39;&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">stopWordsArray</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>Refactored code:</p>
-function filterTokens (rawTokens) {
-  const cleanedTokens = rawTokens.map(token => startsWithADash(token) ? removeDashFrom(token) : token)
-  const processedTokens = cleanedTokens.filter(token => isNotEmpty(token) && isNotAStopWord(token))
-  return processedTokens
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">filterTokens</span> <span class="p">(</span><span class="nx">rawTokens</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">cleanedTokens</span> <span class="o">=</span> <span class="nx">rawTokens</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">token</span> <span class="o">=&gt;</span> <span class="nx">startsWithADash</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">?</span> <span class="nx">removeDashFrom</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">:</span> <span class="nx">token</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">processedTokens</span> <span class="o">=</span> <span class="nx">cleanedTokens</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">token</span> <span class="o">=&gt;</span> <span class="nx">isNotEmpty</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">isNotAStopWord</span><span class="p">(</span><span class="nx">token</span><span class="p">))</span>
+  <span class="k">return</span> <span class="nx">processedTokens</span>
 
-  function startsWithADash (token) {
-    return (token.length && token[ 0 ] === '-')
-  }
+  <span class="kd">function</span> <span class="nx">startsWithADash</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">token</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
 
-  function removeDashFrom (token) {
-    return token.substring(1)
-  }
+  <span class="kd">function</span> <span class="nx">removeDashFrom</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">token</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
 
-  function isNotAStopWord (token) {
-    return stopWordsArray.indexOf(token) === -1
-  }
+  <span class="kd">function</span> <span class="nx">isNotAStopWord</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">stopWordsArray</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="p">}</span>
 
-  function isNotEmpty (token) {
-    return token !== ''
-  }
- }
+  <span class="kd">function</span> <span class="nx">isNotEmpty</span> <span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">token</span> <span class="o">!==</span> <span class="s1">&#39;&#39;</span>
+  <span class="p">}</span>
+ <span class="p">}</span>
+</code></pre></div>
 
 <p>These two codes do the same, but the second reads better, given that each small concept (e.g., <code>cleanedTokens</code>) or operation (e.g., <code>removeDashFrom</code>) has a name. Even the returned value, usually <code>result</code>, has an appropiate name. The machine will optimize that variable assignment to a variable but the human reader will dig deeper only if required.</p>
 

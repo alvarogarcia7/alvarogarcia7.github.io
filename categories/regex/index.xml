@@ -80,9 +80,10 @@ DocumentControllerTest
 &lt;p&gt;copy that to file &lt;code&gt;a.txt&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Revert all the changes in these files:&lt;/p&gt;
-for i in $(cat a.txt | uniq); do
-  git checkout -- *$i*
-done
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; i in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;cat a.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; uniq&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  git checkout -- *&lt;span class=&#34;nv&#34;&gt;$i&lt;/span&gt;*
+&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

@@ -185,12 +185,8 @@ testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest) testCrea
         
           <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.
 This is why I have some scripts to commit all the changes, even with the same message. This is one of them:
-for f in $(git status -s |grep "^M"|awk '{print $2}'); do git add $f git commit -m "generic commit for all files"</p>
+for f in $(git status -s |grep &quot;^M&quot;|awk &#39;{print $2}&#39;); do git add $f git commit -m &quot;generic commit for all files&quot; done  </p>
 
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/" rel="full-article">Read On &rarr;</a>
-              </footer>
           
 
         
@@ -260,9 +256,9 @@ Contents This paper starts slow, from the mathematical and philosophical point o
           <p>Scenario: iterate a sequence (seq) with its index
 The lines have an implicit line number (starting by 1, in most editors):
 [1] line1 [2] line2 [3] hello  When you read it from file to a variable, it is converted to:
-("line1" "line2" "hello") This implicit line number value is not present, therefore you need to assign them one.
+(&quot;line1&quot; &quot;line2&quot; &quot;hello&quot;)  This implicit line number value is not present, therefore you need to assign them one.
 In ruby, you have this construct:
-array = ["A", "B", "C"] array.</p>
+array = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;] array.</p>
 
           
               <footer>

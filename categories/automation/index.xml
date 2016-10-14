@@ -632,60 +632,64 @@ modifiers can manipulate the block so that we can theme or style that particular
 &lt;p&gt;In the &lt;code&gt;local&lt;/code&gt; you can do the development and local commits.&lt;/p&gt;
 
 &lt;p&gt;When you&amp;rsquo;re done, instead of&lt;/p&gt;
-git push origin $branch
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;git push origin &lt;span class=&#34;nv&#34;&gt;$branch&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;do&lt;/p&gt;
-git push pipeline $branch
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;git push pipeline &lt;span class=&#34;nv&#34;&gt;$branch&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;After the git hook is installed, this will trigger the pipeline execution.&lt;/p&gt;
 
 &lt;h3 id=&#34;git-hook&#34;&gt;Git hook&lt;/h3&gt;
 
 &lt;p&gt;In the &lt;code&gt;pipeline&lt;/code&gt;, in the &lt;code&gt;.git/hooks/post-receive&lt;/code&gt; file:&lt;/p&gt;
-#!/bin/bash
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;#!/bin/bash&lt;/span&gt;
 chmod +x pipeline.sh
-while read oldrev newrev refname
-do
-  # whatever you want to execute
-   branch=$(git rev-parse --symbolic --abbrev-ref $refname)
-  ./pipeline.sh $branch
-done
+&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;read&lt;/span&gt; oldrev newrev refname
+&lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  &lt;span class=&#34;c1&#34;&gt;# whatever you want to execute&lt;/span&gt;
+   &lt;span class=&#34;nv&#34;&gt;branch&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;git rev-parse --symbolic --abbrev-ref &lt;span class=&#34;nv&#34;&gt;$refname&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+  ./pipeline.sh &lt;span class=&#34;nv&#34;&gt;$branch&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;In the above script, we&amp;rsquo;re telling git to execute the &lt;code&gt;pipeline.sh&lt;/code&gt; with the received branch as argument.&lt;/p&gt;
 
 &lt;h3 id=&#34;pipeline-executor&#34;&gt;Pipeline executor&lt;/h3&gt;
 
 &lt;p&gt;In the &lt;code&gt;pipeline&lt;/code&gt; repository, in &lt;code&gt;.git/pipeline.sh&lt;/code&gt; file:&lt;/p&gt;
-#!/bin/bash
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;#!/bin/bash&lt;/span&gt;
 
-set -e
-set -o pipefail
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -e
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -o pipefail
 
-function cleanup {
+&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; cleanup &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
   git checkout develop
   git pull develop
-}
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-# upon failure, tell the user
-function err {
+&lt;span class=&#34;c1&#34;&gt;# upon failure, tell the user&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; err &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
   cleanup
-  growlnotify &#34;pipeline fails&#34;
-}
+  growlnotify &lt;span class=&#34;s2&#34;&gt;&amp;quot;pipeline fails&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-# trap signal ERR, executing function &#39;err&#39;
-trap &#34;err&#34; ERR
+&lt;span class=&#34;c1&#34;&gt;# trap signal ERR, executing function &amp;#39;err&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;trap&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;err&amp;quot;&lt;/span&gt; ERR
 
-branch=$1
+&lt;span class=&#34;nv&#34;&gt;branch&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;
 
-if [[ -z $branch ]]; then
-    echo &#34;need to specify a branch&#34;
-    exit -1
-fi
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt; -z &lt;span class=&#34;nv&#34;&gt;$branch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;need to specify a branch&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt; -1
+&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
 
-git checkout $branch
-mvn clean install | tee output.log
-git push --set-upstream origin $branch
+git checkout &lt;span class=&#34;nv&#34;&gt;$branch&lt;/span&gt;
+mvn clean install &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tee output.log
+git push --set-upstream origin &lt;span class=&#34;nv&#34;&gt;$branch&lt;/span&gt;
 cleanup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h4 id=&#34;pipeline-executor-explanation&#34;&gt;Pipeline executor explanation&lt;/h4&gt;
 
@@ -739,9 +743,10 @@ cleanup
 &lt;h2 id=&#34;appendix&#34;&gt;Appendix&lt;/h2&gt;
 
 &lt;p&gt;This script will push to the pipeline:&lt;/p&gt;
-#!/bin/bash
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;#!/bin/bash&lt;/span&gt;
 
-git push pipeline  2&gt;&amp;1 &gt; /dev/null &amp;
+git push pipeline  2&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &amp;gt; /dev/null &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     
@@ -817,9 +822,10 @@ DocumentControllerTest
 &lt;p&gt;copy that to file &lt;code&gt;a.txt&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Revert all the changes in these files:&lt;/p&gt;
-for i in $(cat a.txt | uniq); do
-  git checkout -- *$i*
-done
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; i in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;cat a.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; uniq&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  git checkout -- *&lt;span class=&#34;nv&#34;&gt;$i&lt;/span&gt;*
+&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     
@@ -832,10 +838,11 @@ done
       <description>&lt;p&gt;I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.&lt;/p&gt;
 
 &lt;p&gt;This is why I have some scripts to commit all the changes, even with the same message. This is one of them:&lt;/p&gt;
-for f in $(git status -s |grep &#34;^M&#34;|awk &#39;{print $2}&#39;); do
-  git add $f
-  git commit -m &#34;generic commit for all files&#34;
-done
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; f in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;git status -s &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;^M&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  git add &lt;span class=&#34;nv&#34;&gt;$f&lt;/span&gt;
+  git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;quot;generic commit for all files&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

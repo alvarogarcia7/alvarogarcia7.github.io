@@ -780,12 +780,13 @@ see how services connect to each other based on logs instead of based on documen
       <description>
 
 &lt;p&gt;At a client, we have CSVs of data that can be simplified to this &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-(def data [
-           [&#34;total&#34; 6 8 13]
-           [&#34;0&#34;     1 2 3]
-           [&#34;0&#34;     2 0 4]
-           [&#34;0&#34;     3 0 6]
-          ])
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[&lt;/span&gt;
+           &lt;span class=&#34;nv&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;total&amp;quot;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;13]&lt;/span&gt;
+           &lt;span class=&#34;nv&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;0&amp;quot;&lt;/span&gt;     &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;3]&lt;/span&gt;
+           &lt;span class=&#34;nv&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;0&amp;quot;&lt;/span&gt;     &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;4]&lt;/span&gt;
+           &lt;span class=&#34;nv&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;0&amp;quot;&lt;/span&gt;     &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;6]&lt;/span&gt;
+          &lt;span class=&#34;nv&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;In this case, some of the row named &lt;code&gt;total&lt;/code&gt; is the sum of the rest of the rows, but only for some columns (second and fourth). We do not want to get rid of the columns, as they need to be printed at the end.&lt;/p&gt;
 
@@ -810,29 +811,32 @@ teach someone to fish vs fish for them
 &lt;h2 id=&#34;implementation&#34;&gt;Implementation&lt;/h2&gt;
 
 &lt;p&gt;The full &lt;a href=&#34;https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj&#34; target=&#34;_blank&#34;&gt;source code is here&lt;/a&gt;&lt;/p&gt;
-(defn sum-eq-total [selector dataset]
-  (letfn [(total-and-rest [coll]
-             [(first coll) (rest coll)])]
-  (let [[total rest-dataset] (total-and-rest dataset)
-        selected-total (selector total)
-        selected-column (map selector rest-dataset)
-        sum-of-column (reduce + selected-column)]
-        (= selected-total sum-of-column))))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;sum-eq-total&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[selector&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;dataset]&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;letfn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;total-and-rest&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[coll]&lt;/span&gt;
+             &lt;span class=&#34;nv&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;rest&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;]&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[[total&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;rest-dataset]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;total-and-rest&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;dataset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;selected-total&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;selector&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;total&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;selected-column&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;selector&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;rest-dataset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;sum-of-column&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;selected-column&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;]&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;selected-total&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;sum-of-column&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))))&lt;/span&gt;
 
-(defn validate-columns [indices data]
-  (let [generate-selector #(fn [dataset] (nth dataset %))
-         selectors (map generate-selector indices)
-         check-selector #(sum-eq-total % data)]
-         (map check-selector selectors)))
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;validate-columns&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[indices&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;data]&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[generate-selector&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[dataset]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;nth&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;dataset&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+         &lt;span class=&#34;nv&#34;&gt;selectors&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;generate-selector&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;indices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+         &lt;span class=&#34;nv&#34;&gt;check-selector&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;sum-eq-total&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;]&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;check-selector&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;selectors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;We define the domain concept of &lt;code&gt;selector&lt;/code&gt; for pointing to a dataset column&lt;/p&gt;
-generate-selector #(fn [dataset] (nth dataset %))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;generate-selector&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[dataset]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;nth&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;dataset&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This expression creates selectors based on a given index. It is a lambda that returns a function, thus being a HOF&lt;/p&gt;
 
 &lt;p&gt;Users can use the application in this fashion:&lt;/p&gt;
-simple.core=&gt; (validate-columns [1 3] data)
-(true true)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;validate-columns&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[1&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;3]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The full &lt;a href=&#34;https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj&#34; target=&#34;_blank&#34;&gt;source code is here&lt;/a&gt;&lt;/p&gt;
 
@@ -868,8 +872,9 @@ simple.core=&gt; (validate-columns [1 3] data)
       <description>
 
 &lt;p&gt;While on the REPL, I tried this:&lt;/p&gt;
-simple.core=&gt; (reduce and true [true])
-CompilerException java.lang.RuntimeException: Can&#39;t take value of a macro: #&#39;clojure.core/and, compiling:(form-init7116694665186998245.clj:1:1)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[true]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;CompilerException&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;java.lang.RuntimeException:&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;Can&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;t&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;take&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;value&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;macro:&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;#&amp;#39;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;clojure.core/and,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;compiling:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;form-init7116694665186998245.clj:1:1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Reading the &lt;a href=&#34;https://clojuredocs.org/clojure.core/and&#34; target=&#34;_blank&#34;&gt;clojuredocs for &lt;code&gt;and&lt;/code&gt;&lt;/a&gt;, you can find this:&lt;/p&gt;
 
@@ -884,50 +889,55 @@ CompilerException java.lang.RuntimeException: Can&#39;t take value of a macro: #
 &lt;/blockquote&gt;
 
 &lt;p&gt;I tried it with success. Digging a bit deeper:&lt;/p&gt;
-simple.core=&gt; (defn all-truthy? [&amp; elements] (every? identity elements))
-#&#39;simple.core/all-truthy?
-simple.core=&gt; (all-truthy? nil false)
-false
-simple.core=&gt; (all-truthy? nil 0)
-false
-simple.core=&gt; (all-truthy? nil 1)
-false
-simple.core=&gt; (all-truthy? 2 1)
-true
-simple.core=&gt; (all-truthy? [nil false])
-true
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;elements]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;every?&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;identity&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;elements&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;nf&#34;&gt;#&amp;#39;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core/all-truthy?&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[nil&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Was also tempted to try this:&lt;/p&gt;
-simple.core=&gt; (reduce (fn [acc element] (and acc element)) true [true true false true])
-false
-simple.core=&gt; (reduce (fn [acc element] (and acc element)) true [true true true true])
-true
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Encapsulate it into a function:&lt;/p&gt;
-simple.core=&gt; (defn all-true [&amp; elements] (reduce (fn [acc element] (and acc element)) true elements))
-#&#39;simple.core/all-true
-simple.core=&gt; (all-true true)
-true
-simple.core=&gt; (all-true true false)
-false
-simple.core=&gt; (all-true true false true)
-false
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;elements]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;elements&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;nf&#34;&gt;#&amp;#39;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core/all-true&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;What happens with the non-boolean values?&lt;/p&gt;
-simple.core=&gt; (all-true 1 2 3)
-3
-simple.core=&gt; (all-true 1 2 3 76)
-76
-simple.core=&gt; (all-true 1 2 3 64)
-64
-simple.core=&gt; (all-true 1 2 3 64)
-64
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;76&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;mi&#34;&gt;76&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This is because:&lt;/p&gt;
-simple.core=&gt; (and 64 3)
-3
-simple.core=&gt; (and 3 64)
-64
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
@@ -936,58 +946,62 @@ simple.core=&gt; (and 3 64)
 &lt;h2 id=&#34;appendix-a-source-code&#34;&gt;Appendix A: Source code&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;and&lt;/code&gt;:&lt;/p&gt;
-simple.core=&gt; (source and)
-(defmacro and
-  &#34;Evaluates exprs one at a time, from left to right. If a form
-  returns logical false (nil or false), and returns that value and
-  doesn&#39;t evaluate any of the other expressions, otherwise it returns
-  the value of the last expr. (and) returns true.&#34;
-  {:added &#34;1.0&#34;}
-  ([] true)
-  ([x] x)
-  ([x &amp; next]
-   `(let [and# ~x]
-      (if and# (and ~@next) and#))))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;defmacro&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt;
+  &lt;span class=&#34;s&#34;&gt;&amp;quot;Evaluates exprs one at a time, from left to right. If a form&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;  returns logical false (nil or false), and returns that value and&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;  doesn&amp;#39;t evaluate any of the other expressions, otherwise it returns&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;  the value of the last expr. (and) returns true.&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;{:added&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;}&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[x]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;next]&lt;/span&gt;
+   &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[and#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;~x]&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;and#&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;~@next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;and#&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code&gt;identity&lt;/code&gt;:&lt;/p&gt;
-simple.core=&gt; (source identity)
-(defn identity
-  &#34;Returns its argument.&#34;
-  {:added &#34;1.0&#34;
-   :static true}
-  [x] x)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;identity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;identity&lt;/span&gt;
+  &lt;span class=&#34;s&#34;&gt;&amp;quot;Returns its argument.&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;{:added&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;
+   &lt;span class=&#34;ss&#34;&gt;:static&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true}&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;[x]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code&gt;every&lt;/code&gt;:&lt;/p&gt;
-simple.core=&gt; (source every?)
-(defn every?
-  &#34;Returns true if (pred x) is logical true for every x in coll, else
-  false.&#34;
-  {:tag Boolean
-   :added &#34;1.0&#34;
-   :static true}
-  [pred coll]
-  (cond
-   (nil? (seq coll)) true
-   (pred (first coll)) (recur pred (next coll))
-   :else false))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;every?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;every?&lt;/span&gt;
+  &lt;span class=&#34;s&#34;&gt;&amp;quot;Returns true if (pred x) is logical true for every x in coll, else&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;  false.&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;{:tag&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;Boolean&lt;/span&gt;
+   &lt;span class=&#34;ss&#34;&gt;:added&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;
+   &lt;span class=&#34;ss&#34;&gt;:static&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true}&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;[pred&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll]&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;cond&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;nil?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;seq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;pred&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;recur&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;pred&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+   &lt;span class=&#34;ss&#34;&gt;:else&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code&gt;-&amp;gt;&lt;/code&gt;:&lt;/p&gt;
-simple.core=&gt; (source -&gt;)
-(defmacro -&gt;
-  &#34;Threads the expr through the forms. Inserts x as the
-  second item in the first form, making a list of it if it is not a
-  list already. If there are more forms, inserts the first form as the
-  second item in second form, etc.&#34;
-  {:added &#34;1.0&#34;}
-  [x &amp; forms]
-  (loop [x x, forms forms]
-    (if forms
-      (let [form (first forms)
-            threaded (if (seq? form)
-                       (with-meta `(~(first form) ~x ~@(next form)) (meta form))
-                       (list form x))]
-        (recur threaded (next forms)))
-      x)))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;defmacro&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;-&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;s&#34;&gt;&amp;quot;Threads the expr through the forms. Inserts x as the&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;  second item in the first form, making a list of it if it is not a&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;  list already. If there are more forms, inserts the first form as the&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;  second item in second form, etc.&amp;quot;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;{:added&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;}&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;[x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms]&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;loop&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms]&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[form&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;nv&#34;&gt;threaded&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;seq?&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+                       &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;with-meta&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;~x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;~@&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+                       &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;]&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;recur&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;threaded&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
+      &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     
@@ -2331,52 +2345,59 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
       <description>
 
 &lt;p&gt;Many times I&amp;rsquo;ve written this function:&lt;/p&gt;
-public boolean between(int lowerBound, int n, int upperBound){
-	return lowerBound &lt;= n &amp;&amp;
-		n &lt;= upperBound;
-}
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;boolean&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;between&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lowerBound&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;upperBound&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+	&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lowerBound&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;upperBound&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;It may depend on the case, whether it is &lt;code&gt;[]&lt;/code&gt;, &lt;code&gt;[)&lt;/code&gt;, &lt;code&gt;(]&lt;/code&gt; or &lt;code&gt;()&lt;/code&gt;, to use mathematical terms.&lt;/p&gt;
 
 &lt;p&gt;When the two comparisons are the same (&lt;code&gt;[]&lt;/code&gt; and &lt;code&gt;()&lt;/code&gt;), there is duplication in the comparisons.&lt;/p&gt;
 
 &lt;p&gt;Investigating a little bit on this in clojure, I&amp;rsquo;ve found this function:&lt;/p&gt;
-&lt;=
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;&amp;lt;=&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And its &lt;a href=&#34;https://clojuredocs.org/clojure.core/%3C=&#34; target=&#34;_blank&#34;&gt;clojuredocs&lt;/a&gt;: Returns non-nil if nums are in monotonically non-decreasing order,
 otherwise false.&lt;/p&gt;
 
 &lt;p&gt;A sample usage:&lt;/p&gt;
-(&lt;= 1 2)
-; true
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; true&lt;/span&gt;
 
-(&lt;= 1 2 1)
-; false
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The last part is the most interesting one. As this function is prepared to receive more than two parameters, it is very easy for the programmer to use it. We could say that the language was prepared for that.&lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&#34;https://github.com/clojure/clojure/blob/clojure-1.7.0/src/clj/clojure/core.clj#L1020&#34; target=&#34;_blank&#34;&gt;implementation&lt;/a&gt;:&lt;/p&gt;
-(defn &lt;=
-  ([x] true)
-  ([x y] (. clojure.lang.Numbers (lte x y)))
-  ([x y &amp; more]
-   (if (&lt;= x y)
-     (if (next more)
-       (recur y (first more) (next more))
-       (&lt;= y (first more)))
-     false)))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;&amp;lt;=&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[x]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;y]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;clojure.lang.Numbers&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;lte&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;more]&lt;/span&gt;
+   &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+     &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;more&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;recur&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;more&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;more&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;more&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
+     &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Inspired by this, I&amp;rsquo;ve implemented the same function in haskell (for the repl):&lt;/p&gt;
-let isBigger acc ele = (snd acc) &amp;&amp; (fst acc) &lt; ele in
-   foldl (\acc ele -&gt; (ele, isBigger acc ele)) (1, True) [1,2,1,3] 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;isBigger&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ele&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;snd&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;acc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fst&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;acc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ele&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;in&lt;/span&gt;
+   &lt;span class=&#34;n&#34;&gt;foldl&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ele&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ele&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;isBigger&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ele&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;and a simpler solution I&amp;rsquo;ve found on &lt;a href=&#34;http://codereview.stackexchange.com/questions/46606/is-a-list-sorted/46608#46608&#34; target=&#34;_blank&#34;&gt;Stack Overflow&lt;/a&gt;:&lt;/p&gt;
-isSorted :: (Ord a) =&gt; [a] -&gt; Bool
-isSorted xs = all (\(x, y) -&gt; x &lt;= y) $ zip xs (tail xs)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;isSorted&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;::&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;Ord&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Bool&lt;/span&gt;
+&lt;span class=&#34;nf&#34;&gt;isSorted&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;all&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;$&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;zip&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tail&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;or&lt;/p&gt;
-isSorted :: (Ord a) =&gt; [a] -&gt; Bool
-isSorted xs = and $ zipWith (&lt;=) xs (tail xs)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;isSorted&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;::&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;Ord&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Bool&lt;/span&gt;
+&lt;span class=&#34;nf&#34;&gt;isSorted&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;$&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;zipWith&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tail&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;xs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
@@ -2839,47 +2860,52 @@ that you know &amp;ndash;but can’t easily prove to the compiler&amp;ndash; is 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;When you read it from file to a variable, it is converted to:&lt;/p&gt;
-(&#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;line1&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;line2&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This implicit line number value is not present, therefore you need to assign them one.&lt;/p&gt;
 
 &lt;p&gt;In ruby, you have this construct:&lt;/p&gt;
-array = [&#34;A&#34;, &#34;B&#34;, &#34;C&#34;]
-array.each_with_index {|val, index| puts &#34;#{val} =&gt; #{index}&#34; }
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;A&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;B&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;C&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;each_with_index&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; =&amp;gt; &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/310634/what-is-the-right-way-to-iterate-through-an-array-in-ruby/310638#310638&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;In clojure, there is a similar function:&lt;/p&gt;
-(map-indexed (fn [idx itm] [idx itm]) &#39;(:f :o))
-; ([0 &#34;line1&#34;] [1 &#34;line2&#34;] [2 &#34;hello&#34;])
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;map-indexed&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:f&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; ([0 &amp;quot;line1&amp;quot;] [1 &amp;quot;line2&amp;quot;] [2 &amp;quot;hello&amp;quot;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;If you want to shift the collection to the right so it starts with 1 (for the REPL):&lt;/p&gt;
-(def lines &#39;(&#34;line1&#34; &#34;line2&#34; &#34;hello&#34;))
-; (&#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;line1&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;line2&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
 
-(defn shift-one [lines] 
-  (cons &#34;&#34; lines))
-(def lines (shift-one lines))
-lines
-; (&#34;&#34; &#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;shift-one&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[lines]&lt;/span&gt; 
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;cons&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;shift-one&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;&amp;quot; &amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
 
-(map-indexed (fn [idx itm] [idx itm])
-  lines)  
-; ([0 &#34;&#34;] [1 &#34;line1&#34;] [2 &#34;line2&#34;] [3 &#34;hello&#34;])
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;map-indexed&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  
+&lt;span class=&#34;c1&#34;&gt;; ([0 &amp;quot;&amp;quot;] [1 &amp;quot;line1&amp;quot;] [2 &amp;quot;line2&amp;quot;] [3 &amp;quot;hello&amp;quot;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://clojuredocs.org/clojure.core/map-indexed&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;, especially &lt;a href=&#34;https://clojuredocs.org/clojure.core/map-indexed#example-542692cdc026201cdc326d25&#34; target=&#34;_blank&#34;&gt;this one&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;But if you only need to get the lines at certain indexes, it is also possible to get the values directly, using &lt;code&gt;map&lt;/code&gt; on the sequence of desired indexes:&lt;/p&gt;
-lines
-; (&#34;&#34; &#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;&amp;quot; &amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
 
-(defn get-all [lines indexes]
-  (map #(nth lines %) indexes))
-(get-all lines &#39;(1 2))
-; (&#34;line1&#34; &#34;line2&#34;)
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[lines&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;indexes]&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;nth&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;indexes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot;)&lt;/span&gt;
 
-(get-all lines &#39;(1 1))
-; (&#34;line1&#34; &#34;line1&#34;)
+&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line1&amp;quot;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Note: the original source code for this post is &lt;a href=&#34;https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/iterate-with-index.clj&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>

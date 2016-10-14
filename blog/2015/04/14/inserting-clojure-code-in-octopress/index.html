@@ -172,10 +172,11 @@ Error: Run jekyll build --trace for more information.
 </code></pre>
 
 <p>this is an example:</p>
-(defn all-access[k]
-	(let [{:keys [a b] :as k}]
-		(do a)
-		(do (:b k))))
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+	<span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+		<span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+		<span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</code></pre></div>
 
         </div>
         

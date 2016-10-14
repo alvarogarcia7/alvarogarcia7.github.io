@@ -19,70 +19,73 @@
 &lt;p&gt;At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:&lt;/p&gt;
 
 &lt;p&gt;(source code is &lt;a href=&#34;https://github.com/alvarogarcia7/spike-lambda-testing/tree/ef00a220f427900e3180dcbeec51248845446248&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;)&lt;/p&gt;
-@Test
-public void log_when_sending_greeting_letters() {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_when_sending_greeting_letters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
 
-	sut.send(mock(GreetingLetter.class));
+	&lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;send&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
 
-	verify(logger).sentGreetingLetter();
-}
+	&lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sentGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-@Test
-public void log_when_sending_love_letters() {
+&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_when_sending_love_letters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
 
-	sut.send(mock(LoveLetter.class));
+	&lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;send&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
 
-	verify(logger).sentLoveLetter();
-}
+	&lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sentLoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;and the production code:&lt;/p&gt;
-public class MailSender {
-	private final EventLogger eventLogger;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-	public MailSender (final EventLogger eventLogger) {
-		this.eventLogger = eventLogger;
-	}
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;eventLogger&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	public void send (final GreetingLetter letter) {
-		// more business logic
-		eventLogger.sentGreetingLetter();
-	}
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;send&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;c1&#34;&gt;// more business logic&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sentGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	public void send (final LoveLetter letter) {
-		// more business logic
-		eventLogger.sentLoveLetter();
-	}
-}
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;send&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LoveLetter&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;c1&#34;&gt;// more business logic&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sentLoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Note: this is an adapted code, so the business logic is not complete and seems simple.&lt;/p&gt;
 
 &lt;p&gt;So I decided to explore a bit on refactoring these tests to use lambdas and reduce repetition:&lt;/p&gt;
-private MailSender sut;
-private Consumer&lt;MailSender&gt; arrange;
-private Consumer&lt;EventLogger&gt; verify;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;arrange&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-@Test
-public void log_greetings_letter() {
-	arrange = (MailSender sut) -&gt; sut.send(mock(GreetingLetter.class));
+&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_greetings_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;arrange&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;send&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
 
-	verify = EventLogger::sentGreetingLetter;
+	&lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-	assertAndVerify();
-}
+	&lt;span class=&#34;n&#34;&gt;assertAndVerify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-@Test
-public void log_love_letter() {
-	arrange = (MailSender sut) -&gt; sut.send(mock(LoveLetter.class));
+&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_love_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;arrange&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;send&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
 
-	verify = EventLogger::sentLoveLetter;
+	&lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentLoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-	assertAndVerify();
-}
+	&lt;span class=&#34;n&#34;&gt;assertAndVerify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-private void assertAndVerify() {
-	arrange.accept(sut);
-	verify.accept(logger);
-}
+&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;assertAndVerify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;arrange&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;accept&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;accept&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Some comments, mine and my teammates:&lt;/p&gt;
 
@@ -95,178 +98,188 @@ private void assertAndVerify() {
 &lt;p&gt;Finally, the refactor was discarded and we are using the initial version.&lt;/p&gt;
 
 &lt;p&gt;Later, in the dojo, &lt;a href=&#34;https://twitter.com/@trikitrok&#34; target=&#34;_blank&#34;&gt;Manuel&lt;/a&gt; and I have refactored this a little bit more. Source code is &lt;a href=&#34;https://github.com/alvarogarcia7/spike-lambda-testing/tree/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-public class MailSenderShould {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MailSenderShould&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
 
-	private EventLogger eventLogger;
-	private MailSender mailSender;
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-	@Before
-	public void setUp () {
-		eventLogger = mock(EventLogger.class);
-		mailSender = new MailSender(eventLogger);
-	}
+	&lt;span class=&#34;nd&#34;&gt;@Before&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;setUp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;mailSender&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	@Test
-	public void log_greetings_letter() {
-		checkThat(aLoggingLine().forA(greetingLetter()).wasLoggedWhen(aGreetingLetterWasSent()));
-	}
+	&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_greetings_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;checkThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;aLoggingLine&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;forA&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;greetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;wasLoggedWhen&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;aGreetingLetterWasSent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()));&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	@Test
-	public void log_love_letter() {
-		checkThat(aLoggingLine().forA(loveLetter()).wasLoggedWhen(aLoveLetterWasSent()));
-	}
+	&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_love_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;checkThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;aLoggingLine&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;forA&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;loveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;wasLoggedWhen&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;aLoveLetterWasSent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()));&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private void checkThat (final Check check) {
-		check.checkFor(mailSender, eventLogger);
-	}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;checkThat&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Check&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;check&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;check&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;checkFor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private Consumer&lt;EventLogger&gt; aGreetingLetterWasSent () {
-		return EventLogger::sentGreetingLetter;
-	}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;aGreetingLetterWasSent&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private Consumer&lt;MailSender&gt; greetingLetter () {
-		return (MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class));
-	}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;greetingLetter&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sendGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private Consumer&lt;MailSender&gt; loveLetter () {
-		return (MailSender sut) -&gt; sut.sendLoveLetter(mock(LoveLetter.class));
-	}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;loveLetter&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sendLoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private Consumer&lt;EventLogger&gt; aLoveLetterWasSent () {
-		return EventLogger::sentLoveLetter;
-	}
-}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;aLoveLetterWasSent&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentLoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;(the logger is &lt;a href=&#34;https://github.com/alvarogarcia7/spike-lambda-testing/blob/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9/src/test/java/com/example/lambdatesting/CheckBuilder.java&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;)&lt;/p&gt;
 
 &lt;p&gt;Later, we have created a simpler functional DSL for the logging, joining the &lt;code&gt;act&lt;/code&gt; and &lt;code&gt;verify&lt;/code&gt; into an object called &lt;code&gt;Check&lt;/code&gt;&lt;/p&gt;
-public class MailSenderShould {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MailSenderShould&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
 
-	private EventLogger eventLogger;
-	private MailSender mailSender;
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-	@Before
-	public void setUp () {
-		eventLogger = mock(EventLogger.class);
-		mailSender = new MailSender(eventLogger);
-	}
+	&lt;span class=&#34;nd&#34;&gt;@Before&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;setUp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;mailSender&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	@Test
-	public void log_greetings_letter() {
-		mailSenderLogs(whenSendingAGreetingLetter());
-	}
+	&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_greetings_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;mailSenderLogs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;whenSendingAGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	@Test
-	public void log_love_letter() {
-		mailSenderLogs(whenSendingALoveLetter());
-	}
+	&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_love_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;mailSenderLogs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;whenSendingALoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private Check whenSendingALoveLetter () {
-		return new Check(
-			(MailSender sut) -&gt; sut.send(letter(LoveLetter.class)),
-			EventLogger::sentLoveLetter
-		);
-	}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Check&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;whenSendingALoveLetter&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Check&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+			&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;send&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LoveLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)),&lt;/span&gt;
+			&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentLoveLetter&lt;/span&gt;
+		&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private void mailSenderLogs (Check check) {
-		check.checkFor(mailSender, eventLogger);
-	}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;mailSenderLogs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Check&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;check&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;check&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;checkFor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private Check whenSendingAGreetingLetter () {
-		return new Check(
-			(MailSender sut) -&gt; sut.send(letter(GreetingLetter.class)),
-			EventLogger::sentGreetingLetter
-		);
-	}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Check&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;whenSendingAGreetingLetter&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Check&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+			&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;send&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)),&lt;/span&gt;
+			&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentGreetingLetter&lt;/span&gt;
+		&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	private &lt;T&gt; T letter (final Class&lt;T&gt; typeOfLetter) {
-		return mock(typeOfLetter);
-	}
-}
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;letter&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;typeOfLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;typeOfLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;and the &lt;code&gt;Check&lt;/code&gt;, just a placeholder for two &lt;code&gt;Consumer&lt;/code&gt;s:&lt;/p&gt;
-public class Check {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Check&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
 
-	private final Consumer&lt;MailSender&gt; act;
-	private final Consumer&lt;EventLogger&gt; verify;
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;act&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+	&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-	public Check (final Consumer&lt;MailSender&gt; act, final Consumer&lt;EventLogger&gt; verify) {
-		this.act = act;
-		this.verify = verify;
-	}
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Check&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;act&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;act&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;act&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;verify&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-	public void checkFor(MailSender mailSender, EventLogger eventLogger) {
-		act.accept(mailSender);
-		verify.accept(eventLogger);
-	}
-}
+	&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;checkFor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;act&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;accept&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+		&lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;accept&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;eventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;comparison&#34;&gt;Comparison&lt;/h2&gt;
 
 &lt;p&gt;Comparison between the original form and the three refactored forms of the test:&lt;/p&gt;
-@Test
-public void log_when_sending_greeting_letters() {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_when_sending_greeting_letters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
 
-	sut.send(mock(GreetingLetter.class));
+	&lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;send&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
 
-	verify(logger).sentGreetingLetter();
-}
+	&lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sentGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This reads like a classical JUnit tests, using the interaction (with mocks).&lt;/p&gt;
-@Test
-public void log_greetings_letter() {
-	arrange = (MailSender sut) -&gt; sut.send(mock(GreetingLetter.class));
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_greetings_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;arrange&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;send&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
 
-	verify = EventLogger::sentGreetingLetter;
+	&lt;span class=&#34;n&#34;&gt;verify&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-	assertAndVerify();
-}
+	&lt;span class=&#34;n&#34;&gt;assertAndVerify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This is the first step towards more cohesion, at the cost of readability. You save the verify at the end, but the repeated method &lt;code&gt;assertAndVerify&lt;/code&gt; is still present.&lt;/p&gt;
-@Test
-public void log_greetings_letter() {
-	checkThat(aLoggingLine().forA(greetingLetter()).wasLoggedWhen(aGreetingLetterWasSent()));
-}
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_greetings_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;checkThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;aLoggingLine&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;forA&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;greetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;wasLoggedWhen&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;aGreetingLetterWasSent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()));&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This one reads more like a classical DSL, but is harder to read compared to a classical test.&lt;/p&gt;
-@Test
-public void log_greetings_letter() {
-	mailSenderLogs(whenSendingAGreetingLetter());
-}
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;log_greetings_letter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;mailSenderLogs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;whenSendingAGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This one reads more like a business requirement.&lt;/p&gt;
 
 &lt;h2 id=&#34;other&#34;&gt;Other&lt;/h2&gt;
 
 &lt;p&gt;Other ideas we have tested:&lt;/p&gt;
-Builder.aNew().sendGreetingLetter()
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Builder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;aNew&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sendGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
 
-assertAndVerifyThat(
-	theLoggingLine()
-		.for(aGreetingLetter())
-		.isLoggedWhen(greetingLetterIsSent()
-	)
-);
+&lt;span class=&#34;n&#34;&gt;assertAndVerifyThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;theLoggingLine&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+		&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;aGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;())&lt;/span&gt;
+		&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;isLoggedWhen&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;greetingLetterIsSent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
 
-public Consumer&lt;MailSender&gt; aGreetingLetter(){
-	return (MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class));
-}
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;aGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(){&lt;/span&gt;
+	&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sendGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-public Consumer&lt;EventLogger&gt; greetingLetterIsSent(){
-	return EventLogger::sentGreetingLetter;
-}
-assertAndVerifyThat(
-	theLoggingLine()
-		.for(
-			(MailSender sut) -&gt; sut.sendGreetingLetter(mock(GreetingLetter.class))
-		)
-		.isLoggedWhen(EventLogger::sentGreetingLetter)
-	)
-);
-public void assertAndVerifyThat(TestContext testContext){
-	testContext.assert();
-	testContext.verify();
-}
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Consumer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;greetingLetterIsSent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(){&lt;/span&gt;
+	&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertAndVerifyThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;theLoggingLine&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+		&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+			&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MailSender&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sendGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mock&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+		&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+		&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;isLoggedWhen&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EventLogger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sentGreetingLetter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+	&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;assertAndVerifyThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TestContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;testContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;testContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assert&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;testContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;verify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     
