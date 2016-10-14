@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -144,7 +144,11 @@
 
 
         
-          <p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it. The code provides a way of doing try|catch, specifying an exception to be caught. The source code is available here In the process This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit. If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t).</p>
+          <p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.
+The code provides a way of doing try|catch, specifying an exception to be caught.
+The source code is available here
+In the process This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.
+If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t).</p>
 
           
               <footer>
@@ -179,7 +183,8 @@
 
 
         
-          <p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of Splunk. This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
+          <p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of Splunk.
+This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
 
           
               <footer>
@@ -214,7 +219,9 @@
 
 
         
-          <p>I&rsquo;ve seen this video by Rich Hickey: &ldquo;Simplicity matters&rdquo;, taken from Manuel Rivero&rsquo;s google plus&rsquo; site here are my notes: the software is the elephant do more, do it differently, do it better complexity of the elephant is going to dominate what you can do your ability to reason about your program is critical design is about pulling things apart become familiar by learning, trying &ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;.</p>
+          <p>I&rsquo;ve seen this video by Rich Hickey: &ldquo;Simplicity matters&rdquo;, taken from Manuel Rivero&rsquo;s google plus&rsquo; site
+here are my notes:
+ the software is the elephant do more, do it differently, do it better complexity of the elephant is going to dominate what you can do your ability to reason about your program is critical design is about pulling things apart become familiar by learning, trying &ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;.</p>
 
           
               <footer>
@@ -249,7 +256,11 @@
 
 
         
-          <p>Overheard today at the office, while they were discussing the approval of a pull request: [Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this? [Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source [PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase. This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;you shall not pass&rdquo; while on top of the bridge.</p>
+          <p>Overheard today at the office, while they were discussing the approval of a pull request:
+ [Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this?
+[Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source
+[PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase.
+ This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;you shall not pass&rdquo; while on top of the bridge.</p>
 
           
               <footer>
@@ -284,7 +295,10 @@
 
 
         
-          <p>Inserting this code in the blog: ```clojure (defn all-access[k] (let [{:keys [a b] :as k}] (do a) (do (:b k)))) ``` the octopress processor throws the error: Error: Pygments can't parse unknown language: clojure Error: Run jekyll build --trace for more information. A solution would be to include it as lisp code: ```lisp (defn all-access[k] (let [{:keys [a b] :as k}] (do a) (do (:b k)))) ``` this is an</p>
+          <p>Inserting this code in the blog:
+```clojure (defn all-access[k] (let [{:keys [a b] :as k}] (do a) (do (:b k)))) ```  the octopress processor throws the error:
+Error: Pygments can't parse unknown language: clojure Error: Run jekyll build --trace for more information.  A solution would be to include it as lisp code:
+```lisp (defn all-access[k] (let [{:keys [a b] :as k}] (do a) (do (:b k)))) ```  this is an example:</p>
 
           
               <footer>
@@ -319,7 +333,9 @@
 
 
         
-          <p>Manuel has taught us today about the default value while destructuring: The following example illustrates the use of an :as directive to bind a local with the entire map. user=&gt; (def point {:x 5 :y 7}) #'user/point (let [{:keys [x y] :as the-point} point] (println &quot;x:&quot; x &quot;y:&quot; y &quot;point:&quot; the-point)) x: 5 y: 7 point: {:x 5, :y 7} We&rsquo;ve now seen the :as directive used for both vectors and maps.</p>
+          <p>Manuel has taught us today about the default value while destructuring:
+ The following example illustrates the use of an :as directive to bind a local with the entire map.
+ user=&gt; (def point {:x 5 :y 7}) #'user/point (let [{:keys [x y] :as the-point} point] (println &quot;x:&quot; x &quot;y:&quot; y &quot;point:&quot; the-point)) x: 5 y: 7 point: {:x 5, :y 7}   We&rsquo;ve now seen the :as directive used for both vectors and maps.</p>
 
           
               <footer>

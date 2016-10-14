@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -144,7 +144,11 @@
 
 
         
-          <p>Humble Object I&rsquo;ve read the Humble Object list of patterns, by Gerard Meszaros, including: humble dialog humble executable humble transaction controller humble container adapter Tags: pattern, gerard-meszaros How you know I&rsquo;ve reread this small essay by Paul Graham on storing information in our heads, based on the context. On the importance of rereading, to add more contexts to the initial one. Tags: paul-graham, reread, read Protected Variation: The Importance of Being Closed I&rsquo;ve read this article by Craig Larman in the magazine IEEE Software &gt; Design.</p>
+          <p>Humble Object I&rsquo;ve read the Humble Object list of patterns, by Gerard Meszaros, including:
+ humble dialog humble executable humble transaction controller humble container adapter  Tags: pattern, gerard-meszaros
+How you know I&rsquo;ve reread this small essay by Paul Graham on storing information in our heads, based on the context. On the importance of rereading, to add more contexts to the initial one.
+Tags: paul-graham, reread, read
+Protected Variation: The Importance of Being Closed I&rsquo;ve read this article by Craig Larman in the magazine IEEE Software &gt; Design.</p>
 
           
               <footer>
@@ -166,7 +170,7 @@
         <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing your own maven dependencies</a>
     </h1>
     <p >Jul 30, 2015
-         - 2 minute read 
+         - 1 minute read 
          - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/#disqus_thread">Comments</a>
 
         
@@ -179,7 +183,9 @@
 
 
         
-          <p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project. This is how most of them look like: &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;groupId&gt;com.gmaur.legacycode&lt;/groupId&gt; &lt;artifactId&gt;legacyutils&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.hamcrest&lt;/groupId&gt; &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt; &lt;version&gt;1.3&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;4.11&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.mockito&lt;/groupId&gt; &lt;artifactId&gt;mockito-all&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;version&gt;2.0.2-beta&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt; &lt;version&gt;2.18.1&lt;/version&gt; &lt;configuration&gt; &lt;includes&gt; &lt;include&gt;**/**Test.java&lt;/include&gt; &lt;include&gt;**/**Should.java&lt;/include&gt; &lt;/includes&gt; &lt;/configuration&gt; &lt;/plugin&gt; &lt;/plugins&gt; &lt;/build&gt; &lt;/project&gt; Note: the org.apache.maven.plugins:maven-surefire-plugin is to make maven execute the tests that end in *Should.</p>
+          <p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.
+This is how most of them look like:
+4.0.0 com.gmaur.legacycode legacyutils 0.0.1-SNAPSHOT   org.hamcrest hamcrest-all 1.3 test   junit junit 4.11 test   org.mockito mockito-all test 2.0.2-beta      org.apache.maven.plugins maven-surefire-plugin 2.18.1   **/**Test.</p>
 
           
               <footer>
@@ -214,7 +220,8 @@
 
 
         
-          <p>Imagine having this java class: private static class RepeatedConstants { public static final String A = &quot;A&quot;; public static final String A_1 = A; public static final String A_2 = &quot;A&quot;; public static final Integer _3 = 3; public static final Integer THREE = 3; } I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly.</p>
+          <p>Imagine having this java class:
+private static class RepeatedConstants { public static final String A = "A"; public static final String A_1 = A; public static final String A_2 = "A"; public static final Integer _3 = 3; public static final Integer THREE = 3; } I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly.</p>
 
           
               <footer>
@@ -249,7 +256,9 @@
 
 
         
-          <p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones: While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports. To solve it, see this link</p>
+          <p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:
+While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.
+To solve it, see this link</p>
 
           
 
@@ -280,7 +289,10 @@
 
 
         
-          <p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition: (source code is here) @Test public void log_when_sending_greeting_letters() { sut.send(mock(GreetingLetter.class)); verify(logger).sentGreetingLetter(); } @Test public void log_when_sending_love_letters() { sut.send(mock(LoveLetter.class)); verify(logger).sentLoveLetter(); } and the production code: public class MailSender { private final EventLogger eventLogger; public MailSender (final EventLogger eventLogger) { this.eventLogger = eventLogger; } public void send (final GreetingLetter letter) { // more business logic eventLogger.sentGreetingLetter(); } public void send (final LoveLetter letter) { // more business logic eventLogger.sentLoveLetter(); } } Note: this is an adapted code, so the business logic is not complete and seems simple.</p>
+          <p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:
+(source code is here)
+@Test public void log_when_sending_greeting_letters() { sut.send(mock(GreetingLetter.class)); verify(logger).sentGreetingLetter(); } @Test public void log_when_sending_love_letters() { sut.send(mock(LoveLetter.class)); verify(logger).sentLoveLetter(); } and the production code:
+public class MailSender { private final EventLogger eventLogger; public MailSender (final EventLogger eventLogger) { this.eventLogger = eventLogger; } public void send (final GreetingLetter letter) { // more business logic eventLogger.</p>
 
           
               <footer>
@@ -315,7 +327,10 @@
 
 
         
-          <p>I&rsquo;ve found this set of tweets about the craftsmanship analogy by Sarah Mei: Just put my finger on why the craft/workshop metaphor for software development doesn&#39;t quite fit. &mdash; Sarah Mei (@sarahmei) July 25, 2015 &quot;Craft&quot; doesn&#39;t build any collaboration into the process, except in a top-down control-oriented way (master, journeyman, apprentice). &mdash; Sarah Mei (@sarahmei) July 25, 2015 &quot;Craft&quot; casts software development as an individual achievement, just as in a workshop, the master did all the important work on each piece.</p>
+          <p>I&rsquo;ve found this set of tweets about the craftsmanship analogy by Sarah Mei:
+Just put my finger on why the craft/workshop metaphor for software development doesn&#39;t quite fit.
+&mdash; Sarah Mei (@sarahmei) July 25, 2015 &quot;Craft&quot; doesn&#39;t build any collaboration into the process, except in a top-down control-oriented way (master, journeyman, apprentice).
+&mdash; Sarah Mei (@sarahmei) July 25, 2015 &quot;Craft&quot; casts software development as an individual achievement, just as in a workshop, the master did all the important work on each piece.</p>
 
           
               <footer>

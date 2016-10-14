@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pull Request on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/pull-request/</link>
-    <description>Recent content in Pull Request on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/pull-request/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Jun 2016 21:47:19 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/pull-request/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -64,21 +63,18 @@
 &lt;p&gt;I&amp;rsquo;ve watched &lt;a href=&#34;https://egghead.io/series/js-console-for-power-users&#34; target=&#34;_blank&#34;&gt;this course&lt;/a&gt; by Mykola Bilokonsky at egghead.io.&lt;/p&gt;
 
 &lt;p&gt;In it, he covers the following methods on the console:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;warn&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;error&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;info&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;debug&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+console.log
+console.warn
+console.error
+console.info
+console.debug
 
 &lt;p&gt;The amount of parameters does not matter, it will put a space in between. printing an object will print its values&lt;/p&gt;
 
 &lt;p&gt;console.log with the C&amp;rsquo;s printf syntax, as long as the first parameter is a string&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;  &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;an&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;object&lt;/span&gt;
-  &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;CSS&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;group&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;groupCollapsed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;groupEnd&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  %o for an object
+  %c for CSS
+console.group / groupCollapsed / groupEnd
 
 &lt;p&gt;Tags: mykola-bilokonsky, logging, javascript, console, egghead, course&lt;/p&gt;
 

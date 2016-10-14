@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -144,7 +144,11 @@
 
 
         
-          <p>I was changing a massive amount of files (&gt;1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests. Here&rsquo;s how to do it automatically: Copy all the failing tests to a text editor: Input: testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest) testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest) testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest) testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest) testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest) testDeleteDocument(io.company.controller.dms.DocumentControllerTest) testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest) testUpdateXML(io.company.controller.dms.DocumentControllerTest) testSearchXFPage(io.company.controller.dms.DocumentControllerTest) testCreateXFPage(io.company.controller.dms.DocumentControllerTest) testUpdatePage(io.company.controller.dms.DocumentControllerTest) testSearchCrop(io.company.controller.dms.DocumentControllerTest) testUpdateCrop(io.company.controller.dms.DocumentControllerTest) testMoveDocument(io.company.controller.dms.DocumentControllerTest) testGetDocument(io.company.controller.dms.DocumentControllerTest) regex: (tested</p>
+          <p>I was changing a massive amount of files (&gt;1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests.
+Here&rsquo;s how to do it automatically:
+Copy all the failing tests to a text editor:
+Input:
+testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest) testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest) testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest) testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest) testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest) testDeleteDocument(io.company.controller.dms.DocumentControllerTest) testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest) testUpdateXML(io.company.controller.dms.DocumentControllerTest) testSearchXFPage(io.company.controller.dms.DocumentControllerTest) testCreateXFPage(io.company.controller.dms.DocumentControllerTest) testUpdatePage(io.company.controller.dms.DocumentControllerTest) testSearchCrop(io.company.controller.dms.DocumentControllerTest) testUpdateCrop(io.company.controller.dms.DocumentControllerTest) testMoveDocument(io.company.controller.dms.DocumentControllerTest) testGetDocument(io.company.controller.dms.DocumentControllerTest)  regex:</p>
 
           
               <footer>
@@ -179,7 +183,9 @@
 
 
         
-          <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes. This is why I have some scripts to commit all the changes, even with the same message. This is one of them: for f in $(git status -s |grep &quot;^M&quot;|awk &#39;{print $2}&#39;); do git add $f git commit -m &quot;generic</p>
+          <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.
+This is why I have some scripts to commit all the changes, even with the same message. This is one of them:
+for f in $(git status -s |grep "^M"|awk '{print $2}'); do git add $f git commit -m "generic commit for all files"</p>
 
           
               <footer>
@@ -214,7 +220,9 @@
 
 
         
-          <p>Note: all quotes on this post come from this paper: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000. Contents This paper starts slow, from the mathematical and philosophical point of view, until it gets to the basic concepts on the fundamental concepts: Assignment command L-Value and R-Value Definitions Names Numerals Conceptual models: an explanation about the relationship between the code, the memory store and the abstract concepts Later, it gets more in depth to the conceptual constructs, where most of the content is explained and contains: Expressions and commands Expressions and evaluations Commands and sequencing Definition of functions and routines Functions and routines as data items Types and polymorphism Compound data structures Finally, as closing notes, it explains some implementation details (such as Load-Update Pairs), tools as Macrogenerators (nowadays called macros) and formal semantics Notes / highlights L-Values and R-Values L-value for the address-like object appropriate on the left of the assignment, and R-value for the contents-like object appropriate for the right 2.1, Assignment commands in page 14 An L-value represents an area of the store of the computer.</p>
+          <p>Note: all quotes on this post come from this paper: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.
+Contents This paper starts slow, from the mathematical and philosophical point of view, until it gets to the basic concepts on the fundamental concepts:
+ Assignment command L-Value and R-Value Definitions Names Numerals Conceptual models: an explanation about the relationship between the code, the memory store and the abstract concepts  Later, it gets more in depth to the conceptual constructs, where most of the content is explained and contains:</p>
 
           
               <footer>
@@ -249,7 +257,12 @@
 
 
         
-          <p>Scenario: iterate a sequence (seq) with its index The lines have an implicit line number (starting by 1, in most editors): [1] line1 [2] line2 [3] hello When you read it from file to a variable, it is converted to: (&quot;line1&quot; &quot;line2&quot; &quot;hello&quot;) This implicit line number value is not present, therefore you need to assign them one. In ruby, you have this construct: array = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;] array.each_with_index</p>
+          <p>Scenario: iterate a sequence (seq) with its index
+The lines have an implicit line number (starting by 1, in most editors):
+[1] line1 [2] line2 [3] hello  When you read it from file to a variable, it is converted to:
+("line1" "line2" "hello") This implicit line number value is not present, therefore you need to assign them one.
+In ruby, you have this construct:
+array = ["A", "B", "C"] array.</p>
 
           
               <footer>
@@ -284,7 +297,9 @@
 
 
         
-          <p>Junior programmer&#39;s bookshelf: 90% APIs and programming languages; Senior programmer&#39;s bookshelf: 80% applied psychology. &mdash; ☕ J. B. Rainsberger (@jbrains) July 1, 2015 @jbrains @natpryce I&#39;ve been suggesting psychology, sociology, or anthropology as a minor or second major to incoming CS students for years. &mdash; wallingf (@wallingf) July 1, 2015 @wallingf @jbrains @natpryce psychology certainly. I’ve found it a real challenge over the years working with people rather than code.</p>
+          <p>Junior programmer&#39;s bookshelf: 90% APIs and programming languages; Senior programmer&#39;s bookshelf: 80% applied psychology.
+&mdash; ☕ J. B. Rainsberger (@jbrains) July 1, 2015 @jbrains @natpryce I&#39;ve been suggesting psychology, sociology, or anthropology as a minor or second major to incoming CS students for years.
+&mdash; wallingf (@wallingf) July 1, 2015 @wallingf @jbrains @natpryce psychology certainly. I’ve found it a real challenge over the years working with people rather than code.</p>
 
           
               <footer>
@@ -319,7 +334,9 @@
 
 
         
-          <p>Today I have done a brown bag session about refactoring legacy code. It includes: legacy code definition. There is no agreement about this in the team. the legacy code change algorithm (source is Feathers, Working effectively with legacy code). Plus an example about it. working with legacy code experience with it. The slides are available here (PDF format) We also did a practical session, whose experience report is here</p>
+          <p>Today I have done a brown bag session about refactoring legacy code. It includes:
+ legacy code definition. There is no agreement about this in the team. the legacy code change algorithm (source is Feathers, Working effectively with legacy code). Plus an example about it. working with legacy code experience with it.  The slides are available here (PDF format)
+We also did a practical session, whose experience report is here</p>
 
           
 

@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -148,26 +148,23 @@
           
 
 <p>In bash, the usual behavior is to return the last status code:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">bash-3.1$ tr
+bash-3.1$ tr
 tr: two strings must be given when translating
-bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
+bash-3.1$ echo $?
 1
-</code></pre></div>
 
 <p>But this also applies to pipes:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">bash-3.1$ tr<span class="p">|</span>tee 1.txt
+bash-3.1$ tr|tee 1.txt
 tr: two strings must be given when translating
-bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
+bash-3.1$ echo $?
 0
-</code></pre></div>
 
 <p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">bash-3.1$ <span class="nb">set</span> -o pipefail
-bash-3.1$ tr<span class="p">|</span>tee 1.txt
+bash-3.1$ set -o pipefail
+bash-3.1$ tr|tee 1.txt
 tr: two strings must be given when translating
-bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
+bash-3.1$ echo $?
 1
-</code></pre></div>
 
 <p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
 

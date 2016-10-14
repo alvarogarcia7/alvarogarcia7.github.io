@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -144,7 +144,9 @@
 
 
         
-          <p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz. These are the concepts and links brought up during the discussion: The craftsmanship analogy, as exposed in these tweets Difference between function and method What vs How (also present in the GOOS)</p>
+          <p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.
+These are the concepts and links brought up during the discussion:
+ The craftsmanship analogy, as exposed in these tweets Difference between function and method What vs How (also present in the GOOS)  </p>
 
           
 
@@ -175,7 +177,9 @@
 
 
         
-          <p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See here After a while, the generation of the static site using Octopress 2 was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting. Inspired by their new features in Octopress 3, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
+          <p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See here
+After a while, the generation of the static site using Octopress 2 was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.
+Inspired by their new features in Octopress 3, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
 
           
               <footer>
@@ -210,7 +214,10 @@
 
 
         
-          <p>A friend and I were arguing about this code (fragment): public void register (final String userName) { try { registeredUsers.add(new User(userName)); } catch (AlreadyRegisteredUserException e) { resultListener.alreadyRegistered(userName); } } I would have said that resultListener is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case). He suggested that: being injected through the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency) what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</p>
+          <p>A friend and I were arguing about this code (fragment):
+public void register (final String userName) { try { registeredUsers.add(new User(userName)); } catch (AlreadyRegisteredUserException e) { resultListener.alreadyRegistered(userName); } } I would have said that resultListener is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).
+He suggested that:
+ being injected through the constructor is usually what happens with dependencies, but does not make it one (i.</p>
 
           
               <footer>
@@ -245,7 +252,8 @@
 
 
         
-          <p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have: Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one. Notifications: Peers that need to be kept up to date with the object&rsquo;s activity.</p>
+          <p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have:
+ Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one.</p>
 
           
               <footer>
@@ -280,12 +288,10 @@
 
 
         
-          <p>We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz. These are the concepts and links brought up during the discussion: Data Clump at the bliki Refactoring with Loops and Collection Pipelines, indirect link to the article by Martin Fowler When Worse Is Better: Incrementally Escaping Local Maxima, indirect link to the article by Kent Beck Getting It Right by Betting on Wrong, indirect link</p>
+          <p>We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.
+These are the concepts and links brought up during the discussion:
+ Data Clump at the bliki Refactoring with Loops and Collection Pipelines, indirect link to the article by Martin Fowler When Worse Is Better: Incrementally Escaping Local Maxima, indirect link to the article by Kent Beck Getting It Right by Betting on Wrong, indirect link to an article by Sandi Metz   </p>
 
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/" rel="full-article">Read On &rarr;</a>
-              </footer>
           
 
         
@@ -315,7 +321,7 @@
 
 
         
-          <p>Organizing Code to Allow for Easy Changes Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code. If you define easy to change as Changes have no unexpected side effects Small changes in requirements require correspondingly small changes in code Existing code is easy to reuse The easiest way to make a change is to add code that in itself is easy to change Then the code you write should have the following qualities.</p>
+          <p>Organizing Code to Allow for Easy Changes  Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code. If you define easy to change as</p>
 
           
               <footer>

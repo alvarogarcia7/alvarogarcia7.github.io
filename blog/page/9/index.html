@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -146,86 +146,81 @@
 
         
         <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.spike</span><span class="o">;</span>
+package com.example.spike;
 
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">MatcherAssert</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">Matchers</span><span class="o">.</span><span class="na">is</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">spy</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">when</span><span class="o">;</span>
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
-<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.mockito.Spy</span><span class="o">;</span>
+import org.junit.Test;
+import org.mockito.Spy;
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DifferentReturnValues</span> <span class="o">{</span>
+public class DifferentReturnValues {
 
-	<span class="nd">@Spy</span>
-	<span class="kd">private</span> <span class="n">Spike1</span> <span class="n">spike1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Spike1</span><span class="o">();</span>
-
-
-	<span class="nd">@Test</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
-		<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
-		<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-
-		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-
-		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-	<span class="o">}</span>
+	@Spy
+	private Spike1 spike1 = new Spike1();
 
 
-	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">Spike1</span> <span class="o">{</span>
-		<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getBool</span><span class="o">()</span> <span class="o">{</span>
-			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-		<span class="o">}</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
+	@Test
+	public void spike1() {
+		spike1 = spy(spike1);
+		when(spike1.getBool()).thenReturn(false, true);
+
+		assertThat(spike1.getBool(), is(false));
+		assertThat(spike1.getBool(), is(true));
+
+		assertThat(spike1.getBool(), is(true));
+		assertThat(spike1.getBool(), is(true));
+	}
+
+
+	private class Spike1 {
+		public boolean getBool() {
+			return true;
+		}
+	}
+}
 
 <p>The key line is:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-</code></pre></div>
+when(spike1.getBool()).thenReturn(false, true);
 
 <p>this makes the stubbed function to return multiple values:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-</code></pre></div>
+assertThat(spike1.getBool(), is(false));
+assertThat(spike1.getBool(), is(true));
 
 <p>The last value is repeated after the last defined value:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
-	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
-	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+@Test
+public void spike1() {
+	spike1 = spy(spike1);
+	when(spike1.getBool()).thenReturn(false, true);
 
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	assertThat(spike1.getBool(), is(false));
+	assertThat(spike1.getBool(), is(true));
 
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-<span class="o">}</span>
-</code></pre></div>
+	assertThat(spike1.getBool(), is(true));
+	assertThat(spike1.getBool(), is(true));
+}
 
 <p>If you want to loop over the values, you can implement it with the <code>doAnswer</code> method:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
-	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
-	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+@Test
+public void spike1() {
+	spike1 = spy(spike1);
+	when(spike1.getBool()).thenReturn(false, true);
 
-	<span class="kd">final</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="kc">true</span><span class="o">};</span>
+	final boolean[] value = {true};
 
-	<span class="n">doAnswer</span><span class="o">(</span><span class="n">invocation</span> <span class="o">-&gt;</span> <span class="o">{</span>
-		<span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-		<span class="k">return</span> <span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-	<span class="o">}).</span><span class="na">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">).</span><span class="na">getBool</span><span class="o">();</span>
+	doAnswer(invocation -> {
+		value[0] = !value[0];
+		return value[0];
+	}).when(spike1).getBool();
 
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	assertThat(spike1.getBool(), is(false));
+	assertThat(spike1.getBool(), is(true));
 
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-<span class="o">}</span>
-</code></pre></div>
+	assertThat(spike1.getBool(), is(false));
+	assertThat(spike1.getBool(), is(true));
+}
 
         
 
@@ -756,7 +751,7 @@ that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p>
         <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing your own maven dependencies</a>
     </h1>
     <p >Jul 30, 2015
-         - 2 minute read 
+         - 1 minute read 
          - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/#disqus_thread">Comments</a>
 
         
@@ -774,55 +769,54 @@ that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p>
 <p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.</p>
 
 <p>This is how most of them look like:</p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
-         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-  <span class="nt">&lt;groupId&gt;</span>com.gmaur.legacycode<span class="nt">&lt;/groupId&gt;</span>
-  <span class="nt">&lt;artifactId&gt;</span>legacyutils<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.gmaur.legacycode</groupId>
+  <artifactId>legacyutils</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   
-  <span class="nt">&lt;dependencies&gt;</span>
+  <dependencies>
   
-  	<span class="nt">&lt;dependency&gt;</span>
-  		<span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
-  		<span class="nt">&lt;artifactId&gt;</span>hamcrest-all<span class="nt">&lt;/artifactId&gt;</span>
-  		<span class="nt">&lt;version&gt;</span>1.3<span class="nt">&lt;/version&gt;</span>
-  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-  	<span class="nt">&lt;/dependency&gt;</span>
+  	<dependency>
+  		<groupId>org.hamcrest</groupId>
+  		<artifactId>hamcrest-all</artifactId>
+  		<version>1.3</version>
+  		<scope>test</scope>
+  	</dependency>
   
-  	<span class="nt">&lt;dependency&gt;</span>
-  		<span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-  		<span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-  		<span class="nt">&lt;version&gt;</span>4.11<span class="nt">&lt;/version&gt;</span>
-  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-  	<span class="nt">&lt;/dependency&gt;</span>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>4.11</version>
+  		<scope>test</scope>
+  	</dependency>
 
-  	<span class="nt">&lt;dependency&gt;</span>
-  		<span class="nt">&lt;groupId&gt;</span>org.mockito<span class="nt">&lt;/groupId&gt;</span>
-  		<span class="nt">&lt;artifactId&gt;</span>mockito-all<span class="nt">&lt;/artifactId&gt;</span>
-  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-  		<span class="nt">&lt;version&gt;</span>2.0.2-beta<span class="nt">&lt;/version&gt;</span>
-	<span class="nt">&lt;/dependency&gt;</span>
-  <span class="nt">&lt;/dependencies&gt;</span>
+  	<dependency>
+  		<groupId>org.mockito</groupId>
+  		<artifactId>mockito-all</artifactId>
+  		<scope>test</scope>
+  		<version>2.0.2-beta</version>
+	</dependency>
+  </dependencies>
 
-  <span class="nt">&lt;build&gt;</span>
-        <span class="nt">&lt;plugins&gt;</span>
-            <span class="nt">&lt;plugin&gt;</span>
-                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
-                <span class="nt">&lt;version&gt;</span>2.18.1<span class="nt">&lt;/version&gt;</span>
-                <span class="nt">&lt;configuration&gt;</span>
-                    <span class="nt">&lt;includes&gt;</span>
-                        <span class="nt">&lt;include&gt;</span>**/**Test.java<span class="nt">&lt;/include&gt;</span>
-                        <span class="nt">&lt;include&gt;</span>**/**Should.java<span class="nt">&lt;/include&gt;</span>
-                    <span class="nt">&lt;/includes&gt;</span>
-                <span class="nt">&lt;/configuration&gt;</span>
-            <span class="nt">&lt;/plugin&gt;</span>
-        <span class="nt">&lt;/plugins&gt;</span>
-    <span class="nt">&lt;/build&gt;</span>
-<span class="nt">&lt;/project&gt;</span>
-</code></pre></div>
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <includes>
+                        <include>**/**Test.java</include>
+                        <include>**/**Should.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
 
 <p>Note: the <code>org.apache.maven.plugins:maven-surefire-plugin</code> is to make maven execute the tests that end in <code>*Should</code>.</p>
 
@@ -835,54 +829,53 @@ that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p>
 <p>I&rsquo;ve published my own java dependency (originally <a href="https://github.com/alvarogarcia7/java-parent/releases/tag/v0.0.1" target="_blank">a github release</a>)</p>
 
 <p>A <code>pom.xml</code> in the new style is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/master/pom.xml" target="_blank">here</a>:</p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
-         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    <span class="nt">&lt;groupId&gt;</span>com.example.spike<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>lambdatesting<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+    <groupId>com.example.spike</groupId>
+    <artifactId>lambdatesting</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
-    <span class="nt">&lt;parent&gt;</span>
-        <span class="nt">&lt;groupId&gt;</span>com.github.alvarogarcia7<span class="nt">&lt;/groupId&gt;</span>
-        <span class="nt">&lt;artifactId&gt;</span>java-parent<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>v0.0.1<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;/parent&gt;</span>
+    <parent>
+        <groupId>com.github.alvarogarcia7</groupId>
+        <artifactId>java-parent</artifactId>
+        <version>v0.0.1</version>
+    </parent>
 
-    <span class="nt">&lt;repositories&gt;</span>
-        <span class="nt">&lt;repository&gt;</span>
-            <span class="nt">&lt;id&gt;</span>jitpack.io<span class="nt">&lt;/id&gt;</span>
-            <span class="nt">&lt;url&gt;</span>https://jitpack.io<span class="nt">&lt;/url&gt;</span>
-        <span class="nt">&lt;/repository&gt;</span>
-    <span class="nt">&lt;/repositories&gt;</span>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
-    <span class="nt">&lt;dependencies&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.github.alvarogarcia7<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>java-parent<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>v0.0.1<span class="nt">&lt;/version&gt;</span>
-            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.alvarogarcia7</groupId>
+            <artifactId>java-parent</artifactId>
+            <version>v0.0.1</version>
+            <type>pom</type>
+        </dependency>
 
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>hamcrest-all<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+        </dependency>
 
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
 
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.mockito<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>mockito-all<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;/dependencies&gt;</span>
-</code></pre></div>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 <p>It does not need the plugin configuration nor the dependency versions. The downside is that it needs to be as the <code>parent pom</code>.</p>
 
@@ -918,15 +911,14 @@ that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p>
 
         
         <p>Imagine having this java class:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">RepeatedConstants</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A_1</span> <span class="o">=</span> <span class="n">A</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A_2</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
+private static class RepeatedConstants {
+    public static final String A = "A";
+    public static final String A_1 = A;
+    public static final String A_2 = "A";
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">_3</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">THREE</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div>
+    public static final Integer _3 = 3;
+    public static final Integer THREE = 3;
+}
 
 <p>I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly. To do this, remove all text that is not a value:</p>
 
@@ -951,47 +943,43 @@ A
 </code></pre>
 
 <p>Copy it to <code>a.txt</code>, <code>sort</code> it and <code>uniq</code> it (to remove duplication):</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">cat a.txt <span class="p">|</span> sort <span class="p">|</span> uniq &gt; uniq.txt
-</code></pre></div>
+cat a.txt | sort | uniq > uniq.txt
 
 <p>then sort the non-uniq version:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">cat a.txt <span class="p">|</span> sort &gt; sorted.txt
-</code></pre></div>
+cat a.txt | sort > sorted.txt
 
 <p>and diff among them, to find the repeated values:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">diff sorted.txt uniq.txt
+diff sorted.txt uniq.txt
 
 3,4d2
-&lt; <span class="s2">&quot;A&quot;</span>
-&lt; 3
-</code></pre></div>
+< "A"
+< 3
 
 <p>These are the repeated values. The variable <code>public static final String A_1 = A;</code> was not caught by this as it only has the same value in execution, not staticly.</p>
 
 <p>For this, at Gmaur, we have developed a small <a href="https://github.com/GMaur/java-duplicates-detector" target="_blank">module to detect duplicates</a>. The main code is this:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RepeatedFinder</span> <span class="o">{</span>
+public class RepeatedFinder {
 
-  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Class</span> <span class="n">aClass</span><span class="o">;</span>
+  private final Class aClass;
 
-  <span class="kd">public</span> <span class="nf">RepeatedFinder</span><span class="o">(</span><span class="n">Class</span> <span class="n">aClass</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">aClass</span> <span class="o">=</span> <span class="n">aClass</span><span class="o">;</span>
-  <span class="o">}</span>
+  public RepeatedFinder(Class aClass) {
+    this.aClass = aClass;
+  }
 
-  <span class="kd">public</span> <span class="n">MultiMap</span> <span class="nf">findDuplicates</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">generateMapFromValueToVariables</span><span class="o">(</span><span class="n">aClass</span><span class="o">).</span><span class="na">valuesWithMoreThanOneVariable</span><span class="o">();</span>
-  <span class="o">}</span>
+  public MultiMap findDuplicates() throws IllegalAccessException {
+    return generateMapFromValueToVariables(aClass).valuesWithMoreThanOneVariable();
+  }
 
-  <span class="kd">private</span> <span class="n">ValueToNameRepository</span> <span class="nf">generateMapFromValueToVariables</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
-    <span class="n">ValueToNameRepository</span> <span class="n">valueToNames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ValueToNameRepository</span><span class="o">();</span>
-    <span class="n">Field</span><span class="o">[]</span> <span class="n">fields</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredFields</span><span class="o">();</span>
-    <span class="n">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Field</span> <span class="n">field</span> <span class="o">:</span> <span class="n">fields</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
-      <span class="n">valueToNames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">field</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">valueToNames</span><span class="o">;</span>
-  <span class="o">}</span>
-</code></pre></div>
+  private ValueToNameRepository generateMapFromValueToVariables(Class<?> clazz) throws IllegalAccessException {
+    ValueToNameRepository valueToNames = new ValueToNameRepository();
+    Field[] fields = clazz.getDeclaredFields();
+    Object object = new Object();
+    for (Field field : fields) {
+      Object value = field.get(object);
+      valueToNames.add(value, field.getName());
+    }
+    return valueToNames;
+  }
 
 <p>The tests and the source code can be found here: <a href="https://github.com/GMaur/java-duplicates-detector" target="_blank">https://github.com/GMaur/java-duplicates-detector</a></p>
 

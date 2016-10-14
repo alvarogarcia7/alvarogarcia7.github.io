@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -179,29 +179,25 @@ change</p>
 <p>One of them is &ldquo;sharplet&rdquo; and the other one is &ldquo;gfontenot&rdquo;. Both are github users that match a github-registered mail.</p>
 
 <p>On a shallow inspection, the commit does not reveal anything special:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
+$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
 commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
-Author: XXXX &lt;xxxx@example.com&gt;
-Date:   Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100
+Author: XXXX <xxxx@example.com>
+Date:   Wed Dec 2 14:44:52 2015 +1100
 
     Clarify specs by defining • as the composition operator
-</code></pre></div>
 
 <p>but looking a bit closer<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>,</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s2">&quot;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&quot;</span> <span class="p">|</span> less
-17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> 14:44:52 +1100, <span class="m">3</span> months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> 09:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> 09:30:28 -0800, <span class="m">9</span> weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
-</code></pre></div>
+$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format="%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B" | less
+17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec 2 14:44:52 2015 +1100, Wed, 2 Dec 2015 14:44:52 +1100, 3 months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec 15 09:30:28 2015 -0800, Tue, 15 Dec 2015 09:30:28 -0800, 9 weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
 
 <p>or, just the emails:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s1">&#39;%ae %ce&#39;</span>
+$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format='%ae %ce'
 xxxx@example.com yyyy@example.com
-</code></pre></div>
 
 <h2 id="usage">Usage</h2>
 
 <p>For a single commit:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">$ <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span> git commit -m <span class="s2">&quot;...&quot;</span>
-</code></pre></div>
+$ GIT_COMMITTER_NAME='John Doe' GIT_COMMITTER_EMAIL='john@example.com' git commit -m "..."
 
 <p>For a session:</p>
 
@@ -218,22 +214,21 @@ export GIT_COMMITTER_EMAIL='john@example.com'
 <p>Use <code>pair_with</code> to pair with someone and <code>solo</code> to work on your own.</p>
 
 <p>Place this on your <code>~/.bashrc</code> or <code>~/.zshrc</code> or similar.</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">function</span> solo <span class="o">{</span>
-  <span class="nb">unset</span> GIT_COMMITTER_NAME
-  <span class="nb">unset</span> GIT_COMMITTER_EMAIL
-<span class="o">}</span>
+function solo {
+  unset GIT_COMMITTER_NAME
+  unset GIT_COMMITTER_EMAIL
+}
 
-<span class="k">function</span> pair_with_ <span class="o">{</span>
-  <span class="nb">export</span> <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="nv">$1</span>
-  <span class="nb">export</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="nv">$2</span>
-<span class="o">}</span>
+function pair_with_ {
+  export GIT_COMMITTER_NAME=$1
+  export GIT_COMMITTER_EMAIL=$2
+}
 
-<span class="k">function</span> pair_with_john <span class="o">{</span>
-    pair_with_ <span class="s2">&quot;John Doe&quot;</span> <span class="s2">&quot;jd@example.com&quot;</span>
-<span class="o">}</span>
+function pair_with_john {
+    pair_with_ "John Doe" "jd@example.com"
+}
 
 ...
-</code></pre></div>
 
 <p>Update 2, 2016-10: This script also helps with managing the variables: <a href="https://github.com/git-duet/git-duet" target="_blank">git-duet</a>. Thanks <a href="https://twitter.com/dhatanian" target="_blank">David Hatanian</a> for the tip</p>
 <div class="footnotes">

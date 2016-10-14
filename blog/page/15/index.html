@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -277,17 +277,15 @@ What and not How
 <p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
 
 <p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
-	<span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div>
+private String select(List<String> elements){
+	return elements.get(2);
+}
 
 <p>vs</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
-	<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="o">(</span><span class="n">elements</span><span class="o">);</span>
-	<span class="k">return</span> <span class="n">validElements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div>
+private String selectFirstValidLine(List<String> elements){
+	List<String> validElements = skipHeader(elements);
+	return validElements.get(1);
+}
 
 <h2 id="open-questions-other-ideas">Open questions / other ideas</h2>
 

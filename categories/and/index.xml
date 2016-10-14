@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>And on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/and/</link>
-    <description>Recent content in And on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/and/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Dec 2015 17:37:28 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/and/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,9 +17,8 @@
       <description>
 
 &lt;p&gt;While on the REPL, I tried this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[true]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;CompilerException&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;java.lang.RuntimeException:&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;Can&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;t&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;take&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;value&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;macro:&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;#&amp;#39;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;clojure.core/and,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;compiling:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;form-init7116694665186998245.clj:1:1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (reduce and true [true])
+CompilerException java.lang.RuntimeException: Can&#39;t take value of a macro: #&#39;clojure.core/and, compiling:(form-init7116694665186998245.clj:1:1)
 
 &lt;p&gt;Reading the &lt;a href=&#34;https://clojuredocs.org/clojure.core/and&#34; target=&#34;_blank&#34;&gt;clojuredocs for &lt;code&gt;and&lt;/code&gt;&lt;/a&gt;, you can find this:&lt;/p&gt;
 
@@ -35,55 +33,50 @@
 &lt;/blockquote&gt;
 
 &lt;p&gt;I tried it with success. Digging a bit deeper:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;elements]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;every?&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;identity&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;elements&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;nf&#34;&gt;#&amp;#39;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core/all-truthy?&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-truthy?&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[nil&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (defn all-truthy? [&amp; elements] (every? identity elements))
+#&#39;simple.core/all-truthy?
+simple.core=&gt; (all-truthy? nil false)
+false
+simple.core=&gt; (all-truthy? nil 0)
+false
+simple.core=&gt; (all-truthy? nil 1)
+false
+simple.core=&gt; (all-truthy? 2 1)
+true
+simple.core=&gt; (all-truthy? [nil false])
+true
 
 &lt;p&gt;Was also tempted to try this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (reduce (fn [acc element] (and acc element)) true [true true false true])
+false
+simple.core=&gt; (reduce (fn [acc element] (and acc element)) true [true true true true])
+true
 
 &lt;p&gt;Encapsulate it into a function:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;elements]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reduce&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;acc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;element&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;elements&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;nf&#34;&gt;#&amp;#39;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;simple.core/all-true&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (defn all-true [&amp; elements] (reduce (fn [acc element] (and acc element)) true elements))
+#&#39;simple.core/all-true
+simple.core=&gt; (all-true true)
+true
+simple.core=&gt; (all-true true false)
+false
+simple.core=&gt; (all-true true false true)
+false
 
 &lt;p&gt;What happens with the non-boolean values?&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;76&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;mi&#34;&gt;76&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;all-true&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (all-true 1 2 3)
+3
+simple.core=&gt; (all-true 1 2 3 76)
+76
+simple.core=&gt; (all-true 1 2 3 64)
+64
+simple.core=&gt; (all-true 1 2 3 64)
+64
 
 &lt;p&gt;This is because:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (and 64 3)
+3
+simple.core=&gt; (and 3 64)
+64
 
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
@@ -92,62 +85,58 @@
 &lt;h2 id=&#34;appendix-a-source-code&#34;&gt;Appendix A: Source code&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;and&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;defmacro&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt;
-  &lt;span class=&#34;s&#34;&gt;&amp;quot;Evaluates exprs one at a time, from left to right. If a form&lt;/span&gt;
-&lt;span class=&#34;s&#34;&gt;  returns logical false (nil or false), and returns that value and&lt;/span&gt;
-&lt;span class=&#34;s&#34;&gt;  doesn&amp;#39;t evaluate any of the other expressions, otherwise it returns&lt;/span&gt;
-&lt;span class=&#34;s&#34;&gt;  the value of the last expr. (and) returns true.&amp;quot;&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;{:added&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;}&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[x]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;[x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;next]&lt;/span&gt;
-   &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[and#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;~x]&lt;/span&gt;
-      &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;and#&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;~@next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;and#&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (source and)
+(defmacro and
+  &#34;Evaluates exprs one at a time, from left to right. If a form
+  returns logical false (nil or false), and returns that value and
+  doesn&#39;t evaluate any of the other expressions, otherwise it returns
+  the value of the last expr. (and) returns true.&#34;
+  {:added &#34;1.0&#34;}
+  ([] true)
+  ([x] x)
+  ([x &amp; next]
+   `(let [and# ~x]
+      (if and# (and ~@next) and#))))
 
 &lt;p&gt;&lt;code&gt;identity&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;identity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;identity&lt;/span&gt;
-  &lt;span class=&#34;s&#34;&gt;&amp;quot;Returns its argument.&amp;quot;&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;{:added&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;
-   &lt;span class=&#34;ss&#34;&gt;:static&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true}&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;[x]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (source identity)
+(defn identity
+  &#34;Returns its argument.&#34;
+  {:added &#34;1.0&#34;
+   :static true}
+  [x] x)
 
 &lt;p&gt;&lt;code&gt;every&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;every?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;every?&lt;/span&gt;
-  &lt;span class=&#34;s&#34;&gt;&amp;quot;Returns true if (pred x) is logical true for every x in coll, else&lt;/span&gt;
-&lt;span class=&#34;s&#34;&gt;  false.&amp;quot;&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;{:tag&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;Boolean&lt;/span&gt;
-   &lt;span class=&#34;ss&#34;&gt;:added&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;
-   &lt;span class=&#34;ss&#34;&gt;:static&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true}&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;[pred&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll]&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;cond&lt;/span&gt;
-   &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;nil?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;seq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;true&lt;/span&gt;
-   &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;pred&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;recur&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;pred&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;coll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-   &lt;span class=&#34;ss&#34;&gt;:else&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (source every?)
+(defn every?
+  &#34;Returns true if (pred x) is logical true for every x in coll, else
+  false.&#34;
+  {:tag Boolean
+   :added &#34;1.0&#34;
+   :static true}
+  [pred coll]
+  (cond
+   (nil? (seq coll)) true
+   (pred (first coll)) (recur pred (next coll))
+   :else false))
 
 &lt;p&gt;&lt;code&gt;-&amp;gt;&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;simple.core=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;defmacro&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;-&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;s&#34;&gt;&amp;quot;Threads the expr through the forms. Inserts x as the&lt;/span&gt;
-&lt;span class=&#34;s&#34;&gt;  second item in the first form, making a list of it if it is not a&lt;/span&gt;
-&lt;span class=&#34;s&#34;&gt;  list already. If there are more forms, inserts the first form as the&lt;/span&gt;
-&lt;span class=&#34;s&#34;&gt;  second item in second form, etc.&amp;quot;&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;{:added&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;}&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;[x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms]&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;loop&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms]&lt;/span&gt;
-    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms&lt;/span&gt;
-      &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[form&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-            &lt;span class=&#34;nv&#34;&gt;threaded&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;seq?&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-                       &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;with-meta&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;first&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;~x&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;~@&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-                       &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;form&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;]&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;recur&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;threaded&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;forms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
-      &lt;span class=&#34;nv&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+simple.core=&gt; (source -&gt;)
+(defmacro -&gt;
+  &#34;Threads the expr through the forms. Inserts x as the
+  second item in the first form, making a list of it if it is not a
+  list already. If there are more forms, inserts the first form as the
+  second item in second form, etc.&#34;
+  {:added &#34;1.0&#34;}
+  [x &amp; forms]
+  (loop [x x, forms forms]
+    (if forms
+      (let [form (first forms)
+            threaded (if (seq? form)
+                       (with-meta `(~(first form) ~x ~@(next form)) (meta form))
+                       (list form x))]
+        (recur threaded (next forms)))
+      x)))
 </description>
     </item>
     

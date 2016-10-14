@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -350,10 +350,9 @@ DocumentControllerTest
 <p>copy that to file <code>a.txt</code></p>
 
 <p>Revert all the changes in these files:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> i in <span class="k">$(</span>cat a.txt <span class="p">|</span> uniq<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+for i in $(cat a.txt | uniq); do
   git checkout -- *$i*
-<span class="k">done</span>
-</code></pre></div>
+done
 
         
 
@@ -385,11 +384,10 @@ DocumentControllerTest
         <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
 
 <p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> f in <span class="k">$(</span>git status -s <span class="p">|</span>grep <span class="s2">&quot;^M&quot;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
-  git add <span class="nv">$f</span>
-  git commit -m <span class="s2">&quot;generic commit for all files&quot;</span>
-<span class="k">done</span>
-</code></pre></div>
+for f in $(git status -s |grep "^M"|awk '{print $2}'); do
+  git add $f
+  git commit -m "generic commit for all files"
+done
 
         
 
@@ -506,26 +504,23 @@ DocumentControllerTest
 <h3 id="conditional-expressions-vs-conditional-commands">Conditional expressions vs conditional commands</h3>
 
 <p>Introduces the concept of conditional expression, akin to the ternary operator (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span><span class="o">;</span>
-</code></pre></div>
+y = x > 1 ? 1 : 2;
 
 <p>this is equivalent to (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
-<span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div>
+int y;
+if(x > 1) {
+	y = 1;
+} else {
+	y = 2;
+}
 
 <p>and the conditional command (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">f</span><span class="o">();</span>
-	<span class="n">h</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-	<span class="n">g</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div>
+if (x > 1) {
+	f();
+	h(x);
+} else {
+	g();
+}
 
 <p>The conditional expression is also known as &ldquo;functional if&rdquo;</p>
 

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Algorithm on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/algorithm/</link>
-    <description>Recent content in Algorithm on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/algorithm/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 May 2016 00:08:19 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -516,8 +515,7 @@ The Long Road
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;there are upper and lowercase letters. You could find a way of doing it with vi, but I prefer something that I can remember: save the document, then process it with &lt;code&gt;awk&lt;/code&gt; and &lt;code&gt;sort&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat all.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print tolower($0)&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort &amp;gt; all_sorted.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+cat all.txt | awk &#39;{print tolower($0)&#39;}| sort &gt; all_sorted.txt
 
 &lt;p&gt;(snippet):&lt;/p&gt;
 
@@ -529,8 +527,7 @@ confront your ignorance
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If needed, sort and downcase the read.txt too.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print tolower($0)&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort &amp;gt; read_sorted.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+cat read.txt | awk &#39;{print tolower($0)&#39;}| sort &gt; read_sorted.txt
 
 &lt;p&gt;I tried using &lt;code&gt;comm&lt;/code&gt;, but it wasn&amp;rsquo;t so useful (because of whitespace).&lt;/p&gt;
 
@@ -553,12 +550,10 @@ confront your ignorance
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;to know which are the remain chapters:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat to_read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+cat to_read.txt | grep &#34;&gt;&#34;
 
 &lt;p&gt;to count the number of remaining chapters:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat to_read.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; wc -l
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+cat to_read.txt | grep &#34;&gt;&#34; | wc -l
 
 &lt;p&gt;The lesson learned here is to master your tools. This would have cost me a few minutes if done manually as the list was short, too much time if long (&amp;gt;1000 lines).&lt;/p&gt;
 

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ruby on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/ruby/</link>
-    <description>Recent content in Ruby on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/ruby/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Jul 2016 10:47:19 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/ruby/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -1584,77 +1583,73 @@ Tags: pull-request, james-reeves, tip, list&lt;/p&gt;
       
       <guid>https://alvarogarcia7.github.io/blog/2015/10/12/calling-all-methods-in-a-ruby-object/</guid>
       <description>&lt;p&gt;In Ruby, you can query the methods an object accepts:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;n&#34;&gt;pry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;methods&lt;/span&gt; 
-&lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:to_s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;               
- &lt;span class=&#34;ss&#34;&gt;:-@&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                    
- &lt;span class=&#34;ss&#34;&gt;:+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
- &lt;span class=&#34;ss&#34;&gt;:-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
- &lt;span class=&#34;ss&#34;&gt;:*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
- &lt;span class=&#34;ss&#34;&gt;:/&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
- &lt;span class=&#34;ss&#34;&gt;:div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                   
- &lt;span class=&#34;ss&#34;&gt;:%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                     
- &lt;span class=&#34;ss&#34;&gt;:modulo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                
- &lt;span class=&#34;ss&#34;&gt;:divmod&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                
- &lt;span class=&#34;ss&#34;&gt;:fdiv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;                  
- &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+pry(main)&gt; 1.methods 
+=&gt; [:to_s,               
+ :-@,                    
+ :+,                     
+ :-,                     
+ :*,                     
+ :/,                     
+ :div,                   
+ :%,                     
+ :modulo,                
+ :divmod,                
+ :fdiv,                  
+ ...
 
 &lt;p&gt;In case you want to call all methods, &lt;a href=&#34;https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods.rb&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; can be useful (plus its &lt;a href=&#34;https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods_spec.rb&#34; target=&#34;_blank&#34;&gt;tests&lt;/a&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;call_all_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-  &lt;span class=&#34;c1&#34;&gt;# remove methods that modify the PRY environment or are too verbose&lt;/span&gt;
-  &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
-  &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
-  &lt;span class=&#34;n&#34;&gt;exclusions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:pry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-                &lt;span class=&#34;ss&#34;&gt;:methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-                &lt;span class=&#34;ss&#34;&gt;:private_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-                &lt;span class=&#34;ss&#34;&gt;:public_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-                &lt;span class=&#34;ss&#34;&gt;:gem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-  &lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;methods&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;each&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
-    &lt;span class=&#34;k&#34;&gt;unless&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;exclusions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;include?&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_s&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
-      &lt;span class=&#34;k&#34;&gt;begin&lt;/span&gt;
-        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;empty?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
-          &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__send__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
-          &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__send__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-        &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-      &lt;span class=&#34;k&#34;&gt;rescue&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;StandardError&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ex&lt;/span&gt;
-        &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ex&lt;/span&gt;
-      &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+def call_all_methods(object, *args)
+  # remove methods that modify the PRY environment or are too verbose
+  success = {}
+  error = {}
+  exclusions = [:pry,
+                :methods,
+                :private_methods,
+                :public_methods,
+                :gem].map { |x| x.to_s}
+  object.methods.each { |x|
+    unless exclusions.include? x.to_s then
+      begin
+        if (args.empty?) then
+          success[x] = object.__send__(x)
+        else
+          success[x] = object.__send__(x, *args)
+        end
+      rescue StandardError =&gt; ex
+        error[x] = ex
+      end
+    end
+  }
 
-  &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select!&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nil?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-  &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select!&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nil?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+  success.select! { |x| not x.nil?}
+  error.select! { |x| not x.nil?}
 
-  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  {success: success, error: error}
+end
 
 &lt;p&gt;usage:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;51&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;call_all_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:success&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; 
-&lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:to_s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:-@&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:abs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:magnitude&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:~&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:to_f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:zero?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:odd?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:even?&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:succ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+[51] pry(main)&gt; call_all_methods(1)
+=&gt; {:success =&gt; 
+[[:to_s, &#34;1&#34;],
+ [:-@, -1],
+ [:abs, 1],
+ [:magnitude, 1],
+ [:~, -2],
+ [:to_f, 1.0],
+ [:size, 4],
+ [:zero?, false],
+ [:odd?, true],
+ [:even?, false],
+ [:succ, 2],
+ ...
 
 &lt;p&gt;also with parameters:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;call_all_methods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;err&#34;&gt;☺&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:success&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-   &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:-&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-   &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-   &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:/&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+[4] pry(main)&gt; call_all_methods(1,1)
+☺=&gt; {:success=&gt;
+  [[:+, 2],
+   [:-, 0],
+   [:*, 1],
+   [:/, 1],
 
 &lt;p&gt;Should you be interested in having this as a gem, please tell me (comments or &lt;a href=&#34;https://twitter.com/@alvarobiz&#34; target=&#34;_blank&#34;&gt;@alvarobiz&lt;/a&gt;)&lt;/p&gt;
 </description>
@@ -2167,52 +2162,47 @@ that you know &amp;ndash;but can’t easily prove to the compiler&amp;ndash; is 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;When you read it from file to a variable, it is converted to:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;line1&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;line2&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+(&#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)
 
 &lt;p&gt;This implicit line number value is not present, therefore you need to assign them one.&lt;/p&gt;
 
 &lt;p&gt;In ruby, you have this construct:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;A&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;B&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;C&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;each_with_index&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; =&amp;gt; &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+array = [&#34;A&#34;, &#34;B&#34;, &#34;C&#34;]
+array.each_with_index {|val, index| puts &#34;#{val} =&gt; #{index}&#34; }
 
 &lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/310634/what-is-the-right-way-to-iterate-through-an-array-in-ruby/310638#310638&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;In clojure, there is a similar function:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;map-indexed&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:f&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;:o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;; ([0 &amp;quot;line1&amp;quot;] [1 &amp;quot;line2&amp;quot;] [2 &amp;quot;hello&amp;quot;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+(map-indexed (fn [idx itm] [idx itm]) &#39;(:f :o))
+; ([0 &#34;line1&#34;] [1 &#34;line2&#34;] [2 &#34;hello&#34;])
 
 &lt;p&gt;If you want to shift the collection to the right so it starts with 1 (for the REPL):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;line1&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;line2&amp;quot;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
+(def lines &#39;(&#34;line1&#34; &#34;line2&#34; &#34;hello&#34;))
+; (&#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)
 
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;shift-one&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[lines]&lt;/span&gt; 
-  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;cons&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;shift-one&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;&amp;quot; &amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
+(defn shift-one [lines] 
+  (cons &#34;&#34; lines))
+(def lines (shift-one lines))
+lines
+; (&#34;&#34; &#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)
 
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;map-indexed&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[idx&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;itm]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  
-&lt;span class=&#34;c1&#34;&gt;; ([0 &amp;quot;&amp;quot;] [1 &amp;quot;line1&amp;quot;] [2 &amp;quot;line2&amp;quot;] [3 &amp;quot;hello&amp;quot;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+(map-indexed (fn [idx itm] [idx itm])
+  lines)  
+; ([0 &#34;&#34;] [1 &#34;line1&#34;] [2 &#34;line2&#34;] [3 &#34;hello&#34;])
 
 &lt;p&gt;&lt;a href=&#34;https://clojuredocs.org/clojure.core/map-indexed&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;, especially &lt;a href=&#34;https://clojuredocs.org/clojure.core/map-indexed#example-542692cdc026201cdc326d25&#34; target=&#34;_blank&#34;&gt;this one&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;But if you only need to get the lines at certain indexes, it is also possible to get the values directly, using &lt;code&gt;map&lt;/code&gt; on the sequence of desired indexes:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;&amp;quot; &amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot; &amp;quot;hello&amp;quot;)&lt;/span&gt;
+lines
+; (&#34;&#34; &#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)
 
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;defn&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;[lines&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;indexes]&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;map&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;nth&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;indexes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line2&amp;quot;)&lt;/span&gt;
+(defn get-all [lines indexes]
+  (map #(nth lines %) indexes))
+(get-all lines &#39;(1 2))
+; (&#34;line1&#34; &#34;line2&#34;)
 
-&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;get-all&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;lines&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;; (&amp;quot;line1&amp;quot; &amp;quot;line1&amp;quot;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+(get-all lines &#39;(1 1))
+; (&#34;line1&#34; &#34;line1&#34;)
 
 &lt;p&gt;Note: the original source code for this post is &lt;a href=&#34;https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/iterate-with-index.clj&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>

@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -148,11 +148,10 @@
           <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
 
 <p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> f in <span class="k">$(</span>git status -s <span class="p">|</span>grep <span class="s2">&quot;^M&quot;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
-  git add <span class="nv">$f</span>
-  git commit -m <span class="s2">&quot;generic commit for all files&quot;</span>
-<span class="k">done</span>
-</code></pre></div>
+for f in $(git status -s |grep "^M"|awk '{print $2}'); do
+  git add $f
+  git commit -m "generic commit for all files"
+done
 
         </div>
         

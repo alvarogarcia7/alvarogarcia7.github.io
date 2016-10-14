@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Feature Toggle on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/feature-toggle/</link>
-    <description>Recent content in Feature Toggle on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/feature-toggle/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Oct 2015 08:53:29 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/feature-toggle/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -18,26 +17,23 @@
       <description>
 
 &lt;p&gt;In bash, the usual behavior is to return the last status code:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bash-3.1$ tr
+bash-3.1$ tr
 tr: two strings must be given when translating
-bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
+bash-3.1$ echo $?
 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;But this also applies to pipes:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee 1.txt
+bash-3.1$ tr|tee 1.txt
 tr: two strings must be given when translating
-bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
+bash-3.1$ echo $?
 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: &lt;code&gt;set -o pipefail&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bash-3.1$ &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -o pipefail
-bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee 1.txt
+bash-3.1$ set -o pipefail
+bash-3.1$ tr|tee 1.txt
 tr: two strings must be given when translating
-bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
+bash-3.1$ echo $?
 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This might be useful if you stop on a non-zero status (&lt;code&gt;set -e&lt;/code&gt;).&lt;/p&gt;
 

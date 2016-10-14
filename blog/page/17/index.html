@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -234,11 +234,10 @@ Error: Run jekyll build --trace for more information.
 </code></pre>
 
 <p>this is an example:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-	<span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-		<span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-		<span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</code></pre></div>
+(defn all-access[k]
+	(let [{:keys [a b] :as k}]
+		(do a)
+		(do (:b k))))
 
         
 
@@ -289,17 +288,15 @@ x: 5 y: 7 point: {:x 5, :y 7}
 <p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html" target="_blank">Source</a></p>
 
 <p>This has been used for a method like this one:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
-  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
-</code></pre></div>
+(defn all-access[k]
+  (do (:a k))
+  (do (:b k)))
 
 <p>this has been refactored to this</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-	  <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-	  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</code></pre></div>
+(defn all-access[k]
+  (let [{:keys [a b] :as k}]
+	  (do a)
+	  (do (:b k))))
 
 <p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
 
@@ -543,12 +540,11 @@ x: 5 y: 7 point: {:x 5, :y 7}
 <p>I really liked some of what he said: I like to make the API correct from the first moment so I will ask questions that are correct but only check answers for things that I have already implemented. Example:</p>
 
 <p>As the generated sequence can only have <code>8 &lt;= x &lt;= 50</code> elements, a list returning a single element would not be correct. So</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//class FibonacciTests</span>
-<span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">theFirstElementIsOne</span><span class="o">(){</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="k">new</span> <span class="n">FibonacciSequence</span><span class="o">().</span><span class="na">generate</span><span class="o">(</span><span class="mi">8</span><span class="o">)[</span><span class="mi">0</span><span class="o">],</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
-<span class="o">}</span>
-</code></pre></div>
+//class FibonacciTests
+@Test
+public void theFirstElementIsOne(){
+	assertThat(new FibonacciSequence().generate(8)[0], is(1));
+}
 
 <h3 id="third-exercise-fizzbuzz">Third exercise: FizzBuzz</h3>
 

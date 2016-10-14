@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Git Hook on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/git-hook/</link>
-    <description>Recent content in Git Hook on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/git-hook/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Oct 2015 11:06:58 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/git-hook/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -37,64 +36,60 @@
 &lt;p&gt;In the &lt;code&gt;local&lt;/code&gt; you can do the development and local commits.&lt;/p&gt;
 
 &lt;p&gt;When you&amp;rsquo;re done, instead of&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git push origin &lt;span class=&#34;nv&#34;&gt;$b&lt;/span&gt;ranch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+git push origin $branch
 
 &lt;p&gt;do&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git push pipeline &lt;span class=&#34;nv&#34;&gt;$b&lt;/span&gt;ranch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+git push pipeline $branch
 
 &lt;p&gt;After the git hook is installed, this will trigger the pipeline execution.&lt;/p&gt;
 
 &lt;h3 id=&#34;git-hook&#34;&gt;Git hook&lt;/h3&gt;
 
 &lt;p&gt;In the &lt;code&gt;pipeline&lt;/code&gt;, in the &lt;code&gt;.git/hooks/post-receive&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#!/bin/bash&lt;/span&gt;
+#!/bin/bash
 chmod +x pipeline.sh
-&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;read&lt;/span&gt; oldrev newrev refname
-&lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
-  &lt;span class=&#34;c1&#34;&gt;# whatever you want to execute&lt;/span&gt;
-   &lt;span class=&#34;nv&#34;&gt;branch&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;git rev-parse --symbolic --abbrev-ref $refname&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
-  ./pipeline.sh &lt;span class=&#34;nv&#34;&gt;$b&lt;/span&gt;ranch
-&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+while read oldrev newrev refname
+do
+  # whatever you want to execute
+   branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+  ./pipeline.sh $branch
+done
 
 &lt;p&gt;In the above script, we&amp;rsquo;re telling git to execute the &lt;code&gt;pipeline.sh&lt;/code&gt; with the received branch as argument.&lt;/p&gt;
 
 &lt;h3 id=&#34;pipeline-executor&#34;&gt;Pipeline executor&lt;/h3&gt;
 
 &lt;p&gt;In the &lt;code&gt;pipeline&lt;/code&gt; repository, in &lt;code&gt;.git/pipeline.sh&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#!/bin/bash&lt;/span&gt;
+#!/bin/bash
 
-&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -e
-&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -o pipefail
+set -e
+set -o pipefail
 
-&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; cleanup &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+function cleanup {
   git checkout develop
   git pull develop
-&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+}
 
-&lt;span class=&#34;c1&#34;&gt;# upon failure, tell the user&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; err &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+# upon failure, tell the user
+function err {
   cleanup
-  growlnotify &lt;span class=&#34;s2&#34;&gt;&amp;quot;pipeline fails&amp;quot;&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+  growlnotify &#34;pipeline fails&#34;
+}
 
-&lt;span class=&#34;c1&#34;&gt;# trap signal ERR, executing function &amp;#39;err&amp;#39;&lt;/span&gt;
-&lt;span class=&#34;nb&#34;&gt;trap&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;err&amp;quot;&lt;/span&gt; ERR
+# trap signal ERR, executing function &#39;err&#39;
+trap &#34;err&#34; ERR
 
-&lt;span class=&#34;nv&#34;&gt;branch&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;
+branch=$1
 
-&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt; -z &lt;span class=&#34;nv&#34;&gt;$b&lt;/span&gt;ranch &lt;span class=&#34;o&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
-    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;need to specify a branch&amp;quot;&lt;/span&gt;
-    &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt; -1
-&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+if [[ -z $branch ]]; then
+    echo &#34;need to specify a branch&#34;
+    exit -1
+fi
 
-git checkout &lt;span class=&#34;nv&#34;&gt;$b&lt;/span&gt;ranch
-mvn clean install &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tee output.log
-git push --set-upstream origin &lt;span class=&#34;nv&#34;&gt;$b&lt;/span&gt;ranch
+git checkout $branch
+mvn clean install | tee output.log
+git push --set-upstream origin $branch
 cleanup
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h4 id=&#34;pipeline-executor-explanation&#34;&gt;Pipeline executor explanation&lt;/h4&gt;
 
@@ -148,10 +143,9 @@ cleanup
 &lt;h2 id=&#34;appendix&#34;&gt;Appendix&lt;/h2&gt;
 
 &lt;p&gt;This script will push to the pipeline:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#!/bin/bash&lt;/span&gt;
+#!/bin/bash
 
-git push pipeline  2&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &amp;gt; /dev/null &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+git push pipeline  2&gt;&amp;1 &gt; /dev/null &amp;
 </description>
     </item>
     

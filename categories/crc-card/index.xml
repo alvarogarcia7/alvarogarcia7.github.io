@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Crc Card on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/crc-card/</link>
-    <description>Recent content in Crc Card on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/crc-card/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Apr 2015 20:13:45 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/crc-card/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -138,12 +137,11 @@
 &lt;p&gt;I really liked some of what he said: I like to make the API correct from the first moment so I will ask questions that are correct but only check answers for things that I have already implemented. Example:&lt;/p&gt;
 
 &lt;p&gt;As the generated sequence can only have &lt;code&gt;8 &amp;lt;= x &amp;lt;= 50&lt;/code&gt; elements, a list returning a single element would not be correct. So&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//class FibonacciTests&lt;/span&gt;
-&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
-&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;theFirstElementIsOne&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(){&lt;/span&gt;
-	&lt;span class=&#34;n&#34;&gt;assertThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FibonacciSequence&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;generate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;is&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+//class FibonacciTests
+@Test
+public void theFirstElementIsOne(){
+	assertThat(new FibonacciSequence().generate(8)[0], is(1));
+}
 
 &lt;h3 id=&#34;third-exercise-fizzbuzz&#34;&gt;Third exercise: FizzBuzz&lt;/h3&gt;
 

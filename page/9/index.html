@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -144,7 +144,8 @@
 
 
         
-          <p>I&rsquo;ve found this quote very interesting from the book &ldquo;The Craftsman&rdquo;, by Richard Sennett: Animal laborans is, as the name implies, the human being akin to a beast of burden, a drudge condemned to routine. Arendt enriched this image by imagining him or her absorbed in a task that shuts out the world, a state well exemplified by Oppenheimer&rsquo;s feeling that the atomic bomb was a &ldquo;sweet&rdquo; problem, or Eichmann&rsquo;s obsession with making the gas chambers efficient.</p>
+          <p>I&rsquo;ve found this quote very interesting from the book &ldquo;The Craftsman&rdquo;, by Richard Sennett:
+ Animal laborans is, as the name implies, the human being akin to a beast of burden, a drudge condemned to routine. Arendt enriched this image by imagining him or her absorbed in a task that shuts out the world, a state well exemplified by Oppenheimer&rsquo;s feeling that the atomic bomb was a &ldquo;sweet&rdquo; problem, or Eichmann&rsquo;s obsession with making the gas chambers efficient.</p>
 
           
               <footer>
@@ -179,7 +180,11 @@
 
 
         
-          <p>Many times I&rsquo;ve written this function: public boolean between(int lowerBound, int n, int upperBound){ return lowerBound &lt;= n &amp;&amp; n &lt;= upperBound; } It may depend on the case, whether it is [], [), (] or (), to use mathematical terms. When the two comparisons are the same ([] and ()), there is duplication in the comparisons. Investigating a little bit on this in clojure, I&rsquo;ve found this function: &lt;= And its clojuredocs: Returns non-nil if nums are in monotonically non-decreasing order, otherwise false.</p>
+          <p>Many times I&rsquo;ve written this function:
+public boolean between(int lowerBound, int n, int upperBound){ return lowerBound It may depend on the case, whether it is [], [), (] or (), to use mathematical terms.
+When the two comparisons are the same ([] and ()), there is duplication in the comparisons.
+Investigating a little bit on this in clojure, I&rsquo;ve found this function:
+And its clojuredocs: Returns non-nil if nums are in monotonically non-decreasing order, otherwise false.</p>
 
           
               <footer>
@@ -214,7 +219,9 @@
 
 
         
-          <p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz: An object has a dependency when it knows: The name of another class. [&hellip;] The name of a message that it intends to send to someone other than self. [&hellip;] The arguments that a message requires. [&hellip;] The order of those arguments. [&hellip;] If an object knows any of these facts about another object, it has dependencies to the other.</p>
+          <p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:
+ An object has a dependency when it knows:
+ The name of another class. [&hellip;] The name of a message that it intends to send to someone other than self. [&hellip;] The arguments that a message requires. [&hellip;] The order of those arguments. [&hellip;]   If an object knows any of these facts about another object, it has dependencies to the other.</p>
 
           
               <footer>
@@ -249,7 +256,8 @@
 
 
         
-          <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well. package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; import static org.hamcrest.Matchers.is; import static org.mockito.Mockito.spy; import static org.mockito.Mockito.when; import org.junit.Test; import org.mockito.Spy; public class DifferentReturnValues { @Spy private Spike1 spike1 = new Spike1(); @Test public void spike1() { spike1 = spy(spike1); when(spike1.getBool()).thenReturn(false, true); assertThat(spike1.getBool(), is(false)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true));</p>
+          <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.
+package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; import static org.hamcrest.Matchers.is; import static org.mockito.Mockito.spy; import static org.mockito.Mockito.when; import org.junit.Test; import org.mockito.Spy; public class DifferentReturnValues { @Spy private Spike1 spike1 = new Spike1(); @Test public void spike1() { spike1 = spy(spike1); when(spike1.getBool()).thenReturn(false, true); assertThat(spike1.getBool(), is(false)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); } private class Spike1 { public boolean getBool() { return true; } } } The key line is:</p>
 
           
               <footer>
@@ -284,7 +292,9 @@
 
 
         
-          <p>At a client, today I&rsquo;ve facilitated a brown-bag session introducing the Clojure language to a group of java programmers. I&rsquo;ve started hands-on, live coding on a REPL. To make things easier, I&rsquo;ve created a maven project that imports the clojure jar and lets you obtain dependencies from clojars. The repo is here. This repo wouldn&rsquo;t have been possible without the clojure maven plugin, written by Mark Derricutt. I&rsquo;ve more or less followed this guide We&rsquo;ve also practiced, using a dojo in clojure, the fizzbuzz kata.</p>
+          <p>At a client, today I&rsquo;ve facilitated a brown-bag session introducing the Clojure language to a group of java programmers.
+I&rsquo;ve started hands-on, live coding on a REPL. To make things easier, I&rsquo;ve created a maven project that imports the clojure jar and lets you obtain dependencies from clojars. The repo is here. This repo wouldn&rsquo;t have been possible without the clojure maven plugin, written by Mark Derricutt.
+I&rsquo;ve more or less followed this guide</p>
 
           
               <footer>
@@ -319,7 +329,8 @@
 
 
         
-          <p>I&rsquo;ve found this list of links for Java 9, while in beta, useful: Contents of the new version Java REPL workshop, with useful commands and questions &amp; answers for installing the REPL REPL tutorial PDF Another getting started guide, by JClarity Yet another getting started guide, by Arun Gupta Information on the REPL project, (codenamed Kulla)</p>
+          <p>I&rsquo;ve found this list of links for Java 9, while in beta, useful:
+ Contents of the new version Java REPL workshop, with useful commands and questions &amp; answers for installing the REPL REPL tutorial PDF Another getting started guide, by JClarity Yet another getting started guide, by Arun Gupta Information on the REPL project, (codenamed Kulla)  </p>
 
           
 

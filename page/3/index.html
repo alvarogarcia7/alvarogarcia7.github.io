@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -144,7 +144,8 @@
 
 
         
-          <p>Being A Developer After 40 I&rsquo;ve read this article by Adrian Kosmaczewski on the required topics to be a developer at age 40 and keep enjoying it: Forget The Hype Choose Your Galaxy Wisely Learn About Software History Keep on Learning Teach Workplaces Suck Know Your Worth Send The Elevator Down LLVM He references galaxy, the big stack you are positioned (JVM, .net, PHP, etc). He makes a special mention of the LLVM Take conscious decisions in your life.</p>
+          <p>Being A Developer After 40 I&rsquo;ve read this article by Adrian Kosmaczewski on the required topics to be a developer at age 40 and keep enjoying it:
+ Forget The Hype Choose Your Galaxy Wisely Learn About Software History Keep on Learning Teach Workplaces Suck Know Your Worth Send The Elevator Down LLVM  He references galaxy, the big stack you are positioned (JVM, .net, PHP, etc). He makes a special mention of the LLVM</p>
 
           
               <footer>
@@ -179,7 +180,9 @@
 
 
         
-          <p>In Working effectively with legacy code, Michael Feathers talks a type of tests to define or characterize the current behavior of the legacy system: In nearly every legacy system, what the system does is more important than what it is supposed to do. A characterization test is a test that characterizes the actual behavior of a piece of code. [&hellip;] The test document the actual current behavior of the system. Here is a little algorithm for writing algorithm for writing characterization tests: Use a piece of code in a test harness Write an assertion that you know will fail Let the failure tell you what the behavior is.</p>
+          <p>In Working effectively with legacy code, Michael Feathers talks a type of tests to define or characterize the current behavior of the legacy system:
+ In nearly every legacy system, what the system does is more important than what it is supposed to do.
+A characterization test is a test that characterizes the actual behavior of a piece of code. [&hellip;] The test document the actual current behavior of the system.</p>
 
           
               <footer>
@@ -214,7 +217,9 @@
 
 
         
-          <p>(This formulation has been copied and adapted from Bobby Johnson and Terry Hughes&rsquo;s repository) Formulation Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us.</p>
+          <p>(This formulation has been copied and adapted from Bobby Johnson and Terry Hughes&rsquo;s repository)
+Formulation Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.
+Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us.</p>
 
           
               <footer>
@@ -249,7 +254,10 @@
 
 
         
-          <p>Note: this article is an answer to a previous one, about the same topic: a tool for a faster site generation while developing / writing articles, using octopress 2. Introduction Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles: Isolate a post: # usage rake isolate[my-post] desc &quot;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&quot; task :isolate, :filename do |t, args| stash_dir = &quot;#{source_dir}/#{stash_dir}&quot; FileUtils.mkdir(stash_dir) unless File.exist?(stash_dir) Dir.glob(&quot;#{source_dir}/#{posts_dir}/*.*&quot;) do |post| system &quot;git update-index --assume-unchanged #{post}&quot; unless post.include?(args.filename) FileUtils.mv post, stash_dir unless post.include?(args.filename) end end Integrate with the rest of the posts: desc &quot;Move all stashed posts back into the posts directory, ready for site generation.&quot; task :integrate do posts_dir = &quot;#{source_dir}/#{posts_dir}/&quot; Dir.glob(&quot;#{source_dir}/#{stash_dir}/*.*&quot;) do |post| FileUtils.mv post, posts_dir full_path = &quot;#{posts_dir}/#{post.split(&quot;/&quot;).reverse.first}&quot; system &quot;git update-index --no-assume-unchanged #{full_path}&quot; end end Usage (at the folder where the Rakefile is located) isolate the selected file.</p>
+          <p>Note: this article is an answer to a previous one, about the same topic: a tool for a faster site generation while developing / writing articles, using octopress 2.
+Introduction Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles:
+Isolate a post:
+# usage rake isolate[my-post] desc "Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.</p>
 
           
               <footer>
@@ -284,7 +292,10 @@
 
 
         
-          <p>Deliberate Practice: What It Is and Why You Need It I&rsquo;ve read this article by Corbett Barr on what is deliberate practice and why it is needed to become an expert in a given domain field. The four essential components: Motivation Tailored (practice) Feedback Repetion Tags: corbett-barr, deliberate-practice, expert, practice, anders-ericsson, talent, professional-development, career 10 Features I Wish Java Would Steal From the Kotlin Language I&rsquo;ve read this list of features that the Kotlin Language has that would be an improvement for the Java language.</p>
+          <p>Deliberate Practice: What It Is and Why You Need It I&rsquo;ve read this article by Corbett Barr on what is deliberate practice and why it is needed to become an expert in a given domain field.
+The four essential components:
+ Motivation Tailored (practice) Feedback Repetion   Tags: corbett-barr, deliberate-practice, expert, practice, anders-ericsson, talent, professional-development, career
+10 Features I Wish Java Would Steal From the Kotlin Language I&rsquo;ve read this list of features that the Kotlin Language has that would be an improvement for the Java language.</p>
 
           
               <footer>

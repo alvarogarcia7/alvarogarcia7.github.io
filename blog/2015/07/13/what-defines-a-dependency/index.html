@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -146,14 +146,13 @@
           
           
           <p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java" target="_blank">fragment</a>):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">register</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">userName</span><span class="o">)</span>  <span class="o">{</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="n">registeredUsers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="n">userName</span><span class="o">));</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">AlreadyRegisteredUserException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">userName</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
+public void register (final String userName)  {
+    try {
+        registeredUsers.add(new User(userName));
+    } catch (AlreadyRegisteredUserException e) {
+        resultListener.alreadyRegistered(userName);
+    }
+}
 
 <p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
 
@@ -167,16 +166,15 @@
 <p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
 
 <p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java" target="_blank">fragment</a>)</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span> <span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">,</span> <span class="kd">final</span> <span class="n">RegistryResultListener</span> <span class="n">resultListener</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">contains</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="o">{</span>
-        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
-        <span class="k">return</span><span class="o">;</span>
-    <span class="o">}</span>
+public void add (User user, final RegistryResultListener resultListener) {
+    if(contains(user)) {
+        resultListener.alreadyRegistered(user.name());
+        return;
+    }
 
-    <span class="n">users</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-    <span class="n">resultListener</span><span class="o">.</span><span class="na">successfullyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
-<span class="o">}</span>
-</code></pre></div>
+    users.add(user);
+    resultListener.successfullyRegistered(user.name());
+}
 
 <p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
 

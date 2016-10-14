@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -182,21 +182,19 @@
 -->
 
 <h2 id="select-attribute">Select Attribute</h2>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Array</span>
-  <span class="k">def</span> <span class="nf">select_attribute</span> <span class="kp">attr</span>
-    <span class="nb">self</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">unit</span><span class="o">|</span> <span class="n">unit</span><span class="o">[</span><span class="kp">attr</span><span class="o">]</span> <span class="p">}</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+class Array
+  def select_attribute attr
+    self.map { |unit| unit[attr] }
+  end
+end
 
 <p>usage:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">71</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span>
-    <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">},</span>
-    <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">},</span>
-    <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">}</span><span class="o">]</span>
-                                   <span class="o">.</span><span class="n">select_attribute</span> <span class="ss">:even?</span>
-<span class="o">=&gt;</span> <span class="o">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span>
-</code></pre></div>
+[71] pry(main)> [
+    {:element => 1, :even? => false},
+    {:element => 2, :even? => true},
+    {:element => 3, :even? => false}]
+                                   .select_attribute :even?
+=> [false, true, false]
 
 <h1 id="collection-of-patterns">Collection of patterns</h1>
 
@@ -215,28 +213,25 @@
 </ul>
 
 <h3 id="example">Example</h3>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">62</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> 
-                         <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> 
-                       <span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[</span><span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">true</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">}</span><span class="o">]</span>
-</code></pre></div>
+[62] pry(main)> [1,2,3]
+                       .map { |x| 
+                         {:element => x, :even? => x.even? } 
+                       }
+=> [{:element=>1, :even?=>false}, {:element=>2, :even?=>true}, {:element=>3, :even?=>false}]
 
 <h3 id="extra">Extra</h3>
 
 <p>Naming the decoration</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">62</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> 
-                         <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> 
-                       <span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[</span><span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">true</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">}</span><span class="o">]</span>
-</code></pre></div>
+[62] pry(main)> [1,2,3]
+                       .map { |x| 
+                         {:element => x, :even? => x.even? } 
+                       }
+=> [{:element=>1, :even?=>false}, {:element=>2, :even?=>true}, {:element=>3, :even?=>false}]
 
 <p>compare to</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">63</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="kp">false</span><span class="o">]]</span>
-</code></pre></div>
+[63] pry(main)> [1,2,3]
+                       .map { |x| [x, x.even?] }
+=> [[1, false], [2, true], [3, false]]
 
 <p>In the latter, you are expressing the how, not the what.</p>
 
@@ -247,24 +242,21 @@
 <h3 id="example-1">Example</h3>
 
 <p>Original:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                      <span class="o">.</span><span class="n">select</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span>
-</code></pre></div>
+[5] pry(main)> [1,2,3]
+                      .select {|x| x.even?}
+=> [2]
 
 <p>Introduce an intermediary:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                      <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="kp">false</span><span class="o">]]</span>
-</code></pre></div>
+[2] pry(main)> [1,2,3]
+                      .map { |x| [x, x.even?] }
+=> [[1, false], [2, true], [3, false]]
 
 <p>Then select all that match:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">67</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                       <span class="o">.</span><span class="n">map</span>    <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
-                       <span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
-                       <span class="o">.</span><span class="n">map</span>    <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">first</span> <span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span>
-</code></pre></div>
+[67] pry(main)> [1,2,3]
+                       .map    { |x| [x, x.even?] }
+                       .select { |x| x[1] }
+                       .map    { |x| x.first }
+=> [2]
 
 <h2 id="compact-hof">Compact HOF</h2>
 
@@ -281,29 +273,26 @@
 - .map { |x| x.first}
 + .sort_by { |x| 2 * x}
 </code></pre>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">48</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
-                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span> <span class="p">}</span>
-                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
-                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span>
-</code></pre></div>
+[48] pry(main)> [0, -2, 90, 1, 2, 0]
+                                    .map     { |x| [x, -x] }
+                                    .sort_by { |x| x[1] }
+                                    .map     { |x| x[0] }
+=> [90, 2, 1, 0, 0, -2]
 
 <p>replace it by:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">49</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
-                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">-</span><span class="n">x</span> <span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span>
-</code></pre></div>
+[49] pry(main)> [0, -2, 90, 1, 2, 0]
+                                    .sort_by { |x| -x }
+=> [90, 2, 1, 0, 0, -2]
 
 <h3 id="do-not-use-when">Do not use when</h3>
 
 <p>This pattern is not appropriate when you depend on (i.e., cannot discard) the data generated by the decoration.</p>
 
 <p>Example:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="mi">50</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
-                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span> <span class="p">}</span>
-                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
-<span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="o">[-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">]]</span>
-</code></pre></div>
+[50] pry(main)> [0, -2, 90, 1, 2, 0]
+                                    .map     { |x| [x, -x] }
+                                    .sort_by { |x| x[1] }
+=> [[90, -90], [2, -2], [1, -1], [0, 0], [0, 0], [-2, 2]]
 
         </div>
         

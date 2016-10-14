@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -144,7 +144,9 @@
 
 
         
-          <p>Collection of HOFs Select Attribute class Array def select_attribute attr self.map { |unit| unit[attr] } end end usage: [71] pry(main)&gt; [ {:element =&gt; 1, :even? =&gt; false}, {:element =&gt; 2, :even? =&gt; true}, {:element =&gt; 3, :even? =&gt; false}] .select_attribute :even? =&gt; [false, true, false] Collection of patterns Decorating a collection Introduction You want to materialize properties from a collection Alternative names Intermediary Functional decorator Collection Annotation (from Wallingford&rsquo;s Roundabout, especially Interface procedure) Example [62] pry(main)&gt; [1,2,3] .map { |x| {:element =&gt; x, :even?</p>
+          <p>Collection of HOFs Select Attribute class Array def select_attribute attr self.map { |unit| unit[attr] } end end usage:
+[71] pry(main) [ {:element = 1, :even? = false}, {:element = 2, :even? = true}, {:element = 3, :even? = false}] .select_attribute :even? = [false, true, false] Collection of patterns Decorating a collection Introduction You want to materialize properties from a collection
+Alternative names  Intermediary Functional decorator Collection Annotation (from Wallingford&rsquo;s Roundabout, especially Interface procedure)  Example [62] pry(main) [1,2,3] .</p>
 
           
               <footer>
@@ -179,7 +181,9 @@
 
 
         
-          <p>Call me maybe: RabbitMQ I&rsquo;ve read this article by Kyle Kingsbury on using RabbitMQ as a lock service. It investigates and gives a counterexample of using it for this purpose. Uses Knossos to do the testing and surfaces a problem with it. Explains specific problems on locking: at-most-once and at-least-once message delivery Note: References Jepsen (I guess an inside joke to the song &ldquo;Call me maybe&rdquo; by Carly Rae Jepsen) for at-most-once and at-least-once message delivery.</p>
+          <p>Call me maybe: RabbitMQ I&rsquo;ve read this article by Kyle Kingsbury on using RabbitMQ as a lock service. It investigates and gives a counterexample of using it for this purpose.
+Uses Knossos to do the testing and surfaces a problem with it. Explains specific problems on locking: at-most-once and at-least-once message delivery
+Note: References Jepsen (I guess an inside joke to the song &ldquo;Call me maybe&rdquo; by Carly Rae Jepsen) for at-most-once and at-least-once message delivery.</p>
 
           
               <footer>
@@ -214,7 +218,9 @@
 
 
         
-          <p>In Ruby, you can query the methods an object accepts: pry(main)&gt; 1.methods =&gt; [:to_s, :-@, :+, :-, :*, :/, :div, :%, :modulo, :divmod, :fdiv, ... In case you want to call all methods, this can be useful (plus its tests): def call_all_methods(object, *args) # remove methods that modify the PRY environment or are too verbose success = {} error = {} exclusions = [:pry, :methods, :private_methods, :public_methods, :gem].map { |x| x.to_s} object.methods.each { |x| unless exclusions.include?</p>
+          <p>In Ruby, you can query the methods an object accepts:
+pry(main) 1.methods = [:to_s, :-@, :+, :-, :*, :/, :div, :%, :modulo, :divmod, :fdiv, ... In case you want to call all methods, this can be useful (plus its tests):
+def call_all_methods(object, *args) # remove methods that modify the PRY environment or are too verbose success = {} error = {} exclusions = [:pry, :methods, :private_methods, :public_methods, :gem].map { |x| x.</p>
 
           
               <footer>
@@ -249,7 +255,8 @@
 
 
         
-          <p>Motivation At a client, one of the projects has a long building process and the tests are mostly slow, so I use a local building pipeline, an example of the Pipes and Filters pattern. This allows for executing manually only the fast unit tests, then automatically (no user intervention, no time spent) executing the rest of them before pushing. In case the latter fails, it is possible to do git push -f to the pipeline without corrupting the central repository (origin) history, possibly disturbing others.</p>
+          <p>Motivation At a client, one of the projects has a long building process and the tests are mostly slow, so I use a local building pipeline, an example of the Pipes and Filters pattern.
+This allows for executing manually only the fast unit tests, then automatically (no user intervention, no time spent) executing the rest of them before pushing. In case the latter fails, it is possible to do git push -f to the pipeline without corrupting the central repository (origin) history, possibly disturbing others.</p>
 
           
               <footer>
@@ -284,7 +291,8 @@
 
 
         
-          <p>JVM default encoding as UTF-8 Make the JVM use UTF-8 character encoding by default Set up the system property JAVA_TOOL_OPTIONS to -Dfile.encoding=UTF8</p>
+          <p>JVM default encoding as UTF-8 Make the JVM use UTF-8 character encoding by default
+Set up the system property JAVA_TOOL_OPTIONS to -Dfile.encoding=UTF8</p>
 
           
 
@@ -315,7 +323,9 @@
 
 
         
-          <p>There are times when you only want to have the production code: downstream job after a successful build compiling in local after checkout from DVCS spiking (possibly the tests are broken) speeding up the process For that, maven allows to skip the tests, selectively: -DskipTests compiles the tests, but skips running them -Dmaven.test.skip skips compiling the tests and does not run them. This can also be written as -Dmaven.test.skip=true In case some of your tests depend on tests from another artifact (e.g.</p>
+          <p>There are times when you only want to have the production code:
+ downstream job after a successful build compiling in local after checkout from DVCS spiking (possibly the tests are broken) speeding up the process  For that, maven allows to skip the tests, selectively:
+ -DskipTests compiles the tests, but skips running them -Dmaven.test.skip skips compiling the tests and does not run them. This can also be written as -Dmaven.</p>
 
           
               <footer>

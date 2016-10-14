@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -145,7 +145,8 @@
 
 
         
-          <p>As the preface for the guide for on-call support, a positive note: README You’re cool. I know it. Do not trust yourself, trust me that I trust you. You might be sleepy. It’s OK Everything is going to be fine. Take 5 minutes to think about anything, anytime. Especially before any rash decision. With great power comes great responsibility. Use it wisely. Restoring the services comes first, investigation comes second Do the very minimum of investigation after the incident (collect things that might disappear), leave the rest for the next day on office hours Whenever everything is done, go to sleep but keep an eye on your phone.</p>
+          <p>As the preface for the guide for on-call support, a positive note:
+README  You’re cool. I know it. Do not trust yourself, trust me that I trust you. You might be sleepy. It’s OK Everything is going to be fine. Take 5 minutes to think about anything, anytime. Especially before any rash decision. With great power comes great responsibility. Use it wisely. Restoring the services comes first, investigation comes second Do the very minimum of investigation after the incident (collect things that might disappear), leave the rest for the next day on office hours Whenever everything is done, go to sleep but keep an eye on your phone.</p>
 
           
               <footer>
@@ -180,7 +181,10 @@
 
 
         
-          <p>With my pairing mate we have refactored this piece of functional code. Original code: function filterTokens (rawTokens) { const cleanedTokens = rawTokens.map(token =&gt; (token.length &amp;&amp; token[0] === &#39;-&#39;) ? token.substring(1) : token) return cleanedTokens.filter(token =&gt; token !== &#39;&#39; &amp;&amp; stopWordsArray.indexOf(token) === -1) } Refactored code: function filterTokens (rawTokens) { const cleanedTokens = rawTokens.map(token =&gt; startsWithADash(token) ? removeDashFrom(token) : token) const processedTokens = cleanedTokens.filter(token =&gt; isNotEmpty(token) &amp;&amp; isNotAStopWord(token)) return processedTokens function startsWithADash (token) { return (token.length &amp;&amp; token[ 0 ] === &#39;-&#39;) } function removeDashFrom (token) { return token.substring(1) } function isNotAStopWord (token) { return stopWordsArray.indexOf(token) === -1 } function isNotEmpty (token) { return token !== &#39;&#39; } } These two codes do the same, but the second reads better, given that each small concept (e.g., cleanedTokens) or operation (e.g., removeDashFrom) has a name.</p>
+          <p>With my pairing mate we have refactored this piece of functional code.
+Original code:
+function filterTokens (rawTokens) { const cleanedTokens = rawTokens.map(token = (token.length && token[0] === '-') ? token.substring(1) : token) return cleanedTokens.filter(token = token !== '' && stopWordsArray.indexOf(token) === -1) } Refactored code:
+function filterTokens (rawTokens) { const cleanedTokens = rawTokens.map(token = startsWithADash(token) ? removeDashFrom(token) : token) const processedTokens = cleanedTokens.filter(token = isNotEmpty(token) && isNotAStopWord(token)) return processedTokens function startsWithADash (token) { return (token.</p>
 
           
               <footer>
@@ -215,7 +219,10 @@
 
 
         
-          <p>Quoting the book, Why is programming fun? What delights may its practitioner expect as his reward? First is the sheer joy of making things. As the child delights in his mud pie, so the adult enjoys building things, especially things of his own design [&hellip;] Second is the pleasure of making things that are useful to other people. Deep within, we want other to use our work and to find it helpful.</p>
+          <p>Quoting the book,
+ Why is programming fun? What delights may its practitioner expect as his reward?
+First is the sheer joy of making things. As the child delights in his mud pie, so the adult enjoys building things, especially things of his own design [&hellip;]
+Second is the pleasure of making things that are useful to other people. Deep within, we want other to use our work and to find it helpful.</p>
 
           
               <footer>

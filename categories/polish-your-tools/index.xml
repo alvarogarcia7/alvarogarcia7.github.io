@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Polish Your Tools on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/polish-your-tools/</link>
-    <description>Recent content in Polish Your Tools on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/polish-your-tools/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jul 2015 02:40:24 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/polish-your-tools/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -81,10 +80,9 @@ DocumentControllerTest
 &lt;p&gt;copy that to file &lt;code&gt;a.txt&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Revert all the changes in these files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; i in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;cat a.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; uniq&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+for i in $(cat a.txt | uniq); do
   git checkout -- *$i*
-&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+done
 </description>
     </item>
     
@@ -97,11 +95,10 @@ DocumentControllerTest
       <description>&lt;p&gt;I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.&lt;/p&gt;
 
 &lt;p&gt;This is why I have some scripts to commit all the changes, even with the same message. This is one of them:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; f in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;git status -s &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep &lt;span class=&#34;s2&#34;&gt;&amp;quot;^M&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
-  git add &lt;span class=&#34;nv&#34;&gt;$f&lt;/span&gt;
-  git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;quot;generic commit for all files&amp;quot;&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+for f in $(git status -s |grep &#34;^M&#34;|awk &#39;{print $2}&#39;); do
+  git add $f
+  git commit -m &#34;generic commit for all files&#34;
+done
 </description>
     </item>
     

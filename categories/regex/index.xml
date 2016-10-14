@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Regex on The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/regex/</link>
-    <description>Recent content in Regex on The long way through Software Craftsmanship</description>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/regex/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jul 2015 02:40:24 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/categories/regex/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -81,10 +80,9 @@ DocumentControllerTest
 &lt;p&gt;copy that to file &lt;code&gt;a.txt&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Revert all the changes in these files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; i in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;cat a.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; uniq&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+for i in $(cat a.txt | uniq); do
   git checkout -- *$i*
-&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+done
 </description>
     </item>
     

@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -144,7 +144,8 @@
 
 
         
-          <p>As the preface for the guide for on-call support, a positive note: README You’re cool. I know it. Do not trust yourself, trust me that I trust you. You might be sleepy. It’s OK Everything is going to be fine. Take 5 minutes to think about anything, anytime. Especially before any rash decision. With great power comes great responsibility. Use it wisely. Restoring the services comes first, investigation comes second Do the very minimum of investigation after the incident (collect things that might disappear), leave the rest for the next day on office hours Whenever everything is done, go to sleep but keep an eye on your phone.</p>
+          <p>As the preface for the guide for on-call support, a positive note:
+README  You’re cool. I know it. Do not trust yourself, trust me that I trust you. You might be sleepy. It’s OK Everything is going to be fine. Take 5 minutes to think about anything, anytime. Especially before any rash decision. With great power comes great responsibility. Use it wisely. Restoring the services comes first, investigation comes second Do the very minimum of investigation after the incident (collect things that might disappear), leave the rest for the next day on office hours Whenever everything is done, go to sleep but keep an eye on your phone.</p>
 
           
               <footer>
@@ -179,7 +180,9 @@
 
 
         
-          <p>Should Engineers Design? I&rsquo;ve read this article by Cap Watkins where he explains the relationship between designers and programmers and how to get the latter involved in the design / UX / UI process. Tags: cap-watkins, design, ux, ui, exchange, cross-functional The Sliding Scale of Giving a Fuck I&rsquo;ve read this article by Cap Watkins where he explains that different topics have a different importance to each one of us: this topic might be very important for someone else, ergo, it makes mores sense to evaluate their option more carefully.</p>
+          <p>Should Engineers Design? I&rsquo;ve read this article by Cap Watkins where he explains the relationship between designers and programmers and how to get the latter involved in the design / UX / UI process.
+Tags: cap-watkins, design, ux, ui, exchange, cross-functional
+The Sliding Scale of Giving a Fuck I&rsquo;ve read this article by Cap Watkins where he explains that different topics have a different importance to each one of us: this topic might be very important for someone else, ergo, it makes mores sense to evaluate their option more carefully.</p>
 
           
               <footer>
@@ -214,7 +217,10 @@
 
 
         
-          <p>Books I&rsquo;ve read this quarter1: Extreme Programming Pocket Guide by Chromatic Notes to a Software Team Leader (1st Edition), by Roy Osherove Non-technical: The Zero Marginal Cost Society: The Internet of Things, the Collaborative Commons, and the Eclipse of Capitalism, by Jeremy Rifkin Snow Crash, by Neal Stephenson La guerra no tiene rostro de mujer, by Svetlana Aleksiévich Books started, not yet finished (WIP): Talking with Tech Leads: From Novices to Practitioners by Patrick Kua Books I want to finish.</p>
+          <p>Books I&rsquo;ve read this quarter1:
+ Extreme Programming Pocket Guide by Chromatic Notes to a Software Team Leader (1st Edition), by Roy Osherove  Non-technical:
+ The Zero Marginal Cost Society: The Internet of Things, the Collaborative Commons, and the Eclipse of Capitalism, by Jeremy Rifkin Snow Crash, by Neal Stephenson La guerra no tiene rostro de mujer, by Svetlana Aleksiévich  Books started, not yet finished (WIP):
+ Talking with Tech Leads: From Novices to Practitioners by Patrick Kua  Books I want to finish.</p>
 
           
               <footer>
@@ -249,7 +255,10 @@
 
 
         
-          <p>With my pairing mate we have refactored this piece of functional code. Original code: function filterTokens (rawTokens) { const cleanedTokens = rawTokens.map(token =&gt; (token.length &amp;&amp; token[0] === &#39;-&#39;) ? token.substring(1) : token) return cleanedTokens.filter(token =&gt; token !== &#39;&#39; &amp;&amp; stopWordsArray.indexOf(token) === -1) } Refactored code: function filterTokens (rawTokens) { const cleanedTokens = rawTokens.map(token =&gt; startsWithADash(token) ? removeDashFrom(token) : token) const processedTokens = cleanedTokens.filter(token =&gt; isNotEmpty(token) &amp;&amp; isNotAStopWord(token)) return processedTokens function startsWithADash (token) { return (token.length &amp;&amp; token[ 0 ] === &#39;-&#39;) } function removeDashFrom (token) { return token.substring(1) } function isNotAStopWord (token) { return stopWordsArray.indexOf(token) === -1 } function isNotEmpty (token) { return token !== &#39;&#39; } } These two codes do the same, but the second reads better, given that each small concept (e.g., cleanedTokens) or operation (e.g., removeDashFrom) has a name.</p>
+          <p>With my pairing mate we have refactored this piece of functional code.
+Original code:
+function filterTokens (rawTokens) { const cleanedTokens = rawTokens.map(token = (token.length && token[0] === '-') ? token.substring(1) : token) return cleanedTokens.filter(token = token !== '' && stopWordsArray.indexOf(token) === -1) } Refactored code:
+function filterTokens (rawTokens) { const cleanedTokens = rawTokens.map(token = startsWithADash(token) ? removeDashFrom(token) : token) const processedTokens = cleanedTokens.filter(token = isNotEmpty(token) && isNotAStopWord(token)) return processedTokens function startsWithADash (token) { return (token.</p>
 
           
               <footer>
@@ -315,7 +324,9 @@
 
 
         
-          <p>Lessons in Agile: Six Months at Pivotal I&rsquo;ve read this article by Maryam Labib where she explains what she has learned in the last 6 months at Pivotal: how to pair program, how to TDD and some good practices to be a better developer. Tags: maryam-labib, pivotal, career, professional-career, tdd, pair-programming, team, lessons-learned, experience Hacking verbal communication systems I&rsquo;ve watched this talk by Ryan Alexander on what kind of systems humans use to communicate and how to improve them.</p>
+          <p>Lessons in Agile: Six Months at Pivotal I&rsquo;ve read this article by Maryam Labib where she explains what she has learned in the last 6 months at Pivotal: how to pair program, how to TDD and some good practices to be a better developer.
+Tags: maryam-labib, pivotal, career, professional-career, tdd, pair-programming, team, lessons-learned, experience
+Hacking verbal communication systems I&rsquo;ve watched this talk by Ryan Alexander on what kind of systems humans use to communicate and how to improve them.</p>
 
           
               <footer>

@@ -41,7 +41,7 @@
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.16" />
+  <meta name="generator" content="Hugo 0.17" />
 
   
   
@@ -233,26 +233,23 @@
 <h3 id="conditional-expressions-vs-conditional-commands">Conditional expressions vs conditional commands</h3>
 
 <p>Introduces the concept of conditional expression, akin to the ternary operator (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span><span class="o">;</span>
-</code></pre></div>
+y = x > 1 ? 1 : 2;
 
 <p>this is equivalent to (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
-<span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div>
+int y;
+if(x > 1) {
+	y = 1;
+} else {
+	y = 2;
+}
 
 <p>and the conditional command (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">f</span><span class="o">();</span>
-	<span class="n">h</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-	<span class="n">g</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div>
+if (x > 1) {
+	f();
+	h(x);
+} else {
+	g();
+}
 
 <p>The conditional expression is also known as &ldquo;functional if&rdquo;</p>
 
