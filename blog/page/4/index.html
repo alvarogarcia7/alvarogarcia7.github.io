@@ -218,7 +218,7 @@
         <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two persons involved in a git commit, in github</a>
     </h1>
     <p >Feb 14, 2016
-         - 2 minute read 
+         - 3 minute read 
          - <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/#disqus_thread">Comments</a>
 
         
@@ -298,6 +298,30 @@ export GIT_COMMITTER_EMAIL='john@example.com'
 <p>Taken from <a href="http://stackoverflow.com/a/23108169/1181094" target="_blank">this StackOverflow answer</a></p>
 
 <p>This can be useful for a pairing session or for some kinds of git history rewrite.</p>
+
+<p>Update 2016-10: We have this script to make it easier to change.</p>
+
+<p>Use <code>pair_with</code> to pair with someone and <code>solo</code> to work on your own.</p>
+
+<p>Place this on your <code>~/.bashrc</code> or <code>~/.zshrc</code> or similar.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">function</span> solo <span class="o">{</span>
+  <span class="nb">unset</span> GIT_COMMITTER_NAME
+  <span class="nb">unset</span> GIT_COMMITTER_EMAIL
+<span class="o">}</span>
+
+<span class="k">function</span> pair_with_ <span class="o">{</span>
+  <span class="nb">export</span> <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="nv">$1</span>
+  <span class="nb">export</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="nv">$2</span>
+<span class="o">}</span>
+
+<span class="k">function</span> pair_with_john <span class="o">{</span>
+    pair_with_ <span class="s2">&quot;John Doe&quot;</span> <span class="s2">&quot;jd@example.com&quot;</span>
+<span class="o">}</span>
+
+...
+</code></pre></div>
+
+<p>Update 2, 2016-10: This script also helps with managing the variables: <a href="https://github.com/git-duet/git-duet" target="_blank">git-duet</a>. Thanks <a href="https://twitter.com/dhatanian" target="_blank">David Hatanian</a> for the tip</p>
 <div class="footnotes">
 
 <hr />

@@ -115,6 +115,30 @@ export GIT_COMMITTER_EMAIL=&#39;john@example.com&#39;
 &lt;p&gt;Taken from &lt;a href=&#34;http://stackoverflow.com/a/23108169/1181094&#34; target=&#34;_blank&#34;&gt;this StackOverflow answer&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;This can be useful for a pairing session or for some kinds of git history rewrite.&lt;/p&gt;
+
+&lt;p&gt;Update 2016-10: We have this script to make it easier to change.&lt;/p&gt;
+
+&lt;p&gt;Use &lt;code&gt;pair_with&lt;/code&gt; to pair with someone and &lt;code&gt;solo&lt;/code&gt; to work on your own.&lt;/p&gt;
+
+&lt;p&gt;Place this on your &lt;code&gt;~/.bashrc&lt;/code&gt; or &lt;code&gt;~/.zshrc&lt;/code&gt; or similar.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; solo &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;unset&lt;/span&gt; GIT_COMMITTER_NAME
+  &lt;span class=&#34;nb&#34;&gt;unset&lt;/span&gt; GIT_COMMITTER_EMAIL
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; pair_with_ &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;GIT_COMMITTER_NAME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;GIT_COMMITTER_EMAIL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; pair_with_john &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    pair_with_ &lt;span class=&#34;s2&#34;&gt;&amp;quot;John Doe&amp;quot;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;jd@example.com&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Update 2, 2016-10: This script also helps with managing the variables: &lt;a href=&#34;https://github.com/git-duet/git-duet&#34; target=&#34;_blank&#34;&gt;git-duet&lt;/a&gt;. Thanks &lt;a href=&#34;https://twitter.com/dhatanian&#34; target=&#34;_blank&#34;&gt;David Hatanian&lt;/a&gt; for the tip&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 
 &lt;hr /&gt;
