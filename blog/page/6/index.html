@@ -129,6 +129,108 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/10/12/calling-all-methods-in-a-ruby-object/">Tip: calling all methods in an Object in Ruby</a>
+    </h1>
+    <p >Oct 12, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/10/12/calling-all-methods-in-a-ruby-object/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/metaprogramming/">metaprogramming</a><a class="label" href="https://alvarogarcia7.github.io/categories/object/">object</a><a class="label" href="https://alvarogarcia7.github.io/categories/method/">method</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>In Ruby, you can query the methods an object accepts:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="mi">1</span><span class="o">.</span><span class="n">methods</span> 
+<span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:to_s</span><span class="p">,</span>               
+ <span class="ss">:-@</span><span class="p">,</span>                    
+ <span class="ss">:+</span><span class="p">,</span>                     
+ <span class="ss">:-</span><span class="p">,</span>                     
+ <span class="ss">:*</span><span class="p">,</span>                     
+ <span class="ss">:/</span><span class="p">,</span>                     
+ <span class="ss">:div</span><span class="p">,</span>                   
+ <span class="ss">:%</span><span class="p">,</span>                     
+ <span class="ss">:modulo</span><span class="p">,</span>                
+ <span class="ss">:divmod</span><span class="p">,</span>                
+ <span class="ss">:fdiv</span><span class="p">,</span>                  
+ <span class="o">...</span>
+</code></pre></div>
+
+<p>In case you want to call all methods, <a href="https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods.rb" target="_blank">this</a> can be useful (plus its <a href="https://github.com/alvarogarcia7/ruby-simple-sessions/blob/master/call_all_methods/call_all_methods_spec.rb" target="_blank">tests</a>):</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="k">def</span> <span class="nf">call_all_methods</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+  <span class="c1"># remove methods that modify the PRY environment or are too verbose</span>
+  <span class="n">success</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">error</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">exclusions</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:pry</span><span class="p">,</span>
+                <span class="ss">:methods</span><span class="p">,</span>
+                <span class="ss">:private_methods</span><span class="p">,</span>
+                <span class="ss">:public_methods</span><span class="p">,</span>
+                <span class="ss">:gem</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">to_s</span><span class="p">}</span>
+  <span class="n">object</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+    <span class="k">unless</span> <span class="n">exclusions</span><span class="o">.</span><span class="n">include?</span> <span class="n">x</span><span class="o">.</span><span class="n">to_s</span> <span class="k">then</span>
+      <span class="k">begin</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">empty?</span><span class="p">)</span> <span class="k">then</span>
+          <span class="n">success</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="n">__send__</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">else</span>
+          <span class="n">success</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="n">__send__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">ex</span>
+        <span class="n">error</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">=</span> <span class="n">ex</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="p">}</span>
+
+  <span class="n">success</span><span class="o">.</span><span class="n">select!</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">nil?</span><span class="p">}</span>
+  <span class="n">error</span><span class="o">.</span><span class="n">select!</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">nil?</span><span class="p">}</span>
+
+  <span class="p">{</span><span class="ss">success</span><span class="p">:</span> <span class="n">success</span><span class="p">,</span> <span class="ss">error</span><span class="p">:</span> <span class="n">error</span><span class="p">}</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>usage:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">51</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">call_all_methods</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:success</span> <span class="o">=&gt;</span> 
+<span class="o">[[</span><span class="ss">:to_s</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:-@</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:abs</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:magnitude</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:~</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:to_f</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:size</span><span class="p">,</span> <span class="mi">4</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:zero?</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:odd?</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:even?</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">[</span><span class="ss">:succ</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span><span class="p">,</span>
+ <span class="o">...</span>
+</code></pre></div>
+
+<p>also with parameters:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">call_all_methods</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="err">☺</span><span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:success</span><span class="o">=&gt;</span>
+  <span class="o">[[</span><span class="ss">:+</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span><span class="p">,</span>
+   <span class="o">[</span><span class="ss">:-</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span>
+   <span class="o">[</span><span class="ss">:*</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+   <span class="o">[</span><span class="ss">:/</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</code></pre></div>
+
+<p>Should you be interested in having this as a gem, please tell me (comments or <a href="https://twitter.com/@alvarobiz" target="_blank">@alvarobiz</a>)</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/">Tool: Building a local pipeline</a>
     </h1>
     <p >Oct 10, 2015
@@ -659,106 +761,6 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/30/books-read-in-2015q3/">Books read in 2015Q3</a>
-    </h1>
-    <p >Sep 30, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/30/books-read-in-2015q3/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/q3/">Q3</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Books I&rsquo;ve read this quarter<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>:</p>
-
-<ul>
-<li><a href="http://www.amazon.co.uk/Craftsman-Richard-Sennett/dp/0141022094" target="_blank">The Craftsman</a> by Richard Sennett. Posts under the tag <a href="/categories/the-craftsman
-/">the-craftsman</a></li>
-<li><a href="http://www.amazon.co.uk/Software-Craftsmanship-Imperative-McBreen-Aug-2001/dp/B00L6JZAT0" target="_blank">Software Craftsmanship: The New Imperative</a> by Pete McBreen. Posts under the tag <a href="/categories/software-craftsmanship-book
-/">software-craftsmanship-book</a></li>
-<li><a href="https://leanpub.com/lisphackers" target="_blank">Lisp Hackers</a> by Vsevolod Dyomkin</li>
-<li><a href="https://pragprog.com/book/cfcar2/the-passionate-programmer" target="_blank">The Passionate Programmer: Creating a Remarkable Career in Software Development</a> by Chad Fowler.</li>
-</ul>
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://haskellbook.com/" target="_blank">Haskell Programming</a>, By Chris Allen and Julie Moronuki. This book is still in progress and I&rsquo;m reviewing it</li>
-<li><a href="https://pragprog.com/book/mbfpp/functional-programming-patterns-in-scala-and-clojure" target="_blank">Functional Programming Patterns in Scala and Clojure</a> by Michael Bevilacqua-Linn</li>
-<li><a href="https://pragprog.com/book/ahptl/pragmatic-thinking-and-learning" target="_blank">Pragmatic Thinking and Learning: Refactor Your Wetware</a> by Andy Hunt<br />
-
-<br /></li>
-</ul>
-
-<p>Books I want to finish:</p>
-
-<p>Books that have entered the queue:</p>
-
-<ul>
-<li><a href="http://www.braveclojure.com/#toc" target="_blank">Clojure for the brave and true</a></li>
-<li><a href="http://press.princeton.edu/titles/669.html" target="_blank">How to Solve It: A New Aspect of Mathematical Method</a> by George Pólya</li>
-<li><a href="http://www.amazon.com/Conceptual-Mathematics-First-Introduction-Categories/dp/052171916X" target="_blank">Conceptual Mathematics: A First Introduction to Categories</a> by Lawvere and Schanuel</li>
-<li><a href="http://computationbook.com/" target="_blank">Understanding Computation: From Simple Machines to Impossible Programs</a> by Tom Stuart</li>
-<li><a href="http://www.cambridge.org/wm-ecommerce-web/academic/landingPage/PIHMOOC" target="_blank">Programming in Haskell</a> by Graham Hutton</li>
-</ul>
-
-<!--
-
-repository for WIP books:
-
-  * [The Well-Grounded Java Developer](http://www.manning.com/evans/) by Benjamin J. Evans and Martijn Verburg
-  * [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/) by Miran Lipovača
-  * [Working Effectively with Legacy Code](http://www.amazon.co.uk/Working-Effectively-Legacy-Robert-Martin/dp/0131177052) by Michael Feathers, again. Blog posts under the tag [wewlc](/categories/wewlc
-/)
-  * [Practical Object-Oriented Design in Ruby, An Agile Primer (POODR)](http://www.poodr.com/) by Sandi Metz, with the '[@deAprendices][deaprendices]'s reading club'. Blog posts under the tag [poodr](/categories/poodr
-/).
-  
-  Books I want to finish:
-
-  * [Refactoring](http://martinfowler.com/books/refactoring.html) by Martin Fowler, with Kent Beck, John Brant, William Opdyke, and Don Roberts
-  * [Java Performance: The Definitive Guide](http://shop.oreilly.com/product/0636920028499.do) by Scott Oaks
-  * [Scrum and XP from the trenches](http://www.infoq.com/minibooks/scrum-xp-from-the-trenches) by Henrik Kniberg
-
-Books that have entered the queue:
-
-  * [Mature optimization](http://carlos.bueno.org/optimization/mature-optimization.pdf), by Carlos Bueno
-  * [The Leprechauns of Software Engineering](https://leanpub.com/leprechauns) by Laurent Bossavit, again. [Gift](https://twitter.com/alvarobiz/status/611799849911103488)
-  * [XUnit Test Patterns](http://xunitpatterns.com/) by Gerard Meszaros
-  * [Why programmers work at night](https://leanpub.com/nightowls) by Swizec Teller
-  * [Let Over Lambda](http://letoverlambda.com/) by Doug Hoyte
-  * [The Haskell Road to Logic, Math and Programming](http://fldit-www.cs.uni-dortmund.de/~peter/PS07/HR.pdf) by Kees Doets and Jan van Eijck
-  * [Structure and Interpretation of Computer Programs](http://mitpress.mit.edu/sicp/) by Abelson, Sussman, and Sussman
-  * [Types and Programming Languages](http://www.cis.upenn.edu/~bcpierce/tapl/) by Benjamin C. Pierce
-  * [Fundamentals of Object-oriented Design in UML](http://www.amazon.co.uk/dp/020169946X/ref=pe_385721_37038051_TE_3p_dp_1) by Meilir Page-Jones
-
--->
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">The ending date of the quarter is the same as the publication date
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
     
     
 
@@ -828,6 +830,8 @@ Books that have entered the queue:
     
         <a href="/blog/page/24/" class="label-pagination">24</a>
     
+        <a href="/blog/page/25/" class="label-pagination">25</a>
+    
 
     
     
@@ -836,7 +840,7 @@ Books that have entered the queue:
 
     
     
-        <a href="/blog/page/24/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/25/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -920,6 +924,10 @@ Books that have entered the queue:
           </li>
         
           <li class="post">
+            <a href="/blog/2016/07/28/aws-kinesis-zombieland/">AWS Kinesis Zombieland</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2016/07/04/self-study-in-july-2016/">Self-Study in July 2016</a>
           </li>
         
@@ -929,10 +937,6 @@ Books that have entered the queue:
         
           <li class="post">
             <a href="/blog/2016/06/26/stability-terms-from-release-it-a-quote/">Stability terms from &#34;Release it!&#34;, a quote</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/06/10/role-software-consultant/">The role of a software consultant</a>
           </li>
         
       </ul>

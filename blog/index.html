@@ -159,6 +159,24 @@
 
 <p>Tags: cap-watkins, sliding-scale, decision-making, discussion, argument, convincing, people</p>
 
+<h2 id="nuevos-retos">Nuevos retos</h2>
+
+<p>I&rsquo;ve read <a href="http://www.modestosanjuan.com/nuevos-retos/" target="_blank">this article</a> by Modesto San Juan about him leaving Codesai and joining a new adventure. In Spanish.</p>
+
+<p>Tags: career-change, modesto-san-juan, codesai, carlos-ble, .net</p>
+
+<h2 id="muchas-gracias-modesto">Muchas gracias Modesto</h2>
+
+<p>I&rsquo;ve read <a href="http://www.codesai.com/2016/10/muchas-gracias-modesto/" target="_blank">this article</a>, by Carlos Blé and the rest of the Codesai team, saying goodbye to Modesto San Juan, commenting on their experiences working with him.</p>
+
+<p>Tags: career-change, modesto-san-juan, codesai, carlos-ble, .net</p>
+
+<h2 id="introducing-ticket-magpie">Introducing…Ticket Magpie</h2>
+
+<p>I&rsquo;ve read <a href="https://thetestdoctor.wordpress.com/2016/10/11/introducing-ticket-magpie/" target="_blank">this article</a> by Dan Billing about the a honeypot application he has to teach about security and attacks.</p>
+
+<p>Tags: david-hatanian, dan-billing, ticket-magpie, honeypot, security, attack</p>
+
         
 
     </article>
@@ -408,6 +426,67 @@ Learning paths that have entered the queue:
 </blockquote>
 
 <p>Tags: tdz, temporal-dead-zone, bill-sourour, javascript, es2015, function, const, var, binding, lifecycle</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/">AWS Kinesis Zombieland</a>
+    </h1>
+    <p >Jul 28, 2016
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/aws-kinesis/">aws-kinesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/aws/">aws</a><a class="label" href="https://alvarogarcia7.github.io/categories/ciberado/">ciberado</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop/">workshop</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop-notes/">workshop-notes</a><a class="label" href="https://alvarogarcia7.github.io/categories/notes/">notes</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I attended a workshop on AWS Kinesis, called <a href="http://capside.com/event/aws-kinesis-zombieland/" target="_blank">AWS Kinesis Zombieland</a> by <a href="https://twitter.com/ciberado" target="_blank">Javi Moreno</a>.</p>
+
+<p>Here my notes:</p>
+
+<p>AWS Kinesis Zombieland</p>
+
+<ul>
+<li>muy importante escoger bien la clave de particionado (id de shard)</li>
+<li>KPL librería de kinesis que te permite hacer batching, timeout, &hellip;
+
+<ul>
+<li>la otra se llama KCL.</li>
+<li>KCL permite mantener estado</li>
+</ul></li>
+<li>cuando te pidan una app de big data, pregunta para qué lo quieren, lo mismo que con cualquier proyecto de software</li>
+<li>latitud = Y, longitud = x</li>
+<li>el canal se llama stream, la capacidad se llama shard
+
+<ul>
+<li>el shard sólo permite 5 lecturas por segundo, 2MB/s</li>
+</ul></li>
+<li>usar el shard como buffer</li>
+<li>usar la clave de particionado como algoritmo de agregación</li>
+<li>cada vez que tienes una tabla en dynamodb, tienes que poner una alerta de throughput</li>
+<li>nota: lo que no puedes hacer es guardarlos todos y luego procesarlo. no tienes potencia para todo eso</li>
+</ul>
+
+<p>Preguntas:</p>
+
+<ul>
+<li>¿cómo se calcula el id del shard?
+<br /></li>
+</ul>
 
         
 
@@ -672,141 +751,6 @@ Learning paths that have entered the queue:
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/06/30/books-read-in-2016q2/">Books read in 2016Q2</a>
-    </h1>
-    <p >Jun 30, 2016
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/06/30/books-read-in-2016q2/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/q2/">Q2</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/building-microservices/">building-microservices</a><a class="label" href="https://alvarogarcia7.github.io/categories/release-it/">release-it</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Books I&rsquo;ve read this quarter<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>:</p>
-
-<ul>
-<li><a href="https://www.amazon.com/Extreme-Programming-Explained-Embrace-Change/dp/0321278658" target="_blank">Extreme Programming Explained: Embrace Change, 2nd Edition</a> by Kent Beck and Cynthia Andres, again.</li>
-<li><a href="http://shop.oreilly.com/product/0636920033158.do" target="_blank">Building Microservices, Designing Fine-Grained Systems</a>, by Sam Newman, with the &lsquo;<a href="https://twitter.com/@deaprendices" target="_blank">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/categories/building-microservices">building-microservices</a></li>
-<li><a href="http://www.reinventingorganizations.com/" target="_blank">Reinventing Organizations</a> by Frederic Laloux. Blog posts under the tag <a href="/categories/reinventing-organizations
-/">reinventing-organizations</a></li>
-</ul>
-
-<p>Non-technical:</p>
-
-<ul>
-<li><a href="http://www.llibres.cat/llibres-de-narrativa-en-catala/211579-lacabadora.html" target="_blank">L&rsquo;acabadora</a>, by Michela Murgia</li>
-<li><a href="https://www.amazon.com/Disrupted-My-Misadventure-Start-Up-Bubble/dp/0316306088" target="_blank">Disrupted: My Misadventure in the Start-Up Bubble</a> by Dan Lyons</li>
-</ul>
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.amazon.com/exec/obidos/ASIN/0321125215" target="_blank">Domain-Driven Design: Tackling Complexity in the Heart of Software</a> by Eric Evans, again.</li>
-<li><a href="https://www.manning.com/books/amazon-web-services-in-action" target="_blank">Amazon Web Services in Action</a> by Michael Wittig and Andreas Wittig</li>
-<li><a href="https://pragprog.com/book/mnee/release-it" target="_blank">Release It! - Design and Deploy Production-Ready Software</a>, by Michael T. Nygard, with the &lsquo;<a href="https://twitter.com/@deaprendices" target="_blank">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/categories/release-it
-/">release-it</a></li>
-<li><a href="http://shop.oreilly.com/product/0636920013754.do" target="_blank">Clojure Programming - Practical Lisp for the Java World</a> by Chas Emerick, Brian Carper, Christophe Grand
-
-<br /></li>
-</ul>
-
-<p>Books I want to finish. Usually come from another quarter:</p>
-
-<ul>
-<li><a href="https://leanpub.com/nightowls" target="_blank">Why programmers work at night</a> by Swizec Teller</li>
-<li><a href="http://www.redbook.io/" target="_blank">Readings in Database Systems, 5th Edition</a> by Peter Bailis, Joseph M. Hellerstein, Michael Stonebraker, editors</li>
-</ul>
-
-<p>Books that have entered the queue:</p>
-
-<ul>
-<li><a href="https://leanpub.com/serverless" target="_blank">Serverless - Patterns of Modern Application Design Using Microservices (Amazon Web Services Edition)</a> by Obie Fernandez</li>
-</ul>
-
-<!--
-
-repository for WIP books:
-
-  * [The Well-Grounded Java Developer](http://www.manning.com/evans/) by Benjamin J. Evans and Martijn Verburg
-  * [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/) by Miran Lipovača
-  * [Working Effectively with Legacy Code](http://www.amazon.co.uk/Working-Effectively-Legacy-Robert-Martin/dp/0131177052) by Michael Feathers, again. Blog posts under the tag [wewlc](/categories/wewlc
-/)
-  * [Haskell Programming](http://haskellbook.com/), By Chris Allen and Julie Moronuki. This book is still in progress and I'm reviewing it
-  * [Pragmatic Thinking and Learning: Refactor Your Wetware](https://pragprog.com/book/ahptl/pragmatic-thinking-and-learning) by Andy Hunt  
-  
-  Books I want to finish:
-
-  * [Refactoring](http://martinfowler.com/books/refactoring.html) by Martin Fowler, with Kent Beck, John Brant, William Opdyke, and Don Roberts
-  * [Java Performance: The Definitive Guide](http://shop.oreilly.com/product/0636920028499.do) by Scott Oaks
-  * [Scrum and XP from the trenches](http://www.infoq.com/minibooks/scrum-xp-from-the-trenches) by Henrik Kniberg
-  * [The Leprechauns of Software Engineering](https://leanpub.com/leprechauns) by Laurent Bossavit, again. [Gift](https://twitter.com/alvarobiz/status/611799849911103488)  
-  * [Functional Programming Patterns in Scala and Clojure](https://pragprog.com/book/mbfpp/functional-programming-patterns-in-scala-and-clojure) by Michael Bevilacqua-Linn
-
-Books in the queue:
-
-  * [Mature optimization](http://carlos.bueno.org/optimization/mature-optimization.pdf), by Carlos Bueno
-  * [XUnit Test Patterns](http://xunitpatterns.com/) by Gerard Meszaros
-  * [Let Over Lambda](http://letoverlambda.com/) by Doug Hoyte
-  * [The Haskell Road to Logic, Math and Programming](http://fldit-www.cs.uni-dortmund.de/~peter/PS07/HR.pdf) by Kees Doets and Jan van Eijck
-  * [Types and Programming Languages](http://www.cis.upenn.edu/~bcpierce/tapl/) by Benjamin C. Pierce
-  * [Fundamentals of Object-oriented Design in UML](http://www.amazon.co.uk/dp/020169946X/ref=pe_385721_37038051_TE_3p_dp_1) by Meilir Page-Jones
-  * [Clojure for the brave and true](http://www.braveclojure.com/#toc)
-  * [How to Solve It: A New Aspect of Mathematical Method](http://press.princeton.edu/titles/669.html) by George Pólya
-  * [Conceptual Mathematics: A First Introduction to Categories](http://www.amazon.com/Conceptual-Mathematics-First-Introduction-Categories/dp/052171916X) by Lawvere and Schanuel
-  * [Understanding Computation: From Simple Machines to Impossible Programs](http://computationbook.com/) by Tom Stuart
-  * [Programming in Haskell](http://www.cambridge.org/wm-ecommerce-web/academic/landingPage/PIHMOOC) by Graham Hutton
-  * [Programming Languages: Application and Interpretation](http://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/) by Shriram Krishnamurthi
-  * [Doing Math with Python](https://www.nostarch.com/doingmathwithpython) by Amit Saha. [Gift from the PyConEs 2015](https://twitter.com/alvarobiz/status/668927802159288322)
-  * [Perfect Software: And Other Illusions about Testing](http://www.geraldmweinberg.com/Site/Perfect_Software.html) by Gerald M. Weinberg  
-  * [Computability and Complexity - From a Programming Perspective](https://mitpress.mit.edu/books/computability-and-complexity) by Neil Deaton Jones
-  * [Thinking Forth: a language and philosophy for solving problems](http://thinking-forth.sourceforge.net/) by Leo Brodie
-  * [Concepts, Techniques, and Models of Computer Programming](https://mitpress.mit.edu/index.php?q=books/concepts-techniques-and-models-computer-programming) by Peter Van Roy and Seif Haridi
-  * [Bridging the Communication Gap](http://books.gojko.net/bridging-the-communication-gap/) by Gojko Adzic
-  * [Specification by Example](http://books.gojko.net/specification-by-example/) by Gojko Adzic
-  * [The Cucumber book](https://pragprog.com/book/hwcuc/the-cucumber-book) by Matt Wynne and Aslak Hellesøy
-  * [Software Architecture for Developers](https://leanpub.com/software-architecture-for-developers) by Simon Brown
-  * [Object Design: Roles, Responsibilities, and Collaborations ](http://www.amazon.com/Object-Design-Roles-Responsibilities-Collaborations/dp/0201379430) by Rebecca Wirfs-Brock and Alan McKean
-  * [RESTful Web APIs](http://shop.oreilly.com/product/0636920028468.do) by Leonard Richardson, Mike Amundsen, Sam Ruby
-  * [RESTful Web Services Cookbook](http://shop.oreilly.com/product/9780596801694.do) by Subbu Allamaraju
-  * [Building Maintainable Software](https://www.sig.eu/en/building-maintainable-software) by Joost Visser
-
-Learning paths that have entered the queue:
-
-  * [Software Architecture Fundamentals](http://shop.oreilly.com/category/learning-path/software-architecture-fundamentals.do)
-  * [HTML5 Fundamentals](http://shop.oreilly.com/category/learning-path/html5-fundamentals.do)
-  * [Designing Web APIs](http://shop.oreilly.com/category/learning-path/designing-web-apis.do)
-  * [Dive Deeper into PHP Programming](http://shop.oreilly.com/category/learning-path/dive-deeper-php-programming.do)
-  * [Introduction to the Modern Front-End Web](http://shop.oreilly.com/category/learning-path/intro-modern-front-end-web.do)
-
-
--->
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">The ending date of the quarter is the same as the publication date
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
     
     
 
@@ -873,6 +817,8 @@ Learning paths that have entered the queue:
     
         <a href="/blog/page/24/" class="label-pagination">24</a>
     
+        <a href="/blog/page/25/" class="label-pagination">25</a>
+    
 
     
     
@@ -881,7 +827,7 @@ Learning paths that have entered the queue:
 
     
     
-        <a href="/blog/page/24/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/25/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -965,6 +911,10 @@ Learning paths that have entered the queue:
           </li>
         
           <li class="post">
+            <a href="/blog/2016/07/28/aws-kinesis-zombieland/">AWS Kinesis Zombieland</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2016/07/04/self-study-in-july-2016/">Self-Study in July 2016</a>
           </li>
         
@@ -974,10 +924,6 @@ Learning paths that have entered the queue:
         
           <li class="post">
             <a href="/blog/2016/06/26/stability-terms-from-release-it-a-quote/">Stability terms from &#34;Release it!&#34;, a quote</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/06/10/role-software-consultant/">The role of a software consultant</a>
           </li>
         
       </ul>

@@ -54,6 +54,24 @@
 &lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://blog.capwatkins.com/the-sliding-scale-of-giving-a-fuck&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by Cap Watkins where he explains that different topics have a different importance to each one of us: this topic might be very important for someone else, ergo, it makes mores sense to evaluate their option more carefully. When your importance level is not so high, you can take the other option easily.&lt;/p&gt;
 
 &lt;p&gt;Tags: cap-watkins, sliding-scale, decision-making, discussion, argument, convincing, people&lt;/p&gt;
+
+&lt;h2 id=&#34;nuevos-retos&#34;&gt;Nuevos retos&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://www.modestosanjuan.com/nuevos-retos/&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by Modesto San Juan about him leaving Codesai and joining a new adventure. In Spanish.&lt;/p&gt;
+
+&lt;p&gt;Tags: career-change, modesto-san-juan, codesai, carlos-ble, .net&lt;/p&gt;
+
+&lt;h2 id=&#34;muchas-gracias-modesto&#34;&gt;Muchas gracias Modesto&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://www.codesai.com/2016/10/muchas-gracias-modesto/&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt;, by Carlos Blé and the rest of the Codesai team, saying goodbye to Modesto San Juan, commenting on their experiences working with him.&lt;/p&gt;
+
+&lt;p&gt;Tags: career-change, modesto-san-juan, codesai, carlos-ble, .net&lt;/p&gt;
+
+&lt;h2 id=&#34;introducing-ticket-magpie&#34;&gt;Introducing…Ticket Magpie&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;https://thetestdoctor.wordpress.com/2016/10/11/introducing-ticket-magpie/&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by Dan Billing about the a honeypot application he has to teach about security and attacks.&lt;/p&gt;
+
+&lt;p&gt;Tags: david-hatanian, dan-billing, ticket-magpie, honeypot, security, attack&lt;/p&gt;
 </description>
     </item>
     
@@ -294,6 +312,48 @@ Learning paths that have entered the queue:
 &lt;/blockquote&gt;
 
 &lt;p&gt;Tags: tdz, temporal-dead-zone, bill-sourour, javascript, es2015, function, const, var, binding, lifecycle&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AWS Kinesis Zombieland</title>
+      <link>https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/</link>
+      <pubDate>Thu, 28 Jul 2016 19:28:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/</guid>
+      <description>&lt;p&gt;I attended a workshop on AWS Kinesis, called &lt;a href=&#34;http://capside.com/event/aws-kinesis-zombieland/&#34; target=&#34;_blank&#34;&gt;AWS Kinesis Zombieland&lt;/a&gt; by &lt;a href=&#34;https://twitter.com/ciberado&#34; target=&#34;_blank&#34;&gt;Javi Moreno&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here my notes:&lt;/p&gt;
+
+&lt;p&gt;AWS Kinesis Zombieland&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;muy importante escoger bien la clave de particionado (id de shard)&lt;/li&gt;
+&lt;li&gt;KPL librería de kinesis que te permite hacer batching, timeout, &amp;hellip;
+
+&lt;ul&gt;
+&lt;li&gt;la otra se llama KCL.&lt;/li&gt;
+&lt;li&gt;KCL permite mantener estado&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;cuando te pidan una app de big data, pregunta para qué lo quieren, lo mismo que con cualquier proyecto de software&lt;/li&gt;
+&lt;li&gt;latitud = Y, longitud = x&lt;/li&gt;
+&lt;li&gt;el canal se llama stream, la capacidad se llama shard
+
+&lt;ul&gt;
+&lt;li&gt;el shard sólo permite 5 lecturas por segundo, 2MB/s&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;usar el shard como buffer&lt;/li&gt;
+&lt;li&gt;usar la clave de particionado como algoritmo de agregación&lt;/li&gt;
+&lt;li&gt;cada vez que tienes una tabla en dynamodb, tienes que poner una alerta de throughput&lt;/li&gt;
+&lt;li&gt;nota: lo que no puedes hacer es guardarlos todos y luego procesarlo. no tienes potencia para todo eso&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Preguntas:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;¿cómo se calcula el id del shard?
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -1119,51 +1179,6 @@ prosper and the Principal to suffer.&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Tags: proverb, korea, philosophy, software, constraint, jamis-buck&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Quote: Characterization tests</title>
-      <link>https://alvarogarcia7.github.io/blog/2016/04/18/quote-characterization-tests/</link>
-      <pubDate>Mon, 18 Apr 2016 00:56:54 +0000</pubDate>
-      
-      <guid>https://alvarogarcia7.github.io/blog/2016/04/18/quote-characterization-tests/</guid>
-      <description>&lt;p&gt;In Working effectively with legacy code, Michael Feathers talks a type of tests to define or characterize the current behavior of the legacy system:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;In nearly every legacy system, what the system does is more important than what it is supposed to do.&lt;/p&gt;
-
-&lt;p&gt;A &lt;em&gt;characterization test&lt;/em&gt; is a test that characterizes the actual behavior of a piece of code. [&amp;hellip;] The test document the actual current behavior of the system. Here is a little algorithm for writing algorithm for writing characterization tests:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use a piece of code in a test harness&lt;/li&gt;
-&lt;li&gt;Write an assertion that you know will fail&lt;/li&gt;
-&lt;li&gt;Let the failure tell you what the behavior is.&lt;/li&gt;
-&lt;li&gt;Change the test so that it expects the behavior that the code produces&lt;/li&gt;
-&lt;li&gt;Repeat&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;M Feathers, in the chapter 13&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, section &amp;ldquo;Characterization tests&amp;rdquo; of Working effectively with legacy code. Actual page, 186.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Later on, he goes to describe them in a bigger environment:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Characterization tests record the actual behavior of a piece of code. If we find something unexpected when we write them, it pays to get some clarification. It could be a bu. That doesn&amp;rsquo;t mean that we don&amp;rsquo;t include the test in our test suite; instead, we should mark it as suspicious an find out what th effect would be of fixing it.&lt;/p&gt;
-
-&lt;p&gt;M Feathers, in the chapter 13&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, section &amp;ldquo;Characterization tests&amp;rdquo; of Working effectively with legacy code. Actual page, 188.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;Chapter 13, &amp;ldquo;I need to make a change, but I don&amp;rsquo;t know what tests to write&amp;rdquo;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;Chapter 13, &amp;ldquo;I need to make a change, but I don&amp;rsquo;t know what tests to write&amp;rdquo;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     
