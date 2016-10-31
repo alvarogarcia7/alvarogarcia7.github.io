@@ -129,6 +129,64 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/25/whose-fault-is-this/">Whose fault is this?</a>
+    </h1>
+    <p >Apr 25, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/25/whose-fault-is-this/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/fault/">fault</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/craft-conf/">craft-conf</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/flow/">flow</a><a class="label" href="https://alvarogarcia7.github.io/categories/mihaly-csikszentmihalyi/">mihaly-csikszentmihalyi</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>In the prologue of the book, while thanking everyone that has made the book possible:</p>
+
+<blockquote>
+<p>[&hellip;], none of the people mentioned here would be responsible for any inaccuracy that might exist in the book, as this responsibility is exclusively mine</p>
+
+<p>Mihaly Csikszentmihalyi (translated)<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>, prologue of &ldquo;<a href="http://www.amazon.com/Flow-The-Psychology-Optimal-Experience/dp/0061339202" target="_blank">Flow</a>&ldquo;</p>
+</blockquote>
+
+<p>(More posts on this same book, <a href="/categories/flow
+/">here</a>)</p>
+
+<p>This connects with what <a href="http://twitter.com/@tastapod" target="_blank">Dan North</a> said in the Craft Conf about this idea of the &ldquo;I&rsquo;m the only one in the company producing good quality work, the rest are not doing the same&rdquo;. Of course, he was quoting greedy, selfish people who think this instead of attributing the success to the whole team.</p>
+
+<p>Regarding the whole team, if I recall correctly, it was <a href="http://twitter.com/@svenpet" target="_blank">Sven Peters</a> who explained that &ldquo;[&hellip;] either the team wins or looses. There are no individual wins [&hellip;]&rdquo; <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup></p>
+
+<p>In this sense, Csikszentmihalyi assumes all responsibility when quoting and reflecting on other&rsquo;s works. It was his idea to develop on top of others, so any imperfection is his.</p>
+
+<p>This is similar as when approving a pull request: you make sure that the code works and you stand by it. It is no longer the original owner&rsquo;s cause, but yours too, as you have signed this request. On the pull request, though, the code ownership is already distributed among the whole team, but approvals ensures the presence of the <a href="/categories/guardian-of-the-source
+/">guardian of the source</a></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">I had to translate the quote, because I did not borrow the book in English
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">When the talks are available, we will be able the ensure the correct attribution of this idea.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/04/25/how-i-read-apprenticeship-patterns/">How I read Apprenticeship Patterns</a>
     </h1>
     <p >Apr 25, 2015
@@ -402,77 +460,6 @@ TODO add link to the craft page in my blog
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/">Logging is a feature</a>
-    </h1>
-    <p >Apr 19, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/logging/">logging</a><a class="label" href="https://alvarogarcia7.github.io/categories/log/">log</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature/">feature</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/challenge/">challenge</a><a class="label" href="https://alvarogarcia7.github.io/categories/splunk/">splunk</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of <a href="http://www.splunk.com/" target="_blank">Splunk</a>.</p>
-
-<p>This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
-
-<p>Strategies for dealing with this:</p>
-
-<ul>
-<li>functional logger: no shared state
-
-<ul>
-<li>can only log information available in this scope: parameters, attributes, static information</li>
-</ul></li>
-<li>stateful logger: information is added to the threadContext and logged whenever necessary
-
-<ul>
-<li>can log information in this scope plus any of the previous invokings.</li>
-<li>the problem is precisely sharing state: you have to control all the possible parents to know where this data comes from. A piece of information may come from any source.</li>
-<li>Lose the reference of who is invoking you, as there is no customization for this. (only using implementation)</li>
-<li>Speak two different languages: one for logging and one for business logic</li>
-</ul></li>
-<li>mixed: mix and match the best of both worlds.
-
-<ul>
-<li>The problem with the shared state can be solved if no data is overwritten and any information is stored in a map where the key is the fully qualified (FQ) method name (or FQ class name + FQ method name)</li>
-</ul></li>
-</ul>
-
-<p>The GOOS book explains this very well on the 20th chapter, first half &ldquo;logging is a feature&rdquo;. If we log as described in chapters 19 and 20, some of the problems are reduced:</p>
-
-<ul>
-<li>multiple levels of abstraction</li>
-<li>indirect control over logging. decide in a single place whether to log exceptions of each kind or not</li>
-<li>remove &ldquo;implementation details&rdquo; such as &ldquo;log.isDebugEnabled&rdquo;</li>
-<li>remove performance issues: no need to build strings for logging every time, only need to pass objects. inside the logging layer, if the logger is enabled for that level, then spend the time building strings and print them
-<br /></li>
-</ul>
-
-<p>We should remember that:</p>
-
-<ul>
-<li>Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.</li>
-<li>Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly</li>
-</ul>
-
-        
-
-    </article>
-    
     
     
 
@@ -612,6 +599,10 @@ TODO add link to the craft page in my blog
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2016/11/01/self-study-in-november-2016/">Self-Study in November 2016</a>
+          </li>
+        
+          <li class="post">
             <a href="/articles/2016/10/05/support-for-out-of-hours-on-call-support/">Support for out of hours on-call support</a>
           </li>
         
@@ -645,10 +636,6 @@ TODO add link to the craft page in my blog
         
           <li class="post">
             <a href="/blog/2016/06/30/books-read-in-2016q2/">Books read in 2016Q2</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/06/26/stability-terms-from-release-it-a-quote/">Stability terms from &#34;Release it!&#34;, a quote</a>
           </li>
         
       </ul>
