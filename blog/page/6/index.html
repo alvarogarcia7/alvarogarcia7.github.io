@@ -745,7 +745,7 @@ Tags: pull-request, james-reeves, tip, list</p>
         <a href="https://alvarogarcia7.github.io/blog/2015/11/02/functional-implementation-patterns/">Functional Implementation Patterns</a>
     </h1>
     <p >Nov 2, 2015
-         - 2 minute read 
+         - 3 minute read 
          - <a href="https://alvarogarcia7.github.io/blog/2015/11/02/functional-implementation-patterns/#disqus_thread">Comments</a>
 
         
@@ -807,7 +807,7 @@ Tags: pull-request, james-reeves, tip, list</p>
     <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">},</span>
     <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">},</span>
     <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">}</span><span class="o">]</span>
-                                   <span class="o">.</span><span class="n">select_attribute</span> <span class="ss">:even?</span>
+      <span class="o">.</span><span class="n">select_attribute</span> <span class="ss">:even?</span>
 <span class="o">=&gt;</span> <span class="o">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span>
 </code></pre></div>
 
@@ -829,9 +829,9 @@ Tags: pull-request, james-reeves, tip, list</p>
 
 <h3 id="example">Example</h3>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">62</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> 
-                         <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> 
-                       <span class="p">}</span>
+   <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> 
+     <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> 
+   <span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[</span><span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">true</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">}</span><span class="o">]</span>
 </code></pre></div>
 
@@ -839,15 +839,15 @@ Tags: pull-request, james-reeves, tip, list</p>
 
 <p>Naming the decoration</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">62</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> 
-                         <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> 
-                       <span class="p">}</span>
+   <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> 
+     <span class="p">{</span><span class="ss">:element</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="ss">:even?</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> 
+   <span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[</span><span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">true</span><span class="p">},</span> <span class="p">{</span><span class="ss">:element</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:even?</span><span class="o">=&gt;</span><span class="kp">false</span><span class="p">}</span><span class="o">]</span>
 </code></pre></div>
 
 <p>compare to</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">63</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                       <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
+   <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="kp">false</span><span class="o">]]</span>
 </code></pre></div>
 
@@ -861,31 +861,66 @@ Tags: pull-request, james-reeves, tip, list</p>
 
 <p>Original:</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                      <span class="o">.</span><span class="n">select</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span>
+      <span class="o">.</span><span class="n">select</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span>
 </code></pre></div>
 
 <p>Introduce an intermediary:</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                      <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
+      <span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="kp">false</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="kp">false</span><span class="o">]]</span>
 </code></pre></div>
 
 <p>Then select all that match:</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">67</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
-                       <span class="o">.</span><span class="n">map</span>    <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
-                       <span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
-                       <span class="o">.</span><span class="n">map</span>    <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">first</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">map</span>    <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">even?</span><span class="o">]</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">map</span>    <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">first</span> <span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span>
 </code></pre></div>
 
-<h2 id="compact-hof">Compact HOF</h2>
+<h2 id="data-accordion">Data accordion</h2>
 
 <h3 id="introduction-1">Introduction</h3>
 
-<p>You have several HOFs in a row: you decorate the collection, act on the decorated values, then use only part from the new aggregation.</p>
+<p>The collection suffers the same expansion and contraction than the accordion instrument. In each movement, an action is performed, like a note being played.</p>
+
+<p>Some movements make the collection bigger, decorating it. Others, on the other hand, make it thinner, removing information from it.</p>
 
 <h3 id="example-2">Example</h3>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">numbers</span> <span class="ow">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">-- each element collection is of size 1</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">even</span> <span class="n">n</span><span class="p">))</span> <span class="n">numbers</span> 
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="kt">False</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="kt">True</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="kt">False</span><span class="p">)]</span> <span class="c1">-- each collection is now of size 2</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">even</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">even</span><span class="p">)</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">even</span> <span class="n">n</span><span class="p">))</span> <span class="n">numbers</span>
+<span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="kt">True</span><span class="p">)]</span> <span class="c1">-- still size 2</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">map</span> <span class="n">fst</span> <span class="o">$</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">even</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">even</span><span class="p">)</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">even</span> <span class="n">n</span><span class="p">))</span> <span class="n">numbers</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1">-- size 1 again</span>
+</code></pre></div>
+
+<p>If we focus on the size of each element:</p>
+
+<ul>
+<li>1</li>
+<li>2</li>
+<li>2</li>
+<li>1</li>
+</ul>
+
+<p>When selecting attributes, the destructuring (Clojure naming system) can be useful:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="kr">_</span><span class="p">,</span> <span class="n">even</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">even</span><span class="p">)</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="kt">False</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kt">True</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="kt">False</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="kt">True</span><span class="p">)]</span>
+</code></pre></div>
+
+<p>Note: Remember that with <code>filter</code> the elements are kept or discarded, based on the result of the predicate.</p>
+
+<h2 id="compact-hof">Compact HOF</h2>
+
+<h3 id="introduction-2">Introduction</h3>
+
+<p>You have several HOFs in a row: you decorate the collection, act on the decorated values, then use only part from the new aggregation.</p>
+
+<h3 id="example-3">Example</h3>
 
 <h4 id="diff">Diff</h4>
 
@@ -895,15 +930,15 @@ Tags: pull-request, james-reeves, tip, list</p>
 + .sort_by { |x| 2 * x}
 </code></pre>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">48</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
-                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span> <span class="p">}</span>
-                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
-                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span>
 </code></pre></div>
 
 <p>replace it by:</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">49</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
-                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">-</span><span class="n">x</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">-</span><span class="n">x</span> <span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span>
 </code></pre></div>
 
@@ -913,8 +948,8 @@ Tags: pull-request, james-reeves, tip, list</p>
 
 <p>Example:</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="o">[</span><span class="mi">50</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span>
-                                    <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span> <span class="p">}</span>
-                                    <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">map</span>     <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span> <span class="p">}</span>
+       <span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="p">}</span>
 <span class="o">=&gt;</span> <span class="o">[[</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="o">[-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">]]</span>
 </code></pre></div>
 
