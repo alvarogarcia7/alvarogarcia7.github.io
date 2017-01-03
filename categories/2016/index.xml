@@ -44,7 +44,7 @@
 
 &lt;h2 id=&#34;the-hazards-of-going-on-autopilot&#34;&gt;The hazards of going on autopilot&lt;/h2&gt;
 
-&lt;p&gt;i&amp;rsquo;ve read &lt;a href=&#34;http://www.newyorker.com/science/maria-konnikova/hazards-automation&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by Maria Konnikova on how pilots get distracted (their minds drift off) when not stimulated.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://www.newyorker.com/science/maria-konnikova/hazards-automation&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by Maria Konnikova on how pilots get distracted (their minds drift off) when not stimulated.&lt;/p&gt;
 
 &lt;p&gt;The article introduces the idea of human-centric automation and letting the computer check what the human is doing (to tell when it is wrong), rather than the human what the computer is doing wrong.&lt;/p&gt;
 
@@ -105,13 +105,21 @@
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Tags: simon-simeonov, metaprogramming, ruby, decorator, python, bytecode-generation, java, cpp, learning-programming-language, programming-language, curious-georde, mario-bros, bull-in-a-china-shop, singing-in-the-rain, obi-wan-kenobi, eureka, learning&lt;/p&gt;
+&lt;p&gt;Tags: simeon-simeonov, metaprogramming, ruby, decorator, python, bytecode-generation, java, cpp, learning-programming-language, programming-language, curious-georde, mario-bros, bull-in-a-china-shop, singing-in-the-rain, obi-wan-kenobi, eureka, learning&lt;/p&gt;
 
 &lt;h2 id=&#34;the-marvellously-mysterious-javascript-maybe-monad&#34;&gt;The marvellously mysterious javascript Maybe monad&lt;/h2&gt;
 
 &lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://jrsinclair.com/articles/2016/marvellously-mysterious-javascript-maybe-monad/&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by James Sinclair in which he tries to explain monads in javascript, explaining how promises work, then establishing the parallellism between a promise and a type of monad.&lt;/p&gt;
 
 &lt;p&gt;Tags: monad, javascript, promise, james-sinclair, analogy, functional-programming, monad-explanation&lt;/p&gt;
+
+&lt;h2 id=&#34;debug-trace&#34;&gt;Debug.Trace&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve read both &lt;a href=&#34;https://hackage.haskell.org/package/base-4.9.0.0/docs/Debug-Trace.html&#34; target=&#34;_blank&#34;&gt;the documentation&lt;/a&gt; and the source code for &lt;code&gt;Debug.Trace&lt;/code&gt;, a haskell module that contains functions to trace a program execution. It is interesting to see how a function performs side effects and its signature seems to be pure.&lt;/p&gt;
+
+&lt;p&gt;The main trick is to use &lt;code&gt;unsafePerformIO&lt;/code&gt;, which points to &lt;code&gt;unsafeDupablePerformIO&lt;/code&gt;, which performs a side effect on the Real World (&lt;code&gt;runRW#&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Tags: haskell, debug, monitoring, source-code, real-world&lt;/p&gt;
 </description>
     </item>
     

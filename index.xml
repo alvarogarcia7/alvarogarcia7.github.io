@@ -6,8 +6,59 @@
     <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Dec 2016 18:48:28 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jan 2017 11:32:19 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Self-Study in January 2017</title>
+      <link>https://alvarogarcia7.github.io/blog/2017/01/01/self-study-in-january-2017/</link>
+      <pubDate>Sun, 01 Jan 2017 11:32:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2017/01/01/self-study-in-january-2017/</guid>
+      <description>
+
+&lt;h2 id=&#34;translation-from-haskell-to-javascript-of-selected-portions-of-the-best-introduction-to-monads-i-ve-ever-read&#34;&gt;Translation from Haskell to JavaScript of selected portions of the best introduction to monads I’ve ever read&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;https://blog.jcoglan.com/2011/03/05/translation-from-haskell-to-javascript-of-selected-portions-of-the-best-introduction-to-monads-ive-ever-read/&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by James Coglan, introducing monads.&lt;/p&gt;
+
+&lt;p&gt;About composability:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The symmetry of the argument and return types is what makes these functions composable&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;symmetric input and output types&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Guide to basic monadic functions:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;lift, which converts a &amp;lsquo;simple’ function into a debuggable function
+bind, which converts a debuggable function into a composable form
+unit, which converts a simple value into the format required for debugging, by placing it in a container&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The basic definition:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;So what is a monad? Well, it’s a design pattern. It says that whenever you have a class of functions that accept one type of thing and return another type of thing, there are two functions that can be applied across this class to make them composable:&lt;/p&gt;
+
+&lt;p&gt;There is a &lt;code&gt;bind&lt;/code&gt; function that transforms any function so that accepts the same type as it returns, making it composable
+There is a &lt;code&gt;unit&lt;/code&gt; function that wraps a value in the type accepted by the composable functions.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Also:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;[I]t’s a very useful design pattern to be aware of because it helps you spot accidental complexity: code that isn’t dealing directly with the problem at hand, but which is dealing with glueing data types together&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Tags: monad, monad-explanation, haskell, javascript, james-coglan, bind, unit, lift&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A common misunderstanding about `reduce`</title>
@@ -123,7 +174,7 @@
 
 &lt;h2 id=&#34;the-hazards-of-going-on-autopilot&#34;&gt;The hazards of going on autopilot&lt;/h2&gt;
 
-&lt;p&gt;i&amp;rsquo;ve read &lt;a href=&#34;http://www.newyorker.com/science/maria-konnikova/hazards-automation&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by Maria Konnikova on how pilots get distracted (their minds drift off) when not stimulated.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://www.newyorker.com/science/maria-konnikova/hazards-automation&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by Maria Konnikova on how pilots get distracted (their minds drift off) when not stimulated.&lt;/p&gt;
 
 &lt;p&gt;The article introduces the idea of human-centric automation and letting the computer check what the human is doing (to tell when it is wrong), rather than the human what the computer is doing wrong.&lt;/p&gt;
 
@@ -184,13 +235,21 @@
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Tags: simon-simeonov, metaprogramming, ruby, decorator, python, bytecode-generation, java, cpp, learning-programming-language, programming-language, curious-georde, mario-bros, bull-in-a-china-shop, singing-in-the-rain, obi-wan-kenobi, eureka, learning&lt;/p&gt;
+&lt;p&gt;Tags: simeon-simeonov, metaprogramming, ruby, decorator, python, bytecode-generation, java, cpp, learning-programming-language, programming-language, curious-georde, mario-bros, bull-in-a-china-shop, singing-in-the-rain, obi-wan-kenobi, eureka, learning&lt;/p&gt;
 
 &lt;h2 id=&#34;the-marvellously-mysterious-javascript-maybe-monad&#34;&gt;The marvellously mysterious javascript Maybe monad&lt;/h2&gt;
 
 &lt;p&gt;I&amp;rsquo;ve read &lt;a href=&#34;http://jrsinclair.com/articles/2016/marvellously-mysterious-javascript-maybe-monad/&#34; target=&#34;_blank&#34;&gt;this article&lt;/a&gt; by James Sinclair in which he tries to explain monads in javascript, explaining how promises work, then establishing the parallellism between a promise and a type of monad.&lt;/p&gt;
 
 &lt;p&gt;Tags: monad, javascript, promise, james-sinclair, analogy, functional-programming, monad-explanation&lt;/p&gt;
+
+&lt;h2 id=&#34;debug-trace&#34;&gt;Debug.Trace&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve read both &lt;a href=&#34;https://hackage.haskell.org/package/base-4.9.0.0/docs/Debug-Trace.html&#34; target=&#34;_blank&#34;&gt;the documentation&lt;/a&gt; and the source code for &lt;code&gt;Debug.Trace&lt;/code&gt;, a haskell module that contains functions to trace a program execution. It is interesting to see how a function performs side effects and its signature seems to be pure.&lt;/p&gt;
+
+&lt;p&gt;The main trick is to use &lt;code&gt;unsafePerformIO&lt;/code&gt;, which points to &lt;code&gt;unsafeDupablePerformIO&lt;/code&gt;, which performs a side effect on the Real World (&lt;code&gt;runRW#&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Tags: haskell, debug, monitoring, source-code, real-world&lt;/p&gt;
 </description>
     </item>
     
@@ -1079,41 +1138,6 @@ work doesn&amp;rsquo;t have much in common with the initial request (this change
 be approved by the people that will be affected).&lt;/p&gt;
 
 &lt;p&gt;This is also a thought that &lt;a href=&#34;https://twitter.com/@mashooq&#34; target=&#34;_blank&#34;&gt;Mash&lt;/a&gt; and &lt;a href=&#34;https://twitter.com/@sandromancuso&#34; target=&#34;_blank&#34;&gt;Sandro&lt;/a&gt; were discussing lately.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Unwritten principles for coaching, a quote</title>
-      <link>https://alvarogarcia7.github.io/blog/2016/06/10/unwritten-principles-coaching/</link>
-      <pubDate>Fri, 10 Jun 2016 10:49:50 +0000</pubDate>
-      
-      <guid>https://alvarogarcia7.github.io/blog/2016/06/10/unwritten-principles-coaching/</guid>
-      <description>&lt;p&gt;A quote from &lt;a href=&#34;http://www.reinventingorganizations.com&#34; target=&#34;_blank&#34;&gt;Reinventing Organizations&lt;/a&gt;,
-about a few unwritten principles for coaching, in Chapter 2.2:
-Self-management (structures), page 70:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;It’s okay for teams to struggle. From struggle comes learning. And
-teams that have gone through difficult moments build resilience
-and a deep sense of community. The coach’s role therefore is not
-to prevent foreseeable problems, but to support teams in solving
-them (and later help them reflect on how they’ve grown in the
-process).&lt;/li&gt;
-&lt;li&gt;The coach’s role is to let teams make their own choices, even if she
-believes she knows a better solution.&lt;/li&gt;
-&lt;li&gt;The coach supports the team mostly by asking insightful questions
-and mirroring what she sees. She helps teams frame issues and
-solutions in light of [the company’s] purpose and its holistic approach
-to care.&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The starting point is always to look for enthusiasm, strengths, and
-existing capabilities within the team. The coach projects trust that
-the team has all it takes to solve the problems it faces.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Frederic Laloux, Reinventing Organizations&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
 </description>
     </item>
     
