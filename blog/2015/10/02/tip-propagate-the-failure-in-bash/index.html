@@ -151,22 +151,22 @@
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>bash-3.1$ tr
 tr: two strings must be given when translating
 bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
-1
+<span class="m">1</span>
 </code></pre></div>
 
 <p>But this also applies to pipes:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>bash-3.1$ tr<span class="p">|</span>tee 1.txt
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>bash-3.1$ tr<span class="p">|</span>tee <span class="m">1</span>.txt
 tr: two strings must be given when translating
 bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
-0
+<span class="m">0</span>
 </code></pre></div>
 
 <p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>bash-3.1$ <span class="nb">set</span> -o pipefail
-bash-3.1$ tr<span class="p">|</span>tee 1.txt
+bash-3.1$ tr<span class="p">|</span>tee <span class="m">1</span>.txt
 tr: two strings must be given when translating
 bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
-1
+<span class="m">1</span>
 </code></pre></div>
 
 <p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>

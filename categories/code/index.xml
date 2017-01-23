@@ -973,22 +973,22 @@ Tags: pull-request, james-reeves, tip, list&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;bash-3.1$ tr
 tr: two strings must be given when translating
 bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
-1
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;But this also applies to pipes:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee 1.txt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;.txt
 tr: two strings must be given when translating
 bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
-0
+&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: &lt;code&gt;set -o pipefail&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;bash-3.1$ &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -o pipefail
-bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee 1.txt
+bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;.txt
 tr: two strings must be given when translating
 bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
-1
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This might be useful if you stop on a non-zero status (&lt;code&gt;set -e&lt;/code&gt;).&lt;/p&gt;

@@ -182,14 +182,14 @@ change</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
 commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
 Author: XXXX &lt;xxxx@example.com&gt;
-Date:   Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100
+Date:   Wed Dec <span class="m">2</span> <span class="m">14</span>:44:52 <span class="m">2015</span> +1100
 
     Clarify specs by defining • as the composition operator
 </code></pre></div>
 
 <p>but looking a bit closer<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>,</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s2">&quot;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&quot;</span> <span class="p">|</span> less
-17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> 14:44:52 +1100, <span class="m">3</span> months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> 09:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> 09:30:28 -0800, <span class="m">9</span> weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
+17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> <span class="m">14</span>:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> <span class="m">14</span>:44:52 +1100, <span class="m">3</span> months ago, <span class="m">1449027892</span>, <span class="m">2015</span>-12-02 <span class="m">14</span>:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> <span class="m">09</span>:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> <span class="m">09</span>:30:28 -0800, <span class="m">9</span> weeks ago, <span class="m">1450200628</span>, <span class="m">2015</span>-12-15 <span class="m">09</span>:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
 </code></pre></div>
 
 <p>or, just the emails:</p>

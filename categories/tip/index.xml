@@ -368,14 +368,14 @@ change&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
 commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
 Author: XXXX &amp;lt;xxxx@example.com&amp;gt;
-Date:   Wed Dec &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; 14:44:52 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; +1100
+Date:   Wed Dec &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;:44:52 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; +1100
 
     Clarify specs by defining • as the composition operator
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;but looking a bit closer&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;,&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; less
-17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; 14:44:52 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; +1100, Wed, &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; 14:44:52 +1100, &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; 09:30:28 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; -0800, Tue, &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; 09:30:28 -0800, &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
+17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;:44:52 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; +1100, Wed, &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;:44:52 +1100, &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; months ago, &lt;span class=&#34;m&#34;&gt;1449027892&lt;/span&gt;, &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt;-12-02 &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;09&lt;/span&gt;:30:28 &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; -0800, Tue, &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;09&lt;/span&gt;:30:28 -0800, &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; weeks ago, &lt;span class=&#34;m&#34;&gt;1450200628&lt;/span&gt;, &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt;-12-15 &lt;span class=&#34;m&#34;&gt;09&lt;/span&gt;:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;or, just the emails:&lt;/p&gt;
@@ -1855,22 +1855,22 @@ Tags: pull-request, james-reeves, tip, list&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;bash-3.1$ tr
 tr: two strings must be given when translating
 bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
-1
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;But this also applies to pipes:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee 1.txt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;.txt
 tr: two strings must be given when translating
 bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
-0
+&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: &lt;code&gt;set -o pipefail&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;bash-3.1$ &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; -o pipefail
-bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee 1.txt
+bash-3.1$ tr&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;tee &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;.txt
 tr: two strings must be given when translating
 bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$?&lt;/span&gt;
-1
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This might be useful if you stop on a non-zero status (&lt;code&gt;set -e&lt;/code&gt;).&lt;/p&gt;
@@ -2324,10 +2324,10 @@ bash-3.1$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;n
       <description>&lt;p&gt;I&amp;rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.spike&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
-&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;org&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;hamcrest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;MatcherAssert&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;org&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;hamcrest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Matchers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;is&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;org&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;mockito&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Mockito&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;spy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;org&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;mockito&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Mockito&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;when&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import static&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.hamcrest.MatcherAssert.assertThat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import static&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.hamcrest.Matchers.is&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import static&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.mockito.Mockito.spy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import static&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.mockito.Mockito.when&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
 &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.junit.Test&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.mockito.Spy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;

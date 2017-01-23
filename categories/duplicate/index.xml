@@ -58,9 +58,9 @@ A
 &lt;p&gt;and diff among them, to find the repeated values:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;diff sorted.txt uniq.txt
 
-3,4d2
+&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;,4d2
 &amp;lt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;A&amp;quot;&lt;/span&gt;
-&amp;lt; 3
+&amp;lt; &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;These are the repeated values. The variable &lt;code&gt;public static final String A_1 = A;&lt;/code&gt; was not caught by this as it only has the same value in execution, not staticly.&lt;/p&gt;
