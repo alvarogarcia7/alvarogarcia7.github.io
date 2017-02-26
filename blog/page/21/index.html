@@ -129,6 +129,68 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/">The purple wire</a>
+    </h1>
+    <p >Feb 24, 2015
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/24/the-purple-wire/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/debugging/">debugging</a><a class="label" href="https://alvarogarcia7.github.io/categories/defect/">defect</a><a class="label" href="https://alvarogarcia7.github.io/categories/purple-wire/">purple-wire</a><a class="label" href="https://alvarogarcia7.github.io/categories/mythical-man-month/">mythical-man-month</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/fred-brooks/">fred-brooks</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>A quote from the <a href="http://www.amazon.com/The-Mythical-Man-Month-Engineering-Anniversary/dp/0201835959" target="_blank">Mythical Man-Month</a>:</p>
+
+<blockquote>
+<p>Chapter 13: The Whole and the Parts</p>
+
+<p>[&hellip;] In System/360 engineering models, one saw occasional strands of purple wire among the routine yellow wires. When a bug was found, two things were done. A quick fix was devised and installed on the system, so testing could proceed. This change was put on in purple wire, so it stuck out like a sore thumb. It was entered in the log. Meanwhile, an official change document was prepared and started into the design automation mill. Eventually this resulted in updated drawings and wire lists, and a new back panel in which the change was implemented in printed circuitry or yellow wire. Now the physical model and the paper were together again, and the purple wire was gone.</p>
+
+<p>Programming needs a purple-wire technique, and it badly needs tight control and deep respect for the paper that ultimately is the product. The vital ingredients of such technique are the logging of all changes in a journal and the distinction, carried conspicuously in source code, between quick patches and thought-through, tested, documented fixes.</p>
+
+<p>[&hellip;]</p>
+
+<p><quote> Brooks, F. - The Mythical Man-Month</quote></p>
+</blockquote>
+
+<p>This purple-wire the author talks about is extremely important even in the current age as the whole team should not be blocked by a single defect.</p>
+
+<p>What I usually do is a commit containing a quick fix (purple-wire, scaffold, hackish if, etc) on a bugfix branch, push the changes so jenkins can verify that this purple-wire didn&rsquo;t break any other case. Then integrate this bugfix into master if required<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. If this affects <code>develop</code> branch of other developers, also merge into develop and or feature branches.</p>
+
+<p>On the other hand, in my opinion, fixing the defect should include an unit test so the defect does not reproduce again. If this is not reproducible through an unit one, escalate test levels (unit, integration, end to end, etc) until a suitable one is found.</p>
+
+<p>Once that applying the purple-wire is done, I <code>checkout</code> the last version where the defect is to be found (usually right before the bugfix branch) and create this test necessary to reproduce behavior. Only after this defect is found I fix it. Otherwise, I think the root cause might be in a different place and, therefore, fix a non-existing defect, effectively introducing a regression.</p>
+
+<p>This test also serves to reproduce that the corrected behavior is not introduced anymore into the system.</p>
+
+<p>As an ending phase for the defect, replace the purple wire with the new code and, after passing all tests, merge to master, develop and feature branches.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">If the found defect is not business critical, I try not to merge to master the purple wire, just leave master pointing to the defect and the bugfix branch with the solution. This bugfix branch will be deleted when a more stable fix is found.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/02/23/kata-persistent-linked-list/">kata: persistent linked list</a>
     </h1>
     <p >Feb 23, 2015
@@ -651,43 +713,6 @@ Then I have an element on the list
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/02/09/implementing-bdd-at-a-client/">Implementing BDD at a client</a>
-    </h1>
-    <p >Feb 9, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/02/09/implementing-bdd-at-a-client/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/bdd/">bdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/grunt-job/">grunt-job</a><a class="label" href="https://alvarogarcia7.github.io/categories/behavior-driven-development/">behavior-driven-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/sweep-the-floor/">sweep-the-floor</a><a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship-patterns/">apprenticeship-patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/jbehave/">jbehave</a><a class="label" href="https://alvarogarcia7.github.io/categories/retrospective/">retrospective</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>This was a low-hanging fruit as a team member who specialises in QA complained about testing in the last moment during the last sprint&rsquo;s retrospective.</p>
-
-<p>Did the grunt job of connecting the dots and configuring the maven project (using jbehave). Also, got the inspiration from a tutorial.</p>
-
-<p>Announced it only as it was in place and QA approved of it</p>
-
-<p>This grunt job clicked with <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch04.html#solution_id21" target="_blank">Sweep the floor</a></p>
-
-<p>Let&rsquo;s see how the sprint goes and what are the pain points during this sprint</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -759,6 +784,8 @@ Then I have an element on the list
     
         <a href="/blog/page/25/" class="label-pagination">25</a>
     
+        <a href="/blog/page/26/" class="label-pagination">26</a>
+    
 
     
     
@@ -767,7 +794,7 @@ Then I have an element on the list
 
     
     
-        <a href="/blog/page/25/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/26/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -827,6 +854,10 @@ Then I have an element on the list
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/">Comparing options for parametrized testing in javascript</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/02/01/self-study-in-february-2017/">Self-Study in February 2017</a>
           </li>
         
@@ -860,10 +891,6 @@ Then I have an element on the list
         
           <li class="post">
             <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/09/01/self-study-in-september-2016/">Self-Study in September 2016</a>
           </li>
         
       </ul>
