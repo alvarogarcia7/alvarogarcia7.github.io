@@ -129,6 +129,94 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/10/the-language-was-prepared-for-that/">The language was prepared for that</a>
+    </h1>
+    <p >Aug 10, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/10/the-language-was-prepared-for-that/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/language-comparison/">language-comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/prefix-notation/">prefix-notation</a><a class="label" href="https://alvarogarcia7.github.io/categories/operator/">operator</a><a class="label" href="https://alvarogarcia7.github.io/categories/overloading/">overloading</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>Many times I&rsquo;ve written this function:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">between</span><span class="o">(</span><span class="kt">int</span> <span class="n">lowerBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upperBound</span><span class="o">){</span>
+	<span class="k">return</span> <span class="n">lowerBound</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&amp;&amp;</span>
+		<span class="n">n</span> <span class="o">&lt;=</span> <span class="n">upperBound</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>It may depend on the case, whether it is <code>[]</code>, <code>[)</code>, <code>(]</code> or <code>()</code>, to use mathematical terms.</p>
+
+<p>When the two comparisons are the same (<code>[]</code> and <code>()</code>), there is duplication in the comparisons.</p>
+
+<p>Investigating a little bit on this in clojure, I&rsquo;ve found this function:</p>
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nb">&lt;=</span>
+</code></pre></div>
+
+<p>And its <a href="https://clojuredocs.org/clojure.core/%3C=" target="_blank">clojuredocs</a>: Returns non-nil if nums are in monotonically non-decreasing order,
+otherwise false.</p>
+
+<p>A sample usage:</p>
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nb">&lt;=</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1">; true</span>
+
+<span class="p">(</span><span class="nb">&lt;=</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">; false</span>
+</code></pre></div>
+
+<p>The last part is the most interesting one. As this function is prepared to receive more than two parameters, it is very easy for the programmer to use it. We could say that the language was prepared for that.</p>
+
+<p>The <a href="https://github.com/clojure/clojure/blob/clojure-1.7.0/src/clj/clojure/core.clj#L1020" target="_blank">implementation</a>:</p>
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nb">&lt;=</span>
+  <span class="p">(</span><span class="nv">[x]</span> <span class="nv">true</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">[x</span> <span class="nv">y]</span> <span class="p">(</span><span class="o">.</span> <span class="nv">clojure.lang.Numbers</span> <span class="p">(</span><span class="nv">lte</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">[x</span> <span class="nv">y</span> <span class="nv">&amp;</span> <span class="nv">more]</span>
+   <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;=</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">more</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">recur</span> <span class="nv">y</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">more</span><span class="p">)</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">more</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">&lt;=</span> <span class="nv">y</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">more</span><span class="p">)))</span>
+     <span class="nv">false</span><span class="p">)))</span>
+</code></pre></div>
+
+<p>Inspired by this, I&rsquo;ve implemented the same function in haskell (for the repl):</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="kr">let</span> <span class="n">isBigger</span> <span class="n">acc</span> <span class="n">ele</span> <span class="ow">=</span> <span class="p">(</span><span class="n">snd</span> <span class="n">acc</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">fst</span> <span class="n">acc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ele</span> <span class="kr">in</span>
+   <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">acc</span> <span class="n">ele</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">ele</span><span class="p">,</span> <span class="n">isBigger</span> <span class="n">acc</span> <span class="n">ele</span><span class="p">))</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kt">True</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> 
+</code></pre></div>
+
+<p>and a simpler solution I&rsquo;ve found on <a href="http://codereview.stackexchange.com/questions/46606/is-a-list-sorted/46608#46608" target="_blank">Stack Overflow</a>:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">isSorted</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+<span class="nf">isSorted</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">all</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">y</span><span class="p">)</span> <span class="o">$</span> <span class="n">zip</span> <span class="n">xs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">)</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">isSorted</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="kt">Bool</span>
+<span class="nf">isSorted</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">and</span> <span class="o">$</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">&lt;=</span><span class="p">)</span> <span class="n">xs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Unless a more elegant, language-provided solution exists in haskell, the clojure one is way simpler. This is one of the benefits of prefix notation, that operators (e.g., <code>+</code>, <code>-</code>, <code>*</code>, <code>&lt;=</code>) are overloaded to take more arguments than before.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/">Recognizing dependencies</a>
     </h1>
     <p >Aug 8, 2015
@@ -797,154 +885,6 @@ that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p>
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing your own maven dependencies</a>
-    </h1>
-    <p >Jul 30, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/maven/">maven</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/jitpack/">jitpack</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.</p>
-
-<p>This is how most of them look like:</p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
-         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-  <span class="nt">&lt;groupId&gt;</span>com.gmaur.legacycode<span class="nt">&lt;/groupId&gt;</span>
-  <span class="nt">&lt;artifactId&gt;</span>legacyutils<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-  
-  <span class="nt">&lt;dependencies&gt;</span>
-  
-  	<span class="nt">&lt;dependency&gt;</span>
-  		<span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
-  		<span class="nt">&lt;artifactId&gt;</span>hamcrest-all<span class="nt">&lt;/artifactId&gt;</span>
-  		<span class="nt">&lt;version&gt;</span>1.3<span class="nt">&lt;/version&gt;</span>
-  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-  	<span class="nt">&lt;/dependency&gt;</span>
-  
-  	<span class="nt">&lt;dependency&gt;</span>
-  		<span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-  		<span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-  		<span class="nt">&lt;version&gt;</span>4.11<span class="nt">&lt;/version&gt;</span>
-  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-  	<span class="nt">&lt;/dependency&gt;</span>
-
-  	<span class="nt">&lt;dependency&gt;</span>
-  		<span class="nt">&lt;groupId&gt;</span>org.mockito<span class="nt">&lt;/groupId&gt;</span>
-  		<span class="nt">&lt;artifactId&gt;</span>mockito-all<span class="nt">&lt;/artifactId&gt;</span>
-  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-  		<span class="nt">&lt;version&gt;</span>2.0.2-beta<span class="nt">&lt;/version&gt;</span>
-	<span class="nt">&lt;/dependency&gt;</span>
-  <span class="nt">&lt;/dependencies&gt;</span>
-
-  <span class="nt">&lt;build&gt;</span>
-        <span class="nt">&lt;plugins&gt;</span>
-            <span class="nt">&lt;plugin&gt;</span>
-                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
-                <span class="nt">&lt;version&gt;</span>2.18.1<span class="nt">&lt;/version&gt;</span>
-                <span class="nt">&lt;configuration&gt;</span>
-                    <span class="nt">&lt;includes&gt;</span>
-                        <span class="nt">&lt;include&gt;</span>**/**Test.java<span class="nt">&lt;/include&gt;</span>
-                        <span class="nt">&lt;include&gt;</span>**/**Should.java<span class="nt">&lt;/include&gt;</span>
-                    <span class="nt">&lt;/includes&gt;</span>
-                <span class="nt">&lt;/configuration&gt;</span>
-            <span class="nt">&lt;/plugin&gt;</span>
-        <span class="nt">&lt;/plugins&gt;</span>
-    <span class="nt">&lt;/build&gt;</span>
-<span class="nt">&lt;/project&gt;</span>
-</code></pre></div>
-
-<p>Note: the <code>org.apache.maven.plugins:maven-surefire-plugin</code> is to make maven execute the tests that end in <code>*Should</code>.</p>
-
-<p>Now, the dependency versions and plugin configuration is repeated in all the projects, which is plenty of repetition.</p>
-
-<h2 id="enter-jitpack-io">Enter JitPack.io</h2>
-
-<p>With the tool <a href="https://JitPack.io" target="_blank">JitPack.io</a>, you can generate your own dependencies. A guide on how to use it can be found <a href="https://jitpack.io/docs/" target="_blank">here</a></p>
-
-<p>I&rsquo;ve published my own java dependency (originally <a href="https://github.com/alvarogarcia7/java-parent/releases/tag/v0.0.1" target="_blank">a github release</a>)</p>
-
-<p>A <code>pom.xml</code> in the new style is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/master/pom.xml" target="_blank">here</a>:</p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
-         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-
-    <span class="nt">&lt;groupId&gt;</span>com.example.spike<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>lambdatesting<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-
-    <span class="nt">&lt;parent&gt;</span>
-        <span class="nt">&lt;groupId&gt;</span>com.github.alvarogarcia7<span class="nt">&lt;/groupId&gt;</span>
-        <span class="nt">&lt;artifactId&gt;</span>java-parent<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>v0.0.1<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;/parent&gt;</span>
-
-    <span class="nt">&lt;repositories&gt;</span>
-        <span class="nt">&lt;repository&gt;</span>
-            <span class="nt">&lt;id&gt;</span>jitpack.io<span class="nt">&lt;/id&gt;</span>
-            <span class="nt">&lt;url&gt;</span>https://jitpack.io<span class="nt">&lt;/url&gt;</span>
-        <span class="nt">&lt;/repository&gt;</span>
-    <span class="nt">&lt;/repositories&gt;</span>
-
-    <span class="nt">&lt;dependencies&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.github.alvarogarcia7<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>java-parent<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>v0.0.1<span class="nt">&lt;/version&gt;</span>
-            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>hamcrest-all<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>org.mockito<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>mockito-all<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;/dependencies&gt;</span>
-</code></pre></div>
-
-<p>It does not need the plugin configuration nor the dependency versions. The downside is that it needs to be as the <code>parent pom</code>.</p>
-
-<h2 id="acknowledgments">Acknowledgments</h2>
-
-<p>Thanks to Manuel for encouraging me to write this article</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -1086,6 +1026,10 @@ that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/03/01/self-study-in-march-2017/">Self-Study in March 2017</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/">Comparing options for parametrized testing in javascript</a>
           </li>
         
@@ -1119,10 +1063,6 @@ that you know &ndash;but can’t easily prove to the compiler&ndash; is safe</p>
         
           <li class="post">
             <a href="/blog/2016/09/30/books-read-in-2016q3/">Books read in 2016Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
           </li>
         
       </ul>
