@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <title>Convert a project from npm to yarn</title>
+
+  
+  
+  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <meta name="author" content="Alvaro Garcia">
+
+  
+  <meta name="generator" content="Hugo 0.17" />
+
+  
+  
+
+</head>
+<body>
+
+
+<header role="banner"><hgroup>
+  
+  <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/" target="_blank" title="Breadcrumbs">Breadcrumbs</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/articles/" target="_blank" title="Articles">Articles</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/talks" target="_blank" title="Talks / Events">Talks / Events</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/categories/" target="_blank" title="Categories">Categories</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/archives/" target="_blank" title="Archives">Archives</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/about/" target="_blank" title="About">About</a></li>
+    
+  
+</ul>
+
+
+<ul class="subscription">
+  <a href="index.xml" target="_blank" type="application/rss+xml" title="RSS"><i class="fa fa-rss-square fa-lg"></i></a>
+
+  
+  
+
+</ul>
+
+<script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = form_.getElementsByTagName("input")[0];
+        var siteURL = form_.getElementsByTagName("input")[1];
+        input.value = siteURL.value + " " + input.value;
+    }
+</script>
+
+
+<form action="https://www.google.com/search" method="get" target="_blank" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+  	<input class="search" type="text" name="q" results="0" placeholder="Search"/>
+    <input type="hidden" value="site:https://alvarogarcia7.github.io/" />
+  </fieldset>
+</form>
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+         Convert a project from npm to yarn 
+    </h1>
+    <p >Mar 3, 2017
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipeline/">pipeline</a><a class="label" href="https://alvarogarcia7.github.io/categories/jenkins/">jenkins</a><a class="label" href="https://alvarogarcia7.github.io/categories/yarn/">yarn</a><a class="label" href="https://alvarogarcia7.github.io/categories/npm/">npm</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a>
+        
+    </p>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          
+
+<p>At a  client, we&rsquo;re converting all projects (i.e., sites, services, libraries) from <code>npm</code> to <code>yarn</code>. Mostly for the speed (as it uses the internal cache).</p>
+
+<h2 id="step-by-step-guide">Step by step guide</h2>
+
+<ol>
+<li>Install yarn in your local environment
+
+<ul>
+<li><a href="https://yarnpkg.com/lang/en/docs/install/" target="_blank">https://yarnpkg.com/lang/en/docs/install/</a></li>
+</ul></li>
+<li>Run <code>yarn install</code>
+
+<ul>
+<li>This will create a <code>yarn.lock</code> file</li>
+<li>Add that file to the repo: <code>git add yarn.lock</code></li>
+</ul></li>
+<li>Modify Dockerfile
+
+<ul>
+<li>Install yarn  (in the Dockerfile). Idea: shortcut this execution with <code>yarn --version</code> in case it is installed</li>
+<li>Configure the PATH variable (ENV PATH &hellip;)</li>
+<li><code>ADD yarn.lock</code></li>
+<li>Replace <code>npm install</code> with <code>yarn install</code></li>
+</ul></li>
+<li>Modify pipeline
+
+<ul>
+<li>See example (below)</li>
+<li><code>install_yarn</code>. Idea: shortcut this execution with <code>yarn --version</code> in case it is installed</li>
+<li>Replace <code>npm install</code> with <code>yarn install</code></li>
+</ul></li>
+<li>Test it</li>
+</ol>
+
+<h2 id="jenkins">Jenkins</h2>
+
+<p>Build step: execute shell</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">function</span> install_yarn <span class="o">{</span>
+  yarn --version <span class="o">||</span> curl -o- -L https://yarnpkg.com/install.sh <span class="p">|</span> bash
+  <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.yarn/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+install_yarn
+
+yarn install
+</code></pre></div>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Alvaro Garcia</span></span>
+    
+    <time>Mar 3, 2017</time>
+  </p>
+
+  
+  <div class="sharing">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="alvarobiz" data-hashtags="blog">Tweet this article</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+     
+  </div>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://alvarogarcia7.github.io/blog/2017/03/01/self-study-in-march-2017/" title="Self-Study in March 2017">Self-Study in March 2017</a>
+    
+
+    
+  </p>
+  
+    
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    
+    
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>About this blog</h1>
+    
+
+    <p>
+      
+        This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
+        <br>
+        <br>
+         You can find me on:
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" href="https://github.com/alvarogarcia7/" title="https://github.com/alvarogarcia7/"><i class="fa fa-github fa-3x"></i></a>
+      
+      <a target="_blank" href="https://twitter.com/@alvarobiz/" title="https://twitter.com/@alvarobiz/"><i class="fa fa-twitter fa-3x"></i></a>
+       
+      <a target="_blank" href="https://es.linkedin.com/in/alvarogarcia7" title="https://es.linkedin.com/in/alvarogarcia7"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+    <section class="even">
+      <h1>Recent Posts</h1>
+      <ul id="recent_posts">
+        
+          <li class="post">
+            <a href="/blog/2017/03/03/convert-a-project-from-npm-to-yarn/">Convert a project from npm to yarn</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/03/01/self-study-in-march-2017/">Self-Study in March 2017</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/">Comparing options for parametrized testing in javascript</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/02/01/self-study-in-february-2017/">Self-Study in February 2017</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/01/01/self-study-in-january-2017/">Self-Study in January 2017</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/12/14/a-common-misunderstanding-about-reduce/">A common misunderstanding about `reduce`</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/12/01/self-study-in-december-2016/">Self-Study in December 2016</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/11/01/self-study-in-november-2016/">Self-Study in November 2016</a>
+          </li>
+        
+          <li class="post">
+            <a href="/articles/2016/10/05/support-for-out-of-hours-on-call-support/">Support for out of hours on-call support</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2016/10/01/self-study-in-october-2016/">Self-Study in October 2016</a>
+          </li>
+        
+      </ul>
+    </section>
+  
+
+</aside>
+
+  </div>
+</div>
+
+<footer role="contentinfo">
+  <p>Copyright &copy; 2017 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
+</p>
+
+</footer>
+
+
+<script>
+  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+

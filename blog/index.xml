@@ -6,8 +6,65 @@
     <description>Recent content in Blog-rsses on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Mar 2017 11:32:19 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Mar 2017 11:09:28 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Convert a project from npm to yarn</title>
+      <link>https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/</link>
+      <pubDate>Fri, 03 Mar 2017 11:09:28 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/</guid>
+      <description>
+
+&lt;p&gt;At a  client, we&amp;rsquo;re converting all projects (i.e., sites, services, libraries) from &lt;code&gt;npm&lt;/code&gt; to &lt;code&gt;yarn&lt;/code&gt;. Mostly for the speed (as it uses the internal cache).&lt;/p&gt;
+
+&lt;h2 id=&#34;step-by-step-guide&#34;&gt;Step by step guide&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Install yarn in your local environment
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://yarnpkg.com/lang/en/docs/install/&#34; target=&#34;_blank&#34;&gt;https://yarnpkg.com/lang/en/docs/install/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;yarn install&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This will create a &lt;code&gt;yarn.lock&lt;/code&gt; file&lt;/li&gt;
+&lt;li&gt;Add that file to the repo: &lt;code&gt;git add yarn.lock&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Modify Dockerfile
+
+&lt;ul&gt;
+&lt;li&gt;Install yarn  (in the Dockerfile). Idea: shortcut this execution with &lt;code&gt;yarn --version&lt;/code&gt; in case it is installed&lt;/li&gt;
+&lt;li&gt;Configure the PATH variable (ENV PATH &amp;hellip;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ADD yarn.lock&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Replace &lt;code&gt;npm install&lt;/code&gt; with &lt;code&gt;yarn install&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Modify pipeline
+
+&lt;ul&gt;
+&lt;li&gt;See example (below)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;install_yarn&lt;/code&gt;. Idea: shortcut this execution with &lt;code&gt;yarn --version&lt;/code&gt; in case it is installed&lt;/li&gt;
+&lt;li&gt;Replace &lt;code&gt;npm install&lt;/code&gt; with &lt;code&gt;yarn install&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Test it&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h2&gt;
+
+&lt;p&gt;Build step: execute shell&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;function&lt;/span&gt; install_yarn &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  yarn --version &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; curl -o- -L https://yarnpkg.com/install.sh &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bash
+  &lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$HOME&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/.yarn/bin:&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$PATH&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+install_yarn
+
+yarn install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Self-Study in March 2017</title>
@@ -1770,30 +1827,6 @@ Learning paths that have entered the queue:
  &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Stability terms from &#34;Release it!&#34;, a quote</title>
-      <link>https://alvarogarcia7.github.io/blog/2016/06/26/stability-terms-from-release-it-a-quote/</link>
-      <pubDate>Sun, 26 Jun 2016 22:19:50 +0000</pubDate>
-      
-      <guid>https://alvarogarcia7.github.io/blog/2016/06/26/stability-terms-from-release-it-a-quote/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;https://pragprog.com/book/mnee/release-it&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;Release It!&lt;/strong&gt;&lt;/a&gt;, terms related to stability:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;transaction: is an abstract unit of work processed by the system&lt;/li&gt;
-&lt;li&gt;mixed workload: is a combination of different transaction types processed by a system.&lt;/li&gt;
-&lt;li&gt;system: the complete, interdependent set of hardware, applications, and services required to process transactions for users&lt;/li&gt;
-&lt;li&gt;stability: resilient system keeps processing transactions, even when there are transient impulses, persistent stresses, or component failures disrupting normal processing&lt;/li&gt;
-&lt;li&gt;stress (to the system): is a force applied to the system over an extended period.&lt;/li&gt;
-&lt;li&gt;impulse: is a rapid shock to the system.&lt;/li&gt;
-&lt;li&gt;a material changes shape when stress is applied. This change in shape is called the strain.&lt;/li&gt;
-&lt;li&gt;The original trigger and the way the crack spreads to the rest of the system, together with the result of the damage, failure mode.&lt;/li&gt;
-&lt;li&gt;crumple zones: areas designed to protect passengers by failing first. called crackstoppers&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;All of these are quotes from the book.&lt;/p&gt;
 </description>
     </item>
     
