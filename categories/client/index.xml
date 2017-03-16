@@ -9,6 +9,44 @@
     <atom:link href="https://alvarogarcia7.github.io/categories/client/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>On the Make, Buy or Rent decision: Stateful vs Stateless components</title>
+      <link>https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/</link>
+      <pubDate>Thu, 16 Mar 2017 07:39:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/</guid>
+      <description>
+
+&lt;p&gt;From the [Make, Buy or Rent][] article:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;[&amp;hellip;] [T]he three main system options for organizations seeking to upgrade their systems and the pros and cons of each&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make&lt;/li&gt;
+&lt;li&gt;Buy&lt;/li&gt;
+&lt;li&gt;Rent&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;IT managers have different criteria for deciding which components to assign in each category.&lt;/p&gt;
+
+&lt;h2 id=&#34;another-criteria-for-deciding&#34;&gt;Another criteria for deciding&lt;/h2&gt;
+
+&lt;p&gt;At a client, they have taken the decision to split their core IT systems in to the three options: make, buy, rent.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The business logic to handle the core business is &amp;lsquo;make&amp;rsquo;. These systems are completely stateless&lt;/li&gt;
+&lt;li&gt;The persistance (or storage) for the core business is &amp;lsquo;rent&amp;rsquo;. These systems, by definition, are stateful&lt;/li&gt;
+&lt;li&gt;Other parts of the system are &amp;lsquo;buy&amp;rsquo;. Not important for this article&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The key concept for this separation is moving the responsibility for uptime and complex data management to a provider. They can take better care of those procedures and use economies of scale to provide high availability, reliability and SLAs. This idea simplifies our components (e.g., services), making them stateless. Even if they cache any internal information, it is a &amp;lsquo;Read Through Cache&amp;rsquo;, meaning that in case the data is not available in the cache, the service will transparently fetch it from the underlying storage system.&lt;/p&gt;
+
+&lt;p&gt;This idea for separating components simplifies both development, testing and maintainance, therefore reducing the Total Cost of Ownership (TCO) of our services.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Self-Study in February 2016</title>
       <link>https://alvarogarcia7.github.io/blog/2016/02/01/self-study-in-february-2016/</link>
       <pubDate>Mon, 01 Feb 2016 02:55:19 +0000</pubDate>
@@ -1822,42 +1860,6 @@ that you know &amp;ndash;but can’t easily prove to the compiler&amp;ndash; is 
  &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Brown-bag session: maven</title>
-      <link>https://alvarogarcia7.github.io/blog/2015/03/06/brown-bag-session-maven/</link>
-      <pubDate>Fri, 06 Mar 2015 22:18:28 +0000</pubDate>
-      
-      <guid>https://alvarogarcia7.github.io/blog/2015/03/06/brown-bag-session-maven/</guid>
-      <description>&lt;p&gt;Yesterday we did a training about the maven tool. One of the team members explained to us some topics including:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;lifecycles&lt;/li&gt;
-&lt;li&gt;profiles and how to create one
-
-&lt;ul&gt;
-&lt;li&gt;slowTests for integration tests (this client only)&lt;/li&gt;
-&lt;li&gt;downloadJavadoc&lt;/li&gt;
-&lt;li&gt;downloadSources&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;convention over configuration&lt;/li&gt;
-&lt;li&gt;scopes of the dependencies (test, runtime, compile, provided)&lt;/li&gt;
-&lt;li&gt;tricks about the tool:
-
-&lt;ul&gt;
-&lt;li&gt;order of the dependencies (especially junit, hamcrest)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;plugins and how to build one&lt;/li&gt;
-&lt;li&gt;destination folders
-
-&lt;ul&gt;
-&lt;li&gt;target, classes, test-classes, etc&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Note: this post was created a posteriori, with the original date&lt;/p&gt;
 </description>
     </item>
     

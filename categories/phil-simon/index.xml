@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/phil-simon/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://alvarogarcia7.github.io/categories/phil-simon/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>On the Make, Buy or Rent decision: Stateful vs Stateless components</title>
+      <link>https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/</link>
+      <pubDate>Thu, 16 Mar 2017 07:39:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/</guid>
+      <description>
+
+&lt;p&gt;From the [Make, Buy or Rent][] article:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;[&amp;hellip;] [T]he three main system options for organizations seeking to upgrade their systems and the pros and cons of each&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make&lt;/li&gt;
+&lt;li&gt;Buy&lt;/li&gt;
+&lt;li&gt;Rent&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;IT managers have different criteria for deciding which components to assign in each category.&lt;/p&gt;
+
+&lt;h2 id=&#34;another-criteria-for-deciding&#34;&gt;Another criteria for deciding&lt;/h2&gt;
+
+&lt;p&gt;At a client, they have taken the decision to split their core IT systems in to the three options: make, buy, rent.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The business logic to handle the core business is &amp;lsquo;make&amp;rsquo;. These systems are completely stateless&lt;/li&gt;
+&lt;li&gt;The persistance (or storage) for the core business is &amp;lsquo;rent&amp;rsquo;. These systems, by definition, are stateful&lt;/li&gt;
+&lt;li&gt;Other parts of the system are &amp;lsquo;buy&amp;rsquo;. Not important for this article&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The key concept for this separation is moving the responsibility for uptime and complex data management to a provider. They can take better care of those procedures and use economies of scale to provide high availability, reliability and SLAs. This idea simplifies our components (e.g., services), making them stateless. Even if they cache any internal information, it is a &amp;lsquo;Read Through Cache&amp;rsquo;, meaning that in case the data is not available in the cache, the service will transparently fetch it from the underlying storage system.&lt;/p&gt;
+
+&lt;p&gt;This idea for separating components simplifies both development, testing and maintainance, therefore reducing the Total Cost of Ownership (TCO) of our services.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
