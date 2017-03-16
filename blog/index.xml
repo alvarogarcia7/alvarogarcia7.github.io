@@ -41,7 +41,8 @@
 &lt;li&gt;Other parts of the system are &amp;lsquo;buy&amp;rsquo;. Not important for this article&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;The key concept for this separation is moving the responsibility for uptime and complex data management to a provider. They can take better care of those procedures and use economies of scale to provide high availability, reliability and SLAs. This idea simplifies our components (e.g., services), making them stateless. Even if they cache any internal information, it is a &amp;lsquo;Read Through Cache&amp;rsquo;, meaning that in case the data is not available in the cache, the service will transparently fetch it from the underlying storage system.&lt;/p&gt;
+&lt;p&gt;The key concept for this separation is moving the responsibility for uptime and complex data management to a provider. The provider can take better care of those procedures and use economies of scale to provide a better service that we could do in-house (&amp;lsquo;make&amp;rsquo;) (e.g., high availability, reliability and SLAs) at the cost of paying a price for that.
+This idea simplifies our components (e.g., services), making them stateless. Even if they cache any internal information, it is a &amp;lsquo;Read Through Cache&amp;rsquo;, meaning that in case the data is not available in the cache, the service will transparently fetch it from the underlying storage system.&lt;/p&gt;
 
 &lt;p&gt;This idea for separating components simplifies both development, testing and maintainance, therefore reducing the Total Cost of Ownership (TCO) of our services.&lt;/p&gt;
 </description>
