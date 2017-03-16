@@ -6,8 +6,38 @@
     <description>Recent content on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Mar 2017 11:09:28 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Mar 2017 00:36:19 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Modifying titles in a Trello Board</title>
+      <link>https://alvarogarcia7.github.io/blog/2017/03/16/modifying-titles-in-a-trello-board/</link>
+      <pubDate>Thu, 16 Mar 2017 00:36:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2017/03/16/modifying-titles-in-a-trello-board/</guid>
+      <description>
+
+&lt;p&gt;A teammate and I have created a small tool to modify the titles of the trello card in a trello board.&lt;/p&gt;
+
+&lt;h2 id=&#34;technical-description&#34;&gt;Technical description&lt;/h2&gt;
+
+&lt;p&gt;It works by applying a function to the existing title (because we wanted to remove a prefix from the existing title).&lt;/p&gt;
+
+&lt;p&gt;The modification is done, not through the API, but simulating user interaction:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Click to edit the card&lt;/li&gt;
+&lt;li&gt;Input the new title&lt;/li&gt;
+&lt;li&gt;Save&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The full code is available &lt;a href=&#34;https://github.com/alvarogarcia7/javascript-simple-sessions/tree/master/trello-cards&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This has been a great example of working with legacy code, as the tools to work with the existing product are not the ones you would like to have and an imaginative solution provides a way out of the tar pit.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Convert a project from npm to yarn</title>
@@ -1540,50 +1570,6 @@ Learning paths that have entered the queue:
 &lt;/blockquote&gt;
 
 &lt;p&gt;Tags: tdz, temporal-dead-zone, bill-sourour, javascript, es2015, function, const, var, binding, lifecycle&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>AWS Kinesis Zombieland</title>
-      <link>https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/</link>
-      <pubDate>Thu, 28 Jul 2016 19:28:19 +0000</pubDate>
-      
-      <guid>https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/</guid>
-      <description>
-
-&lt;p&gt;I attended a workshop on AWS Kinesis, called &lt;a href=&#34;http://capside.com/event/aws-kinesis-zombieland/&#34; target=&#34;_blank&#34;&gt;AWS Kinesis Zombieland&lt;/a&gt; by &lt;a href=&#34;https://twitter.com/ciberado&#34; target=&#34;_blank&#34;&gt;Javi Moreno&lt;/a&gt; at &lt;a href=&#34;http://capside.com/&#34; target=&#34;_blank&#34;&gt;capside&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
-
-&lt;p&gt;AWS Kinesis Zombieland&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;muy importante escoger bien la clave de particionado (id de shard)&lt;/li&gt;
-&lt;li&gt;KPL librería de kinesis que te permite hacer batching, timeout, &amp;hellip;
-
-&lt;ul&gt;
-&lt;li&gt;la otra se llama KCL.&lt;/li&gt;
-&lt;li&gt;KCL permite mantener estado&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;cuando te pidan una app de big data, pregunta para qué lo quieren, lo mismo que con cualquier proyecto de software&lt;/li&gt;
-&lt;li&gt;latitud = Y, longitud = x&lt;/li&gt;
-&lt;li&gt;el canal se llama stream, la capacidad se llama shard
-
-&lt;ul&gt;
-&lt;li&gt;el shard sólo permite 5 lecturas por segundo, 2MB/s&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;usar el shard como buffer&lt;/li&gt;
-&lt;li&gt;usar la clave de particionado como algoritmo de agregación&lt;/li&gt;
-&lt;li&gt;cada vez que tienes una tabla en dynamodb, tienes que poner una alerta de throughput&lt;/li&gt;
-&lt;li&gt;nota: lo que no puedes hacer es guardarlos todos y luego procesarlo. no tienes potencia para todo eso&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Preguntas:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;¿cómo se calcula el id del shard?
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
