@@ -129,6 +129,536 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/">Comparing options for parametrized testing in javascript</a>
+    </h1>
+    <p >Feb 26, 2017
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/test/">test</a><a class="label" href="https://alvarogarcia7.github.io/categories/parametrized-testing/">parametrized-testing</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/csharp/">csharp</a><a class="label" href="https://alvarogarcia7.github.io/categories/nunit/">nunit</a><a class="label" href="https://alvarogarcia7.github.io/categories/junit/">junit</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/etude/">etude</a><a class="label" href="https://alvarogarcia7.github.io/categories/study/">study</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>We explore how to use parametrized tests (<a href="https://github.com/junit-team/junit4/wiki/Parameterized-tests" target="_blank">example in java</a>, <a href="https://jeremybytes.blogspot.co.uk/2014/10/parameterized-tests-with-nunit.html" target="_blank">example in c#</a>)</p>
+
+<p>The tests are written using <code>mocha</code> syntax: <code>describe</code>, <code>it</code>. Using <code>chai</code> for expectations: <code>assert</code>.</p>
+
+<p>Note: the example used below (adding to an array) is simple enough to be understood by everybody, without having to explain the domain. The real tests can have a more complicated environment or domain. This is just an example.</p>
+
+<h2 id="using-a-custom-syntax">Using a custom syntax</h2>
+
+<p>This is just an example of some possible syntax, not using any (currently) existing framework.</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="nx">newTestCase</span><span class="p">({</span><span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span>
+               <span class="nx">input</span><span class="o">:</span> <span class="p">[],</span>
+               <span class="nx">parameter</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+               <span class="nx">expected</span><span class="o">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]})</span>
+  <span class="nx">newTestCase</span><span class="p">({</span><span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;to a non-empty list&#39;</span><span class="p">,</span>
+               <span class="nx">input</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+               <span class="nx">parameter</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+               <span class="nx">expected</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">description</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">testCase</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">parameter</span><span class="p">)</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">expected</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>flexible</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>verbose</td>
+</tr>
+
+<tr>
+<td></td>
+<td>too close to the the real test syntax?</td>
+</tr>
+
+<tr>
+<td></td>
+<td>how to explain that the <code>it</code> will execute all test cases?</td>
+</tr>
+
+<tr>
+<td></td>
+<td>magic variable <code>testCase</code>: linting, editor complaining about it</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="using-an-in-place-executor">Using an in-place executor</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="kr">const</span> <span class="nx">runs</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span>
+               <span class="nx">input</span><span class="o">:</span> <span class="p">[],</span>
+               <span class="nx">parameter</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+               <span class="nx">expected</span><span class="o">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]},</span>
+               <span class="p">{</span><span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;to a non-empty list&#39;</span><span class="p">,</span>
+               <span class="nx">input</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+               <span class="nx">parameter</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+               <span class="nx">expected</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]}]</span>
+
+  <span class="nx">runs</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">testCase</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">description</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">testCase</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">parameter</span><span class="p">)</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">expected</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>flexible</td>
+<td></td>
+</tr>
+
+<tr>
+<td>flexible to use any <code>testCase</code> variable name (e.g., <code>testCase</code>, <code>tC</code>, <code>run</code>)</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>verbose</td>
+</tr>
+
+<tr>
+<td>using the real test syntax</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>duplicate the test runner in every case</td>
+</tr>
+
+<tr>
+<td></td>
+<td>test-related features mixed with business/domain tests</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="using-it-damp">Using <code>it</code>, DAMP</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">input</span><span class="o">=</span> <span class="p">[];</span>
+    <span class="kr">const</span> <span class="nx">parameter</span><span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">expected</span><span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">parameter</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to a non-empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">input</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="kr">const</span> <span class="nx">parameter</span><span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">expected</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">parameter</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td></td>
+<td>one test per case</td>
+</tr>
+
+<tr>
+<td>the test is self-contained (DAMP)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="using-it-dry">Using <code>it</code>, DRY</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">input</span><span class="o">=</span> <span class="p">[];</span>
+    <span class="kr">const</span> <span class="nx">parameter</span><span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">expected</span><span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="c1">// use explaining variables</span>
+    <span class="nx">pushingToMatches</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">,</span> <span class="nx">expected</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to a non-empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// not using explaining variables</span>
+    <span class="nx">pushingToMatches</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span>
+  <span class="p">});</span>
+
+  <span class="kd">function</span> <span class="nx">pushingToMatches</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">,</span> <span class="nx">expected</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">parameter</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td></td>
+<td>one test per case</td>
+</tr>
+
+<tr>
+<td>no repeated code</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>the testing method <code>pushingToMatches</code> requires access to all test inputs and outputs</td>
+</tr>
+
+<tr>
+<td></td>
+<td>the testing method <code>pushingToMatches</code> breaks the SRP: act and assert</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="using-it-dry-fluent">Using <code>it</code>, DRY+Fluent</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">input</span><span class="o">=</span> <span class="p">[];</span>
+    <span class="kr">const</span> <span class="nx">parameter</span><span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">expected</span><span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="c1">// use explaining variables</span>
+    <span class="nx">pushingTo</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">).</span><span class="nx">matches</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to a non-empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// not using explaining variables</span>
+    <span class="nx">pushingTo</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]).</span><span class="nx">matches</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span>
+  <span class="p">});</span>
+
+  <span class="kd">function</span> <span class="nx">pushingTo</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">parameter</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">{</span><span class="nx">matches</span><span class="o">:</span> <span class="nx">expected</span> <span class="p">=&gt;</span> <span class="nx">expect</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">)};</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td></td>
+<td>one test per case</td>
+</tr>
+
+<tr>
+<td>no repeated code</td>
+<td></td>
+</tr>
+
+<tr>
+<td>readable</td>
+<td></td>
+</tr>
+
+<tr>
+<td></td>
+<td>verbose, one test per case, when this could be expressed in some other way</td>
+</tr>
+
+<tr>
+<td></td>
+<td>the testing method <code>pushingTo</code> creates space for the difference in act and assert</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="sources">Sources</h2>
+
+<ul>
+<li><a href="https://rjzaworski.com/2013/01/parameterized-testing-in-javascript" target="_blank">https://rjzaworski.com/2013/01/parameterized-testing-in-javascript</a></li>
+<li><a href="http://www.adequatelygood.com/Writing-Testable-JavaScript.html" target="_blank">http://www.adequatelygood.com/Writing-Testable-JavaScript.html</a></li>
+<li>Example in java: <a href="https://github.com/junit-team/junit4/wiki/Parameterized-tests" target="_blank">here</a></li>
+<li>Example in C#: <a href="https://jeremybytes.blogspot.co.uk/2014/10/parameterized-tests-with-nunit.html" target="_blank">here</a></li>
+</ul>
+
+<p>(This post is a modified version of the session available <a href="https://github.com/alvarogarcia7/javascript-simple-sessions/blob/master/parametrized-testing/ideas.md" target="_blank">here</a>)</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/02/01/self-study-in-february-2017/">Self-Study in February 2017</a>
+    </h1>
+    <p >Feb 1, 2017
+         - 7 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/02/01/self-study-in-february-2017/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/february/">february</a><a class="label" href="https://alvarogarcia7.github.io/categories/2017/">2017</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/alan-brouilette/">alan-brouilette</a><a class="label" href="https://alvarogarcia7.github.io/categories/alyssa-mazzina/">alyssa-mazzina</a><a class="label" href="https://alvarogarcia7.github.io/categories/analysis/">analysis</a><a class="label" href="https://alvarogarcia7.github.io/categories/andromeda/">andromeda</a><a class="label" href="https://alvarogarcia7.github.io/categories/api/">api</a><a class="label" href="https://alvarogarcia7.github.io/categories/app/">app</a><a class="label" href="https://alvarogarcia7.github.io/categories/ashton-kemerling/">ashton-kemerling</a><a class="label" href="https://alvarogarcia7.github.io/categories/attack-vector/">attack-vector</a><a class="label" href="https://alvarogarcia7.github.io/categories/bonilista/">bonilista</a><a class="label" href="https://alvarogarcia7.github.io/categories/bonus/">bonus</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/brandur/">brandur</a><a class="label" href="https://alvarogarcia7.github.io/categories/bruce-schneier/">bruce-schneier</a><a class="label" href="https://alvarogarcia7.github.io/categories/challenge/">challenge</a><a class="label" href="https://alvarogarcia7.github.io/categories/change-job/">change-job</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/code-review/">code-review</a><a class="label" href="https://alvarogarcia7.github.io/categories/company/">company</a><a class="label" href="https://alvarogarcia7.github.io/categories/conference/">conference</a><a class="label" href="https://alvarogarcia7.github.io/categories/consulting/">consulting</a><a class="label" href="https://alvarogarcia7.github.io/categories/daniel-dietrich/">daniel-dietrich</a><a class="label" href="https://alvarogarcia7.github.io/categories/daniel-matte/">daniel-matte</a><a class="label" href="https://alvarogarcia7.github.io/categories/darius-foroux/">darius-foroux</a><a class="label" href="https://alvarogarcia7.github.io/categories/dark-standup/">dark-standup</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-bonilla/">david-bonilla</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-cassel/">david-cassel</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-dawson/">david-dawson</a><a class="label" href="https://alvarogarcia7.github.io/categories/diff/">diff</a><a class="label" href="https://alvarogarcia7.github.io/categories/eisenhower-productivity-matrix/">eisenhower-productivity-matrix</a><a class="label" href="https://alvarogarcia7.github.io/categories/email/">email</a><a class="label" href="https://alvarogarcia7.github.io/categories/encryption/">encryption</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a><a class="label" href="https://alvarogarcia7.github.io/categories/experiment/">experiment</a><a class="label" href="https://alvarogarcia7.github.io/categories/fallible/">fallible</a><a class="label" href="https://alvarogarcia7.github.io/categories/frustration/">frustration</a><a class="label" href="https://alvarogarcia7.github.io/categories/fuchsia/">fuchsia</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/google/">google</a><a class="label" href="https://alvarogarcia7.github.io/categories/happiness/">happiness</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/hr/">hr</a><a class="label" href="https://alvarogarcia7.github.io/categories/human-resources/">human-resources</a><a class="label" href="https://alvarogarcia7.github.io/categories/important/">important</a><a class="label" href="https://alvarogarcia7.github.io/categories/important-vs-urgent/">important-vs-urgent</a><a class="label" href="https://alvarogarcia7.github.io/categories/interface/">interface</a><a class="label" href="https://alvarogarcia7.github.io/categories/interface-design/">interface-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/interruption/">interruption</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/javaslang/">javaslang</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-offer/">job-offer</a><a class="label" href="https://alvarogarcia7.github.io/categories/joel-spolsky/">joel-spolsky</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-napier/">john-napier</a><a class="label" href="https://alvarogarcia7.github.io/categories/joyent/">joyent</a><a class="label" href="https://alvarogarcia7.github.io/categories/kat-boogaard/">kat-boogaard</a><a class="label" href="https://alvarogarcia7.github.io/categories/key/">key</a><a class="label" href="https://alvarogarcia7.github.io/categories/kim-zetter/">kim-zetter</a><a class="label" href="https://alvarogarcia7.github.io/categories/knowledge-worker/">knowledge-worker</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/lavabit/">lavabit</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy/">legacy</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-hardware/">legacy-hardware</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-software/">legacy-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-system/">legacy-system</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a><a class="label" href="https://alvarogarcia7.github.io/categories/limited-time/">limited-time</a><a class="label" href="https://alvarogarcia7.github.io/categories/listicle/">listicle</a><a class="label" href="https://alvarogarcia7.github.io/categories/mail/">mail</a><a class="label" href="https://alvarogarcia7.github.io/categories/mainframe/">mainframe</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/managing-performance/">managing-performance</a><a class="label" href="https://alvarogarcia7.github.io/categories/marianne-bellotti/">marianne-bellotti</a><a class="label" href="https://alvarogarcia7.github.io/categories/maybe/">maybe</a><a class="label" href="https://alvarogarcia7.github.io/categories/measuring-performance/">measuring-performance</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/operating-system/">operating-system</a><a class="label" href="https://alvarogarcia7.github.io/categories/option/">option</a><a class="label" href="https://alvarogarcia7.github.io/categories/optional/">optional</a><a class="label" href="https://alvarogarcia7.github.io/categories/organization/">organization</a><a class="label" href="https://alvarogarcia7.github.io/categories/os/">os</a><a class="label" href="https://alvarogarcia7.github.io/categories/overtime/">overtime</a><a class="label" href="https://alvarogarcia7.github.io/categories/palatable/">palatable</a><a class="label" href="https://alvarogarcia7.github.io/categories/papers-we-love/">papers-we-love</a><a class="label" href="https://alvarogarcia7.github.io/categories/pay/">pay</a><a class="label" href="https://alvarogarcia7.github.io/categories/performance/">performance</a><a class="label" href="https://alvarogarcia7.github.io/categories/phone/">phone</a><a class="label" href="https://alvarogarcia7.github.io/categories/post-mortem/">post-mortem</a><a class="label" href="https://alvarogarcia7.github.io/categories/postmortem/">postmortem</a><a class="label" href="https://alvarogarcia7.github.io/categories/privacy/">privacy</a><a class="label" href="https://alvarogarcia7.github.io/categories/problem/">problem</a><a class="label" href="https://alvarogarcia7.github.io/categories/productivity/">productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/pull-request/">pull-request</a><a class="label" href="https://alvarogarcia7.github.io/categories/purpose-of-life/">purpose-of-life</a><a class="label" href="https://alvarogarcia7.github.io/categories/question/">question</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/reference/">reference</a><a class="label" href="https://alvarogarcia7.github.io/categories/referent/">referent</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote/">remote</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote-work/">remote-work</a><a class="label" href="https://alvarogarcia7.github.io/categories/review/">review</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-austin/">robert-austin</a><a class="label" href="https://alvarogarcia7.github.io/categories/scala/">scala</a><a class="label" href="https://alvarogarcia7.github.io/categories/scott-nonnenberg/">scott-nonnenberg</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/sexism/">sexism</a><a class="label" href="https://alvarogarcia7.github.io/categories/shut-down/">shut-down</a><a class="label" href="https://alvarogarcia7.github.io/categories/simplicity-itself/">simplicity-itself</a><a class="label" href="https://alvarogarcia7.github.io/categories/stack-overflow/">stack-overflow</a><a class="label" href="https://alvarogarcia7.github.io/categories/susan-fowler/">susan-fowler</a><a class="label" href="https://alvarogarcia7.github.io/categories/system/">system</a><a class="label" href="https://alvarogarcia7.github.io/categories/systems-we-love/">systems-we-love</a><a class="label" href="https://alvarogarcia7.github.io/categories/team/">team</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-management/">team-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/token/">token</a><a class="label" href="https://alvarogarcia7.github.io/categories/uber/">uber</a><a class="label" href="https://alvarogarcia7.github.io/categories/ui/">ui</a><a class="label" href="https://alvarogarcia7.github.io/categories/urgent/">urgent</a><a class="label" href="https://alvarogarcia7.github.io/categories/urgent-vs-important/">urgent-vs-important</a><a class="label" href="https://alvarogarcia7.github.io/categories/usefulness/">usefulness</a><a class="label" href="https://alvarogarcia7.github.io/categories/ux/">ux</a><a class="label" href="https://alvarogarcia7.github.io/categories/whatsapp/">whatsapp</a><a class="label" href="https://alvarogarcia7.github.io/categories/women/">women</a><a class="label" href="https://alvarogarcia7.github.io/categories/work-environment/">work-environment</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h2 id="whatsapp-security-vulnerability">WhatsApp Security Vulnerability</h2>
+
+<p>I&rsquo;ve read <a href="https://www.schneier.com/blog/archives/2017/01/whatsapp_securi.html" target="_blank">this article</a> by Bruce Schneier on a security defect in whatsapp, where an &lsquo;unconfirmed&rsquo; message can be re-encrypted (with a new key) and resent. This is a vector for some attacks.</p>
+
+<p>Tags: bruce-schneier, security, whatsapp, encryption, attack-vector</p>
+
+<h2 id="encrypted-email-service-once-used-by-edward-snowden-relaunches">Encrypted email service once used by Edward Snowden relaunches</h2>
+
+<p>I&rsquo;ve read <a href="https://theintercept.com/2017/01/20/encrypted-email-service-once-used-by-edward-snowden-to-relaunch/" target="_blank">this article</a>, by Kim Zetter, on Lavabit restablishing its service. Explains the company&rsquo;s past and the new services they are offering</p>
+
+<p>Tags: lavabit, kim-zetter, privacy, encryption, email, mail</p>
+
+<h2 id="what-happens-when-you-mix-java-with-a-1960-ibm-mainframe">What Happens When You Mix Java with a 1960 IBM Mainframe</h2>
+
+<p>I&rsquo;ve read <a href="http://thenewstack.io/happens-use-java-1960-ibm-mainframe/" target="_blank">this article</a> by David Cassel about the legacy infrastructure of hardware that the U.S. government agencies have. How old mainframes are still useful to web applications and how these mainframes can communicate with more modern systems, through APIs</p>
+
+<p>Tags: mainframe, david-cassel, marianne-bellotti, legacy-hardware, legacy-software, legacy-system, legacy, api</p>
+
+<h2 id="systems-we-love-how-the-past-informs-our-present">Systems We Love: How the Past Informs Our Present</h2>
+
+<p>I&rsquo;ve read <a href="http://thenewstack.io/systems-we-love/" target="_blank">this experience report</a> by David Cassel about the conference &ldquo;Systems we love&rdquo;: a mix of papers we love and systems that happened at San Francisco in December 2016</p>
+
+<p>Tags: david-cassel, systems-we-love, papers-we-love, system, conference, experience-report, joyent</p>
+
+<h2 id="the-agonizing-death-of-an-astronaut">The agonizing death of an astronaut</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.javaslang.io/the-agonizing-death-of-an-astronaut/" target="_blank">this article</a> by Daniel Dietrich on why the implementation of the <code>Option</code> in Javaslang seems to be broken but, in fact, follows the rules of the monads.</p>
+
+<p>Explains why <code>map</code> should be used for non-changing contexts and <code>flatmap</code> should be used for changing it.</p>
+
+<p>Tags: daniel-dietrich, monad, option, haskell, optional, maybe, scala, javaslang</p>
+
+<h2 id="we-reverse-engineered-16k-apps-here-s-what-we-found">We reverse engineered 16k apps, here’s what we found</h2>
+
+<p>I&rsquo;ve read <a href="https://hackernoon.com/we-reverse-engineered-16k-apps-heres-what-we-found-51bdf3b456bb" target="_blank">this article</a> by Fallible team, in which they describe the analysis of apps. They discovered 2500 apps with key and secret on them.</p>
+
+<blockquote>
+<p>[&hellip;] whenever you hardcode any API key/token in the app, think hard if you really need to hardcode this, understand the API usage and the read/write scope of the tokens before putting it in the apps.</p>
+</blockquote>
+
+<p>Tags: analysis, security, app, key, token, api, fallible</p>
+
+<h2 id="oh-the-emails-you-ll-get">Oh, the emails you’ll get&hellip;</h2>
+
+<p>I&rsquo;ve read <a href="https://www.joelonsoftware.com/2006/11/09/oh-the-emails-youll-get/" target="_blank">this article</a> by Joel Spolsky, in which he explains how some companies focus on some metrics for measuring performance, how difficult it is to measure performance.</p>
+
+<p>Tags: joel-spolsky, performance, management, consulting</p>
+
+<h2 id="2002-07-15-measurement">2002/07/15 - Measurement</h2>
+
+<p>I&rsquo;ve read <a href="https://www.joelonsoftware.com/2002/07/15/20020715/" target="_blank">this article</a> by Joel Spolsky where he explains how measuring performance is difficult, according to  Robert D. Austin in his book Measuring and Managing Performance in Organizations. He gives some examples of that, mainly about paying out bonuses for performance reasons.</p>
+
+<p>Tags: joel-spolsky, robert-austin, measuring-performance, managing-performance, book, knowledge-worker, bonus, pay, performance, organization</p>
+
+<h2 id="the-purpose-of-life-is-not-happiness-it-s-usefulness">The Purpose Of Life Is Not Happiness: It’s Usefulness</h2>
+
+<p>I&rsquo;ve read <a href="http://dariusforoux.com/happiness-usefulness/" target="_blank">this article</a> by Darius Foroux on what the purpose of life is about: making a difference (even if small) in what you leave behind.</p>
+
+<p>Tags: psychology, purpose-of-life, usefulness, happiness, darius-foroux</p>
+
+<h2 id="the-future-of-user-interfaces">The Future of User Interfaces</h2>
+
+<p>I&rsquo;ve read <a href="https://brandur.org/interfaces" target="_blank">this article</a> by Brandur on how interfaces are becoming more and more bloated, slow and ridden with animations. All of that is targeted to the beginner user, rather than the proficient one. He suggests some ideas on finding inspiration from the terminal applications</p>
+
+<p>Tags: brandur, interface, interface-design, ux, ui</p>
+
+<h2 id="my-increasing-frustration-with-clojure">My Increasing Frustration With Clojure</h2>
+
+<p>I&rsquo;ve read <a href="http://ashtonkemerling.com/blog/2016/06/11/my-increasing-frustration-with-clojure/" target="_blank">this article</a> by Ashton Kemerling on the problems he has found working professionally with Clojure and some possible solutions.</p>
+
+<p>Tags: clojure, language, ashton-kemerling, functional-programming, problem, frustration</p>
+
+<h2 id="java-without-if">Java Without If</h2>
+
+<p>I&rsquo;ve read <a href="http://ashtonkemerling.com/blog/2017/01/26/java-without-if/" target="_blank">this article</a> by Ashton Kemerling on how he is using a library called &lsquo;lambda&rsquo;, which brings some of the functional programming features to Java.</p>
+
+<p>Tags: lambda, library, ashton-kemerling, functional-programming, java, palatable, john-napier</p>
+
+<h2 id="top-ten-pull-request-review-mistakes">Top ten pull request review mistakes</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.scottnonnenberg.com/top-ten-pull-request-review-mistakes/" target="_blank">this article</a> by Scott Nonnenberg on the most common mistakes while doing a code review in the context of a pull request.</p>
+
+<p>Tags: scott-nonnenberg, pull-request, code-review, github, diff, listicle</p>
+
+<h2 id="shutting-down-simplicity-itself">Shutting down Simplicity Itself</h2>
+
+<p>I&rsquo;ve read <a href="http://daviddawson.me/blog/2017/02/04/simplicity-itself-shutdown.html" target="_blank">this article</a> by David Dawson on why he&rsquo;s shutting down his consultancy company, Simplicity Itself, which was mainly focused on microservices.</p>
+
+<p>Tags: david-dawson, simplicity-itself, shut-down, company, consulting, post-mortem, postmortem</p>
+
+<h2 id="turn-off-your-cellphone">Turn Off Your Cellphone</h2>
+
+<p>I&rsquo;ve read <a href="https://brandur.org/fragments/turn-off-your-cellphone" target="_blank">this article</a> by Brandur on how to get more done by unplugging the notifications</p>
+
+<p>Tags: brandur, time-management, interruption, phone, notification</p>
+
+<h2 id="the-dark-standup">The Dark Standup</h2>
+
+<p>I&rsquo;ve read <a href="https://18f.gsa.gov/2017/01/19/the-dark-standup/" target="_blank">this article</a> by Alan Brouilette on the steps they took to reduce the amount of hours worked. It started with a few extra questions during the daily standup:</p>
+
+<blockquote>
+<ul>
+<li>What didn’t you do today because you stopped working on time?</li>
+<li>What will the impact be on tomorrow because of it?</li>
+<li>How much more time would you have needed to get everything done today?</li>
+<li>What will you do with those hours tonight instead?</li>
+</ul>
+</blockquote>
+
+<p>and what they realized after a two-week experiment:</p>
+
+<blockquote>
+<ul>
+<li>The costs of context switching are much higher than we realized.</li>
+<li>We were spending a lot of time doing things that were urgent but not important, or that didn’t need to have been urgent at all.</li>
+<li>We needed to be a lot more ruthless about saying “No.”</li>
+<li>Some Operations roles are legitimately shorthanded, some of us just needed to impose a little order.</li>
+<li>FOMO WIP (unnecessary work one takes on because one fears missing something) is a real problem, especially as regards to Slack and meetings.</li>
+<li>We worked better in the time we had to work, knowing it was finite.</li>
+<li>Work-life balance improves both work and life. People literally slept better when limiting after-hours exposure to Slack and email. [&hellip;]</li>
+</ul>
+</blockquote>
+
+<p>Tags: dark-standup, quote, limited-time, overtime, team-management, experiment, question, alan-brouilette</p>
+
+<h2 id="what-it-means-to-be-a-remote-first-company">What it Means to be a Remote-First Company</h2>
+
+<p>I&rsquo;ve read <a href="http://www.stackoverflow.blog/code-for-a-living/what-it-means-to-be-a-remote-first-company" target="_blank">this article</a> by  Alyssa Mazzina on what Stack Overflow does to keep its remote employees happy, how they are a remote-first company and small practicalities like tools, holiday gifts and stipends.</p>
+
+<p>Tags: alyssa-mazzina, team-management, remote, remote-work, stack-overflow, team</p>
+
+<h2 id="google-s-not-so-secret-new-os">Google’s not-so-secret new OS</h2>
+
+<p>I&rsquo;ve read <a href="https://techspecs.blog/blog/2017/2/14/googles-not-so-secret-new-os" target="_blank">this article</a> describing the state of Google&rsquo;s new operating system, Fuchsia or Andromeda (the final name is not final yet).</p>
+
+<p>Tags: google, os, operating-system, daniel-matte, fuchsia, andromeda</p>
+
+<h2 id="four-secrets-of-people-who-finish-their-workweeks-on-thursday">Four Secrets Of People Who Finish Their Workweeks On Thursday</h2>
+
+<p>I&rsquo;ve read <a href="https://www.fastcompany.com/3068122/work-smart/four-secrets-of-people-who-finish-their-workweeks-on-thursday" target="_blank">this article</a> by Kat Boogaard that includes four tips to finish your week early:</p>
+
+<ol>
+<li>They Schedule Intentionally</li>
+<li>They Focus On Priorities</li>
+<li>They Tune Out Distractions</li>
+<li>They Find Shortcuts</li>
+</ol>
+
+<p>Tags: kat-boogaard, time-management, eisenhower-productivity-matrix, urgent-vs-important, important-vs-urgent, urgent, important, productivity</p>
+
+<h2 id="reflecting-on-one-very-very-strange-year-at-uber">Reflecting On One Very, Very Strange Year At Uber</h2>
+
+<p>I&rsquo;ve read <a href="https://www.susanjfowler.com/blog/2017/2/19/reflecting-on-one-very-strange-year-at-uber" target="_blank">this article</a> by Susan J Fowler on some bad HR practices at Uber and how they are part of the reason their low percentage of women (3%) in the engineering team.</p>
+
+<p>Tags: sexism, uber, susan-fowler, hr, human-resources, women, work-environment, review</p>
+
+<h2 id="ni-dioses-ni-reyes-sólo-el-hombre">Ni dioses ni reyes. Sólo el hombre.</h2>
+
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive1.com/?u=374c664073e1a1fa3deca53b4&amp;id=860ccae5e2" target="_blank">this bonilista</a> (in Spanish) by David Bonilla on which he talks about the God Mode and how that is implemented in different applications.</p>
+
+<p>I&rsquo;ve also liked this:</p>
+
+<blockquote>
+<p>Los desarrolladores sólo somos herreros que forjan ceros y unos. Construimos herramientas para satisfacer necesidades de nuestros usuarios, sin que eso nos haga mejores que ellos o nos dé el derecho de supervisar y juzgar sus actos. A la hora de diseñar nuevos sistemas y funcionalidades, lo único que nunca deberíamos olvidar es que no somos dioses ni reyes, sólo hombres.</p>
+</blockquote>
+
+<p>Rough translation:</p>
+
+<blockquote>
+<p>We, developers, we are only blacksmiths of the digital era. We build tools to satisfy our user&rsquo;s need, without that fact making us better than they are or without the right to overview what they do or to judge their acts. When designing new systems and features, the only thing we must never forget is that we are neither gods nor kings, just humans.</p>
+</blockquote>
+
+<h2 id="las-tres-erres">Las tres erres</h2>
+
+<p>I&rsquo;ve read this article (in Spanish) by David Bonilla in which he explains three necessary factors when considering a job offer:</p>
+
+<blockquote>
+<ul>
+<li>Referentes: es imposible conocer a toda la plantilla de una empresa, pero si conoces a dos o tres empleados clave, podrás hacerte una idea de cómo será el equipo que te vas a encontrar. La gente prefiere trabajar con compañeros que compartan su ética y valores. Yo conocía a casi toda la plantilla de Comalatech tras haber coincidido con unos y otros en distintos eventos… y aún hay gente que se pregunta para qué sirve ir a conferencias técnicas si en Internet “se puede encontrar todo”.</li>
+<li>Referencias: es complicado, pero en el día a día una persona puede ser completamente diferente a la imagen que proyecta públicamente. Me ha pasado. Por eso es importante contar con referencias, terceras personas –antiguos empleados, clientes o proveedores- con las que haya trabajado. Los españoles no solemos pedirlas, pero para los anglosajones son un requisito imprescindible. En el caso de Comala, conseguí las mejores de la mejor fuente posible.</li>
+<li>Retos: los profesionales trabajamos por dinero, pero a partir de cierto nivel de salario, podemos permitirnos el lujo de elegir un trabajo u otro según otros factores. En mi caso, siempre he priorizado por encima de todo el potencial de aprendizaje y, en ese sentido, Comalatech no tenía rival.</li>
+</ul>
+</blockquote>
+
+<p>Tags: referent, reference, challenge, david-bonilla, bonilista, change-job, job-offer</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2017/01/01/self-study-in-january-2017/">Self-Study in January 2017</a>
     </h1>
     <p >Jan 1, 2017
@@ -749,267 +1279,6 @@ There is a <code>unit</code> function that wraps a value in the type accepted by
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/10/01/self-study-in-october-2016/">Self-Study in October 2016</a>
-    </h1>
-    <p >Oct 1, 2016
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/10/01/self-study-in-october-2016/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/october/">october</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/.net/">.net</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/apple/">apple</a><a class="label" href="https://alvarogarcia7.github.io/categories/argument/">argument</a><a class="label" href="https://alvarogarcia7.github.io/categories/attack/">attack</a><a class="label" href="https://alvarogarcia7.github.io/categories/cap-watkins/">cap-watkins</a><a class="label" href="https://alvarogarcia7.github.io/categories/career-change/">career-change</a><a class="label" href="https://alvarogarcia7.github.io/categories/carlos-ble/">carlos-ble</a><a class="label" href="https://alvarogarcia7.github.io/categories/codesai/">codesai</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/compilation/">compilation</a><a class="label" href="https://alvarogarcia7.github.io/categories/compiled-javascript/">compiled-javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/compiled-language/">compiled-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/compiled-to-javascript/">compiled-to-javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/computer-science/">computer-science</a><a class="label" href="https://alvarogarcia7.github.io/categories/convincing/">convincing</a><a class="label" href="https://alvarogarcia7.github.io/categories/cross-functional/">cross-functional</a><a class="label" href="https://alvarogarcia7.github.io/categories/dan-billing/">dan-billing</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-hatanian/">david-hatanian</a><a class="label" href="https://alvarogarcia7.github.io/categories/decision-making/">decision-making</a><a class="label" href="https://alvarogarcia7.github.io/categories/design/">design</a><a class="label" href="https://alvarogarcia7.github.io/categories/destructuring/">destructuring</a><a class="label" href="https://alvarogarcia7.github.io/categories/discussion/">discussion</a><a class="label" href="https://alvarogarcia7.github.io/categories/example/">example</a><a class="label" href="https://alvarogarcia7.github.io/categories/exchange/">exchange</a><a class="label" href="https://alvarogarcia7.github.io/categories/feedback/">feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/honesty/">honesty</a><a class="label" href="https://alvarogarcia7.github.io/categories/honeypot/">honeypot</a><a class="label" href="https://alvarogarcia7.github.io/categories/inheritance/">inheritance</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeremy-ashkenas/">jeremy-ashkenas</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-de-goes/">john-de-goes</a><a class="label" href="https://alvarogarcia7.github.io/categories/law/">law</a><a class="label" href="https://alvarogarcia7.github.io/categories/lessons-learned/">lessons-learned</a><a class="label" href="https://alvarogarcia7.github.io/categories/liskov/">liskov</a><a class="label" href="https://alvarogarcia7.github.io/categories/lsp/">lsp</a><a class="label" href="https://alvarogarcia7.github.io/categories/mac/">mac</a><a class="label" href="https://alvarogarcia7.github.io/categories/mdn/">mdn</a><a class="label" href="https://alvarogarcia7.github.io/categories/meeting/">meeting</a><a class="label" href="https://alvarogarcia7.github.io/categories/modesto-san-juan/">modesto-san-juan</a><a class="label" href="https://alvarogarcia7.github.io/categories/monoid/">monoid</a><a class="label" href="https://alvarogarcia7.github.io/categories/newtype-clases/">newtype-clases</a><a class="label" href="https://alvarogarcia7.github.io/categories/owen-williams/">owen-williams</a><a class="label" href="https://alvarogarcia7.github.io/categories/people/">people</a><a class="label" href="https://alvarogarcia7.github.io/categories/post-mortem/">post-mortem</a><a class="label" href="https://alvarogarcia7.github.io/categories/precog/">precog</a><a class="label" href="https://alvarogarcia7.github.io/categories/process/">process</a><a class="label" href="https://alvarogarcia7.github.io/categories/ryan-hewitt/">ryan-hewitt</a><a class="label" href="https://alvarogarcia7.github.io/categories/scrum/">scrum</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/sigil/">sigil</a><a class="label" href="https://alvarogarcia7.github.io/categories/sliding-scale/">sliding-scale</a><a class="label" href="https://alvarogarcia7.github.io/categories/solid/">solid</a><a class="label" href="https://alvarogarcia7.github.io/categories/startup/">startup</a><a class="label" href="https://alvarogarcia7.github.io/categories/strategy/">strategy</a><a class="label" href="https://alvarogarcia7.github.io/categories/three-amigos/">three-amigos</a><a class="label" href="https://alvarogarcia7.github.io/categories/ticket-magpie/">ticket-magpie</a><a class="label" href="https://alvarogarcia7.github.io/categories/type-classes/">type-classes</a><a class="label" href="https://alvarogarcia7.github.io/categories/ui/">ui</a><a class="label" href="https://alvarogarcia7.github.io/categories/ux/">ux</a><a class="label" href="https://alvarogarcia7.github.io/categories/wikipedia/">wikipedia</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="should-engineers-design">Should Engineers Design?</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.capwatkins.com/should-engineers-design" target="_blank">this article</a> by Cap Watkins where he explains the relationship between designers and programmers and how to get the latter involved in the design / UX / UI process.</p>
-
-<p>Tags: cap-watkins, design, ux, ui, exchange, cross-functional</p>
-
-<h2 id="the-sliding-scale-of-giving-a-fuck">The Sliding Scale of Giving a Fuck</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.capwatkins.com/the-sliding-scale-of-giving-a-fuck" target="_blank">this article</a> by Cap Watkins where he explains that different topics have a different importance to each one of us: this topic might be very important for someone else, ergo, it makes mores sense to evaluate their option more carefully. When your importance level is not so high, you can take the other option easily.</p>
-
-<p>Tags: cap-watkins, sliding-scale, decision-making, discussion, argument, convincing, people</p>
-
-<h2 id="nuevos-retos">Nuevos retos</h2>
-
-<p>I&rsquo;ve read <a href="http://www.modestosanjuan.com/nuevos-retos/" target="_blank">this article</a> by Modesto San Juan about him leaving Codesai and joining a new adventure. In Spanish.</p>
-
-<p>Tags: career-change, modesto-san-juan, codesai, carlos-ble, .net</p>
-
-<h2 id="muchas-gracias-modesto">Muchas gracias Modesto</h2>
-
-<p>I&rsquo;ve read <a href="http://www.codesai.com/2016/10/muchas-gracias-modesto/" target="_blank">this article</a>, by Carlos Blé and the rest of the Codesai team, saying goodbye to Modesto San Juan, commenting on their experiences working with him.</p>
-
-<p>Tags: career-change, modesto-san-juan, codesai, carlos-ble, .net</p>
-
-<h2 id="introducing-ticket-magpie">Introducing…Ticket Magpie</h2>
-
-<p>I&rsquo;ve read <a href="https://thetestdoctor.wordpress.com/2016/10/11/introducing-ticket-magpie/" target="_blank">this article</a> by Dan Billing about the a honeypot application he has to teach about security and attacks.</p>
-
-<p>Tags: david-hatanian, dan-billing, ticket-magpie, honeypot, security, attack</p>
-
-<h2 id="destructuring-assignment">Destructuring assignment</h2>
-
-<p>I&rsquo;ve read the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank">destructuring assignment page</a> at MDN</p>
-
-<p>Tags: javascript, destructuring, mdn</p>
-
-<h2 id="10-lessons-i-learned-from-doing-my-first-real-startup">10 Lessons I Learned from Doing My First Real Startup</h2>
-
-<p>I&rsquo;ve read <a href="http://degoes.net/articles/precog-lessons-learned" target="_blank">this article</a>, a post-mortem analysis of his company, precog, with 10 items that he learned from it.</p>
-
-<p>Tags: john-de-goes, precog, post-mortem, startup, lessons-learned</p>
-
-<h2 id="stop-being-nice-and-just-tell-the-fucking-truth-already">Stop Being &ldquo;Nice&rdquo; and Just Tell the Fucking Truth Already</h2>
-
-<p>I&rsquo;ve read <a href="http://degoes.net/articles/be-nice-not-nice" target="_blank">this article</a> about giving honest feedback vs being a nice guy. The author concludes that the former is, in fact, the latter.</p>
-
-<p>Tags: feedback, honesty, comparison, john-de-goes</p>
-
-<h2 id="haskell-s-type-classes-we-can-do-better">Haskell&rsquo;s Type Classes: We Can Do Better</h2>
-
-<p>I&rsquo;ve read <a href="http://degoes.net/articles/principled-typeclasses" target="_blank">this article</a> about the abuse of newtype classes in haskell to overcome some language limitations.</p>
-
-<p>This article has helped me understand better inheritance, in the sections orphans and laws.</p>
-
-<p>Also suggests that the compiler could check at compile time that the children impose more restrictive (more specific) laws than the parent, given that any children must comply with the inherited rules (liskov substitution principle)</p>
-
-<p>Tags: inheritance, liskov, lsp, solid, john-de-goes, functional-programming, haskell, type-classes,  newtype-clases, monoid, law</p>
-
-<h2 id="introducing-the-three-amigos">Introducing the Three Amigos</h2>
-
-<p>I&rsquo;ve read <a href="https://www.scrumalliance.org/community/articles/2013/2013-april/introducing-the-three-amigos" target="_blank">this article</a> by Ryan Thomas Hewitt about the Three Amigos meeting, to better define a feature</p>
-
-<p>Tags: ryan-hewitt, three-amigos, agile, meeting, process, scrum</p>
-
-<h2 id="apple-just-told-the-world-it-has-no-idea-who-the-mac-is-for">Apple just told the world it has no idea who the Mac is for</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/charged-tech/apple-just-told-the-world-it-has-no-idea-who-the-mac-is-for-722a2438389b" target="_blank">this article</a> by Owen Williams on the latest presentation by Apple.</p>
-
-<p>Tags: owen-williams, mac, apple, strategy</p>
-
-<h2 id="sigil">Sigil</h2>
-
-<p>I&rsquo;ve read this page for the <a href="https://en.wikipedia.org/wiki/Sigil_(computer_programming)" target="_blank">sigil</a>, or the symbol attached to the variable. An example is the <code>$</code> in Perl or the earmuffs in Clojure (<code>*out*</code>).</p>
-
-<p>Tags: sigil, wikipedia, example, computer-science</p>
-
-<h2 id="list-of-languages-that-compile-to-js">List of languages that compile to JS</h2>
-
-<p>I&rsquo;ve read <a href="https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS" target="_blank">this list</a> of programming languages that compile to JS. By Jeremy Ashkenas and the community</p>
-
-<p>Tags: jeremy-ashkenas, compilation, compiled-language, compiled-to-javascript, compiled-javascript, javascript</p>
-
-<h2 id="being-accountable-for-delivering-value">Being accountable for delivering value</h2>
-
-<p>I&rsquo;ve read <a href="https://niksilver.com/2017/01/17/accountable-for-value/" target="_blank">this article</a> by Nik Silver on how the team should be accountable for delivering value, not accountable for delivering artifacts that produce value.</p>
-
-<p>Tags: agile, management, nik-silver, accountability, team, value</p>
-
-<h2 id="getting-partial-value-from-partial-delivery">Getting partial value from partial delivery</h2>
-
-<p>I&rsquo;ve read <a href="https://niksilver.com/2015/10/20/partial-value-from-partial-delivery/" target="_blank">this article</a> by Nik Silver on how it is possible to be agile in an environment where the business is not agile.</p>
-
-<p>Also, introduces the concept of &lsquo;partial delivery&rsquo;, meaning incomplete delivery from development to business.</p>
-
-<p>Tags: delivery, partial-delivery, management, value, partial-value, change, walkawayability, change, nik-silver</p>
-
-<h2 id="hierarchy-of-opinion">Hierarchy of opinion</h2>
-
-<p>I&rsquo;ve read <a href="https://codurance.com/2017/01/16/hierarchy-of-opinion/" target="_blank">this article</a> by Mashooq Badar on what are opinions, how important they are and how them impact others.</p>
-
-<p>Tags: mashooq-badar, opinion, critical-thinking</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/09/30/books-read-in-2016q3/">Books read in 2016Q3</a>
-    </h1>
-    <p >Sep 30, 2016
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/09/30/books-read-in-2016q3/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/q3/">Q3</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Books I&rsquo;ve read this quarter<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>:</p>
-
-<ul>
-<li><a href="http://shop.oreilly.com/product/9780596004859.do" target="_blank">Extreme Programming Pocket Guide</a> by Chromatic</li>
-<li><a href="https://leanpub.com/teamleader" target="_blank">Notes to a Software Team Leader (1st Edition)</a>, by Roy Osherove</li>
-</ul>
-
-<p>Non-technical:</p>
-
-<ul>
-<li><a href="http://www.thezeromarginalcostsociety.com/pages/The-Book.cfm" target="_blank">The Zero Marginal Cost Society: The Internet of Things, the Collaborative Commons, and the Eclipse of Capitalism</a>, by Jeremy Rifkin</li>
-<li><a href="https://en.wikipedia.org/wiki/Snow_Crash" target="_blank">Snow Crash</a>, by Neal Stephenson</li>
-<li><a href="http://www.casadellibro.com/libro-la-guerra-no-tiene-rostro-de-mujer/9788499925752/2630904" target="_blank">La guerra no tiene rostro de mujer</a>, by Svetlana Aleksiévich</li>
-</ul>
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="https://leanpub.com/talking-with-tech-leads" target="_blank">Talking with Tech Leads: From Novices to Practitioners</a> by Patrick Kua</li>
-</ul>
-
-<p>Books I want to finish. Usually come from another quarter:</p>
-
-<ul>
-<li><a href="https://leanpub.com/nightowls" target="_blank">Why programmers work at night</a> by Swizec Teller</li>
-<li><a href="http://www.redbook.io/" target="_blank">Readings in Database Systems, 5th Edition</a> by Peter Bailis, Joseph M. Hellerstein, Michael Stonebraker, editors</li>
-<li><a href="http://www.amazon.com/exec/obidos/ASIN/0321125215" target="_blank">Domain-Driven Design: Tackling Complexity in the Heart of Software</a> by Eric Evans, again.</li>
-<li><a href="https://www.manning.com/books/amazon-web-services-in-action" target="_blank">Amazon Web Services in Action</a> by Michael Wittig and Andreas Wittig</li>
-<li><a href="https://pragprog.com/book/mnee/release-it" target="_blank">Release It! - Design and Deploy Production-Ready Software</a>, by Michael T. Nygard, with the &lsquo;<a href="https://twitter.com/@deaprendices" target="_blank">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/categories/release-it
-/">release-it</a></li>
-<li><a href="http://shop.oreilly.com/product/0636920013754.do" target="_blank">Clojure Programming - Practical Lisp for the Java World</a> by Chas Emerick, Brian Carper, Christophe Grand</li>
-</ul>
-
-<p>Books that have entered the queue:</p>
-
-<!--
-
-repository for WIP books:
-
-  * [The Well-Grounded Java Developer](http://www.manning.com/evans/) by Benjamin J. Evans and Martijn Verburg
-  * [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/) by Miran Lipovača
-  * [Working Effectively with Legacy Code](http://www.amazon.co.uk/Working-Effectively-Legacy-Robert-Martin/dp/0131177052) by Michael Feathers, again. Blog posts under the tag [wewlc](/categories/wewlc
-/)
-  * [Haskell Programming](http://haskellbook.com/), By Chris Allen and Julie Moronuki. This book is still in progress and I'm reviewing it
-  * [Pragmatic Thinking and Learning: Refactor Your Wetware](https://pragprog.com/book/ahptl/pragmatic-thinking-and-learning) by Andy Hunt  
-  
-  Books I want to finish:
-
-  * [Refactoring](http://martinfowler.com/books/refactoring.html) by Martin Fowler, with Kent Beck, John Brant, William Opdyke, and Don Roberts
-  * [Java Performance: The Definitive Guide](http://shop.oreilly.com/product/0636920028499.do) by Scott Oaks
-  * [Scrum and XP from the trenches](http://www.infoq.com/minibooks/scrum-xp-from-the-trenches) by Henrik Kniberg
-  * [The Leprechauns of Software Engineering](https://leanpub.com/leprechauns) by Laurent Bossavit, again. [Gift](https://twitter.com/alvarobiz/status/611799849911103488)  
-  * [Functional Programming Patterns in Scala and Clojure](https://pragprog.com/book/mbfpp/functional-programming-patterns-in-scala-and-clojure) by Michael Bevilacqua-Linn
-
-Books in the queue:
-
-  * [Mature optimization](http://carlos.bueno.org/optimization/mature-optimization.pdf), by Carlos Bueno
-  * [XUnit Test Patterns](http://xunitpatterns.com/) by Gerard Meszaros
-  * [Let Over Lambda](http://letoverlambda.com/) by Doug Hoyte
-  * [The Haskell Road to Logic, Math and Programming](http://fldit-www.cs.uni-dortmund.de/~peter/PS07/HR.pdf) by Kees Doets and Jan van Eijck
-  * [Types and Programming Languages](http://www.cis.upenn.edu/~bcpierce/tapl/) by Benjamin C. Pierce
-  * [Fundamentals of Object-oriented Design in UML](http://www.amazon.co.uk/dp/020169946X/ref=pe_385721_37038051_TE_3p_dp_1) by Meilir Page-Jones
-  * [Clojure for the brave and true](http://www.braveclojure.com/#toc)
-  * [How to Solve It: A New Aspect of Mathematical Method](http://press.princeton.edu/titles/669.html) by George Pólya
-  * [Conceptual Mathematics: A First Introduction to Categories](http://www.amazon.com/Conceptual-Mathematics-First-Introduction-Categories/dp/052171916X) by Lawvere and Schanuel
-  * [Understanding Computation: From Simple Machines to Impossible Programs](http://computationbook.com/) by Tom Stuart
-  * [Programming in Haskell](http://www.cambridge.org/wm-ecommerce-web/academic/landingPage/PIHMOOC) by Graham Hutton
-  * [Programming Languages: Application and Interpretation](http://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/) by Shriram Krishnamurthi
-  * [Doing Math with Python](https://www.nostarch.com/doingmathwithpython) by Amit Saha. [Gift from the PyConEs 2015](https://twitter.com/alvarobiz/status/668927802159288322)
-  * [Perfect Software: And Other Illusions about Testing](http://www.geraldmweinberg.com/Site/Perfect_Software.html) by Gerald M. Weinberg  
-  * [Computability and Complexity - From a Programming Perspective](https://mitpress.mit.edu/books/computability-and-complexity) by Neil Deaton Jones
-  * [Thinking Forth: a language and philosophy for solving problems](http://thinking-forth.sourceforge.net/) by Leo Brodie
-  * [Concepts, Techniques, and Models of Computer Programming](https://mitpress.mit.edu/index.php?q=books/concepts-techniques-and-models-computer-programming) by Peter Van Roy and Seif Haridi
-  * [Bridging the Communication Gap](http://books.gojko.net/bridging-the-communication-gap/) by Gojko Adzic
-  * [Specification by Example](http://books.gojko.net/specification-by-example/) by Gojko Adzic
-  * [The Cucumber book](https://pragprog.com/book/hwcuc/the-cucumber-book) by Matt Wynne and Aslak Hellesøy
-  * [Software Architecture for Developers](https://leanpub.com/software-architecture-for-developers) by Simon Brown
-  * [Object Design: Roles, Responsibilities, and Collaborations ](http://www.amazon.com/Object-Design-Roles-Responsibilities-Collaborations/dp/0201379430) by Rebecca Wirfs-Brock and Alan McKean
-  * [RESTful Web APIs](http://shop.oreilly.com/product/0636920028468.do) by Leonard Richardson, Mike Amundsen, Sam Ruby
-  * [RESTful Web Services Cookbook](http://shop.oreilly.com/product/9780596801694.do) by Subbu Allamaraju
-  * [Building Maintainable Software](https://www.sig.eu/en/building-maintainable-software) by Joost Visser
-  * [Serverless - Patterns of Modern Application Design Using Microservices (Amazon Web Services Edition)](https://leanpub.com/serverless) by Obie Fernandez 
-
-Learning paths that have entered the queue:
-
-  * [Software Architecture Fundamentals](http://shop.oreilly.com/category/learning-path/software-architecture-fundamentals.do)
-  * [HTML5 Fundamentals](http://shop.oreilly.com/category/learning-path/html5-fundamentals.do)
-  * [Designing Web APIs](http://shop.oreilly.com/category/learning-path/designing-web-apis.do)
-  * [Dive Deeper into PHP Programming](http://shop.oreilly.com/category/learning-path/dive-deeper-php-programming.do)
-  * [Introduction to the Modern Front-End Web](http://shop.oreilly.com/category/learning-path/intro-modern-front-end-web.do)
-
-
--->
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">The ending date of the quarter is the same as the publication date
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
     
     
 
@@ -1083,6 +1352,8 @@ Learning paths that have entered the queue:
     
         <a href="/blog/page/26/" class="label-pagination">26</a>
     
+        <a href="/blog/page/27/" class="label-pagination">27</a>
+    
 
     
     
@@ -1091,7 +1362,7 @@ Learning paths that have entered the queue:
 
     
     
-        <a href="/blog/page/26/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/27/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -1151,6 +1422,14 @@ Learning paths that have entered the queue:
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/05/01/self-study-in-may-2017/">Self-Study in May 2017</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/04/01/self-study-in-april-2017/">Self-Study in April 2017</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
           </li>
         
@@ -1180,14 +1459,6 @@ Learning paths that have entered the queue:
         
           <li class="post">
             <a href="/blog/2016/12/14/a-common-misunderstanding-about-reduce/">A common misunderstanding about `reduce`</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/12/01/self-study-in-december-2016/">Self-Study in December 2016</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/11/01/self-study-in-november-2016/">Self-Study in November 2016</a>
           </li>
         
       </ul>
