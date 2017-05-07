@@ -129,6 +129,154 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing your own maven dependencies</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/maven/">maven</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/jitpack/">jitpack</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.</p>
+
+<p>This is how most of them look like:</p>
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>com.gmaur.legacycode<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>legacyutils<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  
+  <span class="nt">&lt;dependencies&gt;</span>
+  
+  	<span class="nt">&lt;dependency&gt;</span>
+  		<span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
+  		<span class="nt">&lt;artifactId&gt;</span>hamcrest-all<span class="nt">&lt;/artifactId&gt;</span>
+  		<span class="nt">&lt;version&gt;</span>1.3<span class="nt">&lt;/version&gt;</span>
+  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+  	<span class="nt">&lt;/dependency&gt;</span>
+  
+  	<span class="nt">&lt;dependency&gt;</span>
+  		<span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+  		<span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+  		<span class="nt">&lt;version&gt;</span>4.11<span class="nt">&lt;/version&gt;</span>
+  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+  	<span class="nt">&lt;/dependency&gt;</span>
+
+  	<span class="nt">&lt;dependency&gt;</span>
+  		<span class="nt">&lt;groupId&gt;</span>org.mockito<span class="nt">&lt;/groupId&gt;</span>
+  		<span class="nt">&lt;artifactId&gt;</span>mockito-all<span class="nt">&lt;/artifactId&gt;</span>
+  		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+  		<span class="nt">&lt;version&gt;</span>2.0.2-beta<span class="nt">&lt;/version&gt;</span>
+	<span class="nt">&lt;/dependency&gt;</span>
+  <span class="nt">&lt;/dependencies&gt;</span>
+
+  <span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>2.18.1<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;includes&gt;</span>
+                        <span class="nt">&lt;include&gt;</span>**/**Test.java<span class="nt">&lt;/include&gt;</span>
+                        <span class="nt">&lt;include&gt;</span>**/**Should.java<span class="nt">&lt;/include&gt;</span>
+                    <span class="nt">&lt;/includes&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div>
+
+<p>Note: the <code>org.apache.maven.plugins:maven-surefire-plugin</code> is to make maven execute the tests that end in <code>*Should</code>.</p>
+
+<p>Now, the dependency versions and plugin configuration is repeated in all the projects, which is plenty of repetition.</p>
+
+<h2 id="enter-jitpack-io">Enter JitPack.io</h2>
+
+<p>With the tool <a href="https://JitPack.io" target="_blank">JitPack.io</a>, you can generate your own dependencies. A guide on how to use it can be found <a href="https://jitpack.io/docs/" target="_blank">here</a></p>
+
+<p>I&rsquo;ve published my own java dependency (originally <a href="https://github.com/alvarogarcia7/java-parent/releases/tag/v0.0.1" target="_blank">a github release</a>)</p>
+
+<p>A <code>pom.xml</code> in the new style is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/master/pom.xml" target="_blank">here</a>:</p>
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+    <span class="nt">&lt;groupId&gt;</span>com.example.spike<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>lambdatesting<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+
+    <span class="nt">&lt;parent&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.github.alvarogarcia7<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>java-parent<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>v0.0.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/parent&gt;</span>
+
+    <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>jitpack.io<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;url&gt;</span>https://jitpack.io<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+    <span class="nt">&lt;/repositories&gt;</span>
+
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.github.alvarogarcia7<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>java-parent<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>v0.0.1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>hamcrest-all<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.mockito<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>mockito-all<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+</code></pre></div>
+
+<p>It does not need the plugin configuration nor the dependency versions. The downside is that it needs to be as the <code>parent pom</code>.</p>
+
+<h2 id="acknowledgments">Acknowledgments</h2>
+
+<p>Thanks to Manuel for encouraging me to write this article</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate values in Constants</a>
     </h1>
     <p >Jul 30, 2015
@@ -664,98 +812,6 @@ A
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster site generation for Octopress 2</a>
-    </h1>
-    <p >Jul 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See <a href="[here](../../../../2016/04/17/faster-site-generation-native-octopress/)" target="_blank">here</a></p>
-
-<p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/" target="_blank">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
-
-<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/" target="_blank">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
-
-<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
-
-<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cp -R blog_source blog_post_factory
-</code></pre></div>
-
-<p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nb">cd</span> blog_post_factory/source/_posts
-git update-index --assume-unchanged <span class="k">$(</span>ls *markdown<span class="k">)</span>
-</code></pre></div>
-
-<p>Delete all existing markdown files</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rm *markdown
-</code></pre></div>
-
-<p>Check that git doesn&rsquo;t realize about the difference:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>git status
-
-<span class="c1"># On branch source</span>
-nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
-</code></pre></div>
-
-<p>Create a new post:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake new_post<span class="o">[</span><span class="s2">&quot;Faster site generation for Octopress 2&quot;</span><span class="o">]</span>
-</code></pre></div>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># On branch source</span>
-<span class="c1"># Untracked files:</span>
-<span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
-<span class="c1">#</span>
-<span class="c1">#	2015-07-13-faster-site-generation-for-octopress-2.markdown</span>
-nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> to track<span class="o">)</span>
-</code></pre></div>
-
-<p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
-
-<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake generate <span class="o">&amp;&amp;</span> rake deploy
-</code></pre></div>
-
-<p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
-
-<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">desc</span> <span class="s2">&quot;Cleans all *.markdown files for a faster site generation&quot;</span>
-<span class="n">task</span> <span class="ss">:ignore</span> <span class="k">do</span>
-  <span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">&quot;</span>
-  <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged $(ls *.markdown)&quot;</span>
-  <span class="nb">system</span> <span class="s2">&quot;rm $(ls *.markdown)&quot;</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
-
-<pre><code>Regenerating: 1 file(s) changed at 2015-07-13 08:03:29 ...done in 0.617269045 seconds.
-</code></pre>
-
-        
-
-    </article>
-    
     
     
 
@@ -899,6 +955,10 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/05/07/notes-agile-open-space-barcelona/">Notes from the Agile Barcelona Open Space</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/05/01/self-study-in-may-2017/">Self-Study in May 2017</a>
           </li>
         
@@ -932,10 +992,6 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
         
           <li class="post">
             <a href="/blog/2017/01/01/self-study-in-january-2017/">Self-Study in January 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2016/12/14/a-common-misunderstanding-about-reduce/">A common misunderstanding about `reduce`</a>
           </li>
         
       </ul>
