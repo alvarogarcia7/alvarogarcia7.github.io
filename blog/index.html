@@ -129,6 +129,62 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/05/13/senior-software-engineer-chapter-3/">The Senior Software Engineer, Chapter 3</a>
+    </h1>
+    <p >May 13, 2017
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/05/13/senior-software-engineer-chapter-3/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/senior-software-engineer/">senior-software-engineer</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h1 id="chapter-3-fix-bugs-efficiently-and-cleanly">Chapter 3: Fix bugs efficiently and cleanly</h1>
+
+<p>In the beginning, you will be given tasks that require no in-depth domain knowledge</p>
+
+<h3 id="process">Process</h3>
+
+<blockquote>
+<p>A process allows you to focus on the right thing at th right time (p. 14)</p>
+
+<p>It will make your productivity and quality more predictable, which, in turn, will help you estimate and keep more of your promises about your work (paraphrased from p. 14)</p>
+</blockquote>
+
+<h3 id="tdd">TDD</h3>
+
+<p>Explains some benefits about TDD:</p>
+
+<ul>
+<li>Thinking before coding</li>
+<li>Separating the &lsquo;getting it to work&rsquo; from &lsquo;getting it right&rsquo;</li>
+</ul>
+
+<p>(p. 15)</p>
+
+<p>The latter can be interpreted as &lsquo;building the thing right&rsquo; vs &lsquo;building the right thing&rsquo;: a red test can be seen as question, a green test as an answer. If the question is defined in business terms, you are building the right thing. When refactoring, you are turning the right thing (no matter how it was built) into the thing right</p>
+
+<!-- TODO this will turn into a blog post -->
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2017/05/07/notes-agile-open-space-barcelona/">Notes from the Agile Barcelona Open Space</a>
     </h1>
     <p >May 7, 2017
@@ -469,82 +525,6 @@ This idea simplifies our components (e.g., services), making them stateless. Eve
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/">Convert a project from npm to yarn</a>
-    </h1>
-    <p >Mar 3, 2017
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipeline/">pipeline</a><a class="label" href="https://alvarogarcia7.github.io/categories/jenkins/">jenkins</a><a class="label" href="https://alvarogarcia7.github.io/categories/yarn/">yarn</a><a class="label" href="https://alvarogarcia7.github.io/categories/npm/">npm</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>At a  client, we&rsquo;re converting all projects (i.e., sites, services, libraries) from <code>npm</code> to <code>yarn</code>. Mostly for the speed (as it uses the internal cache).</p>
-
-<h2 id="step-by-step-guide">Step by step guide</h2>
-
-<ol>
-<li>Install yarn in your local environment
-
-<ul>
-<li><a href="https://yarnpkg.com/lang/en/docs/install/" target="_blank">https://yarnpkg.com/lang/en/docs/install/</a></li>
-</ul></li>
-<li>Run <code>yarn install</code>
-
-<ul>
-<li>This will create a <code>yarn.lock</code> file</li>
-<li>Add that file to the repo: <code>git add yarn.lock</code></li>
-</ul></li>
-<li>Modify Dockerfile
-
-<ul>
-<li>Install yarn  (in the Dockerfile). Idea: shortcut this execution with <code>yarn --version</code> in case it is installed</li>
-<li>Configure the PATH variable (ENV PATH &hellip;)</li>
-<li><code>ADD yarn.lock</code></li>
-<li>Replace <code>npm install</code> with <code>yarn install</code></li>
-</ul></li>
-<li>Modify pipeline
-
-<ul>
-<li>See example (below)</li>
-<li><code>install_yarn</code>. Idea: shortcut this execution with <code>yarn --version</code> in case it is installed</li>
-<li>Replace <code>npm install</code> with <code>yarn install</code></li>
-</ul></li>
-<li>Test it</li>
-</ol>
-
-<h2 id="jenkins">Jenkins</h2>
-
-<p>Build step: execute shell</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">function</span> install_yarn <span class="o">{</span>
-  yarn --version <span class="o">||</span> curl -o- -L https://yarnpkg.com/install.sh <span class="p">|</span> bash
-  <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.yarn/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-<span class="o">}</span>
-
-install_yarn
-
-yarn install
-</code></pre></div>
-
-        
-
-    </article>
-    
     
     
 
@@ -685,6 +665,10 @@ yarn install
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/05/13/senior-software-engineer-chapter-3/">The Senior Software Engineer, Chapter 3</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/05/07/notes-agile-open-space-barcelona/">Notes from the Agile Barcelona Open Space</a>
           </li>
         
@@ -718,10 +702,6 @@ yarn install
         
           <li class="post">
             <a href="/blog/2017/02/01/self-study-in-february-2017/">Self-Study in February 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/01/01/self-study-in-january-2017/">Self-Study in January 2017</a>
           </li>
         
       </ul>
