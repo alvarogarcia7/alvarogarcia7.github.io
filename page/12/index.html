@@ -128,6 +128,81 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/10/the-language-was-prepared-for-that/">The language was prepared for that</a>
+    </h1>
+    <p >Aug 10, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/10/the-language-was-prepared-for-that/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/language-comparison/">language-comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/prefix-notation/">prefix-notation</a><a class="label" href="https://alvarogarcia7.github.io/categories/operator/">operator</a><a class="label" href="https://alvarogarcia7.github.io/categories/overloading/">overloading</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Many times I&rsquo;ve written this function:
+public boolean between(int lowerBound, int n, int upperBound){ return lowerBound &lt;= n &amp;&amp; n &lt;= upperBound; }  It may depend on the case, whether it is [], [), (] or (), to use mathematical terms.
+When the two comparisons are the same ([] and ()), there is duplication in the comparisons.
+Investigating a little bit on this in clojure, I&rsquo;ve found this function:</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/08/10/the-language-was-prepared-for-that/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/">Recognizing dependencies</a>
+    </h1>
+    <p >Aug 8, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/object/">object</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:
+ An object has a dependency when it knows:
+ The name of another class. [&hellip;] The name of a message that it intends to send to someone other than self. [&hellip;] The arguments that a message requires. [&hellip;] The order of those arguments. [&hellip;]   If an object knows any of these facts about another object, it has dependencies to the other.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple return values in a Mockito Stub</a>
     </h1>
     <p >Aug 7, 2015
@@ -258,79 +333,6 @@ Protected Variation: The Importance of Being Closed I&rsquo;ve read this article
           
               <footer>
                   <a href="https://alvarogarcia7.github.io/blog/2015/08/02/self-study-in-august-2015/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing your own maven dependencies</a>
-    </h1>
-    <p >Jul 30, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/maven/">maven</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/jitpack/">jitpack</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.
-This is how most of them look like:
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;groupId&gt;com.gmaur.legacycode&lt;/groupId&gt; &lt;artifactId&gt;legacyutils&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.hamcrest&lt;/groupId&gt; &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt; &lt;version&gt;1.3&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;4.11&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.mockito&lt;/groupId&gt; &lt;artifactId&gt;mockito-all&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;version&gt;2.0.2-beta&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate values in Constants</a>
-    </h1>
-    <p >Jul 30, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/duplicate/">duplicate</a><a class="label" href="https://alvarogarcia7.github.io/categories/gmaur/">gmaur</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>Imagine having this java class:
-private static class RepeatedConstants { public static final String A = &quot;A&quot;; public static final String A_1 = A; public static final String A_2 = &quot;A&quot;; public static final Integer _3 = 3; public static final Integer THREE = 3; }  I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/" rel="full-article">Read On &rarr;</a>
               </footer>
           
 
@@ -499,6 +501,10 @@ private static class RepeatedConstants { public static final String A = &quot;A&
           </li>
         
           <li class="post">
+            <a href="/blog/2017/03/31/books-read-in-2017q1/">Books read in 2017Q1</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
           </li>
         
@@ -516,10 +522,6 @@ private static class RepeatedConstants { public static final String A = &quot;A&
         
           <li class="post">
             <a href="/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/">Comparing options for parametrized testing in javascript</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/02/01/self-study-in-february-2017/">Self-Study in February 2017</a>
           </li>
         
       </ul>

@@ -129,6 +129,184 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2014/12/31/books-read-in-2014q4/">Books read in 2014Q4</a>
+    </h1>
+    <p >Dec 31, 2014
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2014/12/31/books-read-in-2014q4/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2014/">2014</a><a class="label" href="https://alvarogarcia7.github.io/categories/q4/">Q4</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Books I&rsquo;ve read this quarter Q4 on 2014, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html" target="_blank">post</a>:</p>
+
+<ul>
+<li><a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154" target="_blank">ATDD by Example: A Practical Guide to Acceptance Test-Driven Development</a> by Markus Gärtner</li>
+<li><a href="http://shop.oreilly.com/product/9780596007126.do" target="_blank">Head First Design Patterns</a> by Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra</li>
+<li><a href="http://shop.oreilly.com/product/9780596518387.do" target="_blank">Apprenticeship Patterns, Guidance for the Aspiring Software Craftsman</a> by Dave Hoover, Adewale Oshineye</li>
+<li><a href="http://www.carlosble.com/libro-tdd/" target="_blank">Diseño ágil con TDD</a>, by Carlos Blé Jurado; again</li>
+<li><a href="http://www.amazon.com/The-Mythical-Man-Month-Anniversary-Edition-ebook/dp/B00B8USS14" target="_blank">The Mythical Man-Month, Anniversary Edition: Essays On Software Engineering</a> by Frederick P. Brooks Jr.</li>
+<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091" target="_blank">Implementation Patterns</a> by Kent Beck
+
+<br /></li>
+</ul>
+
+<p>Books started, not yet finished (WIP):</p>
+
+<ul>
+<li>do not remember if there were any</li>
+</ul>
+
+<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/">Should we start the TDD cycle on refactor?</a>
+    </h1>
+    <p >Dec 29, 2014
+         - 4 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">TDD</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/cas2k14/">CAS2k14</a><a class="label" href="https://alvarogarcia7.github.io/categories/new-idea/">new-idea</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>In this lexical scope, TDD by example is referring to this book<sup class="footnote-ref" id="fnref:tddbyexample"><a rel="footnote" href="#fn:tddbyexample">1</a></sup>, available <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530" target="_blank">on Amazon</a></p>
+
+<p>###The TDD cycle</p>
+
+<p>Altough <a href="https://twitter.com/KentBeck" target="_blank">Kent Beck</a> in his book Test-Driven Development by example explains in &ldquo;Part I: the money example&rdquo;<sup class="footnote-ref" id="fnref:tddbyexampleparti"><a rel="footnote" href="#fn:tddbyexampleparti">2</a></sup> that one should</p>
+
+<blockquote>
+<p>quickly add a test;</p>
+
+<p>run all the tests and see the new one fail [&hellip;]</p>
+
+<p><cite>Kent Beck </cite></p>
+</blockquote>
+
+<p>Implying that the TDD cycle starts with the red. Later on he explains that the cycle continues with green and refactor and back to red.</p>
+
+<p>But I&rsquo;ve been hearing for a while that there&rsquo;re some useful refactors to be done before introducing new code. Rings in my head but the only example I have is Xavi Gost&rsquo;s &ldquo;La economía del refactoring<sup class="footnote-ref" id="fnref:refactoringeconomy"><a rel="footnote" href="#fn:refactoringeconomy">3</a></sup>&ldquo;</p>
+
+<p>###Refactoring
+Let&rsquo;s take a look at the definition of refactor (found <a href="http://www.refactoring.com/" target="_blank">here</a>):</p>
+
+<blockquote>
+<p>[Refactoring] is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.</p>
+
+<p><cite>Martin Fowler</cite></p>
+</blockquote>
+
+<p>I&rsquo;ve found some info on <a href="http://stackoverflow.com/questions/1355101/test-code-refactor-when-should-we-start-a-refactoring" target="_blank">stackoverflow</a> about the subject. The currently <a href="http://stackoverflow.com/a/1355782" target="_blank">accepted answer</a> points out some interesting comments:</p>
+
+<ul>
+<li>Do not refactor on red. Always a good reminder</li>
+<li>If you are refactoring for introducing a feature, how much refactor is enough? This is speculative development, possibly taking much time from needed development</li>
+</ul>
+
+<p>The last point is the one that interests me the most:</p>
+
+<ul>
+<li>Your refactoring might not be where you&rsquo;re going to introduce new production code<sup class="footnote-ref" id="fnref:spatial-cach"><a rel="footnote" href="#fn:spatial-cach">0</a></sup></li>
+<li>You might end up introducing features after a few hours/days of refactoring, therefore losing focus on the refactor you did and why (local caché)</li>
+<li>Given that I&rsquo;ve already &ldquo;cleaned up&rdquo; this, I could also go somewhere else (slippery slope). Heard from <a href="https://twitter.com/xav1uzz" target="_blank">Xavi Gost</a> at the CAS2014 at his talk <a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/" target="_blank">La economía del refactoring</a></li>
+</ul>
+
+<blockquote>
+<p>No está justificado hacer cambios fuera de la rebanada.</p>
+</blockquote>
+
+<p>Roughly translated to &ldquo;It&rsquo;s not justified to change outside the bread slice&rdquo;, as Xavi was referring to software as sliced bread instead of layers, vertical rather than horizontal</p>
+
+<p>###Should you do it?</p>
+
+<ul>
+<li>Doing it would be a good thing, as long as you know in advance what will be affected by the next feature.</li>
+<li>It can allow for less refactoring at the end of the cycle. This is not about duplication but refactoring to patterns. There might be a gain in refactoring to a pattern before introducing another feature. An example might be adding a new strategy when it&rsquo;s currently coded as if-then-else</li>
+<li>The last responsible moment might be before or after introducing the feature. You decide.</li>
+<li>Work less as there&rsquo;s no need for adding new cases to old structures and then simplifying</li>
+</ul>
+
+<p>###Should you not do it?</p>
+
+<ul>
+<li>Foreseeing the future is difficult, therefore you might end with unused development, as it is speculating</li>
+<li>Related to the last point, you might end refactoring in the wrong places. There&rsquo;s no current business value to it.</li>
+<li>Not useful on first round of a new feature, you can use a lambda transition to the red again. But then, this is not a general pattern, only applicable to a big percent of cases.</li>
+</ul>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>Short answer: it mainly depends on your environment:</p>
+
+<ul>
+<li>You: experience, common sense (sadly) &mdash;another post coming&mdash;, benefit/time-wasted ratio</li>
+<li>Your project: how tight are deadlines, how critical that code is, the team&rsquo;s pressure</li>
+</ul>
+
+<p>Long answer: Yes, as long as:
+ 1. You realize there is a fine line between fixing code and rewriting code (Egoless programming #4). Don&rsquo;t be a lone enforcer
+ 2. Strictly follow the boy scout rule but only around your campfire, not outside of it.
+ 1. You know your domain, pitfalls and team well
+ 1. You want to test this hypothesis and post an answer</p>
+
+<p>###Sources</p>
+
+<ul>
+<li><a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/" target="_blank">La economía del refactoring</a>, <a href="https://twitter.com/xav1uzz" target="_blank">Xavi Gost</a></li>
+<li><a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530" target="_blank">Test-Driven Development by example</a>, <a href="https://twitter.com/KentBeck" target="_blank">Kent Beck</a></li>
+<li><a href="http://refactoring.com" target="_blank">Refactoring.com</a>, <a href="https://twitter.com/martinfowler" target="_blank">Martin Fowler</a></li>
+</ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:tddbyexample">Test-Driven Development by example; Beck, K. (ISBN-13: 078-5342146530)
+ <a class="footnote-return" href="#fnref:tddbyexample"><sup>[return]</sup></a></li>
+<li id="fn:tddbyexampleparti">from the book, description of part I, before chapter I
+ <a class="footnote-return" href="#fnref:tddbyexampleparti"><sup>[return]</sup></a></li>
+<li id="fn:refactoringeconomy">That talk is not yet available (AFAIK), but there&rsquo;s a <a href="http://ocana.github.io/articles/Conferencia-Agile-Spain-2014-primer-dia/" target="_blank">post</a> about it (Spanish)
+ <a class="footnote-return" href="#fnref:refactoringeconomy"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2014/12/18/global-day-of-code-retreat/">Global Day of Code Retreat 2014</a>
     </h1>
     <p >Dec 18, 2014
@@ -379,141 +557,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2014/12/08/hello-world/">Hello World!</a>
-    </h1>
-    <p >Dec 8, 2014
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2014/12/08/hello-world/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/hello-world/">hello-world</a><a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>This is the obligatory &ldquo;Hello World!&rdquo; post</p>
-
-<p>To get here and create your own blog using <a href="http://octopress.org/" target="_blank">octopress</a>, follow the
-instructions below:</p>
-
-<ul>
-<li>Install ruby, as explained on the guide
-<a href="http://octopress.org/docs/setup/" target="_blank">here</a>
-
-<ul>
-<li>I&rsquo;ve used Ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-(<code>ruby --version</code>)</li>
-</ul></li>
-<li>Configure your blog. See
-<a href="http://octopress.org/docs/configuring/" target="_blank">here</a></li>
-<li>Install octopress: <code>rake install</code></li>
-<li>Start the server with <code>rake preview</code>. You should see a basic
-template (CSS) with your blog name, the author, etcetera</li>
-<li>Create your first post.</li>
-</ul>
-
-<pre><code>rake new_post[&quot;Hello World!&quot;]
-</code></pre>
-
-<ul>
-<li>Refresh the browser and see the new post appear</li>
-<li>Edit the .markdown file in &ldquo;source\_posts&rdquo; using a markup editor</li>
-<li>Execute <code>rake preview</code> to see your first post (this)</li>
-<li>Execute <code>rake setup_github_pages</code> for every computer you want to
-publish from</li>
-
-<li><p>Execute <code>rake generate &amp;&amp; rake deploy</code>. After a few minutes, you
-should go to
-<username>.github.io to find your new blog in there</p></li>
-
-<li><p>Happy blogging!</p></li>
-</ul>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/1/01/01/"></a>
-    </h1>
-    <p >Jan 1, 0001
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/1/01/01/#disqus_thread">Comments</a>
-
-        
-    </p>
-</header>
-
-
-        
-        <p>20151019-004841 AGB</p>
-
-<p>Manuel Rivero   22:26
-<a href="http://web.mit.edu/alexmv/6.037/sicp.pdf" target="_blank">http://web.mit.edu/alexmv/6.037/sicp.pdf</a>
-Interactive SICP <a href="https://xuanji.appspot.com/isicp/" target="_blank">https://xuanji.appspot.com/isicp/</a></p>
-
-<p>me  22:27
- <a href="https://github.com/sarabander/sicp-pdf﻿" target="_blank">https://github.com/sarabander/sicp-pdf﻿</a>
-<a href="https://github.com/sarabander/sicp-pdf/raw/master/sicp.pdf" target="_blank">https://github.com/sarabander/sicp-pdf/raw/master/sicp.pdf</a>
-Fran Ferri joined group chat.</p>
-
-<p>Fran Ferri  23:24
-<a href="http://www.javahispano.org/portada/2015/10/15/lambda-world-cadiz-el-evento-sobre-programacion-funcional-ma.html" target="_blank">http://www.javahispano.org/portada/2015/10/15/lambda-world-cadiz-el-evento-sobre-programacion-funcional-ma.html</a>
-<a href="http://www.javahispano.org/portada/2015/9/8/como-ensear-testing-a-tus-programadores.html" target="_blank">http://www.javahispano.org/portada/2015/9/8/como-ensear-testing-a-tus-programadores.html</a>
-<a href="https://www.youtube.com/playlist?list=PLMod1hYiIvSZL1xclvHcsV2dMiminf19x" target="_blank">https://www.youtube.com/playlist?list=PLMod1hYiIvSZL1xclvHcsV2dMiminf19x</a></p>
-
-<p>Abel Cuenca 00:03
-<a href="http://web.mit.edu/alexmv/6.037/sicp.pdf" target="_blank">http://web.mit.edu/alexmv/6.037/sicp.pdf</a></p>
-
-<p>me  00:06
-<a href="https://pragprog.com/book/mbfpp/functional-programming-patterns-in-scala-and-clojure" target="_blank">https://pragprog.com/book/mbfpp/functional-programming-patterns-in-scala-and-clojure</a></p>
-
-<p>Abel Cuenca 00:07
-<a href="http://image.slidesharecdn.com/j6neru4mrj6ivbemoazk-signature-2dc2444de4bab674e57017541f6665ded1bda52727a96fc1951b3c3f5300cafc-poli-141124002944-conversion-gate02/95/functional-programming-patterns-buildstuff-14-13-638.jpg?cb=1421779239" target="_blank">http://image.slidesharecdn.com/j6neru4mrj6ivbemoazk-signature-2dc2444de4bab674e57017541f6665ded1bda52727a96fc1951b3c3f5300cafc-poli-141124002944-conversion-gate02/95/functional-programming-patterns-buildstuff-14-13-638.jpg?cb=1421779239</a></p>
-
-<p>Fran Ferri  00:08
-<a href="https://github.com/franferri" target="_blank">https://github.com/franferri</a>
-Scala, Kotlin, Swift, F#, JAVA8, Haskell, Ruby or Nix
-<a href="http://www.eventbrite.es/e/lambda-world-tickets-18395382083" target="_blank">http://www.eventbrite.es/e/lambda-world-tickets-18395382083</a>
-<a href="https://www.airbnb.es/s/cadiz?guests=&amp;checkin=24%2F10%2F2015&amp;checkout=25%2F10%2F2015&amp;ss_id=z31ehyiu&amp;source=bb" target="_blank">https://www.airbnb.es/s/cadiz?guests=&amp;checkin=24%2F10%2F2015&amp;checkout=25%2F10%2F2015&amp;ss_id=z31ehyiu&amp;source=bb</a>
-<a href="http://www.eventbrite.es/e/lambda-world-tickets-18395382083" target="_blank">http://www.eventbrite.es/e/lambda-world-tickets-18395382083</a>
-<a href="http://agile-aragon.org/2014/10/26/un-ano-mas-global-day-of-coderetreat-en-zaragoza/" target="_blank">http://agile-aragon.org/2014/10/26/un-ano-mas-global-day-of-coderetreat-en-zaragoza/</a>
-<a href="http://cas2015.agile-spain.org/" target="_blank">http://cas2015.agile-spain.org/</a></p>
-
-<p>Abel Cuenca 00:28
-<a href="http://qconlondon.com/london2016/volunteer" target="_blank">http://qconlondon.com/london2016/volunteer</a></p>
-
-<p>Fran Ferri  00:30
-<a href="https://plus.google.com/communities/114859785439968913587/members" target="_blank">https://plus.google.com/communities/114859785439968913587/members</a></p>
-
-<p>Abel Cuenca 00:30
-Matt Waynne</p>
-
-<p>Fran Ferri  00:36
-<a href="https://www.linkedin.com/profile/view?trk=contacts-contacts-list-contact_name-0&amp;id=7094103" target="_blank">https://www.linkedin.com/profile/view?trk=contacts-contacts-list-contact_name-0&amp;id=7094103</a>
-Creating lovable mobile products, rapid prototyping, teaching/coaching developers.</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -673,6 +716,10 @@ Creating lovable mobile products, rapid prototyping, teaching/coaching developer
           </li>
         
           <li class="post">
+            <a href="/blog/2017/03/31/books-read-in-2017q1/">Books read in 2017Q1</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
           </li>
         
@@ -690,10 +737,6 @@ Creating lovable mobile products, rapid prototyping, teaching/coaching developer
         
           <li class="post">
             <a href="/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/">Comparing options for parametrized testing in javascript</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/02/01/self-study-in-february-2017/">Self-Study in February 2017</a>
           </li>
         
       </ul>

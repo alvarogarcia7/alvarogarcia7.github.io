@@ -129,6 +129,150 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories/">Navigating the GitHub repositories</a>
+    </h1>
+    <p >Sep 8, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository/">repository</a><a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/navigate/">navigate</a><a class="label" href="https://alvarogarcia7.github.io/categories/simple-session/">simple-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository-search/">repository-search</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>I&rsquo;ve reorganized my github repositories, especially the katas and the <code>simple sessions</code>.</p>
+
+<h2 id="katas">Katas</h2>
+
+<p>All of them can be found in <a href="https://github.com/search?utf8=%E2%9C%93&amp;q=user%3Aalvarogarcia7+kata&amp;type=Repositories&amp;ref=searchresults" target="_blank">this search</a></p>
+
+<p>Separated by language:</p>
+
+<ul>
+<li><a href="https://github.com/search?l=Java&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank">Java</a></li>
+<li><a href="https://github.com/search?l=Clojure&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank">Clojure</a></li>
+<li><a href="https://github.com/search?l=JavaScript&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank">Javascript</a></li>
+<li><a href="https://github.com/search?l=Haskell&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank">Haskell</a></li>
+<li><a href="https://github.com/search?l=ruby&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93" target="_blank">Ruby</a></li>
+</ul>
+
+<p>To the best of my knowledge, all repositories follow a similar pattern:</p>
+
+<ul>
+<li>Contain the keyword &lsquo;kata&rsquo;</li>
+<li>Contain the language</li>
+<li>Contain a description of the exercise</li>
+</ul>
+
+<p>An example: <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-haskell" target="_blank">palindromes-searcher-kata-haskell</a></p>
+
+<h2 id="simple-sessions">Simple sessions</h2>
+
+<p>A simple session is a lapse of time working with the language to solve a problem, but not big enough to deserve a repository of its own. Usually, the simple sessions are performed in languages that have a REPL, tool that eases this need</p>
+
+<p>They can be found in <a href="https://github.com/search?q=user%3Aalvarogarcia7+simple-sessions" target="_blank">this search</a></p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/">A basic working environment</a>
+    </h1>
+    <p >Sep 8, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/#disqus_thread">Comments</a>
+
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>Sometimes, when working out of somebody&rsquo;s else computer, I won&rsquo;t have my preferred IDE installed.</p>
+
+<p>In this case, what I usually do &ndash;as long as the programming session is more than 5 TDD cycles&ndash;, is to configure my own environment. It includes:</p>
+
+<ul>
+<li>text editor: $EDITOR is enough</li>
+<li>test runner. A simple bash script executing the tests will suffice</li>
+<li>git terminal: to commit, see differences, revert, etc</li>
+<li>[optional] REPL if the language has it</li>
+</ul>
+
+<p>If the system already has it, I will use <code>screen</code> to cycle around the sessions.</p>
+
+<h2 id="a-simple-test-runner">A simple test runner</h2>
+
+<p>More in depth, the test runner will be similar to this:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">while</span> <span class="o">[</span> <span class="nb">true</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
+    clear<span class="p">;</span>
+    date<span class="p">;</span>
+    runhaskell Spec.hs<span class="p">;</span>
+    <span class="nb">read</span> i<span class="p">;</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<p>This script will:</p>
+
+<ul>
+<li>clear the screen (for better readability)</li>
+<li>print the date</li>
+<li>execute the tests</li>
+<li>read from the console, effectively waiting for the user to interact (an enter is enough)</li>
+</ul>
+
+<p>The date is useful for both detecting the pace of the cycles and for scrolling up and down in the terminal.</p>
+
+<p>If this date is much too necessary, it might indicate the presence of the TDD antipattern &ldquo;El Bocazas&rdquo; / &ldquo;A mouthful&rdquo;, present in <a href="http://www.carlosble.com/downloads/disenoAgilConTdd_ebook.pdf" target="_blank">Diseño Ágil con TDD</a>. I use when the output of the test runner is extensive (such as <code>runhaskell</code>).</p>
+
+<p>If the test runner output is too verbose, a possible step forward is to silence output in when every test is green (fragment):</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nv">output</span><span class="o">=</span><span class="k">$(</span>runhaskell Spec.hs<span class="k">)</span><span class="p">;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;OK&quot;</span><span class="p">;</span>
+<span class="k">else</span>
+    <span class="nb">echo</span> <span class="nv">$output</span><span class="p">;</span>
+<span class="k">fi</span>
+</code></pre></div>
+
+<h2 id="other-test-runners">Other test runners</h2>
+
+<p>As a side note, other test runners are quieter than others:</p>
+
+<ul>
+<li><code>py.test</code> will output the name of the file and &ldquo;E&rdquo; for error and &ldquo;.&rdquo; for OK</li>
+<li><code>clojure.test</code> will output the name of the file and a total of tests and assertions. <a href="http://jakemccrary.com/blog/2015/04/25/quieter-clojure-dot-test-output/" target="_blank">Here</a> to make it quieter</li>
+<li><code>HSpec</code> will output one line per <code>describe</code> and <code>it</code>. Inspired by RSpec</li>
+<li><code>Jasmine</code> will output one line per <code>describe</code> and <code>it</code>, as HSpec, as both of them are inspired by RSpec.</li>
+<li><code>Junit</code> and derivatives will produce the name of the file and total of tests and assertions. Also, on demand, a file containing test results so it can be interpreted by the IDE.</li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/">Brown-bag session: eXtreme Programming</a>
     </h1>
     <p >Sep 2, 2015
@@ -546,171 +690,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/">Searching on a suite of failing tests</a>
-    </h1>
-    <p >Aug 13, 2015
-         - 5 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/search/">search</a><a class="label" href="https://alvarogarcia7.github.io/categories/naive-search/">naive-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/binary-search/">binary-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/dichotomous-search/">dichotomous-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/context/">context</a><a class="label" href="https://alvarogarcia7.github.io/categories/end-to-end-test/">end-to-end-test</a><a class="label" href="https://alvarogarcia7.github.io/categories/test-dependency/">test-dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/antipattern/">antipattern</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="motivation">Motivation</h2>
-
-<p>Today, at a client, in the green phase, we had a test suite which was failing: the whole suite fails but the test cases, individually, succeed.</p>
-
-<p>So my first impression was that something was being shared between tests. Also confirmed because the failing class was an EndToEnd test, in which we load the whole spring context</p>
-
-<p>A quick glance was not revealing anything interesting, so I decided to find which is the minimum suite (as opposed as to the whole suite) that makes the new testcase fail, expecting to narrow the search for possible causes. This is very similar to what QuickCheck does, to generate the minimum testcase that breaks your property. In this way, you can focus in a possibly simpler<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> feature.</p>
-
-<p>This post covers how to perform this search.</p>
-
-<h2 id="mathematical-formulation">Mathematical formulation</h2>
-
-<p>Let <code>T</code> be a sequence of tests: <code>i1, i2, ..., in, F, j1, j2, ..., jm</code></p>
-
-<p>where:</p>
-
-<ul>
-<li><code>i</code> are green tests</li>
-<li><code>F</code> is first failing test
-
-<ul>
-<li>when executed in isolation, is green</li>
-<li>when executed in the sequence, is red</li>
-</ul></li>
-<li><code>j</code> are tests after the failed test.</li>
-</ul>
-
-<p>In this case, the order is important, as the failed test suite (presumably) comes from a shared state set by a previous test.</p>
-
-<p>The first search-space pruning is to remove the <code>j</code>, as they supposedly don&rsquo;t have any effect (as they are after the failed test)</p>
-
-<p>let <code>T1</code> be a subsequence of <code>T</code> that includes <code>i</code> and <code>F</code>: <code>i1, i2, ..., in, F</code></p>
-
-<p>Then it is assumed that one (or more) of the <code>i</code> generates an inconsistent state that makes <code>F</code> fail.</p>
-
-<p>In the sequence <code>T1</code>, <code>F</code> fails, but in the sequence <code>TF</code> composed by <code>F</code> only, the test succeeds. This can be thought as the equivalent of the <a href="https://en.wikipedia.org/wiki/Intermediate_value_theorem" target="_blank">Intermediate value theorem</a>, also called Bolzano&rsquo;s theorem, where the <code>T1</code> is at one side ot the axis and the <code>TF</code> at another. The theorem proves that there must be at least one value where the domain of the function crosses the axis</p>
-
-<p>I say &ldquo;thought of&rdquo; because that theorem is only for continous functions and sets are not (are discrete) but the analogy is good enough: if one sequence is OK but the other isn&rsquo;t, there must be a minimum sequence where the result is OK and another one where the results are not. They two sequences must not be the same case as one result cannot be OK and not OK at the same time.</p>
-
-<h2 id="naïve-search">Naïve search</h2>
-
-<p>The first way of searching would be find the minimum set that fails:</p>
-
-<ul>
-<li>include <code>F</code>, then another from <code>i1,...,in</code> that makes the <code>F</code> fail. <code>F</code> the last one, because it needs to be affected by the side effects from the preceding test.</li>
-<li>if the first strategy does not work, for each of the above cases, add another from the <code>i1,...,in</code> (except the one that was added)</li>
-</ul>
-
-<p>For the first step, it takes <code>O(n * 2)</code>, assuming executing a single test costs <code>O(1)</code>. Reduces to <code>O(n)</code></p>
-
-<p>For the second step, <code>O(n * n-1 * 3)</code>. Reduces to <code>O(n^2)</code></p>
-
-<p>For the third step, <code>O(n * n-1 * n-2 * 4)</code>. Reduces to <code>O(n^3)</code></p>
-
-<p>For the nth step, it costs <code>O(n * n-1 * n-2 * ... * n-(n-1) * (n+1))</code>. Reduces to <code>O(n^n)</code>. Which is polynomical but not feasible for medium-sized <code>n</code> (in an automatic fashion) or small <code>n</code> (in a manual fashion)</p>
-
-<h2 id="dichotomous-search">Dichotomous search</h2>
-
-<p>(This is also known as <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm" target="_blank">binary search</a>)</p>
-
-<p>Inspired by <code>git-bisect</code>, I decided to treat the sequence <code>i1, ..., in</code> as the source for the dicotomical search, applying the subsequences to <code>F</code>.</p>
-
-<p>The first step, it takes <code>O(n/2 * n/2)</code> = <code>O(n^2)</code> to execute half the tests</p>
-
-<p>The second step, is to execute half the number of the tests previously executed, either from the sequence before (if the <code>F</code> fails) or from the other half (if <code>F</code> does not fail). The cost is <code>O(n/4 * n/4)</code> = <code>O(n^2)</code></p>
-
-<p>For the nth step, the cost is <code>O(n/2^n * n/2^n)</code> = <code>O(n^2/2^n)</code> = <code>O(0)</code></p>
-
-<p>This n in the nth step is smaller than the other n, as each step divides by two the amount of tests to be included.</p>
-
-<p>The amount of tests to be executed is <code>n + n/2 + n/4 + n/8 + ... + 1</code> which is roughly <code>2n</code>. Executing each test costs <code>O(1)</code> (by the assumption before), so the total cost is <code>O(2n)</code> = <code>O(n)</code></p>
-
-<p>If we take it by the amount of steps we need to manually execute is 1 for the whole, 1 for the half, 1 for the quarter, &hellip;. = <code>O(log2 n)</code></p>
-
-<h2 id="procedure">Procedure</h2>
-
-<p>To keep the executed tests, I created a support branch where I deleted the tests that were selected to be excluded. Always executed &ldquo;all tests in the suite&rdquo; as this makes it faster to select in the IDE.</p>
-
-<p>When the half taken was wrong, I reverted the last commit and selected the other half.</p>
-
-<p>After finding the minimum sequence and solving the issue, this support branch was discarded</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>In the real scenario, with around 100 tests, searching manually in the naïve way would not have been possible. It would have cost 100 steps, as the minimum set that produces <code>F</code> had size 2 (so only one step was necessary).</p>
-
-<p>Applying the dichotomous search, in 8-10 steps I had finished, with the guarantee that no matter how many tests produced the <code>F</code> I would have found it in a reasonable amount of time.</p>
-
-<h2 id="comments">Comments</h2>
-
-<p>Finally, the root cause for the failing test <code>F</code> was the OrientDB InMemory implementation with Spring context, as the former does not allow two instances at the same time in the same JVM.</p>
-
-<p>It was solved using <code>@DirtiesContext</code> in both cases of the minimum sequence that forms <code>F</code>, so no matter which order the executor decides, the context will always be clean for the next execution.</p>
-
-<p>We found this thanks to a teammate&rsquo;s intuition.</p>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">Because maybe the minimum testcase is more difficult than another.
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/12/brownbag-session-spring-boot/">Brown-bag session: Spring Boot</a>
-    </h1>
-    <p >Aug 12, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/12/brownbag-session-spring-boot/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring-boot/">spring-boot</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>At a client, today we&rsquo;ve done a brown-bag session on <a href="http://projects.spring.io/spring-boot/" target="_blank">Spring Boot</a>: we&rsquo;ve gone through the basics with a <a href="https://github.com/Rossyafk/spring-boot-demo/" target="_blank">sample maven project</a> and its <a href="https://github.com/Rossyafk/spring-boot-demo/blob/master/pom.xml" target="_blank">pom file</a>.</p>
-
-<p>We&rsquo;ve seen the <a href="http://start.spring.io/" target="_blank">Spring Initializr</a> and a live demo, using curl for REST client.</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -870,6 +849,10 @@
           </li>
         
           <li class="post">
+            <a href="/blog/2017/03/31/books-read-in-2017q1/">Books read in 2017Q1</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
           </li>
         
@@ -887,10 +870,6 @@
         
           <li class="post">
             <a href="/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/">Comparing options for parametrized testing in javascript</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/02/01/self-study-in-february-2017/">Self-Study in February 2017</a>
           </li>
         
       </ul>
