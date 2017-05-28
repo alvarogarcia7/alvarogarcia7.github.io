@@ -9,6 +9,146 @@
     <atom:link href="https://alvarogarcia7.github.io/categories/process/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>The Senior Software Engineer, Chapter 8</title>
+      <link>https://alvarogarcia7.github.io/blog/2017/05/28/senior-software-engineer-chapter-8/</link>
+      <pubDate>Sun, 28 May 2017 16:12:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2017/05/28/senior-software-engineer-chapter-8/</guid>
+      <description>
+
+&lt;h1 id=&#34;chapter-8-bootstrap-a-greenfield-system&#34;&gt;Chapter 8: Bootstrap a Greenfield System&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Working on a brand new application can be a lot of fun.
+There’s no &amp;ldquo;baggage&amp;rdquo; from legacy code, no technical debt,
+and there’s a wonderful feeling of freshness when starting
+an app from scratch.&lt;/p&gt;
+
+&lt;p&gt;(p. 101)&lt;/p&gt;
+
+&lt;p&gt;The decisions you make [&amp;hellip;] can have a lasting impact&lt;/p&gt;
+
+&lt;p&gt;(p. 101)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;8-1-overview&#34;&gt;8.1 Overview&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;When given a greenfield project [&amp;hellip;] you have two main goals:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make sure everyone involved in the project feels good about the initial direction and decisions being made&lt;/li&gt;
+&lt;li&gt;Establish a location for developers to start contributing code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(p. 102)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Mention of the iteration Zero, that&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;[&amp;hellip;] indicates that no direct business value is going
+to be delivered initially&lt;/p&gt;
+
+&lt;p&gt;(p. 102)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;8-2-understand-the-problem&#34;&gt;8.2 Understand the problem&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You do your company a disservice to build an application you don’t think needs to exist.&lt;/p&gt;
+
+&lt;p&gt;To understand why the application should be built, find answers to these questions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What business problems will this application solve?&lt;/li&gt;
+&lt;li&gt;Why is the proposed application the best solutiont o those problems?&lt;/li&gt;
+&lt;li&gt;What other solutions were considered?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(p. 104)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Mentioning the importance of asking why about these problems, also, whether this decided solution is good / the best.&lt;/p&gt;
+
+&lt;h3 id=&#34;8-3-understand-the-system-s-place-in-the-technical-architecture&#34;&gt;8.3 Understand the System’s Place in the Technical Architecture&lt;/h3&gt;
+
+&lt;p&gt;Mention of the &amp;lsquo;technical architecture&amp;rsquo;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;existing applications and existing infrastructure&lt;/p&gt;
+
+&lt;p&gt;(p. 105)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;8-4-choose-technology&#34;&gt;8.4 Choose Technology&lt;/h3&gt;
+
+&lt;h4 id=&#34;using-the-blessed-stack&#34;&gt;Using the Blessed Stack&lt;/h4&gt;
+
+&lt;p&gt;Be prepared to heavily defend your position if you decide to not use
+the blessed stack, both to yourself and others. (paraphrased from p. 107)&lt;/p&gt;
+
+&lt;h3 id=&#34;using-a-different-technology&#34;&gt;Using a Different Technology&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You must answer the question “Why shouldn’t I use the blessed stack?”&lt;/p&gt;
+
+&lt;p&gt;[&amp;hellip;]&lt;/p&gt;
+
+&lt;p&gt;[&amp;hellip;] your first duty is to deliver results.&lt;/p&gt;
+
+&lt;p&gt;(p. 108).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Also consider these factors:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fitness for purpose&lt;/li&gt;
+&lt;li&gt;Performance&lt;/li&gt;
+&lt;li&gt;Developer productivity&lt;/li&gt;
+&lt;li&gt;Developer happiness - also called developer experience (DX)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(from p. 108)&lt;/p&gt;
+
+&lt;h3 id=&#34;8-5-outline-the-application-s-architecture&#34;&gt;8.5 Outline the Application’s Architecture&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You want your application to ooze consistency&lt;/p&gt;
+
+&lt;p&gt;(p. 111)&lt;/p&gt;
+
+&lt;p&gt;you want to establish a “culture of consistency”&lt;/p&gt;
+
+&lt;p&gt;(p. 113)&lt;/p&gt;
+
+&lt;p&gt;Each developer should be encouraged to establish a convention when
+they first face the need to have one.&lt;/p&gt;
+
+&lt;p&gt;(p. 113)&lt;/p&gt;
+
+&lt;p&gt;[&amp;hellip;] considering the political impact [&amp;hellip;] Since it often doesn’t
+matter what the decision is, making an unpopular decision can be
+little gain for a lot of trouble.&lt;/p&gt;
+
+&lt;p&gt;(p. 114)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;8-7-create-a-minimum-deployable-system&#34;&gt;8.7 Create a Minimum Deployable System&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;I like to think of deployment as the physical act of getting the code up in the production environment and launching as the act of allowing users access.&lt;/p&gt;
+
+&lt;p&gt;(p. 118)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The difference between deploying and launching. This can be enforced
+with some techniques to block/allow access, such as enabling/disabling
+these features or controlling access to said features.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Self-Study in October 2016</title>
       <link>https://alvarogarcia7.github.io/blog/2016/10/01/self-study-in-october-2016/</link>
       <pubDate>Sat, 01 Oct 2016 11:32:19 +0000</pubDate>
