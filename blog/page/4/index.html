@@ -129,6 +129,103 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/">A common misunderstanding about `reduce`</a>
+    </h1>
+    <p >Dec 14, 2016
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/misunderstanding/">misunderstanding</a><a class="label" href="https://alvarogarcia7.github.io/categories/reduce/">reduce</a><a class="label" href="https://alvarogarcia7.github.io/categories/fold/">fold</a><a class="label" href="https://alvarogarcia7.github.io/categories/higher-order-function/">higher-order-function</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/mozilla-developer-network/">mozilla-developer-network</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h3 id="misconception">Misconception</h3>
+
+<p>I&rsquo;ve read in several places that <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank"><code>reduce</code></a> reduces an array<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> of values to a single one. The main characteristic of this function is not to reduce to a &lsquo;smaller element&rsquo; / &lsquo;single element&rsquo;, but to have access to the accumulated results and the elements, one by one. Quoting Mozilla Developer Network&rsquo;s (MDN) Javascript reference:</p>
+
+<blockquote>
+<p>The reduce() method applies a function against an accumulator and each value of the array (from left-to-right) to reduce it to a single value.</p>
+
+<p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank">Array.prototype.reduce()</a> at MDN</p>
+</blockquote>
+
+<h3 id="examples">Examples</h3>
+
+<p>Note: the examples in this article are in Javascript.</p>
+
+<p>This is a simple example of such function:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span> <span class="p">};</span>
+<span class="kc">undefined</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">sum</span><span class="p">)</span>
+<span class="mi">6</span>
+</code></pre></div>
+
+<p><code>reduce</code> can reduce a collection of elements to a single one. But this is not its defining characteristic. Let&rsquo;s see another example:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">append</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">accumulator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">accumulator</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span> <span class="k">return</span> <span class="nx">accumulator</span> <span class="p">};</span>
+<span class="kc">undefined</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">append</span><span class="p">,</span> <span class="p">[])</span>
+<span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
+</code></pre></div>
+
+<p>Note: this is a special case, where the elements are not altered by the <code>reduce</code>. Can be seen as the identity element for <code>reduce</code>.</p>
+
+<p>This same behaviour can be reproduced with a <code>map</code>:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">identity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="p">;</span> <span class="p">};</span>
+<span class="kc">undefined</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">identity</span><span class="p">)</span>
+<span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
+</code></pre></div>
+
+<p>An example that requires a <code>reduce</code> (and not a <code>map</code>) is <a href="https://clojuredocs.org/clojure.core/frequencies" target="_blank"><code>frequencies</code></a>. This function calculates the frequency of the elements in the collection:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="nx">frequencies</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="p">{</span> <span class="s1">&#39;1&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</code></pre></div>
+
+<p>Why not a <code>map</code>? Because you need to cumulate the results.</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">accumulator</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span> 
+  <span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">accumulator</span><span class="p">;</span> 
+<span class="p">}</span> 
+<span class="kc">undefined</span>
+<span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">frequencies</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">frequency</span><span class="p">,</span> <span class="p">{});</span>
+<span class="p">}</span>
+<span class="kc">undefined</span>
+</code></pre></div>
+
+<p>Identity element: <a href="https://en.wikipedia.org/wiki/Identity_element" target="_blank">https://en.wikipedia.org/wiki/Identity_element</a></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">In fact, any type in the <code>Foldable</code> class in Haskell. The <code>reduce</code> function in Javascript is in the <code>Array</code> prototype (only). In Clojure, a set, a map, an array, a list can be <code>reduce</code>d.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/12/01/self-study-in-december-2016/">Self-Study in December 2016</a>
     </h1>
     <p >Dec 1, 2016
@@ -641,97 +738,6 @@ Learning paths that have entered the queue:
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/08/01/self-study-in-august-2016/">Self-Study in August 2016</a>
-    </h1>
-    <p >Aug 1, 2016
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/08/01/self-study-in-august-2016/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/august/">august</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/2fa/">2fa</a><a class="label" href="https://alvarogarcia7.github.io/categories/aaron-krauss/">aaron-krauss</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/amazon/">amazon</a><a class="label" href="https://alvarogarcia7.github.io/categories/bill-sourour/">bill-sourour</a><a class="label" href="https://alvarogarcia7.github.io/categories/binding/">binding</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/conf/">conf</a><a class="label" href="https://alvarogarcia7.github.io/categories/conference/">conference</a><a class="label" href="https://alvarogarcia7.github.io/categories/const/">const</a><a class="label" href="https://alvarogarcia7.github.io/categories/degree/">degree</a><a class="label" href="https://alvarogarcia7.github.io/categories/devin-coldewey/">devin-coldewey</a><a class="label" href="https://alvarogarcia7.github.io/categories/devops/">devops</a><a class="label" href="https://alvarogarcia7.github.io/categories/es2015/">es2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/eventual-consistency/">eventual-consistency</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience/">experience</a><a class="label" href="https://alvarogarcia7.github.io/categories/full-stack-developer/">full-stack-developer</a><a class="label" href="https://alvarogarcia7.github.io/categories/function/">function</a><a class="label" href="https://alvarogarcia7.github.io/categories/hand-signals/">hand-signals</a><a class="label" href="https://alvarogarcia7.github.io/categories/holberton-school/">holberton-school</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview-process/">interview-process</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/josip-franjkovic/">josip-franjkovic</a><a class="label" href="https://alvarogarcia7.github.io/categories/juan-hernandez/">juan-hernandez</a><a class="label" href="https://alvarogarcia7.github.io/categories/kyle-young/">kyle-young</a><a class="label" href="https://alvarogarcia7.github.io/categories/lead-dev/">lead-dev</a><a class="label" href="https://alvarogarcia7.github.io/categories/lessons-learned/">lessons-learned</a><a class="label" href="https://alvarogarcia7.github.io/categories/lifecycle/">lifecycle</a><a class="label" href="https://alvarogarcia7.github.io/categories/maryam-labib/">maryam-labib</a><a class="label" href="https://alvarogarcia7.github.io/categories/nist/">nist</a><a class="label" href="https://alvarogarcia7.github.io/categories/occupy-movement/">occupy-movement</a><a class="label" href="https://alvarogarcia7.github.io/categories/on-call/">on-call</a><a class="label" href="https://alvarogarcia7.github.io/categories/opinion/">opinion</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/pivotal/">pivotal</a><a class="label" href="https://alvarogarcia7.github.io/categories/professional-career/">professional-career</a><a class="label" href="https://alvarogarcia7.github.io/categories/race-condition/">race-condition</a><a class="label" href="https://alvarogarcia7.github.io/categories/regulation/">regulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/rest/">rest</a><a class="label" href="https://alvarogarcia7.github.io/categories/rest-api/">rest-api</a><a class="label" href="https://alvarogarcia7.github.io/categories/ryan-alexander/">ryan-alexander</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/semicolon/">semicolon</a><a class="label" href="https://alvarogarcia7.github.io/categories/sms/">sms</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/style/">style</a><a class="label" href="https://alvarogarcia7.github.io/categories/sylvain-kalache/">sylvain-kalache</a><a class="label" href="https://alvarogarcia7.github.io/categories/syntax/">syntax</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdz/">tdz</a><a class="label" href="https://alvarogarcia7.github.io/categories/team/">team</a><a class="label" href="https://alvarogarcia7.github.io/categories/temporal-dead-zone/">temporal-dead-zone</a><a class="label" href="https://alvarogarcia7.github.io/categories/title/">title</a><a class="label" href="https://alvarogarcia7.github.io/categories/university/">university</a><a class="label" href="https://alvarogarcia7.github.io/categories/us-nist/">us-nist</a><a class="label" href="https://alvarogarcia7.github.io/categories/var/">var</a><a class="label" href="https://alvarogarcia7.github.io/categories/web/">web</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="lessons-in-agile-six-months-at-pivotal">Lessons in Agile: Six Months at Pivotal</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/built-to-adapt/lessons-in-agile-six-months-at-pivotal-66b4c57386a4" target="_blank">this article</a> by Maryam Labib where she explains what she has learned in the last 6 months at Pivotal: how to pair program, how to TDD and some good practices to be a better developer.</p>
-
-<p>Tags: maryam-labib, pivotal, career, professional-career, tdd, pair-programming, team, lessons-learned, experience</p>
-
-<h2 id="hacking-verbal-communication-systems">Hacking verbal communication systems</h2>
-
-<p>I&rsquo;ve watched <a href="https://vimeo.com/album/4045988/video/173255458" target="_blank">this talk</a> by Ryan Alexander on what kind of systems humans use to communicate and how to improve them. Explains the hand signals at Occupy movement (called (Occupy movement hand signals)[<a href="https://en.wikipedia.org/wiki/Occupy_movement_hand_signals]" target="_blank">https://en.wikipedia.org/wiki/Occupy_movement_hand_signals]</a>)</p>
-
-<p>Tags: conference, ryan-alexander, lead-dev, conf, hand-signals, occupy-movement</p>
-
-<h2 id="ni-titulitis-ni-cuñadismo-spanish">Ni titulitis, ni cuñadismo (Spanish)</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.koalite.com/2016/06/ni-titulitis-ni-cunadismo" target="_blank">this article</a> about the regulation or no regulation of the programmer trade, by Juan María Hernández</p>
-
-<p>Tags: regulation, opinion, title, degree, university, juan-hernandez, spanish</p>
-
-<h2 id="are-semicolons-necessary-in-javascript">Are Semicolons Necessary in JavaScript?</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=gsfbh17Ax9I" target="_blank">this video</a> by Kyle Robinson Young on whether semicolons are necessary in javascript and why he purposely does not use them, to teach people how to do it. Suggests going for a month with the opposite way (write / don&rsquo;t write) to see how it feels and take an informed decision.</p>
-
-<p>Tags: javascript, semicolon, style, syntax, kyle-young</p>
-
-<h2 id="race-conditions-on-the-web">Race conditions on the web</h2>
-
-<p>I&rsquo;ve read <a href="https://www.josipfranjkovic.com/blog/race-conditions-on-web" target="_blank">this article</a> by Josip Franjković on the race conditions that can happen using REST APIs, related to eventual consistency matters.</p>
-
-<p>Tags: eventual-consistency, josip-franjkovic, race-condition, rest-api, rest, web</p>
-
-<h2 id="nist-declares-the-age-of-sms-based-2-factor-authentication-over">NIST declares the age of SMS-based 2-factor authentication over</h2>
-
-<p>I&rsquo;ve read <a href="https://techcrunch.com/2016/07/25/nist-declares-the-age-of-sms-based-2-factor-authentication-over/" target="_blank">this article</a> by Devin Coldewey, where he explains that the US NIST has published a draft that suggests using SMS for two-factor authentication in a different way: check that they are real phones and not VoIP to reduce the tampering with.</p>
-
-<p>Tags:  devin-coldewey, 2fa, sms, nist, us-nist, security</p>
-
-<h2 id="my-interviews-with-amazon">My Interviews with Amazon</h2>
-
-<p>I&rsquo;ve read <a href="https://thesocietea.org/2016/07/my-interviews-with-amazon/" target="_blank">this article</a> by Aaron Krauss, where he explains his experience interviewing with Amazon at Seattle. Explains the whole process and insights from some phases.</p>
-
-<p>Tags: aaron-krauss, amazon, interview-process</p>
-
-<h2 id="devops-students-learn-the-value-of-uptime-with-3-a-m-calls">DevOps Students Learn the Value of Uptime With 3 a.m. Calls</h2>
-
-<p>I&rsquo;ve read <a href="https://www.linux.com/news/devops-students-learn-value-uptime-3-am-calls" target="_blank">this article</a> about the practices related to &ldquo;on call&rdquo; at Holberton School and their students.</p>
-
-<p>Tags: sylvain-kalache, holberton-school, on-call, full-stack-developer, devops, agile</p>
-
-<h2 id="constant-confusion-why-i-still-use-javascript-function-statements">Constant confusion: why I still use JavaScript function statements</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/constant-confusion-why-i-still-use-javascript-function-statements-984ece0b72fd" target="_blank">this article</a> that explains the comparison of declaring functions in javascript (ES2015 and above), with the short notation for a function. By Bill Sourour.</p>
-
-<p>Cites the temporal dead zone (TDZ):</p>
-
-<blockquote>
-<p>[&hellip;] JavaScript binds the declaration of “sayHelloTo” — reads it first, puts it at the top, and creates a space in memory to hold its value — but it doesn’t set “sayHelloTo” to anything until it reaches it during execution.</p>
-
-<p>The time between “sayHelloTo” being bound and “sayHelloTo” being initialized is called the temporal dead zone (TDZ).</p>
-</blockquote>
-
-<p>Tags: tdz, temporal-dead-zone, bill-sourour, javascript, es2015, function, const, var, binding, lifecycle</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -877,6 +883,10 @@ Learning paths that have entered the queue:
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/05/28/senior-software-engineer-chapter-9/">The Senior Software Engineer, Chapter 9</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/05/28/senior-software-engineer-chapter-8/">The Senior Software Engineer, Chapter 8</a>
           </li>
         
@@ -910,10 +920,6 @@ Learning paths that have entered the queue:
         
           <li class="post">
             <a href="/blog/2017/03/31/books-read-in-2017q1/">Books read in 2017Q1</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
           </li>
         
       </ul>

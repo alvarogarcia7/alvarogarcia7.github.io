@@ -129,6 +129,82 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/">Convert a project from npm to yarn</a>
+    </h1>
+    <p >Mar 3, 2017
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipeline/">pipeline</a><a class="label" href="https://alvarogarcia7.github.io/categories/jenkins/">jenkins</a><a class="label" href="https://alvarogarcia7.github.io/categories/yarn/">yarn</a><a class="label" href="https://alvarogarcia7.github.io/categories/npm/">npm</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>At a  client, we&rsquo;re converting all projects (i.e., sites, services, libraries) from <code>npm</code> to <code>yarn</code>. Mostly for the speed (as it uses the internal cache).</p>
+
+<h2 id="step-by-step-guide">Step by step guide</h2>
+
+<ol>
+<li>Install yarn in your local environment
+
+<ul>
+<li><a href="https://yarnpkg.com/lang/en/docs/install/" target="_blank">https://yarnpkg.com/lang/en/docs/install/</a></li>
+</ul></li>
+<li>Run <code>yarn install</code>
+
+<ul>
+<li>This will create a <code>yarn.lock</code> file</li>
+<li>Add that file to the repo: <code>git add yarn.lock</code></li>
+</ul></li>
+<li>Modify Dockerfile
+
+<ul>
+<li>Install yarn  (in the Dockerfile). Idea: shortcut this execution with <code>yarn --version</code> in case it is installed</li>
+<li>Configure the PATH variable (ENV PATH &hellip;)</li>
+<li><code>ADD yarn.lock</code></li>
+<li>Replace <code>npm install</code> with <code>yarn install</code></li>
+</ul></li>
+<li>Modify pipeline
+
+<ul>
+<li>See example (below)</li>
+<li><code>install_yarn</code>. Idea: shortcut this execution with <code>yarn --version</code> in case it is installed</li>
+<li>Replace <code>npm install</code> with <code>yarn install</code></li>
+</ul></li>
+<li>Test it</li>
+</ol>
+
+<h2 id="jenkins">Jenkins</h2>
+
+<p>Build step: execute shell</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">function</span> install_yarn <span class="o">{</span>
+  yarn --version <span class="o">||</span> curl -o- -L https://yarnpkg.com/install.sh <span class="p">|</span> bash
+  <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.yarn/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+install_yarn
+
+yarn install
+</code></pre></div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2017/03/01/self-study-in-march-2017/">Self-Study in March 2017</a>
     </h1>
     <p >Mar 1, 2017
@@ -1262,103 +1338,6 @@ Learning paths that have entered the queue:
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/">A common misunderstanding about `reduce`</a>
-    </h1>
-    <p >Dec 14, 2016
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/misunderstanding/">misunderstanding</a><a class="label" href="https://alvarogarcia7.github.io/categories/reduce/">reduce</a><a class="label" href="https://alvarogarcia7.github.io/categories/fold/">fold</a><a class="label" href="https://alvarogarcia7.github.io/categories/higher-order-function/">higher-order-function</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/mozilla-developer-network/">mozilla-developer-network</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h3 id="misconception">Misconception</h3>
-
-<p>I&rsquo;ve read in several places that <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank"><code>reduce</code></a> reduces an array<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> of values to a single one. The main characteristic of this function is not to reduce to a &lsquo;smaller element&rsquo; / &lsquo;single element&rsquo;, but to have access to the accumulated results and the elements, one by one. Quoting Mozilla Developer Network&rsquo;s (MDN) Javascript reference:</p>
-
-<blockquote>
-<p>The reduce() method applies a function against an accumulator and each value of the array (from left-to-right) to reduce it to a single value.</p>
-
-<p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank">Array.prototype.reduce()</a> at MDN</p>
-</blockquote>
-
-<h3 id="examples">Examples</h3>
-
-<p>Note: the examples in this article are in Javascript.</p>
-
-<p>This is a simple example of such function:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span> <span class="p">};</span>
-<span class="kc">undefined</span>
-<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">sum</span><span class="p">)</span>
-<span class="mi">6</span>
-</code></pre></div>
-
-<p><code>reduce</code> can reduce a collection of elements to a single one. But this is not its defining characteristic. Let&rsquo;s see another example:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">append</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">accumulator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">accumulator</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span> <span class="k">return</span> <span class="nx">accumulator</span> <span class="p">};</span>
-<span class="kc">undefined</span>
-<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">append</span><span class="p">,</span> <span class="p">[])</span>
-<span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
-</code></pre></div>
-
-<p>Note: this is a special case, where the elements are not altered by the <code>reduce</code>. Can be seen as the identity element for <code>reduce</code>.</p>
-
-<p>This same behaviour can be reproduced with a <code>map</code>:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">identity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="p">;</span> <span class="p">};</span>
-<span class="kc">undefined</span>
-<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">identity</span><span class="p">)</span>
-<span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
-</code></pre></div>
-
-<p>An example that requires a <code>reduce</code> (and not a <code>map</code>) is <a href="https://clojuredocs.org/clojure.core/frequencies" target="_blank"><code>frequencies</code></a>. This function calculates the frequency of the elements in the collection:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="nx">frequencies</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="p">{</span> <span class="s1">&#39;1&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
-</code></pre></div>
-
-<p>Why not a <code>map</code>? Because you need to cumulate the results.</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">accumulator</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span> 
-  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">])</span> <span class="p">{</span>
-    <span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="p">}</span> 
-  <span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-  <span class="k">return</span> <span class="nx">accumulator</span><span class="p">;</span> 
-<span class="p">}</span> 
-<span class="kc">undefined</span>
-<span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">frequencies</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">frequency</span><span class="p">,</span> <span class="p">{});</span>
-<span class="p">}</span>
-<span class="kc">undefined</span>
-</code></pre></div>
-
-<p>Identity element: <a href="https://en.wikipedia.org/wiki/Identity_element" target="_blank">https://en.wikipedia.org/wiki/Identity_element</a></p>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">In fact, any type in the <code>Foldable</code> class in Haskell. The <code>reduce</code> function in Javascript is in the <code>Array</code> prototype (only). In Clojure, a set, a map, an array, a list can be <code>reduce</code>d.
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
     
     
 
@@ -1504,6 +1483,10 @@ Learning paths that have entered the queue:
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/05/28/senior-software-engineer-chapter-9/">The Senior Software Engineer, Chapter 9</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/05/28/senior-software-engineer-chapter-8/">The Senior Software Engineer, Chapter 8</a>
           </li>
         
@@ -1537,10 +1520,6 @@ Learning paths that have entered the queue:
         
           <li class="post">
             <a href="/blog/2017/03/31/books-read-in-2017q1/">Books read in 2017Q1</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
           </li>
         
       </ul>
