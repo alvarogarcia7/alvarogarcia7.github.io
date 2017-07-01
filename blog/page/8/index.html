@@ -129,6 +129,92 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/">Kata formulation: Find the comments</a>
+    </h1>
+    <p >Mar 1, 2016
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/formulation/">formulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/php/">php</a><a class="label" href="https://alvarogarcia7.github.io/categories/comment/">comment</a><a class="label" href="https://alvarogarcia7.github.io/categories/exercise/">exercise</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>Little Johnny is inspecting a PHP source code that contains comments. These comments contains words that he doesn&rsquo;t understand, as it written in another language.</p>
+
+<h2 id="rules-and-constraints">Rules and constraints</h2>
+
+<p>The source code in the PHP files does not need to be correct.</p>
+
+<p>A comment (a subset of PHP comments) is defined as:</p>
+
+<ul>
+<li>A line containing C-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code>// hello C-style</code> is a valid comment</li>
+<li><code>echo &quot;//&quot;;</code> is not a comment</li>
+<li><code>echo '//';</code> is not a comment</li>
+</ul></li>
+<li>A line containing Perl-style comment delimiter, except when it is within a string
+
+<ul>
+<li><code># hello Perl-style</code> is a valid comment</li>
+<li><code>echo &quot;#&quot;;</code> is not a comment</li>
+<li><code>echo '#';</code> is not a comment</li>
+</ul></li>
+<li>There are no multi-line comments
+
+<ul>
+<li><code>/* ... */</code> is not a comment</li>
+</ul></li>
+</ul>
+
+<p>You can do this kata in any language you want. In any case it is not allowed to use a PHP parser. This task must be done manually.</p>
+
+<h2 id="how-to-start">How to start</h2>
+
+<ul>
+<li>Clone/fork (any stars are welcome) <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments" target="_blank">this repo</a></li>
+<li>Run the tests. <a href="https://github.com/alvarogarcia7/cli-app-base-clojure/blob/master/README.md#tests" target="_blank">See this</a> for help</li>
+<li>They should be red.</li>
+<li>Go to production code and fix it</li>
+<li>Have fun (happy kata and happy koding!)</li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Please do not read ahead, just read the current assignment, do it, then read the next one:</p>
+
+<ol>
+<li>Can you help Little Johnny fetch all those comments?</li>
+<li>These messages have not been audited yet and we want to publish the code, so it is better to remove the comments. Can you do it?</li>
+</ol>
+
+<h2 id="optional-requirement">Optional requirement</h2>
+
+<p>As an optional task, when the problem is finished (you can attack in your preferred order), there must be an executable jar with some parameters to process the current folder with the &lsquo;working modes&rsquo; specified above.</p>
+
+<p>(This formulation is also present at the <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments/blob/master/README.md" target="_blank">repository</a> )</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two persons involved in a git commit, in github</a>
     </h1>
     <p >Feb 14, 2016
@@ -1273,167 +1359,6 @@ teach someone to fish vs fish for them
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the macro and</a>
-    </h1>
-    <p >Dec 8, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro/">macro</a><a class="label" href="https://alvarogarcia7.github.io/categories/and/">and</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/function/">function</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro-vs-function/">macro-vs-function</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>While on the REPL, I tried this:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="nb">and</span> <span class="nv">true</span> <span class="nv">[true]</span><span class="p">)</span>
-<span class="nv">CompilerException</span> <span class="nv">java.lang.RuntimeException:</span> <span class="nv">Can</span><span class="ss">&#39;t</span> <span class="nv">take</span> <span class="nv">value</span> <span class="nv">of</span> <span class="nv">a</span> <span class="nv">macro:</span> <span class="nf">#&#39;</span><span class="nv">clojure.core/and,</span> <span class="nv">compiling:</span><span class="p">(</span><span class="nv">form-init7116694665186998245.clj:1:1</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Reading the <a href="https://clojuredocs.org/clojure.core/and" target="_blank">clojuredocs for <code>and</code></a>, you can find this:</p>
-
-<blockquote>
-<p>Note add is a macro, so you cannot apply it. For example, there is a vector of some Boolean values [true true false true], which you want to test to see if they are all true. The code below will not work:</p>
-
-<p>(apply add [true true false true]) ;won&rsquo;t work</p>
-
-<p>Instead, use this:</p>
-
-<p>(every? identity [true  true false true])</p>
-</blockquote>
-
-<p>I tried it with success. Digging a bit deeper:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">defn</span> <span class="nv">all-truthy?</span> <span class="nv">[&amp;</span> <span class="nv">elements]</span> <span class="p">(</span><span class="nv">every?</span> <span class="nb">identity</span> <span class="nv">elements</span><span class="p">))</span>
-<span class="nf">#&#39;</span><span class="nv">simple.core/all-truthy?</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="nv">false</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="mi">0</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="no">nil</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nv">true</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-truthy?</span> <span class="nv">[nil</span> <span class="nv">false]</span><span class="p">)</span>
-<span class="nv">true</span>
-</code></pre></div>
-
-<p>Was also tempted to try this:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">[true</span> <span class="nv">true</span> <span class="nv">false</span> <span class="nv">true]</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">[true</span> <span class="nv">true</span> <span class="nv">true</span> <span class="nv">true]</span><span class="p">)</span>
-<span class="nv">true</span>
-</code></pre></div>
-
-<p>Encapsulate it into a function:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">defn</span> <span class="nv">all-true</span> <span class="nv">[&amp;</span> <span class="nv">elements]</span> <span class="p">(</span><span class="nb">reduce</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[acc</span> <span class="nv">element]</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">acc</span> <span class="nv">element</span><span class="p">))</span> <span class="nv">true</span> <span class="nv">elements</span><span class="p">))</span>
-<span class="nf">#&#39;</span><span class="nv">simple.core/all-true</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span><span class="p">)</span>
-<span class="nv">true</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span> <span class="nv">false</span><span class="p">)</span>
-<span class="nv">false</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="nv">true</span> <span class="nv">false</span> <span class="nv">true</span><span class="p">)</span>
-<span class="nv">false</span>
-</code></pre></div>
-
-<p>What happens with the non-boolean values?</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span>
-<span class="mi">3</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">76</span><span class="p">)</span>
-<span class="mi">76</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
-<span class="mi">64</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">all-true</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
-<span class="mi">64</span>
-</code></pre></div>
-
-<p>This is because:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">and</span> <span class="mi">64</span> <span class="mi">3</span><span class="p">)</span>
-<span class="mi">3</span>
-<span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nb">and</span> <span class="mi">3</span> <span class="mi">64</span><span class="p">)</span>
-<span class="mi">64</span>
-</code></pre></div>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p><code>all-truthy?</code> exploits the falsy values in clojure (<code>nil</code>, <code>false</code>), while <code>all-true</code> uses the true boolean values, although the function does not work properly with non-boolean values (i.e. its domain is the booleans)</p>
-
-<h2 id="appendix-a-source-code">Appendix A: Source code</h2>
-
-<p><code>and</code>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nb">and</span><span class="p">)</span>
-<span class="p">(</span><span class="nb">defmacro</span> <span class="nb">and</span>
-  <span class="s">&quot;Evaluates exprs one at a time, from left to right. If a form</span>
-<span class="s">  returns logical false (nil or false), and returns that value and</span>
-<span class="s">  doesn&#39;t evaluate any of the other expressions, otherwise it returns</span>
-<span class="s">  the value of the last expr. (and) returns true.&quot;</span>
-  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span><span class="nv">}</span>
-  <span class="p">(</span><span class="nv">[]</span> <span class="nv">true</span><span class="p">)</span>
-  <span class="p">(</span><span class="nv">[x]</span> <span class="nv">x</span><span class="p">)</span>
-  <span class="p">(</span><span class="nv">[x</span> <span class="nv">&amp;</span> <span class="nv">next]</span>
-   <span class="o">`</span><span class="p">(</span><span class="k">let</span> <span class="nv">[and#</span> <span class="nv">~x]</span>
-      <span class="p">(</span><span class="k">if</span> <span class="nv">and#</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">~@next</span><span class="p">)</span> <span class="nv">and#</span><span class="p">))))</span>
-</code></pre></div>
-
-<p><code>identity</code>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nb">identity</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">defn</span> <span class="nb">identity</span>
-  <span class="s">&quot;Returns its argument.&quot;</span>
-  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span>
-   <span class="ss">:static</span> <span class="nv">true}</span>
-  <span class="nv">[x]</span> <span class="nv">x</span><span class="p">)</span>
-</code></pre></div>
-
-<p><code>every</code>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nv">every?</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">defn</span> <span class="nv">every?</span>
-  <span class="s">&quot;Returns true if (pred x) is logical true for every x in coll, else</span>
-<span class="s">  false.&quot;</span>
-  <span class="nv">{:tag</span> <span class="nv">Boolean</span>
-   <span class="ss">:added</span> <span class="s">&quot;1.0&quot;</span>
-   <span class="ss">:static</span> <span class="nv">true}</span>
-  <span class="nv">[pred</span> <span class="nv">coll]</span>
-  <span class="p">(</span><span class="nb">cond</span>
-   <span class="p">(</span><span class="nv">nil?</span> <span class="p">(</span><span class="nv">seq</span> <span class="nv">coll</span><span class="p">))</span> <span class="nv">true</span>
-   <span class="p">(</span><span class="nv">pred</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">coll</span><span class="p">))</span> <span class="p">(</span><span class="nv">recur</span> <span class="nv">pred</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">coll</span><span class="p">))</span>
-   <span class="ss">:else</span> <span class="nv">false</span><span class="p">))</span>
-</code></pre></div>
-
-<p><code>-&gt;</code>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">source</span> <span class="nv">-&gt;</span><span class="p">)</span>
-<span class="p">(</span><span class="nb">defmacro</span> <span class="nv">-&gt;</span>
-  <span class="s">&quot;Threads the expr through the forms. Inserts x as the</span>
-<span class="s">  second item in the first form, making a list of it if it is not a</span>
-<span class="s">  list already. If there are more forms, inserts the first form as the</span>
-<span class="s">  second item in second form, etc.&quot;</span>
-  <span class="nv">{:added</span> <span class="s">&quot;1.0&quot;</span><span class="nv">}</span>
-  <span class="nv">[x</span> <span class="nv">&amp;</span> <span class="nv">forms]</span>
-  <span class="p">(</span><span class="nb">loop</span> <span class="nv">[x</span> <span class="nv">x,</span> <span class="nv">forms</span> <span class="nv">forms]</span>
-    <span class="p">(</span><span class="k">if</span> <span class="nv">forms</span>
-      <span class="p">(</span><span class="k">let</span> <span class="nv">[form</span> <span class="p">(</span><span class="nb">first</span> <span class="nv">forms</span><span class="p">)</span>
-            <span class="nv">threaded</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">seq?</span> <span class="nv">form</span><span class="p">)</span>
-                       <span class="p">(</span><span class="nv">with-meta</span> <span class="o">`</span><span class="p">(</span><span class="nv">~</span><span class="p">(</span><span class="nb">first</span> <span class="nv">form</span><span class="p">)</span> <span class="nv">~x</span> <span class="nv">~@</span><span class="p">(</span><span class="nv">next</span> <span class="nv">form</span><span class="p">))</span> <span class="p">(</span><span class="nv">meta</span> <span class="nv">form</span><span class="p">))</span>
-                       <span class="p">(</span><span class="nb">list</span> <span class="nv">form</span> <span class="nv">x</span><span class="p">))</span><span class="nv">]</span>
-        <span class="p">(</span><span class="nv">recur</span> <span class="nv">threaded</span> <span class="p">(</span><span class="nv">next</span> <span class="nv">forms</span><span class="p">)))</span>
-      <span class="nv">x</span><span class="p">)))</span>
-</code></pre></div>
-
-        
-
-    </article>
-    
     
     
 
@@ -1579,7 +1504,11 @@ teach someone to fish vs fish for them
       <ul id="recent_posts">
         
           <li class="post">
-            <a href="/blog/2017/06/01/self-study-in-june-2017/">Self-Study in June 2017</a>
+            <a href="/blog/2017/06/30/books-read-2017q2/">Books read in 2017Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/06/01/self-study-june-2017/">Self-Study in June 2017</a>
           </li>
         
           <li class="post">
@@ -1612,10 +1541,6 @@ teach someone to fish vs fish for them
         
           <li class="post">
             <a href="/blog/2017/05/01/self-study-in-may-2017/">Self-Study in May 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/04/01/self-study-in-april-2017/">Self-Study in April 2017</a>
           </li>
         
       </ul>

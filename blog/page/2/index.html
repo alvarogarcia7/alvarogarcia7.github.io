@@ -129,6 +129,62 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/05/23/senior-software-engineer-chapter-5/">The Senior Software Engineer, Chapter 5</a>
+    </h1>
+    <p >May 23, 2017
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/05/23/senior-software-engineer-chapter-5/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/senior-software-engineer/">senior-software-engineer</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h1 id="chapter-5-deal-with-technical-debt-and-slop">Chapter 5: Deal With Technical Debt and Slop</h1>
+
+<ul>
+<li>Seeing legacy as tech debt that has been acquired</li>
+<li>Slop as source for sloppy code</li>
+<li>Chapter about understanding the difference between slop and technical debt.</li>
+</ul>
+
+<blockquote>
+<p>Many developers, if they are feeling pressured to complete their work, would call this an acceptable compromise, promise to fix it later, and ship it</p>
+
+<p>(p. 70)</p>
+
+<p>Technical Debt is [&hellip;] used to explain compromises in implementation that save cost now,
+at a larger future cost (just like real debt). [&hellip;] technical debt is code written
+under certain assumptions that no longer hold.</p>
+
+<p>(p. 72)</p>
+
+<p>Although you’ll likely need to pay it off someday, you might not necessarily have to.</p>
+
+<p>(p. 73)</p>
+</blockquote>
+
+<p>Uses a marker (<code>TECHDEBT</code>) to explain what and why has been introduced. Also
+serves to find this debt later.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2017/05/13/senior-software-engineer-chapter-3/">The Senior Software Engineer, Chapter 3</a>
     </h1>
     <p >May 13, 2017
@@ -666,64 +722,6 @@ Learning paths that have entered the queue:
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
-    </h1>
-    <p >Mar 16, 2017
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/lessons-learned/">lessons-learned</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateful/">stateful</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateful-component/">stateful-component</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateless/">stateless</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateless-component/">stateless-component</a><a class="label" href="https://alvarogarcia7.github.io/categories/separation/">separation</a><a class="label" href="https://alvarogarcia7.github.io/categories/resource-management/">resource-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/make-buy-rent/">make-buy-rent</a><a class="label" href="https://alvarogarcia7.github.io/categories/phil-simon/">phil-simon</a><a class="label" href="https://alvarogarcia7.github.io/categories/it-manager/">it-manager</a><a class="label" href="https://alvarogarcia7.github.io/categories/total-cost-ownership/">total-cost-ownership</a><a class="label" href="https://alvarogarcia7.github.io/categories/tco/">tco</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/decision/">decision</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>From the <a href="http://www.ittoday.info/Articles/Make_Buy_or_Rent.htm" target="_blank">Make, Buy or Rent</a> article:</p>
-
-<blockquote>
-<p>[&hellip;] [T]he three main system options for organizations seeking to upgrade their systems [are :]</p>
-</blockquote>
-
-<ul>
-<li>Make</li>
-<li>Buy</li>
-<li>Rent</li>
-</ul>
-
-<p>IT managers have different criteria for deciding which components to assign in each category.</p>
-
-<h2 id="another-criteria-for-deciding">Another criteria for deciding</h2>
-
-<p>At a client, they have taken the decision to split their core IT systems in to the three options: make, buy, rent.</p>
-
-<ul>
-<li>The business logic to handle the core business is &lsquo;make&rsquo;. These systems are completely stateless</li>
-<li>The persistance (or storage) for the core business is &lsquo;rent&rsquo;. These systems, by definition, are stateful</li>
-<li>Other parts of the system are &lsquo;buy&rsquo;. Not important for this article</li>
-</ul>
-
-<p>The key concept for this separation is moving the responsibility for uptime and complex data management to a provider. The provider can take better care of those procedures and use economies of scale to provide a better service that we could do in-house (&lsquo;make&rsquo;) (e.g., high availability, reliability and SLAs) at the cost of paying a price for that.
-This idea simplifies our components (e.g., services), making them stateless. Even if they cache any internal information, it is a &lsquo;Read Through Cache&rsquo;, meaning that in case the data is not available in the cache, the service will transparently fetch it from the underlying storage system.</p>
-
-<p>This idea for separating components simplifies both development, testing and maintainance, therefore reducing the Total Cost of Ownership (TCO) of our services.</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -869,7 +867,11 @@ This idea simplifies our components (e.g., services), making them stateless. Eve
       <ul id="recent_posts">
         
           <li class="post">
-            <a href="/blog/2017/06/01/self-study-in-june-2017/">Self-Study in June 2017</a>
+            <a href="/blog/2017/06/30/books-read-2017q2/">Books read in 2017Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/06/01/self-study-june-2017/">Self-Study in June 2017</a>
           </li>
         
           <li class="post">
@@ -902,10 +904,6 @@ This idea simplifies our components (e.g., services), making them stateless. Eve
         
           <li class="post">
             <a href="/blog/2017/05/01/self-study-in-may-2017/">Self-Study in May 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/04/01/self-study-in-april-2017/">Self-Study in April 2017</a>
           </li>
         
       </ul>

@@ -129,6 +129,49 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/06/26/stability-terms-from-release-it-a-quote/">Stability terms from &#34;Release it!&#34;, a quote</a>
+    </h1>
+    <p >Jun 26, 2016
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/06/26/stability-terms-from-release-it-a-quote/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/release-it/">release-it</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-nygard/">michael-nygard</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>In <a href="https://pragprog.com/book/mnee/release-it" target="_blank"><strong>Release It!</strong></a>, terms related to stability:</p>
+
+<ul>
+<li>transaction: is an abstract unit of work processed by the system</li>
+<li>mixed workload: is a combination of different transaction types processed by a system.</li>
+<li>system: the complete, interdependent set of hardware, applications, and services required to process transactions for users</li>
+<li>stability: resilient system keeps processing transactions, even when there are transient impulses, persistent stresses, or component failures disrupting normal processing</li>
+<li>stress (to the system): is a force applied to the system over an extended period.</li>
+<li>impulse: is a rapid shock to the system.</li>
+<li>a material changes shape when stress is applied. This change in shape is called the strain.</li>
+<li>The original trigger and the way the crack spreads to the rest of the system, together with the result of the damage, failure mode.</li>
+<li>crumple zones: areas designed to protect passengers by failing first. called crackstoppers</li>
+</ul>
+
+<p>All of these are quotes from the book.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/06/10/role-software-consultant/">The role of a software consultant</a>
     </h1>
     <p >Jun 10, 2016
@@ -686,88 +729,6 @@ prosper and the Principal to suffer.</p>
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/04/18/brownish-greenfield-gilded-rose-kata-formulation/">Brownish Greenfield Gilded Rose Kata</a>
-    </h1>
-    <p >Apr 18, 2016
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/04/18/brownish-greenfield-gilded-rose-kata-formulation/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/formulation/">formulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/kata-formulation/">kata-formulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/gilded-rose/">gilded-rose</a><a class="label" href="https://alvarogarcia7.github.io/categories/trikitrok/">trikitrok</a><a class="label" href="https://alvarogarcia7.github.io/categories/manuel-rivero/">manuel-rivero</a><a class="label" href="https://alvarogarcia7.github.io/categories/greenfield/">greenfield</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/bobby-johnson/">bobby-johnson</a><a class="label" href="https://alvarogarcia7.github.io/categories/terry-hughes/">terry-hughes</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>(This formulation has been copied and adapted from <a href="https://twitter.com/NotMyself" target="_blank">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes" target="_blank">Terry Hughes</a>&rsquo;s <a href="https://github.com/NotMyself/GildedRose" target="_blank">repository</a>)</p>
-
-<h2 id="formulation">Formulation</h2>
-
-<p>Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.</p>
-
-<p>Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us. It was developed by a no-nonsense type named Leeroy, who has moved on to new adventures.</p>
-
-<p>Your task is to rewrite the system using an old class, that already exists.
-First an introduction to our system:</p>
-
-<ul>
-<li>All items have a <code>SellIn</code> value which denotes the number of days we have to sell the item</li>
-<li>All items have a <code>Quality</code> value which denotes how valuable the item is</li>
-<li>At the end of each day our system lowers both values for every item</li>
-</ul>
-
-<p>Pretty simple, right? Well this is where it gets interesting:</p>
-
-<ul>
-<li>Once the sell by date has passed, <code>Quality</code> degrades twice as fast</li>
-<li>The <code>Quality</code> of an item is never negative</li>
-<li>&ldquo;Aged Brie&rdquo; actually increases in <code>Quality</code> the older it gets</li>
-<li>&ldquo;Sulfuras&rdquo;, being a legendary item, never has to be sold or decreases in <code>Quality</code></li>
-<li>The <code>Quality</code> of an item is never more than 50, however &ldquo;Sulfuras&rdquo; is a legendary item and as such its <code>Quality</code> is 80 and it never alters.</li>
-<li>&ldquo;Backstage passes&rdquo;, like aged brie, increases in <code>Quality</code> as it&rsquo;s <code>SellIn</code> value approaches; <code>Quality</code> increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but <code>Quality</code> drops to 0 after the concert</li>
-<li>&ldquo;Conjured&rdquo; items degrade in <code>Quality</code> twice as fast as normal items</li>
-</ul>
-
-<p>Your task is to create the system from scratch, with only a restriction: you must use the class <code>Item</code> that Leeroy developed. This class is:</p>
-
-<ul>
-<li>unmodifiable, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in shared code ownership. This prohibition applies to modifying it, deleting it, adding new methods, deleting methodts, changing visibility of stuff, etc</li>
-<li>cannot be inherited, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in code inheritance</li>
-</ul>
-
-<p>The <code>Item</code> class can be found in many programming languages in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata" target="_blank">Emily Bache&rsquo;s repository</a>. You are looking for the class / type <code>Item</code></p>
-
-<p>Happy katas and happy koding. Please be careful with the goblin!</p>
-
-<h2 id="how-to-start">How to start</h2>
-
-<ul>
-<li>Create a new repo</li>
-<li>Find the class <code>Item</code> in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata" target="_blank">this repo</a></li>
-<li>Use TDD to develop the functionality. Remember, <code>Item</code> will stay as it is.</li>
-<li>Have fun</li>
-</ul>
-
-<h2 id="acknowledgements">Acknowledgements</h2>
-
-<p>Thanks to <a href="https://twitter.com/@trikitrok" target="_blank">@trikitrok</a> for the idea, <a href="https://twitter.com/NotMyself" target="_blank">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes" target="_blank">Terry Hughes</a> for allowing me to copy and modify their kata.</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -913,7 +874,11 @@ First an introduction to our system:</p>
       <ul id="recent_posts">
         
           <li class="post">
-            <a href="/blog/2017/06/01/self-study-in-june-2017/">Self-Study in June 2017</a>
+            <a href="/blog/2017/06/30/books-read-2017q2/">Books read in 2017Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/06/01/self-study-june-2017/">Self-Study in June 2017</a>
           </li>
         
           <li class="post">
@@ -946,10 +911,6 @@ First an introduction to our system:</p>
         
           <li class="post">
             <a href="/blog/2017/05/01/self-study-in-may-2017/">Self-Study in May 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/04/01/self-study-in-april-2017/">Self-Study in April 2017</a>
           </li>
         
       </ul>

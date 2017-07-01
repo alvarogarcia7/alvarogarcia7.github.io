@@ -129,6 +129,88 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/04/18/brownish-greenfield-gilded-rose-kata-formulation/">Brownish Greenfield Gilded Rose Kata</a>
+    </h1>
+    <p >Apr 18, 2016
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/04/18/brownish-greenfield-gilded-rose-kata-formulation/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/formulation/">formulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/kata-formulation/">kata-formulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/gilded-rose/">gilded-rose</a><a class="label" href="https://alvarogarcia7.github.io/categories/trikitrok/">trikitrok</a><a class="label" href="https://alvarogarcia7.github.io/categories/manuel-rivero/">manuel-rivero</a><a class="label" href="https://alvarogarcia7.github.io/categories/greenfield/">greenfield</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/bobby-johnson/">bobby-johnson</a><a class="label" href="https://alvarogarcia7.github.io/categories/terry-hughes/">terry-hughes</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>(This formulation has been copied and adapted from <a href="https://twitter.com/NotMyself" target="_blank">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes" target="_blank">Terry Hughes</a>&rsquo;s <a href="https://github.com/NotMyself/GildedRose" target="_blank">repository</a>)</p>
+
+<h2 id="formulation">Formulation</h2>
+
+<p>Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.</p>
+
+<p>Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us. It was developed by a no-nonsense type named Leeroy, who has moved on to new adventures.</p>
+
+<p>Your task is to rewrite the system using an old class, that already exists.
+First an introduction to our system:</p>
+
+<ul>
+<li>All items have a <code>SellIn</code> value which denotes the number of days we have to sell the item</li>
+<li>All items have a <code>Quality</code> value which denotes how valuable the item is</li>
+<li>At the end of each day our system lowers both values for every item</li>
+</ul>
+
+<p>Pretty simple, right? Well this is where it gets interesting:</p>
+
+<ul>
+<li>Once the sell by date has passed, <code>Quality</code> degrades twice as fast</li>
+<li>The <code>Quality</code> of an item is never negative</li>
+<li>&ldquo;Aged Brie&rdquo; actually increases in <code>Quality</code> the older it gets</li>
+<li>&ldquo;Sulfuras&rdquo;, being a legendary item, never has to be sold or decreases in <code>Quality</code></li>
+<li>The <code>Quality</code> of an item is never more than 50, however &ldquo;Sulfuras&rdquo; is a legendary item and as such its <code>Quality</code> is 80 and it never alters.</li>
+<li>&ldquo;Backstage passes&rdquo;, like aged brie, increases in <code>Quality</code> as it&rsquo;s <code>SellIn</code> value approaches; <code>Quality</code> increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but <code>Quality</code> drops to 0 after the concert</li>
+<li>&ldquo;Conjured&rdquo; items degrade in <code>Quality</code> twice as fast as normal items</li>
+</ul>
+
+<p>Your task is to create the system from scratch, with only a restriction: you must use the class <code>Item</code> that Leeroy developed. This class is:</p>
+
+<ul>
+<li>unmodifiable, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in shared code ownership. This prohibition applies to modifying it, deleting it, adding new methods, deleting methodts, changing visibility of stuff, etc</li>
+<li>cannot be inherited, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in code inheritance</li>
+</ul>
+
+<p>The <code>Item</code> class can be found in many programming languages in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata" target="_blank">Emily Bache&rsquo;s repository</a>. You are looking for the class / type <code>Item</code></p>
+
+<p>Happy katas and happy koding. Please be careful with the goblin!</p>
+
+<h2 id="how-to-start">How to start</h2>
+
+<ul>
+<li>Create a new repo</li>
+<li>Find the class <code>Item</code> in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata" target="_blank">this repo</a></li>
+<li>Use TDD to develop the functionality. Remember, <code>Item</code> will stay as it is.</li>
+<li>Have fun</li>
+</ul>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>Thanks to <a href="https://twitter.com/@trikitrok" target="_blank">@trikitrok</a> for the idea, <a href="https://twitter.com/NotMyself" target="_blank">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes" target="_blank">Terry Hughes</a> for allowing me to copy and modify their kata.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/">Faster site generation with a native Octopress 2</a>
     </h1>
     <p >Apr 17, 2016
@@ -938,92 +1020,6 @@ modifiers can manipulate the block so that we can theme or style that particular
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/">Kata formulation: Find the comments</a>
-    </h1>
-    <p >Mar 1, 2016
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/formulation/">formulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/php/">php</a><a class="label" href="https://alvarogarcia7.github.io/categories/comment/">comment</a><a class="label" href="https://alvarogarcia7.github.io/categories/exercise/">exercise</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>Little Johnny is inspecting a PHP source code that contains comments. These comments contains words that he doesn&rsquo;t understand, as it written in another language.</p>
-
-<h2 id="rules-and-constraints">Rules and constraints</h2>
-
-<p>The source code in the PHP files does not need to be correct.</p>
-
-<p>A comment (a subset of PHP comments) is defined as:</p>
-
-<ul>
-<li>A line containing C-style comment delimiter, except when it is within a string
-
-<ul>
-<li><code>// hello C-style</code> is a valid comment</li>
-<li><code>echo &quot;//&quot;;</code> is not a comment</li>
-<li><code>echo '//';</code> is not a comment</li>
-</ul></li>
-<li>A line containing Perl-style comment delimiter, except when it is within a string
-
-<ul>
-<li><code># hello Perl-style</code> is a valid comment</li>
-<li><code>echo &quot;#&quot;;</code> is not a comment</li>
-<li><code>echo '#';</code> is not a comment</li>
-</ul></li>
-<li>There are no multi-line comments
-
-<ul>
-<li><code>/* ... */</code> is not a comment</li>
-</ul></li>
-</ul>
-
-<p>You can do this kata in any language you want. In any case it is not allowed to use a PHP parser. This task must be done manually.</p>
-
-<h2 id="how-to-start">How to start</h2>
-
-<ul>
-<li>Clone/fork (any stars are welcome) <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments" target="_blank">this repo</a></li>
-<li>Run the tests. <a href="https://github.com/alvarogarcia7/cli-app-base-clojure/blob/master/README.md#tests" target="_blank">See this</a> for help</li>
-<li>They should be red.</li>
-<li>Go to production code and fix it</li>
-<li>Have fun (happy kata and happy koding!)</li>
-</ul>
-
-<h2 id="requirements">Requirements</h2>
-
-<p>Please do not read ahead, just read the current assignment, do it, then read the next one:</p>
-
-<ol>
-<li>Can you help Little Johnny fetch all those comments?</li>
-<li>These messages have not been audited yet and we want to publish the code, so it is better to remove the comments. Can you do it?</li>
-</ol>
-
-<h2 id="optional-requirement">Optional requirement</h2>
-
-<p>As an optional task, when the problem is finished (you can attack in your preferred order), there must be an executable jar with some parameters to process the current folder with the &lsquo;working modes&rsquo; specified above.</p>
-
-<p>(This formulation is also present at the <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments/blob/master/README.md" target="_blank">repository</a> )</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -1169,7 +1165,11 @@ modifiers can manipulate the block so that we can theme or style that particular
       <ul id="recent_posts">
         
           <li class="post">
-            <a href="/blog/2017/06/01/self-study-in-june-2017/">Self-Study in June 2017</a>
+            <a href="/blog/2017/06/30/books-read-2017q2/">Books read in 2017Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/06/01/self-study-june-2017/">Self-Study in June 2017</a>
           </li>
         
           <li class="post">
@@ -1202,10 +1202,6 @@ modifiers can manipulate the block so that we can theme or style that particular
         
           <li class="post">
             <a href="/blog/2017/05/01/self-study-in-may-2017/">Self-Study in May 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/04/01/self-study-in-april-2017/">Self-Study in April 2017</a>
           </li>
         
       </ul>
