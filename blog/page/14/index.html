@@ -129,6 +129,115 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate values in Constants</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/duplicate/">duplicate</a><a class="label" href="https://alvarogarcia7.github.io/categories/gmaur/">gmaur</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Imagine having this java class:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">RepeatedConstants</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A_1</span> <span class="o">=</span> <span class="n">A</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">A_2</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">_3</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">THREE</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly. To do this, remove all text that is not a value:</p>
+
+<p>find what, regex mode: <code>^.*=\s*(.*);</code>
+replace with: $1</p>
+
+<p>Explanation:</p>
+
+<ul>
+<li><code>^.*=\s*</code>: any character before the equal sign. Any whitespace right after it.</li>
+<li><code>(.*);</code>: capture everything that is before the semicolon (;)</li>
+</ul>
+
+<p>You end up with this:</p>
+
+<pre><code>&quot;A&quot;
+A
+&quot;A&quot;
+
+3
+3
+</code></pre>
+
+<p>Copy it to <code>a.txt</code>, <code>sort</code> it and <code>uniq</code> it (to remove duplication):</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat a.txt <span class="p">|</span> sort <span class="p">|</span> uniq &gt; uniq.txt
+</code></pre></div>
+
+<p>then sort the non-uniq version:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat a.txt <span class="p">|</span> sort &gt; sorted.txt
+</code></pre></div>
+
+<p>and diff among them, to find the repeated values:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>diff sorted.txt uniq.txt
+
+<span class="m">3</span>,4d2
+&lt; <span class="s2">&quot;A&quot;</span>
+&lt; <span class="m">3</span>
+</code></pre></div>
+
+<p>These are the repeated values. The variable <code>public static final String A_1 = A;</code> was not caught by this as it only has the same value in execution, not staticly.</p>
+
+<p>For this, at Gmaur, we have developed a small <a href="https://github.com/GMaur/java-duplicates-detector" target="_blank">module to detect duplicates</a>. The main code is this:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RepeatedFinder</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">final</span> <span class="n">Class</span> <span class="n">aClass</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">RepeatedFinder</span><span class="o">(</span><span class="n">Class</span> <span class="n">aClass</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">aClass</span> <span class="o">=</span> <span class="n">aClass</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="n">MultiMap</span> <span class="nf">findDuplicates</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">generateMapFromValueToVariables</span><span class="o">(</span><span class="n">aClass</span><span class="o">).</span><span class="na">valuesWithMoreThanOneVariable</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kd">private</span> <span class="n">ValueToNameRepository</span> <span class="nf">generateMapFromValueToVariables</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
+    <span class="n">ValueToNameRepository</span> <span class="n">valueToNames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ValueToNameRepository</span><span class="o">();</span>
+    <span class="n">Field</span><span class="o">[]</span> <span class="n">fields</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredFields</span><span class="o">();</span>
+    <span class="n">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Field</span> <span class="n">field</span> <span class="o">:</span> <span class="n">fields</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+      <span class="n">valueToNames</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">field</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">valueToNames</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre></div>
+
+<p>The tests and the source code can be found here: <a href="https://github.com/GMaur/java-duplicates-detector" target="_blank">https://github.com/GMaur/java-duplicates-detector</a></p>
+
+<p>Hope you enjoy it, as much as we have enjoyed writing it!</p>
+
+<p>Any feedback is welcome.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the same Import Order in IntelliJ IDEA as Eclipse&#39;s</a>
     </h1>
     <p >Jul 30, 2015
@@ -647,70 +756,6 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/">What defines a dependency</a>
-    </h1>
-    <p >Jul 13, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/fragment/">fragment</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/listener/">listener</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-stereotype/">object-stereotype</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java" target="_blank">fragment</a>):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">register</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">userName</span><span class="o">)</span>  <span class="o">{</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="n">registeredUsers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="n">userName</span><span class="o">));</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">AlreadyRegisteredUserException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">userName</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
-
-<p>He suggested that:</p>
-
-<ul>
-<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
-<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
-</ul>
-
-<p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
-
-<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java" target="_blank">fragment</a>)</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span> <span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">,</span> <span class="kd">final</span> <span class="n">RegistryResultListener</span> <span class="n">resultListener</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">contains</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="o">{</span>
-        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
-        <span class="k">return</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">users</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-    <span class="n">resultListener</span><span class="o">.</span><span class="na">successfullyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
-
-<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
-
-        
-
-    </article>
-    
     
     
 
@@ -788,6 +833,8 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
     
         <a href="/blog/page/28/" class="label-pagination">28</a>
     
+        <a href="/blog/page/29/" class="label-pagination">29</a>
+    
 
     
     
@@ -796,7 +843,7 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
 
     
     
-        <a href="/blog/page/28/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/29/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -856,6 +903,10 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/07/01/self-study-july-2017/">Self-Study in July 2017</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/06/30/books-read-2017q2/">Books read in 2017Q2</a>
           </li>
         
@@ -889,10 +940,6 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
         
           <li class="post">
             <a href="/blog/2017/05/07/notes-agile-open-space-barcelona/">Notes from the Agile Barcelona Open Space</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/05/01/self-study-in-may-2017/">Self-Study in May 2017</a>
           </li>
         
       </ul>
