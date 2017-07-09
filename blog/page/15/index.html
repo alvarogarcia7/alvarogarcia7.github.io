@@ -129,6 +129,98 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster site generation for Octopress 2</a>
+    </h1>
+    <p >Jul 13, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See <a href="[here](../../../../2016/04/17/faster-site-generation-native-octopress/)" target="_blank">here</a></p>
+
+<p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/" target="_blank">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
+
+<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/" target="_blank">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
+
+<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
+
+<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cp -R blog_source blog_post_factory
+</code></pre></div>
+
+<p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nb">cd</span> blog_post_factory/source/_posts
+git update-index --assume-unchanged <span class="k">$(</span>ls *markdown<span class="k">)</span>
+</code></pre></div>
+
+<p>Delete all existing markdown files</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rm *markdown
+</code></pre></div>
+
+<p>Check that git doesn&rsquo;t realize about the difference:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>git status
+
+<span class="c1"># On branch source</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</code></pre></div>
+
+<p>Create a new post:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake new_post<span class="o">[</span><span class="s2">&quot;Faster site generation for Octopress 2&quot;</span><span class="o">]</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># On branch source</span>
+<span class="c1"># Untracked files:</span>
+<span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="c1">#</span>
+<span class="c1">#	2015-07-13-faster-site-generation-for-octopress-2.markdown</span>
+nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> to track<span class="o">)</span>
+</code></pre></div>
+
+<p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
+
+<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake generate <span class="o">&amp;&amp;</span> rake deploy
+</code></pre></div>
+
+<p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
+
+<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">desc</span> <span class="s2">&quot;Cleans all *.markdown files for a faster site generation&quot;</span>
+<span class="n">task</span> <span class="ss">:ignore</span> <span class="k">do</span>
+  <span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged $(ls *.markdown)&quot;</span>
+  <span class="nb">system</span> <span class="s2">&quot;rm $(ls *.markdown)&quot;</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
+
+<pre><code>Regenerating: 1 file(s) changed at 2015-07-13 08:03:29 ...done in 0.617269045 seconds.
+</code></pre>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/">What defines a dependency</a>
     </h1>
     <p >Jul 13, 2015
@@ -423,42 +515,6 @@ DocumentControllerTest
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: committing to the repo file by file</a>
-    </h1>
-    <p >Jul 8, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
-
-<p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">for</span> f in <span class="k">$(</span>git status -s <span class="p">|</span>grep <span class="s2">&quot;^M&quot;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
-  git add <span class="nv">$f</span>
-  git commit -m <span class="s2">&quot;generic commit for all files&quot;</span>
-<span class="k">done</span>
-</code></pre></div>
-
-        
-
-    </article>
-    
     
     
 
@@ -606,6 +662,10 @@ DocumentControllerTest
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/07/09/search-for-value-quote-chapter-1/">The Search for Value (a quote)</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/07/01/self-study-july-2017/">Self-Study in July 2017</a>
           </li>
         
@@ -639,10 +699,6 @@ DocumentControllerTest
         
           <li class="post">
             <a href="/blog/2017/05/13/senior-software-engineer-chapter-3/">The Senior Software Engineer, Chapter 3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/05/07/notes-agile-open-space-barcelona/">Notes from the Agile Barcelona Open Space</a>
           </li>
         
       </ul>
