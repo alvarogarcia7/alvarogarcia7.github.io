@@ -129,6 +129,41 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/01/12/kata-reverse-polish-notation-in-java/">Kata: Reverse Polish Notation in java</a>
+    </h1>
+    <p >Jan 12, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/01/12/kata-reverse-polish-notation-in-java/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">TDD</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/rpn/">RPN</a><a class="label" href="https://alvarogarcia7.github.io/categories/reverse-polish-notation/">reverse-polish-notation</a><a class="label" href="https://alvarogarcia7.github.io/categories/calculator/">calculator</a><a class="label" href="https://alvarogarcia7.github.io/categories/using-notes/">using-notes</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I&rsquo;ve written a <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation" target="_blank">RPN</a> string calculator in java, using TDD with these: mockito, hamcrest, junit</p>
+
+<p>It&rsquo;s close to the <a href="http://osherove.com/tdd-kata-1/" target="_blank">String Calculator kata</a>, by <a href="https://twitter.com/RoyOsherove" target="_blank">Roy Osherove</a>. This RPN is using mocks (so more difficult than the String calculator)</p>
+
+<p>I&rsquo;ve tried to practice <a href="http://us2.campaign-archive1.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=42f9a0b66f&amp;e=6ca6702beb" target="_blank">&ldquo;Your tests are dragging you down&rdquo;</a> by <a href="https://twitter.com/jbrains" target="_blank">J.B Rainsberger</a> (mainly, to use something to write on). This behavior is also explained in the book <a href="http://www.carlosble.com/libro-tdd/" target="_blank">Dirigido por tests</a> (Spanish) by <a href="https://twitter.com/carlosble" target="_blank">Carlos Blé</a>.</p>
+
+<p>My solution is <a href="https://github.com/alvarogarcia7/kata-rpn-calculator-java" target="_blank">here</a>. Every step (red, green, refactor) has been saved.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/01/06/listening-to-the-tests/">Listening to the tests</a>
     </h1>
     <p >Jan 6, 2015
@@ -366,136 +401,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/">Should we start the TDD cycle on refactor?</a>
-    </h1>
-    <p >Dec 29, 2014
-         - 4 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">TDD</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/cas2k14/">CAS2k14</a><a class="label" href="https://alvarogarcia7.github.io/categories/new-idea/">new-idea</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>In this lexical scope, TDD by example is referring to this book<sup class="footnote-ref" id="fnref:tddbyexample"><a rel="footnote" href="#fn:tddbyexample">1</a></sup>, available <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530" target="_blank">on Amazon</a></p>
-
-<p>###The TDD cycle</p>
-
-<p>Altough <a href="https://twitter.com/KentBeck" target="_blank">Kent Beck</a> in his book Test-Driven Development by example explains in &ldquo;Part I: the money example&rdquo;<sup class="footnote-ref" id="fnref:tddbyexampleparti"><a rel="footnote" href="#fn:tddbyexampleparti">2</a></sup> that one should</p>
-
-<blockquote>
-<p>quickly add a test;</p>
-
-<p>run all the tests and see the new one fail [&hellip;]</p>
-
-<p><cite>Kent Beck </cite></p>
-</blockquote>
-
-<p>Implying that the TDD cycle starts with the red. Later on he explains that the cycle continues with green and refactor and back to red.</p>
-
-<p>But I&rsquo;ve been hearing for a while that there&rsquo;re some useful refactors to be done before introducing new code. Rings in my head but the only example I have is Xavi Gost&rsquo;s &ldquo;La economía del refactoring<sup class="footnote-ref" id="fnref:refactoringeconomy"><a rel="footnote" href="#fn:refactoringeconomy">3</a></sup>&ldquo;</p>
-
-<p>###Refactoring
-Let&rsquo;s take a look at the definition of refactor (found <a href="http://www.refactoring.com/" target="_blank">here</a>):</p>
-
-<blockquote>
-<p>[Refactoring] is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.</p>
-
-<p><cite>Martin Fowler</cite></p>
-</blockquote>
-
-<p>I&rsquo;ve found some info on <a href="http://stackoverflow.com/questions/1355101/test-code-refactor-when-should-we-start-a-refactoring" target="_blank">stackoverflow</a> about the subject. The currently <a href="http://stackoverflow.com/a/1355782" target="_blank">accepted answer</a> points out some interesting comments:</p>
-
-<ul>
-<li>Do not refactor on red. Always a good reminder</li>
-<li>If you are refactoring for introducing a feature, how much refactor is enough? This is speculative development, possibly taking much time from needed development</li>
-</ul>
-
-<p>The last point is the one that interests me the most:</p>
-
-<ul>
-<li>Your refactoring might not be where you&rsquo;re going to introduce new production code<sup class="footnote-ref" id="fnref:spatial-cach"><a rel="footnote" href="#fn:spatial-cach">0</a></sup></li>
-<li>You might end up introducing features after a few hours/days of refactoring, therefore losing focus on the refactor you did and why (local caché)</li>
-<li>Given that I&rsquo;ve already &ldquo;cleaned up&rdquo; this, I could also go somewhere else (slippery slope). Heard from <a href="https://twitter.com/xav1uzz" target="_blank">Xavi Gost</a> at the CAS2014 at his talk <a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/" target="_blank">La economía del refactoring</a></li>
-</ul>
-
-<blockquote>
-<p>No está justificado hacer cambios fuera de la rebanada.</p>
-</blockquote>
-
-<p>Roughly translated to &ldquo;It&rsquo;s not justified to change outside the bread slice&rdquo;, as Xavi was referring to software as sliced bread instead of layers, vertical rather than horizontal</p>
-
-<p>###Should you do it?</p>
-
-<ul>
-<li>Doing it would be a good thing, as long as you know in advance what will be affected by the next feature.</li>
-<li>It can allow for less refactoring at the end of the cycle. This is not about duplication but refactoring to patterns. There might be a gain in refactoring to a pattern before introducing another feature. An example might be adding a new strategy when it&rsquo;s currently coded as if-then-else</li>
-<li>The last responsible moment might be before or after introducing the feature. You decide.</li>
-<li>Work less as there&rsquo;s no need for adding new cases to old structures and then simplifying</li>
-</ul>
-
-<p>###Should you not do it?</p>
-
-<ul>
-<li>Foreseeing the future is difficult, therefore you might end with unused development, as it is speculating</li>
-<li>Related to the last point, you might end refactoring in the wrong places. There&rsquo;s no current business value to it.</li>
-<li>Not useful on first round of a new feature, you can use a lambda transition to the red again. But then, this is not a general pattern, only applicable to a big percent of cases.</li>
-</ul>
-
-<h2 id="conclusions">Conclusions</h2>
-
-<p>Short answer: it mainly depends on your environment:</p>
-
-<ul>
-<li>You: experience, common sense (sadly) &mdash;another post coming&mdash;, benefit/time-wasted ratio</li>
-<li>Your project: how tight are deadlines, how critical that code is, the team&rsquo;s pressure</li>
-</ul>
-
-<p>Long answer: Yes, as long as:
- 1. You realize there is a fine line between fixing code and rewriting code (Egoless programming #4). Don&rsquo;t be a lone enforcer
- 2. Strictly follow the boy scout rule but only around your campfire, not outside of it.
- 1. You know your domain, pitfalls and team well
- 1. You want to test this hypothesis and post an answer</p>
-
-<p>###Sources</p>
-
-<ul>
-<li><a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/" target="_blank">La economía del refactoring</a>, <a href="https://twitter.com/xav1uzz" target="_blank">Xavi Gost</a></li>
-<li><a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530" target="_blank">Test-Driven Development by example</a>, <a href="https://twitter.com/KentBeck" target="_blank">Kent Beck</a></li>
-<li><a href="http://refactoring.com" target="_blank">Refactoring.com</a>, <a href="https://twitter.com/martinfowler" target="_blank">Martin Fowler</a></li>
-</ul>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:tddbyexample">Test-Driven Development by example; Beck, K. (ISBN-13: 078-5342146530)
- <a class="footnote-return" href="#fnref:tddbyexample"><sup>[return]</sup></a></li>
-<li id="fn:tddbyexampleparti">from the book, description of part I, before chapter I
- <a class="footnote-return" href="#fnref:tddbyexampleparti"><sup>[return]</sup></a></li>
-<li id="fn:refactoringeconomy">That talk is not yet available (AFAIK), but there&rsquo;s a <a href="http://ocana.github.io/articles/Conferencia-Agile-Spain-2014-primer-dia/" target="_blank">post</a> about it (Spanish)
- <a class="footnote-return" href="#fnref:refactoringeconomy"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
     
     
 
@@ -643,6 +548,10 @@ Let&rsquo;s take a look at the definition of refactor (found <a href="http://www
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2017/08/01/self-study-august-2017/">Self-Study in August 2017</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/07/09/nature-software-development-part-1/">The Nature of Software Development: Part I</a>
           </li>
         
@@ -676,10 +585,6 @@ Let&rsquo;s take a look at the definition of refactor (found <a href="http://www
         
           <li class="post">
             <a href="/blog/2017/05/23/senior-software-engineer-chapter-6/">The Senior Software Engineer, Chapter 6</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/05/23/senior-software-engineer-chapter-5/">The Senior Software Engineer, Chapter 5</a>
           </li>
         
       </ul>
