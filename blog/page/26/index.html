@@ -129,6 +129,287 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/21/a-legacy-code-introduction/">A legacy code introduction</a>
+    </h1>
+    <p >Feb 21, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/21/a-legacy-code-introduction/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/clean-code/">clean-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/uncle-bob/">uncle-bob</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-c-martin/">robert-c-martin</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/tiger-team/">tiger-team</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>This is one of the best legacy code introductions I&rsquo;ve seen:</p>
+
+<blockquote>
+<p>The Grand Redesign in the Sky</p>
+
+<p>Eventually the team rebels. They inform management that they cannot continue to develop in this odious code base. They demand a redesign. Management does not want to expend the resources on a whole new redesign of the project, but they cannot deny that productivity is terrible. Eventually they bend to the demands of the developers and authorize the grand redesign in the sky.</p>
+
+<p>A new tiger team is selected. Everyone wants to be on this team because it&rsquo;s a greenfield project. They get to start over and create something truly beautiful. But only the best and brightest are chosen for the tiger team. Everyone else must continue to maintain the current system.</p>
+
+<p>Now the two teams are in a race. The tiger team must build a new system that does everything that the old system does. Not only that, they have to keep up with the changes that are continuously being made to the old system. Management will not replace the old system until the new system can do everything that the old system does.</p>
+
+<p>This race can go on for a very long time. I&rsquo;ve seen it take 10 years. And by the time it&rsquo;s done, the original members of the tiger team are long gone, and the current members are demanding that the new system be redesigned because it&rsquo;s such a mess.</p>
+
+<p><cite> Robert C. Martin </cite> in the chapter 1: Clean Code from the book by <a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/" target="_blank">the same name</a></p>
+</blockquote>
+
+<p>Also, why should you estimate the new tiger team abilities better than the old tiger team? Is it because the language, tools, or just because they are &ldquo;plain better&rdquo;?</p>
+
+<p>What guarantees that the resulting software is going to be better than the old one?</p>
+
+<p>Another interesting definition of legacy code is Michael Feather&rsquo;s one (code without tests).</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/18/the-use-of-power-tools/">The use of power tools</a>
+    </h1>
+    <p >Feb 18, 2015
+         - 6 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/18/the-use-of-power-tools/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/power-tools/">power-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship-patterns/">apprenticeship-patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/choose-your-own-adventure/">choose-your-own-adventure</a><a class="label" href="https://alvarogarcia7.github.io/categories/big-o-notation/">big-o-notation</a><a class="label" href="https://alvarogarcia7.github.io/categories/algorithm/">algorithm</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/right-tool-for-the-right-job/">right-tool-for-the-right-job</a><a class="label" href="https://alvarogarcia7.github.io/categories/unix-tools/">unix-tools</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>I&rsquo;m currently reading the Apprenticeship patterns book, out of order (explained here: TODO).</p>
+
+<p>I&rsquo;m writing down the read chapters in a text file, to measure progress and also be able to backtrack if necessary. This also makes reading the book a &ldquo;choose your own adventure&rdquo;</p>
+
+<p>After reading approximately half the chapters, the navigation wasn&rsquo;t so easy using only the &ldquo;see also&rdquo; part. So I decided to break free from that constraint and start reading other chapters. But how do you know which chapters you have left to read? Knowing the whole set (<code>all</code>) and the read set (<code>read</code>) this is just the <code>all - read</code>.</p>
+
+<p>Coming to a more practical way, how to know this is an automated (non-manual) way? There are <code>m</code> in <code>read</code> and n in <code>all</code>, where <code>m &lt;= n</code>.</p>
+
+<p>The simplest approach would be:</p>
+
+<pre><code>for each current in read:
+  remove current from all
+</code></pre>
+
+<p>as read is is no particular order, that would yield some <code>O(m*n)</code>, worst case scenario (<code>m==n</code>), <code>O(n^2)</code>.</p>
+
+<p>That is quite expensive, especially if you have to do it manually</p>
+
+<p>If we use the same algorithm but sort the <code>read</code> set (no longer a set, as sets have no order). Also, converting it to a <code>O(1)</code> lookup table (e.g., a map), that would yield some <code>O(n log2 n + m)</code> that is already better. Taking into account that the sorting can be automated by the computer, it would yield a &ldquo;manual O notation cost&rdquo; of <code>O(1 + m)</code>. So, relative to the amount of chapters you have read.</p>
+
+<p>But we can even do better in terms of this &ldquo;manual big o notation&rdquo;:</p>
+
+<pre><code>read &lt;- sort read into a map ; cost O(1)
+all &lt;- sort all into a map ; cost O(1)
+
+unread &lt;- all - intersection(all, read) ; cost O(1)
+</code></pre>
+
+<p>And this is where the power tools come into place: if we use <code>comm</code> or <code>diff</code>, the computer will create  the <code>unread</code> set for us, in &ldquo;manual&rdquo; cost of <code>O(1)</code></p>
+
+<h2 id="example-using-vim-sort-and-diff">Example using vim, sort and diff</h2>
+
+<p>This is the <code>read</code> set (for the moment):</p>
+
+<pre><code>the long road
+draw your own map
+find mentors
+the deep end
+create feedback loops
+the white belt
+practice, practice, practice
+concrete skills
+your first language
+use the source
+reflect as you work
+record what you learn
+kindred spirits
+nurture your passion
+study the classics
+expose your ignorance
+dig deeper
+be the worst
+rubbing elbows
+unleash your enthusiasm
+</code></pre>
+
+<p>and this is the all set (copy-paste from the book):</p>
+
+<pre><code>INTRODUCTION 1 What Is Software Craftsmanship? 3 What Is Apprenticeship? 8 What Is an Apprenticeship Pattern? 9 Where Did the Patterns Come From? 9 Where Do We Go from Here? 10
+2 EMPTYING THE CUP 11 Your First Language 13 The White Belt 18 Unleash Your Enthusiasm 22 Concrete Skills 24 Expose Your Ignorance 25 Confront Your Ignorance 28 The Deep End 30 Retreat into Competence 32 Wrapping Up 34
+3 WALKING THE LONG ROAD 37 The Long Road 38 Craft over Art 40 Sustainable Motivations 43 Nurture Your Passion 45 Draw Your Own Map 47 Use Your Title 50 Stay in the Trenches 52 A Different Road 53 Wrapping Up 55
+4 ACCURATE SELF-ASSESSMENT 57 Be the Worst 58 Find Mentors 61 Kindred Spirits 64 Rubbing Elbows 66 Sweep the Floor 68 Wrapping Up 71
+5 PERPETUAL LEARNING 73 Expand Your Bandwidth 74 Practice, Practice, Practice 77 Breakable Toys 79 Use the Source 82 Reflect As You Work 85 Record What You Learn 87 Share What You Learn 89 Create Feedback Loops 91 Learn How You Fail 94 Wrapping Up 95
+6 CONSTRUCT YOUR CURRICULUM 99 Reading List 100 Read Constantly 102 Study the Classics 104 Dig Deeper 105 Familiar Tools 109 Wrapping Up 111
+</code></pre>
+
+<p>The first line is not interesting to our purposes, so delete it with:</p>
+
+<p>go to first line (<code>1G</code>), then delete (<code>dd</code>)</p>
+
+<p>After a quick inspection, there&rsquo;s a number at the end of the desired line, so replace it with newline:</p>
+
+<p><code>%s/\d\+/\r/g</code> (a snippet below):</p>
+
+<pre><code>EMPTYING THE CUP 
+ Your First Language
+ The White Belt 
+ Unleash Your Enthusiasm 
+ Concrete Skills 
+ Expose Your Ignorance
+ Confront Your Ignorance 
+ The Deep End 
+ Retreat into Competence 
+ Wrapping Up 
+
+
+ WALKING THE LONG ROAD 
+</code></pre>
+
+<p>The title lines are all uppercase, so delete them with <code>:%g/^\s*\u\u/d</code>:</p>
+
+<pre><code> Your First Language 
+ The White Belt 
+ Unleash Your Enthusiasm
+ Concrete Skills 
+ Expose Your Ignorance
+ Confront Your Ignorance
+ The Deep End
+ Retreat into Competence
+ Wrapping Up 
+ 
+ 
+ The Long Road 
+</code></pre>
+
+<p>explanation:</p>
+
+<ul>
+<li><code>:</code> : command</li>
+<li><code>%</code> : in all the file</li>
+<li><code>g</code> : do (I remember it as &lsquo;go&rsquo;)</li>
+<li><code>^</code> : starting at the beginning</li>
+<li><code>\s*</code>: whitespace, as much a possible</li>
+<li><code>\u\u</code>: exactly two uppercase letters. Can also be expressed as <code>\u\{2}</code></li>
+<li><code>d</code> : delete</li>
+</ul>
+
+<p>for more information on vim&rsquo;s regex, go <a href="http://vimregex.com/" target="_blank">here</a></p>
+
+<p>but there are empty lines. Delete them with: <code>%g/^$/d</code>:</p>
+
+<pre><code> Your First Language
+ The White Belt
+ Unleash Your Enthusiasm
+ Concrete Skills
+ Expose Your Ignorance 
+ Confront Your Ignorance
+ The Deep End 
+ Retreat into Competence
+ The Long Road
+</code></pre>
+
+<p>there is a space at the beginning of the line, delete it with <code>:%s/^ //</code>:</p>
+
+<pre><code>Your First Language 
+The White Belt 
+Unleash Your Enthusiasm 
+Concrete Skills 
+Expose Your Ignorance  
+Confront Your Ignorance 
+The Deep End  
+Retreat into Competence 
+Wrapping Up  
+The Long Road  
+</code></pre>
+
+<p>there are upper and lowercase letters. You could find a way of doing it with vi, but I prefer something that I can remember: save the document, then process it with <code>awk</code> and <code>sort</code></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat all.txt <span class="p">|</span> awk <span class="s1">&#39;{print tolower($0)&#39;</span><span class="o">}</span><span class="p">|</span> sort &gt; all_sorted.txt
+</code></pre></div>
+
+<p>(snippet):</p>
+
+<pre><code>a different road 
+be the worst 
+breakable toys 
+concrete skills 
+confront your ignorance 
+</code></pre>
+
+<p>If needed, sort and downcase the read.txt too.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat read.txt <span class="p">|</span> awk <span class="s1">&#39;{print tolower($0)&#39;</span><span class="o">}</span><span class="p">|</span> sort &gt; read_sorted.txt
+</code></pre></div>
+
+<p>I tried using <code>comm</code>, but it wasn&rsquo;t so useful (because of whitespace).</p>
+
+<p>Tried <code>diff</code>:</p>
+
+<pre><code>diff read_sorted.txt all_sorted.txt  -bBw &gt; to_read.txt
+
+0a1
+&gt; a different road 
+1a3
+&gt; breakable toys 
+2a5,6
+&gt; confront your ignorance 
+&gt; craft over art 
+5a10
+&gt; expand your bandwidth 
+6a12
+&gt; familiar tools 
+8a15
+</code></pre>
+
+<p>to know which are the remain chapters:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat to_read.txt <span class="p">|</span> grep <span class="s2">&quot;&gt;&quot;</span>
+</code></pre></div>
+
+<p>to count the number of remaining chapters:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat to_read.txt <span class="p">|</span> grep <span class="s2">&quot;&gt;&quot;</span> <span class="p">|</span> wc -l
+</code></pre></div>
+
+<p>The lesson learned here is to master your tools. This would have cost me a few minutes if done manually as the list was short, too much time if long (&gt;1000 lines).</p>
+
+<p>On a funny note, it has taken me approximately 2 min to do this processing but ~45 minutes to write this blog post. So I don&rsquo;t recommend you write as many posts as processings you do.</p>
+
+<p>To quote Apprenticeship patterns, <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch03.html#solution_id16" target="_blank">A different road</a>:</p>
+
+<blockquote>
+<p>If you walk away from software development, you will find that the habit of rigorous thinking and automating tasks involving large volumes of data will still be useful wherever you go</p>
+
+<p>D Hoover, A Oshineye</p>
+</blockquote>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/">Open discussion: Behaviour-Driven Development</a>
     </h1>
     <p >Feb 15, 2015
@@ -438,119 +719,6 @@ Then I have an element on the list
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish/">Book: Diseño Ágil con TDD (Spanish)</a>
-    </h1>
-    <p >Feb 2, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-review/">book-review</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/wewlc/">wewlc</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>I&rsquo;ve read this book <a href="http://www.carlosble.com/libro-tdd/" target="_blank">Diseño Ágil con TDD</a> (Spanish) by
-<a href="https://twitter.com/carlosble" target="_blank">Carlos Blé</a> from cover to cover,
-when previously I had only read the theoretical parts (Part I and Chapter 12 in Part II).</p>
-
-<p>It&rsquo;s worth noting that this is the first TDD book in Spanish (I haven&rsquo;t found any book in Spanish predating this one - also backed by the author; published in January 2010) and, as such, there are some translations that could be improved. Not that it makes it more difficult to read. Sometimes it&rsquo;s a good idea to roughly translate concepts into English and then you&rsquo;ll understand the point.</p>
-
-<h2 id="first-part">First part</h2>
-
-<p>The first part is very interesting, a theoretical introduction into TDD, ATDD and Agile methodologies. Points to some good books as a reference (e.g., Growing Object Oriented Software, Guided by Tests; Working Effectively with Legacy Code; Refactoring; etc)</p>
-
-<p>He explains the TDD algorithm (chapter 2) and the ATDD one (chapter 3). These two are maybe the two most important ones on the book. Should you read only a part of this book, I&rsquo;d recommend to read the motivational intro (the fable on the preface) and these two.</p>
-
-<p>He gives excellent pieces of advice who, correctly applied, would set the basis for good software development, such as SOLID, Object Oriented Design (OOD), Inversion of Control (IoC), etc. (See chapter 7, &ldquo;Diseño orientado a objetos&rdquo;).</p>
-
-<p>There&rsquo;s a chapter (number 6) on &ldquo;Mocks and other test doubles&rdquo; (translation is mine)</p>
-
-<h2 id="second-part">Second part</h2>
-
-<p>The second part, as many other books where the source code is printed, was dense for me. Other books, such as <a href="http://www.growing-object-oriented-software.com/" target="_blank">GOOS</a>, show differences in content with bold typeface, to ease the reader&rsquo;s task.  In my opinion, it would be useful to color the diffs, show them on the left and right, or even show the raw diff (e.g., <code>+++</code> <code>---</code>). I&rsquo;m envisioning a typing program as LaTeX where you could specify a commit with its parent and a range of lines to output.</p>
-
-<p>The second part is written in C# and python, to show a TDD session with him. Warning: it&rsquo;s much better in person than reading his book!</p>
-
-<p>The chapter 12 is a set of antipatterns you might find after starting with TDD. Even after you keep practicing TDD for a while, you will not get rid of these smells. Highly recommended.</p>
-
-<p>There&rsquo;s also an appendix on Continuous Integration, although there are better books for this.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>Recommend this book if you are starting with TDD, or you are more advanced but it&rsquo;s difficult for you to read in English.</p>
-
-<p>Always good as a refresher to read the theoretical part and the antipatterns</p>
-
-<p>PS: This book is free to read, published under a Creative Commons license (don&rsquo;t know exactly which one)</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/02/02/your-first-language/">Your First Language</a>
-    </h1>
-    <p >Feb 2, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/02/02/your-first-language/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship-patterns/">apprenticeship-patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/patterns/">patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/paradigm/">paradigm</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>After reading (in a specific order - below) part of the patterns in <a href="http://shop.oreilly.com/product/9780596518387.do" target="_blank">Apprenticeship Patterns</a>,
-I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch02.html#your_first_language" target="_blank">&ldquo;Your First Language&rdquo;</a></p>
-
-<p>First of all, the illustration with the baby reading a Java book is priceless.</p>
-
-<p>Having said that, I came to the realization that you might not know a paradigm but just an implementation
-(e.g., you don&rsquo;t know about Object-Oriented programming but just about Java), in the same fashion as you could not know about LISPs but only about an implementation, such as clojure.</p>
-
-<p>Also, clicks with the idea of &ldquo;code to interfaces, not implementations&rdquo;. Does it also click with you?</p>
-
-<p>PS: What a great book this is. I&rsquo;m reading it as explained <a href="../../../../2015/04/25/how-i-read-apprenticeship-patterns/">here</a> <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup></p>
-
-<p>PPS: you can read it online for free, <a href="http://chimera.labs.oreilly.com/books/1234000001813/" target="_blank">here</a></p>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">This post was extracted on 2015-04-25. The refactor techniques are very useful, not only for programming
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
     
     
 
@@ -700,6 +868,14 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/12/31/books-read-2017q4/">Books read in 2017Q4</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/10/01/self-study-october-2017/">Self-Study in October 2017</a>
           </li>
         
@@ -729,14 +905,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
         
           <li class="post">
             <a href="/blog/2017/07/01/self-study-july-2017/">Self-Study in July 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/06/30/books-read-2017q2/">Books read in 2017Q2</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/06/01/self-study-june-2017/">Self-Study in June 2017</a>
           </li>
         
       </ul>

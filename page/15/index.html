@@ -128,6 +128,79 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/">Recognizing dependencies</a>
+    </h1>
+    <p >Aug 8, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/object/">object</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:
+ An object has a dependency when it knows:
+ The name of another class. [&hellip;] The name of a message that it intends to send to someone other than self. [&hellip;] The arguments that a message requires. [&hellip;] The order of those arguments. [&hellip;]   If an object knows any of these facts about another object, it has dependencies to the other.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple return values in a Mockito Stub</a>
+    </h1>
+    <p >Aug 7, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/mockito/">mockito</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/stub/">stub</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.
+package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; import static org.hamcrest.Matchers.is; import static org.mockito.Mockito.spy; import static org.mockito.Mockito.when; import org.junit.Test; import org.mockito.Spy; public class DifferentReturnValues { @Spy private Spike1 spike1 = new Spike1(); @Test public void spike1() { spike1 = spy(spike1); when(spike1.getBool()).thenReturn(false, true); assertThat(spike1.getBool(), is(false)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); } private class Spike1 { public boolean getBool() { return true; } } }  The key line is:</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/">Brown-bag session and Dojo: Beginning Clojure</a>
     </h1>
     <p >Aug 5, 2015
@@ -260,75 +333,6 @@ This is how most of them look like:
               <footer>
                   <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/" rel="full-article">Read On &rarr;</a>
               </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate values in Constants</a>
-    </h1>
-    <p >Jul 30, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/duplicate/">duplicate</a><a class="label" href="https://alvarogarcia7.github.io/categories/gmaur/">gmaur</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>Imagine having this java class:
-private static class RepeatedConstants { public static final String A = &quot;A&quot;; public static final String A_1 = A; public static final String A_2 = &quot;A&quot;; public static final Integer _3 = 3; public static final Integer THREE = 3; }  I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the same Import Order in IntelliJ IDEA as Eclipse&#39;s</a>
-    </h1>
-    <p >Jul 30, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/intellij/">intellij</a><a class="label" href="https://alvarogarcia7.github.io/categories/eclipse/">eclipse</a><a class="label" href="https://alvarogarcia7.github.io/categories/ide/">ide</a><a class="label" href="https://alvarogarcia7.github.io/categories/editor/">editor</a><a class="label" href="https://alvarogarcia7.github.io/categories/import/">import</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:
-While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.
-To solve it, see this link</p>
-
           
 
         
@@ -486,6 +490,14 @@ To solve it, see this link</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/12/31/books-read-2017q4/">Books read in 2017Q4</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/10/01/self-study-october-2017/">Self-Study in October 2017</a>
           </li>
         
@@ -515,14 +527,6 @@ To solve it, see this link</p>
         
           <li class="post">
             <a href="/blog/2017/07/01/self-study-july-2017/">Self-Study in July 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/06/30/books-read-2017q2/">Books read in 2017Q2</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/06/01/self-study-june-2017/">Self-Study in June 2017</a>
           </li>
         
       </ul>
