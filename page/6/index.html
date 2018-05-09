@@ -128,28 +128,30 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/">A common misunderstanding about `reduce`</a>
+        <a href="https://alvarogarcia7.github.io/blog/2017/03/16/modifying-titles-in-a-trello-board/">Modifying titles in a Trello Board</a>
     </h1>
-    <p >Dec 14, 2016
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/#disqus_thread">Comments</a>
+    <p >Mar 16, 2017
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/03/16/modifying-titles-in-a-trello-board/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/misunderstanding/">misunderstanding</a><a class="label" href="https://alvarogarcia7.github.io/categories/reduce/">reduce</a><a class="label" href="https://alvarogarcia7.github.io/categories/fold/">fold</a><a class="label" href="https://alvarogarcia7.github.io/categories/higher-order-function/">higher-order-function</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/mozilla-developer-network/">mozilla-developer-network</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/trello/">trello</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/script/">script</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a>
         
     </p>
 </header>
 
 
         
-          <p>Misconception I&rsquo;ve read in several places that reduce reduces an array1 of values to a single one. The main characteristic of this function is not to reduce to a &lsquo;smaller element&rsquo; / &lsquo;single element&rsquo;, but to have access to the accumulated results and the elements, one by one. Quoting Mozilla Developer Network&rsquo;s (MDN) Javascript reference:
- The reduce() method applies a function against an accumulator and each value of the array (from left-to-right) to reduce it to a single value.</p>
+          <p>A teammate and I have created a small tool to modify the titles of the trello card in a trello board.
+Technical description It works by applying a function to the existing title (because we wanted to remove a prefix from the existing title).
+The modification is done, not through the API, but simulating user interaction:
+ Click to edit the card Input the new title Save  The full code is available here</p>
 
           
               <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/" rel="full-article">Read On &rarr;</a>
+                  <a href="https://alvarogarcia7.github.io/blog/2017/03/16/modifying-titles-in-a-trello-board/" rel="full-article">Read On &rarr;</a>
               </footer>
           
 
@@ -164,29 +166,65 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/12/01/self-study-in-december-2016/">Self-Study in December 2016</a>
+        <a href="https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/">Convert a project from npm to yarn</a>
     </h1>
-    <p >Dec 1, 2016
+    <p >Mar 3, 2017
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipeline/">pipeline</a><a class="label" href="https://alvarogarcia7.github.io/categories/jenkins/">jenkins</a><a class="label" href="https://alvarogarcia7.github.io/categories/yarn/">yarn</a><a class="label" href="https://alvarogarcia7.github.io/categories/npm/">npm</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>At a client, we&rsquo;re converting all projects (i.e., sites, services, libraries) from npm to yarn. Mostly for the speed (as it uses the internal cache).
+Step by step guide  Install yarn in your local environment  https://yarnpkg.com/lang/en/docs/install/  Run yarn install  This will create a yarn.lock file Add that file to the repo: git add yarn.lock  Modify Dockerfile  Install yarn (in the Dockerfile). Idea: shortcut this execution with yarn --version in case it is installed Configure the PATH variable (ENV PATH &hellip;) ADD yarn.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2017/03/03/convert-a-project-from-npm-to-yarn/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/03/01/self-study-in-march-2017/">Self-Study in March 2017</a>
+    </h1>
+    <p >Mar 1, 2017
          - 5 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/12/01/self-study-in-december-2016/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2017/03/01/self-study-in-march-2017/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/december/">december</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/alex-williams/">alex-williams</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/autopilot/">autopilot</a><a class="label" href="https://alvarogarcia7.github.io/categories/bob-wise/">bob-wise</a><a class="label" href="https://alvarogarcia7.github.io/categories/bull-in-a-china-shop/">bull-in-a-china-shop</a><a class="label" href="https://alvarogarcia7.github.io/categories/bytecode-generation/">bytecode-generation</a><a class="label" href="https://alvarogarcia7.github.io/categories/cobra-effect/">cobra-effect</a><a class="label" href="https://alvarogarcia7.github.io/categories/company/">company</a><a class="label" href="https://alvarogarcia7.github.io/categories/company-practice/">company-practice</a><a class="label" href="https://alvarogarcia7.github.io/categories/complacency/">complacency</a><a class="label" href="https://alvarogarcia7.github.io/categories/container/">container</a><a class="label" href="https://alvarogarcia7.github.io/categories/copy-paste/">copy-paste</a><a class="label" href="https://alvarogarcia7.github.io/categories/cpp/">cpp</a><a class="label" href="https://alvarogarcia7.github.io/categories/curious-georde/">curious-georde</a><a class="label" href="https://alvarogarcia7.github.io/categories/debug/">debug</a><a class="label" href="https://alvarogarcia7.github.io/categories/decorator/">decorator</a><a class="label" href="https://alvarogarcia7.github.io/categories/devops/">devops</a><a class="label" href="https://alvarogarcia7.github.io/categories/disable-paste/">disable-paste</a><a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/docker-swarm/">docker-swarm</a><a class="label" href="https://alvarogarcia7.github.io/categories/eureka/">eureka</a><a class="label" href="https://alvarogarcia7.github.io/categories/flat-hierarchy/">flat-hierarchy</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/hacker/">hacker</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/immutability/">immutability</a><a class="label" href="https://alvarogarcia7.github.io/categories/internet-of-things/">internet-of-things</a><a class="label" href="https://alvarogarcia7.github.io/categories/iot/">iot</a><a class="label" href="https://alvarogarcia7.github.io/categories/james-sinclair/">james-sinclair</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/joab-jackson/">joab-jackson</a><a class="label" href="https://alvarogarcia7.github.io/categories/kubernetes/">kubernetes</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning-programming-language/">learning-programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/maria-konnikova/">maria-konnikova</a><a class="label" href="https://alvarogarcia7.github.io/categories/mario-bros/">mario-bros</a><a class="label" href="https://alvarogarcia7.github.io/categories/matthew-garrett/">matthew-garrett</a><a class="label" href="https://alvarogarcia7.github.io/categories/metaprogramming/">metaprogramming</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad-explanation/">monad-explanation</a><a class="label" href="https://alvarogarcia7.github.io/categories/monitoring/">monitoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/npm/">npm</a><a class="label" href="https://alvarogarcia7.github.io/categories/npm-link/">npm-link</a><a class="label" href="https://alvarogarcia7.github.io/categories/obi-wan-kenobi/">obi-wan-kenobi</a><a class="label" href="https://alvarogarcia7.github.io/categories/oci/">oci</a><a class="label" href="https://alvarogarcia7.github.io/categories/ode/">ode</a><a class="label" href="https://alvarogarcia7.github.io/categories/open-salary/">open-salary</a><a class="label" href="https://alvarogarcia7.github.io/categories/password-field/">password-field</a><a class="label" href="https://alvarogarcia7.github.io/categories/paste/">paste</a><a class="label" href="https://alvarogarcia7.github.io/categories/pawel-brodzinski/">pawel-brodzinski</a><a class="label" href="https://alvarogarcia7.github.io/categories/philippa-warr/">philippa-warr</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/promise/">promise</a><a class="label" href="https://alvarogarcia7.github.io/categories/python/">python</a><a class="label" href="https://alvarogarcia7.github.io/categories/real-world/">real-world</a><a class="label" href="https://alvarogarcia7.github.io/categories/request/">request</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/salary/">salary</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/simeon-simeonov/">simeon-simeonov</a><a class="label" href="https://alvarogarcia7.github.io/categories/singing-in-the-rain/">singing-in-the-rain</a><a class="label" href="https://alvarogarcia7.github.io/categories/source-code/">source-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/teal/">teal</a><a class="label" href="https://alvarogarcia7.github.io/categories/teal-organization/">teal-organization</a><a class="label" href="https://alvarogarcia7.github.io/categories/toby-retallick/">toby-retallick</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/troy-hunt/">troy-hunt</a><a class="label" href="https://alvarogarcia7.github.io/categories/usability/">usability</a><a class="label" href="https://alvarogarcia7.github.io/categories/ux/">ux</a><a class="label" href="https://alvarogarcia7.github.io/categories/valve/">valve</a><a class="label" href="https://alvarogarcia7.github.io/categories/watch-expression/">watch-expression</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/march/">march</a><a class="label" href="https://alvarogarcia7.github.io/categories/2017/">2017</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/abstraction/">abstraction</a><a class="label" href="https://alvarogarcia7.github.io/categories/advice/">advice</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/application/">application</a><a class="label" href="https://alvarogarcia7.github.io/categories/approval/">approval</a><a class="label" href="https://alvarogarcia7.github.io/categories/architecture/">architecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/arun-gupta/">arun-gupta</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/backup/">backup</a><a class="label" href="https://alvarogarcia7.github.io/categories/backup-strategy/">backup-strategy</a><a class="label" href="https://alvarogarcia7.github.io/categories/benjamin-hardy/">benjamin-hardy</a><a class="label" href="https://alvarogarcia7.github.io/categories/business-logic/">business-logic</a><a class="label" href="https://alvarogarcia7.github.io/categories/c/">c</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/carl-tashian/">carl-tashian</a><a class="label" href="https://alvarogarcia7.github.io/categories/claire-lew/">claire-lew</a><a class="label" href="https://alvarogarcia7.github.io/categories/cli/">cli</a><a class="label" href="https://alvarogarcia7.github.io/categories/code-quality/">code-quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/cplusplus/">cplusplus</a><a class="label" href="https://alvarogarcia7.github.io/categories/database/">database</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-bonilla/">david-bonilla</a><a class="label" href="https://alvarogarcia7.github.io/categories/ddd/">ddd</a><a class="label" href="https://alvarogarcia7.github.io/categories/denis-kalinin/">denis-kalinin</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency-injection/">dependency-injection</a><a class="label" href="https://alvarogarcia7.github.io/categories/devoxx/">devoxx</a><a class="label" href="https://alvarogarcia7.github.io/categories/dice/">dice</a><a class="label" href="https://alvarogarcia7.github.io/categories/domain/">domain</a><a class="label" href="https://alvarogarcia7.github.io/categories/domain-driven-development/">domain-driven-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/donkey-code/">donkey-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/eigenvector/">eigenvector</a><a class="label" href="https://alvarogarcia7.github.io/categories/einar-host/">einar-host</a><a class="label" href="https://alvarogarcia7.github.io/categories/erik-bern/">erik-bern</a><a class="label" href="https://alvarogarcia7.github.io/categories/evolution/">evolution</a><a class="label" href="https://alvarogarcia7.github.io/categories/expat/">expat</a><a class="label" href="https://alvarogarcia7.github.io/categories/facebook/">facebook</a><a class="label" href="https://alvarogarcia7.github.io/categories/feedback/">feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/feedback-process/">feedback-process</a><a class="label" href="https://alvarogarcia7.github.io/categories/framework/">framework</a><a class="label" href="https://alvarogarcia7.github.io/categories/framework-vs-library/">framework-vs-library</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/go/">go</a><a class="label" href="https://alvarogarcia7.github.io/categories/gojko-adzic/">gojko-adzic</a><a class="label" href="https://alvarogarcia7.github.io/categories/graham-king/">graham-king</a><a class="label" href="https://alvarogarcia7.github.io/categories/heinz-kabutz/">heinz-kabutz</a><a class="label" href="https://alvarogarcia7.github.io/categories/humor/">humor</a><a class="label" href="https://alvarogarcia7.github.io/categories/ian-malpass/">ian-malpass</a><a class="label" href="https://alvarogarcia7.github.io/categories/improvement/">improvement</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview/">interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/java-champion/">java-champion</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeronimo-palacios/">jeronimo-palacios</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/leadership/">leadership</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/lessons-learned/">lessons-learned</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a><a class="label" href="https://alvarogarcia7.github.io/categories/macwire/">macwire</a><a class="label" href="https://alvarogarcia7.github.io/categories/meeting/">meeting</a><a class="label" href="https://alvarogarcia7.github.io/categories/meeting-policy/">meeting-policy</a><a class="label" href="https://alvarogarcia7.github.io/categories/microserver/">microserver</a><a class="label" href="https://alvarogarcia7.github.io/categories/missing-abstraction/">missing-abstraction</a><a class="label" href="https://alvarogarcia7.github.io/categories/mistake/">mistake</a><a class="label" href="https://alvarogarcia7.github.io/categories/money/">money</a><a class="label" href="https://alvarogarcia7.github.io/categories/myth/">myth</a><a class="label" href="https://alvarogarcia7.github.io/categories/number-generator/">number-generator</a><a class="label" href="https://alvarogarcia7.github.io/categories/orm/">orm</a><a class="label" href="https://alvarogarcia7.github.io/categories/paas/">paas</a><a class="label" href="https://alvarogarcia7.github.io/categories/parody/">parody</a><a class="label" href="https://alvarogarcia7.github.io/categories/patrick-kua/">patrick-kua</a><a class="label" href="https://alvarogarcia7.github.io/categories/platform-as-a-service/">platform-as-a-service</a><a class="label" href="https://alvarogarcia7.github.io/categories/prng/">prng</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/pseudo-random-number-generator/">pseudo-random-number-generator</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/python/">python</a><a class="label" href="https://alvarogarcia7.github.io/categories/quality/">quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/raid/">raid</a><a class="label" href="https://alvarogarcia7.github.io/categories/random-number/">random-number</a><a class="label" href="https://alvarogarcia7.github.io/categories/random-number-generator/">random-number-generator</a><a class="label" href="https://alvarogarcia7.github.io/categories/randomness/">randomness</a><a class="label" href="https://alvarogarcia7.github.io/categories/raul-avila/">raul-avila</a><a class="label" href="https://alvarogarcia7.github.io/categories/retrospective/">retrospective</a><a class="label" href="https://alvarogarcia7.github.io/categories/sabbatical/">sabbatical</a><a class="label" href="https://alvarogarcia7.github.io/categories/scala/">scala</a><a class="label" href="https://alvarogarcia7.github.io/categories/semantic-versioning/">semantic-versioning</a><a class="label" href="https://alvarogarcia7.github.io/categories/semver/">semver</a><a class="label" href="https://alvarogarcia7.github.io/categories/sentimental-versioning/">sentimental-versioning</a><a class="label" href="https://alvarogarcia7.github.io/categories/serialization/">serialization</a><a class="label" href="https://alvarogarcia7.github.io/categories/serverless/">serverless</a><a class="label" href="https://alvarogarcia7.github.io/categories/spain/">spain</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/statistic/">statistic</a><a class="label" href="https://alvarogarcia7.github.io/categories/tco/">tco</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-management/">team-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/tech-lead/">tech-lead</a><a class="label" href="https://alvarogarcia7.github.io/categories/terminal/">terminal</a><a class="label" href="https://alvarogarcia7.github.io/categories/tig/">tig</a><a class="label" href="https://alvarogarcia7.github.io/categories/total-cost-of-ownership/">total-cost-of-ownership</a><a class="label" href="https://alvarogarcia7.github.io/categories/true-random-number-generator/">true-random-number-generator</a><a class="label" href="https://alvarogarcia7.github.io/categories/ueno/">ueno</a><a class="label" href="https://alvarogarcia7.github.io/categories/united-kingdom/">united-kingdom</a><a class="label" href="https://alvarogarcia7.github.io/categories/utility/">utility</a><a class="label" href="https://alvarogarcia7.github.io/categories/vitaly-belman/">vitaly-belman</a><a class="label" href="https://alvarogarcia7.github.io/categories/zfs/">zfs</a>
         
     </p>
 </header>
 
 
         
-          <p>A Docker Fork: Talk of a Split Is Now on the Table I&rsquo;ve read this article by Alex Williams and Joab Jackson about the possible split in the Docker environment following Docker&rsquo;s and other providers&rsquo; product roadmaps. Each own has their policies and priorities and they collide in this case
-Tags: docker, alex-williams, joab-jackson, container, oci, kubernetes, devops, tool
-An Ode to Boring: Creating Open and Stable Container World I&rsquo;ve read this article by Bob Wise, in which he describes the state of the Docker tool and the Docker Engine.</p>
+          <p>¿Volver? I&rsquo;ve read this article by Raul Avila comparing the options between working in the UK and in Spain (where he&rsquo;s originally from). Inspired by other professionals (e.g., David Bonilla, Jerónimo Palacios).
+Tags: spanish, jeronimo-palacios, david-bonilla, expat, comparison, raul-avila, united-kingdom, spain
+Donkey code I&rsquo;ve read this article by Einar W. Høst in which he introduces the concept of a &lsquo;missing domain term&rsquo; with the example of a donkey being &lsquo;closely related to a horse, though not exactly the same&rsquo;</p>
 
           
               <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2016/12/01/self-study-in-december-2016/" rel="full-article">Read On &rarr;</a>
+                  <a href="https://alvarogarcia7.github.io/blog/2017/03/01/self-study-in-march-2017/" rel="full-article">Read On &rarr;</a>
               </footer>
           
 
@@ -201,102 +239,30 @@ An Ode to Boring: Creating Open and Stable Container World I&rsquo;ve read this 
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/11/01/self-study-in-november-2016/">Self-Study in November 2016</a>
+        <a href="https://alvarogarcia7.github.io/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/">Comparing options for parametrized testing in javascript</a>
     </h1>
-    <p >Nov 1, 2016
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/11/01/self-study-in-november-2016/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/november/">november</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/advice/">advice</a><a class="label" href="https://alvarogarcia7.github.io/categories/bartosz-milewski/">bartosz-milewski</a><a class="label" href="https://alvarogarcia7.github.io/categories/cate-huston/">cate-huston</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit/">commit</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit-message/">commit-message</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-heinemeier-hansson/">david-heinemeier-hansson</a><a class="label" href="https://alvarogarcia7.github.io/categories/dhh/">dhh</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature/">feature</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-io/">functional-io</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/io/">io</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-cutler/">john-cutler</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/microsoft/">microsoft</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/one-on-one/">one-on-one</a><a class="label" href="https://alvarogarcia7.github.io/categories/product-development/">product-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/product-management/">product-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/rant/">rant</a><a class="label" href="https://alvarogarcia7.github.io/categories/runar-bjarnason/">runar-bjarnason</a><a class="label" href="https://alvarogarcia7.github.io/categories/scala/">scala</a><a class="label" href="https://alvarogarcia7.github.io/categories/school-of-haskell/">school-of-haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/talk/">talk</a><a class="label" href="https://alvarogarcia7.github.io/categories/tao/">tao</a><a class="label" href="https://alvarogarcia7.github.io/categories/tao-te-ching/">tao-te-ching</a><a class="label" href="https://alvarogarcia7.github.io/categories/tim-pope/">tim-pope</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/value/">value</a><a class="label" href="https://alvarogarcia7.github.io/categories/video/">video</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>Advice for white men I&rsquo;ve read this article by Cate Huston about how advice affects different people.
- But here are some things to consider:
- Advice on failure is different for people who are judged on performance rather than potential. Advice on saying no is different for people who aren’t appreciated for doing work for the collective… but who are punished if they don’t. Advice on negotiation is different for people who are perceived negatively when they do negotiate.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2016/11/01/self-study-in-november-2016/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/articles/2016/10/05/support-for-out-of-hours-on-call-support/">Support for out of hours on-call support</a>
-    </h1>
-    <p >Oct 5, 2016
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/articles/2016/10/05/support-for-out-of-hours-on-call-support/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/on-call/">on-call</a><a class="label" href="https://alvarogarcia7.github.io/categories/support/">support</a><a class="label" href="https://alvarogarcia7.github.io/categories/readme/">readme</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>As the preface for the guide for on-call support, a positive note:
-README  You’re cool. I know it. Do not trust yourself, trust me that I trust you. You might be sleepy. It’s OK Everything is going to be fine. Take 5 minutes to think about anything, anytime. Especially before any rash decision. With great power comes great responsibility. Use it wisely. Restoring the services comes first, investigation comes second Do the very minimum of investigation after the incident (collect things that might disappear), leave the rest for the next day on office hours Whenever everything is done, go to sleep but keep an eye on your phone.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/articles/2016/10/05/support-for-out-of-hours-on-call-support/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/10/01/self-study-in-october-2016/">Self-Study in October 2016</a>
-    </h1>
-    <p >Oct 1, 2016
+    <p >Feb 26, 2017
          - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/10/01/self-study-in-october-2016/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/october/">october</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/.net/">.net</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/apple/">apple</a><a class="label" href="https://alvarogarcia7.github.io/categories/argument/">argument</a><a class="label" href="https://alvarogarcia7.github.io/categories/attack/">attack</a><a class="label" href="https://alvarogarcia7.github.io/categories/cap-watkins/">cap-watkins</a><a class="label" href="https://alvarogarcia7.github.io/categories/career-change/">career-change</a><a class="label" href="https://alvarogarcia7.github.io/categories/carlos-ble/">carlos-ble</a><a class="label" href="https://alvarogarcia7.github.io/categories/codesai/">codesai</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/compilation/">compilation</a><a class="label" href="https://alvarogarcia7.github.io/categories/compiled-javascript/">compiled-javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/compiled-language/">compiled-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/compiled-to-javascript/">compiled-to-javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/computer-science/">computer-science</a><a class="label" href="https://alvarogarcia7.github.io/categories/convincing/">convincing</a><a class="label" href="https://alvarogarcia7.github.io/categories/cross-functional/">cross-functional</a><a class="label" href="https://alvarogarcia7.github.io/categories/dan-billing/">dan-billing</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-hatanian/">david-hatanian</a><a class="label" href="https://alvarogarcia7.github.io/categories/decision-making/">decision-making</a><a class="label" href="https://alvarogarcia7.github.io/categories/design/">design</a><a class="label" href="https://alvarogarcia7.github.io/categories/destructuring/">destructuring</a><a class="label" href="https://alvarogarcia7.github.io/categories/discussion/">discussion</a><a class="label" href="https://alvarogarcia7.github.io/categories/example/">example</a><a class="label" href="https://alvarogarcia7.github.io/categories/exchange/">exchange</a><a class="label" href="https://alvarogarcia7.github.io/categories/feedback/">feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/honesty/">honesty</a><a class="label" href="https://alvarogarcia7.github.io/categories/honeypot/">honeypot</a><a class="label" href="https://alvarogarcia7.github.io/categories/inheritance/">inheritance</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeremy-ashkenas/">jeremy-ashkenas</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-de-goes/">john-de-goes</a><a class="label" href="https://alvarogarcia7.github.io/categories/law/">law</a><a class="label" href="https://alvarogarcia7.github.io/categories/lessons-learned/">lessons-learned</a><a class="label" href="https://alvarogarcia7.github.io/categories/liskov/">liskov</a><a class="label" href="https://alvarogarcia7.github.io/categories/lsp/">lsp</a><a class="label" href="https://alvarogarcia7.github.io/categories/mac/">mac</a><a class="label" href="https://alvarogarcia7.github.io/categories/mdn/">mdn</a><a class="label" href="https://alvarogarcia7.github.io/categories/meeting/">meeting</a><a class="label" href="https://alvarogarcia7.github.io/categories/modesto-san-juan/">modesto-san-juan</a><a class="label" href="https://alvarogarcia7.github.io/categories/monoid/">monoid</a><a class="label" href="https://alvarogarcia7.github.io/categories/newtype-clases/">newtype-clases</a><a class="label" href="https://alvarogarcia7.github.io/categories/owen-williams/">owen-williams</a><a class="label" href="https://alvarogarcia7.github.io/categories/people/">people</a><a class="label" href="https://alvarogarcia7.github.io/categories/post-mortem/">post-mortem</a><a class="label" href="https://alvarogarcia7.github.io/categories/precog/">precog</a><a class="label" href="https://alvarogarcia7.github.io/categories/process/">process</a><a class="label" href="https://alvarogarcia7.github.io/categories/ryan-hewitt/">ryan-hewitt</a><a class="label" href="https://alvarogarcia7.github.io/categories/scrum/">scrum</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/sigil/">sigil</a><a class="label" href="https://alvarogarcia7.github.io/categories/sliding-scale/">sliding-scale</a><a class="label" href="https://alvarogarcia7.github.io/categories/solid/">solid</a><a class="label" href="https://alvarogarcia7.github.io/categories/startup/">startup</a><a class="label" href="https://alvarogarcia7.github.io/categories/strategy/">strategy</a><a class="label" href="https://alvarogarcia7.github.io/categories/three-amigos/">three-amigos</a><a class="label" href="https://alvarogarcia7.github.io/categories/ticket-magpie/">ticket-magpie</a><a class="label" href="https://alvarogarcia7.github.io/categories/type-classes/">type-classes</a><a class="label" href="https://alvarogarcia7.github.io/categories/ui/">ui</a><a class="label" href="https://alvarogarcia7.github.io/categories/ux/">ux</a><a class="label" href="https://alvarogarcia7.github.io/categories/wikipedia/">wikipedia</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/test/">test</a><a class="label" href="https://alvarogarcia7.github.io/categories/parametrized-testing/">parametrized-testing</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/csharp/">csharp</a><a class="label" href="https://alvarogarcia7.github.io/categories/nunit/">nunit</a><a class="label" href="https://alvarogarcia7.github.io/categories/junit/">junit</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/etude/">etude</a><a class="label" href="https://alvarogarcia7.github.io/categories/study/">study</a>
         
     </p>
 </header>
 
 
         
-          <p>Should Engineers Design? I&rsquo;ve read this article by Cap Watkins where he explains the relationship between designers and programmers and how to get the latter involved in the design / UX / UI process.
-Tags: cap-watkins, design, ux, ui, exchange, cross-functional
-The Sliding Scale of Giving a Fuck I&rsquo;ve read this article by Cap Watkins where he explains that different topics have a different importance to each one of us: this topic might be very important for someone else, ergo, it makes mores sense to evaluate their option more carefully.</p>
+          <p>We explore how to use parametrized tests (example in java, example in c#)
+The tests are written using mocha syntax: describe, it. Using chai for expectations: assert.
+Note: the example used below (adding to an array) is simple enough to be understood by everybody, without having to explain the domain. The real tests can have a more complicated environment or domain. This is just an example.
+Using a custom syntax This is just an example of some possible syntax, not using any (currently) existing framework.</p>
 
           
               <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2016/10/01/self-study-in-october-2016/" rel="full-article">Read On &rarr;</a>
+                  <a href="https://alvarogarcia7.github.io/blog/2017/02/26/comparing-options-for-parametrized-testing-in-javascript/" rel="full-article">Read On &rarr;</a>
               </footer>
           
 
@@ -311,30 +277,70 @@ The Sliding Scale of Giving a Fuck I&rsquo;ve read this article by Cap Watkins w
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/09/30/books-read-in-2016q3/">Books read in 2016Q3</a>
+        <a href="https://alvarogarcia7.github.io/blog/2017/02/01/self-study-in-february-2017/">Self-Study in February 2017</a>
     </h1>
-    <p >Sep 30, 2016
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/09/30/books-read-in-2016q3/#disqus_thread">Comments</a>
+    <p >Feb 1, 2017
+         - 7 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/02/01/self-study-in-february-2017/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/q3/">Q3</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/february/">february</a><a class="label" href="https://alvarogarcia7.github.io/categories/2017/">2017</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/alan-brouilette/">alan-brouilette</a><a class="label" href="https://alvarogarcia7.github.io/categories/alyssa-mazzina/">alyssa-mazzina</a><a class="label" href="https://alvarogarcia7.github.io/categories/analysis/">analysis</a><a class="label" href="https://alvarogarcia7.github.io/categories/andromeda/">andromeda</a><a class="label" href="https://alvarogarcia7.github.io/categories/api/">api</a><a class="label" href="https://alvarogarcia7.github.io/categories/app/">app</a><a class="label" href="https://alvarogarcia7.github.io/categories/ashton-kemerling/">ashton-kemerling</a><a class="label" href="https://alvarogarcia7.github.io/categories/attack-vector/">attack-vector</a><a class="label" href="https://alvarogarcia7.github.io/categories/bonilista/">bonilista</a><a class="label" href="https://alvarogarcia7.github.io/categories/bonus/">bonus</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/brandur/">brandur</a><a class="label" href="https://alvarogarcia7.github.io/categories/bruce-schneier/">bruce-schneier</a><a class="label" href="https://alvarogarcia7.github.io/categories/challenge/">challenge</a><a class="label" href="https://alvarogarcia7.github.io/categories/change-job/">change-job</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/code-review/">code-review</a><a class="label" href="https://alvarogarcia7.github.io/categories/company/">company</a><a class="label" href="https://alvarogarcia7.github.io/categories/conference/">conference</a><a class="label" href="https://alvarogarcia7.github.io/categories/consulting/">consulting</a><a class="label" href="https://alvarogarcia7.github.io/categories/daniel-dietrich/">daniel-dietrich</a><a class="label" href="https://alvarogarcia7.github.io/categories/daniel-matte/">daniel-matte</a><a class="label" href="https://alvarogarcia7.github.io/categories/darius-foroux/">darius-foroux</a><a class="label" href="https://alvarogarcia7.github.io/categories/dark-standup/">dark-standup</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-bonilla/">david-bonilla</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-cassel/">david-cassel</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-dawson/">david-dawson</a><a class="label" href="https://alvarogarcia7.github.io/categories/diff/">diff</a><a class="label" href="https://alvarogarcia7.github.io/categories/eisenhower-productivity-matrix/">eisenhower-productivity-matrix</a><a class="label" href="https://alvarogarcia7.github.io/categories/email/">email</a><a class="label" href="https://alvarogarcia7.github.io/categories/encryption/">encryption</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a><a class="label" href="https://alvarogarcia7.github.io/categories/experiment/">experiment</a><a class="label" href="https://alvarogarcia7.github.io/categories/fallible/">fallible</a><a class="label" href="https://alvarogarcia7.github.io/categories/frustration/">frustration</a><a class="label" href="https://alvarogarcia7.github.io/categories/fuchsia/">fuchsia</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/google/">google</a><a class="label" href="https://alvarogarcia7.github.io/categories/happiness/">happiness</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/hr/">hr</a><a class="label" href="https://alvarogarcia7.github.io/categories/human-resources/">human-resources</a><a class="label" href="https://alvarogarcia7.github.io/categories/important/">important</a><a class="label" href="https://alvarogarcia7.github.io/categories/important-vs-urgent/">important-vs-urgent</a><a class="label" href="https://alvarogarcia7.github.io/categories/interface/">interface</a><a class="label" href="https://alvarogarcia7.github.io/categories/interface-design/">interface-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/interruption/">interruption</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/javaslang/">javaslang</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-offer/">job-offer</a><a class="label" href="https://alvarogarcia7.github.io/categories/joel-spolsky/">joel-spolsky</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-napier/">john-napier</a><a class="label" href="https://alvarogarcia7.github.io/categories/joyent/">joyent</a><a class="label" href="https://alvarogarcia7.github.io/categories/kat-boogaard/">kat-boogaard</a><a class="label" href="https://alvarogarcia7.github.io/categories/key/">key</a><a class="label" href="https://alvarogarcia7.github.io/categories/kim-zetter/">kim-zetter</a><a class="label" href="https://alvarogarcia7.github.io/categories/knowledge-worker/">knowledge-worker</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/lavabit/">lavabit</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy/">legacy</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-hardware/">legacy-hardware</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-software/">legacy-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-system/">legacy-system</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a><a class="label" href="https://alvarogarcia7.github.io/categories/limited-time/">limited-time</a><a class="label" href="https://alvarogarcia7.github.io/categories/listicle/">listicle</a><a class="label" href="https://alvarogarcia7.github.io/categories/mail/">mail</a><a class="label" href="https://alvarogarcia7.github.io/categories/mainframe/">mainframe</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/managing-performance/">managing-performance</a><a class="label" href="https://alvarogarcia7.github.io/categories/marianne-bellotti/">marianne-bellotti</a><a class="label" href="https://alvarogarcia7.github.io/categories/maybe/">maybe</a><a class="label" href="https://alvarogarcia7.github.io/categories/measuring-performance/">measuring-performance</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/operating-system/">operating-system</a><a class="label" href="https://alvarogarcia7.github.io/categories/option/">option</a><a class="label" href="https://alvarogarcia7.github.io/categories/optional/">optional</a><a class="label" href="https://alvarogarcia7.github.io/categories/organization/">organization</a><a class="label" href="https://alvarogarcia7.github.io/categories/os/">os</a><a class="label" href="https://alvarogarcia7.github.io/categories/overtime/">overtime</a><a class="label" href="https://alvarogarcia7.github.io/categories/palatable/">palatable</a><a class="label" href="https://alvarogarcia7.github.io/categories/papers-we-love/">papers-we-love</a><a class="label" href="https://alvarogarcia7.github.io/categories/pay/">pay</a><a class="label" href="https://alvarogarcia7.github.io/categories/performance/">performance</a><a class="label" href="https://alvarogarcia7.github.io/categories/phone/">phone</a><a class="label" href="https://alvarogarcia7.github.io/categories/post-mortem/">post-mortem</a><a class="label" href="https://alvarogarcia7.github.io/categories/postmortem/">postmortem</a><a class="label" href="https://alvarogarcia7.github.io/categories/privacy/">privacy</a><a class="label" href="https://alvarogarcia7.github.io/categories/problem/">problem</a><a class="label" href="https://alvarogarcia7.github.io/categories/productivity/">productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/pull-request/">pull-request</a><a class="label" href="https://alvarogarcia7.github.io/categories/purpose-of-life/">purpose-of-life</a><a class="label" href="https://alvarogarcia7.github.io/categories/question/">question</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/reference/">reference</a><a class="label" href="https://alvarogarcia7.github.io/categories/referent/">referent</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote/">remote</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote-work/">remote-work</a><a class="label" href="https://alvarogarcia7.github.io/categories/review/">review</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-austin/">robert-austin</a><a class="label" href="https://alvarogarcia7.github.io/categories/scala/">scala</a><a class="label" href="https://alvarogarcia7.github.io/categories/scott-nonnenberg/">scott-nonnenberg</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/sexism/">sexism</a><a class="label" href="https://alvarogarcia7.github.io/categories/shut-down/">shut-down</a><a class="label" href="https://alvarogarcia7.github.io/categories/simplicity-itself/">simplicity-itself</a><a class="label" href="https://alvarogarcia7.github.io/categories/stack-overflow/">stack-overflow</a><a class="label" href="https://alvarogarcia7.github.io/categories/susan-fowler/">susan-fowler</a><a class="label" href="https://alvarogarcia7.github.io/categories/system/">system</a><a class="label" href="https://alvarogarcia7.github.io/categories/systems-we-love/">systems-we-love</a><a class="label" href="https://alvarogarcia7.github.io/categories/team/">team</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-management/">team-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/token/">token</a><a class="label" href="https://alvarogarcia7.github.io/categories/uber/">uber</a><a class="label" href="https://alvarogarcia7.github.io/categories/ui/">ui</a><a class="label" href="https://alvarogarcia7.github.io/categories/urgent/">urgent</a><a class="label" href="https://alvarogarcia7.github.io/categories/urgent-vs-important/">urgent-vs-important</a><a class="label" href="https://alvarogarcia7.github.io/categories/usefulness/">usefulness</a><a class="label" href="https://alvarogarcia7.github.io/categories/ux/">ux</a><a class="label" href="https://alvarogarcia7.github.io/categories/whatsapp/">whatsapp</a><a class="label" href="https://alvarogarcia7.github.io/categories/women/">women</a><a class="label" href="https://alvarogarcia7.github.io/categories/work-environment/">work-environment</a>
         
     </p>
 </header>
 
 
         
-          <p>Books I&rsquo;ve read this quarter1:
- Extreme Programming Pocket Guide by Chromatic Notes to a Software Team Leader (1st Edition), by Roy Osherove  Non-technical:
- The Zero Marginal Cost Society: The Internet of Things, the Collaborative Commons, and the Eclipse of Capitalism, by Jeremy Rifkin Snow Crash, by Neal Stephenson La guerra no tiene rostro de mujer, by Svetlana Aleksiévich  Books started, not yet finished (WIP):
- Talking with Tech Leads: From Novices to Practitioners by Patrick Kua  Books I want to finish.</p>
+          <p>WhatsApp Security Vulnerability I&rsquo;ve read this article by Bruce Schneier on a security defect in whatsapp, where an &lsquo;unconfirmed&rsquo; message can be re-encrypted (with a new key) and resent. This is a vector for some attacks.
+Tags: bruce-schneier, security, whatsapp, encryption, attack-vector
+Encrypted email service once used by Edward Snowden relaunches I&rsquo;ve read this article, by Kim Zetter, on Lavabit restablishing its service. Explains the company&rsquo;s past and the new services they are offering</p>
 
           
               <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2016/09/30/books-read-in-2016q3/" rel="full-article">Read On &rarr;</a>
+                  <a href="https://alvarogarcia7.github.io/blog/2017/02/01/self-study-in-february-2017/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/01/01/self-study-in-january-2017/">Self-Study in January 2017</a>
+    </h1>
+    <p >Jan 1, 2017
+         - 7 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/01/01/self-study-in-january-2017/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/january/">january</a><a class="label" href="https://alvarogarcia7.github.io/categories/2017/">2017</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/additive-monad/">additive-monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/advice/">advice</a><a class="label" href="https://alvarogarcia7.github.io/categories/alvaro-videla/">alvaro-videla</a><a class="label" href="https://alvarogarcia7.github.io/categories/amplifier/">amplifier</a><a class="label" href="https://alvarogarcia7.github.io/categories/authority/">authority</a><a class="label" href="https://alvarogarcia7.github.io/categories/benjamin-hardy/">benjamin-hardy</a><a class="label" href="https://alvarogarcia7.github.io/categories/bind/">bind</a><a class="label" href="https://alvarogarcia7.github.io/categories/c-sharp/">c-sharp</a><a class="label" href="https://alvarogarcia7.github.io/categories/code-complete/">code-complete</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding-horror/">coding-horror</a><a class="label" href="https://alvarogarcia7.github.io/categories/comonad/">comonad</a><a class="label" href="https://alvarogarcia7.github.io/categories/compound-interest/">compound-interest</a><a class="label" href="https://alvarogarcia7.github.io/categories/continous-improvement/">continous-improvement</a><a class="label" href="https://alvarogarcia7.github.io/categories/dan-piponi/">dan-piponi</a><a class="label" href="https://alvarogarcia7.github.io/categories/data-structure/">data-structure</a><a class="label" href="https://alvarogarcia7.github.io/categories/dennis-forbes/">dennis-forbes</a><a class="label" href="https://alvarogarcia7.github.io/categories/discipline/">discipline</a><a class="label" href="https://alvarogarcia7.github.io/categories/eric-elliott/">eric-elliott</a><a class="label" href="https://alvarogarcia7.github.io/categories/eric-lippert/">eric-lippert</a><a class="label" href="https://alvarogarcia7.github.io/categories/essay/">essay</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/gerald-weinberg/">gerald-weinberg</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/hume-logan/">hume-logan</a><a class="label" href="https://alvarogarcia7.github.io/categories/hunter-thompson/">hunter-thompson</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview/">interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/interviewing/">interviewing</a><a class="label" href="https://alvarogarcia7.github.io/categories/isomorphic/">isomorphic</a><a class="label" href="https://alvarogarcia7.github.io/categories/james-coglan/">james-coglan</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeff-atwood/">jeff-atwood</a><a class="label" href="https://alvarogarcia7.github.io/categories/kaizen/">kaizen</a><a class="label" href="https://alvarogarcia7.github.io/categories/leadership/">leadership</a><a class="label" href="https://alvarogarcia7.github.io/categories/leading-by-example/">leading-by-example</a><a class="label" href="https://alvarogarcia7.github.io/categories/life/">life</a><a class="label" href="https://alvarogarcia7.github.io/categories/lift/">lift</a><a class="label" href="https://alvarogarcia7.github.io/categories/linrec/">linrec</a><a class="label" href="https://alvarogarcia7.github.io/categories/long-term-plans/">long-term-plans</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad-explanation/">monad-explanation</a><a class="label" href="https://alvarogarcia7.github.io/categories/motivation/">motivation</a><a class="label" href="https://alvarogarcia7.github.io/categories/multirec/">multirec</a><a class="label" href="https://alvarogarcia7.github.io/categories/nasa/">nasa</a><a class="label" href="https://alvarogarcia7.github.io/categories/personal-improvement/">personal-improvement</a><a class="label" href="https://alvarogarcia7.github.io/categories/planning/">planning</a><a class="label" href="https://alvarogarcia7.github.io/categories/politics/">politics</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/quadtree/">quadtree</a><a class="label" href="https://alvarogarcia7.github.io/categories/recruitement/">recruitement</a><a class="label" href="https://alvarogarcia7.github.io/categories/recursive-data-structure/">recursive-data-structure</a><a class="label" href="https://alvarogarcia7.github.io/categories/reginald-braithwaite/">reginald-braithwaite</a><a class="label" href="https://alvarogarcia7.github.io/categories/shiny/">shiny</a><a class="label" href="https://alvarogarcia7.github.io/categories/stephen-toub/">stephen-toub</a><a class="label" href="https://alvarogarcia7.github.io/categories/tailrec/">tailrec</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-lead/">team-lead</a><a class="label" href="https://alvarogarcia7.github.io/categories/test/">test</a><a class="label" href="https://alvarogarcia7.github.io/categories/thomas-oppong/">thomas-oppong</a><a class="label" href="https://alvarogarcia7.github.io/categories/tree/">tree</a><a class="label" href="https://alvarogarcia7.github.io/categories/unit/">unit</a><a class="label" href="https://alvarogarcia7.github.io/categories/unit-test/">unit-test</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Translation from Haskell to JavaScript of selected portions of the best introduction to monads I’ve ever read I&rsquo;ve read this article by James Coglan, introducing monads.
+About composability:
+ The symmetry of the argument and return types is what makes these functions composable
+ or
+ symmetric input and output types
+ Guide to basic monadic functions:
+ lift, which converts a &lsquo;simple’ function into a debuggable function bind, which converts a debuggable function into a composable form unit, which converts a simple value into the format required for debugging, by placing it in a container</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2017/01/01/self-study-in-january-2017/" rel="full-article">Read On &rarr;</a>
               </footer>
           
 
@@ -425,6 +431,8 @@ The Sliding Scale of Giving a Fuck I&rsquo;ve read this article by Cap Watkins w
     
         <a href="/page/31/" class="label-pagination">31</a>
     
+        <a href="/page/32/" class="label-pagination">32</a>
+    
 
     
     
@@ -433,7 +441,7 @@ The Sliding Scale of Giving a Fuck I&rsquo;ve read this article by Cap Watkins w
 
     
     
-        <a href="/page/31/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/page/32/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -493,7 +501,27 @@ The Sliding Scale of Giving a Fuck I&rsquo;ve read this article by Cap Watkins w
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/05/01/self-study-may-2018/">Self-Study in May 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/04/01/self-study-april-2018/">Self-Study in April 2018</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/03/01/self-study-march-2018/">Self-Study in March 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/02/01/self-study-february-2018/">Self-Study in February 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/01/01/self-study-january-2018/">Self-Study in January 2018</a>
           </li>
         
           <li class="post">
@@ -501,35 +529,15 @@ The Sliding Scale of Giving a Fuck I&rsquo;ve read this article by Cap Watkins w
           </li>
         
           <li class="post">
+            <a href="/blog/2017/12/01/self-study-december-2017/">Self-Study in December 2017</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/11/01/self-study-november-2017/">Self-Study in November 2017</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2017/10/01/self-study-october-2017/">Self-Study in October 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/09/30/books-read-2017q3/">Books read in 2017Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/09/01/self-study-september-2017/">Self-Study in September 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/08/07/find-all-pending-work/">Finding all pending work in progress (WIP) in your workspace</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/08/01/self-study-august-2017/">Self-Study in August 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/07/09/nature-software-development-part-1/">The Nature of Software Development: Part I</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/07/09/search-for-value-quote-chapter-1/">The Search for Value (a quote)</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/07/01/self-study-july-2017/">Self-Study in July 2017</a>
           </li>
         
       </ul>
