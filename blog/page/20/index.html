@@ -129,6 +129,78 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag session: Refactoring legacy code</a>
+    </h1>
+    <p >Jun 23, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+
+<p>The contents of the session:</p>
+
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session
+<br /></li>
+</ul></li>
+</ul>
+
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike" target="_blank">here</a>.</p>
+
+<p>I prepared a small script:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">while</span> <span class="nb">test</span> true<span class="p">;</span> <span class="k">do</span>
+  git add --all<span class="p">;</span>
+  git commit --all -m <span class="s2">&quot;save process - uknown state&quot;</span><span class="p">;</span>
+  sleep <span class="m">120</span><span class="p">;</span>
+<span class="k">done</span><span class="p">;</span>
+</code></pre></div>
+
+<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz" target="_blank">Xavi Gost</a> <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup></p>
+
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker/">Brown-bag session: docker</a>
     </h1>
     <p >Jun 16, 2015
@@ -508,37 +580,6 @@ into a single post</p>
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/">Category: Poodr</a>
-    </h1>
-    <p >Jun 1, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/category/">category</a><a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.poodr.com/" target="_blank">Practical Object-Oriented Design in Ruby</a>&rsquo;, by Sandi Metz</p>
-
-<p>Note: This has been created a posteriori with a previous date</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -690,6 +731,10 @@ into a single post</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/06/15/testing-component-randomness/">Testing a component that includes randomness</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/05/01/self-study-may-2018/">Self-Study in May 2018</a>
           </li>
         
@@ -723,10 +768,6 @@ into a single post</p>
         
           <li class="post">
             <a href="/blog/2017/11/01/self-study-november-2017/">Self-Study in November 2017</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2017/10/01/self-study-october-2017/">Self-Study in October 2017</a>
           </li>
         
       </ul>
