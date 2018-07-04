@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/versioning/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://alvarogarcia7.github.io/categories/versioning/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Questioning the existing choices</title>
+      <link>https://alvarogarcia7.github.io/blog/2018/07/04/questioning-existing-choices/</link>
+      <pubDate>Wed, 04 Jul 2018 07:03:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2018/07/04/questioning-existing-choices/</guid>
+      <description>
+
+&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
+
+&lt;p&gt;For a client, we have worked on a service that works with files (containing sensitive data) that get corrupted very often.&lt;/p&gt;
+
+&lt;p&gt;The use case is generally:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Two/Three file opens per day&lt;/li&gt;
+&lt;li&gt;One modification per 10 file opens&lt;/li&gt;
+&lt;li&gt;One corruption per 100 file opens&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;initial-solution&#34;&gt;Initial solution&lt;/h2&gt;
+
+&lt;p&gt;The initial solution was just to copy the file (&lt;code&gt;file.txt&lt;/code&gt;) before opening, after closing. This results in two files (&lt;code&gt;YYY-MM-DDTHH-mm-ss_before_file.txt&lt;/code&gt;, &lt;code&gt;YYY-MM-DDTHH-mm-ss_after_file.txt&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;As this solution quickly became unmaintainable, the client developed a solution to hash the contents of the file and to remove the duplicated files.&lt;/p&gt;
+
+&lt;p&gt;The original cost for developing this was high, as in-house software was needed for comparing the hashes of the files, for comparing the files (remember this is sensitive data). Even if this was just a script, the possibility of deleting correct data is just too much risk.&lt;/p&gt;
+
+&lt;p&gt;Even if this was a pragmatic choice back then (as they did not realize about the cheaper solution), the danger of deleting data is still present as long as the old script is used. Maintainability wise, that script is simple enough but a defect could be potentially dangerous. (This is why the script for deleting the duplicated files does not actually delete files but generates a bash script for deleting them, which you can review before applying.)&lt;/p&gt;
+
+&lt;h2 id=&#34;another-solution&#34;&gt;Another solution&lt;/h2&gt;
+
+&lt;p&gt;When asked about this solution, the client mentioned that this was working well enough. Which is true.&lt;/p&gt;
+
+&lt;p&gt;Another solution could be to store this file in a git repository and only commit the changes when there actually are changes to commit.&lt;/p&gt;
+
+&lt;p&gt;The git repository solves both:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the problem of not having to delete data (as no duplicated data is generated)&lt;/li&gt;
+&lt;li&gt;the cost of writing in-house software, as a single script to commit files is enough&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This client was using &lt;a href=&#34;https://en.wiktionary.org/wiki/if_it_ain%27t_broke,_don%27t_fix_it&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;if ain&amp;rsquo;t broke, don&amp;rsquo;t fix it&amp;rdquo;&lt;/a&gt;, with a good-enough solution.&lt;/p&gt;
+
+&lt;p&gt;Not questioning the existing choice is expensive, putting you in a worse place that they could be. Questioning all the existing choices is expensive, and time-consuming. Finding the sweet spot (whether to question or not), depends heavily on the context.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
