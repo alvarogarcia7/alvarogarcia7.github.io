@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <title>Writing safe(r) bash scripts</title>
+
+  
+  
+  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <meta name="author" content="Alvaro Garcia">
+
+  
+  <meta name="generator" content="Hugo 0.17" />
+
+  
+  
+
+</head>
+<body>
+
+
+<header role="banner"><hgroup>
+  
+  <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/" target="_blank" title="Breadcrumbs">Breadcrumbs</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/articles/" target="_blank" title="Articles">Articles</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/talks" target="_blank" title="Talks / Events">Talks / Events</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/categories/" target="_blank" title="Categories">Categories</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/archives/" target="_blank" title="Archives">Archives</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/about/" target="_blank" title="About">About</a></li>
+    
+  
+</ul>
+
+
+<ul class="subscription">
+  <a href="index.xml" target="_blank" type="application/rss+xml" title="RSS"><i class="fa fa-rss-square fa-lg"></i></a>
+
+  
+  
+
+</ul>
+
+<script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = form_.getElementsByTagName("input")[0];
+        var siteURL = form_.getElementsByTagName("input")[1];
+        input.value = siteURL.value + " " + input.value;
+    }
+</script>
+
+
+<form action="https://www.google.com/search" method="get" target="_blank" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+  	<input class="search" type="text" name="q" results="0" placeholder="Search"/>
+    <input type="hidden" value="site:https://alvarogarcia7.github.io/" />
+  </fieldset>
+</form>
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+         Writing safe(r) bash scripts 
+    </h1>
+    <p >Jul 13, 2018
+         - 13 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2018/07/13/writing-safe-bash-scripts/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/sh/">sh</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/script/">script</a><a class="label" href="https://alvarogarcia7.github.io/categories/one-off/">one-off</a><a class="label" href="https://alvarogarcia7.github.io/categories/maintenance/">maintenance</a><a class="label" href="https://alvarogarcia7.github.io/categories/solid/">solid</a><a class="label" href="https://alvarogarcia7.github.io/categories/single-responsibility-principle/">single-responsibility-principle</a><a class="label" href="https://alvarogarcia7.github.io/categories/perl/">perl</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/make/">make</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a>
+        
+    </p>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          
+
+<p>After writing more and more bash scripts for a client, I&rsquo;ve decided to write down my thoughts about it.</p>
+
+<p>This assumes you have some knowledge about bash, as it is not intended as a beginner&rsquo;s tutorial.</p>
+
+<h2 id="why-bash-scripts">Why bash scripts?</h2>
+
+<ul>
+<li>Bash is present in almost every unix/linux-based stack, now some Windows as well. An exception is the &lsquo;alpine&rsquo; docker images, which have a smaller, lighter shell (more on that later)</li>
+<li>Everything that you can automate, you can do from bash. Bash forces you to create a (first?) client for your application and see how the integration is from the user&rsquo;s perspective</li>
+<li>Testing your application from bash forces you to treat your application as a black-box (e.g., different technology, no shared state, no access to internals)</li>
+</ul>
+
+<h3 id="using-a-safe-bash-subset-sh">Using a safe bash subset: sh</h3>
+
+<p>This is useful for &lsquo;alpine&rsquo; docker images, as some alpine do not include bash.</p>
+
+<p>The more general you need your script to be, the more you should prefer sh rather than bash. A source of generality can be making your script public (publish it), executing it under multiple environments, making it the installer for other tools, etc.</p>
+
+<h2 id="tips">Tips</h2>
+
+<h3 id="temporary-files">Temporary files</h3>
+
+<p>Do not assume that the current directory is the place for writing temporary files (or any file, for that matter).</p>
+
+<p>For temporary files, use <code>mktemp</code>, and for directories <code>mktemp -d</code></p>
+
+<pre><code>$ man mktemp
+MKTEMP(1)                 BSD General Commands Manual                MKTEMP(1)
+
+NAME
+     mktemp -- make temporary file name (unique)
+
+DESCRIPTION
+     The mktemp utility takes each of the given file name templates and over-
+     writes a portion of it to create a file name.  This file name is unique
+     and suitable for use by the application.
+</code></pre>
+
+<p>(remember to cleanup resources when your script exists - maybe use exit traps)</p>
+
+<h3 id="exit-traps">(Exit) Traps</h3>
+
+<p>There are some resources that you need to remove / cleanup / close at the end of your script. Both when things go well as when they don&rsquo;t. Think of it as a (java) try-with-resources or try..catch..finally.</p>
+
+<p>Bash offers <a href="https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins" target="_blank"><code>trap</code></a> to perform this task:</p>
+
+<pre><code>trap arg signal
+trap command signal
+</code></pre>
+
+<p>Taken from <a href="https://bash.cyberciti.biz/guide/Trap_statement" target="_blank">here</a></p>
+
+<p>An example:</p>
+
+<pre><code>function finish {
+  # Your cleanup code here
+}
+trap finish EXIT
+trap finish SIGQUIT
+</code></pre>
+
+<p>More information, and this example from <a href="http://redsymbol.net/articles/bash-exit-traps/" target="_blank">here</a></p>
+
+<h3 id="do-not-hardcode-the-shell-location">Do not hardcode the shell location</h3>
+
+<p>This is more common with perl than with bash, as most bash installs are placed at <code>/bin/bash</code>.</p>
+
+<p>You can use <code>/usr/bin/env bash</code> / <code>/usr/bin/env sh</code> to spawn a shell.</p>
+
+<p>Usage:</p>
+
+<pre><code>#!/usr/bin/env bash
+
+#rest of commands
+</code></pre>
+
+<h3 id="options-for-executing-header">Options for executing / Header</h3>
+
+<p>add these options:</p>
+
+<pre><code>set -euxo pipefail
+</code></pre>
+
+<p>These can be added anywhere, but I usually add them after the shebang (the beginning of the script)</p>
+
+<p>Reference: <a href="https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin" target="_blank">The set built-in</a></p>
+
+<p>Another reference: the inspiration for these options comes from <a href="https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/" target="_blank">here</a></p>
+
+<p>a brief note:</p>
+
+<ul>
+<li><code>set -e</code> stops the execution if a command fails (this is the default behavior in <code>make</code>)</li>
+<li><code>set -u</code>: Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion. An error message will be written to the standard error, and a non-interactive shell will exit.</li>
+<li><code>set -x</code>: debug. Trace the commands on the console</li>
+<li><code>set -o pipefail</code>: make the pipe command fail if any of the commands in the pipe fail.
+
+<ul>
+<li>Example: with this option disabled, <code>a|b|c</code> when <code>a</code> fails, b will execute, the return value will be the one of <code>b</code></li>
+<li>Example: with this option enabled, <code>a|b|c</code> when <code>a</code> fails, <code>b</code> will not execute, the return value will be the one of <code>a</code></li>
+</ul></li>
+</ul>
+
+<p>If you want to use a try&hellip;catch pattern, disable <code>-e</code> temporarily:</p>
+
+<pre><code>set +e # 1
+ls NON_EXISTING_FILE # 2
+set -e # 3
+</code></pre>
+
+<ul>
+<li>1: Disable error-checking. Note this is a plus (+) sign</li>
+<li>2: a command that could fail. As the error checking is disabled, the execution continues even if 2 throws an error. Therefore, the exception is swallowed.</li>
+<li>3: Enable error-checking again</li>
+</ul>
+
+<h3 id="debugging">Debugging</h3>
+
+<h4 id="enable-tracing-debugging-mode">Enable tracing / debugging mode</h4>
+
+<p>I usually make my bash scripts as simple as possible (see Limitations), but even then, they fail often while building them.</p>
+
+<p>For that reason, you can enable the &lsquo;debug&rsquo; option permanently:</p>
+
+<pre><code># Inside the script
+set -x
+</code></pre>
+
+<p>Or just for one invocation:</p>
+
+<pre><code># When invoking the script
+bash -x myscript.sh
+</code></pre>
+
+<p>Note: your script will get the parameters in the same fashion as if executing <code>./myscript.sh</code>:</p>
+
+<pre><code>$ cat myscript.sh
+echo $1
+$ ./myscript.sh 1
+1
+$ bash -x myscript.sh 1
++ echo 1
+1
+</code></pre>
+
+<h4 id="dry-run-while-building-the-script">Dry-run while building the script</h4>
+
+<p>A common pattern I use while building scripts is to prepare the command but do not execute it yet:</p>
+
+<pre><code>...
+# prepare options, decide what to do
+echo COMMAND_WITH_SIDE_EFFECTS
+</code></pre>
+
+<p>When I am sure that this is the desired command, usually after trying it manually on the console, I can remove the <code>echo</code>:</p>
+
+<pre><code>...
+# prepare options, decide what to do
+COMMAND_WITH_SIDE_EFFECTS
+</code></pre>
+
+<h4 id="dry-run-as-another-switch">Dry-run as another switch</h4>
+
+<p>You can use the previous pattern but as a feature of your script:</p>
+
+<ul>
+<li>Accept &lsquo;-n / &ndash;dry-run&rsquo; (or similar)</li>
+<li>When the switch is enabled, it prepends <code>echo</code> to your final command</li>
+</ul>
+
+<pre><code>COMMAND=&quot;rm -rf ./.git&quot;
+if [ $DRY_RUN ]; then
+  COMMAND=&quot;echo $COMMAND&quot;
+fi
+
+$COMMAND
+</code></pre>
+
+<h3 id="verbosity-levels-and-other-modes">Verbosity levels and other modes</h3>
+
+<p>When some scripts grow in size and are not a script but an application, being more or less verbose is useful.</p>
+
+<p>See <code>curl</code> as an example:</p>
+
+<pre><code>$ curl localhost:8080
+curl: (7) Failed to connect to localhost port 8080: Connection refused
+$ curl -vvv localhost:8080
+* Rebuilt URL to: localhost:8080/
+*   Trying ::1...
+* connect to ::1 port 8080 failed: Connection refused
+*   Trying fe80::1...
+* connect to fe80::1 port 8080 failed: Connection refused
+*   Trying 127.0.0.1...
+* connect to 127.0.0.1 port 8080 failed: Connection refused
+* Failed to connect to localhost port 8080: Connection refused
+* Closing connection 0
+</code></pre>
+
+<p>Same with quiet mode, a mode to reduce verbosity.</p>
+
+<p>Same with &lsquo;raw&rsquo; mode, a mode to only print the raw output, maybe for consumption from another script.</p>
+
+<h3 id="using-quotes">Using quotes</h3>
+
+<p>Imagine a script that prints the first, second, and third received parameter, then all of them:</p>
+
+<pre><code>$ cat myscript.sh
+echo &quot;first=$1 second=$2 third=$3; all=$@&quot;
+</code></pre>
+
+<p>The normal invocation:</p>
+
+<pre><code>$ ./myscript.sh 1 2 3
+first=1 second=2 third=3; all=1 2 3
+</code></pre>
+
+<p>(everything works as expected)</p>
+
+<p>now let&rsquo;s try strings (with spaces)</p>
+
+<pre><code>$ ./myscript.sh hello world
+first=hello second=world third=; all=hello world
+</code></pre>
+
+<p>Ok, bash uses spaces to delimit words. Now that we know this, lets be careful.</p>
+
+<p>We want to process some files (with spaces):</p>
+
+<pre><code>$ ls file*
+file 1.txt file 2.txt
+$ ./myscript.sh $(ls file*)
+first=file second=1.txt third=file; all=file 1.txt file 2.txt
+</code></pre>
+
+<p>A defect appeared: I want &ldquo;file 1.txt&rdquo; to be a parameter, not two.</p>
+
+<p>Let&rsquo;s imagine a script checking whether a file exists:</p>
+
+<pre><code>$ cat file_exists.sh
+if [ -e $1 ]; then # -e is for file exists; see `man test`
+  echo &quot;file $1 exists&quot;
+else
+  echo &quot;file $1 does not exist&quot;
+fi
+</code></pre>
+
+<pre><code>$ ls file*
+file 1.txt     file 2.txt     file_exists.sh
+$ ./file_exists.sh &quot;file 1.txt&quot;
+./file_exists.sh: line 1: [: file: binary operator expected
+file file 1.txt does not exist
+</code></pre>
+
+<p>Let&rsquo;s add quotes to the test to make it work with spaces:</p>
+
+<pre><code>$ cat file_exists.sh
+if [ -e &quot;$1&quot; ]; then # note the quotes
+  echo &quot;file $1 exists&quot;
+else
+  echo &quot;file $1 does not exist&quot;
+fi
+$ ./file_exists.sh &quot;file 1.txt&quot;
+file file 1.txt exists
+</code></pre>
+
+<p>In general, be careful with spaces, as they mark the end of the string / parameter. Be proactive with quoting. From the <a href="https://google.github.io/styleguide/shell.xml" target="_blank">google bash guide</a>:</p>
+
+<ul>
+<li>Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required.</li>
+<li>Prefer quoting strings that are &ldquo;words&rdquo; (as opposed to command options or path names).</li>
+<li>Never quote literal integers.</li>
+<li>Be aware of the quoting rules for pattern matches in [[.</li>
+<li>Use &ldquo;$@&rdquo; unless you have a specific reason to use $*.</li>
+</ul>
+
+<p>Also:</p>
+
+<ul>
+<li>Single quote does not interpolate: <code>'$PATH' is literally $PATH</code></li>
+<li>Double quotes interpolate: <code>&quot;$PATH&quot; is the contents of the variable $PATH</code></li>
+<li>If possible, try having spaces in the files you produce. It makes life much simpler.</li>
+</ul>
+
+<h3 id="solid">SOLID</h3>
+
+<p>If your script is a one-off thing, or will not suffer churn/modification, then feel free to discard this tip. On the other hand, if this script will be part of a critical path (e.g., deploying) or will be modified in the future, try to apply the SOLID principles that we apply for other pieces of software.</p>
+
+<p>Especially the SRP (below)</p>
+
+<h3 id="single-responsibility-principle-srp">Single Responsibility Principle (SRP)</h3>
+
+<p>I like to design my scripts by separating concerns or responsibilities.</p>
+
+<p>One typical example: process many files at once:</p>
+
+<pre><code>$ cat s1.sh
+#!/usr/bin/env bash
+
+function find_files {
+   while IFS= read -r -d '' file; do
+       files+=( &quot;$file&quot; )
+   done &lt; &lt;(find . -maxdepth 1 -type f -iname &quot;file*.txt&quot; -print0)
+}
+
+function process_file {
+  file=&quot;$1&quot;
+  echo &quot;Will write to file $file&quot;
+}
+
+function main {
+  declare -a files # this is a global variable inside the script
+  find_files
+  for file in &quot;${files[@]}&quot;; do
+    process_file &quot;$file&quot;
+  done
+}
+
+main
+</code></pre>
+
+<p>The main benefit is that iterating the files is something that usually does not fail (just copy paste the script), while the main work is done in <code>process_file</code>. The two functions have different pace of change, therefore two responsibilities. The latter, I can test manually (on the REPL) until it works, then copy-paste the script (see &lsquo;How I write my scripts&rsquo;).</p>
+
+<p>Its execution:</p>
+
+<pre><code>$ ls file*
+file1.txt file2.txt
+$ ./s1.sh
+Will write to file ./file1.txt
+Will write to file ./file2.txt
+</code></pre>
+
+<p>For more information on return values and functions in bash, see <a href="https://www.linuxjournal.com/content/return-values-bash-functions" target="_blank">this article</a></p>
+
+<h3 id="hot-swap-reload">Hot-swap / reload</h3>
+
+<p>Files in bash are read every time you invoke them. So if you separate the <code>process_file</code> function to another file, you can change the contents of it while the long-running main script is working.</p>
+
+<h3 id="be-extra-careful-with-rm">Be extra careful with <code>rm</code></h3>
+
+<p>This is common knowledge, but it can happen to any of us.</p>
+
+<p>Removing files is a sharp-edged tool, such as <code>DELETE</code> in SQL. This is why we <code>SELECT</code> the same data set before deleting. Why we <code>ls</code> files before <code>rm</code>ing them.</p>
+
+<p>Some operating systems now protect <code>#rm -rf /</code> with another flag, but the mistake of <code>#rm -rf $VARIABLE/*</code> where <code>$VARIABLE</code> is empty is common enough.</p>
+
+<p>To avoid the above mistake,</p>
+
+<pre><code>#!/usr/env/bin bash
+set -euxo pipefail
+cd $VARIABLE #this will fail if $VARIABLE is unbound
+rm -rf ./* # notice the dot (.) before the star
+cd - #go back to the previous folder
+</code></pre>
+
+<p>This will only delete files from the current directory down (<code>./</code>), yet another level of protection.</p>
+
+<h3 id="static-code-analysis">Static code analysis</h3>
+
+<p>Shell files can also be analyzed statically, (i.e., <a href="https://en.wikipedia.org/wiki/Lint_(software)" target="_blank">lint</a>). A tool for that is <a href="https://www.shellcheck.net/" target="_blank">ShellCheck</a>.</p>
+
+<p>Shellcheck helps you locate possible errors, bugs, stylistic errors and suspicious constructs in your scripts.</p>
+
+<p>The tool is large enough to warrant another article, but the basic usage is straightforward: run the linter with the shell script as input.</p>
+
+<p>Some example run:</p>
+
+<pre><code>$ shellcheck sh1.sh
+In sh1.sh line 22:
+  destination=${date}-$(basename $file)
+                                 ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+In sh1.sh line 25:
+  git add $file
+          ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In sh1.sh line 34:
+  if [[ -z $(which imagemagick) ]]; then
+             ^-- SC2230: which is non-standard. Use builtin 'command -v' instead.
+</code></pre>
+
+<p>Note: I use the tool with docker (see <a href="https://github.com/alvarogarcia7/shellcheck-docker" target="_blank">here</a>, <a href="https://github.com/koalaman/shellcheck#installing" target="_blank">official docker image</a>)</p>
+
+<h2 id="how-i-write-my-scripts">How I write my scripts</h2>
+
+<p>Usually, I design my scripts:</p>
+
+<ul>
+<li>the function <code>process_file</code> to receive a single element (i.e., the function passed to <code>map</code> / iterate). This is the hard part</li>
+<li>Create plumbing (either code or manual invocations), putting together the candidates with the other function.</li>
+</ul>
+
+<h3 id="example-1-a-long-lived-script">Example 1: a long-lived script</h3>
+
+<p>This is a full example with code to plumb the candidate to the function.</p>
+
+<p>I want to remove all the existing files in a directory that are greater in size than 30 KB. (I know this can be done with <code>find -exec</code> or <code>ls | xargs rm</code>, this is just an example for arbitrary logic).</p>
+
+<p>First, on the REPL, find all the files:</p>
+
+<pre><code>$ ls -lh file*
+-rw-r--r--  1 user  group     0B Jul 13 00:50 file1.txt
+-rw-r--r--  1 user  group     0B Jul 13 00:50 file2.txt
+-rw-r--r--  1 user  group   531K Jul 13 00:07 file3.txt
+</code></pre>
+
+<p>Find files greater than the desired size:</p>
+
+<pre><code>$ find . -maxdepth 1 -type f -iname &quot;file*.txt&quot; -size +30k -print0
+./file3.txt%
+</code></pre>
+
+<p>now, only need to delete the file:</p>
+
+<pre><code>function process_file {
+  file=&quot;$1&quot;
+  echo &quot;rm $file&quot; # 1
+}
+</code></pre>
+
+<p>Note: #1 - Notice the <code>echo</code> command to protect the real execution</p>
+
+<p>First, I make sure that the plumbing code is all correct before executing commands with side effects (e.g., rm). If you are working with delicate data, you can consider working in a docker container.</p>
+
+<p>Then, remove the &ldquo;temporary dry-run mode&rdquo;:</p>
+
+<pre><code>function process_file {
+  file=&quot;$1&quot;
+  rm $file
+}
+</code></pre>
+
+<p>The full script:</p>
+
+<pre><code>$ cat s2.sh
+#!/usr/bin/env bash
+
+function find_files {
+   while IFS= read -r -d '' file; do
+       files+=( &quot;$file&quot; )
+   done &lt; &lt;(find . -maxdepth 1 -type f -iname &quot;file*.txt&quot; -size +30k -print0)
+}
+
+function process_file {
+  file=&quot;$1&quot;
+  rm $file
+}
+
+function main {
+  declare -a files
+  find_files
+  for file in &quot;${files[@]}&quot;; do
+    process_file &quot;$file&quot;
+  done
+}
+
+main
+</code></pre>
+
+<h3 id="example-2-a-one-off-script">Example 2: a one-off script</h3>
+
+<p>This is a full example with a manual invocation to plumb the candidate to the function.:</p>
+
+<ul>
+<li>the function <code>process_file</code> to receive a single element (i.e., the function passed to <code>map</code> / iterate).</li>
+<li>Manually, I will list all files / candidates to a temporary file</li>
+<li>Review the candidates</li>
+<li>(with vim) turn the selected candidates into invocations.</li>
+</ul>
+
+<p>First, on the REPL, find all the files:</p>
+
+<pre><code>$ ls -lh file*
+-rw-r--r--  1 user  group     0B Jul 13 00:50 file1.txt
+-rw-r--r--  1 user  group     0B Jul 13 00:50 file2.txt
+-rw-r--r--  1 user  group   531K Jul 13 00:07 file3.txt
+-rw-r--r--  1 user  group   531K Jul 13 00:07 file_SUPER_IMPORTANT_DO_NOT_DELETE.txt
+</code></pre>
+
+<p>Find files greater than the desired size:</p>
+
+<pre><code>$ find . -maxdepth 1 -type f -iname &quot;file*.txt&quot; -size +30k &gt; candidates.txt
+$ cat candidates.txt
+./file3.txt
+./file_SUPER_IMPORTANT_DO_NOT_DELETE.txt
+</code></pre>
+
+<p>Then, open vim to review, as a way of checking the valid candidates. This is the same process that <code>git rebase --interactive</code> offers: a CLI command to rebase based on your editor.</p>
+
+<p>I realize that the file <code>file_SUPER_IMPORTANT_DO_NOT_DELETE.txt</code> should not be deleted. So I remove that, manually.</p>
+
+<p>Now,</p>
+
+<pre><code>$ cat candidates.txt
+./file3.txt
+</code></pre>
+
+<p>then I prefer to edit the file manually than to create a script. Remember, this is a one-off effort. And programs need to be maintained. One-off scripts are to be thrown away, so no maintenance effort.</p>
+
+<p>Hint: the vim command <code>%s/^/rm /</code> will insert at the beginning of the line the command <code>rm</code> that we need. The command <code>%s/$/;/</code> will append a semicolon at the end of the line. It&rsquo;s not needed for this example, but as a reminder. This replacement can also be done with <code>sed</code>/<code>awk</code>.</p>
+
+<pre><code>$ cat candidates.txt
+rm ./file3.txt;
+</code></pre>
+
+<p>Now, just execute this file:</p>
+
+<pre><code>bash candidates.txt
+</code></pre>
+
+<p>And your files are processed. Gone, in this case.</p>
+
+<h2 id="limitations">Limitations</h2>
+
+<p>Every tool (and metaphor) has its limits. Know when to use a tool and when to change tools.</p>
+
+<h3 id="when-is-bash-enough">When is bash enough</h3>
+
+<p>Small scripts, simple invocations, etc.</p>
+
+<p>One-off tasks are perfect for bash: write code, review effects, throw it away. Don&rsquo;t plan on reusing it. Although you can keep a collection of snippets for iterating, dealing with spaces, etc.</p>
+
+<p>More than 50-100 bash lines (a rough approximation), I consider a small program already. Maybe start thinking on building a better foundation around it.</p>
+
+<h3 id="when-it-is-too-much-for-bash">When it is too much for bash</h3>
+
+<h4 id="complex-multi-stage-scripts">Complex/multi-stage scripts</h4>
+
+<p>With my current knowledge of bash, I feel that some jobs are not appropriate for bash. For example, when dealing with spaces in strings, arrays, complex functions, etc.</p>
+
+<p>For that, I prefer a more powerful language, ideally scripting (so I can get a quick feedback cycle.) I&rsquo;ve been playing with Perl lately (works very well), Ruby in the past. I&rsquo;ve heard good things about typescript and go as well.</p>
+
+<p>Perl works well for powerful scripts that don&rsquo;t need to be tested.</p>
+
+<p>Ruby works well for programs (no longer scripts) that need to be tested.</p>
+
+<h4 id="parameter-autocompletion">Parameter autocompletion</h4>
+
+<p>For my build scripts, I enjoy hitting <code>&lt;tab&gt;</code> for auto-completion of the goals. Bash does not offer that out of the box (but can be performed using <a href="https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion" target="_blank">programmable completion</a>). Make, on the other hand, offers goal autocompletion out of the box:</p>
+
+<pre><code>.PHONY: build
+build:
+    ./gradlew build
+</code></pre>
+
+<p>Now, I can <code>make b&lt;TAB&gt;</code> and it will suggest <code>make build</code></p>
+
+<h2 id="other-resources">Other resources</h2>
+
+<ul>
+<li><a href="https://www.shellcheck.net/" target="_blank">ShellCheck</a> helps you check your shell scripts, using static analysis tools: ShellCheck is a GPLv3 tool that gives warnings and suggestions for bash/sh shell scripts.</li>
+<li><a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank">Bash reference manual</a></li>
+<li><a href="https://google.github.io/styleguide/shell.xml" target="_blank">Google Bash reference guide</a></li>
+</ul>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Alvaro Garcia</span></span>
+    
+    <time>Jul 13, 2018</time>
+  </p>
+
+  
+  <div class="sharing">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="alvarobiz" data-hashtags="blog">Tweet this article</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+     
+  </div>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://alvarogarcia7.github.io/blog/2018/07/04/questioning-existing-choices/" title="Questioning the existing choices">Questioning the existing choices</a>
+    
+
+    
+  </p>
+  
+    
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    
+    
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>About this blog</h1>
+    
+
+    <p>
+      
+        This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
+        <br>
+        <br>
+         You can find me on:
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" href="https://github.com/alvarogarcia7/" title="https://github.com/alvarogarcia7/"><i class="fa fa-github fa-3x"></i></a>
+      
+      <a target="_blank" href="https://twitter.com/@alvarobiz/" title="https://twitter.com/@alvarobiz/"><i class="fa fa-twitter fa-3x"></i></a>
+       
+      <a target="_blank" href="https://es.linkedin.com/in/alvarogarcia7" title="https://es.linkedin.com/in/alvarogarcia7"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+    <section class="even">
+      <h1>Recent Posts</h1>
+      <ul id="recent_posts">
+        
+          <li class="post">
+            <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/06/15/testing-component-randomness/">Testing a component that includes randomness</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/05/01/self-study-may-2018/">Self-Study in May 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/04/01/self-study-april-2018/">Self-Study in April 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/03/01/self-study-march-2018/">Self-Study in March 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/02/01/self-study-february-2018/">Self-Study in February 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/01/01/self-study-january-2018/">Self-Study in January 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2017/12/31/books-read-2017q4/">Books read in 2017Q4</a>
+          </li>
+        
+      </ul>
+    </section>
+  
+
+</aside>
+
+  </div>
+</div>
+
+<footer role="contentinfo">
+  <p>Copyright &copy; 2018 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
+</p>
+
+</footer>
+
+
+<script>
+  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+
