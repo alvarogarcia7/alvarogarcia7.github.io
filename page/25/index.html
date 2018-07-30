@@ -128,6 +128,42 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/">Logging is a feature</a>
+    </h1>
+    <p >Apr 19, 2015
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/logging/">logging</a><a class="label" href="https://alvarogarcia7.github.io/categories/log/">log</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature/">feature</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/challenge/">challenge</a><a class="label" href="https://alvarogarcia7.github.io/categories/splunk/">splunk</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of Splunk.
+This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity matters</a>
     </h1>
     <p >Apr 18, 2015
@@ -310,43 +346,6 @@ How I do redesign I usually do this &ldquo;changing of the outside design&rdquo;
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/">Experience report: Test-driven development intensive, by Jason Gorman</a>
-    </h1>
-    <p >Apr 12, 2015
-         - 8 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop/">workshop</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-gorman/">jason-gorman</a><a class="label" href="https://alvarogarcia7.github.io/categories/uk/">uk</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/crc-card/">crc-card</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>This is an experience report on Jason Gorman&rsquo;s &ldquo;Test-driven development intensive workshop&rdquo; on the April 11th, 2015
-I attended this training in the Greenfell housing &amp; training in South Wimbledon, London SW19 1JZ. The training spanned from 10:00 to 17:00 with a half an hour for lunch plus three or four 10-15 minute pauses. (7 - ,5 - 4 * 12/60 = ~5.7hours = 5 hours 45 minutes)
-Introduction There were 23 of us, including me.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -514,6 +513,10 @@ Introduction There were 23 of us, including me.</p>
           </li>
         
           <li class="post">
+            <a href="/blog/2018/06/30/books-read-2018q2/">Books read in 2018Q2</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/06/15/testing-component-randomness/">Testing a component that includes randomness</a>
           </li>
         
@@ -535,10 +538,6 @@ Introduction There were 23 of us, including me.</p>
         
           <li class="post">
             <a href="/blog/2018/03/01/self-study-march-2018/">Self-Study in March 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/02/01/self-study-february-2018/">Self-Study in February 2018</a>
           </li>
         
       </ul>

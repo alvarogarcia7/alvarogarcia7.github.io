@@ -128,6 +128,43 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster site generation for Octopress 2</a>
+    </h1>
+    <p >Jul 13, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See here
+After a while, the generation of the static site using Octopress 2 was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.
+Inspired by their new features in Octopress 3, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/">What defines a dependency</a>
     </h1>
     <p >Jul 13, 2015
@@ -302,39 +339,6 @@ testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest) testCrea
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: committing to the repo file by file</a>
-    </h1>
-    <p >Jul 8, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.
-This is why I have some scripts to commit all the changes, even with the same message. This is one of them:
-for f in $(git status -s |grep &quot;^M&quot;|awk &#39;{print $2}&#39;); do git add $f git commit -m &quot;generic commit for all files&quot; done  </p>
-
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -502,6 +506,10 @@ for f in $(git status -s |grep &quot;^M&quot;|awk &#39;{print $2}&#39;); do git 
           </li>
         
           <li class="post">
+            <a href="/blog/2018/06/30/books-read-2018q2/">Books read in 2018Q2</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/06/15/testing-component-randomness/">Testing a component that includes randomness</a>
           </li>
         
@@ -523,10 +531,6 @@ for f in $(git status -s |grep &quot;^M&quot;|awk &#39;{print $2}&#39;); do git 
         
           <li class="post">
             <a href="/blog/2018/03/01/self-study-march-2018/">Self-Study in March 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/02/01/self-study-february-2018/">Self-Study in February 2018</a>
           </li>
         
       </ul>
