@@ -129,6 +129,89 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/">A basic working environment</a>
+    </h1>
+    <p >Sep 8, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/#disqus_thread">Comments</a>
+
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>Sometimes, when working out of somebody&rsquo;s else computer, I won&rsquo;t have my preferred IDE installed.</p>
+
+<p>In this case, what I usually do &ndash;as long as the programming session is more than 5 TDD cycles&ndash;, is to configure my own environment. It includes:</p>
+
+<ul>
+<li>text editor: $EDITOR is enough</li>
+<li>test runner. A simple bash script executing the tests will suffice</li>
+<li>git terminal: to commit, see differences, revert, etc</li>
+<li>[optional] REPL if the language has it</li>
+</ul>
+
+<p>If the system already has it, I will use <code>screen</code> to cycle around the sessions.</p>
+
+<h2 id="a-simple-test-runner">A simple test runner</h2>
+
+<p>More in depth, the test runner will be similar to this:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">while</span> <span class="o">[</span> <span class="nb">true</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
+    clear<span class="p">;</span>
+    date<span class="p">;</span>
+    runhaskell Spec.hs<span class="p">;</span>
+    <span class="nb">read</span> i<span class="p">;</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<p>This script will:</p>
+
+<ul>
+<li>clear the screen (for better readability)</li>
+<li>print the date</li>
+<li>execute the tests</li>
+<li>read from the console, effectively waiting for the user to interact (an enter is enough)</li>
+</ul>
+
+<p>The date is useful for both detecting the pace of the cycles and for scrolling up and down in the terminal.</p>
+
+<p>If this date is much too necessary, it might indicate the presence of the TDD antipattern &ldquo;El Bocazas&rdquo; / &ldquo;A mouthful&rdquo;, present in <a href="http://www.carlosble.com/downloads/disenoAgilConTdd_ebook.pdf" target="_blank">Diseño Ágil con TDD</a>. I use when the output of the test runner is extensive (such as <code>runhaskell</code>).</p>
+
+<p>If the test runner output is too verbose, a possible step forward is to silence output in when every test is green (fragment):</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nv">output</span><span class="o">=</span><span class="k">$(</span>runhaskell Spec.hs<span class="k">)</span><span class="p">;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;OK&quot;</span><span class="p">;</span>
+<span class="k">else</span>
+    <span class="nb">echo</span> <span class="nv">$output</span><span class="p">;</span>
+<span class="k">fi</span>
+</code></pre></div>
+
+<h2 id="other-test-runners">Other test runners</h2>
+
+<p>As a side note, other test runners are quieter than others:</p>
+
+<ul>
+<li><code>py.test</code> will output the name of the file and &ldquo;E&rdquo; for error and &ldquo;.&rdquo; for OK</li>
+<li><code>clojure.test</code> will output the name of the file and a total of tests and assertions. <a href="http://jakemccrary.com/blog/2015/04/25/quieter-clojure-dot-test-output/" target="_blank">Here</a> to make it quieter</li>
+<li><code>HSpec</code> will output one line per <code>describe</code> and <code>it</code>. Inspired by RSpec</li>
+<li><code>Jasmine</code> will output one line per <code>describe</code> and <code>it</code>, as HSpec, as both of them are inspired by RSpec.</li>
+<li><code>Junit</code> and derivatives will produce the name of the file and total of tests and assertions. Also, on demand, a file containing test results so it can be interpreted by the IDE.</li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/">Brown-bag session: eXtreme Programming</a>
     </h1>
     <p >Sep 2, 2015
@@ -680,37 +763,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/12/brownbag-session-spring-boot/">Brown-bag session: Spring Boot</a>
-    </h1>
-    <p >Aug 12, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/12/brownbag-session-spring-boot/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring-boot/">spring-boot</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>At a client, today we&rsquo;ve done a brown-bag session on <a href="http://projects.spring.io/spring-boot/" target="_blank">Spring Boot</a>: we&rsquo;ve gone through the basics with a <a href="https://github.com/Rossyafk/spring-boot-demo/" target="_blank">sample maven project</a> and its <a href="https://github.com/Rossyafk/spring-boot-demo/blob/master/pom.xml" target="_blank">pom file</a>.</p>
-
-<p>We&rsquo;ve seen the <a href="http://start.spring.io/" target="_blank">Spring Initializr</a> and a live demo, using curl for REST client.</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -864,6 +916,10 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/12/01/self-study-december-2018/">Self-Study in December 2018</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
           </li>
         
@@ -899,10 +955,6 @@
             <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
           </li>
         
-          <li class="post">
-            <a href="/blog/2018/03/01/self-study-march-2018/">Self-Study in March 2018</a>
-          </li>
-        
       </ul>
     </section>
   
@@ -913,7 +965,7 @@
 </div>
 
 <footer role="contentinfo">
-  <p>Copyright &copy; 2018 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+  <p>Copyright &copy; 2019 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
   <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
 </p>
 

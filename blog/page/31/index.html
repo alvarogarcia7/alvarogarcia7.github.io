@@ -129,6 +129,136 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/">Should we start the TDD cycle on refactor?</a>
+    </h1>
+    <p >Dec 29, 2014
+         - 4 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2014/12/29/should-we-start-the-tdd-cycle-on-refactor/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">TDD</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/cas2k14/">CAS2k14</a><a class="label" href="https://alvarogarcia7.github.io/categories/new-idea/">new-idea</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>In this lexical scope, TDD by example is referring to this book<sup class="footnote-ref" id="fnref:tddbyexample"><a rel="footnote" href="#fn:tddbyexample">1</a></sup>, available <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530" target="_blank">on Amazon</a></p>
+
+<p>###The TDD cycle</p>
+
+<p>Altough <a href="https://twitter.com/KentBeck" target="_blank">Kent Beck</a> in his book Test-Driven Development by example explains in &ldquo;Part I: the money example&rdquo;<sup class="footnote-ref" id="fnref:tddbyexampleparti"><a rel="footnote" href="#fn:tddbyexampleparti">2</a></sup> that one should</p>
+
+<blockquote>
+<p>quickly add a test;</p>
+
+<p>run all the tests and see the new one fail [&hellip;]</p>
+
+<p><cite>Kent Beck </cite></p>
+</blockquote>
+
+<p>Implying that the TDD cycle starts with the red. Later on he explains that the cycle continues with green and refactor and back to red.</p>
+
+<p>But I&rsquo;ve been hearing for a while that there&rsquo;re some useful refactors to be done before introducing new code. Rings in my head but the only example I have is Xavi Gost&rsquo;s &ldquo;La economía del refactoring<sup class="footnote-ref" id="fnref:refactoringeconomy"><a rel="footnote" href="#fn:refactoringeconomy">3</a></sup>&ldquo;</p>
+
+<p>###Refactoring
+Let&rsquo;s take a look at the definition of refactor (found <a href="http://www.refactoring.com/" target="_blank">here</a>):</p>
+
+<blockquote>
+<p>[Refactoring] is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.</p>
+
+<p><cite>Martin Fowler</cite></p>
+</blockquote>
+
+<p>I&rsquo;ve found some info on <a href="http://stackoverflow.com/questions/1355101/test-code-refactor-when-should-we-start-a-refactoring" target="_blank">stackoverflow</a> about the subject. The currently <a href="http://stackoverflow.com/a/1355782" target="_blank">accepted answer</a> points out some interesting comments:</p>
+
+<ul>
+<li>Do not refactor on red. Always a good reminder</li>
+<li>If you are refactoring for introducing a feature, how much refactor is enough? This is speculative development, possibly taking much time from needed development</li>
+</ul>
+
+<p>The last point is the one that interests me the most:</p>
+
+<ul>
+<li>Your refactoring might not be where you&rsquo;re going to introduce new production code<sup class="footnote-ref" id="fnref:spatial-cach"><a rel="footnote" href="#fn:spatial-cach">0</a></sup></li>
+<li>You might end up introducing features after a few hours/days of refactoring, therefore losing focus on the refactor you did and why (local caché)</li>
+<li>Given that I&rsquo;ve already &ldquo;cleaned up&rdquo; this, I could also go somewhere else (slippery slope). Heard from <a href="https://twitter.com/xav1uzz" target="_blank">Xavi Gost</a> at the CAS2014 at his talk <a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/" target="_blank">La economía del refactoring</a></li>
+</ul>
+
+<blockquote>
+<p>No está justificado hacer cambios fuera de la rebanada.</p>
+</blockquote>
+
+<p>Roughly translated to &ldquo;It&rsquo;s not justified to change outside the bread slice&rdquo;, as Xavi was referring to software as sliced bread instead of layers, vertical rather than horizontal</p>
+
+<p>###Should you do it?</p>
+
+<ul>
+<li>Doing it would be a good thing, as long as you know in advance what will be affected by the next feature.</li>
+<li>It can allow for less refactoring at the end of the cycle. This is not about duplication but refactoring to patterns. There might be a gain in refactoring to a pattern before introducing another feature. An example might be adding a new strategy when it&rsquo;s currently coded as if-then-else</li>
+<li>The last responsible moment might be before or after introducing the feature. You decide.</li>
+<li>Work less as there&rsquo;s no need for adding new cases to old structures and then simplifying</li>
+</ul>
+
+<p>###Should you not do it?</p>
+
+<ul>
+<li>Foreseeing the future is difficult, therefore you might end with unused development, as it is speculating</li>
+<li>Related to the last point, you might end refactoring in the wrong places. There&rsquo;s no current business value to it.</li>
+<li>Not useful on first round of a new feature, you can use a lambda transition to the red again. But then, this is not a general pattern, only applicable to a big percent of cases.</li>
+</ul>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>Short answer: it mainly depends on your environment:</p>
+
+<ul>
+<li>You: experience, common sense (sadly) &mdash;another post coming&mdash;, benefit/time-wasted ratio</li>
+<li>Your project: how tight are deadlines, how critical that code is, the team&rsquo;s pressure</li>
+</ul>
+
+<p>Long answer: Yes, as long as:
+ 1. You realize there is a fine line between fixing code and rewriting code (Egoless programming #4). Don&rsquo;t be a lone enforcer
+ 2. Strictly follow the boy scout rule but only around your campfire, not outside of it.
+ 1. You know your domain, pitfalls and team well
+ 1. You want to test this hypothesis and post an answer</p>
+
+<p>###Sources</p>
+
+<ul>
+<li><a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/" target="_blank">La economía del refactoring</a>, <a href="https://twitter.com/xav1uzz" target="_blank">Xavi Gost</a></li>
+<li><a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530" target="_blank">Test-Driven Development by example</a>, <a href="https://twitter.com/KentBeck" target="_blank">Kent Beck</a></li>
+<li><a href="http://refactoring.com" target="_blank">Refactoring.com</a>, <a href="https://twitter.com/martinfowler" target="_blank">Martin Fowler</a></li>
+</ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:tddbyexample">Test-Driven Development by example; Beck, K. (ISBN-13: 078-5342146530)
+ <a class="footnote-return" href="#fnref:tddbyexample"><sup>[return]</sup></a></li>
+<li id="fn:tddbyexampleparti">from the book, description of part I, before chapter I
+ <a class="footnote-return" href="#fnref:tddbyexampleparti"><sup>[return]</sup></a></li>
+<li id="fn:refactoringeconomy">That talk is not yet available (AFAIK), but there&rsquo;s a <a href="http://ocana.github.io/articles/Conferencia-Agile-Spain-2014-primer-dia/" target="_blank">post</a> about it (Spanish)
+ <a class="footnote-return" href="#fnref:refactoringeconomy"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2014/12/18/global-day-of-code-retreat/">Global Day of Code Retreat 2014</a>
     </h1>
     <p >Dec 18, 2014
@@ -444,79 +574,6 @@ should go to
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/1/01/01/"></a>
-    </h1>
-    <p >Jan 1, 0001
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/1/01/01/#disqus_thread">Comments</a>
-
-        
-    </p>
-</header>
-
-
-        
-        
-
-<hr />
-
-<p>published: false
-categories:</p>
-
-<h2 id="draft">- draft</h2>
-
-<p>curiosities - so early, they talk:
-* about testing, reproducing cases: ensuring quality
-* store documentation and update it incrementally (in paper)
-* store versions of the software: version control system (VCS)</p>
-
-<p>ideas to talk about:
-* no silver bullet
-  - essence and accident
-  - how to measure performance without control groups?
-  - candidates:
-    - the social coding (not silver bullet, still)
-    - higher-level languages and frameworks (scala, play; python, django; ruby, ruby on rails)
-    - open source packages
-* brooks&rsquo; law
-* nine women cannot make a baby in one month: the non-parallelizable tasks of a project
-* chapter #2: the idea of the waiting patrons on the french menu
-* investing a part of your time to sharpen your tools
-*
-* hypothesis: was the book (the mythical man month) a precursor to the agile movement?</p>
-
-<p>others investigate the same:
-<a href="http://edu.technion.ac.il/Faculty/OritH/HomePage/FrontierColumns/OritHazzan_SystemDesigFrontier_Column9.pdf" target="_blank">technion</a></p>
-
-<p>Ideas from paper in [technion]:
-* not in year &lsquo;75 but maybe &lsquo;85 (approx)</p>
-
-<p>The <a href="http://en.wikipedia.org/wiki/Extreme_programming" target="_blank">XP wiki page</a> points to the C3 System: started in &lsquo;93 and Kent Beck joined in &lsquo;96</p>
-
-<p>This other post:
-<a href="http://dhondtsayitsagile.blogspot.com/2010/01/mythical-man-month-by-frederick-brooks.html:" target="_blank">http://dhondtsayitsagile.blogspot.com/2010/01/mythical-man-month-by-frederick-brooks.html:</a></p>
-
-<blockquote>
-<p>Though I found the book a bit dry and out of date, it was worth a quick read for the simple reason that it holds so many ideas that are so strongly advocated by Agile practices, and others that are not. Consistent with agile&ndash;we must use a process that assures us that &ldquo;one always has, at every stage in the process, a working system. I find that teams can grow much more complex entities in four months than they can build&rdquo;; &ldquo;conceptual integrity is the most important consideration in system design&rdquo;. Communication is critical&ndash;and exponentially more difficult with larger and larger teams. He advocates giving developers room to be creative, saying they need room for &ldquo;invention and craftsmanship&rdquo; [&hellip;]</p>
-
-<p>He also believes in &ldquo;done-done&rdquo;, in other words&ndash;&ldquo;milestones musbe be concrete, specific, measureable&hellip;coding, for counterexample, is &lsquo;90 percent finished&rsquo;, for half the total coding time. Debugging is &lsquo;99 percent complete&rsquo; most of the time&hellip;&rdquo;. Though stand-up meetings weren&rsquo;t called it at the time, he knew the wastes of &ldquo;status-review&rdquo; meetings, and started calling things problem-action meetings instead</p>
-</blockquote>
-
-<p>XP values:
-* <a href="http://www.extremeprogramming.org/values.html" target="_blank">http://www.extremeprogramming.org/values.html</a>
-* <a href="http://www.softwarereality.com/lifecycle/xp/four_values.jsp" target="_blank">http://www.softwarereality.com/lifecycle/xp/four_values.jsp</a></p>
-
-        
-
-    </article>
-    
     
     
 
@@ -670,6 +727,10 @@ categories:</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/12/01/self-study-december-2018/">Self-Study in December 2018</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
           </li>
         
@@ -705,10 +766,6 @@ categories:</p>
             <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
           </li>
         
-          <li class="post">
-            <a href="/blog/2018/03/01/self-study-march-2018/">Self-Study in March 2018</a>
-          </li>
-        
       </ul>
     </section>
   
@@ -719,7 +776,7 @@ categories:</p>
 </div>
 
 <footer role="contentinfo">
-  <p>Copyright &copy; 2018 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+  <p>Copyright &copy; 2019 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
   <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
 </p>
 
