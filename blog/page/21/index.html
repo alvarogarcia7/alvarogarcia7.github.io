@@ -129,6 +129,118 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag session: Refactoring legacy code</a>
+    </h1>
+    <p >Jun 23, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+
+<p>The contents of the session:</p>
+
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session
+<br /></li>
+</ul></li>
+</ul>
+
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike" target="_blank">here</a>.</p>
+
+<p>I prepared a small script:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">while</span> <span class="nb">test</span> true<span class="p">;</span> <span class="k">do</span>
+  git add --all<span class="p">;</span>
+  git commit --all -m <span class="s2">&quot;save process - uknown state&quot;</span><span class="p">;</span>
+  sleep <span class="m">120</span><span class="p">;</span>
+<span class="k">done</span><span class="p">;</span>
+</code></pre></div>
+
+<p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz" target="_blank">Xavi Gost</a> <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup></p>
+
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker/">Brown-bag session: docker</a>
+    </h1>
+    <p >Jun 16, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including:</p>
+
+<ul>
+<li>the difference between a container and an image</li>
+<li>diffing image contents</li>
+<li>AUFS (Another Union FS)</li>
+<li>persistent vs non-persistent (volatile) filesystems</li>
+<li>running CMD and other commands on the instance</li>
+<li>problems of running with permission = root (or its group)</li>
+<li>downsides of it</li>
+<li>how to compare it with a virtual machine</li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects/">Types of defects</a>
     </h1>
     <p >Jun 14, 2015
@@ -468,160 +580,6 @@ into a single post</p>
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/">Category: Poodr</a>
-    </h1>
-    <p >Jun 1, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/category/">category</a><a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.poodr.com/" target="_blank">Practical Object-Oriented Design in Ruby</a>&rsquo;, by Sandi Metz</p>
-
-<p>Note: This has been created a posteriori with a previous date</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal training: QA &amp;amp; how to test</a>
-    </h1>
-    <p >May 18, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal/">internal</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal-training/">internal-training</a><a class="label" href="https://alvarogarcia7.github.io/categories/quality-assurance/">quality-assurance</a><a class="label" href="https://alvarogarcia7.github.io/categories/qa/">qa</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>At a client, we&rsquo;ve done today an internal training on &ldquo;QA &amp; how to test&rdquo;. In it, the most skilled person with the QA role in the dev team has explained to us some techniques and concepts for testing</p>
-
-<h2 id="my-notes">My notes</h2>
-
-<p>Verification vs validation: building the product right vs building the right product.</p>
-
-<h3 id="principles">Principles</h3>
-
-<p>Extracted from <a href="http://www.istqb.org/" target="_blank">ISTQB</a>:</p>
-
-<ul>
-<li>testing shows presence of defects</li>
-<li>exhaustive testing is impossible</li>
-<li>early testing is better than later testing</li>
-<li>defect clustering: areas with bigger defect ratio or more critical, etc should be tested more thoroughly</li>
-<li>pesticide paradox</li>
-<li>testing is context-dependent</li>
-<li>absence of errors fallacy: the absence of defects does not imply perfect software. There are also problems with validation.</li>
-</ul>
-
-<h3 id="techniques">Techniques</h3>
-
-<h4 id="people-based">People-based</h4>
-
-<ul>
-<li>bug bashes: e.g., time-constrained</li>
-<li>subject-matter expert testing</li>
-<li>eat your own dogfood</li>
-<li>others</li>
-</ul>
-
-<h4 id="activity-based">Activity-based</h4>
-
-<ul>
-<li>regression</li>
-<li>scripted (manual)</li>
-<li>smoke</li>
-<li>exploratory</li>
-<li>installation</li>
-<li>load</li>
-<li>long sequence</li>
-<li>performance</li>
-</ul>
-
-<h4 id="coverage-based">Coverage-based</h4>
-
-<ul>
-<li>menu tour: exploration based on menus (especially on websites)</li>
-<li>functional and system testing</li>
-<li>integration</li>
-<li>logic</li>
-<li>state-based</li>
-</ul>
-
-<h4 id="requirements-based">Requirements-based</h4>
-
-<ul>
-<li>Equivalence partitioning: examples in the same set are considered equivalent</li>
-<li>Boundary based: there are interesting examples around and on the boundaries</li>
-<li>Decision tables: truth table</li>
-<li>State transition tables: state diagram</li>
-</ul>
-
-<h4 id="risk-based">Risk-based</h4>
-
-<ul>
-<li>make a prioritized list: probability and impact</li>
-<li>perform testing exploring each risk</li>
-<li>after a risk disappears, another opens. Adjust your test effort to stay focused on the current crop</li>
-</ul>
-
-<h4 id="use-case-tests">Use case tests</h4>
-
-<ul>
-<li>use case: a common case that represents one of your customer&rsquo;s cases</li>
-<li>use busines language</li>
-</ul>
-
-<h4 id="structure-based">Structure-based</h4>
-
-<ul>
-<li>test coverage is different than code coverage</li>
-<li>test coverage is based on decision tables</li>
-</ul>
-
-<h4 id="defining-testing-priorities">Defining testing priorities</h4>
-
-<ul>
-<li>customer and contractual requirements</li>
-<li>regulatory</li>
-<li>experience-based</li>
-<li>&ldquo;Best representative&rdquo;</li>
-</ul>
-
-        
-
-    </article>
-    
     
     
 
@@ -775,7 +733,15 @@ into a single post</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/12/01/self-study-december-2018/">Self-Study in December 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/09/30/books-read-2018q3/">Books read in 2018Q3</a>
           </li>
         
           <li class="post">
@@ -804,14 +770,6 @@ into a single post</p>
         
           <li class="post">
             <a href="/blog/2018/05/01/self-study-may-2018/">Self-Study in May 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/04/01/self-study-april-2018/">Self-Study in April 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
           </li>
         
       </ul>

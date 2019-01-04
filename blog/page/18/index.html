@@ -129,6 +129,333 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the same Import Order in IntelliJ IDEA as Eclipse&#39;s</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/intellij/">intellij</a><a class="label" href="https://alvarogarcia7.github.io/categories/eclipse/">eclipse</a><a class="label" href="https://alvarogarcia7.github.io/categories/ide/">ide</a><a class="label" href="https://alvarogarcia7.github.io/categories/editor/">editor</a><a class="label" href="https://alvarogarcia7.github.io/categories/import/">import</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:</p>
+
+<p>While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.</p>
+
+<p>To solve it, see <a href="http://stackoverflow.com/questions/14716283/is-it-possible-for-intellij-to-organize-imports-the-same-way-as-in-eclipse" target="_blank">this link</a></p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing with Java 8 Lambdas</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 4 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/draft/">draft</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a><a class="label" href="https://alvarogarcia7.github.io/categories/exploration/">exploration</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:</p>
+
+<p>(source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/ef00a220f427900e3180dcbeec51248845446248" target="_blank">here</a>)</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_greeting_letters</span><span class="o">()</span> <span class="o">{</span>
+
+	<span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+
+	<span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_love_letters</span><span class="o">()</span> <span class="o">{</span>
+
+	<span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+
+	<span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentLoveLetter</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>and the production code:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSender</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">MailSender</span> <span class="o">(</span><span class="kd">final</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">eventLogger</span> <span class="o">=</span> <span class="n">eventLogger</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span> <span class="o">(</span><span class="kd">final</span> <span class="n">GreetingLetter</span> <span class="n">letter</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// more business logic</span>
+		<span class="n">eventLogger</span><span class="o">.</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span> <span class="o">(</span><span class="kd">final</span> <span class="n">LoveLetter</span> <span class="n">letter</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// more business logic</span>
+		<span class="n">eventLogger</span><span class="o">.</span><span class="na">sentLoveLetter</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>Note: this is an adapted code, so the business logic is not complete and seems simple.</p>
+
+<p>So I decided to explore a bit on refactoring these tests to use lambdas and reduce repetition:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="n">MailSender</span> <span class="n">sut</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">arrange</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">;</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+
+	<span class="n">verify</span> <span class="o">=</span> <span class="n">EventLogger</span><span class="o">::</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+
+	<span class="n">assertAndVerify</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+
+	<span class="n">verify</span> <span class="o">=</span> <span class="n">EventLogger</span><span class="o">::</span><span class="n">sentLoveLetter</span><span class="o">;</span>
+
+	<span class="n">assertAndVerify</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">assertAndVerify</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">arrange</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">sut</span><span class="o">);</span>
+	<span class="n">verify</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">logger</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>Some comments, mine and my teammates:</p>
+
+<ul>
+<li>The tests are not very readable, maybe because we&rsquo;re still not used to java 8 lambdas</li>
+<li><code>assertAndVerify</code> has multiple purposes / responsibilities</li>
+<li>The gain of usability does not outweight the loss of readability</li>
+</ul>
+
+<p>Finally, the refactor was discarded and we are using the initial version.</p>
+
+<p>Later, in the dojo, <a href="https://twitter.com/@trikitrok" target="_blank">Manuel</a> and I have refactored this a little bit more. Source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9" target="_blank">here</a></p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSenderShould</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">;</span>
+
+	<span class="nd">@Before</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="n">eventLogger</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="n">EventLogger</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="n">mailSender</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MailSender</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">greetingLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aGreetingLetterWasSent</span><span class="o">()));</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">loveLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aLoveLetterWasSent</span><span class="o">()));</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">checkThat</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Check</span> <span class="n">check</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">check</span><span class="o">.</span><span class="na">checkFor</span><span class="o">(</span><span class="n">mailSender</span><span class="o">,</span> <span class="n">eventLogger</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">aGreetingLetterWasSent</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">EventLogger</span><span class="o">::</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">greetingLetter</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">loveLetter</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendLoveLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">aLoveLetterWasSent</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">EventLogger</span><span class="o">::</span><span class="n">sentLoveLetter</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>(the logger is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9/src/test/java/com/example/lambdatesting/CheckBuilder.java" target="_blank">here</a>)</p>
+
+<p>Later, we have created a simpler functional DSL for the logging, joining the <code>act</code> and <code>verify</code> into an object called <code>Check</code></p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSenderShould</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">;</span>
+
+	<span class="nd">@Before</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="n">eventLogger</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="n">EventLogger</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="n">mailSender</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MailSender</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingAGreetingLetter</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingALoveLetter</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">Check</span> <span class="nf">whenSendingALoveLetter</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">Check</span><span class="o">(</span>
+			<span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">letter</span><span class="o">(</span><span class="n">LoveLetter</span><span class="o">.</span><span class="na">class</span><span class="o">)),</span>
+			<span class="n">EventLogger</span><span class="o">::</span><span class="n">sentLoveLetter</span>
+		<span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">mailSenderLogs</span> <span class="o">(</span><span class="n">Check</span> <span class="n">check</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">check</span><span class="o">.</span><span class="na">checkFor</span><span class="o">(</span><span class="n">mailSender</span><span class="o">,</span> <span class="n">eventLogger</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">Check</span> <span class="nf">whenSendingAGreetingLetter</span> <span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">Check</span><span class="o">(</span>
+			<span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">letter</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">)),</span>
+			<span class="n">EventLogger</span><span class="o">::</span><span class="n">sentGreetingLetter</span>
+		<span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">letter</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">typeOfLetter</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">mock</span><span class="o">(</span><span class="n">typeOfLetter</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>and the <code>Check</code>, just a placeholder for two <code>Consumer</code>s:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Check</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">act</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Check</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">act</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">act</span> <span class="o">=</span> <span class="n">act</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">verify</span> <span class="o">=</span> <span class="n">verify</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkFor</span><span class="o">(</span><span class="n">MailSender</span> <span class="n">mailSender</span><span class="o">,</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">act</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mailSender</span><span class="o">);</span>
+		<span class="n">verify</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">eventLogger</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="comparison">Comparison</h2>
+
+<p>Comparison between the original form and the three refactored forms of the test:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_greeting_letters</span><span class="o">()</span> <span class="o">{</span>
+
+	<span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+
+	<span class="n">verify</span><span class="o">(</span><span class="n">logger</span><span class="o">).</span><span class="na">sentGreetingLetter</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>This reads like a classical JUnit tests, using the interaction (with mocks).</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">arrange</span> <span class="o">=</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+
+	<span class="n">verify</span> <span class="o">=</span> <span class="n">EventLogger</span><span class="o">::</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+
+	<span class="n">assertAndVerify</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>This is the first step towards more cohesion, at the cost of readability. You save the verify at the end, but the repeated method <code>assertAndVerify</code> is still present.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">checkThat</span><span class="o">(</span><span class="n">aLoggingLine</span><span class="o">().</span><span class="na">forA</span><span class="o">(</span><span class="n">greetingLetter</span><span class="o">()).</span><span class="na">wasLoggedWhen</span><span class="o">(</span><span class="n">aGreetingLetterWasSent</span><span class="o">()));</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>This one reads more like a classical DSL, but is harder to read compared to a classical test.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">mailSenderLogs</span><span class="o">(</span><span class="n">whenSendingAGreetingLetter</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>This one reads more like a business requirement.</p>
+
+<h2 id="other">Other</h2>
+
+<p>Other ideas we have tested:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">Builder</span><span class="o">.</span><span class="na">aNew</span><span class="o">().</span><span class="na">sendGreetingLetter</span><span class="o">()</span>
+
+<span class="n">assertAndVerifyThat</span><span class="o">(</span>
+	<span class="n">theLoggingLine</span><span class="o">()</span>
+		<span class="o">.</span><span class="na">for</span><span class="o">(</span><span class="n">aGreetingLetter</span><span class="o">())</span>
+		<span class="o">.</span><span class="na">isLoggedWhen</span><span class="o">(</span><span class="n">greetingLetterIsSent</span><span class="o">()</span>
+	<span class="o">)</span>
+<span class="o">);</span>
+
+<span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">aGreetingLetter</span><span class="o">(){</span>
+	<span class="k">return</span> <span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">greetingLetterIsSent</span><span class="o">(){</span>
+	<span class="k">return</span> <span class="n">EventLogger</span><span class="o">::</span><span class="n">sentGreetingLetter</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">assertAndVerifyThat</span><span class="o">(</span>
+	<span class="n">theLoggingLine</span><span class="o">()</span>
+		<span class="o">.</span><span class="na">for</span><span class="o">(</span>
+			<span class="o">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="o">.</span><span class="na">sendGreetingLetter</span><span class="o">(</span><span class="n">mock</span><span class="o">(</span><span class="n">GreetingLetter</span><span class="o">.</span><span class="na">class</span><span class="o">))</span>
+		<span class="o">)</span>
+		<span class="o">.</span><span class="na">isLoggedWhen</span><span class="o">(</span><span class="n">EventLogger</span><span class="o">::</span><span class="n">sentGreetingLetter</span><span class="o">)</span>
+	<span class="o">)</span>
+<span class="o">);</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">assertAndVerifyThat</span><span class="o">(</span><span class="n">TestContext</span> <span class="n">testContext</span><span class="o">){</span>
+	<span class="n">testContext</span><span class="o">.</span><span class="na">assert</span><span class="o">();</span>
+	<span class="n">testContext</span><span class="o">.</span><span class="na">verify</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/27/craftsmanship-analogy/">Craftsmanship analogy</a>
     </h1>
     <p >Jul 27, 2015
@@ -384,84 +711,6 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
-    </h1>
-    <p >Jul 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-peer-stereotype/">object-peer-stereotype</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/adjustment/">adjustment</a>
-        
-    </p>
-</header>
-
-
-        
-        <blockquote>
-<p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have:</p>
-
-<ul>
-<li>Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one.</li>
-<li>Notifications: Peers that need to be kept up to date with the object&rsquo;s activity. The object will notify interested peers whenever it changes state or performs a significant action. Notifications are &ldquo;fire and forget&rdquo;; the object neither knows nor cares which peers are listening. Notifications are so useful because they decouple objects from each other. For example, in a user interface system, a button component promises to notify any registered listeners when it&rsquo;s clicked, but does not know what those listeners will do. Similarly, the listeners expect to be called but know nothing of the way the user interface dispatches its events.</li>
-<li>Adjustments: Peers that adjust the object&rsquo;s behavior to the wider needs of the system. This includes policy objects that make decisions on the object&rsquo;s behalf (the Strategy pattern in [Gamma94]) and component parts of the object if it&rsquo;s a composite. For example, a Swing JTable will ask a TableCellRenderer to draw a cell&rsquo;s value, perhaps as RGB (Red, Green, Blue) values for a color. If we change the renderer, the table will change its presentation, now displaying the HSB (Hue, Saturation, Brightness) values.</li>
-</ul>
-</blockquote>
-
-<p>Source is Growing Object-Oriented Software, Guided by Tests &gt; Chapter 6, Object-Oriented Style &gt; Object Peer Stereotypes, page 52</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a>
-    </h1>
-    <p >Jul 12, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/martin-fowler/">martin-fowler</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/bliki/">bliki</a><a class="label" href="https://alvarogarcia7.github.io/categories/kent-beck/">kent-beck</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
-
-<p>These are the concepts and links brought up during the discussion:</p>
-
-<ul>
-<li><a href="http://martinfowler.com/bliki/DataClump.html" target="_blank">Data Clump</a> at the bliki</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/WaMWtp1Uetp" target="_blank">Refactoring with Loops and Collection Pipelines</a>, indirect link to the article by Martin Fowler</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/6J9PPQpUjwY" target="_blank">When Worse Is Better: Incrementally Escaping Local Maxima</a>, indirect link to the article by Kent Beck</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/Sk7DfYFPt5j" target="_blank">Getting It Right by Betting on Wrong</a>, indirect link to an article by Sandi Metz
-<br /></li>
-</ul>
-
-        
-
-    </article>
-    
     
     
 
@@ -615,7 +864,15 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/12/01/self-study-december-2018/">Self-Study in December 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/09/30/books-read-2018q3/">Books read in 2018Q3</a>
           </li>
         
           <li class="post">
@@ -644,14 +901,6 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
         
           <li class="post">
             <a href="/blog/2018/05/01/self-study-may-2018/">Self-Study in May 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/04/01/self-study-april-2018/">Self-Study in April 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
           </li>
         
       </ul>

@@ -128,6 +128,75 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/">Searching on a suite of failing tests</a>
+    </h1>
+    <p >Aug 13, 2015
+         - 5 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/search/">search</a><a class="label" href="https://alvarogarcia7.github.io/categories/naive-search/">naive-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/binary-search/">binary-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/dichotomous-search/">dichotomous-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/context/">context</a><a class="label" href="https://alvarogarcia7.github.io/categories/end-to-end-test/">end-to-end-test</a><a class="label" href="https://alvarogarcia7.github.io/categories/test-dependency/">test-dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/antipattern/">antipattern</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Motivation Today, at a client, in the green phase, we had a test suite which was failing: the whole suite fails but the test cases, individually, succeed.
+So my first impression was that something was being shared between tests. Also confirmed because the failing class was an EndToEnd test, in which we load the whole spring context
+A quick glance was not revealing anything interesting, so I decided to find which is the minimum suite (as opposed as to the whole suite) that makes the new testcase fail, expecting to narrow the search for possible causes.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/12/brownbag-session-spring-boot/">Brown-bag session: Spring Boot</a>
+    </h1>
+    <p >Aug 12, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/12/brownbag-session-spring-boot/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring-boot/">spring-boot</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>At a client, today we&rsquo;ve done a brown-bag session on Spring Boot: we&rsquo;ve gone through the basics with a sample maven project and its pom file.
+We&rsquo;ve seen the Spring Initializr and a live demo, using curl for REST client.</p>
+
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/08/10/the-animal-laborans-and-the-homo-faber/">The Animal Laborans and the Homo Faber</a>
     </h1>
     <p >Aug 10, 2015
@@ -268,75 +337,6 @@ package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; 
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/">Brown-bag session and Dojo: Beginning Clojure</a>
-    </h1>
-    <p >Aug 5, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/dojo/">dojo</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitator/">facilitator</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitation/">facilitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure-for-java-developer/">clojure-for-java-developer</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository/">repository</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>At a client, today I&rsquo;ve facilitated a brown-bag session introducing the Clojure language to a group of java programmers.
-I&rsquo;ve started hands-on, live coding on a REPL. To make things easier, I&rsquo;ve created a maven project that imports the clojure jar and lets you obtain dependencies from clojars. The repo is here. This repo wouldn&rsquo;t have been possible without the clojure maven plugin, written by Mark Derricutt.
-I&rsquo;ve more or less followed this guide</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/03/resources-for-java-9-beta/">Resources for Java 9 (beta)</a>
-    </h1>
-    <p >Aug 3, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/03/resources-for-java-9-beta/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/java-9/">java-9</a><a class="label" href="https://alvarogarcia7.github.io/categories/resource/">resource</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/tutorial/">tutorial</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>I&rsquo;ve found this list of links for Java 9, while in beta, useful:
- Contents of the new version Java REPL workshop, with useful commands and questions &amp; answers for installing the REPL REPL tutorial PDF Another getting started guide, by JClarity Yet another getting started guide, by Arun Gupta Information on the REPL project, (codenamed Kulla)  </p>
-
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -424,6 +424,8 @@ I&rsquo;ve more or less followed this guide</p>
     
         <a href="/page/33/" class="label-pagination">33</a>
     
+        <a href="/page/34/" class="label-pagination">34</a>
+    
 
     
     
@@ -432,7 +434,7 @@ I&rsquo;ve more or less followed this guide</p>
 
     
     
-        <a href="/page/33/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/page/34/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -492,7 +494,15 @@ I&rsquo;ve more or less followed this guide</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/12/01/self-study-december-2018/">Self-Study in December 2018</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2018/09/30/books-read-2018q3/">Books read in 2018Q3</a>
           </li>
         
           <li class="post">
@@ -521,14 +531,6 @@ I&rsquo;ve more or less followed this guide</p>
         
           <li class="post">
             <a href="/blog/2018/05/01/self-study-may-2018/">Self-Study in May 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/04/01/self-study-april-2018/">Self-Study in April 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/03/31/books-read-2018q1/">Books read in 2018Q1</a>
           </li>
         
       </ul>
