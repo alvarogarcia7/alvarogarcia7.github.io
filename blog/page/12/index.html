@@ -129,6 +129,58 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/03/02/using-tortoise-credentials-from-cli/">Tip: using tortoise credentials in git CLI</a>
+    </h1>
+    <p >Mar 2, 2016
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/03/02/using-tortoise-credentials-from-cli/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/how-to/">how-to</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/cli/">cli</a><a class="label" href="https://alvarogarcia7.github.io/categories/tortoisegit/">tortoisegit</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h2 id="tortoisegit-part">TortoiseGit part</h2>
+
+<ul>
+<li>Go to a repo</li>
+<li>right button, Settings</li>
+<li>Git -&gt; Credential</li>
+<li>Add a creadential</li>
+<li>Config type: global</li>
+<li>Helper: wincred</li>
+</ul>
+
+<p>Sync once using your HTTPS password</p>
+
+<h2 id="cli-part">CLI part</h2>
+
+<p>Open the <code>$REPO/.git/config</code> and add</p>
+
+<pre><code>[credential]
+	helper = wincred
+</code></pre>
+
+<p>Remote git operations should not ask for credentials anymore</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/">Kata formulation: Find the comments</a>
     </h1>
     <p >Mar 1, 2016
@@ -1248,117 +1300,6 @@ Books in the queue:
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/12/15/validating-data-clojure/">Validating CSV data in clojure</a>
-    </h1>
-    <p >Dec 15, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/12/15/validating-data-clojure/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/hof/">hof</a><a class="label" href="https://alvarogarcia7.github.io/categories/csv/">csv</a><a class="label" href="https://alvarogarcia7.github.io/categories/validation/">validation</a><a class="label" href="https://alvarogarcia7.github.io/categories/yagni/">yagni</a><a class="label" href="https://alvarogarcia7.github.io/categories/idea-for-another-post/">idea-for-another-post</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl-based-development/">repl-based-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/selector/">selector</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>At a client, we have CSVs of data that can be simplified to this <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">def</span> <span class="nv">data</span> <span class="nv">[</span>
-           <span class="nv">[</span><span class="s">&quot;total&quot;</span> <span class="mi">6</span> <span class="mi">8</span> <span class="nv">13]</span>
-           <span class="nv">[</span><span class="s">&quot;0&quot;</span>     <span class="mi">1</span> <span class="mi">2</span> <span class="nv">3]</span>
-           <span class="nv">[</span><span class="s">&quot;0&quot;</span>     <span class="mi">2</span> <span class="mi">0</span> <span class="nv">4]</span>
-           <span class="nv">[</span><span class="s">&quot;0&quot;</span>     <span class="mi">3</span> <span class="mi">0</span> <span class="nv">6]</span>
-          <span class="nv">]</span><span class="p">)</span>
-</code></pre></div>
-
-<p>In this case, some of the row named <code>total</code> is the sum of the rest of the rows, but only for some columns (second and fourth). We do not want to get rid of the columns, as they need to be printed at the end.</p>
-
-<p>This is what we need to validate:</p>
-
-<p><code>sum (rest [1]) = total [1]</code></p>
-
-<p><code>sum (rest [3]) = total [3]</code></p>
-
-<p>this could be written as a one-off program but a better alternative for us was to write a program and let users decide what columns to validate. In the future, power users will write their own validations <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>, thus creating an environment where users are no longer dependent on programmers as coupling business users to programmers does not scale.</p>
-
-<!--
-TODO
-expand on this idea for another post:
-
-thus creating an environment where users are no longer dependent on programmers as coupling business users to programmers does not scale. 
-
-teach someone to fish vs fish for them
-
--->
-
-<h2 id="implementation">Implementation</h2>
-
-<p>The full <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj" target="_blank">source code is here</a></p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">sum-eq-total</span> <span class="nv">[selector</span> <span class="nv">dataset]</span>
-  <span class="p">(</span><span class="nv">letfn</span> <span class="nv">[</span><span class="p">(</span><span class="nv">total-and-rest</span> <span class="nv">[coll]</span>
-             <span class="nv">[</span><span class="p">(</span><span class="nb">first</span> <span class="nv">coll</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest</span> <span class="nv">coll</span><span class="p">)</span><span class="nv">]</span><span class="p">)</span><span class="nv">]</span>
-  <span class="p">(</span><span class="k">let</span> <span class="nv">[[total</span> <span class="nv">rest-dataset]</span> <span class="p">(</span><span class="nv">total-and-rest</span> <span class="nv">dataset</span><span class="p">)</span>
-        <span class="nv">selected-total</span> <span class="p">(</span><span class="nv">selector</span> <span class="nv">total</span><span class="p">)</span>
-        <span class="nv">selected-column</span> <span class="p">(</span><span class="nb">map</span> <span class="nv">selector</span> <span class="nv">rest-dataset</span><span class="p">)</span>
-        <span class="nv">sum-of-column</span> <span class="p">(</span><span class="nb">reduce</span> <span class="nb">+</span> <span class="nv">selected-column</span><span class="p">)</span><span class="nv">]</span>
-        <span class="p">(</span><span class="nb">=</span> <span class="nv">selected-total</span> <span class="nv">sum-of-column</span><span class="p">))))</span>
-
-<span class="p">(</span><span class="nv">defn</span> <span class="nv">validate-columns</span> <span class="nv">[indices</span> <span class="nv">data]</span>
-  <span class="p">(</span><span class="k">let</span> <span class="nv">[generate-selector</span> <span class="o">#(</span><span class="nv">fn</span> <span class="nv">[dataset]</span> <span class="p">(</span><span class="nb">nth</span> <span class="nv">dataset</span> <span class="nv">%</span><span class="p">))</span>
-         <span class="nv">selectors</span> <span class="p">(</span><span class="nb">map</span> <span class="nv">generate-selector</span> <span class="nv">indices</span><span class="p">)</span>
-         <span class="nv">check-selector</span> <span class="o">#(</span><span class="nv">sum-eq-total</span> <span class="nv">%</span> <span class="nv">data</span><span class="p">)</span><span class="nv">]</span>
-         <span class="p">(</span><span class="nb">map</span> <span class="nv">check-selector</span> <span class="nv">selectors</span><span class="p">)))</span>
-</code></pre></div>
-
-<p>We define the domain concept of <code>selector</code> for pointing to a dataset column</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">generate-selector</span> <span class="o">#(</span><span class="nv">fn</span> <span class="nv">[dataset]</span> <span class="p">(</span><span class="nb">nth</span> <span class="nv">dataset</span> <span class="nv">%</span><span class="p">))</span>
-</code></pre></div>
-
-<p>This expression creates selectors based on a given index. It is a lambda that returns a function, thus being a HOF</p>
-
-<p>Users can use the application in this fashion:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">validate-columns</span> <span class="nv">[1</span> <span class="nv">3]</span> <span class="nv">data</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">true</span> <span class="nv">true</span><span class="p">)</span>
-</code></pre></div>
-
-<p>The full <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj" target="_blank">source code is here</a></p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>Working on the REPL for this problem has been a very good idea, but working in a spreadsheet software has been even better. Even faster feedback cycle <sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">3</a></sup>.</p>
-
-<p>The inclusion of the HOF for validating the data has paid its cost (good RoI)</p>
-
-<p>Do not limit what your users can do, let them decide but do not complicate things unnecessarily. Know when to stop adding features and limit work to prevent YAGNI.</p>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">for more information and a spike on reading CSV data in clojure, <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/src/simple/check-media-csv.clj" target="_blank">this spike</a> may be useful
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">for the time being, there are no power users and no need to enable these custom validators. Doing it now would be YAGNI
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
-<li id="fn:3">in the case here, the data and business rules are so simple that there is no need for this software.
- <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
     
     
 
@@ -1512,6 +1453,10 @@ teach someone to fish vs fish for them
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/02/06/refactoring-split-loop-map-equivalence/">Refactoring: split loop &#43; loop/map equivalence</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
           </li>
         
@@ -1545,10 +1490,6 @@ teach someone to fish vs fish for them
         
           <li class="post">
             <a href="/blog/2018/06/01/self-study-june-2018/">Self-Study in June 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/05/01/self-study-may-2018/">Self-Study in May 2018</a>
           </li>
         
       </ul>

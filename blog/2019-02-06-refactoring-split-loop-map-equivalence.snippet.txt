@@ -1,0 +1,20 @@
+<!--
+see 
+@startuml
+[*] --> State1
+State1: one loop, two operations
+State2: one map, two operations
+State3: two loops, one operation each
+State4: two maps, one operation each
+
+State1 --> State2 : replace loop for map
+
+State1 -> State3: split loop
+
+State2 -> State4: split map
+
+State3 -down-> State4: replace loops for maps
+@enduml
+//http://www.plantuml.com/plantuml/png/TSunpeCm30NWdLDu_WN33qmC5NVeM7Mmm5MHaZYAZRX-bRffr849YVSvxysYc7JthhdztQ7hBd1LLFflx3C11mB775lGWu4Z9TIDWnZe3NWyoOVf_Ji_86scLG3XyZGrcl9uWZvZwhmU9aWK7Ius3XwSydcL1dE_HBTfLYNjl-bOqdewGBVo4QhuwP5I9CrCOTszUm40
+-->
+
