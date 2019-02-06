@@ -179,8 +179,8 @@
 see the 2019-02-06-refactoring-split-loop-map-equivalence.snippet.txt file for the code to generate this state diagram UML
 -->
 
-/uploads/state-diagram-loop-map-split-map-equivalence.png
-
+<p><img src="/uploads/state-diagram-loop-map-split-map-equivalence.png
+" alt="State diagram of the operations" /></p>
 
 <h2 id="example">Example</h2>
 
@@ -241,7 +241,9 @@ see the 2019-02-06-refactoring-split-loop-map-equivalence.snippet.txt file for t
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">).</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> 
+  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
 </code></pre></div>
 
 <p>Alternatively, use the method, with a map:</p>
@@ -252,7 +254,9 @@ see the 2019-02-06-refactoring-split-loop-map-equivalence.snippet.txt file for t
     <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">).</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> 
+  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
 </code></pre></div>
 
 <p>Alternatively, from State3, we can also replace the loop for two <code>map</code>s:</p>
