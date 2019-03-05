@@ -128,6 +128,114 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/">Practical Object-Oriented Design in Ruby: Chapter 4</a>
+    </h1>
+    <p >Jul 26, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/ood/">ood</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.
+These are the concepts and links brought up during the discussion:
+ The craftsmanship analogy, as exposed in these tweets Difference between function and method What vs How (also present in the GOOS)  </p>
+
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster site generation for Octopress 2</a>
+    </h1>
+    <p >Jul 13, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See here
+After a while, the generation of the static site using Octopress 2 was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.
+Inspired by their new features in Octopress 3, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/">What defines a dependency</a>
+    </h1>
+    <p >Jul 13, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/fragment/">fragment</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/listener/">listener</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-stereotype/">object-stereotype</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>A friend and I were arguing about this code (fragment):
+public void register (final String userName) { try { registeredUsers.add(new User(userName)); } catch (AlreadyRegisteredUserException e) { resultListener.alreadyRegistered(userName); } }  I would have said that resultListener is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).
+He suggested that:
+ being injected through the constructor is usually what happens with dependencies, but does not make it one (i.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
     </h1>
     <p >Jul 13, 2015
@@ -218,115 +326,6 @@ These are the concepts and links brought up during the discussion:
           
               <footer>
                   <a href="https://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/">Tip: massively reverting local changes</a>
-    </h1>
-    <p >Jul 8, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/regex/">regex</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>I was changing a massive amount of files (&gt;1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests.
-Here&rsquo;s how to do it automatically:
-Copy all the failing tests to a text editor:
-Input:
-testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest) testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest) testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest) testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest) testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest) testDeleteDocument(io.company.controller.dms.DocumentControllerTest) testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest) testUpdateXML(io.company.controller.dms.DocumentControllerTest) testSearchXFPage(io.company.controller.dms.DocumentControllerTest) testCreateXFPage(io.company.controller.dms.DocumentControllerTest) testUpdatePage(io.company.controller.dms.DocumentControllerTest) testSearchCrop(io.company.controller.dms.DocumentControllerTest) testUpdateCrop(io.company.controller.dms.DocumentControllerTest) testMoveDocument(io.company.controller.dms.DocumentControllerTest) testGetDocument(io.company.controller.dms.DocumentControllerTest)  regex:</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: committing to the repo file by file</a>
-    </h1>
-    <p >Jul 8, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.
-This is why I have some scripts to commit all the changes, even with the same message. This is one of them:
-for f in $(git status -s |grep &quot;^M&quot;|awk &#39;{print $2}&#39;); do git add $f git commit -m &quot;generic commit for all files&quot; done  </p>
-
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental concepts on programming languages</a>
-    </h1>
-    <p >Jul 6, 2015
-         - 8 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/christopher-strachey/">christopher-strachey</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a><a class="label" href="https://alvarogarcia7.github.io/categories/1967/">1967</a><a class="label" href="https://alvarogarcia7.github.io/categories/course/">course</a><a class="label" href="https://alvarogarcia7.github.io/categories/fundamental-concepts/">fundamental-concepts</a><a class="label" href="https://alvarogarcia7.github.io/categories/paper/">paper</a><a class="label" href="https://alvarogarcia7.github.io/categories/lecture/">lecture</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>Note: all quotes on this post come from this paper: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.
-Contents This paper starts slow, from the mathematical and philosophical point of view, until it gets to the basic concepts on the fundamental concepts:
- Assignment command L-Value and R-Value Definitions Names Numerals Conceptual models: an explanation about the relationship between the code, the memory store and the abstract concepts  Later, it gets more in depth to the conceptual constructs, where most of the content is explained and contains:</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/" rel="full-article">Read On &rarr;</a>
               </footer>
           
 
@@ -491,7 +490,19 @@ Contents This paper starts slow, from the mathematical and philosophical point o
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/03/01/self-study-march-2019/">Self-Study in March 2019</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/02/06/refactoring-split-loop-map-equivalence/">Refactoring: split loop &#43; loop/map equivalence</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/01/01/self-study-january-2019/">Self-Study in January 2019</a>
           </li>
         
           <li class="post">
@@ -516,18 +527,6 @@ Contents This paper starts slow, from the mathematical and philosophical point o
         
           <li class="post">
             <a href="/blog/2018/07/01/self-study-july-2018/">Self-Study in July 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/06/30/books-read-2018q2/">Books read in 2018Q2</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/06/15/testing-component-randomness/">Testing a component that includes randomness</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/06/01/self-study-june-2018/">Self-Study in June 2018</a>
           </li>
         
       </ul>

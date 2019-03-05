@@ -129,6 +129,332 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/">A common misunderstanding about `reduce`</a>
+    </h1>
+    <p >Dec 14, 2016
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/12/14/a-common-misunderstanding-about-reduce/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/misunderstanding/">misunderstanding</a><a class="label" href="https://alvarogarcia7.github.io/categories/reduce/">reduce</a><a class="label" href="https://alvarogarcia7.github.io/categories/fold/">fold</a><a class="label" href="https://alvarogarcia7.github.io/categories/higher-order-function/">higher-order-function</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/mozilla-developer-network/">mozilla-developer-network</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h3 id="misconception">Misconception</h3>
+
+<p>I&rsquo;ve read in several places that <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank"><code>reduce</code></a> reduces an array<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> of values to a single one. The main characteristic of this function is not to reduce to a &lsquo;smaller element&rsquo; / &lsquo;single element&rsquo;, but to have access to the accumulated results and the elements, one by one. Quoting Mozilla Developer Network&rsquo;s (MDN) Javascript reference:</p>
+
+<blockquote>
+<p>The reduce() method applies a function against an accumulator and each value of the array (from left-to-right) to reduce it to a single value.</p>
+
+<p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank">Array.prototype.reduce()</a> at MDN</p>
+</blockquote>
+
+<h3 id="examples">Examples</h3>
+
+<p>Note: the examples in this article are in Javascript.</p>
+
+<p>This is a simple example of such function:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span> <span class="p">};</span>
+<span class="kc">undefined</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">sum</span><span class="p">)</span>
+<span class="mi">6</span>
+</code></pre></div>
+
+<p><code>reduce</code> can reduce a collection of elements to a single one. But this is not its defining characteristic. Let&rsquo;s see another example:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">append</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">accumulator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">accumulator</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span> <span class="k">return</span> <span class="nx">accumulator</span> <span class="p">};</span>
+<span class="kc">undefined</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">append</span><span class="p">,</span> <span class="p">[])</span>
+<span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
+</code></pre></div>
+
+<p>Note: this is a special case, where the elements are not altered by the <code>reduce</code>. Can be seen as the identity element for <code>reduce</code>.</p>
+
+<p>This same behaviour can be reproduced with a <code>map</code>:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">identity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="p">;</span> <span class="p">};</span>
+<span class="kc">undefined</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">identity</span><span class="p">)</span>
+<span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
+</code></pre></div>
+
+<p>An example that requires a <code>reduce</code> (and not a <code>map</code>) is <a href="https://clojuredocs.org/clojure.core/frequencies" target="_blank"><code>frequencies</code></a>. This function calculates the frequency of the elements in the collection:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="nx">frequencies</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="p">{</span> <span class="s1">&#39;1&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</code></pre></div>
+
+<p>Why not a <code>map</code>? Because you need to cumulate the results.</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">accumulator</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span> 
+  <span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">accumulator</span><span class="p">;</span> 
+<span class="p">}</span> 
+<span class="kc">undefined</span>
+<span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">frequencies</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">frequency</span><span class="p">,</span> <span class="p">{});</span>
+<span class="p">}</span>
+<span class="kc">undefined</span>
+</code></pre></div>
+
+<p>Identity element: <a href="https://en.wikipedia.org/wiki/Identity_element" target="_blank">https://en.wikipedia.org/wiki/Identity_element</a></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">In fact, any type in the <code>Foldable</code> class in Haskell. The <code>reduce</code> function in Javascript is in the <code>Array</code> prototype (only). In Clojure, a set, a map, an array, a list can be <code>reduce</code>d.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/12/01/self-study-in-december-2016/">Self-Study in December 2016</a>
+    </h1>
+    <p >Dec 1, 2016
+         - 5 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/12/01/self-study-in-december-2016/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/december/">december</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/alex-williams/">alex-williams</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/autopilot/">autopilot</a><a class="label" href="https://alvarogarcia7.github.io/categories/bob-wise/">bob-wise</a><a class="label" href="https://alvarogarcia7.github.io/categories/bull-in-a-china-shop/">bull-in-a-china-shop</a><a class="label" href="https://alvarogarcia7.github.io/categories/bytecode-generation/">bytecode-generation</a><a class="label" href="https://alvarogarcia7.github.io/categories/cobra-effect/">cobra-effect</a><a class="label" href="https://alvarogarcia7.github.io/categories/company/">company</a><a class="label" href="https://alvarogarcia7.github.io/categories/company-practice/">company-practice</a><a class="label" href="https://alvarogarcia7.github.io/categories/complacency/">complacency</a><a class="label" href="https://alvarogarcia7.github.io/categories/container/">container</a><a class="label" href="https://alvarogarcia7.github.io/categories/copy-paste/">copy-paste</a><a class="label" href="https://alvarogarcia7.github.io/categories/cpp/">cpp</a><a class="label" href="https://alvarogarcia7.github.io/categories/curious-georde/">curious-georde</a><a class="label" href="https://alvarogarcia7.github.io/categories/debug/">debug</a><a class="label" href="https://alvarogarcia7.github.io/categories/decorator/">decorator</a><a class="label" href="https://alvarogarcia7.github.io/categories/devops/">devops</a><a class="label" href="https://alvarogarcia7.github.io/categories/disable-paste/">disable-paste</a><a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/docker-swarm/">docker-swarm</a><a class="label" href="https://alvarogarcia7.github.io/categories/eureka/">eureka</a><a class="label" href="https://alvarogarcia7.github.io/categories/flat-hierarchy/">flat-hierarchy</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/hacker/">hacker</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/immutability/">immutability</a><a class="label" href="https://alvarogarcia7.github.io/categories/internet-of-things/">internet-of-things</a><a class="label" href="https://alvarogarcia7.github.io/categories/iot/">iot</a><a class="label" href="https://alvarogarcia7.github.io/categories/james-sinclair/">james-sinclair</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/joab-jackson/">joab-jackson</a><a class="label" href="https://alvarogarcia7.github.io/categories/kubernetes/">kubernetes</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning-programming-language/">learning-programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/maria-konnikova/">maria-konnikova</a><a class="label" href="https://alvarogarcia7.github.io/categories/mario-bros/">mario-bros</a><a class="label" href="https://alvarogarcia7.github.io/categories/matthew-garrett/">matthew-garrett</a><a class="label" href="https://alvarogarcia7.github.io/categories/metaprogramming/">metaprogramming</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad-explanation/">monad-explanation</a><a class="label" href="https://alvarogarcia7.github.io/categories/monitoring/">monitoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/npm/">npm</a><a class="label" href="https://alvarogarcia7.github.io/categories/npm-link/">npm-link</a><a class="label" href="https://alvarogarcia7.github.io/categories/obi-wan-kenobi/">obi-wan-kenobi</a><a class="label" href="https://alvarogarcia7.github.io/categories/oci/">oci</a><a class="label" href="https://alvarogarcia7.github.io/categories/ode/">ode</a><a class="label" href="https://alvarogarcia7.github.io/categories/open-salary/">open-salary</a><a class="label" href="https://alvarogarcia7.github.io/categories/password-field/">password-field</a><a class="label" href="https://alvarogarcia7.github.io/categories/paste/">paste</a><a class="label" href="https://alvarogarcia7.github.io/categories/pawel-brodzinski/">pawel-brodzinski</a><a class="label" href="https://alvarogarcia7.github.io/categories/philippa-warr/">philippa-warr</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/promise/">promise</a><a class="label" href="https://alvarogarcia7.github.io/categories/python/">python</a><a class="label" href="https://alvarogarcia7.github.io/categories/real-world/">real-world</a><a class="label" href="https://alvarogarcia7.github.io/categories/request/">request</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/salary/">salary</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/simeon-simeonov/">simeon-simeonov</a><a class="label" href="https://alvarogarcia7.github.io/categories/singing-in-the-rain/">singing-in-the-rain</a><a class="label" href="https://alvarogarcia7.github.io/categories/source-code/">source-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/teal/">teal</a><a class="label" href="https://alvarogarcia7.github.io/categories/teal-organization/">teal-organization</a><a class="label" href="https://alvarogarcia7.github.io/categories/toby-retallick/">toby-retallick</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/troy-hunt/">troy-hunt</a><a class="label" href="https://alvarogarcia7.github.io/categories/usability/">usability</a><a class="label" href="https://alvarogarcia7.github.io/categories/ux/">ux</a><a class="label" href="https://alvarogarcia7.github.io/categories/valve/">valve</a><a class="label" href="https://alvarogarcia7.github.io/categories/watch-expression/">watch-expression</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h2 id="a-docker-fork-talk-of-a-split-is-now-on-the-table">A Docker Fork: Talk of a Split Is Now on the Table</h2>
+
+<p>I&rsquo;ve read <a href="http://thenewstack.io/docker-fork-talk-split-now-table/" target="_blank">this article</a> by Alex Williams and Joab Jackson about the possible split in the Docker environment following Docker&rsquo;s and other providers&rsquo; product roadmaps. Each own has their policies and priorities and they collide in this case</p>
+
+<p>Tags: docker, alex-williams, joab-jackson, container, oci, kubernetes, devops, tool</p>
+
+<h2 id="an-ode-to-boring-creating-open-and-stable-container-world">An Ode to Boring: Creating Open and Stable Container World</h2>
+
+<p>I&rsquo;ve read this article by Bob Wise, in which he describes the state of the Docker tool and the Docker Engine. Asks for some kind of Docker long-time support (LTS - like Ubuntu does, for example) and to create a boring environment so applications on top of the containers itself can thrive.</p>
+
+<p>The difference here is that application creators want some boring infrastructure because their product is the application on top, not the container themselves. Docker&rsquo;s product, on the other hand, is the containers and the Engine.</p>
+
+<p>Tags: ode, bob-wise, devops, tool, request, kubernetes, docker-swarm</p>
+
+<h2 id="how-to-use-npm-link">How to use &lsquo;npm link&rsquo;</h2>
+
+<p>I&rsquo;ve read <a href="http://tobyret.github.io/NPM-Link/" target="_blank">this article</a> by Toby Retallick about using npm link.</p>
+
+<p>Tags: npm, tool, npm-link, toby-retallick</p>
+
+<h2 id="valve-s-flat-management-structure-like-high-school">Valve&rsquo;s flat management structure &lsquo;like high school&rsquo;</h2>
+
+<p>I&rsquo;ve read <a href="http://www.wired.co.uk/article/valve-management-jeri-ellsworth" target="_blank">this article</a> by Philippa Warr on the flat management hierarchy at Valve (a company cited as having some Teal practices) and its shortcomings.</p>
+
+<p>Tags:  philippa-warr, teal, teal-organization, valve, management, flat-hierarchy</p>
+
+<h2 id="the-hazards-of-going-on-autopilot">The hazards of going on autopilot</h2>
+
+<p>I&rsquo;ve read <a href="http://www.newyorker.com/science/maria-konnikova/hazards-automation" target="_blank">this article</a> by Maria Konnikova on how pilots get distracted (their minds drift off) when not stimulated.</p>
+
+<p>The article introduces the idea of human-centric automation and letting the computer check what the human is doing (to tell when it is wrong), rather than the human what the computer is doing wrong.</p>
+
+<p>Tags: maria-konnikova, automation, autopilot, complacency</p>
+
+<h2 id="the-cobra-effect-that-is-disabling-paste-on-password-fields">The “Cobra Effect” that is disabling paste on password fields</h2>
+
+<p>I&rsquo;ve read <a href="https://www.troyhunt.com/the-cobra-effect-that-is-disabling/" target="_blank">this article</a> on disabling paste on password fields, how that forces using a weaker password. Also names the &lsquo;Cobra Effect&rsquo;. By Troy Hunt</p>
+
+<p>Tags: troy-hunt, copy-paste, paste, password-field, cobra-effect, disable-paste, usability, ux</p>
+
+<h2 id="of-course-smart-homes-are-targets-for-hackers">Of course smart homes are targets for hackers</h2>
+
+<p>I&rsquo;ve read <a href="http://mjg59.dreamwidth.org/45483.html" target="_blank">this article</a> by Matthew Garrett on how the security of Internet of Things devices is as important as traditional devices and what rules should a consumer follow to decide whether a device is secure or not.</p>
+
+<p>Tags: matthew-garrett, security, internet-of-things, iot, hacker</p>
+
+<h2 id="open-salaries-outcomes">Open Salaries: Outcomes</h2>
+
+<p>I&rsquo;ve read <a href="http://blog.lunarlogic.io/2016/open-salaries-outcomes" target="_blank">this article</a> by Paweł Brodziński on how the open salaries has affected them in their company (Lunar Logic):</p>
+
+<ul>
+<li>removing the bottleneck for salary reviews</li>
+<li>making more often and better the feedback process</li>
+<li>people more involved in running the company</li>
+</ul>
+
+<p>Tags: teal, company, salary, teal-organization, company-practice, open-salary, pawel-brodzinski</p>
+
+<h2 id="one-more-vote-for-functional-languages">One more vote for functional languages</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.simeonov.com/2013/03/04/one-more-vote-for-functional-languages/" target="_blank">this article</a> by Simeon Simeonov in which he describes how setting a watch expression can cause a side effect (e.g. VBA, Ruby).</p>
+
+<p>Tags: immutability, simeon-simeonov, watch-expression</p>
+
+<h2 id="the-fastest-way-to-learn-a-new-programming-language">The fastest way to learn a new programming language</h2>
+
+<p>I&rsquo;ve read <a href="https://blog.simeonov.com/2013/02/11/the-fastest-way-to-learn-a-new-programming-language/" target="_blank">this article</a> the ways the author (Simeon Simeonov) goes while learning a new language:</p>
+
+<blockquote>
+<ul>
+<li>Curious George. During this phase, which usually lasts only a few hours and involves semi-random exploration of tutorials, reference manuals, blog posts and StackOverflow posts, I get my bearings straight, find analogies between the new language and ones I’m more familiar with and choose my initial tooling.</li>
+<li>Mario Bros. -&gt; Super Mario Bros. In this phase, which usually lasts several days, I try to bring the meta-patterns I’m comfortable working with from familiar environments (the sewers of New York) to the new environment (the Mushroom Kingdom). It involves diving head first into advanced language features and building various utilities that I find lacking in the environment, e.g., debugging tools, all in the context of early prototypes of whatever it is that I need to work on.</li>
+<li>Bull in a china shop. This is the phase where my noble goal of bending the language to the way I solve problems meets the harsh reality of me being a neophyte in its intricacies. The observable attributes of this phase are lower velocity, increased use of expletives and more time on StackOverflow. The amount of time in this phase varies. The “Eureka!” moments are fun but overall it’s a dip in the experience curve.</li>
+<li>Singin’ in the Rain. With newly acquired knowledge and improved language-specific testing/debugging skills, the bull gently transforms into Fred Astaire. Coding is a lot of fun again. It’s time to go to production.</li>
+<li>Obi-Wan Kenobi. Over time, the interaction with the new language improves the meta-patterns I use for problem solving. I tend to use less and simpler code using natural language idioms as opposed to generalized utilities &amp; abstractions. It’s like changing from using the Force to allowing the Force to do things through you. It takes a long time to get here. More often than not, I never do.</li>
+</ul>
+</blockquote>
+
+<p>He also describes several (advanced) techniques that helped him better understand programming:</p>
+
+<blockquote>
+<ul>
+<li>In C++ template, meta-programming [&hellip;]</li>
+<li>In Java, dynamic bytecode generation [&hellip;]</li>
+<li>In Python [&hellip;] stateful decorators [&hellip;]</li>
+<li>In Ruby, metaprogramming  [&hellip;]</li>
+</ul>
+</blockquote>
+
+<p>Tags: simeon-simeonov, metaprogramming, ruby, decorator, python, bytecode-generation, java, cpp, learning-programming-language, programming-language, curious-georde, mario-bros, bull-in-a-china-shop, singing-in-the-rain, obi-wan-kenobi, eureka, learning</p>
+
+<h2 id="the-marvellously-mysterious-javascript-maybe-monad">The marvellously mysterious javascript Maybe monad</h2>
+
+<p>I&rsquo;ve read <a href="http://jrsinclair.com/articles/2016/marvellously-mysterious-javascript-maybe-monad/" target="_blank">this article</a> by James Sinclair in which he tries to explain monads in javascript, explaining how promises work, then establishing the parallellism between a promise and a type of monad.</p>
+
+<p>Tags: monad, javascript, promise, james-sinclair, analogy, functional-programming, monad-explanation</p>
+
+<h2 id="debug-trace">Debug.Trace</h2>
+
+<p>I&rsquo;ve read both <a href="https://hackage.haskell.org/package/base-4.9.0.0/docs/Debug-Trace.html" target="_blank">the documentation</a> and the source code for <code>Debug.Trace</code>, a haskell module that contains functions to trace a program execution. It is interesting to see how a function performs side effects and its signature seems to be pure.</p>
+
+<p>The main trick is to use <code>unsafePerformIO</code>, which points to <code>unsafeDupablePerformIO</code>, which performs a side effect on the Real World (<code>runRW#</code>).</p>
+
+<p>Tags: haskell, debug, monitoring, source-code, real-world</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/11/01/self-study-in-november-2016/">Self-Study in November 2016</a>
+    </h1>
+    <p >Nov 1, 2016
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/11/01/self-study-in-november-2016/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/november/">november</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/advice/">advice</a><a class="label" href="https://alvarogarcia7.github.io/categories/bartosz-milewski/">bartosz-milewski</a><a class="label" href="https://alvarogarcia7.github.io/categories/cate-huston/">cate-huston</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit/">commit</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit-message/">commit-message</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-heinemeier-hansson/">david-heinemeier-hansson</a><a class="label" href="https://alvarogarcia7.github.io/categories/dhh/">dhh</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature/">feature</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-io/">functional-io</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/io/">io</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-cutler/">john-cutler</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/microsoft/">microsoft</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/one-on-one/">one-on-one</a><a class="label" href="https://alvarogarcia7.github.io/categories/product-development/">product-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/product-management/">product-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/rant/">rant</a><a class="label" href="https://alvarogarcia7.github.io/categories/runar-bjarnason/">runar-bjarnason</a><a class="label" href="https://alvarogarcia7.github.io/categories/scala/">scala</a><a class="label" href="https://alvarogarcia7.github.io/categories/school-of-haskell/">school-of-haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/talk/">talk</a><a class="label" href="https://alvarogarcia7.github.io/categories/tao/">tao</a><a class="label" href="https://alvarogarcia7.github.io/categories/tao-te-ching/">tao-te-ching</a><a class="label" href="https://alvarogarcia7.github.io/categories/tim-pope/">tim-pope</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/value/">value</a><a class="label" href="https://alvarogarcia7.github.io/categories/video/">video</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h2 id="advice-for-white-men">Advice for white men</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catehuston.com/blog/2016/01/28/advice-for-white-men/" target="_blank">this article</a> by Cate Huston about how advice affects different people.</p>
+
+<blockquote>
+<p>But here are some things to consider:</p>
+
+<ul>
+<li>Advice on failure is different for people who are judged on performance rather than potential.</li>
+<li>Advice on saying no is different for people who aren’t appreciated for doing work for the collective… but who are punished if they don’t.</li>
+<li>Advice on negotiation is different for people who are perceived negatively when they do negotiate.</li>
+<li>Advice on choosing a new job is different for people who disproportionately experience harassment (it’s another factor to consider).</li>
+<li>Advice on raising your profile is different for people who are recognized for their advocacy more than their work.</li>
+</ul>
+</blockquote>
+
+<p>Tags: cate-huston, management, advice, psychology</p>
+
+<h2 id="on-1-1s">On 1:1s</h2>
+
+<p>I&rsquo;ve read <a href="http://www.catehuston.com/blog/2016/11/05/on-11s/" target="_blank">this article</a> by Cate Huston about one-on-ones (1:1s), that includes how she handles and the purpose of them.</p>
+
+<blockquote>
+<p>For me, 1:1s were about active relationship building, with a focus on the important-but-not urgent. But having built a relationships where we talked regularly and I listened, that created space for conversations to happen outside of the 1:1</p>
+</blockquote>
+
+<p>Tags: cate-huston, management, psychology, one-on-one</p>
+
+<h2 id="microsoft-i-forgive-you">Microsoft, I forgive you!</h2>
+
+<p>I&rsquo;ve read <a href="https://m.signalvnoise.com/microsoft-i-forgive-you-2fb6d6061a2c" target="_blank">this article</a> by David Heinemeier Hansson (DHH) on why Microsoft has changed and why the author has forgiven past beefs.</p>
+
+<p>Tags: dhh, david-heinemeier-hansson, microsoft</p>
+
+<h2 id="stop-writing-rambling-commit-messages">Stop writing rambling commit messages</h2>
+
+<p>I&rsquo;ve read <a href="http://stopwritingramblingcommitmessages.com/" target="_blank">this rant</a> by Tim Pope on commit messages</p>
+
+<p>Tags: rant, commit-message, tim-pope, commit</p>
+
+<h2 id="a-note-about-git-commit-messages">A Note About Git Commit Messages</h2>
+
+<p>I&rsquo;ve read <a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html" target="_blank">this article</a> by Tim Pope on git commits and tools to normalize the text and apply the rules he describes</p>
+
+<p>Tags: commit-message, tim-pope, commit, tool</p>
+
+<h2 id="purely-functional-i-o">Purely Functional I/O</h2>
+
+<p>I&rsquo;ve watched <a href="https://www.infoq.com/presentations/io-functional-side-effects" target="_blank">this talk</a> by Runar Bjarnason on purely functional IO. In the first part, he introduces functional programming, referential transparency and functional IO. In the second part, he explains the types for IO and both the implementation in haskell and in scala.</p>
+
+<p>Tags: runar-bjarnason, haskell, scala, talk, video, functional-programming, functional-io, io</p>
+
+<h2 id="12-signs-you-re-working-in-a-feature-factory">12 Signs You’re Working in a Feature Factory</h2>
+
+<p>I&rsquo;ve read <a href="https://hackernoon.com/12-signs-youre-working-in-a-feature-factory-44a5b938d6a2" target="_blank">this listicle</a> by John Cutler on signs that a company is very centered in features rather than value.</p>
+
+<p>Tags: john-cutler, feature, value, product-management, product-development</p>
+
+<h2 id="3-a-the-tao-of-monad">3.a The Tao of Monad</h2>
+
+<p>I&rsquo;ve read <a href="https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/the-tao-of-monad" target="_blank">this article</a> by Bartosz Milewski explaining the Monad under another lens.</p>
+
+<p>He draws some inspiration from Lao Tzu, in Tao Te Ching: TE as virtue, laziness.</p>
+
+<p>Tags: bartosz-milewski, monad, haskell, school-of-haskell, tao-te-ching, tao</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/10/01/self-study-in-october-2016/">Self-Study in October 2016</a>
     </h1>
     <p >Oct 1, 2016
@@ -412,419 +738,6 @@ Learning paths that have entered the queue:
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/08/01/self-study-in-august-2016/">Self-Study in August 2016</a>
-    </h1>
-    <p >Aug 1, 2016
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/08/01/self-study-in-august-2016/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/august/">august</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/2fa/">2fa</a><a class="label" href="https://alvarogarcia7.github.io/categories/aaron-krauss/">aaron-krauss</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/amazon/">amazon</a><a class="label" href="https://alvarogarcia7.github.io/categories/bill-sourour/">bill-sourour</a><a class="label" href="https://alvarogarcia7.github.io/categories/binding/">binding</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/conf/">conf</a><a class="label" href="https://alvarogarcia7.github.io/categories/conference/">conference</a><a class="label" href="https://alvarogarcia7.github.io/categories/const/">const</a><a class="label" href="https://alvarogarcia7.github.io/categories/degree/">degree</a><a class="label" href="https://alvarogarcia7.github.io/categories/devin-coldewey/">devin-coldewey</a><a class="label" href="https://alvarogarcia7.github.io/categories/devops/">devops</a><a class="label" href="https://alvarogarcia7.github.io/categories/es2015/">es2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/eventual-consistency/">eventual-consistency</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience/">experience</a><a class="label" href="https://alvarogarcia7.github.io/categories/full-stack-developer/">full-stack-developer</a><a class="label" href="https://alvarogarcia7.github.io/categories/function/">function</a><a class="label" href="https://alvarogarcia7.github.io/categories/hand-signals/">hand-signals</a><a class="label" href="https://alvarogarcia7.github.io/categories/holberton-school/">holberton-school</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview-process/">interview-process</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/josip-franjkovic/">josip-franjkovic</a><a class="label" href="https://alvarogarcia7.github.io/categories/juan-hernandez/">juan-hernandez</a><a class="label" href="https://alvarogarcia7.github.io/categories/kyle-young/">kyle-young</a><a class="label" href="https://alvarogarcia7.github.io/categories/lead-dev/">lead-dev</a><a class="label" href="https://alvarogarcia7.github.io/categories/lessons-learned/">lessons-learned</a><a class="label" href="https://alvarogarcia7.github.io/categories/lifecycle/">lifecycle</a><a class="label" href="https://alvarogarcia7.github.io/categories/maryam-labib/">maryam-labib</a><a class="label" href="https://alvarogarcia7.github.io/categories/nist/">nist</a><a class="label" href="https://alvarogarcia7.github.io/categories/occupy-movement/">occupy-movement</a><a class="label" href="https://alvarogarcia7.github.io/categories/on-call/">on-call</a><a class="label" href="https://alvarogarcia7.github.io/categories/opinion/">opinion</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/pivotal/">pivotal</a><a class="label" href="https://alvarogarcia7.github.io/categories/professional-career/">professional-career</a><a class="label" href="https://alvarogarcia7.github.io/categories/race-condition/">race-condition</a><a class="label" href="https://alvarogarcia7.github.io/categories/regulation/">regulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/rest/">rest</a><a class="label" href="https://alvarogarcia7.github.io/categories/rest-api/">rest-api</a><a class="label" href="https://alvarogarcia7.github.io/categories/ryan-alexander/">ryan-alexander</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/semicolon/">semicolon</a><a class="label" href="https://alvarogarcia7.github.io/categories/sms/">sms</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/style/">style</a><a class="label" href="https://alvarogarcia7.github.io/categories/sylvain-kalache/">sylvain-kalache</a><a class="label" href="https://alvarogarcia7.github.io/categories/syntax/">syntax</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdz/">tdz</a><a class="label" href="https://alvarogarcia7.github.io/categories/team/">team</a><a class="label" href="https://alvarogarcia7.github.io/categories/temporal-dead-zone/">temporal-dead-zone</a><a class="label" href="https://alvarogarcia7.github.io/categories/title/">title</a><a class="label" href="https://alvarogarcia7.github.io/categories/university/">university</a><a class="label" href="https://alvarogarcia7.github.io/categories/us-nist/">us-nist</a><a class="label" href="https://alvarogarcia7.github.io/categories/var/">var</a><a class="label" href="https://alvarogarcia7.github.io/categories/web/">web</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="lessons-in-agile-six-months-at-pivotal">Lessons in Agile: Six Months at Pivotal</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/built-to-adapt/lessons-in-agile-six-months-at-pivotal-66b4c57386a4" target="_blank">this article</a> by Maryam Labib where she explains what she has learned in the last 6 months at Pivotal: how to pair program, how to TDD and some good practices to be a better developer.</p>
-
-<p>Tags: maryam-labib, pivotal, career, professional-career, tdd, pair-programming, team, lessons-learned, experience</p>
-
-<h2 id="hacking-verbal-communication-systems">Hacking verbal communication systems</h2>
-
-<p>I&rsquo;ve watched <a href="https://vimeo.com/album/4045988/video/173255458" target="_blank">this talk</a> by Ryan Alexander on what kind of systems humans use to communicate and how to improve them. Explains the hand signals at Occupy movement (called (Occupy movement hand signals)[<a href="https://en.wikipedia.org/wiki/Occupy_movement_hand_signals]" target="_blank">https://en.wikipedia.org/wiki/Occupy_movement_hand_signals]</a>)</p>
-
-<p>Tags: conference, ryan-alexander, lead-dev, conf, hand-signals, occupy-movement</p>
-
-<h2 id="ni-titulitis-ni-cuñadismo-spanish">Ni titulitis, ni cuñadismo (Spanish)</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.koalite.com/2016/06/ni-titulitis-ni-cunadismo" target="_blank">this article</a> about the regulation or no regulation of the programmer trade, by Juan María Hernández</p>
-
-<p>Tags: regulation, opinion, title, degree, university, juan-hernandez, spanish</p>
-
-<h2 id="are-semicolons-necessary-in-javascript">Are Semicolons Necessary in JavaScript?</h2>
-
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=gsfbh17Ax9I" target="_blank">this video</a> by Kyle Robinson Young on whether semicolons are necessary in javascript and why he purposely does not use them, to teach people how to do it. Suggests going for a month with the opposite way (write / don&rsquo;t write) to see how it feels and take an informed decision.</p>
-
-<p>Tags: javascript, semicolon, style, syntax, kyle-young</p>
-
-<h2 id="race-conditions-on-the-web">Race conditions on the web</h2>
-
-<p>I&rsquo;ve read <a href="https://www.josipfranjkovic.com/blog/race-conditions-on-web" target="_blank">this article</a> by Josip Franjković on the race conditions that can happen using REST APIs, related to eventual consistency matters.</p>
-
-<p>Tags: eventual-consistency, josip-franjkovic, race-condition, rest-api, rest, web</p>
-
-<h2 id="nist-declares-the-age-of-sms-based-2-factor-authentication-over">NIST declares the age of SMS-based 2-factor authentication over</h2>
-
-<p>I&rsquo;ve read <a href="https://techcrunch.com/2016/07/25/nist-declares-the-age-of-sms-based-2-factor-authentication-over/" target="_blank">this article</a> by Devin Coldewey, where he explains that the US NIST has published a draft that suggests using SMS for two-factor authentication in a different way: check that they are real phones and not VoIP to reduce the tampering with.</p>
-
-<p>Tags:  devin-coldewey, 2fa, sms, nist, us-nist, security</p>
-
-<h2 id="my-interviews-with-amazon">My Interviews with Amazon</h2>
-
-<p>I&rsquo;ve read <a href="https://thesocietea.org/2016/07/my-interviews-with-amazon/" target="_blank">this article</a> by Aaron Krauss, where he explains his experience interviewing with Amazon at Seattle. Explains the whole process and insights from some phases.</p>
-
-<p>Tags: aaron-krauss, amazon, interview-process</p>
-
-<h2 id="devops-students-learn-the-value-of-uptime-with-3-a-m-calls">DevOps Students Learn the Value of Uptime With 3 a.m. Calls</h2>
-
-<p>I&rsquo;ve read <a href="https://www.linux.com/news/devops-students-learn-value-uptime-3-am-calls" target="_blank">this article</a> about the practices related to &ldquo;on call&rdquo; at Holberton School and their students.</p>
-
-<p>Tags: sylvain-kalache, holberton-school, on-call, full-stack-developer, devops, agile</p>
-
-<h2 id="constant-confusion-why-i-still-use-javascript-function-statements">Constant confusion: why I still use JavaScript function statements</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/constant-confusion-why-i-still-use-javascript-function-statements-984ece0b72fd" target="_blank">this article</a> that explains the comparison of declaring functions in javascript (ES2015 and above), with the short notation for a function. By Bill Sourour.</p>
-
-<p>Cites the temporal dead zone (TDZ):</p>
-
-<blockquote>
-<p>[&hellip;] JavaScript binds the declaration of “sayHelloTo” — reads it first, puts it at the top, and creates a space in memory to hold its value — but it doesn’t set “sayHelloTo” to anything until it reaches it during execution.</p>
-
-<p>The time between “sayHelloTo” being bound and “sayHelloTo” being initialized is called the temporal dead zone (TDZ).</p>
-</blockquote>
-
-<p>Tags: tdz, temporal-dead-zone, bill-sourour, javascript, es2015, function, const, var, binding, lifecycle</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/">AWS Kinesis Zombieland</a>
-    </h1>
-    <p >Jul 28, 2016
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/aws-kinesis/">aws-kinesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/aws/">aws</a><a class="label" href="https://alvarogarcia7.github.io/categories/ciberado/">ciberado</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop/">workshop</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop-notes/">workshop-notes</a><a class="label" href="https://alvarogarcia7.github.io/categories/notes/">notes</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>I attended a workshop on AWS Kinesis, called <a href="http://capside.com/event/aws-kinesis-zombieland/" target="_blank">AWS Kinesis Zombieland</a> by <a href="https://twitter.com/ciberado" target="_blank">Javi Moreno</a> at <a href="http://capside.com/" target="_blank">capside</a>.</p>
-
-<h2 id="notes">Notes</h2>
-
-<p>AWS Kinesis Zombieland</p>
-
-<ul>
-<li>muy importante escoger bien la clave de particionado (id de shard)</li>
-<li>KPL librería de kinesis que te permite hacer batching, timeout, &hellip;
-
-<ul>
-<li>la otra se llama KCL.</li>
-<li>KCL permite mantener estado</li>
-</ul></li>
-<li>cuando te pidan una app de big data, pregunta para qué lo quieren, lo mismo que con cualquier proyecto de software</li>
-<li>latitud = Y, longitud = x</li>
-<li>el canal se llama stream, la capacidad se llama shard
-
-<ul>
-<li>el shard sólo permite 5 lecturas por segundo, 2MB/s</li>
-</ul></li>
-<li>usar el shard como buffer</li>
-<li>usar la clave de particionado como algoritmo de agregación</li>
-<li>cada vez que tienes una tabla en dynamodb, tienes que poner una alerta de throughput</li>
-<li>nota: lo que no puedes hacer es guardarlos todos y luego procesarlo. no tienes potencia para todo eso</li>
-</ul>
-
-<p>Preguntas:</p>
-
-<ul>
-<li>¿cómo se calcula el id del shard?
-<br /></li>
-</ul>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/07/04/self-study-in-july-2016/">Self-Study in July 2016</a>
-    </h1>
-    <p >Jul 4, 2016
-         - 8 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/07/04/self-study-in-july-2016/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/july/">july</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/10x/">10x</a><a class="label" href="https://alvarogarcia7.github.io/categories/2fa/">2fa</a><a class="label" href="https://alvarogarcia7.github.io/categories/agent/">agent</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/alexander-yakushev/">alexander-yakushev</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/android/">android</a><a class="label" href="https://alvarogarcia7.github.io/categories/answer/">answer</a><a class="label" href="https://alvarogarcia7.github.io/categories/assembler/">assembler</a><a class="label" href="https://alvarogarcia7.github.io/categories/asynchronous/">asynchronous</a><a class="label" href="https://alvarogarcia7.github.io/categories/ats/">ats</a><a class="label" href="https://alvarogarcia7.github.io/categories/authentication/">authentication</a><a class="label" href="https://alvarogarcia7.github.io/categories/baas/">baas</a><a class="label" href="https://alvarogarcia7.github.io/categories/backend-as-a-service/">backend-as-a-service</a><a class="label" href="https://alvarogarcia7.github.io/categories/basecamp/">basecamp</a><a class="label" href="https://alvarogarcia7.github.io/categories/beginner/">beginner</a><a class="label" href="https://alvarogarcia7.github.io/categories/ben-halpern/">ben-halpern</a><a class="label" href="https://alvarogarcia7.github.io/categories/big-company/">big-company</a><a class="label" href="https://alvarogarcia7.github.io/categories/bill-sourour/">bill-sourour</a><a class="label" href="https://alvarogarcia7.github.io/categories/binary/">binary</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-editing/">book-editing</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-publishing/">book-publishing</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-writing/">book-writing</a><a class="label" href="https://alvarogarcia7.github.io/categories/bus/">bus</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/career-security/">career-security</a><a class="label" href="https://alvarogarcia7.github.io/categories/carin-meier/">carin-meier</a><a class="label" href="https://alvarogarcia7.github.io/categories/cate-huston/">cate-huston</a><a class="label" href="https://alvarogarcia7.github.io/categories/clean-code/">clean-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure-gazette/">clojure-gazette</a><a class="label" href="https://alvarogarcia7.github.io/categories/communication/">communication</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/compensating-action/">compensating-action</a><a class="label" href="https://alvarogarcia7.github.io/categories/computer/">computer</a><a class="label" href="https://alvarogarcia7.github.io/categories/conversation-pattern/">conversation-pattern</a><a class="label" href="https://alvarogarcia7.github.io/categories/copy-paste/">copy-paste</a><a class="label" href="https://alvarogarcia7.github.io/categories/correlation-id/">correlation-id</a><a class="label" href="https://alvarogarcia7.github.io/categories/cv/">cv</a><a class="label" href="https://alvarogarcia7.github.io/categories/dan-kim/">dan-kim</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-dill/">david-dill</a><a class="label" href="https://alvarogarcia7.github.io/categories/debugger/">debugger</a><a class="label" href="https://alvarogarcia7.github.io/categories/developer/">developer</a><a class="label" href="https://alvarogarcia7.github.io/categories/dhh/">dhh</a><a class="label" href="https://alvarogarcia7.github.io/categories/economy/">economy</a><a class="label" href="https://alvarogarcia7.github.io/categories/efficiency/">efficiency</a><a class="label" href="https://alvarogarcia7.github.io/categories/elton-minetto/">elton-minetto</a><a class="label" href="https://alvarogarcia7.github.io/categories/employee/">employee</a><a class="label" href="https://alvarogarcia7.github.io/categories/employer/">employer</a><a class="label" href="https://alvarogarcia7.github.io/categories/end-of-the-internet/">end-of-the-internet</a><a class="label" href="https://alvarogarcia7.github.io/categories/english/">english</a><a class="label" href="https://alvarogarcia7.github.io/categories/eric-elliot/">eric-elliot</a><a class="label" href="https://alvarogarcia7.github.io/categories/event/">event</a><a class="label" href="https://alvarogarcia7.github.io/categories/event-loop/">event-loop</a><a class="label" href="https://alvarogarcia7.github.io/categories/evolving-article/">evolving-article</a><a class="label" href="https://alvarogarcia7.github.io/categories/exception-handling/">exception-handling</a><a class="label" href="https://alvarogarcia7.github.io/categories/faas/">faas</a><a class="label" href="https://alvarogarcia7.github.io/categories/function-as-a-service/">function-as-a-service</a><a class="label" href="https://alvarogarcia7.github.io/categories/giovanni-asproni/">giovanni-asproni</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/google-summer-of-code/">google-summer-of-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/gregor-hohpe/">gregor-hohpe</a><a class="label" href="https://alvarogarcia7.github.io/categories/gsoc/">gsoc</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/guideline/">guideline</a><a class="label" href="https://alvarogarcia7.github.io/categories/hackintosh/">hackintosh</a><a class="label" href="https://alvarogarcia7.github.io/categories/hiring/">hiring</a><a class="label" href="https://alvarogarcia7.github.io/categories/ignacio-segura/">ignacio-segura</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview/">interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/investment/">investment</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-gorman/">jason-gorman</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-zimdars/">jason-zimdars</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeff-hall/">jeff-hall</a><a class="label" href="https://alvarogarcia7.github.io/categories/job/">job</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-interview/">job-interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-market/">job-market</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-offer/">job-offer</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-security/">job-security</a><a class="label" href="https://alvarogarcia7.github.io/categories/jurgen-appelo/">jurgen-appelo</a><a class="label" href="https://alvarogarcia7.github.io/categories/ken-mazaika/">ken-mazaika</a><a class="label" href="https://alvarogarcia7.github.io/categories/kotlin/">kotlin</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/law/">law</a><a class="label" href="https://alvarogarcia7.github.io/categories/learn-coding/">learn-coding</a><a class="label" href="https://alvarogarcia7.github.io/categories/limitation/">limitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/list/">list</a><a class="label" href="https://alvarogarcia7.github.io/categories/love-of-language/">love-of-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/mac/">mac</a><a class="label" href="https://alvarogarcia7.github.io/categories/macintosh/">macintosh</a><a class="label" href="https://alvarogarcia7.github.io/categories/masha-diminsky/">masha-diminsky</a><a class="label" href="https://alvarogarcia7.github.io/categories/mbass/">mbass</a><a class="label" href="https://alvarogarcia7.github.io/categories/mfa/">mfa</a><a class="label" href="https://alvarogarcia7.github.io/categories/mike-roberts/">mike-roberts</a><a class="label" href="https://alvarogarcia7.github.io/categories/mike-rundle/">mike-rundle</a><a class="label" href="https://alvarogarcia7.github.io/categories/mobile-backend-as-a-service/">mobile-backend-as-a-service</a><a class="label" href="https://alvarogarcia7.github.io/categories/molly-wilson/">molly-wilson</a><a class="label" href="https://alvarogarcia7.github.io/categories/monotasking/">monotasking</a><a class="label" href="https://alvarogarcia7.github.io/categories/multi-factor-authentication/">multi-factor-authentication</a><a class="label" href="https://alvarogarcia7.github.io/categories/multitasking/">multitasking</a><a class="label" href="https://alvarogarcia7.github.io/categories/native/">native</a><a class="label" href="https://alvarogarcia7.github.io/categories/nodejs/">nodejs</a><a class="label" href="https://alvarogarcia7.github.io/categories/non-native/">non-native</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-calisthenics/">object-calisthenics</a><a class="label" href="https://alvarogarcia7.github.io/categories/ofa/">ofa</a><a class="label" href="https://alvarogarcia7.github.io/categories/office/">office</a><a class="label" href="https://alvarogarcia7.github.io/categories/one-factor-authentication/">one-factor-authentication</a><a class="label" href="https://alvarogarcia7.github.io/categories/online-voting/">online-voting</a><a class="label" href="https://alvarogarcia7.github.io/categories/pandoc/">pandoc</a><a class="label" href="https://alvarogarcia7.github.io/categories/paradox/">paradox</a><a class="label" href="https://alvarogarcia7.github.io/categories/pci-guru/">pci-guru</a><a class="label" href="https://alvarogarcia7.github.io/categories/php/">php</a><a class="label" href="https://alvarogarcia7.github.io/categories/policy/">policy</a><a class="label" href="https://alvarogarcia7.github.io/categories/portuguese/">portuguese</a><a class="label" href="https://alvarogarcia7.github.io/categories/product/">product</a><a class="label" href="https://alvarogarcia7.github.io/categories/professional-career/">professional-career</a><a class="label" href="https://alvarogarcia7.github.io/categories/quincy-larson/">quincy-larson</a><a class="label" href="https://alvarogarcia7.github.io/categories/recruiter/">recruiter</a><a class="label" href="https://alvarogarcia7.github.io/categories/recruitment/">recruitment</a><a class="label" href="https://alvarogarcia7.github.io/categories/related-to-article/">related-to-article</a><a class="label" href="https://alvarogarcia7.github.io/categories/resume/">resume</a><a class="label" href="https://alvarogarcia7.github.io/categories/retry/">retry</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-martin/">robert-martin</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/scaled-agile/">scaled-agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/serverless/">serverless</a><a class="label" href="https://alvarogarcia7.github.io/categories/small-company/">small-company</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/startup/">startup</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip-and-trick/">tip-and-trick</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/two-factor-authentication/">two-factor-authentication</a><a class="label" href="https://alvarogarcia7.github.io/categories/unbeateable-programmer/">unbeateable-programmer</a><a class="label" href="https://alvarogarcia7.github.io/categories/uncle-bob/">uncle-bob</a><a class="label" href="https://alvarogarcia7.github.io/categories/unitasking/">unitasking</a><a class="label" href="https://alvarogarcia7.github.io/categories/unstoppable-programmer/">unstoppable-programmer</a><a class="label" href="https://alvarogarcia7.github.io/categories/verena-von-pfetten/">verena-von-pfetten</a><a class="label" href="https://alvarogarcia7.github.io/categories/web/">web</a><a class="label" href="https://alvarogarcia7.github.io/categories/working-environment/">working-environment</a><a class="label" href="https://alvarogarcia7.github.io/categories/write-off/">write-off</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="until-the-end-of-the-internet">Until the End of the Internet</h2>
-
-<p>I&rsquo;ve read <a href="https://m.signalvnoise.com/until-the-end-of-the-internet-405d55fde60f" target="_blank">this article</a> by Jason Zimdars explaining the &ldquo;end of the internet&rdquo; policy at Basecamp: they will make everything possible to keep the services running for existing customer until the end or until the last customer uses it.</p>
-
-<p>Tags: policy, end-of-the-internet, jason-zimdars, basecamp, product</p>
-
-<h2 id="how-agile-principles-can-fund-your-start-up">How Agile Principles Can Fund Your Start-Up</h2>
-
-<p>I&rsquo;ve read <a href="https://dzone.com/articles/how-agile-principles-can-fund-your-start-up" target="_blank">this article</a> by Jurgen Appelo explaining how the agile values can help you negotiate funding for your startup: instead of negotiating with each investor, agree on a formula and invest in many small rounds, instead of a big one. This works both ways: for buying and for selling.</p>
-
-<p>Suggests using a base plus the amount of sales in the last year * a percentage.</p>
-
-<p>Tags:  jurgen-appelo, investment, startup, agile</p>
-
-<h2 id="how-i-fell-in-love-with-a-programming-language">How I fell in love with a programming language</h2>
-
-<p>I&rsquo;ve read <a href="https://m.signalvnoise.com/how-i-fell-in-love-with-a-programming-language-8933d5e749ed" target="_blank">this article</a> by Dan Kim on the feelings of love and comfort he feels when he&rsquo;s programming in Kotlin, for Android. Tells the story of DHH and the love of Ruby as a similar one.</p>
-
-<p>Tags: dan-kim, dhh, ruby, love-of-language, kotlin, android</p>
-
-<h2 id="book-writing-for-the-busy-programmer">Book writing for the busy programmer</h2>
-
-<p>I&rsquo;ve read <a href="http://gigasquidsoftware.com/blog/2016/06/19/book-writing-for-the-busy-programmer/" target="_blank">this article</a> by Carin Meier on what tools she found useful for writing, editing and publishing a science fiction book she was writing for her daughter.</p>
-
-<p>Tags: tool, pandoc, carin-meier, book, book-writing, book-editing, book-publishing</p>
-
-<h2 id="one-two-and-three-factor-authentication">one-, two-, and three-factor authentication</h2>
-
-<p>I&rsquo;ve read <a href="https://pciguru.wordpress.com/2010/05/01/one-two-and-three-factor-authentication/" target="_blank">this article</a> by Jeff Hall, that explains the factors in multi-factor authentication.</p>
-
-<p>Tags: jeff-hall, ofa, 2fa, mfa, one-factor-authentication, two-factor-authentication, multi-factor-authentication, pci-guru, security, authentication</p>
-
-<h2 id="scaling-agile-a-law-and-two-paradoxes">Scaling Agile: A Law And Two Paradoxes</h2>
-
-<p>I&rsquo;ve read <a href="http://asprotunity.com/blog/scaling-agile-a-law-and-two-paradoxes/" target="_blank">this article</a> by Giovanni Asproni about agile.</p>
-
-<blockquote>
-<p>Fundamental law of scaling: Scaling up amplifies the bad and makes the good more difficult.</p>
-
-<p>First paradox of scaling: Most projects are scaled up because they don’t fulfill the prerequisites for scaling.</p>
-
-<p>Second paradox of scaling: Projects fulfilling the prerequisites for scaling have a lesser need to scale.</p>
-
-<p><quote>Giovanni Asproni</quote></p>
-</blockquote>
-
-<p>Also goes on to explain ten prerequisites for scaling.</p>
-
-<p>Tags: scaled-agile, agile, giovanni-asproni, paradox, law</p>
-
-<h2 id="carta-abierta-a-ese-empresario-que-no-encuentra-talento">Carta abierta a ese empresario que no encuentra talento</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/espanol/carta-abierta-a-ese-empresario-que-no-encuentra-talento-669e28e4a89b" target="_blank">this article</a> by Ignacio Segura reacting to a previous article about job offer and demand. Ignacio explains how the job market can be modeled and how workers have found ways of selling their time to the best price.</p>
-
-<p>Tags: ignacio-segura, analogy, job-offer, job, job-market, economy, spanish</p>
-
-<h2 id="david-dill-why-online-voting-is-a-danger-to-democracy">David Dill: Why Online Voting Is a Danger to Democracy</h2>
-
-<p>I&rsquo;ve read <a href="https://engineering.stanford.edu/news/david-dill-why-online-voting-danger-democracy" target="_blank">this interview</a> to David Dill on why the online voting is not a good idea and we should stick to paper as the golden rule for voting processes.</p>
-
-<p>Explains how difficult is to convince people of the technical limitations and the massive incentive it would be to hack into election systems / services.</p>
-
-<p>Tags: interview, david-dill, online-voting, limitation</p>
-
-<h2 id="clojure-gazette-tdd-in-clojure-on-android">Clojure Gazette - TDD in Clojure on Android</h2>
-
-<p>I&rsquo;ve read <a href="http://us4.campaign-archive2.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=7023cf0a33" target="_blank">this interview</a> to Alexander Yakushev, about his Google Summer of Code and the project he is currently working on: Clojure-android</p>
-
-<p>Tags: interview, clojure-gazette, alexander-yakushev, google-summer-of-code, gsoc, clojure, tdd, android</p>
-
-<h2 id="what-will-github-be-in-5-years">What Will GitHub Be in 5 years?</h2>
-
-<p>I&rsquo;ve read <a href="https://dev.to/ben/what-will-github-be-in-5-years" target="_blank">this article</a> that describes the current state of Github business and the possible solutions in the upcoming five years. By Ben Halpern</p>
-
-<p>Tags: ben-halpern, github, economy, startup, investment</p>
-
-<h2 id="serverless-architectures">Serverless Architectures</h2>
-
-<p>I&rsquo;ve read <a href="http://martinfowler.com/articles/serverless.html" target="_blank">this evolving article</a> by Mike Roberts on what is and is not Serverless: [mobile] backend as a service or function as a service.</p>
-
-<p>Converts some n-tier applications into serverless ones, expliciting that this is only a way of doing it, not necessarily the way he would do it</p>
-
-<p>Tags: faas, baas, mbass, function-as-a-service, backend-as-a-service, mobile-backend-as-a-service, serverless, evolving-article, mike-roberts, lambda</p>
-
-<h2 id="big-co-vs-small-co-job-vs-career-stability">Big co. vs small co. &amp; job vs. career stability</h2>
-
-<p>I&rsquo;ve read <a href="http://www.catehuston.com/blog/2016/06/02/job-vs-career-stability/" target="_blank">this article</a> by Cate Huston on the career and job stability that big companies and small companies can offer:</p>
-
-<blockquote>
-<p>Job security means that you know you will keep getting a paycheck from $company. Career security means that you know you can get another job, and develop yourself and your career in the way that is meaningful to you.</p>
-</blockquote>
-
-<p>Tags: job-security, cate-huston, big-company, small-company, career-security, career, professional-career</p>
-
-<h2 id="copy-paste-code">Copy. Paste. Code?</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.devmastery.com/copy-paste-code-6ed9bb841cd4" target="_blank">this article</a> by Bill Sourour on the different point of view of solving questions in coding many years ago compared to nowadays.</p>
-
-<p>Also explores the concept of copy pasting code without understanding it, explaining that the endgame is writing good code that works and is easy to change.</p>
-
-<p>Tags: copy-paste, bill-sourour, clean-code, comparison</p>
-
-<h2 id="why-so-many-developers-hate-recruiters">Why so many developers hate recruiters</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/the-tech-recruiter-red-pill-967dd492560c" target="_blank">this article</a> by Quincy Larson on how recruiters for the IT sector work and how to work with them for your best possible outcome.</p>
-
-<p>Tags: career, professional-career, recruitment, recruiter, agent, hiring, quincy-larson</p>
-
-<h2 id="every-time-someone-posts-one-of-these-coding-is-over-essays-on-medium-they-undo-a-good-chunk-of">Every time someone posts one of these “coding is over” essays on Medium, they undo a good chunk of…</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/@quincylarson/every-time-someone-posts-one-of-these-coding-is-over-essay-on-medium-they-undo-a-good-chunk-of-b7989849390b" target="_blank">this article</a> by Quincy Larson on why we should not tell others about their choosing of learning programming, and every time we do, some doors close.</p>
-
-<p>Tags: answer, learn-coding, related-to-article, quincy-larson</p>
-
-<h2 id="29-behaviors-that-will-make-you-an-unstoppable-programmer">29 Behaviors That Will Make You An Unstoppable Programmer</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/@kenmazaika/29-behaviors-that-will-make-you-an-unstoppable-programmer-8778941d80f7" target="_blank">this list</a> of tricks to become a be a better programmer. By Ken Mazaika</p>
-
-<blockquote>
-<ol>
-<li>Use Google very aggressively.</li>
-<li>Maintain an obnoxious amount of stick-to-itiveness.</li>
-<li>Acknowledge that micro-decisions matter.</li>
-<li>Acknowledge that most major decisions don’t matter that much.</li>
-<li>Always use the right tool for the job.</li>
-<li>Understand that code is cheap.</li>
-<li>Evaluate technologies based on all their merits.</li>
-<li>Say “I don’t know.”</li>
-<li>Always analyze the clues found in error messages.</li>
-<li>Know the difference between a premature optimization and a show-stopping optimization that NEEDS to happen.</li>
-<li>Take responsibility for your mistakes.</li>
-<li>Become a power-user of your development tools.</li>
-<li>Know how to use Vim (at least a little bit).</li>
-<li>Never accept freelance work in an unfamiliar technology.</li>
-<li>Don’t count the number of hours.</li>
-<li>Absorb massive criticism with ease.</li>
-<li>Pair program with people with more experience.</li>
-<li>Always code review your own work first.</li>
-<li>Recognize that the hard part of freelancing isn’t writing the code. It’s everything else.</li>
-<li>Identify and resolve bigger issues.</li>
-<li>Dive into large open source projects to bring your features to life.</li>
-<li>Skip a lot of meetings.</li>
-<li>Know when it’s time to give back.</li>
-<li>Be capable of writing bad code.</li>
-<li>Let other people know that you’re working late without being a jerk.</li>
-<li>Act as a leader, not a boss.</li>
-<li>Go play foosball.</li>
-<li>Learn under pressure.</li>
-<li>“Move fast and break things.”</li>
-</ol>
-</blockquote>
-
-<p>Tags: ken-mazaika, list, unbeateable-programmer, unstoppable-programmer, efficiency, 10x, tip-and-trick</p>
-
-<h2 id="como-melhorar-seus-códigos-usando-object-calisthenics-portuguese">Como melhorar seus códigos usando Object Calisthenics (Portuguese)</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/coderockr-way/como-melhorar-seus-c%C3%B3digos-usando-object-calisthenics-444daf3e2e06" target="_blank">this article</a> about object calisthenics, with an example in PHP. By Elton Minetto</p>
-
-<p>Tags: object-calisthenics, elton-minetto, php, portuguese</p>
-
-<h2 id="read-this-story-without-distraction-can-you">Read This Story Without Distraction (Can You?)</h2>
-
-<p>I&rsquo;ve read <a href="http://www.nytimes.com/2016/05/01/fashion/monotasking-drop-everything-and-read-this-story.html?action=click&amp;contentCollection=Fashion%20%26%20Style&amp;module=RelatedCoverage&amp;region=Marginalia&amp;pgtype=article" target="_blank">this article</a> by Verena von Pfetten on the effects on multitasking in our daily lives. Also comments on the movement of monotasking or unitasking, which is the opposite of multitasking: doing one thing at a time.</p>
-
-<p>Underlines the benefits of monotasking and how this is related to mindfulness and psychological benefits.</p>
-
-<p>Tags: multitasking, monotasking, unitasking, verena-von-pfetten, time-management</p>
-
-<h2 id="debuggers-are-a-wasteful-timesink">Debuggers are a wasteful Timesink</h2>
-
-<p>I&rsquo;ve read <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=23476" target="_blank">this article</a> by Robert C. Martin on why we shouldn&rsquo;t use debuggers</p>
-
-<p>Tags: uncle-bob, robert-martin, debugger, tdd</p>
-
-<h2 id="taming-the-steamroller-how-to-communicate-compassionately-with-non-native-english-speakers">Taming the steamroller: how to communicate compassionately with non-native English speakers</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/@mollyclare/taming-the-steamroller-how-to-communicate-compassionately-with-non-native-english-speakers-d95d8d1845a0" target="_blank">this article</a> by Molly Clare Wilson on tips on how native English speakers can simplify their communication so it is easier for non-native speakers to understand them. Provides guidelines for situations involving &lsquo;speaking and presenting&rsquo;, &lsquo;meetings&rsquo;, written form &lsquo;email, text, chat&rsquo; and about correction each others English.</p>
-
-<p>Tags: molly-wilson, english, communication, native, non-native, guideline</p>
-
-<h2 id="blue-no-yellow">Blue. No! Yellow!</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2016/05/21/BlueNoYellow.html" target="_blank">this interview</a> with Robert C. Martin on the productivity increases that different languages provide to the programmer. He says that no language can provide an effect as big as binary to assembler and that we&rsquo;re currently searching the Holy Grail.</p>
-
-<p>Tags: robert-martin, uncle-bob, language, comparison, assembler, binary, clojure</p>
-
-<h2 id="it-s-time-development-teams-chose-their-own-working-environments">It&rsquo;s Time Development Teams Chose Their Own Working Environments</h2>
-
-<p>I&rsquo;ve read <a href="http://codemanship.co.uk/parlezuml/blog/?postid=1383" target="_blank">this article</a> by Jason Gorman on how takes the decision of working environments and why having other options are financially available. How developers should be in charge of their own working environments.</p>
-
-<p>Tags: office, working-environment, jason-gorman</p>
-
-<h2 id="building-my-1-200-hackintosh">Building My $1,200 Hackintosh</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/swlh/building-my-1-200-hackintosh-49a1a186241e" target="_blank">this guide</a> on how to build a powerful hackintosh. By Mike Rundle</p>
-
-<p>Tags: mike-rundle, hackintosh, macintosh, mac, computer</p>
-
-<h2 id="the-practical-guide-to-becoming-a-professional-web-developer">The Practical Guide to Becoming a Professional Web Developer</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/the-practical-guide-to-becoming-a-professional-web-developer-2f255bc25c90" target="_blank">this article</a> by Bill Sourour on how to become a web developer. Explains all kind of resources, from learning javascript, deciding on being a frontend of backend developer, which language to choose, how to find a job, getting experience.</p>
-
-<p>Tags: bill-sourour, guide, career, beginner, developer, web, professional-career</p>
-
-<h2 id="why-hiring-is-so-hard-in-tech">Why Hiring is So Hard in Tech</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017" target="_blank">this article</a> by Eric Elliot on how to tackle job interviews, both from the side of the employer and the employee.</p>
-
-<p>Tags: eric-elliot, job-interview, employee, employer, cv, career, professional-career</p>
-
-<h2 id="learn-node-js-with-brigadier-fluffykins-part-ii-events-eventemitter-and-the-event-loop">Learn Node.js with Brigadier Fluffykins Part II: Events, EventEmitter and the Event Loop</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/learn-node-js-with-brigadier-fluffykins-part-ii-events-eventemitter-the-event-loop-6d4c139694fb" target="_blank">this article</a> by Masha Diminsky on the architecture of javascript and nodejs. Explains the event-driven architecture, the events and the event loop.</p>
-
-<p>Tags: masha-diminsky, bus, nodejs, javascript, bus, event-loop, event</p>
-
-<h2 id="you-in-6-seconds-how-to-write-a-résumé-that-employers-will-actually-read">You in 6 seconds: how to write a résumé that employers will actually read</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/you-in-6-seconds-how-to-write-a-r%C3%A9sum%C3%A9-that-employers-will-actually-read-fd7757740802" target="_blank">this article</a> that suggests how to customize your cv for maximum engagement from interviewers / head hunters and to make the most of the 6 seconds they (allegedly) spend looking at your cv. Also explains some techniques for preparing the interview, about the cover letter, etc.</p>
-
-<p>Tags: quincy-larson, cv, resume, career, professional-career, ats</p>
-
-<h2 id="starbucks-does-not-use-two-phase-commit">Starbucks Does Not Use Two-Phase Commit</h2>
-
-<p>I&rsquo;ve read <a href="http://www.enterpriseintegrationpatterns.com/ramblings/18_starbucks.html" target="_blank">this article</a> by Gregor Hohpe explaining how Starbucks is modeled in terms of asynchronous interactions and the actions for exception handling: write-off, retry, compensating action.</p>
-
-<p>Also mentions Conversation pattern and Correlation ID.</p>
-
-<p>Tags: gregor-hohpe, conversation-pattern, correlation-id, analogy, asynchronous, exception-handling, write-off, retry, compensating-action</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -910,6 +823,8 @@ Learning paths that have entered the queue:
     
         <a href="/blog/page/32/" class="label-pagination">32</a>
     
+        <a href="/blog/page/33/" class="label-pagination">33</a>
+    
 
     
     
@@ -918,7 +833,7 @@ Learning paths that have entered the queue:
 
     
     
-        <a href="/blog/page/32/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/33/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -978,7 +893,19 @@ Learning paths that have entered the queue:
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/03/01/self-study-march-2019/">Self-Study in March 2019</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/02/06/refactoring-split-loop-map-equivalence/">Refactoring: split loop &#43; loop/map equivalence</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/01/01/self-study-january-2019/">Self-Study in January 2019</a>
           </li>
         
           <li class="post">
@@ -1003,18 +930,6 @@ Learning paths that have entered the queue:
         
           <li class="post">
             <a href="/blog/2018/07/01/self-study-july-2018/">Self-Study in July 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/06/30/books-read-2018q2/">Books read in 2018Q2</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/06/15/testing-component-randomness/">Testing a component that includes randomness</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/06/01/self-study-june-2018/">Self-Study in June 2018</a>
           </li>
         
       </ul>
