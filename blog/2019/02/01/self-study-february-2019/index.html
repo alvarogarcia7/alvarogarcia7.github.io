@@ -256,30 +256,21 @@ Read: Wed, 27 Feb 2019 13:26:16 +0000</p>
 
 <h2 id="makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago-https-jesuslc-com-2018-04-21-makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago"><a href="https://jesuslc.com/2018/04/21/makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago/" target="_blank">Makefiles como dejar de memorizar comandos en docker – Developer Vago</a></h2>
 
-<p>I&rsquo;ve discovered a new technique for Makefiles:\n\nUsing a common format (a DSL, in fact) to document the goal, then a new goal &lsquo;help&rsquo; to print that documentation.\n\n```bash
-.PHONY: help
-help: ## Print this help.
-  @grep -E &lsquo;<sup class="footnote-ref" id="fnref:a-zA-Z"><a rel="footnote" href="#fn:a-zA-Z">1</a></sup>+:.<em>?## .</em>$$&rsquo; $(MAKEFILE_LIST) | awk &lsquo;BEGIN {FS = \&rdquo;:.*?## \&ldquo;}; {printf \&rdquo;\033[36m%-20s\033[0m %s\n\&ldquo;, $$1, $$2}&rsquo;</p>
+<p>I&rsquo;ve discovered a new technique for Makefiles:\n\nUsing a common format (a DSL, in fact) to document the goal, then a new goal &lsquo;help&rsquo; to print that documentation.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>.PHONY: <span class="nb">help</span>
+help: <span class="c1">## Print this help.</span>
+  @grep -E <span class="s1">&#39;^[a-zA-Z_-]+:.*?## .*$$&#39;</span> <span class="k">$(</span>MAKEFILE_LIST<span class="k">)</span> <span class="p">|</span> awk <span class="s1">&#39;BEGIN {FS = \&quot;:.*?## \&quot;}; {printf \&quot;\033[36m%-20s\033[0m %s\n\&quot;, $$1, $$2}&#39;</span>
+</code></pre></div>
 
-<pre><code>
-when you run `make help`, then
+<p>when you run <code>make help</code>, then</p>
+
+<pre><code>Print this help.
 </code></pre>
-
-<p>Print this help.
-```</p>
 
 <p>Tags: makefile, jesuslc, documentation, executable-documentation, awk, trick, help</p>
 
 <p>Id: d6a4b78c-3a93-11e9-88d7-0242ac110003
 Read: Wed, 27 Feb 2019 13:30:24 +0000</p>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:a-zA-Z">a-zA-Z_- <a class="footnote-return" href="#fnref:a-zA-Z"><sup>[return]</sup></a></li>
-</ol>
-</div>
 
         </div>
         

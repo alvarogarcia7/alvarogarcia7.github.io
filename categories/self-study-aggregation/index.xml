@@ -134,30 +134,21 @@ Read: Wed, 27 Feb 2019 13:26:16 +0000&lt;/p&gt;
 
 &lt;h2 id=&#34;makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago-https-jesuslc-com-2018-04-21-makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago&#34;&gt;&lt;a href=&#34;https://jesuslc.com/2018/04/21/makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago/&#34; target=&#34;_blank&#34;&gt;Makefiles como dejar de memorizar comandos en docker – Developer Vago&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;I&amp;rsquo;ve discovered a new technique for Makefiles:\n\nUsing a common format (a DSL, in fact) to document the goal, then a new goal &amp;lsquo;help&amp;rsquo; to print that documentation.\n\n```bash
-.PHONY: help
-help: ## Print this help.
-  @grep -E &amp;lsquo;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:a-zA-Z&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:a-zA-Z&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;+:.&lt;em&gt;?## .&lt;/em&gt;$$&amp;rsquo; $(MAKEFILE_LIST) | awk &amp;lsquo;BEGIN {FS = \&amp;rdquo;:.*?## \&amp;ldquo;}; {printf \&amp;rdquo;\033[36m%-20s\033[0m %s\n\&amp;ldquo;, $$1, $$2}&amp;rsquo;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve discovered a new technique for Makefiles:\n\nUsing a common format (a DSL, in fact) to document the goal, then a new goal &amp;lsquo;help&amp;rsquo; to print that documentation.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;.PHONY: &lt;span class=&#34;nb&#34;&gt;help&lt;/span&gt;
+help: &lt;span class=&#34;c1&#34;&gt;## Print this help.&lt;/span&gt;
+  @grep -E &lt;span class=&#34;s1&#34;&gt;&amp;#39;^[a-zA-Z_-]+:.*?## .*$$&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;MAKEFILE_LIST&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;BEGIN {FS = \&amp;quot;:.*?## \&amp;quot;}; {printf \&amp;quot;\033[36m%-20s\033[0m %s\n\&amp;quot;, $$1, $$2}&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;pre&gt;&lt;code&gt;
-when you run `make help`, then
+&lt;p&gt;when you run &lt;code&gt;make help&lt;/code&gt;, then&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Print this help.
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Print this help.
-```&lt;/p&gt;
 
 &lt;p&gt;Tags: makefile, jesuslc, documentation, executable-documentation, awk, trick, help&lt;/p&gt;
 
 &lt;p&gt;Id: d6a4b78c-3a93-11e9-88d7-0242ac110003
 Read: Wed, 27 Feb 2019 13:30:24 +0000&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:a-zA-Z&#34;&gt;a-zA-Z_- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:a-zA-Z&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     
