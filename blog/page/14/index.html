@@ -129,6 +129,58 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: automate the blog publishing</a>
+    </h1>
+    <p >Dec 2, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/blog/">blog</a><a class="label" href="https://alvarogarcia7.github.io/categories/travis/">travis</a><a class="label" href="https://alvarogarcia7.github.io/categories/ci/">ci</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>I&rsquo;ve automated the generation of the blog using <a href="https://travis-ci.org/" target="_blank">Travis CI</a>. Using this new way, each commit generates a new version of the pages.</p>
+
+<p>These resources have been very useful:</p>
+
+<ul>
+<li><a href="http://darvin.github.io/2013/01/13/Prose_Octopress_TravisIO" target="_blank">Prose.io + Octopress + Travis-CI + GitHub Pages = ♥</a>. First post (in this set) that explains how this automation is possible</li>
+<li><a href="https://harimenon.com/blog/2013/01/27/auto-deploying-to-my-octopress-blog/" target="_blank">Auto-deploying to My Octopress Blog With Travis-CI</a>. Explains how to generate your key, encript it with travis</li>
+<li><a href="http://blog.yasuoza.com/2014/01/13/octopress-plus-github-pages-plus-travis/" target="_blank">Octopress + GitHub Pages + Travis</a>: The most useful page, explains step by step what to do for mac and linux.</li>
+<li><a href="https://disqus.com/home/discussion/codez/octopressprosegithubtravis_ci_coders_blog_human_not_octopus/" target="_blank">Octopress+Prose+Github+Travis CI = coders&rsquo; blog - Human, not octopus</a>.Altough the page is not available anymore, this discussion explains why it is safe to store your private key in the file <code>.travis.yml</code>.</li>
+</ul>
+
+<p><a href="https://github.com/floydpink?tab=repositories" target="_blank">An example</a> of the resulting repository, by <a href="https://github.com/floydpink" target="_blank">Hari Menon</a>.</p>
+
+<h2 id="my-own-modifications">My own modifications</h2>
+
+<p>The full diff for making this change is <a href="https://github.com/alvarogarcia7/blog_source/compare/8414267a1e8e1f0ef588602121f32da3f6eb9f9e...9f60c76d6d9faca8cff8bce2f0a00bf8f2eafb30" target="_blank">here</a>. Disregard the changes in:</p>
+
+<ul>
+<li><code>partial/1444939871_diff.txt</code></li>
+<li><code>partial/1444939871_msg.txt</code></li>
+<li><code>source/_posts/2015-12-02-self-study-in-december-2015.markdown</code></li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/12/02/self-study-in-december-2015/">Self-Study in December 2015</a>
     </h1>
     <p >Dec 2, 2015
@@ -1457,41 +1509,6 @@ git push pipeline  <span class="m">2</span>&gt;<span class="p">&amp;</span><span
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas/">Java Tips &amp; Gotchas</a>
-    </h1>
-    <p >Oct 7, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/gotcha/">gotcha</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/character-encoding/">character-encoding</a><a class="label" href="https://alvarogarcia7.github.io/categories/utf8/">utf8</a><a class="label" href="https://alvarogarcia7.github.io/categories/java-tool-options/">java-tool-options</a><a class="label" href="https://alvarogarcia7.github.io/categories/file-encoding/">file-encoding</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="jvm-default-encoding-as-utf-8">JVM default encoding as UTF-8</h2>
-
-<p>Make the JVM use UTF-8 character encoding by default</p>
-
-<p>Set up the system property <code>JAVA_TOOL_OPTIONS</code> to <code>-Dfile.encoding=UTF8</code></p>
-
-        
-
-    </article>
-    
     
     
 
@@ -1647,6 +1664,10 @@ git push pipeline  <span class="m">2</span>&gt;<span class="p">&amp;</span><span
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/03/31/books-read-2018q1/">Books read in 2019Q1</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/03/01/self-study-march-2019/">Self-Study in March 2019</a>
           </li>
         
@@ -1680,10 +1701,6 @@ git push pipeline  <span class="m">2</span>&gt;<span class="p">&amp;</span><span
         
           <li class="post">
             <a href="/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/07/01/self-study-july-2018/">Self-Study in July 2018</a>
           </li>
         
       </ul>

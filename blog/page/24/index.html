@@ -129,6 +129,110 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/">Internal training: Testing is hard - just do it</a>
+    </h1>
+    <p >May 5, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal/">internal</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal-training/">internal-training</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/testing/">testing</a><a class="label" href="https://alvarogarcia7.github.io/categories/laziness/">laziness</a><a class="label" href="https://alvarogarcia7.github.io/categories/open-questions/">open-questions</a><a class="label" href="https://alvarogarcia7.github.io/categories/article/">article</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/" target="_blank">Testing is hard - just do it</a></p>
+
+<h2 id="our-thoughts">Our thoughts</h2>
+
+<blockquote>
+<p>When a bug is found, prove it exists with a test</p>
+</blockquote>
+
+<p>This immediately reduces defect rate: the same regression cannot be introduced again</p>
+
+<blockquote>
+<p>fix a bug a second time</p>
+</blockquote>
+
+<p>If fixing a bug (having defects in your code) was &lsquo;waste&rsquo;, as defined by lean methodologies, it also is wast fixing it for the following times</p>
+
+<blockquote>
+<p>testing requires discipline</p>
+</blockquote>
+
+<p>Agree. See quote by Larry Wall (this same article)</p>
+
+<blockquote>
+<p>[Three requirements for a good test suite]:</p>
+
+<ol>
+<li>The tests need to be easier to write</li>
+<li>The test suite must run, and pass, before any code is allowed out the door</li>
+<li>Support from the project&rsquo;s leadership</li>
+</ol>
+</blockquote>
+
+<p>Agree.</p>
+
+<blockquote>
+<p>Programming is like drawing water from a well</p>
+</blockquote>
+
+<p>Good analogy</p>
+
+<blockquote>
+<p>I&rsquo;m going to assume you are smarter than me [&hellip;]</p>
+</blockquote>
+
+<p>This is related to &lsquo;doing clever things&rsquo;: when I write &lsquo;clever code&rsquo;, that has neither comments, nor it is massaged to be Clean Code, it will cost me many times more to modify / understand in the future vs massage it a little bit.</p>
+
+<p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
+
+<p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
+	<span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>vs</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
+	<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="o">(</span><span class="n">elements</span><span class="o">);</span>
+	<span class="k">return</span> <span class="n">validElements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="open-questions-other-ideas">Open questions / other ideas</h2>
+
+<ul>
+<li>There are tests that are more important than others. Is there a tool to assign them weights and inform about which preponderation of the codebase is broken? The same (i.e., more importance) can happen for production code.</li>
+<li>Is SCRUM apt for junior developers? In the sense of the increased autonomy, more decisions, more required technical skills / values, etc</li>
+<li>We discussed what differentiates a project with a shorter deadline from one with a longer deadline. The consensus was: you should do tests for any kind of project, the shorter deadline project won&rsquo;t allow as much time for refactoring</li>
+<li>Tests iff (i.e., if and only if) working code</li>
+<li>Tests do not guarantee lack of defects</li>
+<li>Bijectiveness between tests and features (production code)
+<!--
+Expand on this bijectiveness
+--></li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/05/04/video-nothing-is-something/">Video: Nothing is something</a>
     </h1>
     <p >May 4, 2015
@@ -378,63 +482,6 @@ TODO add link to the craft page in my blog
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/">Talks I have attended at the Craft Conf 2015</a>
-    </h1>
-    <p >Apr 25, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/craft-conf/">craft-conf</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/attended-talks/">attended-talks</a><a class="label" href="https://alvarogarcia7.github.io/categories/budapest/">budapest</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>These are the talks I&rsquo;ve attended at the Craft Conf 2015:</p>
-
-<h2 id="thursday-23th">Thursday 23th</h2>
-
-<ul>
-<li>Opening keynote by <a href="http://twitter.com/@tastapod" target="_blank">Dan North</a> and <a href="http://twitter.com/@jessitron" target="_blank">Jessica Kerr</a></li>
-<li>Writing testable code - A functional programming point of view, by <a href="http://twitter.com/@old_sound" target="_blank">Alvaro Videla</a></li>
-<li>Coding Culture, by <a href="http://twitter.com/@svenpet" target="_blank">Sven Peters</a></li>
-<li>OnConnectionLost: the life of an offline web application, by <a href="http://twitter.com/@sgrewenig" target="_blank">Stefanie Grewenig</a> and <a href="http://twitter.com/@jthoenes" target="_blank">Johannes Thönes</a></li>
-<li>Concurrency: It&rsquo;s harder (and easier) than you think, by <a href="http://twitter.com/@paulrabutcher" target="_blank">Paul Butcher</a></li>
-<li>Testing and Integration (the remix), by <a href="http://twitter.com/@randommood" target="_blank">Inés Sombra</a></li>
-<li>Beyond Features: Rethinking agile planning and tracking, by <a href="http://twitter.com/@tastapod" target="_blank">Dan North</a></li>
-<li>Closing keynote by <a href="http://twitter.com/@alfrehn" target="_blank">Alf Rehn</a></li>
-</ul>
-
-<h2 id="friday-24th">Friday 24th</h2>
-
-<ul>
-<li>Opening keynote: The New New Software development game: Containers, Microservices and Contract tests, by <a href="http://twitter.com/@mpoppendieck" target="_blank">Mary Poppendieck</a></li>
-<li>Apprenticeship patterns, revisited, by <a href="http://twitter.com/@davehoover" target="_blank">Dave Hoover</a></li>
-<li>Interaction Driven Design, by <a href="http://twitter.com/@sandromancuso" target="_blank">Sandro Mancuso</a></li>
-<li>The hidden dimension of refactoring, by <a href="http://twitter.com/@mfeathers" target="_blank">Michael Feathers</a></li>
-<li>Why is an API like a puppy, by <a href="http://twitter.com/@ade_oshineye" target="_blank">Adewale Oshineye</a></li>
-<li>Microservice antipatterns, by <a href="http://twitter.com/@tsaleh" target="_blank">Tammer Saleh</a></li>
-</ul>
-
-<p>I couldn&rsquo;t attend the last talk nor the keynote as I had to get to the airport</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -590,6 +637,10 @@ TODO add link to the craft page in my blog
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/03/31/books-read-2018q1/">Books read in 2019Q1</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/03/01/self-study-march-2019/">Self-Study in March 2019</a>
           </li>
         
@@ -623,10 +674,6 @@ TODO add link to the craft page in my blog
         
           <li class="post">
             <a href="/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/07/01/self-study-july-2018/">Self-Study in July 2018</a>
           </li>
         
       </ul>
