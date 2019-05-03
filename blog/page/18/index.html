@@ -129,6 +129,115 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple return values in a Mockito Stub</a>
+    </h1>
+    <p >Aug 7, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/mockito/">mockito</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/stub/">stub</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example.spike</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.hamcrest.MatcherAssert.assertThat</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.hamcrest.Matchers.is</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.mockito.Mockito.spy</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.mockito.Mockito.when</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.Spy</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DifferentReturnValues</span> <span class="o">{</span>
+
+	<span class="nd">@Spy</span>
+	<span class="kd">private</span> <span class="n">Spike1</span> <span class="n">spike1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Spike1</span><span class="o">();</span>
+
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+		<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	<span class="o">}</span>
+
+
+	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">Spike1</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getBool</span><span class="o">()</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>The key line is:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</code></pre></div>
+
+<p>this makes the stubbed function to return multiple values:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</code></pre></div>
+
+<p>The last value is repeated after the last defined value:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>If you want to loop over the values, you can implement it with the <code>doAnswer</code> method:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+	<span class="kd">final</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="kc">true</span><span class="o">};</span>
+
+	<span class="n">doAnswer</span><span class="o">(</span><span class="n">invocation</span> <span class="o">-&gt;</span> <span class="o">{</span>
+		<span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+		<span class="k">return</span> <span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+	<span class="o">}).</span><span class="na">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">).</span><span class="na">getBool</span><span class="o">();</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/">Brown-bag session and Dojo: Beginning Clojure</a>
     </h1>
     <p >Aug 5, 2015
@@ -894,39 +1003,6 @@ A
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the same Import Order in IntelliJ IDEA as Eclipse&#39;s</a>
-    </h1>
-    <p >Jul 30, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/intellij/">intellij</a><a class="label" href="https://alvarogarcia7.github.io/categories/eclipse/">eclipse</a><a class="label" href="https://alvarogarcia7.github.io/categories/ide/">ide</a><a class="label" href="https://alvarogarcia7.github.io/categories/editor/">editor</a><a class="label" href="https://alvarogarcia7.github.io/categories/import/">import</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:</p>
-
-<p>While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.</p>
-
-<p>To solve it, see <a href="http://stackoverflow.com/questions/14716283/is-it-possible-for-intellij-to-organize-imports-the-same-way-as-in-eclipse" target="_blank">this link</a></p>
-
-        
-
-    </article>
-    
     
     
 
@@ -1082,6 +1158,10 @@ A
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/04/01/self-study-april-2019/">Self-Study in April 2019</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/03/31/books-read-2019q1/">Books read in 2019Q1</a>
           </li>
         
@@ -1115,10 +1195,6 @@ A
         
           <li class="post">
             <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
           </li>
         
       </ul>

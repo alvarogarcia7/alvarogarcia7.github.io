@@ -129,6 +129,64 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
+    </h1>
+    <p >Mar 16, 2017
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/lessons-learned/">lessons-learned</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateful/">stateful</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateful-component/">stateful-component</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateless/">stateless</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateless-component/">stateless-component</a><a class="label" href="https://alvarogarcia7.github.io/categories/separation/">separation</a><a class="label" href="https://alvarogarcia7.github.io/categories/resource-management/">resource-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/make-buy-rent/">make-buy-rent</a><a class="label" href="https://alvarogarcia7.github.io/categories/phil-simon/">phil-simon</a><a class="label" href="https://alvarogarcia7.github.io/categories/it-manager/">it-manager</a><a class="label" href="https://alvarogarcia7.github.io/categories/total-cost-ownership/">total-cost-ownership</a><a class="label" href="https://alvarogarcia7.github.io/categories/tco/">tco</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/decision/">decision</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>From the <a href="http://www.ittoday.info/Articles/Make_Buy_or_Rent.htm" target="_blank">Make, Buy or Rent</a> article:</p>
+
+<blockquote>
+<p>[&hellip;] [T]he three main system options for organizations seeking to upgrade their systems [are :]</p>
+</blockquote>
+
+<ul>
+<li>Make</li>
+<li>Buy</li>
+<li>Rent</li>
+</ul>
+
+<p>IT managers have different criteria for deciding which components to assign in each category.</p>
+
+<h2 id="another-criteria-for-deciding">Another criteria for deciding</h2>
+
+<p>At a client, they have taken the decision to split their core IT systems in to the three options: make, buy, rent.</p>
+
+<ul>
+<li>The business logic to handle the core business is &lsquo;make&rsquo;. These systems are completely stateless</li>
+<li>The persistance (or storage) for the core business is &lsquo;rent&rsquo;. These systems, by definition, are stateful</li>
+<li>Other parts of the system are &lsquo;buy&rsquo;. Not important for this article</li>
+</ul>
+
+<p>The key concept for this separation is moving the responsibility for uptime and complex data management to a provider. The provider can take better care of those procedures and use economies of scale to provide a better service that we could do in-house (&lsquo;make&rsquo;) (e.g., high availability, reliability and SLAs) at the cost of paying a price for that.
+This idea simplifies our components (e.g., services), making them stateless. Even if they cache any internal information, it is a &lsquo;Read Through Cache&rsquo;, meaning that in case the data is not available in the cache, the service will transparently fetch it from the underlying storage system.</p>
+
+<p>This idea for separating components simplifies both development, testing and maintainance, therefore reducing the Total Cost of Ownership (TCO) of our services.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2017/03/16/modifying-titles-in-a-trello-board/">Modifying titles in a Trello Board</a>
     </h1>
     <p >Mar 16, 2017
@@ -955,307 +1013,6 @@ yarn install
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2017/01/01/self-study-in-january-2017/">Self-Study in January 2017</a>
-    </h1>
-    <p >Jan 1, 2017
-         - 7 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2017/01/01/self-study-in-january-2017/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/january/">january</a><a class="label" href="https://alvarogarcia7.github.io/categories/2017/">2017</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/additive-monad/">additive-monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/advice/">advice</a><a class="label" href="https://alvarogarcia7.github.io/categories/alvaro-videla/">alvaro-videla</a><a class="label" href="https://alvarogarcia7.github.io/categories/amplifier/">amplifier</a><a class="label" href="https://alvarogarcia7.github.io/categories/authority/">authority</a><a class="label" href="https://alvarogarcia7.github.io/categories/benjamin-hardy/">benjamin-hardy</a><a class="label" href="https://alvarogarcia7.github.io/categories/bind/">bind</a><a class="label" href="https://alvarogarcia7.github.io/categories/c-sharp/">c-sharp</a><a class="label" href="https://alvarogarcia7.github.io/categories/code-complete/">code-complete</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding-horror/">coding-horror</a><a class="label" href="https://alvarogarcia7.github.io/categories/comonad/">comonad</a><a class="label" href="https://alvarogarcia7.github.io/categories/compound-interest/">compound-interest</a><a class="label" href="https://alvarogarcia7.github.io/categories/continous-improvement/">continous-improvement</a><a class="label" href="https://alvarogarcia7.github.io/categories/dan-piponi/">dan-piponi</a><a class="label" href="https://alvarogarcia7.github.io/categories/data-structure/">data-structure</a><a class="label" href="https://alvarogarcia7.github.io/categories/dennis-forbes/">dennis-forbes</a><a class="label" href="https://alvarogarcia7.github.io/categories/discipline/">discipline</a><a class="label" href="https://alvarogarcia7.github.io/categories/eric-elliott/">eric-elliott</a><a class="label" href="https://alvarogarcia7.github.io/categories/eric-lippert/">eric-lippert</a><a class="label" href="https://alvarogarcia7.github.io/categories/essay/">essay</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/gerald-weinberg/">gerald-weinberg</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/hume-logan/">hume-logan</a><a class="label" href="https://alvarogarcia7.github.io/categories/hunter-thompson/">hunter-thompson</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview/">interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/interviewing/">interviewing</a><a class="label" href="https://alvarogarcia7.github.io/categories/isomorphic/">isomorphic</a><a class="label" href="https://alvarogarcia7.github.io/categories/james-coglan/">james-coglan</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeff-atwood/">jeff-atwood</a><a class="label" href="https://alvarogarcia7.github.io/categories/kaizen/">kaizen</a><a class="label" href="https://alvarogarcia7.github.io/categories/leadership/">leadership</a><a class="label" href="https://alvarogarcia7.github.io/categories/leading-by-example/">leading-by-example</a><a class="label" href="https://alvarogarcia7.github.io/categories/life/">life</a><a class="label" href="https://alvarogarcia7.github.io/categories/lift/">lift</a><a class="label" href="https://alvarogarcia7.github.io/categories/linrec/">linrec</a><a class="label" href="https://alvarogarcia7.github.io/categories/long-term-plans/">long-term-plans</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad-explanation/">monad-explanation</a><a class="label" href="https://alvarogarcia7.github.io/categories/motivation/">motivation</a><a class="label" href="https://alvarogarcia7.github.io/categories/multirec/">multirec</a><a class="label" href="https://alvarogarcia7.github.io/categories/nasa/">nasa</a><a class="label" href="https://alvarogarcia7.github.io/categories/personal-improvement/">personal-improvement</a><a class="label" href="https://alvarogarcia7.github.io/categories/planning/">planning</a><a class="label" href="https://alvarogarcia7.github.io/categories/politics/">politics</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/quadtree/">quadtree</a><a class="label" href="https://alvarogarcia7.github.io/categories/recruitement/">recruitement</a><a class="label" href="https://alvarogarcia7.github.io/categories/recursive-data-structure/">recursive-data-structure</a><a class="label" href="https://alvarogarcia7.github.io/categories/reginald-braithwaite/">reginald-braithwaite</a><a class="label" href="https://alvarogarcia7.github.io/categories/shiny/">shiny</a><a class="label" href="https://alvarogarcia7.github.io/categories/stephen-toub/">stephen-toub</a><a class="label" href="https://alvarogarcia7.github.io/categories/tailrec/">tailrec</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-lead/">team-lead</a><a class="label" href="https://alvarogarcia7.github.io/categories/test/">test</a><a class="label" href="https://alvarogarcia7.github.io/categories/thomas-oppong/">thomas-oppong</a><a class="label" href="https://alvarogarcia7.github.io/categories/tree/">tree</a><a class="label" href="https://alvarogarcia7.github.io/categories/unit/">unit</a><a class="label" href="https://alvarogarcia7.github.io/categories/unit-test/">unit-test</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="translation-from-haskell-to-javascript-of-selected-portions-of-the-best-introduction-to-monads-i-ve-ever-read">Translation from Haskell to JavaScript of selected portions of the best introduction to monads I’ve ever read</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.jcoglan.com/2011/03/05/translation-from-haskell-to-javascript-of-selected-portions-of-the-best-introduction-to-monads-ive-ever-read/" target="_blank">this article</a> by James Coglan, introducing monads.</p>
-
-<p>About composability:</p>
-
-<blockquote>
-<p>The symmetry of the argument and return types is what makes these functions composable</p>
-</blockquote>
-
-<p>or</p>
-
-<blockquote>
-<p>symmetric input and output types</p>
-</blockquote>
-
-<p>Guide to basic monadic functions:</p>
-
-<blockquote>
-<p>lift, which converts a &lsquo;simple’ function into a debuggable function
-bind, which converts a debuggable function into a composable form
-unit, which converts a simple value into the format required for debugging, by placing it in a container</p>
-</blockquote>
-
-<p>The basic definition:</p>
-
-<blockquote>
-<p>So what is a monad? Well, it’s a design pattern. It says that whenever you have a class of functions that accept one type of thing and return another type of thing, there are two functions that can be applied across this class to make them composable:</p>
-
-<p>There is a <code>bind</code> function that transforms any function so that accepts the same type as it returns, making it composable
-There is a <code>unit</code> function that wraps a value in the type accepted by the composable functions.</p>
-</blockquote>
-
-<p>Also:</p>
-
-<blockquote>
-<p>[I]t’s a very useful design pattern to be aware of because it helps you spot accidental complexity: code that isn’t dealing directly with the problem at hand, but which is dealing with glueing data types together</p>
-</blockquote>
-
-<p>Tags: monad, monad-explanation, haskell, javascript, james-coglan, bind, unit, lift</p>
-
-<h2 id="you-could-have-invented-monads-and-maybe-you-already-have">You Could Have Invented Monads! (And Maybe You Already Have.)</h2>
-
-<p>I&rsquo;ve read <a href="http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html" target="_blank">this tutorial</a> by Dan Piponi, in which he slowly introduces monads, using examples from everyday life.</p>
-
-<p>Tags: dan-piponi, monad, monad-explanation, haskell</p>
-
-<h2 id="monads-part-one">Monads, part one</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/02/21/monads-part-one/" target="_blank">this article</a> by Eric Lippert, in which he describes monads as a design pattern that &ldquo;can sneak up on you&rdquo;</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-two">Monads, part two</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/02/25/monads-part-two/" target="_blank">this article</a> by Eric Lippert, in which he describes monad examples in the C# code. Also describes what an &lsquo;amplifier&rsquo; is. I relate it to composing behavior.</p>
-
-<blockquote>
-<p>An &ldquo;amplifier&rdquo; is something that increases the representational power of their &ldquo;underlying&rdquo; type.</p>
-</blockquote>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming, amplifier</p>
-
-<h2 id="monads-part-three">Monads, part three</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/02/28/monads-part-three/" target="_blank">this article</a> by Eric Lippert, in which he describes how to wrap a value in a monadic wrapper (<code>unit</code>)</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-four">Monads, part four</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/03/04/monads-part-four/" target="_blank">this article</a> by Eric Lippert, in which he explains the second function (<code>bind</code>)</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-five">Monads, part five</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/03/07/monads-part-five/" target="_blank">this article</a> by Eric Lippert, in which he explains the three laws, which are later compressed into two (<code>unit</code> and <code>bind</code>)</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-six">Monads, part six</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/03/11/monads-part-six/" target="_blank">this article</a> by Eric Lippert, in which he explains the logical identity of applying the function inside a monad and outside a monad.</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-seven">Monads, part seven</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/03/14/monads-part-seven/" target="_blank">this article</a> by Eric Lippert, in which he states the three laws of monads:</p>
-
-<blockquote>
-<ul>
-<li>Applying the construction function to a given instance of the monad produces a logically identical instance of the monad.</li>
-<li>Applying a function to the result of the construction function on a value, and applying that function to the value directly, produces two logically identical instances of the monad.</li>
-<li>Applying to a value a first function followed by applying to the result a second function, and applying to the original value a third function that is the composition of the first and second functions, produces two logically identical instances of the monad.</li>
-</ul>
-</blockquote>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-eight">Monads, part eight</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/03/18/monads-part-eight/" target="_blank">this article</a> by Eric Lippert, in which he describes the monad terms he was using other, more common names (<code>unit</code> and <code>bind</code>).</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-nine">Monads, part nine</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/03/21/monads-part-nine/" target="_blank">this article</a> by Eric Lippert, in which he creates a <code>Tainted</code> monad, which is basically a <code>Nullable</code> or <code>Maybe</code> monad</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-ten">Monads, part ten</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/03/25/monads-part-ten/" target="_blank">this article</a> by Eric Lippert, in which he describes <code>Where</code> (as the query syntax form) using the <code>bind</code> signature</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-eleven">Monads, part eleven</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/03/28/monads-part-eleven/" target="_blank">this article</a> by Eric Lippert, in which he describes the &ldquo;additive monad&rdquo;:</p>
-
-<blockquote>
-<ul>
-<li>There is a zero value of every construction of the monadic type.</li>
-<li>There is a way to add two monads with the same underlying type together.</li>
-<li>The zero value is the identity of the add operation.</li>
-<li>Using bind to apply any function to the zero produces the zero.</li>
-<li>Using bind to apply the function <code>a=&gt;zero</code> to any <code>M&lt;A&gt;</code> produces the zero.</li>
-</ul>
-</blockquote>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming, additive-monad</p>
-
-<h2 id="monads-part-twelve">Monads, part twelve</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/04/02/monads-part-twelve/" target="_blank">this article</a> by Eric Lippert, in which he explains how the <code>SelectMany</code> could be implemented (but it is not implemented in practice)</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming</p>
-
-<h2 id="monads-part-thirteen">Monads, part thirteen</h2>
-
-<p>I&rsquo;ve read <a href="https://ericlippert.com/2013/04/03/monads-part-thirteen/" target="_blank">this article</a> by Eric Lippert, in which he suggests reading a similar article on the Task comonad</p>
-
-<p>Tags: eric-lippert, monad, monad-explanation, c-sharp, functional-programming, comonad</p>
-
-<h2 id="tasks-monads-and-linq">Tasks, Monads, and LINQ</h2>
-
-<p>I&rsquo;ve read <a href="https://blogs.msdn.microsoft.com/pfxteam/2013/04/03/tasks-monads-and-linq/" target="_blank">this article</a> by Stephen Toub in which he explains the comonad <code>Task</code>.</p>
-
-<p>A comonad:</p>
-
-<blockquote>
-<p>[&hellip;] dual of a monad, a triple consisting of the type and two operators: <code>Extract</code> (the flip of <code>Unit</code>/<code>Return</code>) and <code>Extend</code> (the flip of <code>Bind</code>)</p>
-</blockquote>
-
-<p>Tags: comonad, monad, monad-explanation, stephen-toub, c-sharp, functional-programming</p>
-
-<h2 id="5-questions-every-unit-test-must-answer">5 Questions Every Unit Test Must Answer</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/javascript-scene/what-every-unit-test-needs-f6cd34d9836d" target="_blank">this article</a> (titled as a listicle) by Eric Elliot about unit tests:</p>
-
-<blockquote>
-<ul>
-<li>What are you testing?</li>
-<li>What should it do?</li>
-<li>What is the actual output?</li>
-<li>What is the expected output?</li>
-<li>How can the test be reproduced?</li>
-</ul>
-</blockquote>
-
-<p>Tags: eric-elliott, javascript, unit-test, test</p>
-
-<h2 id="why-you-should-be-planning-for-2018-not-2017">Why You Should be Planning for 2018, Not 2017.</h2>
-
-<p>I&rsquo;ve read <a href="https://medium.com/the-mission/why-you-should-be-planning-for-2018-not-2017-7c8fea3e2e52" target="_blank">this article</a> by Benjamin P. Hardy on motivation, planning and designing your life.</p>
-
-<p>Some quotes:</p>
-
-<blockquote>
-<p>[&hellip;] having the power to make choices:</p>
-
-<ul>
-<li>The right to choice</li>
-<li>The responsibility to choose</li>
-<li>The results of choice</li>
-</ul>
-
-<p>[&hellip;] hope reflects your perceptions regarding your capacity to:</p>
-
-<ul>
-<li>clearly conceptualize goals</li>
-<li>develop the specific strategies to reach those goals (i.e., pathways thinking)</li>
-<li>initiate and sustain the motivation for using those strategies (i.e., agency thinking).</li>
-</ul>
-
-<p>[&hellip;] motivation involves three components:</p>
-
-<ul>
-<li>the value you place on your goal</li>
-<li>your belief that specific behaviors will actually facilitate the outcomes you desire</li>
-<li>your belief in your own ability to successfully execute the behaviors requisite to achieving your goals</li>
-</ul>
-</blockquote>
-
-<p>Tags: benjamin-hardy, motivation, life, planning, long-term-plans</p>
-
-<h2 id="get-5-better">Get 5% Better</h2>
-
-<p>I&rsquo;ve read <a href="https://www.farnamstreetblog.com/2016/03/five-percent-better/" target="_blank">this article</a>, in which the author explains how compound interest does not only apply to investing and saving but also personal improvement.</p>
-
-<p>Tags: kaizen, personal-improvement, compound-interest</p>
-
-<h2 id="hunter-s-thompson-s-letter-on-finding-your-purpose-and-living-a-meaningful-life">Hunter S. Thompson’s Letter on Finding Your Purpose and Living a Meaningful Life</h2>
-
-<p>I&rsquo;ve read <a href="https://www.farnamstreetblog.com/2014/05/hunter-s-thompson-to-hume-logan/" target="_blank">this letter</a> from Hunter S. Thompson to his friend Hume Logan, containing advice on living your own life: must find your own way, decide between floating or swimming to your goal and strive to be yourself.</p>
-
-<p>Tags: hunter-thompson, hume-logan, advice, psychology, life</p>
-
-<h2 id="the-japanese-philosophy-of-kaizen-offers-an-effective-manageable-way-to-achieve-long-term-goals">The Japanese philosophy of Kaizen offers an effective, manageable way to achieve long-term goals</h2>
-
-<p>I&rsquo;ve read <a href="https://qz.com/867711/the-japanese-philosophy-of-kaizen-offers-an-effective-manageable-way-to-achieve-long-term-goals/" target="_blank">this article</a> by Thomas Oppong on kaizen, or continuous improvement, and how it applies like compound interest to your life.</p>
-
-<p>Tags: kaizen, continous-improvement, thomas-oppong, compound-interest, life, psychology</p>
-
-<h2 id="preparing-for-a-software-interview">Preparing for a Software Interview</h2>
-
-<p>I&rsquo;ve read <a href="https://42hire.com/preparing-for-a-software-interview-6d0392a3d72c" target="_blank">this article</a> by Alvaro Videla on interviewing technical people.</p>
-
-<p>Tags: recruitement, interviewing, interview, alvaro-videla</p>
-
-<h2 id="why-recursive-data-structures">Why Recursive Data Structures?</h2>
-
-<p>I&rsquo;ve read <a href="http://raganwald.com/2016/12/27/recursive-data-structures.html" target="_blank">this essay</a> by Reginald “Raganwald” Braithwaite, on which he introduces the relationship between data structures and algorithms. Explains how the algorithm can be split into parts, following the data structure.</p>
-
-<p>Uses a library containing a function called <code>multirec</code> for recursion:</p>
-
-<ul>
-<li><a href="https://hackage.haskell.org/package/multirec" target="_blank">a candidate</a> library, in haskell</li>
-<li><a href="http://www.lazutkin.com/blog/2008/06/30/using-recursion-combinators-javascript/" target="_blank">another candidate</a> library, in javascript</li>
-</ul>
-
-<p>Tags: reginald-braithwaite, recursive-data-structure, quadtree, javascript, functional-programming, essay, data-structure, isomorphic, tree, multirec, linrec, tailrec, haskell</p>
-
-<h2 id="leading-by-example">Leading by Example</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.codinghorror.com/leading-by-example/" target="_blank">this article</a> by Jeff Atwood on how the best leadership comes from doing, rather than telling how to do it. From being a leader rather than being a boss.</p>
-
-<p>Suggests further reads.</p>
-
-<p>Tags: leadership, team-lead, leading-by-example, jeff-atwood, gerald-weinberg</p>
-
-<h2 id="discipline-makes-strong-developers">Discipline Makes Strong Developers</h2>
-
-<p>I&rsquo;ve read <a href="https://blog.codinghorror.com/discipline-makes-strong-developers/" target="_blank">this article</a> by Jeff Atwood on a project sucess should not be attributed to a language or framework, but to the team&rsquo;s and individuals&rsquo; discipline.</p>
-
-<p>Also explains how small projects require different levels of discipline than large projects.</p>
-
-<p>Tags: leadership, discipline, nasa, code-complete, coding-horror, jeff-atwood</p>
-
-<h2 id="effectively-integrating-into-software-development-teams">Effectively Integrating Into Software Development Teams</h2>
-
-<p>I&rsquo;ve read <a href="https://dennisforbes.ca/index.php/2006/01/29/effectively-integrating-into-software-development-teams/" target="_blank">this article</a> by Dennis Forbes about authority and discipline in a team.</p>
-
-<blockquote>
-<p>One organization’s Enterprise solution is another organization’s short sighted mistake.</p>
-</blockquote>
-
-<p>Tags: shiny, dennis-forbes, discipline, authority, psychology, politics</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -1411,6 +1168,10 @@ There is a <code>unit</code> function that wraps a value in the type accepted by
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/04/01/self-study-april-2019/">Self-Study in April 2019</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/03/31/books-read-2019q1/">Books read in 2019Q1</a>
           </li>
         
@@ -1444,10 +1205,6 @@ There is a <code>unit</code> function that wraps a value in the type accepted by
         
           <li class="post">
             <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
           </li>
         
       </ul>
