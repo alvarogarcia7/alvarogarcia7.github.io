@@ -37,7 +37,7 @@
 
 &lt;p&gt;This will create automatic (i.e., meaningless) commits every 10 seconds. It covers the need of &amp;ldquo;not forgetting to save the progress&amp;rdquo;. This script is so small, that there is no point in creating a tool around it. Type it as a one-liner when you need it.&lt;/p&gt;
 
-&lt;p&gt;When you create meaningful increments (e.g., a milestone), when you decide that you should save your progress, you can commit as well. The downside is that the automatic commits will pollute your log, and the diff will not represent the full delta. For that, you can create a marker (i.e., one that does not have any diff - use the &lt;code&gt;allow-empty&lt;/code&gt; parameter). That kind of commit is like a Marker Interface in java, to pinpoint a specific delta:&lt;/p&gt;
+&lt;p&gt;When you create meaningful increments (e.g., a milestone), when you decide that you should save your progress, you can commit as well. The downside is that the automatic commits will pollute your log, and the diff will not represent the full delta. For that, you can create a marker (i.e., one that does not have any diff - use the &lt;code&gt;allow-empty&lt;/code&gt; parameter). That kind of commit is like a &lt;a href=&#34;https://en.wikipedia.org/wiki/Marker_interface_pattern&#34; target=&#34;_blank&#34;&gt;Marker Interface Pattern&lt;/a&gt;, to pinpoint a specific delta:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;git commit -am &lt;span class=&#34;s2&#34;&gt;&amp;quot;Marker: Completed the ....&amp;quot;&lt;/span&gt; --allow-empty
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 

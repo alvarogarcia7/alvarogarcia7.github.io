@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
@@ -14,7 +15,7 @@
   <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
-  <title>Automatically keeping the intermediate history of your work using git</title>
+  <title>Marker Interface</title>
 
   
   
@@ -33,7 +34,7 @@
   
   
 
-  
+  <link href="https://alvarogarcia7.github.io/categories/marker-interface/index.xml" rel="alternate" type="application/rss+xml" title="The long way through Software Craftsmanship" />
 
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -115,125 +116,32 @@
 
 </nav>
 
-
 <div id="main">
   <div id="content">
     <div>
-      <article class="hentry" role="article">
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-         Automatically keeping the intermediate history of your work using git 
-    </h1>
-    <p >May 29, 2019
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2019/05/29/keeping-intermediate-history-work-git/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/toolbox/">toolbox</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/documentation/">documentation</a><a class="label" href="https://alvarogarcia7.github.io/categories/spike/">spike</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/marker/">marker</a><a class="label" href="https://alvarogarcia7.github.io/categories/marker-interface/">marker-interface</a><a class="label" href="https://alvarogarcia7.github.io/categories/flow/">flow</a><a class="label" href="https://alvarogarcia7.github.io/categories/problem/">problem</a><a class="label" href="https://alvarogarcia7.github.io/categories/solution/">solution</a>
-        
-    </p>
-</header>
-
-
-        <div class="entry-content">
+      <article role="article">
+        <header>
+          <h1 class="entry-title">
+            Items in Marker Interface  
+          </h1>
+        </header>
+        <div id="blog-archives" class="category">
           
+          <h2>
+            2019 
+          </h2>
+          <article>
+            <h1>
+              <a href="https://alvarogarcia7.github.io/blog/2019/05/29/keeping-intermediate-history-work-git/" title="Automatically keeping the intermediate history of your work using git">Automatically keeping the intermediate history of your work using git</a>
+            </h1>
+            <time>
+              <span class="month">May</span> 
+              <span class="day">29</span> 
+            </time>
+              
+          </article>
           
-          
-          
-
-<p>This is another tool for your toolbox: using git to automatically document your development process (special cases only.)</p>
-
-<h2 id="context">Context</h2>
-
-<p>When I&rsquo;m spiking a feature, I usually get in the zone (e.g., Csikszentmihalyi&rsquo;s Flow), and I can forget my good engineering practices, searching for that desired answer. After a few of those bouts of coding, you realize you&rsquo;re wandering. You circle around, get lost, get back on track, then get lost again. You might or might not reach your goal.</p>
-
-<p>I sometimes lose the path that took me to the solution. This is helpful when you want to get back on your tracks (e.g., you broke something along the way). But I forget to commit as often as I should.</p>
-
-<h2 id="solution">Solution</h2>
-
-<p>To document, I came up with a (very) simple tool to document the path:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">while</span> <span class="o">[</span> <span class="nb">true</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
-  date
-  git add .
-  git commit -am <span class="s2">&quot;Automatic: Save progress&quot;</span>
-  sleep <span class="m">10</span>
-<span class="k">done</span>
-</code></pre></div>
-
-<p>This will create automatic (i.e., meaningless) commits every 10 seconds. It covers the need of &ldquo;not forgetting to save the progress&rdquo;. This script is so small, that there is no point in creating a tool around it. Type it as a one-liner when you need it.</p>
-
-<p>When you create meaningful increments (e.g., a milestone), when you decide that you should save your progress, you can commit as well. The downside is that the automatic commits will pollute your log, and the diff will not represent the full delta. For that, you can create a marker (i.e., one that does not have any diff - use the <code>allow-empty</code> parameter). That kind of commit is like a <a href="https://en.wikipedia.org/wiki/Marker_interface_pattern" target="_blank">Marker Interface Pattern</a>, to pinpoint a specific delta:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>git commit -am <span class="s2">&quot;Marker: Completed the ....&quot;</span> --allow-empty
-</code></pre></div>
-
-<p>When you want to see all the changes, <code>git diff</code> between two commits (e.g., Markers) or you can rebase with squash (<code>git rebase --interactive</code>) into another branch (so you keep this history).</p>
-
-<h2 id="summary">Summary</h2>
-
-<p>Summary:</p>
-
-<ul>
-<li>Automatic commits to save your progress. To save the progress.</li>
-<li>Manual commits to pinpoint milestones. To document.</li>
-<li>Tools help you be more productive</li>
-</ul>
-
         </div>
-        
-
-<footer>
-  <p class="meta">
-    <span class="byline author vcard">Posted by <span class="fn">Alvaro Garcia</span></span>
-    
-    <time>May 29, 2019</time>
-  </p>
-
-  
-  <div class="sharing">
-      <a href="https://twitter.com/share" class="twitter-share-button" data-via="alvarobiz" data-hashtags="blog">Tweet this article</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-     
-  </div>
-
-  
-
-  <p class="meta">
-    
-        <a class="basic-alignment left" href="https://alvarogarcia7.github.io/blog/2018/07/13/writing-safe-bash-scripts/" title="Writing safe(r) bash scripts">Writing safe(r) bash scripts</a>
-    
-
-    
-  </p>
-  
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
-</footer>
-
       </article>
     </div>
     
@@ -334,7 +242,6 @@
 
   </div>
 </div>
-
 <footer role="contentinfo">
   <p>Copyright &copy; 2019 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
   <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
@@ -352,4 +259,5 @@
 
 </body>
 </html>
+
 
