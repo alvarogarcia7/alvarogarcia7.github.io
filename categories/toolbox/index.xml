@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/toolbox/index.xml</link>
+    <description>Recent content on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://alvarogarcia7.github.io/categories/toolbox/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Automatically keeping the intermediate history of your work using git</title>
+      <link>https://alvarogarcia7.github.io/blog/2019/05/29/keeping-intermediate-history-work-git/</link>
+      <pubDate>Wed, 29 May 2019 22:32:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2019/05/29/keeping-intermediate-history-work-git/</guid>
+      <description>
+
+&lt;p&gt;This is another tool for your toolbox: using git to automatically document your development process (special cases only.)&lt;/p&gt;
+
+&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
+
+&lt;p&gt;When I&amp;rsquo;m spiking a feature, I usually get in the zone (e.g., Csikszentmihalyi&amp;rsquo;s Flow), and I can forget my good engineering practices, searching for that desired answer. After a few of those bouts of coding, you realize you&amp;rsquo;re wandering. You circle around, get lost, get back on track, then get lost again. You might or might not reach your goal.&lt;/p&gt;
+
+&lt;p&gt;I sometimes lose the path that took me to the solution. This is helpful when you want to get back on your tracks (e.g., you broke something along the way). But I forget to commit as often as I should.&lt;/p&gt;
+
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;To document, I came up with a (very) simple tool to document the path:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+  date
+  git add .
+  git commit -am &lt;span class=&#34;s2&#34;&gt;&amp;quot;Automatic: Save progress&amp;quot;&lt;/span&gt;
+  sleep &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create automatic (i.e., meaningless) commits every 10 seconds. It covers the need of &amp;ldquo;not forgetting to save the progress&amp;rdquo;. This script is so small, that there is no point in creating a tool around it. Type it as a one-liner when you need it.&lt;/p&gt;
+
+&lt;p&gt;When you create meaningful increments (e.g., a milestone), when you decide that you should save your progress, you can commit as well. The downside is that the automatic commits will pollute your log, and the diff will not represent the full delta. For that, you can create a marker (i.e., one that does not have any diff - use the &lt;code&gt;allow-empty&lt;/code&gt; parameter). That kind of commit is like a Marker Interface in java, to pinpoint a specific delta:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;git commit -am &lt;span class=&#34;s2&#34;&gt;&amp;quot;Marker: Completed the ....&amp;quot;&lt;/span&gt; --allow-empty
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;When you want to see all the changes, &lt;code&gt;git diff&lt;/code&gt; between two commits (e.g., Markers) or you can rebase with squash (&lt;code&gt;git rebase --interactive&lt;/code&gt;) into another branch (so you keep this history).&lt;/p&gt;
+
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;Summary:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Automatic commits to save your progress. To save the progress.&lt;/li&gt;
+&lt;li&gt;Manual commits to pinpoint milestones. To document.&lt;/li&gt;
+&lt;li&gt;Tools help you be more productive&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

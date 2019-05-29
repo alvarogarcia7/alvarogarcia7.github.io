@@ -128,6 +128,38 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/">Coding dojo: Goldbach Conjecture</a>
+    </h1>
+    <p >Aug 17, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/barcelona-software-craftsmanship/">barcelona-software-craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding-dojo/">coding-dojo</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/goldbach/">goldbach</a><a class="label" href="https://alvarogarcia7.github.io/categories/conjecture/">conjecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/goldbach-conjecture/">goldbach-conjecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitation/">facilitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitator/">facilitator</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>At the Barcelona Software Craftsmanship meetup, today I&rsquo;ve facilitated a coding dojo on the Goldbach Conjecture. The problem was prepared by Manuel Rivero.
+The meetup event is here and there are plenty of solutions prepared by the pairs: * Java * C# * Haskell * PHP * Java * PHP * Haskell</p>
+
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/">Searching on a suite of failing tests</a>
     </h1>
     <p >Aug 13, 2015
@@ -301,42 +333,6 @@ Investigating a little bit on this in clojure, I&rsquo;ve found this function:</
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple return values in a Mockito Stub</a>
-    </h1>
-    <p >Aug 7, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/mockito/">mockito</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/stub/">stub</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.
-package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; import static org.hamcrest.Matchers.is; import static org.mockito.Mockito.spy; import static org.mockito.Mockito.when; import org.junit.Test; import org.mockito.Spy; public class DifferentReturnValues { @Spy private Spike1 spike1 = new Spike1(); @Test public void spike1() { spike1 = spy(spike1); when(spike1.getBool()).thenReturn(false, true); assertThat(spike1.getBool(), is(false)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); } private class Spike1 { public boolean getBool() { return true; } } }  The key line is:</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -496,6 +492,10 @@ package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; 
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/05/29/keeping-intermediate-history-work-git/">Automatically keeping the intermediate history of your work using git</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/04/01/self-study-april-2019/">Self-Study in April 2019</a>
           </li>
         
@@ -529,10 +529,6 @@ package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; 
         
           <li class="post">
             <a href="/blog/2018/09/30/books-read-2018q3/">Books read in 2018Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
           </li>
         
       </ul>
