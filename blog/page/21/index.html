@@ -129,6 +129,377 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: committing to the repo file by file</a>
+    </h1>
+    <p >Jul 8, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
+
+<p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">for</span> f in <span class="k">$(</span>git status -s <span class="p">|</span>grep <span class="s2">&quot;^M&quot;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+  git add <span class="nv">$f</span>
+  git commit -m <span class="s2">&quot;generic commit for all files&quot;</span>
+<span class="k">done</span>
+</code></pre></div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental concepts on programming languages</a>
+    </h1>
+    <p >Jul 6, 2015
+         - 8 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/christopher-strachey/">christopher-strachey</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a><a class="label" href="https://alvarogarcia7.github.io/categories/1967/">1967</a><a class="label" href="https://alvarogarcia7.github.io/categories/course/">course</a><a class="label" href="https://alvarogarcia7.github.io/categories/fundamental-concepts/">fundamental-concepts</a><a class="label" href="https://alvarogarcia7.github.io/categories/paper/">paper</a><a class="label" href="https://alvarogarcia7.github.io/categories/lecture/">lecture</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>Note: all quotes on this post come from <a href="http://www.cs.cmu.edu/~crary/819-f09/Strachey67.pdf" target="_blank">this paper</a>: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.</p>
+
+<h2 id="contents">Contents</h2>
+
+<p>This paper starts slow, from the mathematical and philosophical point of view, until it gets to the basic concepts on the fundamental concepts:</p>
+
+<ul>
+<li>Assignment command</li>
+<li>L-Value and R-Value</li>
+<li>Definitions</li>
+<li>Names</li>
+<li>Numerals</li>
+<li>Conceptual models: an explanation about the relationship between the code, the memory store and the abstract concepts</li>
+</ul>
+
+<p>Later, it gets more in depth to the conceptual constructs, where most of the content is explained and contains:</p>
+
+<ul>
+<li>Expressions and commands</li>
+<li>Expressions and evaluations</li>
+<li>Commands and sequencing</li>
+<li>Definition of functions and routines</li>
+<li>Functions and routines as data items</li>
+<li>Types and polymorphism</li>
+<li>Compound data structures</li>
+</ul>
+
+<p>Finally, as closing notes, it explains some implementation details (such as Load-Update Pairs), tools as Macrogenerators (nowadays called macros) and formal semantics</p>
+
+<h2 id="notes-highlights">Notes / highlights</h2>
+
+<h3 id="l-values-and-r-values">L-Values and R-Values</h3>
+
+<blockquote>
+<p>L-value for the address-like object appropriate on the left of the assignment, and R-value for the contents-like object appropriate for the right</p>
+
+<p>2.1, Assignment commands in page 14</p>
+
+<p>An L-value represents an area of the store of the computer. [&hellip;] Two essential features [&hellip;] it has content &ndash;i.e., an associated R-value&ndash; and that it is in general possible to change this content</p>
+
+<p>2.2, L-values and R-Values in pages 14-15</p>
+</blockquote>
+
+<h3 id="referential-transparency">Referential transparency</h3>
+
+<p>Explained in 3.2.1, Values:</p>
+
+<blockquote>
+<p>In essence, this means that if we wish to find the value of an expression with contains a sub-expression, the only thing we need to know about the sub-expression is its value.</p>
+</blockquote>
+
+<p>Also cites Quine <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> on this matter.</p>
+
+<blockquote>
+<p>We tend to assume automatically that the symbol <code>x</code> in an expression such as <code>3x**2 + 2x + 17</code> stands for the same thing (or has the same value) on each occasion it occurs. This is the most important consequence of referential transparency</p>
+
+<p>3.3.1 Variables, page 22</p>
+
+<p>If we consider L-values as well as R-Values, however, we can preserve referential transparency as far as L-values are concerned. Thi is because L-values, being generalised addresses, are not altered by assignment command</p>
+
+<p>3.3.1 Variables, page 22</p>
+</blockquote>
+
+<h3 id="types-of-variables-bound-free">Types of variables: bound, free</h3>
+
+<p>Explains the types of variables, based on their belonging to an environment or not: bound variable and free variable. Page 20</p>
+
+<h3 id="evaluating-vs-applying">Evaluating vs applying</h3>
+
+<blockquote>
+<p>Distinction between evaluating an operator and applying it to its operands
+3.2.4, Evaluation, page 20</p>
+</blockquote>
+
+<p>This also introduces the concept of currification / currying:</p>
+
+<blockquote>
+<p>[&hellip;] for reducing operators with several operands to the successive application of single operands operators
+3.2.4, Evaluation, page 21</p>
+</blockquote>
+
+<p>An example is given.</p>
+
+<h3 id="conditional-expressions-vs-conditional-commands">Conditional expressions vs conditional commands</h3>
+
+<p>Introduces the concept of conditional expression, akin to the ternary operator (example in java):</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span><span class="o">;</span>
+</code></pre></div>
+
+<p>this is equivalent to (example in java):</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+<span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+	<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>and the conditional command (example in java):</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">f</span><span class="o">();</span>
+	<span class="n">h</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+	<span class="n">g</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>The conditional expression is also known as &ldquo;functional if&rdquo;</p>
+
+<h2 id="parameter-calling-modes">Parameter calling modes</h2>
+
+<p>Explains call by value and call by reference, equivalent to calling by R-Value or L-Value, respectively</p>
+
+<p>3.4.2, Parameter calling mode</p>
+
+<h3 id="functions-and-routines">Functions and routines</h3>
+
+<blockquote>
+<p>Functions and routines are as different in their nature as expressions and commands. It
+is unfortunate, therefore, that most programming languages manage to confuse them very
+successfully</p>
+
+<p>3.4.5 Functions and routines, page 30</p>
+
+<p>The problem arises because we naturally expect referential transparency of R-values in
+expressions, particularly those on the right of assignment commands</p>
+
+<p>3.4.5 Functions and routines, page 30</p>
+
+<p>Any departure of R-value referential transparency in a R-value context should
+either be eliminated by decomposing the expression into several commands and simpler
+expressions, or, if this turns out to be difficult, the subject of a comment</p>
+
+<p>3.4.5 Functions and routines, page 30</p>
+</blockquote>
+
+<h3 id="constancy-and-fixity">Constancy and fixity</h3>
+
+<p>&ldquo;Protection by freezing&rdquo;</p>
+
+<blockquote>
+<p>Constancy is thus an attribute of an L-value, and
+is, moreover, an invariant attribute. Thus when we create a new L-value, and in particular
+when we define a new quantity, we must decide whether it is a constant or a variable.</p>
+
+<p>3.4.6 Constants and variables, page 30</p>
+
+<p>[&hellip;] fixed function. This is defined as a function which
+either has no free variables, or if it has, whose free variables are all both constant and fixed.</p>
+
+<p>3.4.7, Fixed and free, page 31</p>
+
+<p>Note that fixity is a property of the λ-expression&ndash;i.e., a property of the R-value, while
+constancy is a property of the L-value.</p>
+
+<p>3.4.7, Fixed and free, page 31</p>
+</blockquote>
+
+<p>In general:</p>
+
+<ul>
+<li>Constancy is an attribute of the L-Value</li>
+<li>Fixity is an attribute of the R-Value</li>
+</ul>
+
+<p>Both for functions and objects.</p>
+
+<h3 id="first-and-second-class-objects">First and second class objects</h3>
+
+<blockquote>
+<p>A procedure, on the other hand, may only appear in another procedure call either
+as the operator (the most common case) or as one of the actual parameters. There are no
+other expressions involving procedures or whose results are procedures. Thus in a sense
+procedures in ALGOL are second class citizens—they always have to appear in person
+and can never be represented by a variable or expression</p>
+
+<p>3.5.1, First and second class objects, page 32</p>
+
+<p>Historically this second class status of procedures in ALGOL is probably a consequence
+of the view of functions taken by many mathematicians: that they are constants whose
+name one can always recognise.</p>
+
+<p>3.5.1, First and second class objects, page 33</p>
+
+<p>[&hellip;] it is remarkably difficult to stop looking on functions as second class objects</p>
+
+<p>3.5.1, First and second class objects, page 33</p>
+
+<p>and in particular, of functions which have functions as a result</p>
+
+<p>3.5.1, First and second class objects, page 33</p>
+</blockquote>
+
+<h3 id="closure">Closure</h3>
+
+<blockquote>
+<p>Thus the R-value of a function contains two parts—a rule for evaluating the expression,
+and an environment which supplies its free variables. An R-value of this sort will be called
+a closure.</p>
+
+<p>3.5.2, Representation of functions, page 34</p>
+</blockquote>
+
+<h3 id="types">Types</h3>
+
+<p>There is information on types: latent vs manifest, how to determine it</p>
+
+<blockquote>
+<p>We call attributes which can be determined at compile time in this way manifest; attributes
+that can only be determined by running the program are known as latent</p>
+
+<p>3.6.2, Manifest and latent, page 36</p>
+</blockquote>
+
+<h3 id="polymorphism">Polymorphism</h3>
+
+<p>Ad-hoc vs parametric polymorphism</p>
+
+<blockquote>
+<p>In ad hoc polymorphism there is no single systematic way of determining the type of the
+result from the type of the arguments. There may be several rules of limited extent which
+reduce the number of cases, but these are themselves ad hoc both in scope and content</p>
+
+<p>3.6.4, Polymorphism, page 37</p>
+
+<p>Parametric polymorphism:</p>
+
+<p>(α ⇒ β, α list) ⇒ β list</p>
+
+<p>3.6.4, Polymorphism, page 37</p>
+</blockquote>
+
+<h3 id="collections">Collections</h3>
+
+<blockquote>
+<ul>
+<li><strong>List</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
+<li><strong>Ntuple</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
+<li><strong>Set</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
+<li><strong>Bag or Coll</strong>: It consists of an unordered collection of objects all of which are of the same type and differs from a set in that repetitions are allowed</li>
+</ul>
+
+<p>3.7.7, Other forms of structure, page 45</p>
+</blockquote>
+
+<p>Also talks about &ldquo;rings&rdquo; (3.7.7, Other forms of structure, page 45)</p>
+
+<h3 id="macros">Macros</h3>
+
+<blockquote>
+<p>macrogenerators deal with the symbols which represent
+the variables, values and other objects of concern to a program so that all their manipulation
+is performed before the final compiling</p>
+
+<p>4.2, Macrogenerators, page 47</p>
+
+<p>Macrogeneration seems to be particularly valuable when a semantic extension of the
+language is required</p>
+
+<p>4.2, Macrogenerators, page 47</p>
+
+<p>I believe, a proper aim for programming language designers to try to make the use of
+macrogenerators wholly unnecessary</p>
+
+<p>4.2, Macrogenerators, page 47</p>
+</blockquote>
+
+<h3 id="funny-comments">funny comments</h3>
+
+<blockquote>
+<p>One important characteristic of mathematics is our habit of using names for things</p>
+
+<p>3.3.1 Variables, page 22</p>
+
+<p>if this turns out to be difficult, the subject of a comment</p>
+
+<p>3.4.5 Functions and routines, page 30</p>
+
+<p><strong>Bag or Coll</strong> This is a new sort of collection for which there is, as yet, no generally accepted name.</p>
+
+<p>3.7.7, Other forms of structure, page 45</p>
+</blockquote>
+
+<h2 id="review">Review</h2>
+
+<p>This has been a very interesting paper, on the foundational concepts. A more formal approach to the assignment operator, L-Values and R-Values and functions.</p>
+
+<p>The part about types is very interesting, explained in simple terms and with examples.</p>
+
+<p>Some of the examples are in CPL, that although an old language, it is still comprehensible. The examples or equivalences in lambda calculus are more difficult to understand (I had to read an introduction to it<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>, just to grab the basics)</p>
+
+<p>Some concepts are a bit outdated, such as the missing object orientation (or its features) or the assembly code, but in general the contents resist the time.</p>
+
+<p>Many of the concepts in programming are around L-Values and R-Values and this paper has made me realize this. Also that even if we are users of these systems, I didn&rsquo;t know many formalities behind it (assignment operator, rewriting, types, type inference, polymorphism modes, polymorphism without inheritance, etc).</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Quine, W.V. Word and Object. New York Technology Press and Wiley, 1960
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2"><a href="../../../../2015/07/01/self-study-in-july-2015">introduction to lambda calculus</a>, search for &ldquo;A Tutorial Introduction to the Lambda Calculus&rdquo;
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate with index in clojure</a>
     </h1>
     <p >Jul 4, 2015
@@ -734,134 +1105,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/30/books-read-in-2015q2/">Books read in 2015Q2</a>
-    </h1>
-    <p >Jun 30, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/30/books-read-in-2015q2/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/q2/">Q2</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Books I&rsquo;ve read this quarter Q2 on 2015:</p>
-
-<ul>
-<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202" target="_blank">Flow</a> by Mihaly Csikszentmihalyi. Blog posts under the tag <a href="/categories/flow
-/">flow</a></li>
-<li><a href="http://www.growing-object-oriented-software.com/" target="_blank">Growing Object-Oriented Software Guided by Tests</a> by Steve Freeman and Nat Pryce. Blog posts under the tag <a href="/categories/goos
-/">goos</a>. Read in the &lsquo;<a href="https://twitter.com/@deaprendices" target="_blank">@deAprendices</a>&rsquo;s reading club&rsquo;.</li>
-<li>TDD in Java, by Viktor Farcic and Alex García. I&rsquo;ve reviewed this book.
-
-<br /></li>
-</ul>
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.manning.com/evans/" target="_blank">The Well-Grounded Java Developer</a> by Benjamin J. Evans and Martijn Verburg</li>
-<li><a href="https://leanpub.com/lisphackers" target="_blank">Lisp Hackers</a> by Vsevolod Dyomkin</li>
-<li><a href="http://learnyouahaskell.com/" target="_blank">Learn You a Haskell for Great Good!</a> by Miran Lipovača</li>
-<li><a href="http://www.amazon.co.uk/Working-Effectively-Legacy-Robert-Martin/dp/0131177052" target="_blank">Working Effectively with Legacy Code</a> by Michael Feathers, again. Blog posts under the tag <a href="/categories/wewlc
-/">wewlc</a></li>
-<li><a href="http://www.poodr.com/" target="_blank">Practical Object-Oriented Design in Ruby, An Agile Primer (POODR)</a> by Sandi Metz, with the &lsquo;<a href="https://twitter.com/@deaprendices" target="_blank">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/categories/poodr
-/">poodr</a>.
-<br /></li>
-</ul>
-
-<p>Books I want to finish:</p>
-
-<ul>
-<li><a href="http://martinfowler.com/books/refactoring.html" target="_blank">Refactoring</a> by Martin Fowler, with Kent Beck, John Brant, William Opdyke, and Don Roberts</li>
-<li><a href="http://shop.oreilly.com/product/0636920028499.do" target="_blank">Java Performance: The Definitive Guide</a> by Scott Oaks</li>
-<li><a href="http://www.infoq.com/minibooks/scrum-xp-from-the-trenches" target="_blank">Scrum and XP from the trenches</a> by Henrik Kniberg</li>
-</ul>
-
-<p>Books that have entered the queue:</p>
-
-<ul>
-<li><a href="http://carlos.bueno.org/optimization/mature-optimization.pdf" target="_blank">Mature optimization</a>, by Carlos Bueno</li>
-<li><a href="https://leanpub.com/leprechauns" target="_blank">The Leprechauns of Software Engineering</a> by Laurent Bossavit, again. <a href="https://twitter.com/alvarobiz/status/611799849911103488" target="_blank">Gift</a></li>
-<li><a href="http://xunitpatterns.com/" target="_blank">XUnit Test Patterns</a> by Gerard Meszaros</li>
-<li><a href="https://leanpub.com/nightowls" target="_blank">Why programmers work at night</a> by Swizec Teller</li>
-<li><a href="http://letoverlambda.com/" target="_blank">Let Over Lambda</a> by Doug Hoyte</li>
-<li><a href="http://fldit-www.cs.uni-dortmund.de/~peter/PS07/HR.pdf" target="_blank">The Haskell Road to Logic, Math and Programming</a> by Kees Doets and Jan van Eijck</li>
-<li><a href="http://mitpress.mit.edu/sicp/" target="_blank">Structure and Interpretation of Computer Programs</a> by Abelson, Sussman, and Sussman</li>
-<li><a href="http://www.cis.upenn.edu/~bcpierce/tapl/" target="_blank">Types and Programming Languages</a> by Benjamin C. Pierce</li>
-<li><a href="http://www.amazon.co.uk/Craftsman-Richard-Sennett/dp/0141022094" target="_blank">The Craftsman</a> by Richard Sennett</li>
-<li><a href="http://www.amazon.co.uk/Software-Craftsmanship-Imperative-McBreen-Aug-2001/dp/B00L6JZAT0" target="_blank">Software Craftsmanship: The New Imperative</a> by Pete McBreen</li>
-<li><a href="http://www.amazon.co.uk/dp/020169946X/ref=pe_385721_37038051_TE_3p_dp_1" target="_blank">Fundamentals of Object-oriented Design in UML</a> by Meilir Page-Jones</li>
-</ul>
-
-<p>Starting in 2015-Q2, I&rsquo;m also writing here the list of books that I want to read.</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/">Practical Object-Oriented Design in Ruby: Chapter 1</a>
-    </h1>
-    <p >Jun 29, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-feathers/">michael-feathers</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/ood/">ood</a><a class="label" href="https://alvarogarcia7.github.io/categories/edward-berard/">edward-berard</a><a class="label" href="https://alvarogarcia7.github.io/categories/design-metrics/">design-metrics</a><a class="label" href="https://alvarogarcia7.github.io/categories/churn/">churn</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>We&rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
-
-<p>These are the concepts and links brought up during the discussion:</p>
-
-<blockquote>
-<p>Walking on water and developing software from a specification are easy if both are frozen.</p>
-
-<p>Edward V Berard, source is <a href="https://en.wikiquote.org/wiki/Edward_V._Berard" target="_blank">Wikiquote</a></p>
-</blockquote>
-
-<p>Two cited papers on metrics for design:</p>
-
-<ul>
-<li><a href="http://www.pitt.edu/~ckemerer/CK%20research%20papers/MetricForOOD_ChidamberKemerer94.pdf" target="_blank">A metrics suite for object oriented design</a> by Chidamber and Kemerer</li>
-<li><a href="http://www.cs.umd.edu/~basili/publications/technical/T102.pdf" target="_blank">A validation of object-oriented design metrics as quality indicators</a> by Basili, Briand and Melo</li>
-</ul>
-
-<p>The video for the &lsquo;churn&rsquo; as a measure:</p>
-
-<ul>
-<li><a href="http://www.ustream.tv/recorded/61483799" target="_blank">The Hidden Dimension Of Refactoring</a> by Michael Feathers</li>
-</ul>
-
-        
-
-    </article>
-    
     
     
 
@@ -949,6 +1192,8 @@
     
         <a href="/blog/page/33/" class="label-pagination">33</a>
     
+        <a href="/blog/page/34/" class="label-pagination">34</a>
+    
 
     
     
@@ -957,7 +1202,7 @@
 
     
     
-        <a href="/blog/page/33/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/34/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -1017,7 +1262,15 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/05/30/defense-tooling/">In Defense of Tooling</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/05/29/keeping-intermediate-history-work-git/">Automatically keeping the intermediate history of your work using git</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/05/01/self-study-may-2019/">Self-Study in May 2019</a>
           </li>
         
           <li class="post">
@@ -1046,14 +1299,6 @@
         
           <li class="post">
             <a href="/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/12/01/self-study-december-2018/">Self-Study in December 2018</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/09/30/books-read-2018q3/">Books read in 2018Q3</a>
           </li>
         
       </ul>
