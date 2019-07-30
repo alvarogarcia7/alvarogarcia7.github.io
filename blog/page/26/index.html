@@ -129,6 +129,138 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/">What legacy code is about</a>
+    </h1>
+    <p >Apr 21, 2015
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/trust/">trust</a><a class="label" href="https://alvarogarcia7.github.io/categories/clean-code/">clean-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-feathers/">michael-feathers</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/definition/">definition</a><a class="label" href="https://alvarogarcia7.github.io/categories/update-definition/">update-definition</a><a class="label" href="https://alvarogarcia7.github.io/categories/tests/">tests</a><a class="label" href="https://alvarogarcia7.github.io/categories/unit-test/">unit-test</a><a class="label" href="https://alvarogarcia7.github.io/categories/working-effectively-with-legacy-code/">working-effectively-with-legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/welc/">welc</a><a class="label" href="https://alvarogarcia7.github.io/categories/wewlc/">wewlc</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers" target="_blank">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers" target="_blank">Michael Feathers</a> describes:</p>
+
+<blockquote>
+<p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
+
+<p>M Feathers, in the preface of Working effectively with legacy code</p>
+</blockquote>
+
+<p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
+
+<p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
+
+<p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
+
+<ul>
+<li>some test the test framework</li>
+<li>some the language</li>
+<li>some test a happy path that works by pure luck</li>
+<li>some functionalities are tested (not all happy paths)</li>
+<li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
+</ul>
+
+<p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
+
+<p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
+
+<p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
+
+<p>This is why I would like to update the definition:</p>
+
+<blockquote>
+<p>Legacy code is code without tests that provide trust to all your stakeholders</p>
+</blockquote>
+
+<p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
+
+<p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
+
+<p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a>
+    </h1>
+    <p >Apr 21, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/aspect/">aspect</a><a class="label" href="https://alvarogarcia7.github.io/categories/aspectj/">aspectj</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/annotation/">annotation</a><a class="label" href="https://alvarogarcia7.github.io/categories/snippet/">snippet</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.</p>
+
+<p>The code provides a way of doing <code>try|catch</code>, specifying an exception to be caught.</p>
+
+<p>The source code is available <a href="https://github.com/alvarogarcia7/annotation-aspect-java" target="_blank">here</a></p>
+
+<h2 id="in-the-process">In the process</h2>
+
+<p>This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.</p>
+
+<p>If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t). The unmassaged code can be found <a href="https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e" target="_blank">here</a>. The massaged version is at the <a href="https://github.com/alvarogarcia7/annotation-aspect-java/" target="_blank">tip of the arrow</a></p>
+
+<h2 id="more-information">More information</h2>
+
+<p>Regarding <code>annotations</code> (like @Override):</p>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/annotations/" target="_blank">This official article</a> on annotations is useful.</li>
+<li><a href="http://www.vogella.com/tutorials/JavaAnnotations/article.html" target="_blank">This article</a> by Lars Vogel guides you step by step.</li>
+<li><a href="http://tutorials.jenkov.com/java/annotations.html" target="_blank">This article</a> by Jakov Jenkov is very nice.</li>
+<li><a href="http://crunchify.com/understanding-java-annotation-annotation-examples/" target="_blank">This article</a> helps you to understand what an annotation is and what to use it for.</li>
+</ul>
+
+<p>Regarding <code>aspect</code> (based on AspectJ):</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation" target="_blank">This question</a> has been my main source of information / inspiration for the spring + aspectj configuration
+<br /></li>
+</ul>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>One of the drawbacks that I find to common examples or tutorials is that they&rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including <code>pom.xml</code> (dependencies) and tests.</p>
+
+<p>Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/">Logging is a feature</a>
     </h1>
     <p >Apr 19, 2015
@@ -477,159 +609,6 @@ Error: Run jekyll build --trace for more information.
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a refactor in Clojure</a>
-    </h1>
-    <p >Apr 14, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/destructuring/">destructuring</a><a class="label" href="https://alvarogarcia7.github.io/categories/parallel-change/">parallel-change</a>
-        
-    </p>
-</header>
-
-
-        
-        <p><a href="https://twitter.com/@trikitrok" target="_blank">Manuel</a> has taught us today about the default value while destructuring:</p>
-
-<blockquote>
-<p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p>
-</blockquote>
-
-<pre><code>user=&gt; (def point {:x 5 :y 7})
-#'user/point
-
-(let [{:keys [x y] :as the-point} point]
-         (println &quot;x:&quot; x &quot;y:&quot; y &quot;point:&quot; the-point))
-
-x: 5 y: 7 point: {:x 5, :y 7}
-</code></pre>
-
-<blockquote>
-<p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p>
-</blockquote>
-
-<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html" target="_blank">Source</a></p>
-
-<p>This has been used for a method like this one:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
-  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
-</code></pre></div>
-
-<p>this has been refactored to this</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-	  <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-	  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</code></pre></div>
-
-<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a new TDD phase</a>
-    </h1>
-    <p >Apr 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/redesign/">redesign</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall" target="_blank">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
-
-<h2 id="concept">Concept</h2>
-
-<p>As Gary introduced it to me<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>, it is a phase that might appear after refactor.</p>
-
-<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
-
-<h2 id="how-i-do-redesign">How I do redesign</h2>
-
-<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
-
-<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
-
-<h2 id="other-thoughts">Other thoughts</h2>
-
-<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign" target="_blank">redesign</a>&rdquo; as</p>
-
-<blockquote>
-<p>to change the design of (something)</p>
-</blockquote>
-
-<p>or</p>
-
-<blockquote>
-<p>to revise in appearance, function, or content</p>
-</blockquote>
-
-<p>an example:</p>
-
-<blockquote>
-<p>The book&rsquo;s cover has been redesigned for the new edition.</p>
-</blockquote>
-
-<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
-
-<blockquote>
-<p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p>
-</blockquote>
-
-<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
-
-<h2 id="other-references">Other references</h2>
-
-<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign" target="_blank">this blog post</a> came up. They cite redesign as a way of rewriting</p>
-
-<p><a href="http://stackoverflow.com/a/80758/1181094" target="_blank">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094" target="_blank">original question</a> in StackOverflow is interesting</p>
-
-<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html" target="_blank">this blog post</a></p>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts" target="_blank">here</a>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html" target="_blank">here</a>
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
-</ol>
-</div>
-
-        
-
-    </article>
-    
     
     
 
@@ -787,6 +766,14 @@ x: 5 y: 7 point: {:x 5, :y 7}
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/06/01/self-study-june-2019/">Self-Study in June 2019</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/05/30/defense-tooling/">In Defense of Tooling</a>
           </li>
         
@@ -816,14 +803,6 @@ x: 5 y: 7 point: {:x 5, :y 7}
         
           <li class="post">
             <a href="/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/01/01/self-study-january-2019/">Self-Study in January 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
           </li>
         
       </ul>

@@ -129,6 +129,159 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a refactor in Clojure</a>
+    </h1>
+    <p >Apr 14, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/destructuring/">destructuring</a><a class="label" href="https://alvarogarcia7.github.io/categories/parallel-change/">parallel-change</a>
+        
+    </p>
+</header>
+
+
+        
+        <p><a href="https://twitter.com/@trikitrok" target="_blank">Manuel</a> has taught us today about the default value while destructuring:</p>
+
+<blockquote>
+<p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p>
+</blockquote>
+
+<pre><code>user=&gt; (def point {:x 5 :y 7})
+#'user/point
+
+(let [{:keys [x y] :as the-point} point]
+         (println &quot;x:&quot; x &quot;y:&quot; y &quot;point:&quot; the-point))
+
+x: 5 y: 7 point: {:x 5, :y 7}
+</code></pre>
+
+<blockquote>
+<p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p>
+</blockquote>
+
+<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html" target="_blank">Source</a></p>
+
+<p>This has been used for a method like this one:</p>
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
+</code></pre></div>
+
+<p>this has been refactored to this</p>
+<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
+  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
+	  <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
+	  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
+</code></pre></div>
+
+<p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a new TDD phase</a>
+    </h1>
+    <p >Apr 13, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/redesign/">redesign</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall" target="_blank">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
+
+<h2 id="concept">Concept</h2>
+
+<p>As Gary introduced it to me<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>, it is a phase that might appear after refactor.</p>
+
+<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
+
+<h2 id="how-i-do-redesign">How I do redesign</h2>
+
+<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
+
+<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
+
+<h2 id="other-thoughts">Other thoughts</h2>
+
+<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign" target="_blank">redesign</a>&rdquo; as</p>
+
+<blockquote>
+<p>to change the design of (something)</p>
+</blockquote>
+
+<p>or</p>
+
+<blockquote>
+<p>to revise in appearance, function, or content</p>
+</blockquote>
+
+<p>an example:</p>
+
+<blockquote>
+<p>The book&rsquo;s cover has been redesigned for the new edition.</p>
+</blockquote>
+
+<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
+
+<blockquote>
+<p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p>
+</blockquote>
+
+<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
+
+<h2 id="other-references">Other references</h2>
+
+<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign" target="_blank">this blog post</a> came up. They cite redesign as a way of rewriting</p>
+
+<p><a href="http://stackoverflow.com/a/80758/1181094" target="_blank">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094" target="_blank">original question</a> in StackOverflow is interesting</p>
+
+<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html" target="_blank">this blog post</a></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts" target="_blank">here</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html" target="_blank">here</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/04/12/jason-gorman-tdd-intensive-workshop/">Experience report: Test-driven development intensive, by Jason Gorman</a>
     </h1>
     <p >Apr 12, 2015
@@ -529,146 +682,6 @@ A: Testing. Test for the purpose of testing, not TDD
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/03/31/books-read-in-2015q1/">Books read in 2015Q1</a>
-    </h1>
-    <p >Mar 31, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/03/31/books-read-in-2015q1/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/q1/">Q1</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Books I&rsquo;ve read this quarter Q1 on 2015, as inspired by Manuel, on this <a href="http://garajeando.blogspot.com.es/2015/04/books-i-read-january-april-2015.html" target="_blank">post</a>:</p>
-
-<ul>
-<li><a href="https://leanpub.com/50quickideas" target="_blank">Fifty Quick Ideas to Improve your User Stories</a>, by Gojko Adzic and David Evans</li>
-<li><a href="https://leanpub.com/funretrospectives" target="_blank">Fun retrospectives</a> by Taina Caetano and Paulo Caroli</li>
-<li><a href="http://www.amazon.com/Implementation-Patterns-Kent-Beck/dp/0321413091" target="_blank">Implementation patterns</a> by Kent Beck</li>
-<li><a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/" target="_blank">Clean code</a> by Robert C. Martin;  again
-<br /></li>
-</ul>
-
-<p>Books started, not yet finished (WIP):</p>
-
-<ul>
-<li><a href="http://www.manning.com/evans/" target="_blank">The Well-Grounded Java Developer</a>, by Benjamin J. Evans and Martijn Verburg</li>
-<li><a href="http://martinfowler.com/books/refactoring.html" target="_blank">Refactoring</a>, by Martin Fowler, (with Kent Beck, John Brant, William Opdyke, and Don Roberts)</li>
-<li><a href="http://www.growing-object-oriented-software.com/" target="_blank">Growing Object-Oriented Software Guided by Tests</a>, by Steve Freeman and Nat Pryce</li>
-<li><a href="http://www.amazon.com/Flow-Psychology-Experience-Perennial-Classics/dp/0061339202" target="_blank">Flow</a>, by Mihaly Csikszentmihalyi
-<br /></li>
-</ul>
-
-<p>(Note: I&rsquo;ve written this list a posteriori, in May 2015)</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/03/29/growing-software-according-to-the-season/">Growing software according to the season</a>
-    </h1>
-    <p >Mar 29, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/03/29/growing-software-according-to-the-season/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/growing-software/">growing-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/building-software/">building-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/season/">season</a><a class="label" href="https://alvarogarcia7.github.io/categories/agriculture/">agriculture</a><a class="label" href="https://alvarogarcia7.github.io/categories/gardening/">gardening</a><a class="label" href="https://alvarogarcia7.github.io/categories/software/">software</a><a class="label" href="https://alvarogarcia7.github.io/categories/embedded-tweet/">embedded-tweet</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>This is the first post is of the <a href="/categories/growing-software
-/">growing-software series</a></p>
-
-<p>A few weeks ago, while reading the book <a href="http://www.growing-object-oriented-software.com/" target="_blank">Growing Object-Oriented Software Guided by Tests</a> by <a href="https://twitter.com/@natpryce" target="_blank">Nat Pryce</a> and <a href="https://twitter.com/@sf105" target="_blank">Steve Freeman</a>, I finally understood why the software needs to be grown and not built:</p>
-
-<blockquote class="twitter-tweet" lang="en"><p>.<a href="https://twitter.com/natpryce">@natpryce</a> <a href="https://twitter.com/sf105">@sf105</a> With the <a href="https://twitter.com/hashtag/goos?src=hash">#goos</a> book I finally grasped the importance of growing, not building software. Thanks for writing it</p>&mdash; Alvaro Garcia (@alvarobiz) <a href="https://twitter.com/alvarobiz/status/570835142136049664">February 26, 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-A few days ago, I was thinking about new inspiration sources and this came to my mind:
-
-<blockquote class="twitter-tweet" lang="en"><p>If we want to grow software instead of building it, should we start looking at gardening and agriculture for new inspiration? <a href="https://twitter.com/hashtag/goos?src=hash">#goos</a></p>&mdash; Alvaro Garcia (@alvarobiz) <a href="https://twitter.com/alvarobiz/status/581005906667687938">March 26, 2015</a></blockquote>
-
-<p>In agriculture, at least in this latitude, there are different seasons. Different plants have different temporal schedules: you need to plant, wait for it to bloom, produce fruits then collect. Maybe remove the plant and wait for the next time slot to appear.</p>
-
-<p>When growing software, things are different (or we think so):</p>
-
-<ul>
-<li>Do we need to plant? Yes, seed the project with resources</li>
-<li>Wait for it to bloom? Yes, from an outside actor perspective, there is no result for a while, even if it is one sprint</li>
-<li>Wait to produce fruits? Yes, usually some sprints past the minimum viable product (MVP) until the minimum lovable product (MLP)</li>
-<li>Do we need to collect it? Yes, usually the final tests (e.g., regression) and ship it to production to be used.</li>
-</ul>
-
-<p>After all, we might say that the process is not so different in both activities. Nothing to do related to tools or materials, etc.</p>
-
-<p>As in agriculture, seasons vary in productivity for a certain activity or crop: during the cold months, not many plants are able to produce fruits. Meanwhile, during the hot months, harvest is much higher. (This only applies to outdoors gardening.)</p>
-
-<p>When producing software, there might be seasons too:</p>
-
-<ul>
-<li>Seasons where productivity (harvest) varies
-
-<ul>
-<li>Lowers when a new team member joins (see the Mythical Man-Month), the pressure is too high, salaries are low, &hellip;</li>
-<li>Increases when there are no information silos, the bus factor is high, the team is not affected by external distractions, &hellip;</li>
-</ul></li>
-<li>Seasons where different harvests can be planted, but a subset of them will be the most effective
-
-<ul>
-<li>A front-end developer can do back-end, but it won&rsquo;t be as productive. In this area, one can learn other disciplines and get as effective as other professionals.</li>
-<li>There are many tasks to be done but the prioritized ones are more effective</li>
-</ul></li>
-<li>Some harvests are more intense on the fields than others. After that, there is a required rest so the next season is as productive as the previous one
-
-<ul>
-<li>Some projects produce burn-out so some slack time is more productive than getting to work again.</li>
-</ul></li>
-</ul>
-
-<p>But there might be differences too:</p>
-
-<ul>
-<li>Geographical distribution: some crops cannot grow in certain conditions. I believe any geographic area (e.g., country) can produce any type of work (e.g., back-end, front-end, quality assurance, project management, etc)</li>
-<li>Quality distribution: same as before, many crops do not grow in Iceland (due to the harsh environment) or do it with lower quality as nearer to the Equator.</li>
-</ul>
-
-<p><a href="https://twitter.com/@XaV1uzz" target="_blank">Xavi Gost</a> responded to my tweet:</p>
-
-<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p><a href="https://twitter.com/alvarobiz">@alvarobiz</a> Conceptos como darle a las cosas su tiempo de crecer y madurar nos vendrian bien en la industria</p>&mdash; Xaviuzz (@XaV1uzz) <a href="https://twitter.com/XaV1uzz/status/581063149203394560">March 26, 2015</a></blockquote>
-
-<p>[Roughly translated: Concepts like allowing some time for things to grow and ripe would benefit the industry]</p>
-
-<p>Get the tools out of the tool-shed and start buying seeds for this spring.</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -826,6 +839,14 @@ A few days ago, I was thinking about new inspiration sources and this came to my
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/06/01/self-study-june-2019/">Self-Study in June 2019</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/05/30/defense-tooling/">In Defense of Tooling</a>
           </li>
         
@@ -855,14 +876,6 @@ A few days ago, I was thinking about new inspiration sources and this came to my
         
           <li class="post">
             <a href="/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/01/01/self-study-january-2019/">Self-Study in January 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
           </li>
         
       </ul>

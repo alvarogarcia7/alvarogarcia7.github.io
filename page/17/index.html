@@ -128,6 +128,80 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/">Tip: Differences in maven test execution</a>
+    </h1>
+    <p >Oct 5, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/maven/">maven</a><a class="label" href="https://alvarogarcia7.github.io/categories/test/">test</a><a class="label" href="https://alvarogarcia7.github.io/categories/skip-tests/">skip-tests</a><a class="label" href="https://alvarogarcia7.github.io/categories/maven-test-skip/">maven-test-skip</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>There are times when you only want to have the production code:
+ downstream job after a successful build compiling in local after checkout from DVCS spiking (possibly the tests are broken) speeding up the process  For that, maven allows to skip the tests, selectively:
+ -DskipTests compiles the tests, but skips running them -Dmaven.test.skip skips compiling the tests and does not run them. This can also be written as -Dmaven.</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the failure in bash</a>
+    </h1>
+    <p >Oct 2, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipe/">pipe</a><a class="label" href="https://alvarogarcia7.github.io/categories/failure/">failure</a><a class="label" href="https://alvarogarcia7.github.io/categories/exit-code/">exit-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/exit-status/">exit-status</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature-toggle/">feature-toggle</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>In bash, the usual behavior is to return the last status code:
+bash-3.1$ tr tr: two strings must be given when translating bash-3.1$ echo $? 1  But this also applies to pipes:
+bash-3.1$ tr|tee 1.txt tr: two strings must be given when translating bash-3.1$ echo $? 0  Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: set -o pipefail</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/">Self-Study in October 2015</a>
     </h1>
     <p >Oct 1, 2015
@@ -274,73 +348,6 @@ Simple sessions A simple session is a lapse of time working with the language to
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/">A basic working environment</a>
-    </h1>
-    <p >Sep 8, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/#disqus_thread">Comments</a>
-
-        
-    </p>
-</header>
-
-
-        
-          <p>Sometimes, when working out of somebody&rsquo;s else computer, I won&rsquo;t have my preferred IDE installed.
-In this case, what I usually do &ndash;as long as the programming session is more than 5 TDD cycles&ndash;, is to configure my own environment. It includes:
- text editor: $EDITOR is enough test runner. A simple bash script executing the tests will suffice git terminal: to commit, see differences, revert, etc [optional] REPL if the language has it  If the system already has it, I will use screen to cycle around the sessions.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/">Brown-bag session: eXtreme Programming</a>
-    </h1>
-    <p >Sep 2, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/extreme-programming/">extreme-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/xp/">xp</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>At a client, today I&rsquo;ve introduced the eXtreme Programmig methodology, with its values, principles, practices in a brown-bag session.
-It has been an informal session, without slides, but we have used this video by the Kleer guys (in Spanish).
-The video gives a high-level overview of what XP is. We also needed to cover the daily practices (e.g., TDD, pair programming, whole team)
-After that, we&rsquo;ve done a questions&amp;answers round to solve the teammates&rsquo; doubts</p>
-
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -432,6 +439,8 @@ After that, we&rsquo;ve done a questions&amp;answers round to solve the teammate
     
         <a href="/page/35/" class="label-pagination">35</a>
     
+        <a href="/page/36/" class="label-pagination">36</a>
+    
 
     
     
@@ -440,7 +449,7 @@ After that, we&rsquo;ve done a questions&amp;answers round to solve the teammate
 
     
     
-        <a href="/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -500,6 +509,14 @@ After that, we&rsquo;ve done a questions&amp;answers round to solve the teammate
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/06/01/self-study-june-2019/">Self-Study in June 2019</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/05/30/defense-tooling/">In Defense of Tooling</a>
           </li>
         
@@ -529,14 +546,6 @@ After that, we&rsquo;ve done a questions&amp;answers round to solve the teammate
         
           <li class="post">
             <a href="/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/01/01/self-study-january-2019/">Self-Study in January 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
           </li>
         
       </ul>
