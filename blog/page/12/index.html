@@ -129,6 +129,55 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/06/10/role-software-consultant/">The role of a software consultant</a>
+    </h1>
+    <p >Jun 10, 2016
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/06/10/role-software-consultant/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/reinventing-organizations/">reinventing-organizations</a><a class="label" href="https://alvarogarcia7.github.io/categories/frederic-laloux/">frederic-laloux</a><a class="label" href="https://alvarogarcia7.github.io/categories/teal-organization/">teal-organization</a><a class="label" href="https://alvarogarcia7.github.io/categories/consultant/">consultant</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>A quote from <a href="http://www.reinventingorganizations.com" target="_blank">Reinventing Organizations</a>,
+about roles, job descriptions and job titles in Chapter 2.2:
+Self-management (structures), page 90:</p>
+
+<blockquote>
+<p>[In] Teal Organizations [&hellip;] people are not made to fit pre-defined jobs;
+ their job emerge from a multitude of roles and responsibilities they pick
+ up based on their interests, talents, and the needs of the organization.</p>
+
+<ul>
+<li>Frederic Laloux, Reinventing Organizations</li>
+</ul>
+</blockquote>
+
+<p>In my opinion, this is the role of the software consultant when working with a client:
+even if the customer has asked for help in some parts of their activity, a senior-enough
+consultant can discover other areas where they can add value, even if that new
+work doesn&rsquo;t have much in common with the initial request (this change should
+be approved by the people that will be affected).</p>
+
+<p>This is also a thought that <a href="https://twitter.com/@mashooq" target="_blank">Mash</a> and <a href="https://twitter.com/@sandromancuso" target="_blank">Sandro</a> were discussing lately.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/06/10/unwritten-principles-coaching/">Unwritten principles for coaching, a quote</a>
     </h1>
     <p >Jun 10, 2016
@@ -719,94 +768,6 @@ First an introduction to our system:</p>
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/">Faster site generation with a native Octopress 2</a>
-    </h1>
-    <p >Apr 17, 2016
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/native-octopress/">native-octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/rakefile/">rakefile</a><a class="label" href="https://alvarogarcia7.github.io/categories/reinventing-the-wheel/">reinventing-the-wheel</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>Note: this article is an answer to <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a previous one</a>, about the same topic: a tool for a faster site generation while developing / writing articles, using octopress 2.</p>
-
-<h2 id="introduction">Introduction</h2>
-
-<p>Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles:</p>
-
-<p>Isolate a post:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="c1"># usage rake isolate[my-post]</span>
-<span class="n">desc</span> <span class="s2">&quot;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&quot;</span>
-<span class="n">task</span> <span class="ss">:isolate</span><span class="p">,</span> <span class="ss">:filename</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
-  <span class="n">stash_dir</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">&quot;</span>
-  <span class="no">FileUtils</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span> <span class="k">unless</span> <span class="no">File</span><span class="o">.</span><span class="n">exist?</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span>
-  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/*.*&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
-    <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
-    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">stash_dir</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p>Integrate with the rest of the posts:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">desc</span> <span class="s2">&quot;Move all stashed posts back into the posts directory, ready for site generation.&quot;</span>
-<span class="n">task</span> <span class="ss">:integrate</span> <span class="k">do</span>
-  <span class="n">posts_dir</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/&quot;</span>
-  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">/*.*&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
-    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">posts_dir</span>
-    <span class="n">full_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reverse</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="nb">system</span> <span class="s2">&quot;git update-index --no-assume-unchanged </span><span class="si">#{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">&quot;</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<h2 id="usage">Usage</h2>
-
-<p>(at the folder where the Rakefile is located)</p>
-
-<ul>
-<li>isolate the selected file. Specify the pattern to keep.</li>
-</ul>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake isolate<span class="o">[</span><span class="s2">&quot;draft&quot;</span><span class="o">]</span>
-</code></pre></div>
-
-<ul>
-<li>write the new content</li>
-<li>commit to git</li>
-<li>integrate with the rest of the files</li>
-</ul>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake integrate
-</code></pre></div>
-
-<ul>
-<li>git push</li>
-</ul>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>When I needed this tool, to speed up my feedback cycle, I didn&rsquo;t find any that did this job, so I created <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a small tool for this same purpose</a>. Unfortunately, there was one, so close to my nose that I could not find it. I was reinventing the wheel.</p>
-
-<p>It is better to switch to a tool that has been tested by more users, that has received the community&rsquo;s approval than a custom-made tool.</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -968,6 +929,10 @@ First an introduction to our system:</p>
           </li>
         
           <li class="post">
+            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/06/01/self-study-june-2019/">Self-Study in June 2019</a>
           </li>
         
@@ -997,10 +962,6 @@ First an introduction to our system:</p>
         
           <li class="post">
             <a href="/blog/2019/02/06/refactoring-split-loop-map-equivalence/">Refactoring: split loop &#43; loop/map equivalence</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
           </li>
         
       </ul>
