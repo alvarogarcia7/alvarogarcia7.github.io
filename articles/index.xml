@@ -6,8 +6,63 @@
     <description>Recent content in Articles-rsses on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 May 2019 22:32:19 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Nov 2019 10:22:19 +0000</lastBuildDate>
     <atom:link href="https://alvarogarcia7.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>On private but leaked information in SaaS</title>
+      <link>https://alvarogarcia7.github.io/blog/2019/11/04/private-leaked-information-saas/</link>
+      <pubDate>Mon, 04 Nov 2019 10:22:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2019/11/04/private-leaked-information-saas/</guid>
+      <description>
+
+&lt;p&gt;Yet another tool for your toolbox. How to uncorrelate public and private information&lt;/p&gt;
+
+&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
+
+&lt;p&gt;Context: there are clients who have sensitive information. Some is just &amp;lsquo;companies being stealth&amp;rsquo; (e.g., don&amp;rsquo;t want to make public until launching), some is just protected by a Non-Disclosure Agreement (NDA), some are protected by security clearance. The more sensitive, the greater protection needed. This applies to all sensitive information.&lt;/p&gt;
+
+&lt;p&gt;More context: there are applications (i.e., SaaS) better installed in the cloud (e.g., expensive or impossible to install on-premise).&lt;/p&gt;
+
+&lt;p&gt;Having sensitive information on the cloud is delicate. There is a fine balance needed to achieve the perfect equilibrium between security, confort, data privacy, cost (among others). Even when using private resources, there is information leaking to the public (i.e., people not included in the designated circle).&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take an example: we create a git repository in an organization, on an online git vendor. For that, we choose the strictest security measures available (e.g. private repositories; private organization details &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;). Even then, there&amp;rsquo;s an overlooked piece of information that many times cannot be hidden: the URL.&lt;/p&gt;
+
+&lt;p&gt;See:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://gitvendor.com/organization/repository
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Both &lt;code&gt;organization&lt;/code&gt; and &lt;code&gt;repository&lt;/code&gt; can be leaked to the public. Even if they&amp;rsquo;re not published (i.e., only available with a link), you can check whether this has been registered or not. Should you have a exposed-enough profile, when there are rumours that your company will launch a new product, people can investigate whether this domain/repo/organization has been registered.&lt;/p&gt;
+
+&lt;p&gt;This is one reason why, in the past, project are using a codename. Also, because the final project name has not been decided (e.g., removes choosing the project name from the critical path to start a project).&lt;/p&gt;
+
+&lt;p&gt;We can use &amp;ndash;at least&amp;ndash; two techniques for using project &lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_Microsoft_codenames&#34; target=&#34;_blank&#34;&gt;codenames&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Alias: choose a catchy name as a codename. Such as Utopia for Microsoft Bob, Longhorn for Windows Vista&lt;/li&gt;
+&lt;li&gt;Random data: choose a randomly-generated id (e.g., UUID), that is sufficiently random not to be guessed by chance, that does not relate in any way to the project. The downside to this is that it actually bears no relation to the thing, therefore difficult to remember.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note: *nix-like systems can generate uuid with &lt;code&gt;uuidgen&lt;/code&gt; (&lt;a href=&#34;http://man7.org/linux/man-pages/man1/uuidgen.1.html&#34; target=&#34;_blank&#34;&gt;man page&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Make a wise choice of where to put your sensitive information.&lt;/p&gt;
+
+&lt;p&gt;When you can choose a SaaS solution, keep information private as needed. Be careful with the information you leak. When you are forced to use something public, you can use a codename or random data.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;This is not available in all git vendors that I&amp;rsquo;ve reviewed.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Automatically keeping the intermediate history of your work using git</title>
