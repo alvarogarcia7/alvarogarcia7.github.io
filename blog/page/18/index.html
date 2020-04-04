@@ -362,10 +362,10 @@ asks &ldquo;Why?&rdquo;</p>
         
 
 <p>Many times I&rsquo;ve written this function:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">between</span><span class="o">(</span><span class="kt">int</span> <span class="n">lowerBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upperBound</span><span class="o">){</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">between</span><span class="p">(</span><span class="kt">int</span> <span class="n">lowerBound</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">upperBound</span><span class="p">){</span>
 	<span class="k">return</span> <span class="n">lowerBound</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&amp;&amp;</span>
-		<span class="n">n</span> <span class="o">&lt;=</span> <span class="n">upperBound</span><span class="o">;</span>
-<span class="o">}</span>
+		<span class="n">n</span> <span class="o">&lt;=</span> <span class="n">upperBound</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>It may depend on the case, whether it is <code>[]</code>, <code>[)</code>, <code>(]</code> or <code>()</code>, to use mathematical terms.</p>
@@ -499,85 +499,85 @@ Chapter 3, Managing Dependencies, Introduction</p>
 
         
         <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example.spike</span><span class="o">;</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example.spike</span><span class="p">;</span>
 
-<span class="kn">import static</span> <span class="nn">org.hamcrest.MatcherAssert.assertThat</span><span class="o">;</span>
-<span class="kn">import static</span> <span class="nn">org.hamcrest.Matchers.is</span><span class="o">;</span>
-<span class="kn">import static</span> <span class="nn">org.mockito.Mockito.spy</span><span class="o">;</span>
-<span class="kn">import static</span> <span class="nn">org.mockito.Mockito.when</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.hamcrest.MatcherAssert.assertThat</span><span class="p">;</span>
+<span class="kn">import static</span> <span class="nn">org.hamcrest.Matchers.is</span><span class="p">;</span>
+<span class="kn">import static</span> <span class="nn">org.mockito.Mockito.spy</span><span class="p">;</span>
+<span class="kn">import static</span> <span class="nn">org.mockito.Mockito.when</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.mockito.Spy</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.Spy</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DifferentReturnValues</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DifferentReturnValues</span> <span class="p">{</span>
 
 	<span class="nd">@Spy</span>
-	<span class="kd">private</span> <span class="n">Spike1</span> <span class="n">spike1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Spike1</span><span class="o">();</span>
+	<span class="kd">private</span> <span class="n">Spike1</span> <span class="n">spike1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Spike1</span><span class="p">();</span>
 
 
 	<span class="nd">@Test</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
-		<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
-		<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="p">(</span><span class="n">spike1</span><span class="p">);</span>
+		<span class="n">when</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
-		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+		<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+		<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
 
-		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-	<span class="o">}</span>
+		<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+		<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+	<span class="p">}</span>
 
 
-	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">Spike1</span> <span class="o">{</span>
-		<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getBool</span><span class="o">()</span> <span class="o">{</span>
-			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-		<span class="o">}</span>
-	<span class="o">}</span>
-<span class="o">}</span>
+	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">Spike1</span> <span class="p">{</span>
+		<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getBool</span><span class="p">()</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>The key line is:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">when</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div>
 
 <p>this makes the stubbed function to return multiple values:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
 </code></pre></div>
 
 <p>The last value is repeated after the last defined value:</p>
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
-	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
-	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="p">(</span><span class="n">spike1</span><span class="p">);</span>
+	<span class="n">when</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
 
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-<span class="o">}</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>If you want to loop over the values, you can implement it with the <code>doAnswer</code> method:</p>
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
-	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
-	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="p">(</span><span class="n">spike1</span><span class="p">);</span>
+	<span class="n">when</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
-	<span class="kd">final</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="kc">true</span><span class="o">};</span>
+	<span class="kd">final</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">value</span> <span class="o">=</span> <span class="p">{</span><span class="kc">true</span><span class="p">};</span>
 
-	<span class="n">doAnswer</span><span class="o">(</span><span class="n">invocation</span> <span class="o">-&gt;</span> <span class="o">{</span>
-		<span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-		<span class="k">return</span> <span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-	<span class="o">}).</span><span class="na">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">).</span><span class="na">getBool</span><span class="o">();</span>
+	<span class="n">doAnswer</span><span class="p">(</span><span class="n">invocation</span> <span class="o">-&gt;</span> <span class="p">{</span>
+		<span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+		<span class="k">return</span> <span class="n">value</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+	<span class="p">}).</span><span class="na">when</span><span class="p">(</span><span class="n">spike1</span><span class="p">).</span><span class="na">getBool</span><span class="p">();</span>
 
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
 
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
-<span class="o">}</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">spike1</span><span class="p">.</span><span class="na">getBool</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+<span class="p">}</span>
 </code></pre></div>
 
         
@@ -790,7 +790,7 @@ Chapter 3, Managing Dependencies, Introduction</p>
 </div>
 
 <footer role="contentinfo">
-  <p>Copyright &copy; 2019 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+  <p>Copyright &copy; 2020 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
   <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
 </p>
 

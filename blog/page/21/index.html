@@ -467,25 +467,25 @@ DocumentControllerTest
 <h3 id="conditional-expressions-vs-conditional-commands">Conditional expressions vs conditional commands</h3>
 
 <p>Introduces the concept of conditional expression, akin to the ternary operator (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span><span class="o">;</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>
 </code></pre></div>
 
 <p>this is equivalent to (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
-<span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-<span class="o">}</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>and the conditional command (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">f</span><span class="o">();</span>
-	<span class="n">h</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-	<span class="n">g</span><span class="o">();</span>
-<span class="o">}</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">f</span><span class="p">();</span>
+	<span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="n">g</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>The conditional expression is also known as &ldquo;functional if&rdquo;</p>
@@ -983,7 +983,7 @@ macrogenerators wholly unnecessary</p>
 </div>
 
 <footer role="contentinfo">
-  <p>Copyright &copy; 2019 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+  <p>Copyright &copy; 2020 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
   <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
 </p>
 

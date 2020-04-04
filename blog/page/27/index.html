@@ -483,9 +483,9 @@ x: 5 y: 7 point: {:x 5, :y 7}
 <p>As the generated sequence can only have <code>8 &lt;= x &lt;= 50</code> elements, a list returning a single element would not be correct. So</p>
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="c1">//class FibonacciTests</span>
 <span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">theFirstElementIsOne</span><span class="o">(){</span>
-	<span class="n">assertThat</span><span class="o">(</span><span class="k">new</span> <span class="n">FibonacciSequence</span><span class="o">().</span><span class="na">generate</span><span class="o">(</span><span class="mi">8</span><span class="o">)[</span><span class="mi">0</span><span class="o">],</span> <span class="n">is</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">theFirstElementIsOne</span><span class="p">(){</span>
+	<span class="n">assertThat</span><span class="p">(</span><span class="k">new</span> <span class="n">FibonacciSequence</span><span class="p">().</span><span class="na">generate</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">is</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <h3 id="third-exercise-fizzbuzz">Third exercise: FizzBuzz</h3>
@@ -877,7 +877,7 @@ A: Testing. Test for the purpose of testing, not TDD
 </div>
 
 <footer role="contentinfo">
-  <p>Copyright &copy; 2019 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+  <p>Copyright &copy; 2020 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
   <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
 </p>
 

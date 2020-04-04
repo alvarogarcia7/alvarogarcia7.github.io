@@ -829,21 +829,21 @@ Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
 <p>A first solution that he have implemented is to provide a 6-digit pin code.</p>
 
 <p>The solution (in java) is straightforward: get a <code>Random</code> to generate <code>int</code>s for you.</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Random</span> <span class="n">secureRandom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="o">();</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="n">Random</span> <span class="n">secureRandom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="p">();</span>
 
-    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">PinCode</span><span class="o">(</span><span class="n">secureRandom</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">1_000_000</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">PinCode</span><span class="p">(</span><span class="n">secureRandom</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCode</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCode</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="nf">PinCode</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">PinCode</span> <span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Note: this is not the final solution; it does not include package, imports; might not even compile. Take it as pseudo-code.</p>
@@ -865,65 +865,65 @@ Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
 
 <p>Easy. You add a base amount to always make it in the six digits. But, are you affecting the distribution of the pseudo-random generator? At this time, I&rsquo;m not even sure. <a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515" target="_blank">Don&rsquo;t make me think</a> too much. To make it easier, let&rsquo;s pad the numbers with zeros on the left:</p>
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_are_left_padded_with_zeros</span> <span class="o">()</span> <span class="o">{</span>
-    <span class="n">verifyEachOf</span><span class="o">(</span><span class="n">pinCodes</span><span class="o">(</span><span class="mi">100</span><span class="o">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="o">(</span><span class="n">pincode</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="mi">6</span><span class="o">)));</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_are_left_padded_with_zeros</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">verifyEachOf</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pincode</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="mi">6</span><span class="p">)));</span>
+<span class="p">}</span>
 
 <span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_do_not_contain_spaces</span> <span class="o">()</span> <span class="o">{</span>
-    <span class="n">verifyEachOf</span><span class="o">(</span><span class="n">pinCodes</span><span class="o">(</span><span class="mi">100</span><span class="o">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="o">(</span><span class="n">pincode</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">)));</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_do_not_contain_spaces</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">verifyEachOf</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pincode</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">)));</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Now that these tests are failing, I can focus on finding a simple implementation that satisfies them.</p>
 
 <p>A passing solution:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example</span><span class="o">;</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Random</span> <span class="n">secureRandom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="o">();</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="n">Random</span> <span class="n">secureRandom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="p">();</span>
 
-    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">PinCode</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;%06d&quot;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">1_000_000</span><span class="o">)));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">PinCode</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%06d&quot;</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>But, if you execute these tests long enough, they will fail. Because of the underlaying randomness of the code. We don&rsquo;t want to modify the design of this class, as we started with &ldquo;wishful programming&rdquo; (<a href="http://blog.adrianbolboaca.ro/2016/04/programming-by-wishful-thinking/" target="_blank">reference</a>, <a href="https://dsoguy.blogspot.com/2007/01/programming-by-wishful-thinking.html" target="_blank">reference</a>), specifying the desired public API, to later fill the implementation details.</p>
 
 <p>A possible solution to this randomness is to consider the random a &lsquo;setting&rsquo; <a href="http://www.mockobjects.com/2006/10/different-kinds-of-collaborators.html" target="_blank">aka policy</a> that I can later override. But only for the test. We don&rsquo;t want to make the API more complicated, so we will offer a <code>protected</code> method for &lsquo;friends&rsquo; to use, but not for everyone:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example</span><span class="o">;</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="p">{</span>
 
-    <span class="kd">private</span> <span class="n">Random</span> <span class="n">random</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Random</span> <span class="n">random</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="nf">PinCodeFactory</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="o">();</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">PinCodeFactory</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="p">();</span>
+    <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">String</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;%06d&quot;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">1_000_000</span><span class="o">));</span>
-        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCode</span><span class="o">(</span><span class="n">payload</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">pinCode</span><span class="o">;</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%06d&quot;</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">));</span>
+        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCode</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">pinCode</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setGenerator</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Random</span> <span class="n">generator</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">random</span> <span class="o">=</span> <span class="n">generator</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setGenerator</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Random</span> <span class="n">generator</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">random</span> <span class="o">=</span> <span class="n">generator</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>(Note: this is the final version)</p>
@@ -938,10 +938,10 @@ Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
 
 <p>Even if this requirement cannot be met with enough requests (because with enough requests, you will repeat a six-digit code), finding no repeated codes in 100 consecutive pin codes is enough. The user has to input the exact code they received, so the chance of repetition is quite low.</p>
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">there_are_no_repeated_with_the_given_seed</span> <span class="o">()</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
-    <span class="n">verifyAll</span><span class="o">(</span><span class="n">pinCodes</span><span class="o">(</span><span class="n">desiredProofSize</span><span class="o">),</span> <span class="n">pinCodes</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="o">(</span><span class="n">pinCodes</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="n">desiredProofSize</span><span class="o">)));</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">there_are_no_repeated_with_the_given_seed</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="n">verifyAll</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">),</span> <span class="n">pinCodes</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">.</span><span class="na">size</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">)));</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>This test is passing from the beginning with the fixed seed <code>1L</code>. But, if you enlarge the <code>desiredProofSize</code> to 1000, it does not pass anymore.</p>
@@ -962,124 +962,124 @@ Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
 
 <p>As a local copy:</p>
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="c1">//File PinCode.java</span>
-<span class="kn">package</span> <span class="nn">com.example</span><span class="o">;</span>
+<span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCode</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCode</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="nf">PinCode</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">o</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">o</span><span class="o">.</span><span class="na">getClass</span><span class="o">())</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="o">(</span><span class="n">PinCode</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">pinCode</span><span class="o">.</span><span class="na">value</span><span class="o">);</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">PinCode</span> <span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+    <span class="p">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Objects</span><span class="o">.</span><span class="na">hash</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Object</span> <span class="n">o</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">o</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">getClass</span><span class="p">()</span> <span class="o">!=</span> <span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="p">(</span><span class="n">PinCode</span><span class="p">)</span> <span class="n">o</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">pinCode</span><span class="p">.</span><span class="na">value</span><span class="p">);</span>
+    <span class="p">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">(</span><span class="s">&quot;PinCode{&quot;</span><span class="o">);</span>
-        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;value=&#39;&quot;</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="n">value</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;\&#39;&#39;</span><span class="o">);</span>
-        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;}&#39;</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Objects</span><span class="p">.</span><span class="na">hash</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">final</span> <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="p">(</span><span class="s">&quot;PinCode{&quot;</span><span class="p">);</span>
+        <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;value=&#39;&quot;</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="sc">&#39;\&#39;&#39;</span><span class="p">);</span>
+        <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="sc">&#39;}&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">sb</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="c1">//File PinCodeFactory.java</span>
-<span class="kn">package</span> <span class="nn">com.example</span><span class="o">;</span>
+<span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="p">{</span>
 
-    <span class="kd">private</span> <span class="n">Random</span> <span class="n">random</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Random</span> <span class="n">random</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="nf">PinCodeFactory</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="o">();</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">PinCodeFactory</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="p">();</span>
+    <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">String</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;%06d&quot;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">1_000_000</span><span class="o">));</span>
-        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCode</span><span class="o">(</span><span class="n">payload</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">pinCode</span><span class="o">;</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%06d&quot;</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">));</span>
+        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCode</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">pinCode</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setGenerator</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Random</span> <span class="n">generator</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">random</span> <span class="o">=</span> <span class="n">generator</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setGenerator</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Random</span> <span class="n">generator</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">random</span> <span class="o">=</span> <span class="n">generator</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="c1">//File PinCodeFactoryTest.java</span>
-<span class="kn">package</span> <span class="nn">com.example</span><span class="o">;</span>
+<span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">java.util.Collection</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.function.Consumer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collection</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Consumer</span><span class="p">;</span>
 
-<span class="kn">import static</span> <span class="nn">org.hamcrest.core.Is.is</span><span class="o">;</span>
-<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertThat</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.hamcrest.core.Is.is</span><span class="p">;</span>
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertThat</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactoryTest</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactoryTest</span> <span class="p">{</span>
 
-    <span class="kd">private</span> <span class="n">PinCodeFactory</span> <span class="n">pinCodeFactory</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">PinCodeFactory</span> <span class="n">pinCodeFactory</span><span class="p">;</span>
 
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="n">pinCodeFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCodeFactory</span><span class="o">();</span>
-        <span class="n">pinCodeFactory</span><span class="o">.</span><span class="na">setGenerator</span><span class="o">(</span><span class="k">new</span> <span class="n">Random</span><span class="o">(</span><span class="mi">1L</span><span class="o">));</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="n">pinCodeFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCodeFactory</span><span class="p">();</span>
+        <span class="n">pinCodeFactory</span><span class="p">.</span><span class="na">setGenerator</span><span class="p">(</span><span class="k">new</span> <span class="n">Random</span><span class="p">(</span><span class="mi">1L</span><span class="p">));</span>
+    <span class="p">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">there_are_no_repeated_with_the_given_seed</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
-        <span class="n">verifyAll</span><span class="o">(</span><span class="n">pinCodes</span><span class="o">(</span><span class="n">desiredProofSize</span><span class="o">),</span> <span class="n">pinCodes</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="o">(</span><span class="n">pinCodes</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="n">desiredProofSize</span><span class="o">)));</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">there_are_no_repeated_with_the_given_seed</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="n">verifyAll</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">),</span> <span class="n">pinCodes</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">.</span><span class="na">size</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">)));</span>
+    <span class="p">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_are_left_padded_with_zeros</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="n">verifyEachOf</span><span class="o">(</span><span class="n">pinCodes</span><span class="o">(</span><span class="mi">100</span><span class="o">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="o">(</span><span class="n">pincode</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="mi">6</span><span class="o">)));</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_are_left_padded_with_zeros</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="n">verifyEachOf</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pincode</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="mi">6</span><span class="p">)));</span>
+    <span class="p">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_do_not_contain_spaces</span> <span class="o">()</span> <span class="o">{</span>
-        <span class="n">verifyEachOf</span><span class="o">(</span><span class="n">pinCodes</span><span class="o">(</span><span class="mi">100</span><span class="o">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="o">(</span><span class="n">pincode</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">)));</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_do_not_contain_spaces</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="n">verifyEachOf</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pincode</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">)));</span>
+    <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">verifyEachOf</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">pincodes</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">assertion</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">pincode</span> <span class="o">:</span> <span class="n">pincodes</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">assertion</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">pincode</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">verifyEachOf</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">pincodes</span><span class="p">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">assertion</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">pincode</span> <span class="p">:</span> <span class="n">pincodes</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">assertion</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">pincode</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">verifyAll</span> <span class="o">(</span><span class="kd">final</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">pincodes</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">assertion</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">assertion</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">pincodes</span><span class="o">);</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">verifyAll</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">pincodes</span><span class="p">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">assertion</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">assertion</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">pincodes</span><span class="p">);</span>
+    <span class="p">}</span>
 
 
-    <span class="kd">private</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">pinCodes</span> <span class="o">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Stream</span><span class="o">.</span><span class="na">generate</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">pinCodeFactory</span><span class="o">.</span><span class="na">aNewPinCode</span><span class="o">().</span><span class="na">value</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="n">desiredProofSize</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toSet</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="kd">private</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">pinCodes</span> <span class="p">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Stream</span><span class="p">.</span><span class="na">generate</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="n">pinCodeFactory</span><span class="p">.</span><span class="na">aNewPinCode</span><span class="p">().</span><span class="na">value</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">limit</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toSet</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
         
@@ -2263,7 +2263,7 @@ Read: Wed, 27 Jun 2018 16:13:55 +0000</p>
 </div>
 
 <footer role="contentinfo">
-  <p>Copyright &copy; 2019 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+  <p>Copyright &copy; 2020 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
   <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
 </p>
 
