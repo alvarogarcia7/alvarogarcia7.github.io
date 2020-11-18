@@ -129,37 +129,344 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor/">Demand for TDD and Refactor</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/05/06/what-versus-how/">What versus How</a>
+    </h1>
+    <p >May 6, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/05/06/what-versus-how/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/idea/">idea</a><a class="label" href="https://alvarogarcia7.github.io/categories/what-vs-how/">what-vs-how</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>After reading the GOOS<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>, the more and more I get this feeling of what vs how:</p>
+
+<ul>
+<li>Information hiding</li>
+<li>The total simpler than the sum of the parts</li>
+<li>Extracting a concept so you can think about this. Makes you find better names:
+
+<ul>
+<li>test name</li>
+<li>variable name</li>
+<li>method name</li>
+<li>interface / protocol name</li>
+</ul></li>
+</ul>
+
+<p>I also got this feeling when reading Clean Code. But with this other book the smell is much harder, stronger. This same concept is repeated all over the book. In our discussions about the book, this concept appears again and again. I&rsquo;m thinking of adding a sub-title to the book:</p>
+
+<pre><code>Growing Object-Oriented Software, Guided by Tests
+What and not How
+</code></pre>
+
+<h2 id="applying-this-in-your-team">Applying this in your team</h2>
+
+<p>Now, there might be a problem if your team has a split opinion on &lsquo;what vs how&rsquo; (i.e., part of the team prefers what and another prefers how)</p>
+
+<p>Reasons I&rsquo;ve heard to defend how:</p>
+
+<ul>
+<li>The ones cited above</li>
+<li>Concision / shortness</li>
+<li>Code reusability</li>
+<li>Easier to test, extracting to collaborators<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup></li>
+</ul>
+
+<p>Reasons I&rsquo;ve heard to defend what:</p>
+
+<ul>
+<li>Knowing exactly what the code is doing: i.e., do not have to think what the name means and to what this corresponds
+<br /></li>
+</ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="http://www.growing-object-oriented-software.com/" target="_blank">Growing Object-Oriented Software Guided by Tests</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">Altough I believe you shouldn&rsquo;t do anything <em>just</em> for the purpose of tests. If it also improves your design, OK, but only for the tests, no.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/">Internal training: Testing is hard - just do it</a>
+    </h1>
+    <p >May 5, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/05/05/internal-training-testing-is-hard-just-do-it/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal/">internal</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal-training/">internal-training</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/testing/">testing</a><a class="label" href="https://alvarogarcia7.github.io/categories/laziness/">laziness</a><a class="label" href="https://alvarogarcia7.github.io/categories/open-questions/">open-questions</a><a class="label" href="https://alvarogarcia7.github.io/categories/article/">article</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/" target="_blank">Testing is hard - just do it</a></p>
+
+<h2 id="our-thoughts">Our thoughts</h2>
+
+<blockquote>
+<p>When a bug is found, prove it exists with a test</p>
+</blockquote>
+
+<p>This immediately reduces defect rate: the same regression cannot be introduced again</p>
+
+<blockquote>
+<p>fix a bug a second time</p>
+</blockquote>
+
+<p>If fixing a bug (having defects in your code) was &lsquo;waste&rsquo;, as defined by lean methodologies, it also is wast fixing it for the following times</p>
+
+<blockquote>
+<p>testing requires discipline</p>
+</blockquote>
+
+<p>Agree. See quote by Larry Wall (this same article)</p>
+
+<blockquote>
+<p>[Three requirements for a good test suite]:</p>
+
+<ol>
+<li>The tests need to be easier to write</li>
+<li>The test suite must run, and pass, before any code is allowed out the door</li>
+<li>Support from the project&rsquo;s leadership</li>
+</ol>
+</blockquote>
+
+<p>Agree.</p>
+
+<blockquote>
+<p>Programming is like drawing water from a well</p>
+</blockquote>
+
+<p>Good analogy</p>
+
+<blockquote>
+<p>I&rsquo;m going to assume you are smarter than me [&hellip;]</p>
+</blockquote>
+
+<p>This is related to &lsquo;doing clever things&rsquo;: when I write &lsquo;clever code&rsquo;, that has neither comments, nor it is massaged to be Clean Code, it will cost me many times more to modify / understand in the future vs massage it a little bit.</p>
+
+<p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
+
+<p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="p">){</span>
+	<span class="k">return</span> <span class="n">elements</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>vs</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="p">){</span>
+	<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="p">(</span><span class="n">elements</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">validElements</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="open-questions-other-ideas">Open questions / other ideas</h2>
+
+<ul>
+<li>There are tests that are more important than others. Is there a tool to assign them weights and inform about which preponderation of the codebase is broken? The same (i.e., more importance) can happen for production code.</li>
+<li>Is SCRUM apt for junior developers? In the sense of the increased autonomy, more decisions, more required technical skills / values, etc</li>
+<li>We discussed what differentiates a project with a shorter deadline from one with a longer deadline. The consensus was: you should do tests for any kind of project, the shorter deadline project won&rsquo;t allow as much time for refactoring</li>
+<li>Tests iff (i.e., if and only if) working code</li>
+<li>Tests do not guarantee lack of defects</li>
+<li>Bijectiveness between tests and features (production code)
+<!--
+Expand on this bijectiveness
+--></li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/05/04/video-nothing-is-something/">Video: Nothing is something</a>
+    </h1>
+    <p >May 4, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/05/04/video-nothing-is-something/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/talk/">talk</a><a class="label" href="https://alvarogarcia7.github.io/categories/video/">video</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandy-metz/">sandy-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/bathruby/">bathruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/composition-vs-inheritance/">composition-vs-inheritance</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I have seen this video: <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A" target="_blank">Nothing is something</a> by <a href="https://twitter.com/@sandimetz" target="_blank">Sandi Metz</a>, as I saw it recommended <a href="http://garajeando.blogspot.com.es/2015/04/interesting-talk-nothing-is-something.html" target="_blank">here</a></p>
+
+<p>In the video, she talks programming in this fashion: (it is a stack, not an unordered list)</p>
+
+<ul>
+<li>Abstraction seeking</li>
+<li>Message centric</li>
+<li>Condition Averse</li>
+<li>Smalltalk Infected</li>
+</ul>
+
+<blockquote>
+<p>Not here to change the language but change you</p>
+</blockquote>
+
+<p>This is a pattern I&rsquo;ve also heard from <a href="https://twitter.com/@old_sound" target="_blank">Alvaro Videla</a>, where he said that other, more powerful languages can change your mind and help you bring some of those concepts to your own language. He was talking about Haskell, she, about Smalltalk.</p>
+
+<p>She shows how to smell the <code>null object pattern</code> (that she independently discovered herself too - can be improved studying the classics<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>), also called <code>active nothing</code>. Decorates the <code>Animal</code> with a wrapper, to call it <code>GuaranteedAnimal</code></p>
+
+<p>Later on, shows how to code an example on a &lsquo;tail&rsquo;, extending behaviour with inheritance and how to get rid of it: prefer composition versus inheritance. The importance of roles.</p>
+
+<blockquote>
+<p>Inheritance is for specialization, not for sharing code</p>
+</blockquote>
+
+<p>Steps to convert inheritance into composition:</p>
+
+<ol>
+<li>Isolate the difference</li>
+<li>Name the concept</li>
+<li>Define the role</li>
+<li>Inject the players</li>
+</ol>
+
+<p>This is a trick I discovered here: when you don&rsquo;t know what name put here, create a spreadsheet and ask yourself what name the row should have. There is an example <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=9lv2lBq6x4A#t=1959" target="_blank">at this minute</a></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">a reference to a pattern by the same name at <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382" target="_blank">Apprenticeship Patterns</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/30/internal-training-introduction-to-angularjs/">Internal training: Introduction to AngularJs</a>
+    </h1>
+    <p >Apr 30, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/30/internal-training-introduction-to-angularjs/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal/">internal</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal-training/">internal-training</a><a class="label" href="https://alvarogarcia7.github.io/categories/angularjs/">angularjs</a><a class="label" href="https://alvarogarcia7.github.io/categories/angular/">angular</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>At a client, today I&rsquo;ve done an internal training on <a href="https://angularjs.org/" target="_blank">angular js</a>: we&rsquo;ve prepared some <a href="https://github.com/alvarogarcia7/demo-frontend-angularjs/tree/master/slides" target="_blank">slides</a> and a live demo.</p>
+
+<p>The repository with all the information can be found <a href="https://github.com/alvarogarcia7/demo-frontend-angularjs" target="_blank">here</a>.</p>
+
+<p>Apparently, the training has been a success, given that most of the talent in the team is backend focused (as opposed to full-stack) and changing from java to javascript is not straight-forward.</p>
+
+<p>Note: this post has been created a posteriori, dated with the correct training timestamp.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/25/whose-fault-is-this/">Whose fault is this?</a>
     </h1>
     <p >Apr 25, 2015
          - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/25/demand-for-tdd-and-refactor/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/25/whose-fault-is-this/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/idea/">idea</a><a class="label" href="https://alvarogarcia7.github.io/categories/overheard/">overheard</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-gorman/">jason-gorman</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop/">workshop</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/fault/">fault</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/craft-conf/">craft-conf</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/flow/">flow</a><a class="label" href="https://alvarogarcia7.github.io/categories/mihaly-csikszentmihalyi/">mihaly-csikszentmihalyi</a>
         
     </p>
 </header>
 
 
         
-        <p>When I went to the Jason Gorman&rsquo;s TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), he said something interesting regarding refactor and TDD:</p>
+        <p>In the prologue of the book, while thanking everyone that has made the book possible:</p>
 
 <blockquote>
-<p>In job offers / advertisements, TDD is much more in demand than refactor. But the latter is included in the former as an integral part.</p>
+<p>[&hellip;], none of the people mentioned here would be responsible for any inaccuracy that might exist in the book, as this responsibility is exclusively mine</p>
 
-<p>Jason Gorman</p>
+<p>Mihaly Csikszentmihalyi (translated)<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>, prologue of &ldquo;<a href="http://www.amazon.com/Flow-The-Psychology-Optimal-Experience/dp/0061339202" target="_blank">Flow</a>&ldquo;</p>
 </blockquote>
 
-<p>I agree with the second thought: you cannot properly do TDD without refactoring, as it is an integral part; also the third phase.</p>
+<p>(More posts on this same book, <a href="/categories/flow
+/">here</a>)</p>
 
-<p>For me, sometimes refactoring is the difference between code and &ldquo;Clean Code&rdquo; (as defined in the book by the same title). If I cannot find the (algorithmic) pattern for the software I&rsquo;m writing, I try to introduce scaffolds to keep investigating until I can find a viable, general solution (if the problem requires it.)</p>
+<p>This connects with what <a href="http://twitter.com/@tastapod" target="_blank">Dan North</a> said in the Craft Conf about this idea of the &ldquo;I&rsquo;m the only one in the company producing good quality work, the rest are not doing the same&rdquo;. Of course, he was quoting greedy, selfish people who think this instead of attributing the success to the whole team.</p>
 
-<p>Even after doing the refactor <code>replace algorithm</code>, the code might not have the responsibilities in the right place, the methods might be long, value objects not extracted yet, etc. This is where further refactor is needed to introduce all those qualities in the piece of software.</p>
+<p>Regarding the whole team, if I recall correctly, it was <a href="http://twitter.com/@svenpet" target="_blank">Sven Peters</a> who explained that &ldquo;[&hellip;] either the team wins or looses. There are no individual wins [&hellip;]&rdquo; <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup></p>
 
-<p>I believe that we programmers have done a bad job of communicating with the rest of the organization what refactoring is about. It has nothing to do with beauty, style or design (in the visual sense) but is related to maintainability, coupling, defects and quality. Money, in the long run, as its objective is to make it cheaper to change in the future, a better investment and ROI. This is the common language that the rest of the company understands.</p>
+<p>In this sense, Csikszentmihalyi assumes all responsibility when quoting and reflecting on other&rsquo;s works. It was his idea to develop on top of others, so any imperfection is his.</p>
+
+<p>This is similar as when approving a pull request: you make sure that the code works and you stand by it. It is no longer the original owner&rsquo;s cause, but yours too, as you have signed this request. On the pull request, though, the code ownership is already distributed among the whole team, but approvals ensures the presence of the <a href="/categories/guardian-of-the-source
+/">guardian of the source</a></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">I had to translate the quote, because I did not borrow the book in English
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">When the talks are available, we will be able the ensure the correct attribution of this idea.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
 
         
 
@@ -172,416 +479,42 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/">Talks I have attended at the Craft Conf 2015</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/25/how-i-read-apprenticeship-patterns/">How I read Apprenticeship Patterns</a>
     </h1>
     <p >Apr 25, 2015
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/25/talks-i-have-attended-at-the-craft-conf-2015/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/25/how-i-read-apprenticeship-patterns/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/craft-conf/">craft-conf</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/attended-talks/">attended-talks</a><a class="label" href="https://alvarogarcia7.github.io/categories/budapest/">budapest</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>These are the talks I&rsquo;ve attended at the Craft Conf 2015:</p>
-
-<h2 id="thursday-23th">Thursday 23th</h2>
-
-<ul>
-<li>Opening keynote by <a href="http://twitter.com/@tastapod" target="_blank">Dan North</a> and <a href="http://twitter.com/@jessitron" target="_blank">Jessica Kerr</a></li>
-<li>Writing testable code - A functional programming point of view, by <a href="http://twitter.com/@old_sound" target="_blank">Alvaro Videla</a></li>
-<li>Coding Culture, by <a href="http://twitter.com/@svenpet" target="_blank">Sven Peters</a></li>
-<li>OnConnectionLost: the life of an offline web application, by <a href="http://twitter.com/@sgrewenig" target="_blank">Stefanie Grewenig</a> and <a href="http://twitter.com/@jthoenes" target="_blank">Johannes Thönes</a></li>
-<li>Concurrency: It&rsquo;s harder (and easier) than you think, by <a href="http://twitter.com/@paulrabutcher" target="_blank">Paul Butcher</a></li>
-<li>Testing and Integration (the remix), by <a href="http://twitter.com/@randommood" target="_blank">Inés Sombra</a></li>
-<li>Beyond Features: Rethinking agile planning and tracking, by <a href="http://twitter.com/@tastapod" target="_blank">Dan North</a></li>
-<li>Closing keynote by <a href="http://twitter.com/@alfrehn" target="_blank">Alf Rehn</a></li>
-</ul>
-
-<h2 id="friday-24th">Friday 24th</h2>
-
-<ul>
-<li>Opening keynote: The New New Software development game: Containers, Microservices and Contract tests, by <a href="http://twitter.com/@mpoppendieck" target="_blank">Mary Poppendieck</a></li>
-<li>Apprenticeship patterns, revisited, by <a href="http://twitter.com/@davehoover" target="_blank">Dave Hoover</a></li>
-<li>Interaction Driven Design, by <a href="http://twitter.com/@sandromancuso" target="_blank">Sandro Mancuso</a></li>
-<li>The hidden dimension of refactoring, by <a href="http://twitter.com/@mfeathers" target="_blank">Michael Feathers</a></li>
-<li>Why is an API like a puppy, by <a href="http://twitter.com/@ade_oshineye" target="_blank">Adewale Oshineye</a></li>
-<li>Microservice antipatterns, by <a href="http://twitter.com/@tsaleh" target="_blank">Tammer Saleh</a></li>
-</ul>
-
-<p>I couldn&rsquo;t attend the last talk nor the keynote as I had to get to the airport</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/">What legacy code is about</a>
-    </h1>
-    <p >Apr 21, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/21/what-legacy-code-is-about/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/trust/">trust</a><a class="label" href="https://alvarogarcia7.github.io/categories/clean-code/">clean-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-feathers/">michael-feathers</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/definition/">definition</a><a class="label" href="https://alvarogarcia7.github.io/categories/update-definition/">update-definition</a><a class="label" href="https://alvarogarcia7.github.io/categories/tests/">tests</a><a class="label" href="https://alvarogarcia7.github.io/categories/unit-test/">unit-test</a><a class="label" href="https://alvarogarcia7.github.io/categories/working-effectively-with-legacy-code/">working-effectively-with-legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/welc/">welc</a><a class="label" href="https://alvarogarcia7.github.io/categories/wewlc/">wewlc</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship-patterns/">apprenticeship-patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading-guide/">reading-guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a>
         
     </p>
 </header>
 
 
         
-        <p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers" target="_blank">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers" target="_blank">Michael Feathers</a> describes:</p>
+        <!--
+TODO add link to the craft page in my blog
+-->
 
-<blockquote>
-<p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
+<p>At the Craft Conf 2015 I saw someone with the book <a href="http://www.amazon.com/Apprenticeship-Patterns-Guidance-Aspiring-Craftsman/dp/0596518382" target="_blank">Apprenticeship Patterns</a> by <a href="http://twitter.com/@davehoover" target="_blank">Dave Hoover</a> and <a href="http://twitter.com/@ade_oshineye" target="_blank">Adewale Oshineye</a> and asked them about the book. After praising the contents, they asked me how to approach the book.</p>
 
-<p>M Feathers, in the preface of Working effectively with legacy code</p>
-</blockquote>
-
-<p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
-
-<p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
-
-<p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
+<p>I recalled reading it non-sequentially, and explained it to them:</p>
 
 <ul>
-<li>some test the test framework</li>
-<li>some the language</li>
-<li>some test a happy path that works by pure luck</li>
-<li>some functionalities are tested (not all happy paths)</li>
-<li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
+<li>Read the introduction, preface, etc first</li>
+<li>When you get to the patterns, pick one at random</li>
+<li><code>10</code>: Read it and navigate through the <code>see also</code>.</li>
+<li>If there are unread chapters from the <code>see also</code>, <code>goto 10</code></li>
+<li>Find the remaining unread chapters and read them, try to apply the same algorithm</li>
+<li>Read the appendices and finishing words</li>
 </ul>
 
-<p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
+<p>Reading a connected chapter after the first one made me connect the dots and understand it much better than reading them sequentially.</p>
 
-<p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
-
-<p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
-
-<p>This is why I would like to update the definition:</p>
-
-<blockquote>
-<p>Legacy code is code without tests that provide trust to all your stakeholders</p>
-</blockquote>
-
-<p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
-
-<p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
-
-<p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a>
-    </h1>
-    <p >Apr 21, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/aspect/">aspect</a><a class="label" href="https://alvarogarcia7.github.io/categories/aspectj/">aspectj</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/annotation/">annotation</a><a class="label" href="https://alvarogarcia7.github.io/categories/snippet/">snippet</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.</p>
-
-<p>The code provides a way of doing <code>try|catch</code>, specifying an exception to be caught.</p>
-
-<p>The source code is available <a href="https://github.com/alvarogarcia7/annotation-aspect-java" target="_blank">here</a></p>
-
-<h2 id="in-the-process">In the process</h2>
-
-<p>This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.</p>
-
-<p>If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t). The unmassaged code can be found <a href="https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e" target="_blank">here</a>. The massaged version is at the <a href="https://github.com/alvarogarcia7/annotation-aspect-java/" target="_blank">tip of the arrow</a></p>
-
-<h2 id="more-information">More information</h2>
-
-<p>Regarding <code>annotations</code> (like @Override):</p>
-
-<ul>
-<li><a href="https://docs.oracle.com/javase/tutorial/java/annotations/" target="_blank">This official article</a> on annotations is useful.</li>
-<li><a href="http://www.vogella.com/tutorials/JavaAnnotations/article.html" target="_blank">This article</a> by Lars Vogel guides you step by step.</li>
-<li><a href="http://tutorials.jenkov.com/java/annotations.html" target="_blank">This article</a> by Jakov Jenkov is very nice.</li>
-<li><a href="http://crunchify.com/understanding-java-annotation-annotation-examples/" target="_blank">This article</a> helps you to understand what an annotation is and what to use it for.</li>
-</ul>
-
-<p>Regarding <code>aspect</code> (based on AspectJ):</p>
-
-<ul>
-<li><a href="http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation" target="_blank">This question</a> has been my main source of information / inspiration for the spring + aspectj configuration
-<br /></li>
-</ul>
-
-<h2 id="conclusions">Conclusions</h2>
-
-<p>One of the drawbacks that I find to common examples or tutorials is that they&rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including <code>pom.xml</code> (dependencies) and tests.</p>
-
-<p>Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/">Logging is a feature</a>
-    </h1>
-    <p >Apr 19, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/logging/">logging</a><a class="label" href="https://alvarogarcia7.github.io/categories/log/">log</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature/">feature</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/challenge/">challenge</a><a class="label" href="https://alvarogarcia7.github.io/categories/splunk/">splunk</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of <a href="http://www.splunk.com/" target="_blank">Splunk</a>.</p>
-
-<p>This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
-
-<p>Strategies for dealing with this:</p>
-
-<ul>
-<li>functional logger: no shared state
-
-<ul>
-<li>can only log information available in this scope: parameters, attributes, static information</li>
-</ul></li>
-<li>stateful logger: information is added to the threadContext and logged whenever necessary
-
-<ul>
-<li>can log information in this scope plus any of the previous invokings.</li>
-<li>the problem is precisely sharing state: you have to control all the possible parents to know where this data comes from. A piece of information may come from any source.</li>
-<li>Lose the reference of who is invoking you, as there is no customization for this. (only using implementation)</li>
-<li>Speak two different languages: one for logging and one for business logic</li>
-</ul></li>
-<li>mixed: mix and match the best of both worlds.
-
-<ul>
-<li>The problem with the shared state can be solved if no data is overwritten and any information is stored in a map where the key is the fully qualified (FQ) method name (or FQ class name + FQ method name)</li>
-</ul></li>
-</ul>
-
-<p>The GOOS book explains this very well on the 20th chapter, first half &ldquo;logging is a feature&rdquo;. If we log as described in chapters 19 and 20, some of the problems are reduced:</p>
-
-<ul>
-<li>multiple levels of abstraction</li>
-<li>indirect control over logging. decide in a single place whether to log exceptions of each kind or not</li>
-<li>remove &ldquo;implementation details&rdquo; such as &ldquo;log.isDebugEnabled&rdquo;</li>
-<li>remove performance issues: no need to build strings for logging every time, only need to pass objects. inside the logging layer, if the logger is enabled for that level, then spend the time building strings and print them
-<br /></li>
-</ul>
-
-<p>We should remember that:</p>
-
-<ul>
-<li>Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.</li>
-<li>Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly</li>
-</ul>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity matters</a>
-    </h1>
-    <p >Apr 18, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/rich-hickey/">rich-hickey</a><a class="label" href="https://alvarogarcia7.github.io/categories/talk/">talk</a><a class="label" href="https://alvarogarcia7.github.io/categories/keynote/">keynote</a><a class="label" href="https://alvarogarcia7.github.io/categories/rails-conf/">rails-conf</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey" target="_blank">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0" target="_blank">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok" target="_blank">Manuel Rivero</a>&rsquo;s google plus&rsquo; <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1" target="_blank">site</a></p>
-
-<p>here are my notes:</p>
-
-<ul>
-<li>the software is the elephant</li>
-<li>do more, do it differently, do it better</li>
-<li>complexity of the elephant is going to dominate what you can do</li>
-<li>your ability to reason about your program is critical</li>
-<li>design is about pulling things apart</li>
-<li>become familiar by learning, trying</li>
-<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
-</ul>
-
-<p>Complexity vs simplicity:</p>
-
-<table>
-<thead>
-<tr>
-<th>Complexity</th>
-<th>Simplicity</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>state, objects</td>
-<td>values</td>
-</tr>
-
-<tr>
-<td>methods</td>
-<td>functions, namespaces</td>
-</tr>
-
-<tr>
-<td>variables</td>
-<td>managed refs</td>
-</tr>
-
-<tr>
-<td>inheritance, switch, matching</td>
-<td>polymorphism à la carte</td>
-</tr>
-
-<tr>
-<td>syntax</td>
-<td>data</td>
-</tr>
-
-<tr>
-<td>imperative loops, fold</td>
-<td>set functions</td>
-</tr>
-
-<tr>
-<td>actors</td>
-<td>queues</td>
-</tr>
-
-<tr>
-<td>ORM</td>
-<td>declarative data manipulation</td>
-</tr>
-
-<tr>
-<td>conditionals</td>
-<td>rules</td>
-</tr>
-
-<tr>
-<td>inconsistency</td>
-<td>consistency</td>
-</tr>
-</tbody>
-</table>
-
-<ul>
-<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
-<li>simplicity is not about you. simplicity is a lot of hard work
-
-<ul>
-<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html" target="_blank">LISP startup</a></li>
-</ul></li>
-<li>simplicity is not an objective</li>
-</ul>
-
-<p>Order is all over the place:</p>
-
-<table>
-<thead>
-<tr>
-<th>Complex</th>
-<th>Simple</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>positional arguments</td>
-<td>named arguments or map</td>
-</tr>
-
-<tr>
-<td>syntax</td>
-<td>data</td>
-</tr>
-
-<tr>
-<td>product types</td>
-<td>associate records</td>
-</tr>
-
-<tr>
-<td>imperative programs</td>
-<td>declarative programs</td>
-</tr>
-
-<tr>
-<td>prolog</td>
-<td>datalog</td>
-</tr>
-
-<tr>
-<td>call chains</td>
-<td>queues</td>
-</tr>
-
-<tr>
-<td>XML</td>
-<td>JSON, Clojure literals</td>
-</tr>
-</tbody>
-</table>
+<p>PS: This post was extracted from this one: <a href="../../../../2015/02/02/your-first-language/">here</a></p>
 
         
 
@@ -676,6 +609,8 @@
     
         <a href="/blog/page/34/" class="label-pagination">34</a>
     
+        <a href="/blog/page/35/" class="label-pagination">35</a>
+    
 
     
     
@@ -684,7 +619,7 @@
 
     
     
-        <a href="/blog/page/34/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -744,11 +679,35 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
           <li class="post">
+            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
           </li>
         
           <li class="post">
@@ -757,30 +716,6 @@
         
           <li class="post">
             <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/01/self-study-june-2019/">Self-Study in June 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/30/defense-tooling/">In Defense of Tooling</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/29/keeping-intermediate-history-work-git/">Automatically keeping the intermediate history of your work using git</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/01/self-study-may-2019/">Self-Study in May 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/04/01/self-study-april-2019/">Self-Study in April 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/03/31/books-read-2019q1/">Books read in 2019Q1</a>
           </li>
         
       </ul>

@@ -129,282 +129,138 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/02/07/open-discussion-on-code-reviews/">Open discussion: On code reviews</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/23/kata-persistent-linked-list/">kata: persistent linked list</a>
     </h1>
-    <p >Feb 7, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/02/07/open-discussion-on-code-reviews/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/internal-training/">internal-training</a><a class="label" href="https://alvarogarcia7.github.io/categories/open-discussion/">open-discussion</a><a class="label" href="https://alvarogarcia7.github.io/categories/code-review/">code-review</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>At a client, I organized an open discussion on code reviews. We had a great conversation.</p>
-
-<p>The main idea was to discuss about it and share the ideas each one had. I didn&rsquo;t want it to turn into a masterclass (see <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch02.html#the_white_belt" target="_blank">the white belt</a>)</p>
-
-<h2 id="benefits">Benefits</h2>
-
-<p>These are the main benefits we saw in it:</p>
-
-<ul>
-<li>Increased trust</li>
-<li>Learning from others, other approaches</li>
-<li>Less defects, more quality</li>
-<li>Increased <a href="http://en.wikipedia.org/wiki/Bus_factor" target="_blank">bus factor</a>, decreased information silos</li>
-<li>Also:
-
-<ul>
-<li>Getting out of your comfort zone</li>
-<li>Communicating more often (code style, edge cases, complaining, etc)</li>
-</ul></li>
-</ul>
-
-<h2 id="pair-programming">Pair programming</h2>
-
-<p>Then we discussed about the topic of <a href="/categories/code-review
-/">code reviews</a> and <a href="/categories/pair-programming
-/">pair programming</a>:</p>
-
-<ul>
-<li><p>How do they mix</p>
-
-<ul>
-<li>Is the need for code review reduced when doing pair programming?</li>
-<li>It is cheaper to catch defects when pairing than code review (e.g., less to modify, mental caches are hot, &hellip;), so why do code reviews? <a href="https://twitter.com/jbrains" target="_blank">J. B. Rainsberger</a> has an <a href="http://us2.campaign-archive2.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=acc77a0fb2&amp;e=4a925444f9" target="_blank">article</a> about it</li>
-</ul></li>
-
-<li><p>Does it give you the same benefits?</p>
-
-<ul>
-<li>I argued that it does, some of my colleagues argued against as one is &ldquo;while doing&rdquo; and the other is after.</li>
-</ul></li>
-</ul>
-
-<h2 id="practice-practice-practice">Practice, Practice, Practice</h2>
-
-<p>This is also a reference to a chapter by the same name (<a href="http://chimera.labs.oreilly.com/books/1234000001813/ch05.html#practice_comma_practice_comma_practice" target="_blank">here</a>)</p>
-
-<p>We proposed this problem:</p>
-
-<blockquote>
-<p>Receive a list of numbers to a command-line (CLI) application and print their sum</p>
-</blockquote>
-
-<p>I wrote simple code listing and we reviewed it. The code is <a href="https://gist.github.com/alvarogarcia7/258faea12cb9375539fe" target="_blank">here as a gist</a></p>
-
-<p>(Just in case, I wrote this listing with some defects / smells on purpose)</p>
-
-<p>Here are the comments:</p>
-
-<ul>
-<li>Not all parameters will be added, only the first three</li>
-<li>The parameters are out of order, overcomplicating things. Is it due to something? Should I be careful about it?</li>
-<li>There is duplication (i.e., parsing from string)</li>
-<li>Bad naming: what is <code>a</code>, <code>b</code>, <code>c</code>?</li>
-<li>There are no tests for it. No manual / javadoc either. Therefore, it&rsquo;s difficult to maintain</li>
-
-<li><p>Difficult to test: a smell for bad design?</p>
-
-<ul>
-<li>How to test the adding by itself? The output is to the console, so we have to capture it (at GMaur we published this tool: <a href="https://github.com/GMaur/legacyutils" target="_blank">legacyUtils</a>)</li>
-<li>How to test the parsing if there is no mock to be injected? Only via state tests, therefore &ldquo;end to end&rdquo; tests as it includes the adding</li>
-</ul></li>
-
-<li><p>Mixed concerns / responsibilities. Parsing the numbers and adding them are different concerns and should not be together</p></li>
-</ul>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<ul>
-<li>No one was against it</li>
-<li>We all agreed that is important to do it even in time-constrained environments</li>
-<li>It is also important to review our code reviews to make the most of it. The article by <a href="http://us2.campaign-archive2.com/?u=80ca60ec48ef77dfaa1f38943&amp;id=acc77a0fb2&amp;e=4a925444f9" target="_blank">J. B. Rainsberger</a> is quite useful for that</li>
-<li>Even small codes can be bad and need to be reviewed (as the example)</li>
-<li>Quick and dirty proof of concept do not mix well with code reviews</li>
-</ul>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/02/03/pairing-with-junior-developers/">Pairing with junior developers</a>
-    </h1>
-    <p >Feb 3, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/02/03/pairing-with-junior-developers/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/pairing/">pairing</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/expertise/">expertise</a><a class="label" href="https://alvarogarcia7.github.io/categories/junior/">junior</a><a class="label" href="https://alvarogarcia7.github.io/categories/senior/">senior</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience/">experience</a><a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship/">apprenticeship</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>After reading <a href="https://devmynd.com/blog/2015-1-pairing-with-junior-developers" target="_blank">this blog post</a>, here are my thoughts:</p>
-
-<p><strong>WARNING</strong>: the post was about how to do it, these reflections are on a more philosophical level</p>
-
-<p>This is a controversial topic, as:</p>
-
-<ul>
-<li>You cannot discern how much or little the other person knows more than you. I cannot find the reference anymore, but it was a to the tune of &ldquo;once the other person&rsquo;s level is higher than yours, you cannot know how much&rdquo;</li>
-<li>There are different knowledge areas. Yours and theirs might overlap on some areas, but not completely. So they may be experts on an area that is not useful to the technology you&rsquo;re currently using.</li>
-<li>Different people have different passions and motivators.</li>
-</ul>
-
-<p>When and where are you a junior and a senior?</p>
-
-<ul>
-<li>Does it depend on each job?</li>
-<li>Is it on each product you work?</li>
-<li>Is it on each team?</li>
-</ul>
-
-<blockquote>
-<p>&ldquo;when you join a new project you are starting from square one&rdquo;</p>
-
-<p><cite> D. Hoover, A. Oshineye </cite> in the chapter <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch04.html#solution_id21" target="_blank">Sweep the floor</a>, <a href="http://chimera.labs.oreilly.com/books/1234000001813/index.html" target="_blank">Apprenticeship patterns</a></p>
-</blockquote>
-
-<p>Related to the amount of senior people, is there only one senior per team?</p>
-
-<ul>
-<li>Can everybody be a senior? If we assert this is true, what about &ldquo;if everything matters, nothing matters&rdquo;. Does that mean that everyone is senior or there are different levels of seniority and we call &ldquo;the senior&rdquo; the one on the top of the list?</li>
-<li>Who choses the senior within the team? Is it self-organized, self-chosen? Do the people chose one? Is a shared responsibility, as each one masters a (possibly different) subject?</li>
-</ul>
-
-<p>Food for thought.</p>
-
-<p>What do you think about it?</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish/">Book: Diseño Ágil con TDD (Spanish)</a>
-    </h1>
-    <p >Feb 2, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/02/02/book-diseno-agil-con-tdd-spanish/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-review/">book-review</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/wewlc/">wewlc</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>I&rsquo;ve read this book <a href="http://www.carlosble.com/libro-tdd/" target="_blank">Diseño Ágil con TDD</a> (Spanish) by
-<a href="https://twitter.com/carlosble" target="_blank">Carlos Blé</a> from cover to cover,
-when previously I had only read the theoretical parts (Part I and Chapter 12 in Part II).</p>
-
-<p>It&rsquo;s worth noting that this is the first TDD book in Spanish (I haven&rsquo;t found any book in Spanish predating this one - also backed by the author; published in January 2010) and, as such, there are some translations that could be improved. Not that it makes it more difficult to read. Sometimes it&rsquo;s a good idea to roughly translate concepts into English and then you&rsquo;ll understand the point.</p>
-
-<h2 id="first-part">First part</h2>
-
-<p>The first part is very interesting, a theoretical introduction into TDD, ATDD and Agile methodologies. Points to some good books as a reference (e.g., Growing Object Oriented Software, Guided by Tests; Working Effectively with Legacy Code; Refactoring; etc)</p>
-
-<p>He explains the TDD algorithm (chapter 2) and the ATDD one (chapter 3). These two are maybe the two most important ones on the book. Should you read only a part of this book, I&rsquo;d recommend to read the motivational intro (the fable on the preface) and these two.</p>
-
-<p>He gives excellent pieces of advice who, correctly applied, would set the basis for good software development, such as SOLID, Object Oriented Design (OOD), Inversion of Control (IoC), etc. (See chapter 7, &ldquo;Diseño orientado a objetos&rdquo;).</p>
-
-<p>There&rsquo;s a chapter (number 6) on &ldquo;Mocks and other test doubles&rdquo; (translation is mine)</p>
-
-<h2 id="second-part">Second part</h2>
-
-<p>The second part, as many other books where the source code is printed, was dense for me. Other books, such as <a href="http://www.growing-object-oriented-software.com/" target="_blank">GOOS</a>, show differences in content with bold typeface, to ease the reader&rsquo;s task.  In my opinion, it would be useful to color the diffs, show them on the left and right, or even show the raw diff (e.g., <code>+++</code> <code>---</code>). I&rsquo;m envisioning a typing program as LaTeX where you could specify a commit with its parent and a range of lines to output.</p>
-
-<p>The second part is written in C# and python, to show a TDD session with him. Warning: it&rsquo;s much better in person than reading his book!</p>
-
-<p>The chapter 12 is a set of antipatterns you might find after starting with TDD. Even after you keep practicing TDD for a while, you will not get rid of these smells. Highly recommended.</p>
-
-<p>There&rsquo;s also an appendix on Continuous Integration, although there are better books for this.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>Recommend this book if you are starting with TDD, or you are more advanced but it&rsquo;s difficult for you to read in English.</p>
-
-<p>Always good as a refresher to read the theoretical part and the antipatterns</p>
-
-<p>PS: This book is free to read, published under a Creative Commons license (don&rsquo;t know exactly which one)</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/02/02/your-first-language/">Your First Language</a>
-    </h1>
-    <p >Feb 2, 2015
+    <p >Feb 23, 2015
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/02/02/your-first-language/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/23/kata-persistent-linked-list/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship-patterns/">apprenticeship-patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/patterns/">patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/paradigm/">paradigm</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/kaizen/">kaizen</a><a class="label" href="https://alvarogarcia7.github.io/categories/linked-list/">linked-list</a><a class="label" href="https://alvarogarcia7.github.io/categories/persistent-data-structure/">persistent-data-structure</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a>
         
     </p>
 </header>
 
 
         
-        <p>After reading (in a specific order - below) part of the patterns in <a href="http://shop.oreilly.com/product/9780596518387.do" target="_blank">Apprenticeship Patterns</a>,
-I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch02.html#your_first_language" target="_blank">&ldquo;Your First Language&rdquo;</a></p>
+        <p>I&rsquo;ve just written a new kata, about a persistent linked list.</p>
 
-<p>First of all, the illustration with the baby reading a Java book is priceless.</p>
+<p>It is using the same project as for the <a href="https://github.com/alvarogarcia7/kata-linkedlist" target="_blank">linked list kata</a>.</p>
 
-<p>Having said that, I came to the realization that you might not know a paradigm but just an implementation
-(e.g., you don&rsquo;t know about Object-Oriented programming but just about Java), in the same fashion as you could not know about LISPs but only about an implementation, such as clojure.</p>
+<p>For now, only the <code>add</code>, <code>contains</code> and <code>size</code> methods are implemented.</p>
 
-<p>Also, clicks with the idea of &ldquo;code to interfaces, not implementations&rdquo;. Does it also click with you?</p>
+<p>If you have any comments or code review, please let me know</p>
 
-<p>PS: What a great book this is. I&rsquo;m reading it as explained <a href="../../../../2015/04/25/how-i-read-apprenticeship-patterns/">here</a> <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup></p>
+        
 
-<p>PPS: you can read it online for free, <a href="http://chimera.labs.oreilly.com/books/1234000001813/" target="_blank">here</a></p>
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/22/polishing-your-tools/">Polishing your tools</a>
+    </h1>
+    <p >Feb 22, 2015
+         - 5 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/22/polishing-your-tools/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/toolsmith/">toolsmith</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish/">polish</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsman/">craftsman</a><a class="label" href="https://alvarogarcia7.github.io/categories/trade/">trade</a><a class="label" href="https://alvarogarcia7.github.io/categories/mythical-man-month/">mythical-man-month</a><a class="label" href="https://alvarogarcia7.github.io/categories/surgical-team/">surgical-team</a><a class="label" href="https://alvarogarcia7.github.io/categories/brooks/">brooks</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/who-owns-your-career/">who-owns-your-career</a><a class="label" href="https://alvarogarcia7.github.io/categories/fred-brooks/">fred-brooks</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<h2 id="the-toolsmith">The toolsmith</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Fred_Brooks" target="_blank">Frederick P Brooks, Jr</a> quoted / explained a theory explained by Mills and Baker<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> around 1971-72:</p>
+
+<blockquote>
+<p>Chapter 3: The Surgical Team</p>
+
+<p>[&hellip;] but the team be organized like a surgical team rather than a hog-butchering team. That is, instead of each member cutting away on the problem, one does the cutting and the others give him[her] every support that will enhance his[her] effectiveness and productivity.</p>
+
+<p>[&hellip;]</p>
+
+<p><quote> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team </quote></p>
+</blockquote>
+
+<p>(Text between square brackets is mine)</p>
+
+<p>The author goes on to explain the job descriptions for the surgeon, copilot, administrator, editor, secretaries, program clerk, toolsmith, tester and the language lawyer.</p>
+
+<p>The one that will be covered in this post is the toolsmith:</p>
+
+<blockquote>
+<p><strong>The toolsmith</strong>. File-editing, text-editing, and interactive debugging services are now readily available, so that a team will rarely need its own machine and machine-operating crew. But these services must be available with unquestionably satisfactory response and reliability; and the surgeon must be sole judge of the adequacy of the service available to him. He needs a toolsmith, responsible for ensuring this adequacy of the basic service and for constructing, maintaining, and upgrading special tools &ndash;mostly interactive computer services&ndash; needed by his team. Each team will need its own toolsmith, regardless of the excellence and reliability of any centrally provided service, for his job is to see to the tools needed or wanted by his surgeon, without regard to any other team&rsquo;s needs. The tool-builder will often construct specialized utilities, cataloged procedures, macro libraries.</p>
+
+<p><quote> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team </quote></p>
+</blockquote>
+
+<p>Even though the chapter reads a bit outdated, especially with the part about genders and methodologies (i.e., waterfall), the part about roles is interesting. The surgical team, as the author presents will be composed by 9 &frac12; (nine and a half) as the language lawyer can be shared among two or three teams.</p>
+
+<h2 id="day-to-day-practices">Day to day practices</h2>
+
+<p>So, one full-time job is to build tools to service the surgeon and the copilot (1:8,5 ratio), or approximately 12% of a full-time position.</p>
+
+<p>These tools can make the surgeon and the copilot more effective, ranging from a single digit percentage to orders of magnitude in other tasks.</p>
+
+<p>As agile teams no longer have a toolsmith and the scrum master is not necessarily a technical expert who can build tools for the whole team, the tasks of creating tools must be taken care by everyone. No one better than yourself can know your needs and tailor solutions for them.</p>
+
+<p>The only downside is you have to invest ~5h (for a full time position) per week into creating and polishing tools for your work: it is a need for achieving more productivity when working.</p>
+
+<p>Nowadays that IDEs are configurable, this time might be invested on learning more advanced features as other shortcuts, refactoring techniques, other design patterns, etc. I like having my own live templates (see <a href="https://www.jetbrains.com/idea/help/creating-and-editing-live-templates.html#d1333587e219" target="_blank">description</a>), especially for tests, as I saw on the <a href="https://skillsmatter.com/courses/503-sandro-mancuso-s-crafting-code-course#programme" target="_blank">Crafting Code workshop</a> by <a href="https://twitter.com/sandromancuso" target="_blank">Sandro Mancuso</a></p>
+
+<!--
+TODO: Add link to Sandro Mancuso's experience report, when I write it
+-->
+
+<p>It may also include other activities as setting up your bash alias, cleaning your desk, trying a new UML diagram modeler, etc. Anything that improves the productivity of your main task.</p>
+
+<p>If we consider our experience and knowledge part of our tools (as we are knowledge workers), training could be considered part of polishing our tools. Short, daily or weekly training sessions (even internal) can make a great impact on breadth (not depth) of knowledge among your teammates. This shallow knowledge can open doors for more knowledge to be gained outside of company time, or used to practice and test other methods.</p>
+
+<p>This training is so useful for everyone (&ldquo;when one teaches, two learn&rdquo;) that I recommend my clients to do it. This has helped them cope with changing technologies, knowledge transfer and even some team building.</p>
+
+<h2 id="company-provided-or-not">Company provided or not?</h2>
+
+<p>Should the company provide for this time to improve? Although I don&rsquo;t know the answer, it would greatly affect the programmers&rsquo; productivity to do so. I would say, provide this time as long as what is produced is useful. How do you measure useful? This is a subjective opinion, so it depends on each one.</p>
+
+<p>Some companies acknowledge that this is so important as to invest part of their resources (0-2 hours per week) into training.</p>
+
+<p>Either way, should your company provide it for your or not, you are the one in charge of your career (from Mancuso, <a href="https://leanpub.com/socra" target="_blank">Software Craftsmanship</a> - now called <a href="http://www.amazon.co.uk/Software-Craftsman-Professionalism-Pragmatism-Robert/dp/0134052501/ref=sr_1_1?ie=UTF8&amp;qid=1416521895&amp;sr=8-1&amp;keywords=the+software+craftsman" target="_blank">The Software Craftsman</a>). If you are not allowed to invest company time for your own benefit, you could use some of your personal time to do so. It is not required, but you will soon enjoy its profits.</p>
+
+<h2 id="examples">Examples</h2>
+
+<ul>
+<li>Every sprint, one of my clients (as of 2015-05) wants to review the work done using some slides and a live demo. The &lsquo;sample&rsquo; slides with the format, layout is useful. Everything that should be replaced (timestamp, contents, etc) is marked with a TODO</li>
+<li>Every day, I commit plenty of times to the control version system (i.e., git). I have an alias for commit, diff, status, etc, that saves me some keystrokes on the most common commands</li>
+<li>See the post &ldquo;A basic working environment&rdquo;</li>
+<li>Deployment, even on local, is automated: a script for getting the latest <code>branch</code>, <code>develop</code> or <code>master</code> code, build the Docker container, start the docker image, notify me the code is ready</li>
+<li>Pipeline: I have a pipeline, in local, where I can push and the tests will be executed automatically. If the build fails (usually BDD tests), I can <code>push -f</code> without affecting to the repo history.</li>
+</ul>
+
+<hr />
+
+<p>Mills, H., &ldquo;Chief programmer teams, principles, and procedures,&rdquo; IBM Federal Systems Division Report FSC 715108, Gaithersburg, Md., 1971.</p>
+
+<p>Baker, F. T., &ldquo;Chief programmer team management of production programming,&rdquo; IBM Sys. J., 11, 1 (1972).</p>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:1">This post was extracted on 2015-04-25. The refactor techniques are very useful, not only for programming
+<li id="fn:1">Original references in &ldquo;The Mythical Man-Month&rdquo; (Notes and References, page 294) point to these:
  <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
 </ol>
 </div>
@@ -420,25 +276,43 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/01/24/podcast-basta-ya-de-picar-spanish/">Podcast: Basta ya de picar (Spanish)</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/21/a-legacy-code-introduction/">A legacy code introduction</a>
     </h1>
-    <p >Jan 24, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/01/24/podcast-basta-ya-de-picar-spanish/#disqus_thread">Comments</a>
+    <p >Feb 21, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/21/a-legacy-code-introduction/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/podcast/">podcast</a><a class="label" href="https://alvarogarcia7.github.io/categories/basta-ya-de-picar/">basta-ya-de-picar</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/clean-code/">clean-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/uncle-bob/">uncle-bob</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-c-martin/">robert-c-martin</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/tiger-team/">tiger-team</a>
         
     </p>
 </header>
 
 
         
-        <p>Some weeks ago I listened to some podcasts from <a href="http://www.bastayadepicar.com" target="_blank">BastaYaDePicar</a> (episodes 1 to 8) and now I&rsquo;m listening more (9 to 10). I really recommend these to you, and I imagine that the newer episodes (also new format) will be interesting too.</p>
+        <p>This is one of the best legacy code introductions I&rsquo;ve seen:</p>
 
-<p>They&rsquo;re in Spanish and narrated by <a href="https://twitter.com/sbastn" target="_blank">Sebastian Hermida</a></p>
+<blockquote>
+<p>The Grand Redesign in the Sky</p>
+
+<p>Eventually the team rebels. They inform management that they cannot continue to develop in this odious code base. They demand a redesign. Management does not want to expend the resources on a whole new redesign of the project, but they cannot deny that productivity is terrible. Eventually they bend to the demands of the developers and authorize the grand redesign in the sky.</p>
+
+<p>A new tiger team is selected. Everyone wants to be on this team because it&rsquo;s a greenfield project. They get to start over and create something truly beautiful. But only the best and brightest are chosen for the tiger team. Everyone else must continue to maintain the current system.</p>
+
+<p>Now the two teams are in a race. The tiger team must build a new system that does everything that the old system does. Not only that, they have to keep up with the changes that are continuously being made to the old system. Management will not replace the old system until the new system can do everything that the old system does.</p>
+
+<p>This race can go on for a very long time. I&rsquo;ve seen it take 10 years. And by the time it&rsquo;s done, the original members of the tiger team are long gone, and the current members are demanding that the new system be redesigned because it&rsquo;s such a mess.</p>
+
+<p><cite> Robert C. Martin </cite> in the chapter 1: Clean Code from the book by <a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/" target="_blank">the same name</a></p>
+</blockquote>
+
+<p>Also, why should you estimate the new tiger team abilities better than the old tiger team? Is it because the language, tools, or just because they are &ldquo;plain better&rdquo;?</p>
+
+<p>What guarantees that the resulting software is going to be better than the old one?</p>
+
+<p>Another interesting definition of legacy code is Michael Feather&rsquo;s one (code without tests).</p>
 
         
 
@@ -451,29 +325,364 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/01/24/code-snippets-stash/">Code Snippets Stash</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/18/the-use-of-power-tools/">The use of power tools</a>
     </h1>
-    <p >Jan 24, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/01/24/code-snippets-stash/#disqus_thread">Comments</a>
+    <p >Feb 18, 2015
+         - 6 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/18/the-use-of-power-tools/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/idea/">idea</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository/">repository</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/power-tools/">power-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship-patterns/">apprenticeship-patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/choose-your-own-adventure/">choose-your-own-adventure</a><a class="label" href="https://alvarogarcia7.github.io/categories/big-o-notation/">big-o-notation</a><a class="label" href="https://alvarogarcia7.github.io/categories/algorithm/">algorithm</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/right-tool-for-the-right-job/">right-tool-for-the-right-job</a><a class="label" href="https://alvarogarcia7.github.io/categories/unix-tools/">unix-tools</a>
         
     </p>
 </header>
 
 
         
-        <p>Following a team member&rsquo;s recommendation, I recently started a repository to save all my useful snippets.</p>
+        
 
-<p>I&rsquo;ve decided that the examples should be designed guided by tests or at least to have a working example exercised by tests. Also, that I should not reinvent the wheel and use as many open source libraries as possible, reducing the amount of code I have to write myself.</p>
+<p>I&rsquo;m currently reading the Apprenticeship patterns book, out of order (explained here: TODO).</p>
 
-<p>Ideally, every snippet should be a maven project (where applicable) and be imported as a small library, therefore being able to reuse the functionality incrementally across projects.</p>
+<p>I&rsquo;m writing down the read chapters in a text file, to measure progress and also be able to backtrack if necessary. This also makes reading the book a &ldquo;choose your own adventure&rdquo;</p>
 
-<p>For the time being, I&rsquo;m saving my snippets into a private repository and later I might decide to publish it for common usage.</p>
+<p>After reading approximately half the chapters, the navigation wasn&rsquo;t so easy using only the &ldquo;see also&rdquo; part. So I decided to break free from that constraint and start reading other chapters. But how do you know which chapters you have left to read? Knowing the whole set (<code>all</code>) and the read set (<code>read</code>) this is just the <code>all - read</code>.</p>
+
+<p>Coming to a more practical way, how to know this is an automated (non-manual) way? There are <code>m</code> in <code>read</code> and n in <code>all</code>, where <code>m &lt;= n</code>.</p>
+
+<p>The simplest approach would be:</p>
+
+<pre><code>for each current in read:
+  remove current from all
+</code></pre>
+
+<p>as read is is no particular order, that would yield some <code>O(m*n)</code>, worst case scenario (<code>m==n</code>), <code>O(n^2)</code>.</p>
+
+<p>That is quite expensive, especially if you have to do it manually</p>
+
+<p>If we use the same algorithm but sort the <code>read</code> set (no longer a set, as sets have no order). Also, converting it to a <code>O(1)</code> lookup table (e.g., a map), that would yield some <code>O(n log2 n + m)</code> that is already better. Taking into account that the sorting can be automated by the computer, it would yield a &ldquo;manual O notation cost&rdquo; of <code>O(1 + m)</code>. So, relative to the amount of chapters you have read.</p>
+
+<p>But we can even do better in terms of this &ldquo;manual big o notation&rdquo;:</p>
+
+<pre><code>read &lt;- sort read into a map ; cost O(1)
+all &lt;- sort all into a map ; cost O(1)
+
+unread &lt;- all - intersection(all, read) ; cost O(1)
+</code></pre>
+
+<p>And this is where the power tools come into place: if we use <code>comm</code> or <code>diff</code>, the computer will create  the <code>unread</code> set for us, in &ldquo;manual&rdquo; cost of <code>O(1)</code></p>
+
+<h2 id="example-using-vim-sort-and-diff">Example using vim, sort and diff</h2>
+
+<p>This is the <code>read</code> set (for the moment):</p>
+
+<pre><code>the long road
+draw your own map
+find mentors
+the deep end
+create feedback loops
+the white belt
+practice, practice, practice
+concrete skills
+your first language
+use the source
+reflect as you work
+record what you learn
+kindred spirits
+nurture your passion
+study the classics
+expose your ignorance
+dig deeper
+be the worst
+rubbing elbows
+unleash your enthusiasm
+</code></pre>
+
+<p>and this is the all set (copy-paste from the book):</p>
+
+<pre><code>INTRODUCTION 1 What Is Software Craftsmanship? 3 What Is Apprenticeship? 8 What Is an Apprenticeship Pattern? 9 Where Did the Patterns Come From? 9 Where Do We Go from Here? 10
+2 EMPTYING THE CUP 11 Your First Language 13 The White Belt 18 Unleash Your Enthusiasm 22 Concrete Skills 24 Expose Your Ignorance 25 Confront Your Ignorance 28 The Deep End 30 Retreat into Competence 32 Wrapping Up 34
+3 WALKING THE LONG ROAD 37 The Long Road 38 Craft over Art 40 Sustainable Motivations 43 Nurture Your Passion 45 Draw Your Own Map 47 Use Your Title 50 Stay in the Trenches 52 A Different Road 53 Wrapping Up 55
+4 ACCURATE SELF-ASSESSMENT 57 Be the Worst 58 Find Mentors 61 Kindred Spirits 64 Rubbing Elbows 66 Sweep the Floor 68 Wrapping Up 71
+5 PERPETUAL LEARNING 73 Expand Your Bandwidth 74 Practice, Practice, Practice 77 Breakable Toys 79 Use the Source 82 Reflect As You Work 85 Record What You Learn 87 Share What You Learn 89 Create Feedback Loops 91 Learn How You Fail 94 Wrapping Up 95
+6 CONSTRUCT YOUR CURRICULUM 99 Reading List 100 Read Constantly 102 Study the Classics 104 Dig Deeper 105 Familiar Tools 109 Wrapping Up 111
+</code></pre>
+
+<p>The first line is not interesting to our purposes, so delete it with:</p>
+
+<p>go to first line (<code>1G</code>), then delete (<code>dd</code>)</p>
+
+<p>After a quick inspection, there&rsquo;s a number at the end of the desired line, so replace it with newline:</p>
+
+<p><code>%s/\d\+/\r/g</code> (a snippet below):</p>
+
+<pre><code>EMPTYING THE CUP 
+ Your First Language
+ The White Belt 
+ Unleash Your Enthusiasm 
+ Concrete Skills 
+ Expose Your Ignorance
+ Confront Your Ignorance 
+ The Deep End 
+ Retreat into Competence 
+ Wrapping Up 
+
+
+ WALKING THE LONG ROAD 
+</code></pre>
+
+<p>The title lines are all uppercase, so delete them with <code>:%g/^\s*\u\u/d</code>:</p>
+
+<pre><code> Your First Language 
+ The White Belt 
+ Unleash Your Enthusiasm
+ Concrete Skills 
+ Expose Your Ignorance
+ Confront Your Ignorance
+ The Deep End
+ Retreat into Competence
+ Wrapping Up 
+ 
+ 
+ The Long Road 
+</code></pre>
+
+<p>explanation:</p>
+
+<ul>
+<li><code>:</code> : command</li>
+<li><code>%</code> : in all the file</li>
+<li><code>g</code> : do (I remember it as &lsquo;go&rsquo;)</li>
+<li><code>^</code> : starting at the beginning</li>
+<li><code>\s*</code>: whitespace, as much a possible</li>
+<li><code>\u\u</code>: exactly two uppercase letters. Can also be expressed as <code>\u\{2}</code></li>
+<li><code>d</code> : delete</li>
+</ul>
+
+<p>for more information on vim&rsquo;s regex, go <a href="http://vimregex.com/" target="_blank">here</a></p>
+
+<p>but there are empty lines. Delete them with: <code>%g/^$/d</code>:</p>
+
+<pre><code> Your First Language
+ The White Belt
+ Unleash Your Enthusiasm
+ Concrete Skills
+ Expose Your Ignorance 
+ Confront Your Ignorance
+ The Deep End 
+ Retreat into Competence
+ The Long Road
+</code></pre>
+
+<p>there is a space at the beginning of the line, delete it with <code>:%s/^ //</code>:</p>
+
+<pre><code>Your First Language 
+The White Belt 
+Unleash Your Enthusiasm 
+Concrete Skills 
+Expose Your Ignorance  
+Confront Your Ignorance 
+The Deep End  
+Retreat into Competence 
+Wrapping Up  
+The Long Road  
+</code></pre>
+
+<p>there are upper and lowercase letters. You could find a way of doing it with vi, but I prefer something that I can remember: save the document, then process it with <code>awk</code> and <code>sort</code></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat all.txt <span class="p">|</span> awk <span class="s1">&#39;{print tolower($0)&#39;</span><span class="o">}</span><span class="p">|</span> sort &gt; all_sorted.txt
+</code></pre></div>
+
+<p>(snippet):</p>
+
+<pre><code>a different road 
+be the worst 
+breakable toys 
+concrete skills 
+confront your ignorance 
+</code></pre>
+
+<p>If needed, sort and downcase the read.txt too.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat read.txt <span class="p">|</span> awk <span class="s1">&#39;{print tolower($0)&#39;</span><span class="o">}</span><span class="p">|</span> sort &gt; read_sorted.txt
+</code></pre></div>
+
+<p>I tried using <code>comm</code>, but it wasn&rsquo;t so useful (because of whitespace).</p>
+
+<p>Tried <code>diff</code>:</p>
+
+<pre><code>diff read_sorted.txt all_sorted.txt  -bBw &gt; to_read.txt
+
+0a1
+&gt; a different road 
+1a3
+&gt; breakable toys 
+2a5,6
+&gt; confront your ignorance 
+&gt; craft over art 
+5a10
+&gt; expand your bandwidth 
+6a12
+&gt; familiar tools 
+8a15
+</code></pre>
+
+<p>to know which are the remain chapters:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat to_read.txt <span class="p">|</span> grep <span class="s2">&quot;&gt;&quot;</span>
+</code></pre></div>
+
+<p>to count the number of remaining chapters:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cat to_read.txt <span class="p">|</span> grep <span class="s2">&quot;&gt;&quot;</span> <span class="p">|</span> wc -l
+</code></pre></div>
+
+<p>The lesson learned here is to master your tools. This would have cost me a few minutes if done manually as the list was short, too much time if long (&gt;1000 lines).</p>
+
+<p>On a funny note, it has taken me approximately 2 min to do this processing but ~45 minutes to write this blog post. So I don&rsquo;t recommend you write as many posts as processings you do.</p>
+
+<p>To quote Apprenticeship patterns, <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch03.html#solution_id16" target="_blank">A different road</a>:</p>
+
+<blockquote>
+<p>If you walk away from software development, you will find that the habit of rigorous thinking and automating tasks involving large volumes of data will still be useful wherever you go</p>
+
+<p>D Hoover, A Oshineye</p>
+</blockquote>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/">Open discussion: Behaviour-Driven Development</a>
+    </h1>
+    <p >Feb 15, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/15/open-discussion-behaviour-driven-development/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/bdd/">bdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/open-discussion/">open-discussion</a><a class="label" href="https://alvarogarcia7.github.io/categories/behaviour-driven-development/">behaviour-driven-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/jbehave/">jbehave</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a>
+        
+    </p>
+</header>
+
+
+        
+        
+
+<p>This week we had a great discussion about Behavior Driven Development (BDD). We have explained it as a way of developing software based on requirements, via automatically tested specifications. For more information, see the <a href="http://en.wikipedia.org/wiki/Behavior-driven_development" target="_blank">wikipedia&rsquo;s article on the subject</a></p>
+
+<p>I forgot to mention that this is the perfect start to TDD, as this is usually called the double-loop TDD. See a post on it on <a href="http://coding-is-like-cooking.info/2013/04/outside-in-development-with-double-loop-tdd/" target="_blank">coding is like cooking</a></p>
+
+<p>In this double-loop TDD, the first thing is to create a BDD scenario, run it (red-1), create a unit test that reflects this red (red-2), pass it, refactor; go to red-1 as many times as you need, doing TDD cycles. When you think the feature is done, execute the BDD scenarios and go to green (outer layer) and refactor.</p>
+
+<h2 id="our-common-setting">(Our) Common setting</h2>
+
+<p>Going back to BDD, a common scenario would be the following:</p>
+
+<p>Layers of software:</p>
+
+<ul>
+<li>Domain-Specific Language (DSL). See <a href="http://en.wikipedia.org/wiki/Domain-specific_language" target="_blank">wikipedia&rsquo;s article</a></li>
+<li>Test adapter: an interpreter for this DSL</li>
+<li>Test software: test fixtures, methods, structures to arrange, act, and assert on the sut</li>
+<li>Production software (system under test - SUT): thing being tested</li>
+</ul>
+
+<h2 id="a-bdd-test-vs-a-tdd-test">A BDD test vs A TDD test</h2>
+
+<p>Let&rsquo;s imagine a BDD test for a <a href="http://en.wikipedia.org/wiki/Linked_list" target="_blank">linked list</a>:</p>
+
+<pre><code>Given I have an empty list
+When I add an element
+Then I have an element on the list
+</code></pre>
+
+<p>now, the same test in TDD [using java, junit 4, hamcrest]</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">add_an_element_to_an_empty_list</span><span class="p">(){</span>
+	<span class="n">MyLinkedList</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyLinkedList</span><span class="p">();</span>
+
+	<span class="n">linkedList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;something&quot;</span><span class="p">);</span>
+
+	<span class="n">assertThat</span><span class="p">(</span><span class="n">linkedList</span><span class="p">.</span><span class="na">size</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>In some aspects, a BDD and a TDD test are similar:</p>
+
+<ul>
+<li>the given is the arrange, i.e., the prerequisite</li>
+<li>the when is the act, i.e., the command</li>
+<li>the then is the assertion, i.e., the postcondition</li>
+</ul>
+
+<p>(for more information on this, see <a href="http://en.wikipedia.org/wiki/Hoare_logic" target="_blank">Hoare&rsquo;s triple</a>)</p>
+
+<p>But in others, they are not. In BDD you do not specify the APIs, methods, etc. You only care about behavior.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Benefits:</p>
+
+<ul>
+<li>everyone might involved in the specification by example workshops (source: <a href="http://www.amazon.com/ATDD-Example-Test-Driven-Development-Addison-Wesley/dp/0321784154" target="_blank">ATDD by example</a>)</li>
+<li>live specifications. managers can now understand the real state</li>
+<li><a href="http://en.wikipedia.org/wiki/Regression_testing" target="_blank">regression tests</a> are much cheaper (from automation)</li>
+</ul>
+
+<p>Gotchas:</p>
+
+<ul>
+<li>Test only the happy paths</li>
+<li>This has a cost, do not overdo it</li>
+<li>Doesn&rsquo;t remove manual tests</li>
+<li>How do you manage multiple scenarios</li>
+<li>How fast should it be?
+<br /></li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/02/09/implementing-bdd-at-a-client/">Implementing BDD at a client</a>
+    </h1>
+    <p >Feb 9, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/02/09/implementing-bdd-at-a-client/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/bdd/">bdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/grunt-job/">grunt-job</a><a class="label" href="https://alvarogarcia7.github.io/categories/behavior-driven-development/">behavior-driven-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/sweep-the-floor/">sweep-the-floor</a><a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship-patterns/">apprenticeship-patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/jbehave/">jbehave</a><a class="label" href="https://alvarogarcia7.github.io/categories/retrospective/">retrospective</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>This was a low-hanging fruit as a team member who specialises in QA complained about testing in the last moment during the last sprint&rsquo;s retrospective.</p>
+
+<p>Did the grunt job of connecting the dots and configuring the maven project (using jbehave). Also, got the inspiration from a tutorial.</p>
+
+<p>Announced it only as it was in place and QA approved of it</p>
+
+<p>This grunt job clicked with <a href="http://chimera.labs.oreilly.com/books/1234000001813/ch04.html#solution_id21" target="_blank">Sweep the floor</a></p>
+
+<p>Let&rsquo;s see how the sprint goes and what are the pain points during this sprint</p>
 
         
 
@@ -568,6 +777,8 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
     
         <a href="/blog/page/34/" class="label-pagination">34</a>
     
+        <a href="/blog/page/35/" class="label-pagination">35</a>
+    
 
     
     
@@ -576,7 +787,7 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
 
     
     
-        <a href="/blog/page/34/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -636,11 +847,35 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
           <li class="post">
+            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
           </li>
         
           <li class="post">
@@ -649,30 +884,6 @@ I stumbled upon the <a href="http://chimera.labs.oreilly.com/books/1234000001813
         
           <li class="post">
             <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/01/self-study-june-2019/">Self-Study in June 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/30/defense-tooling/">In Defense of Tooling</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/29/keeping-intermediate-history-work-git/">Automatically keeping the intermediate history of your work using git</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/01/self-study-may-2019/">Self-Study in May 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/04/01/self-study-april-2019/">Self-Study in April 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/03/31/books-read-2019q1/">Books read in 2019Q1</a>
           </li>
         
       </ul>

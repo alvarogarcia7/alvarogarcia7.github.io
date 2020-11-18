@@ -129,33 +129,27 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the same Import Order in IntelliJ IDEA as Eclipse&#39;s</a>
     </h1>
-    <p >Jul 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/#disqus_thread">Comments</a>
+    <p >Jul 30, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-peer-stereotype/">object-peer-stereotype</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/adjustment/">adjustment</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/intellij/">intellij</a><a class="label" href="https://alvarogarcia7.github.io/categories/eclipse/">eclipse</a><a class="label" href="https://alvarogarcia7.github.io/categories/ide/">ide</a><a class="label" href="https://alvarogarcia7.github.io/categories/editor/">editor</a><a class="label" href="https://alvarogarcia7.github.io/categories/import/">import</a>
         
     </p>
 </header>
 
 
         
-        <blockquote>
-<p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have:</p>
+        <p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:</p>
 
-<ul>
-<li>Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one.</li>
-<li>Notifications: Peers that need to be kept up to date with the object&rsquo;s activity. The object will notify interested peers whenever it changes state or performs a significant action. Notifications are &ldquo;fire and forget&rdquo;; the object neither knows nor cares which peers are listening. Notifications are so useful because they decouple objects from each other. For example, in a user interface system, a button component promises to notify any registered listeners when it&rsquo;s clicked, but does not know what those listeners will do. Similarly, the listeners expect to be called but know nothing of the way the user interface dispatches its events.</li>
-<li>Adjustments: Peers that adjust the object&rsquo;s behavior to the wider needs of the system. This includes policy objects that make decisions on the object&rsquo;s behalf (the Strategy pattern in [Gamma94]) and component parts of the object if it&rsquo;s a composite. For example, a Swing JTable will ask a TableCellRenderer to draw a cell&rsquo;s value, perhaps as RGB (Red, Green, Blue) values for a color. If we change the renderer, the table will change its presentation, now displaying the HSB (Hue, Saturation, Brightness) values.</li>
-</ul>
-</blockquote>
+<p>While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.</p>
 
-<p>Source is Growing Object-Oriented Software, Guided by Tests &gt; Chapter 6, Object-Oriented Style &gt; Object Peer Stereotypes, page 52</p>
+<p>To solve it, see <a href="http://stackoverflow.com/questions/14716283/is-it-possible-for-intellij-to-organize-imports-the-same-way-as-in-eclipse" target="_blank">this link</a></p>
 
         
 
@@ -168,32 +162,393 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing with Java 8 Lambdas</a>
     </h1>
-    <p >Jul 12, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/#disqus_thread">Comments</a>
+    <p >Jul 30, 2015
+         - 4 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/martin-fowler/">martin-fowler</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/bliki/">bliki</a><a class="label" href="https://alvarogarcia7.github.io/categories/kent-beck/">kent-beck</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/draft/">draft</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a><a class="label" href="https://alvarogarcia7.github.io/categories/exploration/">exploration</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a>
         
     </p>
 </header>
 
 
         
-        <p>We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
+        
+
+<p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:</p>
+
+<p>(source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/ef00a220f427900e3180dcbeec51248845446248" target="_blank">here</a>)</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_greeting_letters</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="n">sut</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">GreetingLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+
+	<span class="n">verify</span><span class="p">(</span><span class="n">logger</span><span class="p">).</span><span class="na">sentGreetingLetter</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_love_letters</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="n">sut</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">LoveLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+
+	<span class="n">verify</span><span class="p">(</span><span class="n">logger</span><span class="p">).</span><span class="na">sentLoveLetter</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>and the production code:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSender</span> <span class="p">{</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="p">;</span>
+
+	<span class="kd">public</span> <span class="nf">MailSender</span> <span class="p">(</span><span class="kd">final</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="na">eventLogger</span> <span class="o">=</span> <span class="n">eventLogger</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span> <span class="p">(</span><span class="kd">final</span> <span class="n">GreetingLetter</span> <span class="n">letter</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// more business logic</span>
+		<span class="n">eventLogger</span><span class="p">.</span><span class="na">sentGreetingLetter</span><span class="p">();</span>
+	<span class="p">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span> <span class="p">(</span><span class="kd">final</span> <span class="n">LoveLetter</span> <span class="n">letter</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// more business logic</span>
+		<span class="n">eventLogger</span><span class="p">.</span><span class="na">sentLoveLetter</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Note: this is an adapted code, so the business logic is not complete and seems simple.</p>
+
+<p>So I decided to explore a bit on refactoring these tests to use lambdas and reduce repetition:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="n">MailSender</span> <span class="n">sut</span><span class="p">;</span>
+<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">arrange</span><span class="p">;</span>
+<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="p">;</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">arrange</span> <span class="o">=</span> <span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">GreetingLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+
+	<span class="n">verify</span> <span class="o">=</span> <span class="n">EventLogger</span><span class="p">::</span><span class="n">sentGreetingLetter</span><span class="p">;</span>
+
+	<span class="n">assertAndVerify</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">arrange</span> <span class="o">=</span> <span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">LoveLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+
+	<span class="n">verify</span> <span class="o">=</span> <span class="n">EventLogger</span><span class="p">::</span><span class="n">sentLoveLetter</span><span class="p">;</span>
+
+	<span class="n">assertAndVerify</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">assertAndVerify</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">arrange</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">sut</span><span class="p">);</span>
+	<span class="n">verify</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">logger</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Some comments, mine and my teammates:</p>
+
+<ul>
+<li>The tests are not very readable, maybe because we&rsquo;re still not used to java 8 lambdas</li>
+<li><code>assertAndVerify</code> has multiple purposes / responsibilities</li>
+<li>The gain of usability does not outweight the loss of readability</li>
+</ul>
+
+<p>Finally, the refactor was discarded and we are using the initial version.</p>
+
+<p>Later, in the dojo, <a href="https://twitter.com/@trikitrok" target="_blank">Manuel</a> and I have refactored this a little bit more. Source code is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/tree/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9" target="_blank">here</a></p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSenderShould</span> <span class="p">{</span>
+
+	<span class="kd">private</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="n">MailSender</span> <span class="n">mailSender</span><span class="p">;</span>
+
+	<span class="nd">@Before</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="n">eventLogger</span> <span class="o">=</span> <span class="n">mock</span><span class="p">(</span><span class="n">EventLogger</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+		<span class="n">mailSender</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MailSender</span><span class="p">(</span><span class="n">eventLogger</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">checkThat</span><span class="p">(</span><span class="n">aLoggingLine</span><span class="p">().</span><span class="na">forA</span><span class="p">(</span><span class="n">greetingLetter</span><span class="p">()).</span><span class="na">wasLoggedWhen</span><span class="p">(</span><span class="n">aGreetingLetterWasSent</span><span class="p">()));</span>
+	<span class="p">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">checkThat</span><span class="p">(</span><span class="n">aLoggingLine</span><span class="p">().</span><span class="na">forA</span><span class="p">(</span><span class="n">loveLetter</span><span class="p">()).</span><span class="na">wasLoggedWhen</span><span class="p">(</span><span class="n">aLoveLetterWasSent</span><span class="p">()));</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">checkThat</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Check</span> <span class="n">check</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">check</span><span class="p">.</span><span class="na">checkFor</span><span class="p">(</span><span class="n">mailSender</span><span class="p">,</span> <span class="n">eventLogger</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">aGreetingLetterWasSent</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">EventLogger</span><span class="p">::</span><span class="n">sentGreetingLetter</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">greetingLetter</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">sendGreetingLetter</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">GreetingLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">loveLetter</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">sendLoveLetter</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">LoveLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">aLoveLetterWasSent</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">EventLogger</span><span class="p">::</span><span class="n">sentLoveLetter</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>(the logger is <a href="https://github.com/alvarogarcia7/spike-lambda-testing/blob/8e3dbecd91e1ead33c5b3f6560e2a786c36b0de9/src/test/java/com/example/lambdatesting/CheckBuilder.java" target="_blank">here</a>)</p>
+
+<p>Later, we have created a simpler functional DSL for the logging, joining the <code>act</code> and <code>verify</code> into an object called <code>Check</code></p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailSenderShould</span> <span class="p">{</span>
+
+	<span class="kd">private</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="n">MailSender</span> <span class="n">mailSender</span><span class="p">;</span>
+
+	<span class="nd">@Before</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="n">eventLogger</span> <span class="o">=</span> <span class="n">mock</span><span class="p">(</span><span class="n">EventLogger</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+		<span class="n">mailSender</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MailSender</span><span class="p">(</span><span class="n">eventLogger</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">mailSenderLogs</span><span class="p">(</span><span class="n">whenSendingAGreetingLetter</span><span class="p">());</span>
+	<span class="p">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_love_letter</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">mailSenderLogs</span><span class="p">(</span><span class="n">whenSendingALoveLetter</span><span class="p">());</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="n">Check</span> <span class="nf">whenSendingALoveLetter</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">Check</span><span class="p">(</span>
+			<span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">letter</span><span class="p">(</span><span class="n">LoveLetter</span><span class="p">.</span><span class="na">class</span><span class="p">)),</span>
+			<span class="n">EventLogger</span><span class="p">::</span><span class="n">sentLoveLetter</span>
+		<span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">mailSenderLogs</span> <span class="p">(</span><span class="n">Check</span> <span class="n">check</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">check</span><span class="p">.</span><span class="na">checkFor</span><span class="p">(</span><span class="n">mailSender</span><span class="p">,</span> <span class="n">eventLogger</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="n">Check</span> <span class="nf">whenSendingAGreetingLetter</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">Check</span><span class="p">(</span>
+			<span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">letter</span><span class="p">(</span><span class="n">GreetingLetter</span><span class="p">.</span><span class="na">class</span><span class="p">)),</span>
+			<span class="n">EventLogger</span><span class="p">::</span><span class="n">sentGreetingLetter</span>
+		<span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">letter</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">typeOfLetter</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">mock</span><span class="p">(</span><span class="n">typeOfLetter</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>and the <code>Check</code>, just a placeholder for two <code>Consumer</code>s:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Check</span> <span class="p">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">act</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="p">;</span>
+
+	<span class="kd">public</span> <span class="nf">Check</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="n">act</span><span class="p">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="n">verify</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="na">act</span> <span class="o">=</span> <span class="n">act</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="na">verify</span> <span class="o">=</span> <span class="n">verify</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkFor</span><span class="p">(</span><span class="n">MailSender</span> <span class="n">mailSender</span><span class="p">,</span> <span class="n">EventLogger</span> <span class="n">eventLogger</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">act</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">mailSender</span><span class="p">);</span>
+		<span class="n">verify</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">eventLogger</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="comparison">Comparison</h2>
+
+<p>Comparison between the original form and the three refactored forms of the test:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_when_sending_greeting_letters</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="n">sut</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">GreetingLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+
+	<span class="n">verify</span><span class="p">(</span><span class="n">logger</span><span class="p">).</span><span class="na">sentGreetingLetter</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This reads like a classical JUnit tests, using the interaction (with mocks).</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">arrange</span> <span class="o">=</span> <span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">GreetingLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+
+	<span class="n">verify</span> <span class="o">=</span> <span class="n">EventLogger</span><span class="p">::</span><span class="n">sentGreetingLetter</span><span class="p">;</span>
+
+	<span class="n">assertAndVerify</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This is the first step towards more cohesion, at the cost of readability. You save the verify at the end, but the repeated method <code>assertAndVerify</code> is still present.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">checkThat</span><span class="p">(</span><span class="n">aLoggingLine</span><span class="p">().</span><span class="na">forA</span><span class="p">(</span><span class="n">greetingLetter</span><span class="p">()).</span><span class="na">wasLoggedWhen</span><span class="p">(</span><span class="n">aGreetingLetterWasSent</span><span class="p">()));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This one reads more like a classical DSL, but is harder to read compared to a classical test.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">log_greetings_letter</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">mailSenderLogs</span><span class="p">(</span><span class="n">whenSendingAGreetingLetter</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This one reads more like a business requirement.</p>
+
+<h2 id="other">Other</h2>
+
+<p>Other ideas we have tested:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">Builder</span><span class="p">.</span><span class="na">aNew</span><span class="p">().</span><span class="na">sendGreetingLetter</span><span class="p">()</span>
+
+<span class="n">assertAndVerifyThat</span><span class="p">(</span>
+	<span class="n">theLoggingLine</span><span class="p">()</span>
+		<span class="p">.</span><span class="na">for</span><span class="p">(</span><span class="n">aGreetingLetter</span><span class="p">())</span>
+		<span class="p">.</span><span class="na">isLoggedWhen</span><span class="p">(</span><span class="n">greetingLetterIsSent</span><span class="p">()</span>
+	<span class="p">)</span>
+<span class="p">);</span>
+
+<span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">MailSender</span><span class="o">&gt;</span> <span class="nf">aGreetingLetter</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">sendGreetingLetter</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">GreetingLetter</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">EventLogger</span><span class="o">&gt;</span> <span class="nf">greetingLetterIsSent</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="n">EventLogger</span><span class="p">::</span><span class="n">sentGreetingLetter</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">assertAndVerifyThat</span><span class="p">(</span>
+	<span class="n">theLoggingLine</span><span class="p">()</span>
+		<span class="p">.</span><span class="na">for</span><span class="p">(</span>
+			<span class="p">(</span><span class="n">MailSender</span> <span class="n">sut</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sut</span><span class="p">.</span><span class="na">sendGreetingLetter</span><span class="p">(</span><span class="n">mock</span><span class="p">(</span><span class="n">GreetingLetter</span><span class="p">.</span><span class="na">class</span><span class="p">))</span>
+		<span class="p">)</span>
+		<span class="p">.</span><span class="na">isLoggedWhen</span><span class="p">(</span><span class="n">EventLogger</span><span class="p">::</span><span class="n">sentGreetingLetter</span><span class="p">)</span>
+	<span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">assertAndVerifyThat</span><span class="p">(</span><span class="n">TestContext</span> <span class="n">testContext</span><span class="p">){</span>
+	<span class="n">testContext</span><span class="p">.</span><span class="na">assert</span><span class="p">();</span>
+	<span class="n">testContext</span><span class="p">.</span><span class="na">verify</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/27/craftsmanship-analogy/">Craftsmanship analogy</a>
+    </h1>
+    <p >Jul 27, 2015
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/27/craftsmanship-analogy/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/sarah-mei/">sarah-mei</a><a class="label" href="https://alvarogarcia7.github.io/categories/stage/">stage</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I&rsquo;ve found this set of tweets about the craftsmanship analogy by Sarah Mei:</p>
+
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Just put my finger on why the craft/workshop metaphor for software development doesn&#39;t quite fit.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625089415812022272">July 25, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">&quot;Craft&quot; doesn&#39;t build any collaboration into the process, except in a top-down control-oriented way (master, journeyman, apprentice).</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625089741046714368">July 25, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">&quot;Craft&quot; casts software development as an individual achievement, just as in a workshop, the master did all the important work on each piece.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625090561821642752">July 25, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">Software development is sometimes like that. But the craft/workshop metaphor doesn&#39;t fit at all with what modern small teams do.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625090750628261888">July 25, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">Modeling development as a &quot;craft&quot; means hoarding information rather than sharing openly, &amp; individual rather than collective code ownership.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625091765108760580">July 25, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">Craft means teams have a rigid hierarchy in which folks at the lowest levels just watch the higher-ups work, rather than participating.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625092312742256640">July 25, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">The folks who like the craft metaphor tend to use it to mean &quot;we take pride in our work.&quot; I don&#39;t dispute that that is important.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625093820011540480">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">But the craft metaphor has other implications, some of which, historically, were more important to a shop than &quot;taking time to do it right.&quot;</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625094414801604608">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">Some people want the information hoarding &amp; rigid hierarchy that go along with &quot;craft.&quot; But some of the folks who use it surely don&#39;t.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625095815854305281">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">It&#39;s unfortunate they chose &quot;craft&quot; &amp; built companies &amp; conferences around a metaphor that is such a remarkably poor fit for a modern team.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625096569075838980">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">Software as craft was a reaction to the growing popularity of the factory model, in which developers are replaceable line workers.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625098649635192832">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">Both the factory and the craft metaphors, while they each describe some software orgs, don&#39;t describe any sort of team I want to be on.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625099626434072576">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">Or any sort of team I *have* been on, in the last 15 years.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625099810656247808">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">I should say, any of the teams I have enjoyed being on. The teams I didn&#39;t enjoy had some element of either the workshop or the factory.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625101011997163520">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">It&#39;s time for us to move on from &quot;craft.&quot; To what, though?</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625101911276978176">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">I&#39;ve been thinking about &quot;stage,&quot; in which team members are part of an ensemble cast working together to form a creative work.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625102202982436864">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">&quot;Stage&quot; does allow for a single person (perhaps a big name) to come in &amp; ruin the collaboration by making it all about them. :D</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625103117151944705">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">In broad strokes, the acting ensemble metaphor does describe the teams I&#39;ve loved working on better than craft/workshop or factory.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625104587842719744">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">The seed of this idea came from Artful Making&#39;s descriptions of how a director &amp; actors put together a play.</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625107441311576064">July 26, 2015</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr">I don&#39;t have first-hand experience to draw on. But I suppose none of the software-as-craft folks have apprenticed at a blacksmith, either.😊</p>&mdash; Sarah Mei (@sarahmei) <a href="https://twitter.com/sarahmei/status/625107793230458880">July 26, 2015</a></blockquote>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/">Practical Object-Oriented Design in Ruby: Chapter 4</a>
+    </h1>
+    <p >Jul 26, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/ood/">ood</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
 
 <p>These are the concepts and links brought up during the discussion:</p>
 
 <ul>
-<li><a href="http://martinfowler.com/bliki/DataClump.html" target="_blank">Data Clump</a> at the bliki</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/WaMWtp1Uetp" target="_blank">Refactoring with Loops and Collection Pipelines</a>, indirect link to the article by Martin Fowler</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/6J9PPQpUjwY" target="_blank">When Worse Is Better: Incrementally Escaping Local Maxima</a>, indirect link to the article by Kent Beck</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/Sk7DfYFPt5j" target="_blank">Getting It Right by Betting on Wrong</a>, indirect link to an article by Sandi Metz
-<br /></li>
+<li>The craftsmanship analogy, as exposed in <a href="https://twitter.com/sarahmei/status/625089415812022272" target="_blank">these tweets</a></li>
+<li>Difference between function and method</li>
+<li>What vs How (also present in the GOOS)</li>
 </ul>
 
         
@@ -207,154 +562,87 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster site generation for Octopress 2</a>
     </h1>
-    <p >Jul 8, 2015
+    <p >Jul 13, 2015
          - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/true-code/">true-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/change-code/">change-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/easy-change/">easy-change</a><a class="label" href="https://alvarogarcia7.github.io/categories/transparent/">transparent</a><a class="label" href="https://alvarogarcia7.github.io/categories/reasonable/">reasonable</a><a class="label" href="https://alvarogarcia7.github.io/categories/usable/">usable</a><a class="label" href="https://alvarogarcia7.github.io/categories/exemplary/">exemplary</a><a class="label" href="https://alvarogarcia7.github.io/categories/design/">design</a><a class="label" href="https://alvarogarcia7.github.io/categories/ood/">ood</a><a class="label" href="https://alvarogarcia7.github.io/categories/oo/">oo</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented/">object-oriented</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="organizing-code-to-allow-for-easy-changes">Organizing Code to Allow for Easy Changes</h2>
-
-<blockquote>
-<p>Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code.
-If you define easy to change as</p>
-
-<ul>
-<li>Changes have no unexpected side effects</li>
-<li>Small changes in requirements require correspondingly small changes in code</li>
-<li>Existing code is easy to reuse</li>
-<li>The easiest way to make a change is to add code that in itself is easy to change</li>
-</ul>
-
-<p>Then the code you write should have the following qualities. Code should be:</p>
-
-<ul>
-<li><strong>Transparent</strong> The consequences of change should be obvious in the code that is changing and in distant code that relies upon it</li>
-<li><strong>Reasonable</strong> The cost of any change should be proportional to the benefits the change achieves</li>
-<li><strong>Usable</strong> Existing code should be usable in new and unexpected contexts</li>
-<li><strong>Exemplary</strong> The code itself should encourage those who change it to perpetuate
-these qualities</li>
-</ul>
-
-<p>Code that is Transparent, Reasonable, Usable, and Exemplary (TRUE) not only meets today’s needs but can also be changed to meet the needs of the future. The first step in creating code that is TRUE is to ensure that each class has a single, well-defined responsibility.</p>
-
-<p>Practical Object Oriented Design in Ruby, by Sandi Metz</p>
-</blockquote>
-
-<p>This can be found the in POODR &gt; Chapter 2. Designing Classes with a Single Responsibility &gt; Organizing Code to Allow for Easy Changes</p>
-
-<p>Note: Bold is mine</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/">Tip: massively reverting local changes</a>
-    </h1>
-    <p >Jul 8, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-massively-reverting-local-changes/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/regex/">regex</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
         
     </p>
 </header>
 
 
         
-        <p>I was changing a massive amount of files (&gt;1000) for a repeated code. The search and replace query was not too exact and it broke many tests in the system. For that, I preferred reverting those tests.</p>
+        
 
-<p>Here&rsquo;s how to do it automatically:</p>
+<p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See <a href="../../../../2016/04/17/faster-site-generation-native-octopress/">here</a></p>
 
-<p>Copy all the failing tests to a text editor:</p>
+<p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/" target="_blank">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
 
-<p>Input:</p>
+<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/" target="_blank">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
 
-<pre><code>testSearchXMLDocument(io.company.controller.dms.DocumentControllerTest)
-testCreateXMLDocument(io.company.controller.dms.DocumentControllerTest)
-testUpdateXFPageMetadata(io.company.controller.dms.DocumentControllerTest)
-testCreateDocumentCrop(io.company.controller.dms.DocumentControllerTest)
-testUpdateCropMetadata(io.company.controller.dms.DocumentControllerTest)
-testDeleteDocument(io.company.controller.dms.DocumentControllerTest)
-testUpdateXmlDocumentMetadata(io.company.controller.dms.DocumentControllerTest)
-testUpdateXML(io.company.controller.dms.DocumentControllerTest)
-testSearchXFPage(io.company.controller.dms.DocumentControllerTest)
-testCreateXFPage(io.company.controller.dms.DocumentControllerTest)
-testUpdatePage(io.company.controller.dms.DocumentControllerTest)
-testSearchCrop(io.company.controller.dms.DocumentControllerTest)
-testUpdateCrop(io.company.controller.dms.DocumentControllerTest)
-testMoveDocument(io.company.controller.dms.DocumentControllerTest)
-testGetDocument(io.company.controller.dms.DocumentControllerTest)
+<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
+
+<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>cp -R blog_source blog_post_factory
+</code></pre></div>
+
+<p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nb">cd</span> blog_post_factory/source/_posts
+git update-index --assume-unchanged <span class="k">$(</span>ls *markdown<span class="k">)</span>
+</code></pre></div>
+
+<p>Delete all existing markdown files</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rm *markdown
+</code></pre></div>
+
+<p>Check that git doesn&rsquo;t realize about the difference:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>git status
+
+<span class="c1"># On branch source</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</code></pre></div>
+
+<p>Create a new post:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake new_post<span class="o">[</span><span class="s2">&quot;Faster site generation for Octopress 2&quot;</span><span class="o">]</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># On branch source</span>
+<span class="c1"># Untracked files:</span>
+<span class="c1">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="c1">#</span>
+<span class="c1">#	2015-07-13-faster-site-generation-for-octopress-2.markdown</span>
+nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> to track<span class="o">)</span>
+</code></pre></div>
+
+<p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
+
+<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rake generate <span class="o">&amp;&amp;</span> rake deploy
+</code></pre></div>
+
+<p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
+
+<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span></span><span class="n">desc</span> <span class="s2">&quot;Cleans all *.markdown files for a faster site generation&quot;</span>
+<span class="n">task</span> <span class="ss">:ignore</span> <span class="k">do</span>
+  <span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nb">system</span> <span class="s2">&quot;git update-index --assume-unchanged $(ls *.markdown)&quot;</span>
+  <span class="nb">system</span> <span class="s2">&quot;rm $(ls *.markdown)&quot;</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
+
+<pre><code>Regenerating: 1 file(s) changed at 2015-07-13 08:03:29 ...done in 0.617269045 seconds.
 </code></pre>
 
-<p>regex:</p>
-
-<p>(tested in Sublime 3, build 3083, Windows 64)</p>
-
-<p>find what: <code>^[^(]+\([a-Z.]*\.(.*)\)</code></p>
-
-<p>replace with: <code>$1</code></p>
-
-<p>Regex explanation for <code>^[^(]+\([a-Z.]*\.(.*)\)</code>:</p>
-
-<ul>
-<li><code>^</code>: beginning of line</li>
-<li><code>[^(]+</code>: every character except parenthesis, one or more times</li>
-<li><code>\([a-Z.]*</code>: start with one parenthesis, any number of a-z, A-Z</li>
-<li><code>\.</code>`: a dot, as I&rsquo;m using regex replacement</li>
-<li><code>(.*)</code>: any character, zero or more times, captured in group <code>$1</code></li>
-<li><code>\)</code>: closing parenthesis</li>
-</ul>
-
-<p>Output:</p>
-
-<pre><code>DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-DocumentControllerTest
-</code></pre>
-
-<p>copy that to file <code>a.txt</code></p>
-
-<p>Revert all the changes in these files:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">for</span> i in <span class="k">$(</span>cat a.txt <span class="p">|</span> uniq<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
-  git checkout -- *<span class="nv">$i</span>*
-<span class="k">done</span>
-</code></pre></div>
-
         
 
     </article>
@@ -366,365 +654,58 @@ DocumentControllerTest
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: committing to the repo file by file</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/">What defines a dependency</a>
     </h1>
-    <p >Jul 8, 2015
+    <p >Jul 13, 2015
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
-
-<p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">for</span> f in <span class="k">$(</span>git status -s <span class="p">|</span>grep <span class="s2">&quot;^M&quot;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
-  git add <span class="nv">$f</span>
-  git commit -m <span class="s2">&quot;generic commit for all files&quot;</span>
-<span class="k">done</span>
-</code></pre></div>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental concepts on programming languages</a>
-    </h1>
-    <p >Jul 6, 2015
-         - 8 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/christopher-strachey/">christopher-strachey</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a><a class="label" href="https://alvarogarcia7.github.io/categories/1967/">1967</a><a class="label" href="https://alvarogarcia7.github.io/categories/course/">course</a><a class="label" href="https://alvarogarcia7.github.io/categories/fundamental-concepts/">fundamental-concepts</a><a class="label" href="https://alvarogarcia7.github.io/categories/paper/">paper</a><a class="label" href="https://alvarogarcia7.github.io/categories/lecture/">lecture</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/fragment/">fragment</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/listener/">listener</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-stereotype/">object-stereotype</a>
         
     </p>
 </header>
 
 
         
-        
-
-<p>Note: all quotes on this post come from <a href="http://www.cs.cmu.edu/~crary/819-f09/Strachey67.pdf" target="_blank">this paper</a>: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.</p>
-
-<h2 id="contents">Contents</h2>
-
-<p>This paper starts slow, from the mathematical and philosophical point of view, until it gets to the basic concepts on the fundamental concepts:</p>
-
-<ul>
-<li>Assignment command</li>
-<li>L-Value and R-Value</li>
-<li>Definitions</li>
-<li>Names</li>
-<li>Numerals</li>
-<li>Conceptual models: an explanation about the relationship between the code, the memory store and the abstract concepts</li>
-</ul>
-
-<p>Later, it gets more in depth to the conceptual constructs, where most of the content is explained and contains:</p>
-
-<ul>
-<li>Expressions and commands</li>
-<li>Expressions and evaluations</li>
-<li>Commands and sequencing</li>
-<li>Definition of functions and routines</li>
-<li>Functions and routines as data items</li>
-<li>Types and polymorphism</li>
-<li>Compound data structures</li>
-</ul>
-
-<p>Finally, as closing notes, it explains some implementation details (such as Load-Update Pairs), tools as Macrogenerators (nowadays called macros) and formal semantics</p>
-
-<h2 id="notes-highlights">Notes / highlights</h2>
-
-<h3 id="l-values-and-r-values">L-Values and R-Values</h3>
-
-<blockquote>
-<p>L-value for the address-like object appropriate on the left of the assignment, and R-value for the contents-like object appropriate for the right</p>
-
-<p>2.1, Assignment commands in page 14</p>
-
-<p>An L-value represents an area of the store of the computer. [&hellip;] Two essential features [&hellip;] it has content &ndash;i.e., an associated R-value&ndash; and that it is in general possible to change this content</p>
-
-<p>2.2, L-values and R-Values in pages 14-15</p>
-</blockquote>
-
-<h3 id="referential-transparency">Referential transparency</h3>
-
-<p>Explained in 3.2.1, Values:</p>
-
-<blockquote>
-<p>In essence, this means that if we wish to find the value of an expression with contains a sub-expression, the only thing we need to know about the sub-expression is its value.</p>
-</blockquote>
-
-<p>Also cites Quine <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> on this matter.</p>
-
-<blockquote>
-<p>We tend to assume automatically that the symbol <code>x</code> in an expression such as <code>3x**2 + 2x + 17</code> stands for the same thing (or has the same value) on each occasion it occurs. This is the most important consequence of referential transparency</p>
-
-<p>3.3.1 Variables, page 22</p>
-
-<p>If we consider L-values as well as R-Values, however, we can preserve referential transparency as far as L-values are concerned. Thi is because L-values, being generalised addresses, are not altered by assignment command</p>
-
-<p>3.3.1 Variables, page 22</p>
-</blockquote>
-
-<h3 id="types-of-variables-bound-free">Types of variables: bound, free</h3>
-
-<p>Explains the types of variables, based on their belonging to an environment or not: bound variable and free variable. Page 20</p>
-
-<h3 id="evaluating-vs-applying">Evaluating vs applying</h3>
-
-<blockquote>
-<p>Distinction between evaluating an operator and applying it to its operands
-3.2.4, Evaluation, page 20</p>
-</blockquote>
-
-<p>This also introduces the concept of currification / currying:</p>
-
-<blockquote>
-<p>[&hellip;] for reducing operators with several operands to the successive application of single operands operators
-3.2.4, Evaluation, page 21</p>
-</blockquote>
-
-<p>An example is given.</p>
-
-<h3 id="conditional-expressions-vs-conditional-commands">Conditional expressions vs conditional commands</h3>
-
-<p>Introduces the concept of conditional expression, akin to the ternary operator (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>
-</code></pre></div>
-
-<p>this is equivalent to (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
-<span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java" target="_blank">fragment</a>):</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">register</span> <span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">userName</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="n">registeredUsers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">User</span><span class="p">(</span><span class="n">userName</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">AlreadyRegisteredUserException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">resultListener</span><span class="p">.</span><span class="na">alreadyRegistered</span><span class="p">(</span><span class="n">userName</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>and the conditional command (example in java):</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-	<span class="n">f</span><span class="p">();</span>
-	<span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-	<span class="n">g</span><span class="p">();</span>
+<p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
+
+<p>He suggested that:</p>
+
+<ul>
+<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
+<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
+</ul>
+
+<p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
+
+<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java" target="_blank">fragment</a>)</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span> <span class="p">(</span><span class="n">User</span> <span class="n">user</span><span class="p">,</span> <span class="kd">final</span> <span class="n">RegistryResultListener</span> <span class="n">resultListener</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">user</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">resultListener</span><span class="p">.</span><span class="na">alreadyRegistered</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">name</span><span class="p">());</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">users</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+    <span class="n">resultListener</span><span class="p">.</span><span class="na">successfullyRegistered</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">name</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>The conditional expression is also known as &ldquo;functional if&rdquo;</p>
+<p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
 
-<h2 id="parameter-calling-modes">Parameter calling modes</h2>
-
-<p>Explains call by value and call by reference, equivalent to calling by R-Value or L-Value, respectively</p>
-
-<p>3.4.2, Parameter calling mode</p>
-
-<h3 id="functions-and-routines">Functions and routines</h3>
-
-<blockquote>
-<p>Functions and routines are as different in their nature as expressions and commands. It
-is unfortunate, therefore, that most programming languages manage to confuse them very
-successfully</p>
-
-<p>3.4.5 Functions and routines, page 30</p>
-
-<p>The problem arises because we naturally expect referential transparency of R-values in
-expressions, particularly those on the right of assignment commands</p>
-
-<p>3.4.5 Functions and routines, page 30</p>
-
-<p>Any departure of R-value referential transparency in a R-value context should
-either be eliminated by decomposing the expression into several commands and simpler
-expressions, or, if this turns out to be difficult, the subject of a comment</p>
-
-<p>3.4.5 Functions and routines, page 30</p>
-</blockquote>
-
-<h3 id="constancy-and-fixity">Constancy and fixity</h3>
-
-<p>&ldquo;Protection by freezing&rdquo;</p>
-
-<blockquote>
-<p>Constancy is thus an attribute of an L-value, and
-is, moreover, an invariant attribute. Thus when we create a new L-value, and in particular
-when we define a new quantity, we must decide whether it is a constant or a variable.</p>
-
-<p>3.4.6 Constants and variables, page 30</p>
-
-<p>[&hellip;] fixed function. This is defined as a function which
-either has no free variables, or if it has, whose free variables are all both constant and fixed.</p>
-
-<p>3.4.7, Fixed and free, page 31</p>
-
-<p>Note that fixity is a property of the λ-expression&ndash;i.e., a property of the R-value, while
-constancy is a property of the L-value.</p>
-
-<p>3.4.7, Fixed and free, page 31</p>
-</blockquote>
-
-<p>In general:</p>
-
-<ul>
-<li>Constancy is an attribute of the L-Value</li>
-<li>Fixity is an attribute of the R-Value</li>
-</ul>
-
-<p>Both for functions and objects.</p>
-
-<h3 id="first-and-second-class-objects">First and second class objects</h3>
-
-<blockquote>
-<p>A procedure, on the other hand, may only appear in another procedure call either
-as the operator (the most common case) or as one of the actual parameters. There are no
-other expressions involving procedures or whose results are procedures. Thus in a sense
-procedures in ALGOL are second class citizens—they always have to appear in person
-and can never be represented by a variable or expression</p>
-
-<p>3.5.1, First and second class objects, page 32</p>
-
-<p>Historically this second class status of procedures in ALGOL is probably a consequence
-of the view of functions taken by many mathematicians: that they are constants whose
-name one can always recognise.</p>
-
-<p>3.5.1, First and second class objects, page 33</p>
-
-<p>[&hellip;] it is remarkably difficult to stop looking on functions as second class objects</p>
-
-<p>3.5.1, First and second class objects, page 33</p>
-
-<p>and in particular, of functions which have functions as a result</p>
-
-<p>3.5.1, First and second class objects, page 33</p>
-</blockquote>
-
-<h3 id="closure">Closure</h3>
-
-<blockquote>
-<p>Thus the R-value of a function contains two parts—a rule for evaluating the expression,
-and an environment which supplies its free variables. An R-value of this sort will be called
-a closure.</p>
-
-<p>3.5.2, Representation of functions, page 34</p>
-</blockquote>
-
-<h3 id="types">Types</h3>
-
-<p>There is information on types: latent vs manifest, how to determine it</p>
-
-<blockquote>
-<p>We call attributes which can be determined at compile time in this way manifest; attributes
-that can only be determined by running the program are known as latent</p>
-
-<p>3.6.2, Manifest and latent, page 36</p>
-</blockquote>
-
-<h3 id="polymorphism">Polymorphism</h3>
-
-<p>Ad-hoc vs parametric polymorphism</p>
-
-<blockquote>
-<p>In ad hoc polymorphism there is no single systematic way of determining the type of the
-result from the type of the arguments. There may be several rules of limited extent which
-reduce the number of cases, but these are themselves ad hoc both in scope and content</p>
-
-<p>3.6.4, Polymorphism, page 37</p>
-
-<p>Parametric polymorphism:</p>
-
-<p>(α ⇒ β, α list) ⇒ β list</p>
-
-<p>3.6.4, Polymorphism, page 37</p>
-</blockquote>
-
-<h3 id="collections">Collections</h3>
-
-<blockquote>
-<ul>
-<li><strong>List</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
-<li><strong>Ntuple</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
-<li><strong>Set</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
-<li><strong>Bag or Coll</strong>: It consists of an unordered collection of objects all of which are of the same type and differs from a set in that repetitions are allowed</li>
-</ul>
-
-<p>3.7.7, Other forms of structure, page 45</p>
-</blockquote>
-
-<p>Also talks about &ldquo;rings&rdquo; (3.7.7, Other forms of structure, page 45)</p>
-
-<h3 id="macros">Macros</h3>
-
-<blockquote>
-<p>macrogenerators deal with the symbols which represent
-the variables, values and other objects of concern to a program so that all their manipulation
-is performed before the final compiling</p>
-
-<p>4.2, Macrogenerators, page 47</p>
-
-<p>Macrogeneration seems to be particularly valuable when a semantic extension of the
-language is required</p>
-
-<p>4.2, Macrogenerators, page 47</p>
-
-<p>I believe, a proper aim for programming language designers to try to make the use of
-macrogenerators wholly unnecessary</p>
-
-<p>4.2, Macrogenerators, page 47</p>
-</blockquote>
-
-<h3 id="funny-comments">funny comments</h3>
-
-<blockquote>
-<p>One important characteristic of mathematics is our habit of using names for things</p>
-
-<p>3.3.1 Variables, page 22</p>
-
-<p>if this turns out to be difficult, the subject of a comment</p>
-
-<p>3.4.5 Functions and routines, page 30</p>
-
-<p><strong>Bag or Coll</strong> This is a new sort of collection for which there is, as yet, no generally accepted name.</p>
-
-<p>3.7.7, Other forms of structure, page 45</p>
-</blockquote>
-
-<h2 id="review">Review</h2>
-
-<p>This has been a very interesting paper, on the foundational concepts. A more formal approach to the assignment operator, L-Values and R-Values and functions.</p>
-
-<p>The part about types is very interesting, explained in simple terms and with examples.</p>
-
-<p>Some of the examples are in CPL, that although an old language, it is still comprehensible. The examples or equivalences in lambda calculus are more difficult to understand (I had to read an introduction to it<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>, just to grab the basics)</p>
-
-<p>Some concepts are a bit outdated, such as the missing object orientation (or its features) or the assembly code, but in general the contents resist the time.</p>
-
-<p>Many of the concepts in programming are around L-Values and R-Values and this paper has made me realize this. Also that even if we are users of these systems, I didn&rsquo;t know many formalities behind it (assignment operator, rewriting, types, type inference, polymorphism modes, polymorphism without inheritance, etc).</p>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">Quine, W.V. Word and Object. New York Technology Press and Wiley, 1960
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2"><a href="../../../../2015/07/01/self-study-in-july-2015">introduction to lambda calculus</a>, search for &ldquo;A Tutorial Introduction to the Lambda Calculus&rdquo;
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
-</ol>
-</div>
+<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
 
         
 
@@ -819,6 +800,8 @@ macrogenerators wholly unnecessary</p>
     
         <a href="/blog/page/34/" class="label-pagination">34</a>
     
+        <a href="/blog/page/35/" class="label-pagination">35</a>
+    
 
     
     
@@ -827,7 +810,7 @@ macrogenerators wholly unnecessary</p>
 
     
     
-        <a href="/blog/page/34/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -887,11 +870,35 @@ macrogenerators wholly unnecessary</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
           <li class="post">
+            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
           </li>
         
           <li class="post">
@@ -900,30 +907,6 @@ macrogenerators wholly unnecessary</p>
         
           <li class="post">
             <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/01/self-study-june-2019/">Self-Study in June 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/30/defense-tooling/">In Defense of Tooling</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/29/keeping-intermediate-history-work-git/">Automatically keeping the intermediate history of your work using git</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/05/01/self-study-may-2019/">Self-Study in May 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/04/01/self-study-april-2019/">Self-Study in April 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/03/31/books-read-2019q1/">Books read in 2019Q1</a>
           </li>
         
       </ul>
