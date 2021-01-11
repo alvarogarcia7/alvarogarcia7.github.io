@@ -1,58 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/documentation/index.xml</link>
-    <description>Recent content on The long way through Software Craftsmanship</description>
+    <title>documentation on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/documentation/</link>
+    <description>Recent content in documentation on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://alvarogarcia7.github.io/categories/documentation/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Wed, 29 May 2019 22:32:19 +0000</lastBuildDate><atom:link href="https://alvarogarcia7.github.io/categories/documentation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automatically keeping the intermediate history of your work using git</title>
       <link>https://alvarogarcia7.github.io/blog/2019/05/29/keeping-intermediate-history-work-git/</link>
       <pubDate>Wed, 29 May 2019 22:32:19 +0000</pubDate>
       
       <guid>https://alvarogarcia7.github.io/blog/2019/05/29/keeping-intermediate-history-work-git/</guid>
-      <description>
-
-&lt;p&gt;This is another tool for your toolbox: using git to automatically document your development process (special cases only.)&lt;/p&gt;
-
-&lt;h2 id=&#34;context&#34;&gt;Context&lt;/h2&gt;
-
-&lt;p&gt;When I&amp;rsquo;m spiking a feature, I usually get in the zone (e.g., Csikszentmihalyi&amp;rsquo;s Flow), and I can forget my good engineering practices, searching for that desired answer. After a few of those bouts of coding, you realize you&amp;rsquo;re wandering. You circle around, get lost, get back on track, then get lost again. You might or might not reach your goal.&lt;/p&gt;
-
-&lt;p&gt;I sometimes lose the path that took me to the solution. This is helpful when you want to get back on your tracks (e.g., you broke something along the way). But I forget to commit as often as I should.&lt;/p&gt;
-
-&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
-
-&lt;p&gt;To document, I came up with a (very) simple tool to document the path:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
-  date
-  git add .
-  git commit -am &lt;span class=&#34;s2&#34;&gt;&amp;quot;Automatic: Save progress&amp;quot;&lt;/span&gt;
-  sleep &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will create automatic (i.e., meaningless) commits every 10 seconds. It covers the need of &amp;ldquo;not forgetting to save the progress&amp;rdquo;. This script is so small, that there is no point in creating a tool around it. Type it as a one-liner when you need it.&lt;/p&gt;
-
-&lt;p&gt;When you create meaningful increments (e.g., a milestone), when you decide that you should save your progress, you can commit as well. The downside is that the automatic commits will pollute your log, and the diff will not represent the full delta. For that, you can create a marker (i.e., one that does not have any diff - use the &lt;code&gt;allow-empty&lt;/code&gt; parameter). That kind of commit is like a &lt;a href=&#34;https://en.wikipedia.org/wiki/Marker_interface_pattern&#34; target=&#34;_blank&#34;&gt;Marker Interface Pattern&lt;/a&gt;, to pinpoint a specific delta:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;git commit -am &lt;span class=&#34;s2&#34;&gt;&amp;quot;Marker: Completed the ....&amp;quot;&lt;/span&gt; --allow-empty
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;When you want to see all the changes, &lt;code&gt;git diff&lt;/code&gt; between two commits (e.g., Markers) or you can rebase with squash (&lt;code&gt;git rebase --interactive&lt;/code&gt;) into another branch (so you keep this history).&lt;/p&gt;
-
-&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;Summary:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Automatic commits to save your progress. To save the progress.&lt;/li&gt;
-&lt;li&gt;Manual commits to pinpoint milestones. To document.&lt;/li&gt;
-&lt;li&gt;Tools help you be more productive&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>This is another tool for your toolbox: using git to automatically document your development process (special cases only.)
+Context When I&amp;rsquo;m spiking a feature, I usually get in the zone (e.g., Csikszentmihalyi&amp;rsquo;s Flow), and I can forget my good engineering practices, searching for that desired answer. After a few of those bouts of coding, you realize you&amp;rsquo;re wandering. You circle around, get lost, get back on track, then get lost again.</description>
     </item>
     
     <item>
@@ -61,133 +23,12 @@
       <pubDate>Fri, 01 Feb 2019 10:32:19 +0000</pubDate>
       
       <guid>https://alvarogarcia7.github.io/blog/2019/02/01/self-study-february-2019/</guid>
-      <description>
-
-&lt;h2 id=&#34;amazon-dynamodb-transactions-how-it-works-https-docs-aws-amazon-com-amazondynamodb-latest-developerguide-transaction-apis-html&#34;&gt;&lt;a href=&#34;https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html&#34; target=&#34;_blank&#34;&gt;Amazon DynamoDB Transactions: How it Works&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;Explains how transactions work in DynamoDB&lt;/p&gt;
-
-&lt;p&gt;Tags: dynamodb, aws, help, transaction, serializable&lt;/p&gt;
-
-&lt;p&gt;Id: 7fb09cd4-2639-11e9-9377-0242ac110002
-Read: Fri, 01 Feb 2019 15:53:20 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;jepsen-aerospike-https-aphyr-com-posts-324-call-me-maybe-aerospike&#34;&gt;&lt;a href=&#34;https://aphyr.com/posts/324-call-me-maybe-aerospike&#34; target=&#34;_blank&#34;&gt;Jepsen: Aerospike&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve read this analysis of Aerospike, that explains what kind of database it is, what CAP properties satisfies&lt;/p&gt;
-
-&lt;p&gt;Tags: cap, cap-theorem, jepsen, aphyr, aerospike, database, acid, ap, cp, consistency, availability, partitioning, paxos&lt;/p&gt;
-
-&lt;p&gt;Id: bd7151c6-2639-11e9-a38e-0242ac110002
-Read: Fri, 01 Feb 2019 15:55:04 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;a-critique-of-ansi-sql-isolation-levels-https-www-microsoft-com-en-us-research-wp-content-uploads-2016-02-tr-95-51-pdf&#34;&gt;&lt;a href=&#34;https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf&#34; target=&#34;_blank&#34;&gt;A Critique of ANSI SQL Isolation Levels&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve read this paper that explains the ANSI SQL isolation levels&lt;/p&gt;
-
-&lt;p&gt;Tags: non-repeatable, fuzzy-read, dirty-read, phantom, phantom-read, isolation, serializability, consistency, consistency, consistency-level, read-uncommitted, read-committed, repeatable-read, serializable, microsoft&lt;/p&gt;
-
-&lt;p&gt;Id: 01292b8c-263a-11e9-a7fe-0242ac110002
-Read: Fri, 01 Feb 2019 15:56:58 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;weak-consistency-a-generalized-theory-and-optimistic-implementations-for-distributed-transactions-http-pmg-csail-mit-edu-papers-adya-phd-pdf&#34;&gt;&lt;a href=&#34;http://pmg.csail.mit.edu/papers/adya-phd.pdf&#34; target=&#34;_blank&#34;&gt;Weak Consistency: A Generalized Theory and Optimistic Implementations for Distributed Transactions&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;An extended paper on ACID properties for SQL databases&lt;/p&gt;
-
-&lt;p&gt;Tags: liskov, atul-adya, stronger-serializable, consistency, consistency-level, isolation, database, sql-database, acid, transaction&lt;/p&gt;
-
-&lt;p&gt;Id: 4a1c6f7a-263a-11e9-8e08-0242ac110002
-Read: Fri, 01 Feb 2019 15:59:00 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;no-todo-el-mundo-sabe-o-debe-dar-feedback-https-softwareyotrasdesvirtudes-com-2018-11-26-no-todo-el-mundo-sabe-o-debe-dar-feedback&#34;&gt;&lt;a href=&#34;https://softwareyotrasdesvirtudes.com/2018/11/26/no-todo-el-mundo-sabe-o-debe-dar-feedback/&#34; target=&#34;_blank&#34;&gt;No todo el mundo sabe o debe dar feedback&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;The author explains why some feedback is dangerous: either the way of giving it, or the message, or both.&lt;/p&gt;
-
-&lt;p&gt;In this case, she&amp;rsquo;s talking about the Commit Conf, but this is applicable to any situation&lt;/p&gt;
-
-&lt;p&gt;Para dar un buen feedback es importante:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Primero: agradecer el esfuerzo por la charla.&lt;/li&gt;
-&lt;li&gt;Segundo: resaltar algo positivo de ella.  Seguro que algo cumple.&lt;/li&gt;
-&lt;li&gt;Tercero: decir cómo mejorarías un aspecto&lt;/li&gt;
-&lt;li&gt;Último: volver a dar las gracias o decir una frase buena que motive.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Dar un mal feedback es muy fácil:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Primero: no leerte la descripción ni el nivel de la charla&lt;/li&gt;
-&lt;li&gt;Segundo: te cabreas porque no es lo esperado y dudabas entre esa y otra charla&lt;/li&gt;
-&lt;li&gt;Tercero: dices lo que no te ha gustado sin rodeos.&lt;/li&gt;
-&lt;li&gt;Cuarto: además asumes cosas que no ha hecho y las escribes. Igual que yo he hecho en el Primero y Segundo.&lt;/li&gt;
-&lt;li&gt;Quinto: si además dices algo faltoso gana puntos.&lt;/li&gt;
-&lt;li&gt;Sexto: Utilizas esa tónica destructiva en todos.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Tags: laura-lacarra, commit, commit-conf, feedback, good-feedback, honest-feedback, spanish&lt;/p&gt;
-
-&lt;p&gt;Id: 20d8145e-3a92-11e9-8023-0242ac110003
-Read: Wed, 27 Feb 2019 13:18:10 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;how-to-deal-with-difficult-people-on-software-projects-https-people-neilon-software&#34;&gt;&lt;a href=&#34;https://people.neilon.software/&#34; target=&#34;_blank&#34;&gt;How to Deal with Difficult People on Software Projects&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve read this guide on dealing with difficult people.&lt;/p&gt;
-
-&lt;p&gt;There are many (48) personality types, including these types:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Product Managers&lt;/li&gt;
-&lt;li&gt;Designers&lt;/li&gt;
-&lt;li&gt;Project Managers&lt;/li&gt;
-&lt;li&gt;Development Managers&lt;/li&gt;
-&lt;li&gt;Developers&lt;/li&gt;
-&lt;li&gt;Quality Assurance&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Tags: people, people-management, personality-type, guide, neil-green&lt;/p&gt;
-
-&lt;p&gt;Id: 95554892-3a92-11e9-9bbf-0242ac110003
-Read: Wed, 27 Feb 2019 13:21:25 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;software-disenchantment-http-tonsky-me-blog-disenchantment&#34;&gt;&lt;a href=&#34;http://tonsky.me/blog/disenchantment/&#34; target=&#34;_blank&#34;&gt;Software disenchantment&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve read this article about somebody disenchanted with the current state of the art of software: slow, bloated, not better than 10 years ago, or faster.&lt;/p&gt;
-
-&lt;p&gt;Tags: nikita-prokopov, bloat, rant, disenchantment, tonsky, comparison, speed, software&lt;/p&gt;
-
-&lt;p&gt;Id: 0078d58a-3a93-11e9-8f23-0242ac110003
-Read: Wed, 27 Feb 2019 13:24:25 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;the-values-and-principles-of-agile-software-development-https-www-slideshare-net-bradapp-the-values-and-principles-of-agile-software-development&#34;&gt;&lt;a href=&#34;https://www.slideshare.net/bradapp/the-values-and-principles-of-agile-software-development&#34; target=&#34;_blank&#34;&gt;The Values and Principles of Agile Software Development&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve read the slides of this presentation by Brad Appleton, on Values, Principles, and Practices in an Agile environment.&lt;/p&gt;
-
-&lt;p&gt;Plenty of good quotes&lt;/p&gt;
-
-&lt;p&gt;Tags: brad-appleton, slideshare, slide, agile, practice, principle, value, xp, extreme-programming, quote, lean-software, lean&lt;/p&gt;
-
-&lt;p&gt;Id: 42cdde80-3a93-11e9-814c-0242ac110003
-Read: Wed, 27 Feb 2019 13:26:16 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago-https-jesuslc-com-2018-04-21-makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago&#34;&gt;&lt;a href=&#34;https://jesuslc.com/2018/04/21/makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago/&#34; target=&#34;_blank&#34;&gt;Makefiles como dejar de memorizar comandos en docker – Developer Vago&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve discovered a new technique for Makefiles:\n\nUsing a common format (a DSL, in fact) to document the goal, then a new goal &amp;lsquo;help&amp;rsquo; to print that documentation.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span&gt;&lt;/span&gt;.PHONY: &lt;span class=&#34;nb&#34;&gt;help&lt;/span&gt;
-help: &lt;span class=&#34;c1&#34;&gt;## Print this help.&lt;/span&gt;
-  @grep -E &lt;span class=&#34;s1&#34;&gt;&amp;#39;^[a-zA-Z_-]+:.*?## .*$$&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;MAKEFILE_LIST&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;BEGIN {FS = \&amp;quot;:.*?## \&amp;quot;}; {printf \&amp;quot;\033[36m%-20s\033[0m %s\n\&amp;quot;, $$1, $$2}&amp;#39;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;when you run &lt;code&gt;make help&lt;/code&gt;, then&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Print this help.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Tags: makefile, jesuslc, documentation, executable-documentation, awk, trick, help&lt;/p&gt;
-
-&lt;p&gt;Id: d6a4b78c-3a93-11e9-88d7-0242ac110003
-Read: Wed, 27 Feb 2019 13:30:24 +0000&lt;/p&gt;
-</description>
+      <description>Amazon DynamoDB Transactions: How it Works Explains how transactions work in DynamoDB
+Tags: dynamodb, aws, help, transaction, serializable
+Id: 7fb09cd4-2639-11e9-9377-0242ac110002 Read: Fri, 01 Feb 2019 15:53:20 +0000
+Jepsen: Aerospike I&amp;rsquo;ve read this analysis of Aerospike, that explains what kind of database it is, what CAP properties satisfies
+Tags: cap, cap-theorem, jepsen, aphyr, aerospike, database, acid, ap, cp, consistency, availability, partitioning, paxos
+Id: bd7151c6-2639-11e9-a38e-0242ac110002 Read: Fri, 01 Feb 2019 15:55:04 +0000</description>
     </item>
     
     <item>
@@ -196,45 +37,11 @@ Read: Wed, 27 Feb 2019 13:30:24 +0000&lt;/p&gt;
       <pubDate>Sat, 01 Dec 2018 10:32:19 +0000</pubDate>
       
       <guid>https://alvarogarcia7.github.io/blog/2018/12/01/self-study-december-2018/</guid>
-      <description>
-
-&lt;h2 id=&#34;one-year-nomad-a-review-https-krausefx-com-blog-one-year-nomad&#34;&gt;&lt;a href=&#34;https://krausefx.com/blog/one-year-nomad&#34; target=&#34;_blank&#34;&gt;One year nomad - a review&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;Tags: nomad, felix-krause, digital-nomad, remote, life&lt;/p&gt;
-
-&lt;p&gt;Id: 7784a1da-fc82-11e8-a2cc-0242ac110002
-Read: Mon, 10 Dec 2018 13:49:51 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;the-reason-many-ultrarich-people-aren-t-satisfied-with-their-wealth-https-www-theatlantic-com-family-archive-2018-12-rich-people-happy-money-577231&#34;&gt;&lt;a href=&#34;https://www.theatlantic.com/family/archive/2018/12/rich-people-happy-money/577231/&#34; target=&#34;_blank&#34;&gt;The Reason Many Ultrarich People Aren’t Satisfied With Their Wealth&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;How the rich are motivated to earn more money&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;really rich people are often motivated to acquire more money by the thrill that comes with multiplying one’s fortune by making investments, buying up businesses&lt;/p&gt;
-
-&lt;p&gt;Those two ways of putting money to use—as a way of covering expenses or as a way of building a bigger fortune—&lt;/p&gt;
-
-&lt;p&gt;Every billionaire I’ve spoken to, and I’ve spoken to quite a number of them, is extremely excited by each additional increment of money they make&lt;/p&gt;
-
-&lt;p&gt;Do I have enough to buy this expensive thing I want? but rather Do I have as much or more than these people I’m comparing myself with?&lt;/p&gt;
-
-&lt;p&gt;feeling wealthy is about comparison with others in your reference group. So the question is not what individuals want to buy, but what they feel they must buy in order to keep up their status&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Tags: rich, wealth, the-atlantic, longform, management, wealth-management, motivation, elite, ultrarich, money&lt;/p&gt;
-
-&lt;p&gt;Id: e5650e1c-0081-11e9-a127-0242ac110002
-Read: Sat, 15 Dec 2018 15:55:51 +0000&lt;/p&gt;
-
-&lt;h2 id=&#34;etsy-s-experiment-with-immutable-documentation-https-codeascraft-com-2018-10-10-etsys-experiment-with-immutable-documentation&#34;&gt;&lt;a href=&#34;https://codeascraft.com/2018/10/10/etsys-experiment-with-immutable-documentation/&#34; target=&#34;_blank&#34;&gt;Etsy’s experiment with immutable documentation&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;Trading freshness for completeness in documentation&lt;/p&gt;
-
-&lt;p&gt;Tags: how-doc, what-doc, fyi, documentation, etsy, experiment, immutable-documentation, infobot, bot, slack, slack-integration&lt;/p&gt;
-
-&lt;p&gt;Id: 6ef4bf24-0082-11e9-a076-0242ac110002
-Read: Sat, 15 Dec 2018 15:59:41 +0000&lt;/p&gt;
-</description>
+      <description>One year nomad - a review Tags: nomad, felix-krause, digital-nomad, remote, life
+Id: 7784a1da-fc82-11e8-a2cc-0242ac110002 Read: Mon, 10 Dec 2018 13:49:51 +0000
+The Reason Many Ultrarich People Aren’t Satisfied With Their Wealth How the rich are motivated to earn more money
+ really rich people are often motivated to acquire more money by the thrill that comes with multiplying one’s fortune by making investments, buying up businesses
+  Those two ways of putting money to use—as a way of covering expenses or as a way of building a bigger fortune—</description>
     </item>
     
   </channel>

@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Polishing your tools</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,68 +145,38 @@
           
           
           
-          
-
-<h2 id="the-toolsmith">The toolsmith</h2>
-
-<p><a href="http://en.wikipedia.org/wiki/Fred_Brooks" target="_blank">Frederick P Brooks, Jr</a> quoted / explained a theory explained by Mills and Baker<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> around 1971-72:</p>
-
+          <h2 id="the-toolsmith">The toolsmith</h2>
+<p><a href="http://en.wikipedia.org/wiki/Fred_Brooks">Frederick P Brooks, Jr</a> quoted / explained a theory explained by Mills and Baker<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> around 1971-72:</p>
 <blockquote>
 <p>Chapter 3: The Surgical Team</p>
-
 <p>[&hellip;] but the team be organized like a surgical team rather than a hog-butchering team. That is, instead of each member cutting away on the problem, one does the cutting and the others give him[her] every support that will enhance his[her] effectiveness and productivity.</p>
-
 <p>[&hellip;]</p>
-
-<p><quote> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team </quote></p>
+<p><!-- raw HTML omitted --> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team <!-- raw HTML omitted --></p>
 </blockquote>
-
 <p>(Text between square brackets is mine)</p>
-
 <p>The author goes on to explain the job descriptions for the surgeon, copilot, administrator, editor, secretaries, program clerk, toolsmith, tester and the language lawyer.</p>
-
 <p>The one that will be covered in this post is the toolsmith:</p>
-
 <blockquote>
 <p><strong>The toolsmith</strong>. File-editing, text-editing, and interactive debugging services are now readily available, so that a team will rarely need its own machine and machine-operating crew. But these services must be available with unquestionably satisfactory response and reliability; and the surgeon must be sole judge of the adequacy of the service available to him. He needs a toolsmith, responsible for ensuring this adequacy of the basic service and for constructing, maintaining, and upgrading special tools &ndash;mostly interactive computer services&ndash; needed by his team. Each team will need its own toolsmith, regardless of the excellence and reliability of any centrally provided service, for his job is to see to the tools needed or wanted by his surgeon, without regard to any other team&rsquo;s needs. The tool-builder will often construct specialized utilities, cataloged procedures, macro libraries.</p>
-
-<p><quote> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team </quote></p>
+<p><!-- raw HTML omitted --> Brooks, F. - The Mythical Man-Month, chapter 3: The Surgical Team <!-- raw HTML omitted --></p>
 </blockquote>
-
-<p>Even though the chapter reads a bit outdated, especially with the part about genders and methodologies (i.e., waterfall), the part about roles is interesting. The surgical team, as the author presents will be composed by 9 &frac12; (nine and a half) as the language lawyer can be shared among two or three teams.</p>
-
+<p>Even though the chapter reads a bit outdated, especially with the part about genders and methodologies (i.e., waterfall), the part about roles is interesting. The surgical team, as the author presents will be composed by 9 1/2 (nine and a half) as the language lawyer can be shared among two or three teams.</p>
 <h2 id="day-to-day-practices">Day to day practices</h2>
-
 <p>So, one full-time job is to build tools to service the surgeon and the copilot (1:8,5 ratio), or approximately 12% of a full-time position.</p>
-
 <p>These tools can make the surgeon and the copilot more effective, ranging from a single digit percentage to orders of magnitude in other tasks.</p>
-
 <p>As agile teams no longer have a toolsmith and the scrum master is not necessarily a technical expert who can build tools for the whole team, the tasks of creating tools must be taken care by everyone. No one better than yourself can know your needs and tailor solutions for them.</p>
-
 <p>The only downside is you have to invest ~5h (for a full time position) per week into creating and polishing tools for your work: it is a need for achieving more productivity when working.</p>
-
-<p>Nowadays that IDEs are configurable, this time might be invested on learning more advanced features as other shortcuts, refactoring techniques, other design patterns, etc. I like having my own live templates (see <a href="https://www.jetbrains.com/idea/help/creating-and-editing-live-templates.html#d1333587e219" target="_blank">description</a>), especially for tests, as I saw on the <a href="https://skillsmatter.com/courses/503-sandro-mancuso-s-crafting-code-course#programme" target="_blank">Crafting Code workshop</a> by <a href="https://twitter.com/sandromancuso" target="_blank">Sandro Mancuso</a></p>
-
-<!--
-TODO: Add link to Sandro Mancuso's experience report, when I write it
--->
-
+<p>Nowadays that IDEs are configurable, this time might be invested on learning more advanced features as other shortcuts, refactoring techniques, other design patterns, etc. I like having my own live templates (see <a href="https://www.jetbrains.com/idea/help/creating-and-editing-live-templates.html#d1333587e219">description</a>), especially for tests, as I saw on the <a href="https://skillsmatter.com/courses/503-sandro-mancuso-s-crafting-code-course#programme">Crafting Code workshop</a> by <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>It may also include other activities as setting up your bash alias, cleaning your desk, trying a new UML diagram modeler, etc. Anything that improves the productivity of your main task.</p>
-
 <p>If we consider our experience and knowledge part of our tools (as we are knowledge workers), training could be considered part of polishing our tools. Short, daily or weekly training sessions (even internal) can make a great impact on breadth (not depth) of knowledge among your teammates. This shallow knowledge can open doors for more knowledge to be gained outside of company time, or used to practice and test other methods.</p>
-
 <p>This training is so useful for everyone (&ldquo;when one teaches, two learn&rdquo;) that I recommend my clients to do it. This has helped them cope with changing technologies, knowledge transfer and even some team building.</p>
-
 <h2 id="company-provided-or-not">Company provided or not?</h2>
-
-<p>Should the company provide for this time to improve? Although I don&rsquo;t know the answer, it would greatly affect the programmers&rsquo; productivity to do so. I would say, provide this time as long as what is produced is useful. How do you measure useful? This is a subjective opinion, so it depends on each one.</p>
-
+<p>Should the company provide for this time to improve? Although I don&rsquo;t know the answer, it would greatly affect the programmers' productivity to do so. I would say, provide this time as long as what is produced is useful. How do you measure useful? This is a subjective opinion, so it depends on each one.</p>
 <p>Some companies acknowledge that this is so important as to invest part of their resources (0-2 hours per week) into training.</p>
-
-<p>Either way, should your company provide it for your or not, you are the one in charge of your career (from Mancuso, <a href="https://leanpub.com/socra" target="_blank">Software Craftsmanship</a> - now called <a href="http://www.amazon.co.uk/Software-Craftsman-Professionalism-Pragmatism-Robert/dp/0134052501/ref=sr_1_1?ie=UTF8&amp;qid=1416521895&amp;sr=8-1&amp;keywords=the+software+craftsman" target="_blank">The Software Craftsman</a>). If you are not allowed to invest company time for your own benefit, you could use some of your personal time to do so. It is not required, but you will soon enjoy its profits.</p>
-
+<p>Either way, should your company provide it for your or not, you are the one in charge of your career (from Mancuso, <a href="https://leanpub.com/socra">Software Craftsmanship</a> - now called <a href="http://www.amazon.co.uk/Software-Craftsman-Professionalism-Pragmatism-Robert/dp/0134052501/ref=sr_1_1?ie=UTF8&amp;qid=1416521895&amp;sr=8-1&amp;keywords=the+software+craftsman">The Software Craftsman</a>). If you are not allowed to invest company time for your own benefit, you could use some of your personal time to do so. It is not required, but you will soon enjoy its profits.</p>
 <h2 id="examples">Examples</h2>
-
 <ul>
 <li>Every sprint, one of my clients (as of 2015-05) wants to review the work done using some slides and a live demo. The &lsquo;sample&rsquo; slides with the format, layout is useful. Everything that should be replaced (timestamp, contents, etc) is marked with a TODO</li>
 <li>Every day, I commit plenty of times to the control version system (i.e., git). I have an alias for commit, diff, status, etc, that saves me some keystrokes on the most common commands</li>
@@ -214,21 +184,17 @@ TODO: Add link to Sandro Mancuso's experience report, when I write it
 <li>Deployment, even on local, is automated: a script for getting the latest <code>branch</code>, <code>develop</code> or <code>master</code> code, build the Docker container, start the docker image, notify me the code is ready</li>
 <li>Pipeline: I have a pipeline, in local, where I can push and the tests will be executed automatically. If the build fails (usually BDD tests), I can <code>push -f</code> without affecting to the repo history.</li>
 </ul>
-
-<hr />
-
+<hr>
 <p>Mills, H., &ldquo;Chief programmer teams, principles, and procedures,&rdquo; IBM Federal Systems Division Report FSC 715108, Gaithersburg, Md., 1971.</p>
-
 <p>Baker, F. T., &ldquo;Chief programmer team management of production programming,&rdquo; IBM Sys. J., 11, 1 (1972).</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">Original references in &ldquo;The Mythical Man-Month&rdquo; (Notes and References, page 294) point to these:
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>Original references in &ldquo;The Mythical Man-Month&rdquo; (Notes and References, page 294) point to these: <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
         
@@ -259,27 +225,6 @@ TODO: Add link to Sandro Mancuso's experience report, when I write it
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -296,9 +241,9 @@ TODO: Add link to Sandro Mancuso's experience report, when I write it
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -335,43 +280,43 @@ TODO: Add link to Sandro Mancuso's experience report, when I write it
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -383,21 +328,24 @@ TODO: Add link to Sandro Mancuso's experience report, when I write it
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

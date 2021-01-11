@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>On private but leaked information in a SaaS</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,56 +145,37 @@
           
           
           
-          
-
-<p>This is another tool for your toolbox: how to uncorrelate public and private information.</p>
-
+          <p>This is another tool for your toolbox: how to uncorrelate public and private information.</p>
 <h2 id="context">Context</h2>
-
 <p>Context: there are clients who have sensitive information. Some is just &lsquo;companies being stealth&rsquo; (e.g., don&rsquo;t want to make public until launching), some is just protected by a Non-Disclosure Agreement (NDA), some are protected by security clearance. The more sensitive, the greater protection needed. This tool applies to all sensitive information, regardless of where it&rsquo;s stored or how it is used.</p>
-
 <p>More context: there are applications (i.e., SaaS) better installed in the cloud (e.g., expensive or impossible to install on-premise).</p>
-
 <h2 id="solution">Solution</h2>
-
 <p>Having sensitive information on the cloud is delicate. There is a fine balance between security, confort, data privacy, cost (among others). Even when using private resources, there is information leaking to the public (i.e., people not included in the designated circle).</p>
-
-<p>Let&rsquo;s take an example: we create a git repository in an organization, on an online git vendor. For that, we choose the strictest security measures available (e.g. private repositories; private organization details <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>). Even then, there&rsquo;s an overlooked piece of information that many times cannot be hidden: the URL.</p>
-
+<p>Let&rsquo;s take an example: we create a git repository in an organization, on an online git vendor. For that, we choose the strictest security measures available (e.g. private repositories; private organization details <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>). Even then, there&rsquo;s an overlooked piece of information that many times cannot be hidden: the URL.</p>
 <p>See:</p>
-
 <pre><code>https://gitvendor.com/organization/repository
-</code></pre>
-
-<p>Both <code>organization</code> and <code>repository</code> can be leaked to the public. Even if they&rsquo;re not published (i.e., only available with a link), you can check whether this has been registered or not. Should you have a exposed-enough profile, when there are rumours that your company will launch a new product, people can investigate whether this domain/repo/organization has been registered.</p>
-
-<p>This is one reason why, in the past, projects are designed to use a <a href="https://en.wikipedia.org/wiki/List_of_Microsoft_codenames" target="_blank">codename</a><sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>.</p>
-
+</code></pre><p>Both <code>organization</code> and <code>repository</code> can be leaked to the public. Even if they&rsquo;re not published (i.e., only available with a link), you can check whether this has been registered or not. Should you have a exposed-enough profile, when there are rumours that your company will launch a new product, people can investigate whether this domain/repo/organization has been registered.</p>
+<p>This is one reason why, in the past, projects are designed to use a <a href="https://en.wikipedia.org/wiki/List_of_Microsoft_codenames">codename</a><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
 <p>We can use &ndash;at least&ndash; two techniques for uncorrelating private information from public information:</p>
-
 <ul>
 <li>Alias: choose a catchy name as a codename. Such as Utopia for Microsoft Bob, Longhorn for Windows Vista</li>
 <li>Random data: choose a randomly-generated id (e.g., UUID), that is sufficiently random not to be guessed by chance, that does not relate in any way to the project. The downside to this is that it actually bears no relation to the thing, therefore making it more difficult to remember.</li>
 </ul>
-
-<p>Note: *nix-like systems can generate uuid with <code>uuidgen</code> (<a href="http://man7.org/linux/man-pages/man1/uuidgen.1.html" target="_blank">man page</a>). Also, you can generate it online.</p>
-
+<p>Note: *nix-like systems can generate uuid with <code>uuidgen</code> (<a href="http://man7.org/linux/man-pages/man1/uuidgen.1.html">man page</a>). Also, you can generate it online.</p>
 <h2 id="conclusion">Conclusion</h2>
-
 <p>Make a wise choice of where to put your sensitive information.</p>
-
 <p>When you can choose a SaaS solution, keep information private as needed. Be careful with the information you leak. When you are forced to use something public, you can use a codename or random data.</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">This is not available in all git vendors that I&rsquo;ve reviewed.
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">Also, because the final project name has not been decided yet (e.g., removes choosing the project name from the critical path to start a project).
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>This is not available in all git vendors that I&rsquo;ve reviewed. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Also, because the final project name has not been decided yet (e.g., removes choosing the project name from the critical path to start a project). <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
         
@@ -223,27 +204,6 @@
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -260,9 +220,9 @@
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -299,43 +259,43 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -347,21 +307,24 @@
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

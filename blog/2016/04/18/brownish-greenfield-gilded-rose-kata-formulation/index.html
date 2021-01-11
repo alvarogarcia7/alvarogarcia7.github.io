@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Brownish Greenfield Gilded Rose Kata</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,27 +145,18 @@
           
           
           
-          
-
-<p>(This formulation has been copied and adapted from <a href="https://twitter.com/NotMyself" target="_blank">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes" target="_blank">Terry Hughes</a>&rsquo;s <a href="https://github.com/NotMyself/GildedRose" target="_blank">repository</a>)</p>
-
+          <p>(This formulation has been copied and adapted from <a href="https://twitter.com/NotMyself">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes">Terry Hughes</a>&rsquo;s <a href="https://github.com/NotMyself/GildedRose">repository</a>)</p>
 <h2 id="formulation">Formulation</h2>
-
 <p>Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.</p>
-
 <p>Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us. It was developed by a no-nonsense type named Leeroy, who has moved on to new adventures.</p>
-
 <p>Your task is to rewrite the system using an old class, that already exists.
 First an introduction to our system:</p>
-
 <ul>
 <li>All items have a <code>SellIn</code> value which denotes the number of days we have to sell the item</li>
 <li>All items have a <code>Quality</code> value which denotes how valuable the item is</li>
 <li>At the end of each day our system lowers both values for every item</li>
 </ul>
-
 <p>Pretty simple, right? Well this is where it gets interesting:</p>
-
 <ul>
 <li>Once the sell by date has passed, <code>Quality</code> degrades twice as fast</li>
 <li>The <code>Quality</code> of an item is never negative</li>
@@ -175,30 +166,22 @@ First an introduction to our system:</p>
 <li>&ldquo;Backstage passes&rdquo;, like aged brie, increases in <code>Quality</code> as it&rsquo;s <code>SellIn</code> value approaches; <code>Quality</code> increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but <code>Quality</code> drops to 0 after the concert</li>
 <li>&ldquo;Conjured&rdquo; items degrade in <code>Quality</code> twice as fast as normal items</li>
 </ul>
-
 <p>Your task is to create the system from scratch, with only a restriction: you must use the class <code>Item</code> that Leeroy developed. This class is:</p>
-
 <ul>
 <li>unmodifiable, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in shared code ownership. This prohibition applies to modifying it, deleting it, adding new methods, deleting methodts, changing visibility of stuff, etc</li>
 <li>cannot be inherited, if you do, a goblin in the corner who will insta-rage and one-shot you as he doesn&rsquo;t believe in code inheritance</li>
 </ul>
-
-<p>The <code>Item</code> class can be found in many programming languages in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata" target="_blank">Emily Bache&rsquo;s repository</a>. You are looking for the class / type <code>Item</code></p>
-
+<p>The <code>Item</code> class can be found in many programming languages in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Emily Bache&rsquo;s repository</a>. You are looking for the class / type <code>Item</code></p>
 <p>Happy katas and happy koding. Please be careful with the goblin!</p>
-
 <h2 id="how-to-start">How to start</h2>
-
 <ul>
 <li>Create a new repo</li>
-<li>Find the class <code>Item</code> in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata" target="_blank">this repo</a></li>
+<li>Find the class <code>Item</code> in <a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">this repo</a></li>
 <li>Use TDD to develop the functionality. Remember, <code>Item</code> will stay as it is.</li>
 <li>Have fun</li>
 </ul>
-
 <h2 id="acknowledgements">Acknowledgements</h2>
-
-<p>Thanks to <a href="https://twitter.com/@trikitrok" target="_blank">@trikitrok</a> for the idea, <a href="https://twitter.com/NotMyself" target="_blank">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes" target="_blank">Terry Hughes</a> for allowing me to copy and modify their kata.</p>
+<p>Thanks to <a href="https://twitter.com/@trikitrok">@trikitrok</a> for the idea, <a href="https://twitter.com/NotMyself">Bobby Johnson</a> and <a href="https://twitter.com/TerryHughes">Terry Hughes</a> for allowing me to copy and modify their kata.</p>
 
         </div>
         
@@ -229,27 +212,6 @@ First an introduction to our system:</p>
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -266,9 +228,9 @@ First an introduction to our system:</p>
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -305,43 +267,43 @@ First an introduction to our system:</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -353,21 +315,24 @@ First an introduction to our system:</p>
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

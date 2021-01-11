@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>The Guardian of the Source</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -146,39 +146,32 @@
           
           
           <p>Overheard today at the office, while they were discussing the approval of a pull request:</p>
-
 <blockquote>
 <p>[Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this?</p>
-
 <p>[Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source</p>
-
 <p>[PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase.</p>
 </blockquote>
-
-<p>This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;<a href="http://knowyourmeme.com/memes/you-shall-not-pass" target="_blank">you shall not pass</a>&rdquo; while on top of the bridge.</p>
-
-<p>This is part of the objectives of doing a pull request before merging code: stop the bad code<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> before it is merged to the codebase.</p>
-
-<p>Later, as you start having <a href="http://en.wikipedia.org/wiki/Broken_windows_theory" target="_blank">broken windows</a> in your codebase, it is easier that you start introducing more. Exactly about this is the <a href="http://en.wikipedia.org/wiki/Broken_windows_theory" target="_blank">broken windows theory</a>.</p>
-
-<p>On the other hand, if you try to block that bad code before it is merged, it is cheaper to remove it: nothing depends on it, you introduce no repetition, etc<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup></p>
-
-<p>This also connects with the idea present in <a href="http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501" target="_blank">Software Craftsmanship, now called The Software Craftsman</a>, about preserving value for investors and treat software as an investment (with positive ROI) rather than a sunk cost.</p>
-
+<p>This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;[you shall not pass][you-shall-not-pass-meme]&rdquo; while on top of the bridge.</p>
+<p>This is part of the objectives of doing a pull request before merging code: stop the bad code<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> before it is merged to the codebase.</p>
+<p>Later, as you start having [broken windows][broken-window-theory] in your codebase, it is easier that you start introducing more. Exactly about this is the [broken windows theory][broken-window-theory].</p>
+<p>On the other hand, if you try to block that bad code before it is merged, it is cheaper to remove it: nothing depends on it, you introduce no repetition, etc<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This also connects with the idea present in [Software Craftsmanship, now called The Software Craftsman][socra], about preserving value for investors and treat software as an investment (with positive ROI) rather than a sunk cost.</p>
 <p>It is being picky and, to the most of our possibilities, do not letting any defects nor bad code into the codebase. A hedge fund manager would not let any toxic or dubious asset into the managed funds. This would be counterproductive in the long run (maybe even in the short one) and would be not doing their job correctly. Why is it that some developers suggest or accept these toxic assets?</p>
-
 <p>So, at least for me, would be an honor to be called the &ldquo;Guardian of the Source&rdquo; by someone I respect, as long as this is a serious proposition (i.e., not a joke of some kind).</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">Bad code can be expressed in many ways: long methods, bad naming, breaking design principles (e.g., SOLID, KISS, DRY - OAOO), code with defects, no tests or no coverage, etc.
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">A source is <a href="http://c2.com/cgi/wiki?DiscoverDefectsEarly" target="_blank">Discover defects early</a>. Another is <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more" target="_blank">this paper</a> that cites the ratio of fixing it later to 5:1 (five times more expensive).
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>Bad code can be expressed in many ways: long methods, bad naming, breaking design principles (e.g., SOLID, KISS, DRY - OAOO), code with defects, no tests or no coverage, etc. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>A source is <a href="http://c2.com/cgi/wiki?DiscoverDefectsEarly">Discover defects early</a>. Another is <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">this paper</a> that cites the ratio of fixing it later to 5:1 (five times more expensive).
+[broken-window-theory]: <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">http://en.wikipedia.org/wiki/Broken_windows_theory</a>
+[socra]: <a href="http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501">http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501</a>
+[you-shall-not-pass-meme]: <a href="http://knowyourmeme.com/memes/you-shall-not-pass">http://knowyourmeme.com/memes/you-shall-not-pass</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
         
@@ -209,27 +202,6 @@
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -246,9 +218,9 @@
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -285,43 +257,43 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -333,21 +305,24 @@
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

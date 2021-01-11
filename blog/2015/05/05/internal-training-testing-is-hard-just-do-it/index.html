@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Internal training: Testing is hard - just do it</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,82 +145,58 @@
           
           
           
-          
-
-<p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/" target="_blank">Testing is hard - just do it</a></p>
-
+          <p>At a client, last week I&rsquo;ve organized an internal training, in the form of a discussion about this article: <a href="http://davidsouther.com/#/posts/2013/10/30/testing-its-hard-just-do-it/">Testing is hard - just do it</a></p>
 <h2 id="our-thoughts">Our thoughts</h2>
-
 <blockquote>
 <p>When a bug is found, prove it exists with a test</p>
 </blockquote>
-
 <p>This immediately reduces defect rate: the same regression cannot be introduced again</p>
-
 <blockquote>
 <p>fix a bug a second time</p>
 </blockquote>
-
 <p>If fixing a bug (having defects in your code) was &lsquo;waste&rsquo;, as defined by lean methodologies, it also is wast fixing it for the following times</p>
-
 <blockquote>
 <p>testing requires discipline</p>
 </blockquote>
-
 <p>Agree. See quote by Larry Wall (this same article)</p>
-
 <blockquote>
 <p>[Three requirements for a good test suite]:</p>
-
 <ol>
 <li>The tests need to be easier to write</li>
 <li>The test suite must run, and pass, before any code is allowed out the door</li>
 <li>Support from the project&rsquo;s leadership</li>
 </ol>
 </blockquote>
-
 <p>Agree.</p>
-
 <blockquote>
 <p>Programming is like drawing water from a well</p>
 </blockquote>
-
 <p>Good analogy</p>
-
 <blockquote>
 <p>I&rsquo;m going to assume you are smarter than me [&hellip;]</p>
 </blockquote>
-
 <p>This is related to &lsquo;doing clever things&rsquo;: when I write &lsquo;clever code&rsquo;, that has neither comments, nor it is massaged to be Clean Code, it will cost me many times more to modify / understand in the future vs massage it a little bit.</p>
-
 <p>For me, an example of clever code are certain bitwise operations. Even though these operations are publicly available on websites and books, you must know about them before understanding the code.</p>
-
 <p>Another example of clever code is taking assumptions, even if they are valid. Example: always return the second element because the first one is the header</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="p">){</span>
-	<span class="k">return</span> <span class="n">elements</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>vs</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="p">){</span>
-	<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="p">(</span><span class="n">elements</span><span class="p">);</span>
-	<span class="k">return</span> <span class="n">validElements</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h2 id="open-questions-other-ideas">Open questions / other ideas</h2>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">String</span> <span class="nf">select</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
+	<span class="k">return</span> <span class="n">elements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div><p>vs</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">String</span> <span class="nf">selectFirstValidLine</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">){</span>
+	<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">validElements</span> <span class="o">=</span> <span class="n">skipHeader</span><span class="o">(</span><span class="n">elements</span><span class="o">);</span>
+	<span class="k">return</span> <span class="n">validElements</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div><h2 id="open-questions--other-ideas">Open questions / other ideas</h2>
 <ul>
 <li>There are tests that are more important than others. Is there a tool to assign them weights and inform about which preponderation of the codebase is broken? The same (i.e., more importance) can happen for production code.</li>
 <li>Is SCRUM apt for junior developers? In the sense of the increased autonomy, more decisions, more required technical skills / values, etc</li>
 <li>We discussed what differentiates a project with a shorter deadline from one with a longer deadline. The consensus was: you should do tests for any kind of project, the shorter deadline project won&rsquo;t allow as much time for refactoring</li>
 <li>Tests iff (i.e., if and only if) working code</li>
 <li>Tests do not guarantee lack of defects</li>
-<li>Bijectiveness between tests and features (production code)
-<!--
-Expand on this bijectiveness
---></li>
+<li>Bijectiveness between tests and features (production code)</li>
 </ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
         </div>
         
@@ -251,27 +227,6 @@ Expand on this bijectiveness
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -288,9 +243,9 @@ Expand on this bijectiveness
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -327,43 +282,43 @@ Expand on this bijectiveness
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -375,21 +330,24 @@ Expand on this bijectiveness
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

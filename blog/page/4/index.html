@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Blogs</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
-  
-  
+  <link href="/blog/index.xml" rel="alternate" type="application/rss+xml" title="The long way through Software Craftsmanship" />
 
-  <link href="https://alvarogarcia7.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="The long way through Software Craftsmanship" />
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -129,6 +129,270 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/">Refactoring: split loop &#43; loop/map equivalence</a>
+    </h1>
+    <p >Feb 6, 2019
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/split-loop/">split-loop</a><a class="label" href="https://alvarogarcia7.github.io/categories/split-loop-refactoring/">split-loop-refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/loop-map-equivalence/">loop-map-equivalence</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/kotlin/">kotlin</a><a class="label" href="https://alvarogarcia7.github.io/categories/multiparadigm/">multiparadigm</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/fp/">fp</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-programming/">object-oriented-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented/">object-oriented</a><a class="label" href="https://alvarogarcia7.github.io/categories/oo/">oo</a><a class="label" href="https://alvarogarcia7.github.io/categories/oop/">oop</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>We can combine the <a href="https://refactoring.com/catalog/splitLoop.html">&ldquo;Split loop&rdquo; refactoring</a> technique plus the &ldquo;Loop / Map equivalence&rdquo; when refactoring.</p>
+<p>Given that it does not matter in which order we apply these operations, we can say that they have the <a href="https://en.wikipedia.org/wiki/Associative_property">associative property</a></p>
+<h2 id="chart-of-the-operations">Chart of the operations</h2>
+<p>Take the case of a loop doing two things. From there:</p>
+<ul>
+<li>we can replace the loop for a map (including the two actions into a single map body)</li>
+<li>we can split the loop into two loops</li>
+</ul>
+<p>Take the case of two loops, doing one thing each. From there:</p>
+<ul>
+<li>we can replace a loop for a map</li>
+<li>we can replace both loops for maps</li>
+</ul>
+<p>Take a map doing two things. From there:</p>
+<ul>
+<li>we can split the map, into two maps, doing one thing each.</li>
+</ul>
+<p>(We&rsquo;re not specifying the inverse operations)</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><img src="/uploads/state-diagram-loop-map-split-map-equivalence.png
+" alt="State diagram of the operations"></p>
+<h2 id="example">Example</h2>
+<p>We want to print all substrings of a given string:</p>
+<p>(State1: This uses a single loop, performing two actions)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>From State1, we replace the loop for a map:</p>
+<p>(State2: This uses a map, with two operations)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">).</span><span class="n">map</span> <span class="p">{</span>
+        <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>From State1, Refactor to split the loop:</p>
+<p>(State3: This uses two loops, performing one action each)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
+  <span class="k">val</span> <span class="py">substrings</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;()</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">substrings</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="n">substrings</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Collapse the first loop into a map:</p>
+<p>(This uses a map and a loop)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+                     <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Extract the method to give it a name:</p>
+<p>(This uses a map, a loop, and a method to explain the logic)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="n">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> 
+  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div><p>Alternatively, use the method, with a map:</p>
+<p>(This uses an explaining method, with a map)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> 
+  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div><p>Alternatively, from State3, we can also replace the loop for two <code>map</code>s:</p>
+<p>(State4: This uses two maps)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
+  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://refactoring.com/catalog/splitLoop.html">Split Loop refactoring</a>, by Martin Fowler</li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
+    </h1>
+    <p >Feb 1, 2019
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2019/02/01/self-study-february-2019/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/february/">february</a><a class="label" href="https://alvarogarcia7.github.io/categories/2019/">2019</a><a class="label" href="https://alvarogarcia7.github.io/categories/acid/">acid</a><a class="label" href="https://alvarogarcia7.github.io/categories/aerospike/">aerospike</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/ap/">ap</a><a class="label" href="https://alvarogarcia7.github.io/categories/aphyr/">aphyr</a><a class="label" href="https://alvarogarcia7.github.io/categories/atul-adya/">atul-adya</a><a class="label" href="https://alvarogarcia7.github.io/categories/availability/">availability</a><a class="label" href="https://alvarogarcia7.github.io/categories/awk/">awk</a><a class="label" href="https://alvarogarcia7.github.io/categories/aws/">aws</a><a class="label" href="https://alvarogarcia7.github.io/categories/bloat/">bloat</a><a class="label" href="https://alvarogarcia7.github.io/categories/brad-appleton/">brad-appleton</a><a class="label" href="https://alvarogarcia7.github.io/categories/cap/">cap</a><a class="label" href="https://alvarogarcia7.github.io/categories/cap-theorem/">cap-theorem</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit/">commit</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit-conf/">commit-conf</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/consistency/">consistency</a><a class="label" href="https://alvarogarcia7.github.io/categories/consistency-level/">consistency-level</a><a class="label" href="https://alvarogarcia7.github.io/categories/cp/">cp</a><a class="label" href="https://alvarogarcia7.github.io/categories/database/">database</a><a class="label" href="https://alvarogarcia7.github.io/categories/dirty-read/">dirty-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/disenchantment/">disenchantment</a><a class="label" href="https://alvarogarcia7.github.io/categories/documentation/">documentation</a><a class="label" href="https://alvarogarcia7.github.io/categories/dynamodb/">dynamodb</a><a class="label" href="https://alvarogarcia7.github.io/categories/executable-documentation/">executable-documentation</a><a class="label" href="https://alvarogarcia7.github.io/categories/extreme-programming/">extreme-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/feedback/">feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/fuzzy-read/">fuzzy-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/good-feedback/">good-feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/help/">help</a><a class="label" href="https://alvarogarcia7.github.io/categories/honest-feedback/">honest-feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/isolation/">isolation</a><a class="label" href="https://alvarogarcia7.github.io/categories/jepsen/">jepsen</a><a class="label" href="https://alvarogarcia7.github.io/categories/jesuslc/">jesuslc</a><a class="label" href="https://alvarogarcia7.github.io/categories/laura-lacarra/">laura-lacarra</a><a class="label" href="https://alvarogarcia7.github.io/categories/lean/">lean</a><a class="label" href="https://alvarogarcia7.github.io/categories/lean-software/">lean-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/liskov/">liskov</a><a class="label" href="https://alvarogarcia7.github.io/categories/makefile/">makefile</a><a class="label" href="https://alvarogarcia7.github.io/categories/microsoft/">microsoft</a><a class="label" href="https://alvarogarcia7.github.io/categories/neil-green/">neil-green</a><a class="label" href="https://alvarogarcia7.github.io/categories/nikita-prokopov/">nikita-prokopov</a><a class="label" href="https://alvarogarcia7.github.io/categories/non-repeatable/">non-repeatable</a><a class="label" href="https://alvarogarcia7.github.io/categories/partitioning/">partitioning</a><a class="label" href="https://alvarogarcia7.github.io/categories/paxos/">paxos</a><a class="label" href="https://alvarogarcia7.github.io/categories/people/">people</a><a class="label" href="https://alvarogarcia7.github.io/categories/people-management/">people-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/personality-type/">personality-type</a><a class="label" href="https://alvarogarcia7.github.io/categories/phantom/">phantom</a><a class="label" href="https://alvarogarcia7.github.io/categories/phantom-read/">phantom-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/practice/">practice</a><a class="label" href="https://alvarogarcia7.github.io/categories/principle/">principle</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/rant/">rant</a><a class="label" href="https://alvarogarcia7.github.io/categories/read-committed/">read-committed</a><a class="label" href="https://alvarogarcia7.github.io/categories/read-uncommitted/">read-uncommitted</a><a class="label" href="https://alvarogarcia7.github.io/categories/repeatable-read/">repeatable-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/serializability/">serializability</a><a class="label" href="https://alvarogarcia7.github.io/categories/serializable/">serializable</a><a class="label" href="https://alvarogarcia7.github.io/categories/slide/">slide</a><a class="label" href="https://alvarogarcia7.github.io/categories/slideshare/">slideshare</a><a class="label" href="https://alvarogarcia7.github.io/categories/software/">software</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/speed/">speed</a><a class="label" href="https://alvarogarcia7.github.io/categories/sql-database/">sql-database</a><a class="label" href="https://alvarogarcia7.github.io/categories/stronger-serializable/">stronger-serializable</a><a class="label" href="https://alvarogarcia7.github.io/categories/tonsky/">tonsky</a><a class="label" href="https://alvarogarcia7.github.io/categories/transaction/">transaction</a><a class="label" href="https://alvarogarcia7.github.io/categories/trick/">trick</a><a class="label" href="https://alvarogarcia7.github.io/categories/value/">value</a><a class="label" href="https://alvarogarcia7.github.io/categories/xp/">xp</a>
+        
+    </p>
+</header>
+
+
+        
+        <h2 id="amazon-dynamodb-transactions-how-it-workshttpsdocsawsamazoncomamazondynamodblatestdeveloperguidetransaction-apishtml"><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html">Amazon DynamoDB Transactions: How it Works</a></h2>
+<p>Explains how transactions work in DynamoDB</p>
+<p>Tags: dynamodb, aws, help, transaction, serializable</p>
+<p>Id: 7fb09cd4-2639-11e9-9377-0242ac110002
+Read: Fri, 01 Feb 2019 15:53:20 +0000</p>
+<h2 id="jepsen-aerospikehttpsaphyrcomposts324-call-me-maybe-aerospike"><a href="https://aphyr.com/posts/324-call-me-maybe-aerospike">Jepsen: Aerospike</a></h2>
+<p>I&rsquo;ve read this analysis of Aerospike, that explains what kind of database it is, what CAP properties satisfies</p>
+<p>Tags: cap, cap-theorem, jepsen, aphyr, aerospike, database, acid, ap, cp, consistency, availability, partitioning, paxos</p>
+<p>Id: bd7151c6-2639-11e9-a38e-0242ac110002
+Read: Fri, 01 Feb 2019 15:55:04 +0000</p>
+<h2 id="a-critique-of-ansi-sql-isolation-levelshttpswwwmicrosoftcomen-usresearchwp-contentuploads201602tr-95-51pdf"><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf">A Critique of ANSI SQL Isolation Levels</a></h2>
+<p>I&rsquo;ve read this paper that explains the ANSI SQL isolation levels</p>
+<p>Tags: non-repeatable, fuzzy-read, dirty-read, phantom, phantom-read, isolation, serializability, consistency, consistency, consistency-level, read-uncommitted, read-committed, repeatable-read, serializable, microsoft</p>
+<p>Id: 01292b8c-263a-11e9-a7fe-0242ac110002
+Read: Fri, 01 Feb 2019 15:56:58 +0000</p>
+<h2 id="weak-consistency-a-generalized-theory-and-optimistic-implementations-for-distributed-transactionshttppmgcsailmitedupapersadya-phdpdf"><a href="http://pmg.csail.mit.edu/papers/adya-phd.pdf">Weak Consistency: A Generalized Theory and Optimistic Implementations for Distributed Transactions</a></h2>
+<p>An extended paper on ACID properties for SQL databases</p>
+<p>Tags: liskov, atul-adya, stronger-serializable, consistency, consistency-level, isolation, database, sql-database, acid, transaction</p>
+<p>Id: 4a1c6f7a-263a-11e9-8e08-0242ac110002
+Read: Fri, 01 Feb 2019 15:59:00 +0000</p>
+<h2 id="no-todo-el-mundo-sabe-o-debe-dar-feedbackhttpssoftwareyotrasdesvirtudescom20181126no-todo-el-mundo-sabe-o-debe-dar-feedback"><a href="https://softwareyotrasdesvirtudes.com/2018/11/26/no-todo-el-mundo-sabe-o-debe-dar-feedback/">No todo el mundo sabe o debe dar feedback</a></h2>
+<p>The author explains why some feedback is dangerous: either the way of giving it, or the message, or both.</p>
+<p>In this case, she&rsquo;s talking about the Commit Conf, but this is applicable to any situation</p>
+<p>Para dar un buen feedback es importante:</p>
+<ul>
+<li>Primero: agradecer el esfuerzo por la charla.</li>
+<li>Segundo: resaltar algo positivo de ella.  Seguro que algo cumple.</li>
+<li>Tercero: decir cómo mejorarías un aspecto</li>
+<li>Último: volver a dar las gracias o decir una frase buena que motive.</li>
+</ul>
+<p>Dar un mal feedback es muy fácil:</p>
+<ul>
+<li>Primero: no leerte la descripción ni el nivel de la charla</li>
+<li>Segundo: te cabreas porque no es lo esperado y dudabas entre esa y otra charla</li>
+<li>Tercero: dices lo que no te ha gustado sin rodeos.</li>
+<li>Cuarto: además asumes cosas que no ha hecho y las escribes. Igual que yo he hecho en el Primero y Segundo.</li>
+<li>Quinto: si además dices algo faltoso gana puntos.</li>
+<li>Sexto: Utilizas esa tónica destructiva en todos.</li>
+</ul>
+<p>Tags: laura-lacarra, commit, commit-conf, feedback, good-feedback, honest-feedback, spanish</p>
+<p>Id: 20d8145e-3a92-11e9-8023-0242ac110003
+Read: Wed, 27 Feb 2019 13:18:10 +0000</p>
+<h2 id="how-to-deal-with-difficult-people-on-software-projectshttpspeopleneilonsoftware"><a href="https://people.neilon.software/">How to Deal with Difficult People on Software Projects</a></h2>
+<p>I&rsquo;ve read this guide on dealing with difficult people.</p>
+<p>There are many (48) personality types, including these types:</p>
+<ul>
+<li>Product Managers</li>
+<li>Designers</li>
+<li>Project Managers</li>
+<li>Development Managers</li>
+<li>Developers</li>
+<li>Quality Assurance</li>
+</ul>
+<p>Tags: people, people-management, personality-type, guide, neil-green</p>
+<p>Id: 95554892-3a92-11e9-9bbf-0242ac110003
+Read: Wed, 27 Feb 2019 13:21:25 +0000</p>
+<h2 id="software-disenchantmenthttptonskymeblogdisenchantment"><a href="http://tonsky.me/blog/disenchantment/">Software disenchantment</a></h2>
+<p>I&rsquo;ve read this article about somebody disenchanted with the current state of the art of software: slow, bloated, not better than 10 years ago, or faster.</p>
+<p>Tags: nikita-prokopov, bloat, rant, disenchantment, tonsky, comparison, speed, software</p>
+<p>Id: 0078d58a-3a93-11e9-8f23-0242ac110003
+Read: Wed, 27 Feb 2019 13:24:25 +0000</p>
+<h2 id="the-values-and-principles-of-agile-software-developmenthttpswwwslidesharenetbradappthe-values-and-principles-of-agile-software-development"><a href="https://www.slideshare.net/bradapp/the-values-and-principles-of-agile-software-development">The Values and Principles of Agile Software Development</a></h2>
+<p>I&rsquo;ve read the slides of this presentation by Brad Appleton, on Values, Principles, and Practices in an Agile environment.</p>
+<p>Plenty of good quotes</p>
+<p>Tags: brad-appleton, slideshare, slide, agile, practice, principle, value, xp, extreme-programming, quote, lean-software, lean</p>
+<p>Id: 42cdde80-3a93-11e9-814c-0242ac110003
+Read: Wed, 27 Feb 2019 13:26:16 +0000</p>
+<h2 id="makefiles-como-dejar-de-memorizar-comandos-en-docker--developer-vagohttpsjesuslccom20180421makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago"><a href="https://jesuslc.com/2018/04/21/makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago/">Makefiles como dejar de memorizar comandos en docker – Developer Vago</a></h2>
+<p>I&rsquo;ve discovered a new technique for Makefiles:\n\nUsing a common format (a DSL, in fact) to document the goal, then a new goal &lsquo;help&rsquo; to print that documentation.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">.PHONY: <span class="nb">help</span>
+help: <span class="c1">## Print this help.</span>
+  @grep -E <span class="s1">&#39;^[a-zA-Z_-]+:.*?## .*$$&#39;</span> <span class="k">$(</span>MAKEFILE_LIST<span class="k">)</span> <span class="p">|</span> awk <span class="s1">&#39;BEGIN {FS = \&#34;:.*?## \&#34;}; {printf \&#34;\033[36m%-20s\033[0m %s\n\&#34;, $$1, $$2}&#39;</span>
+</code></pre></div><p>when you run <code>make help</code>, then</p>
+<pre><code>Print this help.
+</code></pre><p>Tags: makefile, jesuslc, documentation, executable-documentation, awk, trick, help</p>
+<p>Id: d6a4b78c-3a93-11e9-88d7-0242ac110003
+Read: Wed, 27 Feb 2019 13:30:24 +0000</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2019/01/01/self-study-january-2019/">Self-Study in January 2019</a>
+    </h1>
+    <p >Jan 1, 2019
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2019/01/01/self-study-january-2019/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/january/">january</a><a class="label" href="https://alvarogarcia7.github.io/categories/2019/">2019</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/cycle/">cycle</a><a class="label" href="https://alvarogarcia7.github.io/categories/ebook/">ebook</a><a class="label" href="https://alvarogarcia7.github.io/categories/framework/">framework</a><a class="label" href="https://alvarogarcia7.github.io/categories/getting-things-done/">getting-things-done</a><a class="label" href="https://alvarogarcia7.github.io/categories/gtd/">gtd</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/mental-framework/">mental-framework</a><a class="label" href="https://alvarogarcia7.github.io/categories/personal-productivity/">personal-productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/pomodoro/">pomodoro</a><a class="label" href="https://alvarogarcia7.github.io/categories/pomodoro-technique/">pomodoro-technique</a><a class="label" href="https://alvarogarcia7.github.io/categories/productivity/">productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/search/">search</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/work-cycle/">work-cycle</a>
+        
+    </p>
+</header>
+
+
+        
+        <h2 id="work-cycleshttpsdocsgooglecomdocumentd1dkldpcwvzn_z2tokwc80yomidueo6x58dt4debkc84qedit"><a href="https://docs.google.com/document/d/1DKLDpCwvzn_z2tokwC80yOmidueO6x58dt4DEbkc84Q/edit#">Work cycles</a></h2>
+<p>I&rsquo;ve read this Work Cycle framework to be more productive with your daily routine.</p>
+<p>Suggests an alternative to Pomodoro technique, in which you are to write down the contents of the goal, then split in small chunks (periods) of time to complete the individual tasks, then debrief at the end of the period and at the end of the cycle.</p>
+<p>An analogy could be a double-loop Pomodoro technique for tasks.</p>
+<p>Tags: pomodoro, pomodoro-technique, framework, management, productivity, personal-productivity, gtd, getting-things-done, work-cycle, cycle, time-management, mental-framework</p>
+<p>Id: f280c496-0df2-11e9-bf65-0242ac110002
+Read: Tue, 01 Jan 2019 18:27:51 +0000</p>
+<h2 id="world-cathttpswwwworldcatorgsearch"><a href="https://www.worldcat.org/search">World Cat</a></h2>
+<p>Site to find books in public libraries</p>
+<p>Tags: book, search, library, ebook</p>
+<p>Id: 15ca63e4-0df8-11e9-b145-0242ac110002
+Read: Tue, 01 Jan 2019 19:04:38 +0000</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
     </h1>
     <p >Dec 31, 2018
@@ -145,12 +409,8 @@
 
 
         
-        
-
-<p>Read this quarter:</p>
-
+        <p>Read this quarter:</p>
 <p>Note: re+read means I&rsquo;m re-reading this book. The (+) stands for one-or-more times, as in the regexes.</p>
-
 <ul>
 <li>Como ganar amigos e influir sobre las personas; Carnegie (+)</li>
 <li>Oliver Twist; Dickens</li>
@@ -158,51 +418,33 @@
 <li>Selfie: How We Became So Self-Obsessed and What It’s Doing To Us; Storr. Just chapter 1: The dying self</li>
 <li>Sota la cistella; Gasol</li>
 </ul>
-
-<h2 id="como-ganar-amigos-e-influir-sobre-las-personas-carnegie">Como ganar amigos e influir sobre las personas; Carnegie (+)</h2>
-
+<h2 id="como-ganar-amigos-e-influir-sobre-las-personas-carnegie-">Como ganar amigos e influir sobre las personas; Carnegie (+)</h2>
 <p>I&rsquo;ve re-read this classic book (How to win friends and influence people), by Carnegie.</p>
-
 <p>Explains a few tricks on communication and leadership, such as:</p>
-
 <ul>
-<li>&gt;The most important name to somebody is their own</li>
+<li>
+<blockquote>
+<p>The most important name to somebody is their own</p>
+</blockquote>
+</li>
 </ul>
-
-<!-- TODO MISSING MORE TRICKS IN HERE-->
-
+<!-- raw HTML omitted -->
 <h2 id="oliver-twist-dickens">Oliver Twist; Dickens</h2>
-
 <p>I&rsquo;ve read this classic novel by Dickens, to try to understand the character of Oliver Twist, his adventures and misadventures.</p>
-
 <p>I was interested in grokking how it compares to &lsquo;El Lazarillo de Tormes&rsquo;, a previous Spanish novel.</p>
-
 <h2 id="building-evolutionary-architecture-ford-parsons">Building evolutionary architecture; Ford, Parsons</h2>
-
 <p>I&rsquo;ve read this book on software architecture. On how a previous definition of architecture (&lsquo;Architecture is what needs to be defined upfront and/or is difficult to change&rsquo;) is no longer valid and we should strive to approach &lsquo;evolutionary architecture&rsquo;,  where -ilities (features) of the system are easier to change, where architecture changes to accommodate business requirements and where systems are designed with -ilities (features) in mind.</p>
-
-<h2 id="selfie-how-we-became-so-self-obsessed-and-what-it-s-doing-to-us-storr">Selfie: How We Became So Self-Obsessed and What It’s Doing To Us; Storr</h2>
-
+<h2 id="selfie-how-we-became-so-self-obsessed-and-what-its-doing-to-us-storr">Selfie: How We Became So Self-Obsessed and What It’s Doing To Us; Storr</h2>
 <p>I&rsquo;ve just read the chapter 1: The dying self</p>
-
 <p>I&rsquo;ve read this chapter relating the perfectionism with suicide.</p>
-
 <p>Explains many stories of attempted or committed suicides, giving some insight into them and trying to define a pattern</p>
-
 <p>I got interested in it by reading this article: Improving Ourselves to Death (from newyorker.com)</p>
-
 <h2 id="sota-la-cistella-gasol">Sota la cistella; Gasol</h2>
-
 <p>I&rsquo;ve read this book by pau Gasol on his experiences playing basketball professionally, with regards to leadership, motivation, career management, etc</p>
-
 <p>One takeaway is &lsquo;the important thing is not to reach there, but to stay there&rsquo;.</p>
-
 <p>He explains part of his professional successes, and failures as well. How some failures allowed him to progress further in his career, how he reached levels that he only dreamed in the past, how important it is to have a goal and work towards it.</p>
-
-<!-- copy-paste the books.md here -->
-
+<!-- raw HTML omitted -->
 <p>backlog (partially sorted):</p>
-
 <ul>
 <li>unsorted V</li>
 <li>The Machine That Changed the World: The Story of Lean Production</li>
@@ -352,8 +594,8 @@
 <li>Dispossessed, the; Le Guin; non-technical</li>
 <li>Left hand of darkness; Le Guin; non-technical</li>
 <li>Lathe of heaven; Le Guin; non-technical</li>
-<li><a href="https://www.amazon.com/Schopenhauer-Cure-Novel-Irvin-Yalom/dp/0060938102/" target="_blank">https://www.amazon.com/Schopenhauer-Cure-Novel-Irvin-Yalom/dp/0060938102/</a></li>
-<li><a href="https://www.amazon.com/How-Schopenhauer-Through-Mid-Life-Crisis-ebook/dp/B00QXNB5PC/" target="_blank">https://www.amazon.com/How-Schopenhauer-Through-Mid-Life-Crisis-ebook/dp/B00QXNB5PC/</a></li>
+<li><a href="https://www.amazon.com/Schopenhauer-Cure-Novel-Irvin-Yalom/dp/0060938102/">https://www.amazon.com/Schopenhauer-Cure-Novel-Irvin-Yalom/dp/0060938102/</a></li>
+<li><a href="https://www.amazon.com/How-Schopenhauer-Through-Mid-Life-Crisis-ebook/dp/B00QXNB5PC/">https://www.amazon.com/How-Schopenhauer-Through-Mid-Life-Crisis-ebook/dp/B00QXNB5PC/</a></li>
 <li>Books in general &ndash; Epstein</li>
 <li>Affluent society, the; Galbraith; non-technical, finance</li>
 <li>Philosophy of the Buddha; Bahm; non-technical</li>
@@ -380,9 +622,7 @@
 <li>Hope in the Dark; Solnit</li>
 <li>Agile!: The Good, the Hype and the Ugly; Meyer</li>
 </ul>
-
 <p>unfinished (unsorted):</p>
-
 <ul>
 <li>Working Effectively with Legacy Code (+); Feathers; own-it</li>
 <li>Nonviolent communication (+); Rosenberg; own-it, non-technical</li>
@@ -401,26 +641,20 @@
 <li>Switch: How to Change Things When Change Is Hard; Heath, Heath; own-it, non-technical</li>
 <li>Como leer un libro; Adler, van Doren; non-technical, own-it</li>
 </ul>
-
 <p>next (2):</p>
-
 <ul>
 <li>Who rules the world?; Chomsky; non-technical</li>
 <li>Mundo nuevo, ahora, un; Tolle; own-it, non-technical</li>
 <li>Continuous Delivery; Humble, Farley; own-it</li>
 <li>Hombre multiorgásmico, el; Chía, Arava; own-it, non-technical</li>
 </ul>
-
 <p>wip (2):</p>
-
 <ul>
 <li>Thinking fast and slow; Kahneman; non-technical</li>
 <li>Java Concurrency in Practice (JCIP); Goetz</li>
 <li>Hombre en busca del sentido, el; Frankl; own-it, non-technical</li>
 </ul>
-
 <p>done:</p>
-
 <ul>
 <li>Como ganar amigos e influir sobre las personas; Carnegie (+); own-it, guillem</li>
 <li>Oliver Twist; Dickens; own-it, non-technical</li>
@@ -428,9 +662,7 @@
 <li>Selfie: How We Became So Self-Obsessed and What It’s Doing To Us; Storr. Just chapter 1: The dying self; own-it, non-technical</li>
 <li>Sota la cistella; Gasol; own-it, non-technical</li>
 </ul>
-
 <p>rejected:</p>
-
 <ul>
 <li>Stanger in a strange land; Heinlein; own-it, non-technical</li>
 </ul>
@@ -462,42 +694,33 @@
 
 
         
-        
-
-<h2 id="one-year-nomad-a-review-https-krausefx-com-blog-one-year-nomad"><a href="https://krausefx.com/blog/one-year-nomad" target="_blank">One year nomad - a review</a></h2>
-
+        <h2 id="one-year-nomad---a-reviewhttpskrausefxcomblogone-year-nomad"><a href="https://krausefx.com/blog/one-year-nomad">One year nomad - a review</a></h2>
 <p>Tags: nomad, felix-krause, digital-nomad, remote, life</p>
-
 <p>Id: 7784a1da-fc82-11e8-a2cc-0242ac110002
 Read: Mon, 10 Dec 2018 13:49:51 +0000</p>
-
-<h2 id="the-reason-many-ultrarich-people-aren-t-satisfied-with-their-wealth-https-www-theatlantic-com-family-archive-2018-12-rich-people-happy-money-577231"><a href="https://www.theatlantic.com/family/archive/2018/12/rich-people-happy-money/577231/" target="_blank">The Reason Many Ultrarich People Aren’t Satisfied With Their Wealth</a></h2>
-
+<h2 id="the-reason-many-ultrarich-people-arent-satisfied-with-their-wealthhttpswwwtheatlanticcomfamilyarchive201812rich-people-happy-money577231"><a href="https://www.theatlantic.com/family/archive/2018/12/rich-people-happy-money/577231/">The Reason Many Ultrarich People Aren’t Satisfied With Their Wealth</a></h2>
 <p>How the rich are motivated to earn more money</p>
-
 <blockquote>
 <p>really rich people are often motivated to acquire more money by the thrill that comes with multiplying one’s fortune by making investments, buying up businesses</p>
-
+</blockquote>
+<blockquote>
 <p>Those two ways of putting money to use—as a way of covering expenses or as a way of building a bigger fortune—</p>
-
+</blockquote>
+<blockquote>
 <p>Every billionaire I’ve spoken to, and I’ve spoken to quite a number of them, is extremely excited by each additional increment of money they make</p>
-
+</blockquote>
+<blockquote>
 <p>Do I have enough to buy this expensive thing I want? but rather Do I have as much or more than these people I’m comparing myself with?</p>
-
+</blockquote>
+<blockquote>
 <p>feeling wealthy is about comparison with others in your reference group. So the question is not what individuals want to buy, but what they feel they must buy in order to keep up their status</p>
 </blockquote>
-
 <p>Tags: rich, wealth, the-atlantic, longform, management, wealth-management, motivation, elite, ultrarich, money</p>
-
 <p>Id: e5650e1c-0081-11e9-a127-0242ac110002
 Read: Sat, 15 Dec 2018 15:55:51 +0000</p>
-
-<h2 id="etsy-s-experiment-with-immutable-documentation-https-codeascraft-com-2018-10-10-etsys-experiment-with-immutable-documentation"><a href="https://codeascraft.com/2018/10/10/etsys-experiment-with-immutable-documentation/" target="_blank">Etsy’s experiment with immutable documentation</a></h2>
-
+<h2 id="etsys-experiment-with-immutable-documentationhttpscodeascraftcom20181010etsys-experiment-with-immutable-documentation"><a href="https://codeascraft.com/2018/10/10/etsys-experiment-with-immutable-documentation/">Etsy’s experiment with immutable documentation</a></h2>
 <p>Trading freshness for completeness in documentation</p>
-
 <p>Tags: how-doc, what-doc, fyi, documentation, etsy, experiment, immutable-documentation, infobot, bot, slack, slack-integration</p>
-
 <p>Id: 6ef4bf24-0082-11e9-a076-0242ac110002
 Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
 
@@ -528,35 +751,21 @@ Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
 
 
         
-        
-
-<p>Read this quarter:</p>
-
+        <p>Read this quarter:</p>
 <p>Note: re+read means I&rsquo;m re-reading this book. The (+) stands for one-or-more times, as in the regexes.</p>
-
 <ul>
 <li>Ética a Nicómaco; Aristóteles</li>
 <li>Book of Transformation; Dalai Lama</li>
 </ul>
-
 <h2 id="ética-a-nicómaco-aristóteles">Ética a Nicómaco; Aristóteles</h2>
-
 <p>I&rsquo;ve read this book on philosophy and ethics. This book contains an analysis of the relationship between the personality, intelligence and happiness.</p>
-
 <p>Tries to describe what &lsquo;virtues&rsquo; are, that they belong in a continuum of acts, aand the good term is always in the middle. Example: between cowardliness and temerity, there is braveness. The two extremes, and the middle or virtue, respectively.</p>
-
 <p>This book describes the meaning of life, according to Aristotle; how to lead your life, as well.</p>
-
 <p>Note: this book was a gift from some friends. To people from Payments, thank you so much</p>
-
 <h2 id="book-of-transformation-dalai-lama">Book of transformation; Dalai Lama</h2>
-
 <p>I&rsquo;ve read this book based on teaching from the Dalai Lama, on the importance of love, compassion, balanced attitudes, and positive thinking.</p>
-
 <p>Contains the eight verses on transforming the mind, a lo-jong text, written in the 11th century by Langri Thangpa.</p>
-
 <p>Contains four parts:</p>
-
 <ul>
 <li>The basis of transformation</li>
 <li>Transforming though altruism</li>
@@ -568,843 +777,10 @@ Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/07/01/self-study-july-2018/">Self-Study in July 2018</a>
-    </h1>
-    <p >Jul 1, 2018
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/07/01/self-study-july-2018/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/july/">july</a><a class="label" href="https://alvarogarcia7.github.io/categories/2018/">2018</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/aws/">aws</a><a class="label" href="https://alvarogarcia7.github.io/categories/bar/">bar</a><a class="label" href="https://alvarogarcia7.github.io/categories/bonilista/">bonilista</a><a class="label" href="https://alvarogarcia7.github.io/categories/burn-out/">burn-out</a><a class="label" href="https://alvarogarcia7.github.io/categories/burnout/">burnout</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/career-management/">career-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/chesterton-fence/">chesterton-fence</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/cloud-scale/">cloud-scale</a><a class="label" href="https://alvarogarcia7.github.io/categories/collaborator/">collaborator</a><a class="label" href="https://alvarogarcia7.github.io/categories/consulting/">consulting</a><a class="label" href="https://alvarogarcia7.github.io/categories/contractor/">contractor</a><a class="label" href="https://alvarogarcia7.github.io/categories/database/">database</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-bonilla/">david-bonilla</a><a class="label" href="https://alvarogarcia7.github.io/categories/delivery/">delivery</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/development/">development</a><a class="label" href="https://alvarogarcia7.github.io/categories/discovery/">discovery</a><a class="label" href="https://alvarogarcia7.github.io/categories/dummy/">dummy</a><a class="label" href="https://alvarogarcia7.github.io/categories/exactly-once-delivery/">exactly-once-delivery</a><a class="label" href="https://alvarogarcia7.github.io/categories/facebook/">facebook</a><a class="label" href="https://alvarogarcia7.github.io/categories/fix/">fix</a><a class="label" href="https://alvarogarcia7.github.io/categories/gerard-meszaros/">gerard-meszaros</a><a class="label" href="https://alvarogarcia7.github.io/categories/go/">go</a><a class="label" href="https://alvarogarcia7.github.io/categories/golang/">golang</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/growing-object-oriented-software/">growing-object-oriented-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/hacker-news/">hacker-news</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/health/">health</a><a class="label" href="https://alvarogarcia7.github.io/categories/history/">history</a><a class="label" href="https://alvarogarcia7.github.io/categories/hype/">hype</a><a class="label" href="https://alvarogarcia7.github.io/categories/kafka/">kafka</a><a class="label" href="https://alvarogarcia7.github.io/categories/keith-lee/">keith-lee</a><a class="label" href="https://alvarogarcia7.github.io/categories/ksuid/">ksuid</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/lewis-menelaws/">lewis-menelaws</a><a class="label" href="https://alvarogarcia7.github.io/categories/listicle/">listicle</a><a class="label" href="https://alvarogarcia7.github.io/categories/lucas-di-cioccio/">lucas-di-cioccio</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/message/">message</a><a class="label" href="https://alvarogarcia7.github.io/categories/message-delivery/">message-delivery</a><a class="label" href="https://alvarogarcia7.github.io/categories/mock/">mock</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/oaoo/">oaoo</a><a class="label" href="https://alvarogarcia7.github.io/categories/onboarding/">onboarding</a><a class="label" href="https://alvarogarcia7.github.io/categories/once-and-only-once/">once-and-only-once</a><a class="label" href="https://alvarogarcia7.github.io/categories/part/">part</a><a class="label" href="https://alvarogarcia7.github.io/categories/people/">people</a><a class="label" href="https://alvarogarcia7.github.io/categories/policy/">policy</a><a class="label" href="https://alvarogarcia7.github.io/categories/process/">process</a><a class="label" href="https://alvarogarcia7.github.io/categories/productive-haskell-bar/">productive-haskell-bar</a><a class="label" href="https://alvarogarcia7.github.io/categories/productivity/">productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/project-management/">project-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/pyramid/">pyramid</a><a class="label" href="https://alvarogarcia7.github.io/categories/relationship/">relationship</a><a class="label" href="https://alvarogarcia7.github.io/categories/rick-branson/">rick-branson</a><a class="label" href="https://alvarogarcia7.github.io/categories/rocksdb/">rocksdb</a><a class="label" href="https://alvarogarcia7.github.io/categories/sabbatical/">sabbatical</a><a class="label" href="https://alvarogarcia7.github.io/categories/segment/">segment</a><a class="label" href="https://alvarogarcia7.github.io/categories/slack-time/">slack-time</a><a class="label" href="https://alvarogarcia7.github.io/categories/steve-freeman/">steve-freeman</a><a class="label" href="https://alvarogarcia7.github.io/categories/stub/">stub</a><a class="label" href="https://alvarogarcia7.github.io/categories/test-double/">test-double</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/topic/">topic</a><a class="label" href="https://alvarogarcia7.github.io/categories/uuid/">uuid</a><a class="label" href="https://alvarogarcia7.github.io/categories/vertical-slice/">vertical-slice</a><a class="label" href="https://alvarogarcia7.github.io/categories/xunit/">xunit</a><a class="label" href="https://alvarogarcia7.github.io/categories/xunit-pattern/">xunit-pattern</a><a class="label" href="https://alvarogarcia7.github.io/categories/xunitpatterns/">xunitpatterns</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="the-haskell-pyramid-https-patrickmn-com-software-the-haskell-pyramid"><a href="https://patrickmn.com/software/the-haskell-pyramid/" target="_blank">The Haskell Pyramid</a></h2>
-
-<p>I&rsquo;ve read this article on how the productivity for Haskell is achieved: not using the topics discussed on social networks (monads, functors, laws, lenses, etc) but using more basic tools</p>
-
-<p>Tags: haskell, productivity, lucas-di-cioccio, learning, development, tool, monad, hype, pyramid, productive-haskell-bar, bar</p>
-
-<p>Id: 454f53fc-7dd6-11e8-8208-0242ac110003
-Read: Mon, 02 Jul 2018 08:59:47 +0000</p>
-
-<h2 id="el-verde-más-verde-https-mailchi-mp-bonillaware-verde-mas-verde-e-68e22b460d"><a href="https://mailchi.mp/bonillaware/verde-mas-verde?e=68e22b460d" target="_blank">El verde más verde</a></h2>
-
-<p>I&rsquo;ve read this article on how to structure creative projects (e.g., UX, programming) by professionals, as told by David Bonilla.</p>
-
-<p>Tags: david-bonilla, bonilista, project-management, slack-time, sabbatical, vertical-slice</p>
-
-<p>Id: ef00176e-7ddc-11e8-a33b-0242ac110003
-Read: Mon, 02 Jul 2018 09:47:29 +0000</p>
-
-<h2 id="how-to-fix-burnout-as-a-developer-https-dev-to-lewismenelaws-how-to-fix-burnout-as-a-developer-4opl"><a href="https://dev.to/lewismenelaws/how-to-fix-burnout-as-a-developer--4opl" target="_blank">How to Fix Burnout as a Developer</a></h2>
-
-<p>I&rsquo;ve read this article on burnout and how to fix it:
-Stop working so much.
-Prioritize your health.
-Try something new.
-Patience is key.
-Talk to your loved ones.</p>
-
-<p>Tags: lewis-menelaws, burnout, burn-out, productivity, listicle, career, psychology, management, time-management, career-management, health</p>
-
-<p>Id: 40d68542-7dff-11e8-89f2-0242ac110003
-Read: Mon, 02 Jul 2018 13:53:09 +0000</p>
-
-<h2 id="ask-hn-what-is-the-first-thing-you-implement-at-a-new-company-https-news-ycombinator-com-item-id-17353854"><a href="https://news.ycombinator.com/item?id=17353854" target="_blank">Ask HN: What is the first thing you implement at a new company?</a></h2>
-
-<p>I&rsquo;ve read this article on the first things that people do when joining a new client.
-Mentions the Chesterton&rsquo;s fence: You don’t want to change something until you understand why it’s there in the first place.</p>
-
-<p>Tags: chesterton-fence, hacker-news, contractor, client, onboarding, fix</p>
-
-<p>Id: 9003a91a-7dff-11e8-a366-0242ac110003
-Read: Mon, 02 Jul 2018 13:55:22 +0000</p>
-
-<h2 id="the-fallacy-of-chesterton-s-fence-https-abovethelaw-com-2014-01-the-fallacy-of-chestertons-fence"><a href="https://abovethelaw.com/2014/01/the-fallacy-of-chestertons-fence/" target="_blank">The Fallacy Of Chesterton&rsquo;s Fence</a></h2>
-
-<p>I&rsquo;ve read this article on the Chesterton&rsquo;s fence.
-&gt; don’t ever take a fence down until you know the reason why it was put up</p>
-
-<p>The author explains that the walls (or contracts, or clauses, or practices) were put in place to cover for a specific need. Do not assume that this need does not exist now, before understanding what the need was in the first place.</p>
-
-<p>Tags: chesterton-fence, keith-lee, consulting, tip, analogy, discovery, process, people</p>
-
-<p>Id: 736e269e-7e00-11e8-ac4a-0242ac110003
-Read: Mon, 02 Jul 2018 14:01:43 +0000</p>
-
-<h2 id="a-brief-history-of-the-uuid-https-segment-com-blog-a-brief-history-of-the-uuid"><a href="https://segment.com/blog/a-brief-history-of-the-uuid/" target="_blank">A brief history of the UUID</a></h2>
-
-<p>A brief history of UUID: of how it was developed, why, and a new library in go called ksuid
-Explains the origins of networked computers (as opposed to personal computers without any networking) in the 1980s.
-Also explains the origins of the UUID, some algorithms for generating them.</p>
-
-<p>Tags: ksuid, uuid, golang, go, rick-branson, history</p>
-
-<p>Id: c20e6ac4-8fe5-11e8-b54e-0242ac110003
-Read: Wed, 25 Jul 2018 08:36:00 +0000</p>
-
-<h2 id="delivering-billions-of-messages-exactly-once-https-segment-com-blog-exactly-once-delivery"><a href="https://segment.com/blog/exactly-once-delivery/" target="_blank">Delivering billions of messages exactly once</a></h2>
-
-<p>Explains how this company (segment) has solved the problem of delivering the messages once and only once (OAOO), using RocksDB, Kafka, UUIDs. Deployed to AWS, lowers the cost of the previous system (memcached-based).
-Impressive numbers: 1.5 TB worth of keys stored on disk in RocksDB
-a 4-week window of de-duplication before aging out old keys
-approximately 60B keys stored inside our RocksDB instances
-200B messages passed through the dedupe system
-Also explains in depth how RocksDB works</p>
-
-<p>Tags: rocksdb, facebook, database, once-and-only-once, oaoo, message, exactly-once-delivery, delivery, message-delivery, kafka, uuid, client, aws, segment, topic, cloud-scale</p>
-
-<p>Id: 962c0c26-8fe6-11e8-bf2c-0242ac110003
-Read: Wed, 25 Jul 2018 08:41:55 +0000</p>
-
-<h2 id="object-collaboration-stereotypes-http-www-mockobjects-com-2006-10-different-kinds-of-collaborators-html"><a href="http://www.mockobjects.com/2006/10/different-kinds-of-collaborators.html" target="_blank">Object Collaboration Stereotypes</a></h2>
-
-<p>This post describes the relationships between two objects:
-Dependencies are services that the object needs from its environment so that it can fulfil its responsibilities.
-Notifications are other parts of the system that need to know when the object changes state or performs an action.
-Policies are objects that tweak or adapt the object&rsquo;s behaviour to the needs of the system.
-Parts are components in the implementation that are not controlled from outside the object after being set.</p>
-
-<p>Tags: dependency, notification, policy, part, collaborator, relationship, steve-freeman, goos, growing-object-oriented-software</p>
-
-<p>Id: f7e738c8-8fe6-11e8-89be-0242ac110003
-Read: Wed, 25 Jul 2018 08:44:39 +0000</p>
-
-<h2 id="mocks-fakes-stubs-and-dummies-http-xunitpatterns-com-mocks-20fakes-20stubs-20and-20dummies-html"><a href="http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html" target="_blank">Mocks, Fakes, Stubs and Dummies</a></h2>
-
-<p>Bibliography for mocks, stubs, fakes, dummies, spies.</p>
-
-<p>Tags: mock, stub, test-double, dummy, xunit, xunit-pattern, gerard-meszaros, xunitpatterns</p>
-
-<p>Id: ea7281ee-9012-11e8-bd95-0242ac110003
-Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/06/30/books-read-2018q2/">Books read in 2018Q2</a>
-    </h1>
-    <p >Jun 30, 2018
-         - 11 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/06/30/books-read-2018q2/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2018/">2018</a><a class="label" href="https://alvarogarcia7.github.io/categories/q2/">Q2</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/codurance/">codurance</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<p>Read this quarter:</p>
-
-<p>Note: re+read means I&rsquo;m re-reading this book. The (+) stands for one-or-more times, as in the regexes.</p>
-
-<ul>
-<li>Quien se ha llevado mi queso; Johnson; own-it, guillem</li>
-<li>One minute manager, the; Blanchard; own-it, non-technical, guillem</li>
-<li>En defensa de los ociosos; Stevenson; non-technical, own-it</li>
-<li>Ladybird Book of Mindfulness, the (Ladybirds for Grown-Ups); Hazeley, Morris; non-technical</li>
-<li>Art of the start, the; Kawasaki; own-it, non-technical, guillem</li>
-<li>Getting started with NoFap; non-technical</li>
-<li>Emotional intelligence; Goleman; non-technical</li>
-</ul>
-
-<h3 id="quien-se-ha-llevado-mi-queso">Quien se ha llevado mi queso</h3>
-
-<p>I&rsquo;ve read this fable explaining the little story of two mice and two lilliputians that end up without any cheese. The story is about how they react to the lack of cheese, how they were used to finding cheese, fighting for it.</p>
-
-<p>The morale of the story is about change and how to deal with change.</p>
-
-<p>More about it here: <a href="https://business-book-summary.blogspot.com.es/2008/10/who-moved-my-cheese.html" target="_blank">https://business-book-summary.blogspot.com.es/2008/10/who-moved-my-cheese.html</a></p>
-
-<blockquote>
-<p>Wisdom in a Nutshell from Who Moved My Cheese?</p>
-
-<ul>
-<li>Anticipate change.</li>
-<li>Adapt quickly.</li>
-<li>Enjoy change.</li>
-<li>Be ready to change quickly, again and again.</li>
-<li>Having Cheese makes you happy.</li>
-<li>The more important your Cheese is to you, the more you want to hold on to it.</li>
-<li>If you do not change, you can become extinct.</li>
-<li>Ask yourself “What would I do if I weren’t afraid?”</li>
-<li>Smell the Cheese often so you know when it is getting old.</li>
-<li>Movement in a new direction helps you find New Cheese.</li>
-<li>When you move beyond your fear, you feel free.</li>
-<li>Imagining myself enjoying New Cheese, even before I find it, leads me to it.</li>
-<li>The quicker you let go of old cheese, the sooner you find New Cheese.</li>
-<li>It is safer to search in the maze than remain in a cheeseless situation.</li>
-<li>Old beliefs do not lead you to New Cheese.</li>
-<li>When you see that you can find and enjoy New Cheese, you change course.</li>
-<li>Noticing small changes early helps you adapt to the bigger changes that are to come.</li>
-<li>Read the Handwriting on the Wall</li>
-<li>Change happens. They keep moving the Cheese.</li>
-<li>Move with the Cheese and enjoy it!</li>
-</ul>
-</blockquote>
-
-<h3 id="one-minute-manager">One-minute manager</h3>
-
-<p>I&rsquo;ve read this book on management, the story of a young man looking for guidance in the one-minute manager.</p>
-
-<p>The gist of it is RPG: Reprimand, Praise, Goal (Setting). All of that done in one-minute increments.</p>
-
-<p>In case the goal setting does not happen by your manager, it&rsquo;s your task to ask for it, so you can achieve your goals, rather than try to guess what your line manager is expecting from you.</p>
-
-<p>The praising is an easy, cheap, straightforward way to encourage employees to keep doing what they&rsquo;re doing.</p>
-
-<p>The reprimand is the way of delivering feedback that can help change the employee behaviour.</p>
-
-<h3 id="ladybird-book-of-mindfulness-the-ladybirds-for-grown-ups">Ladybird Book of Mindfulness, the (Ladybirds for Grown-Ups)</h3>
-
-<p>I&rsquo;ve read this collection of (sarcastic) reflections about mindfulness, illustrated with classic British images.</p>
-
-<h3 id="en-defensa-de-los-ociosos-an-apology-for-idlers">En defensa de los ociosos - An apology for idlers</h3>
-
-<p>I&rsquo;ve read this book, containing three main essays plus some experiences.</p>
-
-<p>The first, defending the idlers of society, explaining the benefits of doing nothing but enjoying life.</p>
-
-<p>The second, exposing true love, the effects on people.</p>
-
-<h3 id="getting-started-with-nofap">Getting started with NoFap</h3>
-
-<p>I&rsquo;ve read this book about the dangers of abusing PMO (porn, masturbation, orgasm), the downsides, how to fix it (reboot), what effects said reboot can have in your mind and body.</p>
-
-<h3 id="inteligencia-emocional-emotional-intelligence">Inteligencia emocional - Emotional intelligence</h3>
-
-<p>I&rsquo;ve read this book by goleman on the topics that are included in the emotional intelligence.</p>
-
-<p>Why it is so important to develop this kind of intelligence and how it compares to other kinds.</p>
-
-<!-- copy-paste the books.md here -->
-
-<p>Export of the database:</p>
-
-<p>backlog (partially sorted):</p>
-
-<ul>
-<li>unsorted V</li>
-<li>The Machine That Changed the World: The Story of Lean Production</li>
-<li>Haskell Programming</li>
-<li>Software Architecture in Practice</li>
-<li>The five disfunctions of a team: a leadership fable; Lencioni</li>
-<li>lucha por la desigualdad, la; Pontón; non-technical</li>
-<li>psicología del dinero, la; Hammond; non-technical</li>
-<li>Invirtiendo a largo plazo; García Paramés; non-technical, finance</li>
-<li>Well-Grounded Java Developer, the; own-it</li>
-<li>Learn You a Haskell for Great Good!; own-it</li>
-<li>camino al 18J, el; Payne; non-technical</li>
-<li>Cartas desde la revolución bolchevique; Sadoul; non-technical</li>
-<li>Java Performance: The Definitive Guide</li>
-<li>Why programmers work at night</li>
-<li>Shogun: The Life of Tokugawa Ieyasu; Sadler; non-technical</li>
-<li>Scrum and XP from the trenches, 2nd edition;</li>
-<li>Els jueus i Catalunya; Villatoro; non-technical</li>
-<li>El problema de los tres cuerpos; Liu; non-technical</li>
-<li>Amazon Web Services in Action; own-it</li>
-<li>Clojure Programming - Practical Lisp for the Java World</li>
-<li>Mature optimization</li>
-<li>XUnit Test Patterns</li>
-<li>Let Over Lambda</li>
-<li>The Haskell Road to Logic, Math and Programming</li>
-<li>Types and Programming Languages</li>
-<li>Fundamentals of Object-oriented Design in UML</li>
-<li>Clojure for the brave and true</li>
-<li>How to Solve It: A New Aspect of Mathematical Method</li>
-<li>Conceptual Mathematics: A First Introduction to Categories</li>
-<li>Understanding Computation: From Simple Machines to Impossible Programs</li>
-<li>Programming in Haskell</li>
-<li>Programming Languages: Application and Interpretation</li>
-<li>Doing Math with Python</li>
-<li>Perfect Software: And Other Illusions about Testing</li>
-<li>Computability and Complexity - From a Programming Perspective</li>
-<li>Thinking Forth: a language and philosophy for solving problems</li>
-<li>Concepts, Techniques, and Models of Computer Programming</li>
-<li>Bridging the Communication Gap; Adzic</li>
-<li>Specification by Example; Adzic</li>
-<li>Cucumber book, the; Adzic</li>
-<li>Software Architecture for Developers; Brown</li>
-<li>Object Design: Roles, Responsibilities, and Collaborations</li>
-<li>RESTful Web APIs</li>
-<li>RESTful Web Services Cookbook</li>
-<li>Building Maintainable Software</li>
-<li>Serverless - Patterns of Modern Application Design Using Microservices (Amazon Web Services Edition)</li>
-<li>A Pattern Language; Alexander</li>
-<li>Types and Programming Languages, TAPL; Pierce; own-it</li>
-<li>Speed Reading Book: Read More, Learn More, Achieve More, the; Buzan</li>
-<li>Cómo crear mapas mentales (Crecimiento personal); Buzan</li>
-<li>First things first; Covey</li>
-<li>What&rsquo;s best next; Perman</li>
-<li>problems of philosophy, the; Russell</li>
-<li>Requiem for the American dream; Chomsky</li>
-<li>sun also rises, the; Hemingway</li>
-<li>travels, the; Polo; non-technical</li>
-<li>Homo Deus: A Brief History of Tomorrow; Harari; non-technical</li>
-<li>Books by Aristotle; non-technical</li>
-<li>Books by Plato; non-technical</li>
-<li>Books by Descartes; non-technical</li>
-<li>The idea of culture; Eagleton; non-technical</li>
-<li>Hereditary Intelligence; Galton; non-technical</li>
-<li>Lean Software Development: An Agile Toolkit; Poppendieck (+)</li>
-<li>Chaos Monkeys: Obscene Fortune and Random Failure; Garcia Martinez</li>
-<li>Implementing Lean Software Development: From Concept to Cash; Poppendieck</li>
-<li>Joel on Software; Spolsky</li>
-<li>Death March; Yourdon</li>
-<li>Psychology of Computer Programming, The; Weinberg</li>
-<li>Introduction to General Systems Thinking; Weinberg</li>
-<li>Lao Tzu : Tao Te Ching : A Book About the Way and the Power of the Way; Tzu, Le Guin; non-technical</li>
-<li>Gay Science, the; Nietzsche; non-technical</li>
-<li>Being Geek; Lopp</li>
-<li>Finance for Freelancers; Retallick; non-technical, finance</li>
-<li>Object-oriented software engineering: a use case driven approach; Jacobson</li>
-<li>Patterns of Enterprise Application Architecture; Fowler; own-it</li>
-<li>Thinking fast and slow; Kahneman; non-technical</li>
-<li>Romeo y Julieta; Shakespeare; non-technical</li>
-<li>Computer Systems: A Programmer’s Perspective; Bryant, O&rsquo;Hallaron</li>
-<li>My Journey to Lhasa: The Classic Story of the Only Western Woman Who Succeeded in Entering the Forbidden City; David-Néel; non-technical</li>
-<li>Cathedral and the bazaar, the ; Raymond</li>
-<li>Coding dojo handbook, the; Bache; own-it</li>
-<li>Making software; Oram and Wilson; own-it</li>
-<li>Code complete; McConnell; own-it</li>
-<li>Soft skills; Sonmez; own-it</li>
-<li>DSLs in action; Ghosh; own-it</li>
-<li>Purely functional data structures; Okasaki; own-it</li>
-<li>Working effectively with unit tests; Fields (+); own-it</li>
-<li>First Nazi, the; Ludendorff; non-technical</li>
-<li>Greatest story ever told &hellip; so far; Krauss; non-technical</li>
-<li>Master algorithm, the; Domingos; non-technical</li>
-<li>Invention of Science, the; Wootton; non-technical</li>
-<li>Tesla: Inventor of the electrical age; Bernard Carlson; non-technical</li>
-<li>Psychology in minutes; Weeks; non-technical</li>
-<li>Alan Turing: The Enigma; Hodges; non-technical</li>
-<li>How to think more about sex; de Botton; non-technical</li>
-<li>Piccolo manuale di persuasione; Taylor; non-technical</li>
-<li>arte de la guerra, el; Sun Tzu; non-technical, own-it</li>
-<li>Piccolo manuale di leadership Confuciana; Adair; non-technical</li>
-<li>How to Stop Worrying and Start Living; Carnegie; non-technical</li>
-<li>Uomo - Guida allo stile; Roetzel; non-technical</li>
-<li>Unwritten Laws of Engineering: Revised and Updated Edition; King</li>
-<li>Test-Driven JavaScript Development (Developer&rsquo;s Library); Johansen</li>
-<li>Test Driven Development: By Example; Beck</li>
-<li>Arquitectura Java JPA Domain Driven Design; Alvárez, Peláez</li>
-<li>End of loyalty, the; Wartzman; non-technical</li>
-<li>Basic Economics; Sowell; non-technical</li>
-<li>Introduction to Economic Analysis; McAfee; non-technical</li>
-<li>Patterns of Software; Gabriel</li>
-<li>Coders at work; Seibel</li>
-<li>Clean architecture; Martin</li>
-<li>How to Be a Stoic: Using Ancient Philosophy to Live a Modern Life; Pigliucci; non-technical</li>
-<li>Introduction to Object-Oriented Programming, an; Budd</li>
-<li>Gafas de la felicidad, las; Santandreu; non-technical</li>
-<li>Ser feliz en Alaska; Santandreu; own-it, non-technical</li>
-<li>Mochila para el universo, una; Punset; non-technical</li>
-<li>Gods themselves, the; Asimov; non-technical</li>
-<li>Panamá papers, the; Obermayer, Obermaier; non-technical</li>
-<li>Originals; Grant; non-technical</li>
-<li>Optimism over despair; Chomsky; non-technical</li>
-<li>SCIENCE OF BREATH: A Practical Guide; Ballentine, Hymes; non-technical</li>
-<li>Yoga Explained: A New Step-by-step Approach to Understanding and Practising Yoga; Mehta,‎ Arjunwadkar; non-technical</li>
-<li>Wanderlust: A Modern Yogi&rsquo;s Guide to Discovering Your Best Self; Krasno; non-technical</li>
-<li>How to Think About Money; Clements; non-technical, finance</li>
-<li>By Way of Deception; Ostrovsky; non-technical</li>
-<li>Printemps des sayanim, le; Cohen; own-it, non-technical</li>
-<li>Deep work; Newport; non-technical, own-it</li>
-<li>Hooked: How to Build Habit-Forming Products; Eyal, Hoover; non-technical</li>
-<li>Irresistible: The Rise of Addictive Technology and the Business of Keeping Us Hooked; Alter; non-technical</li>
-<li>The Attention Merchants: The Epic Scramble to Get Inside Our Heads; Wu; non-technical</li>
-<li>Willpower: Why Self-Control is The Secret to Success; Baumeister, Tierney; non-technical</li>
-<li>Principles of Psychology, the; James; own-it, non-technical</li>
-<li>Our mutual friend; Dickens; non-technical</li>
-<li>Crucial Conversations: Tools for Talking When Stakes Are High, Second Edition; Patterson, Grenny, McMillan, Switzler; non-technical</li>
-<li>Amusing Ourselves to Death - Public Discourse in the Age of Show Business; Postman; non-technical</li>
-<li>Mastery; Greene; non-technical, own-it</li>
-<li>Silence in the age of noise; Kagge; non-technical</li>
-<li>Functional programming simplified; Alexander; own-it</li>
-<li>Your money or your life; Dominguez, Robin; non-technical, finance</li>
-<li>Batalla del Ebro, la; Reverte; non-technical</li>
-<li>Historia de la guerra civil española; Rojo; non-technical</li>
-<li>Lucha por el poder, la; Evans; non-technical</li>
-<li>Revolución rusa, la; Pipes; non-technical</li>
-<li>Holocausto, el; Rees; non-technical</li>
-<li>Martín Lutero, renegado y Profeta; Roper; non-technical</li>
-<li>Siglo de la revolución, el ; Fontana; non-technical</li>
-<li>Història de la revolución rusa; Trotsky; non-technical</li>
-<li>Dispossessed, the; Le Guin; non-technical</li>
-<li>Left hand of darkness; Le Guin; non-technical</li>
-<li>Lathe of heaven; Le Guin; non-technical</li>
-<li><a href="https://www.amazon.com/Schopenhauer-Cure-Novel-Irvin-Yalom/dp/0060938102/" target="_blank">https://www.amazon.com/Schopenhauer-Cure-Novel-Irvin-Yalom/dp/0060938102/</a></li>
-<li><a href="https://www.amazon.com/How-Schopenhauer-Through-Mid-Life-Crisis-ebook/dp/B00QXNB5PC/" target="_blank">https://www.amazon.com/How-Schopenhauer-Through-Mid-Life-Crisis-ebook/dp/B00QXNB5PC/</a></li>
-<li>Books in general &ndash; Epstein</li>
-<li>Affluent society, the; Galbraith; non-technical, finance</li>
-<li>Philosophy of the Buddha; Bahm; non-technical</li>
-<li>Tribe of mentors; guillem, non-technical, own-it</li>
-<li>5 dysfunctions of a team; non-technical</li>
-<li>Ziglar&rsquo;s Top Performance; non-technical</li>
-<li>Pragmatic Programmer (+)</li>
-<li>High Output Management; Grove; non-technical</li>
-<li>First Break All the Rules; non-technical, guillem</li>
-<li>Managing for happiness; Appelo; non-technical</li>
-<li>How to be a stoic - Pugliucci; non-technical</li>
-<li>Why budism is true; Wright; non-technical</li>
-<li>7 hábitos de la gente altamente productiva</li>
-<li>Como ganar amigos e influir sobre las personas; Carnegie (+); own-it, guillem</li>
-<li>art of readable code; guillem</li>
-<li>Domain modeling made functional; guillem</li>
-<li>Sketchbook handbook; guillem, own-it</li>
-<li>Agile samurai, the; guillem</li>
-<li>Miracle of Mindfulness, the; Hanh; non-technical, own-it</li>
-<li>No mud, no lotus: The Art of Transforming Suffering; Hahn; non-technical</li>
-<li>Lean Architecture: for Agile Software Development; Coplien, Bjørnvig</li>
-<li>Agile IT Organization Design: For Digital Transformation and Continuous Delivery; Sriram Narayan</li>
-</ul>
-
-<p>unfinished (unsorted):</p>
-
-<ul>
-<li>Effective Java; Bloch; own-it</li>
-<li>Functional Programming Patterns in Scala and Clojure; own-it</li>
-<li>Release It! - Design and Deploy Production-Ready Software; own-it</li>
-<li>Refactoring (+); Fowler; own-it</li>
-<li>Leprechauns of Software Engineering (+), the; Bossavit; own-it</li>
-<li>Domain-Driven Design: Tackling Complexity in the Heart of Software; Vernon (+); own-it</li>
-<li>Pragmatic Thinking and Learning: Refactor Your Wetware; own-it</li>
-<li>Readings in Database Systems, 5th Edition; own-it</li>
-<li>Structure and Interpretation of Computer Programs (SICP); Abelson, Sussmann, Sussmann; own-it</li>
-<li>La Sociedad De Coste Marginal Cero (Estado y Sociedad); Rifkin; non-technical</li>
-<li>Odisea; Homero; non-technical</li>
-<li>Switch: How to Change Things When Change Is Hard; Heath, Heath; own-it, non-technical</li>
-<li>Como leer un libro; Adler, van Doren; non-technical, own-it</li>
-</ul>
-
-<p>next (2):</p>
-
-<ul>
-<li>Who rules the world?; Chomsky; non-technical</li>
-<li>Working Effectively with Legacy Code (+); Feathers; own-it</li>
-<li>Nonviolent communication (+); Rosenberg; own-it, non-technical</li>
-<li>Introduction to Buddhism: Teachings, History and Practices, an; Harvey; non-technical, own-it</li>
-<li>Meditations; Marcus Aurelius; non-technical, own-it</li>
-</ul>
-
-<p>wip (2):</p>
-
-<ul>
-<li>Continuous Delivery; Humble, Farley; own-it</li>
-<li>Ética a Nicómaco; Aristotle; own-it, non-technical</li>
-</ul>
-
-<p>done:</p>
-
-<ul>
-<li>Prince, the; Macchiavello; non-technical, own-it</li>
-<li>Nuevo kama-sutra ilustrado, el; Gallotti; non-technical</li>
-<li>Senior software developer, the; Copeland; own-it</li>
-<li>Scandal in Bohemia, a; Doyle; own-it</li>
-<li>Getting things done, &hellip;; Allen (+); own-it, non-technical</li>
-<li>Nature of Software Development, the; Jeffries; own-it</li>
-<li>Team Geek; Fitzpatrick, Collins-Sussman; own-it</li>
-<li>Aprendo Yoga; Van Lysebeth; non-technical, own-it</li>
-<li>Clean Coder: A Code of Conduct for Professional Programmers, the; Martin; own-it</li>
-<li>ML for the working programmer, 2nd edition [5th chapter only]; Paulson; own-it</li>
-<li>Lazarillo de Tormes, el; anónimo; non-technical</li>
-<li>Tom Clancy&rsquo;s power plays - Politika; Preisler; own-it, non-technical</li>
-<li>Moon is a harsh mistress, the; Heinlein; own-it, non-technical</li>
-<li>Old man&rsquo;s war; Scalzi; non-technical, own-it</li>
-<li>Nightfall; Asimov, Silverberg; own-it, non-technical</li>
-<li>Interface; Stephenson, George; non-technical, own-it</li>
-<li>Man who sold the moon, the; Heinlein; own-it, non-technical</li>
-<li>Agents of innocence; Ignatius; own-it, non-technical</li>
-<li>Fist of god, the; Forsyth; own-it, non-technical</li>
-<li>Avaro, el; Molière; own-it, non-technical</li>
-<li>Bogleheads’ Guide to Investing, the; Larimore, Lindauer, LeBoeuf; own-it, non-technical, finance</li>
-<li>Lazyperson&rsquo;s guide to investment; Farrell; own-it, non-technical, finance</li>
-<li>Millionaire next door, the; Stanley, Danko; own-it, non-technical, finance</li>
-<li>Little Book of Common Sense Investing; Bogle; own-it, non-technical, finance</li>
-<li>Monje que vendió su Ferrari, el; Sharma; own-it, non-technical</li>
-<li>Siddhartha; Hesse; non-technical, own-it</li>
-<li>If you can: how millenials can get rich slowly; Bernstein; own-it, non-technical, finance</li>
-<li>Odessa; Forsyth; non-technical, own-it</li>
-<li>Bogle on mutual funds: new perspectives for the intelligent investor; Bogle; own-it, non-technical, finance</li>
-<li>Perros de la guerra, los; Forsyth; own-it, non-technical</li>
-<li>avaro y el oro, el; Esopo; non-technical</li>
-<li>Aulularia; Plauto; own-it, non-technical</li>
-<li>Tus zonas erróneas; Dyer; non-technical, own-it</li>
-<li>Alternativa del Diablo, la; Forsyth; own-it, non-technical</li>
-<li>Guía, el; Forsyth; own-it, non-technical</li>
-<li>Pied piper; Forsyth; own-it, non-technical</li>
-<li>Hunt for the Red October, the; Clancy; own-it, non-technical</li>
-<li>Peopleware; DeMarco, Lister (+); own-it</li>
-<li>Time to kill, a; Grisham; own-it, non-technical</li>
-<li>Ética promiscua; Easton, Hardy; own-it, non-technical</li>
-<li>Checklist manifesto, the; Gawande; own-it, non-technical, guillem</li>
-<li>Team geek (+); guillem, own-it</li>
-<li>Kata de la voluntad; guillem, non-technical</li>
-<li>Phoenix project, the ; Kim, Behr, Spafford; own-it</li>
-<li>Obstacle is the way, the; guillem, non-technical</li>
-<li>Guide to stoicism, a; Stock; own-it, non-technical</li>
-<li>Quien se ha llevado mi queso; Johnson; own-it, guillem</li>
-<li>One minute manager, the; Blanchard; own-it, non-technical, guillem</li>
-<li>En defensa de los ociosos; Stevenson; non-technical, own-it</li>
-<li>Ladybird Book of Mindfulness, the (Ladybirds for Grown-Ups); Hazeley, Morris; non-technical</li>
-<li>Art of the start, the; Kawasaki; own-it, non-technical, guillem</li>
-<li>Getting started with NoFap; non-technical</li>
-<li>Emotional intelligence; Goleman; non-technical</li>
-</ul>
-
-<p>rejected:</p>
-
-<ul>
-<li>Stanger in a strange land; Heinlein; own-it, non-technical</li>
-</ul>
-
-<p>lists:</p>
-
-<ul>
-<li><a href="https://www.goodreads.com/review/list/246177-rob?shelf=non-fiction-for-humans" target="_blank">https://www.goodreads.com/review/list/246177-rob?shelf=non-fiction-for-humans</a></li>
-<li><a href="https://www.goodreads.com/list/show/451.Best_Philosophy_Book" target="_blank">https://www.goodreads.com/list/show/451.Best_Philosophy_Book</a></li>
-<li><a href="https://www.goodreads.com/list/show/8379.Software_Craftsmanship" target="_blank">https://www.goodreads.com/list/show/8379.Software_Craftsmanship</a></li>
-<li><a href="https://blog.ycombinator.com/ycs-2017-summer-reading-list/" target="_blank">https://blog.ycombinator.com/ycs-2017-summer-reading-list/</a></li>
-<li><a href="https://www.goodreads.com/list/show/107321.TI2011_Course" target="_blank">https://www.goodreads.com/list/show/107321.TI2011_Course</a></li>
-<li><a href="https://www.goodreads.com/list/show/12287.Fog_Creek_Software_Management_Training_Program" target="_blank">https://www.goodreads.com/list/show/12287.Fog_Creek_Software_Management_Training_Program</a></li>
-<li><a href="https://www.goodreads.com/list/show/12351.Books_on_Stoic_Philosophy" target="_blank">https://www.goodreads.com/list/show/12351.Books_on_Stoic_Philosophy</a>; non-technical</li>
-<li>Tom clancy&rsquo;s power plays</li>
-<li><a href="https://www.thriveglobal.com/stories/17969-11-top-positive-psychology-books-that-will-improve-your-work-and-life" target="_blank">https://www.thriveglobal.com/stories/17969-11-top-positive-psychology-books-that-will-improve-your-work-and-life</a></li>
-<li>Investing: <a href="http://efficientfrontier.com/reading.htm" target="_blank">http://efficientfrontier.com/reading.htm</a>; finance</li>
-<li>Investing, personal finance: <a href="https://www.goodreads.com/review/list/5876938-tyler?shelf=personal-finance" target="_blank">https://www.goodreads.com/review/list/5876938-tyler?shelf=personal-finance</a>; finance</li>
-<li>Investing: <a href="http://lemkingroup.com/ListOfPersonalFinanceBooks.html#SelectedWebSites" target="_blank">http://lemkingroup.com/ListOfPersonalFinanceBooks.html#SelectedWebSites</a>; finance</li>
-<li>High performance organizations: <a href="https://github.com/pdfernhout/High-Performance-Organizations-Reading-List" target="_blank">https://github.com/pdfernhout/High-Performance-Organizations-Reading-List</a></li>
-<li>For becoming a manager / team management: <a href="https://news.ycombinator.com/item?id=16151067" target="_blank">https://news.ycombinator.com/item?id=16151067</a></li>
-</ul>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/06/15/testing-component-randomness/">Testing a component that includes randomness</a>
-    </h1>
-    <p >Jun 15, 2018
-         - 6 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/06/15/testing-component-randomness/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/testing/">testing</a><a class="label" href="https://alvarogarcia7.github.io/categories/randomness/">randomness</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/snippet/">snippet</a>
-        
-    </p>
-</header>
-
-
-        
-        
-
-<h2 id="context">Context</h2>
-
-<p>We have been tasked with designing a component to generate secrets for two-factor authentication (2FA), to ensure that the you also own that other &lsquo;channel&rsquo;.</p>
-
-<p>It has to be secure enough to pass to verify a user, meaning no other user should be able to impersonating another one by guessing the secret.</p>
-
-<h2 id="solution">Solution</h2>
-
-<p>A first solution that he have implemented is to provide a 6-digit pin code.</p>
-
-<p>The solution (in java) is straightforward: get a <code>Random</code> to generate <code>int</code>s for you.</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="p">{</span>
-    <span class="kd">private</span> <span class="n">Random</span> <span class="n">secureRandom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="p">();</span>
-
-    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">PinCode</span><span class="p">(</span><span class="n">secureRandom</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCode</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="p">;</span>
-
-    <span class="kd">public</span> <span class="nf">PinCode</span> <span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>Note: this is not the final solution; it does not include package, imports; might not even compile. Take it as pseudo-code.</p>
-
-<p>Now that we this &ldquo;<a href="https://rubyplus.com/articles/521-TDD-Basics-Obvious-Implementation" target="_blank">obvious implementation</a>&rdquo; in mind, how can we test drive it?</p>
-
-<p>Let&rsquo;s start with the requirements:</p>
-
-<ul>
-<li>the numbers are always six digits</li>
-<li>they should be pseudo-random</li>
-</ul>
-
-<p>We can test the first by taking one of them and verifying that it has six digits.</p>
-
-<h3 id="first-requirement-type-of-pin-code">First requirement: type of pin code</h3>
-
-<p>The problem with that is that the SecureRandom gives random data. Now, the test will be passing, but later in the future, the build will break as this implementation has (some) defects. If you keep generating pin codes, you will get one as &ldquo;123&rdquo;, as per the definition of the <code>nextInt</code> method.</p>
-
-<p>Easy. You add a base amount to always make it in the six digits. But, are you affecting the distribution of the pseudo-random generator? At this time, I&rsquo;m not even sure. <a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515" target="_blank">Don&rsquo;t make me think</a> too much. To make it easier, let&rsquo;s pad the numbers with zeros on the left:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_are_left_padded_with_zeros</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="n">verifyEachOf</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pincode</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="mi">6</span><span class="p">)));</span>
-<span class="p">}</span>
-
-<span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_do_not_contain_spaces</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="n">verifyEachOf</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pincode</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">)));</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>Now that these tests are failing, I can focus on finding a simple implementation that satisfies them.</p>
-
-<p>A passing solution:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="p">{</span>
-    <span class="kd">private</span> <span class="n">Random</span> <span class="n">secureRandom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="p">();</span>
-
-    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">PinCode</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%06d&quot;</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)));</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>But, if you execute these tests long enough, they will fail. Because of the underlaying randomness of the code. We don&rsquo;t want to modify the design of this class, as we started with &ldquo;wishful programming&rdquo; (<a href="http://blog.adrianbolboaca.ro/2016/04/programming-by-wishful-thinking/" target="_blank">reference</a>, <a href="https://dsoguy.blogspot.com/2007/01/programming-by-wishful-thinking.html" target="_blank">reference</a>), specifying the desired public API, to later fill the implementation details.</p>
-
-<p>A possible solution to this randomness is to consider the random a &lsquo;setting&rsquo; <a href="http://www.mockobjects.com/2006/10/different-kinds-of-collaborators.html" target="_blank">aka policy</a> that I can later override. But only for the test. We don&rsquo;t want to make the API more complicated, so we will offer a <code>protected</code> method for &lsquo;friends&rsquo; to use, but not for everyone:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="p">{</span>
-
-    <span class="kd">private</span> <span class="n">Random</span> <span class="n">random</span><span class="p">;</span>
-
-    <span class="kd">public</span> <span class="nf">PinCodeFactory</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="kd">final</span> <span class="n">String</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%06d&quot;</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">));</span>
-        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCode</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">pinCode</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setGenerator</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Random</span> <span class="n">generator</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">random</span> <span class="o">=</span> <span class="n">generator</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>(Note: this is the final version)</p>
-
-<p>(Note: in java, the <code>SecureRandom</code> implements the same API as <code>Random</code> &ndash;in fact it is a child class&ndash; so we prefer accepting the parent class.)</p>
-
-<p>In this way, the test can always set the random seed to a fixed value. Therefore, the numbers will be stable and the behavior is no longer random, but controlled.</p>
-
-<p>This is just one way how you can test components that have randomness: eliminating it without affecting the public API.</p>
-
-<h3 id="second-requirement-the-pin-codes-don-t-repeat">Second requirement: the pin codes don&rsquo;t repeat</h3>
-
-<p>Even if this requirement cannot be met with enough requests (because with enough requests, you will repeat a six-digit code), finding no repeated codes in 100 consecutive pin codes is enough. The user has to input the exact code they received, so the chance of repetition is quite low.</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">there_are_no_repeated_with_the_given_seed</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-    <span class="n">verifyAll</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">),</span> <span class="n">pinCodes</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">.</span><span class="na">size</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">)));</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>This test is passing from the beginning with the fixed seed <code>1L</code>. But, if you enlarge the <code>desiredProofSize</code> to 1000, it does not pass anymore.</p>
-
-<h3 id="a-note-about-process">A note about process</h3>
-
-<p>We did not get much value of test-driving (TDD) this code, as the knew the desired API from the beginning, we had a clear implementation in mind and only a few cases left to iron out. Just test-first was enough in this case.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>One way how you can test components that have randomness: eliminating it.</p>
-
-<p>Do not use TDD (or any other tool) as an end in itself. Use it as a tool.</p>
-
-<h2 id="appendix">Appendix</h2>
-
-<p>All code can be found <a href="https://gist.github.com/alvarogarcia7/46917d8d160d46b145de8262e3965670" target="_blank">here</a></p>
-
-<p>As a local copy:</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="c1">//File PinCode.java</span>
-<span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="p">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCode</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="p">;</span>
-
-    <span class="kd">public</span> <span class="nf">PinCode</span> <span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Object</span> <span class="n">o</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">o</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">getClass</span><span class="p">()</span> <span class="o">!=</span> <span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="p">(</span><span class="n">PinCode</span><span class="p">)</span> <span class="n">o</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">pinCode</span><span class="p">.</span><span class="na">value</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">Objects</span><span class="p">.</span><span class="na">hash</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="kd">final</span> <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="p">(</span><span class="s">&quot;PinCode{&quot;</span><span class="p">);</span>
-        <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;value=&#39;&quot;</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="sc">&#39;\&#39;&#39;</span><span class="p">);</span>
-        <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="sc">&#39;}&#39;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">sb</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="c1">//File PinCodeFactory.java</span>
-<span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">com.example.Pincode</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactory</span> <span class="p">{</span>
-
-    <span class="kd">private</span> <span class="n">Random</span> <span class="n">random</span><span class="p">;</span>
-
-    <span class="kd">public</span> <span class="nf">PinCodeFactory</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecureRandom</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="n">PinCode</span> <span class="nf">aNewPinCode</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="kd">final</span> <span class="n">String</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%06d&quot;</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">));</span>
-        <span class="kd">final</span> <span class="n">PinCode</span> <span class="n">pinCode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCode</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">pinCode</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setGenerator</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Random</span> <span class="n">generator</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">random</span> <span class="o">=</span> <span class="n">generator</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="c1">//File PinCodeFactoryTest.java</span>
-<span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">java.util.Collection</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.function.Consumer</span><span class="p">;</span>
-
-<span class="kn">import static</span> <span class="nn">org.hamcrest.core.Is.is</span><span class="p">;</span>
-<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertThat</span><span class="p">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinCodeFactoryTest</span> <span class="p">{</span>
-
-    <span class="kd">private</span> <span class="n">PinCodeFactory</span> <span class="n">pinCodeFactory</span><span class="p">;</span>
-
-    <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="n">pinCodeFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PinCodeFactory</span><span class="p">();</span>
-        <span class="n">pinCodeFactory</span><span class="p">.</span><span class="na">setGenerator</span><span class="p">(</span><span class="k">new</span> <span class="n">Random</span><span class="p">(</span><span class="mi">1L</span><span class="p">));</span>
-    <span class="p">}</span>
-
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">there_are_no_repeated_with_the_given_seed</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-        <span class="n">verifyAll</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">),</span> <span class="n">pinCodes</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">.</span><span class="na">size</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">)));</span>
-    <span class="p">}</span>
-
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_are_left_padded_with_zeros</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="n">verifyEachOf</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pincode</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span> <span class="n">is</span><span class="p">(</span><span class="mi">6</span><span class="p">)));</span>
-    <span class="p">}</span>
-
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">the_numbers_do_not_contain_spaces</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="n">verifyEachOf</span><span class="p">(</span><span class="n">pinCodes</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">pincode</span> <span class="o">-&gt;</span> <span class="n">assertThat</span><span class="p">(</span><span class="n">pincode</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">),</span> <span class="n">is</span><span class="p">(</span><span class="kc">false</span><span class="p">)));</span>
-    <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">verifyEachOf</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">pincodes</span><span class="p">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">assertion</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">pincode</span> <span class="p">:</span> <span class="n">pincodes</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">assertion</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">pincode</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">verifyAll</span> <span class="p">(</span><span class="kd">final</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">pincodes</span><span class="p">,</span> <span class="kd">final</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">assertion</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">assertion</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">pincodes</span><span class="p">);</span>
-    <span class="p">}</span>
-
-
-    <span class="kd">private</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">pinCodes</span> <span class="p">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">desiredProofSize</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">Stream</span><span class="p">.</span><span class="na">generate</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="n">pinCodeFactory</span><span class="p">.</span><span class="na">aNewPinCode</span><span class="p">().</span><span class="na">value</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">limit</span><span class="p">(</span><span class="n">desiredProofSize</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toSet</span><span class="p">());</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-        
-
-    </article>
     
     
-    
+
+
 
 
 
@@ -1523,9 +899,9 @@ Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -1562,43 +938,43 @@ Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -1610,21 +986,24 @@ Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
  </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
    

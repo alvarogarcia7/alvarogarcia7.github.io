@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>The long way through Software Craftsmanship</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
-  
-  
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="The long way through Software Craftsmanship" />
 
-  <link href="https://alvarogarcia7.github.io/index.xml" rel="alternate" type="application/rss+xml" title="The long way through Software Craftsmanship" />
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -116,13 +116,49 @@
 </nav>
 
 
-<div id="main">
- <div id="content">
-  <div class="blog-index">
-    
-    
-    <article>
 
+
+  
+
+<div id="main">
+  <div id="content">
+    <div class="blog-index">
+      
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/">Refactoring: split loop &#43; loop/map equivalence</a>
+    </h1>
+    <p >Feb 6, 2019
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/split-loop/">split-loop</a><a class="label" href="https://alvarogarcia7.github.io/categories/split-loop-refactoring/">split-loop-refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/loop-map-equivalence/">loop-map-equivalence</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/kotlin/">kotlin</a><a class="label" href="https://alvarogarcia7.github.io/categories/multiparadigm/">multiparadigm</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/fp/">fp</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-programming/">object-oriented-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented/">object-oriented</a><a class="label" href="https://alvarogarcia7.github.io/categories/oo/">oo</a><a class="label" href="https://alvarogarcia7.github.io/categories/oop/">oop</a>
+        
+    </p>
+</header>
+
+        
+          <p>We can combine the &ldquo;Split loop&rdquo; refactoring technique plus the &ldquo;Loop / Map equivalence&rdquo; when refactoring.
+Given that it does not matter in which order we apply these operations, we can say that they have the associative property
+Chart of the operations Take the case of a loop doing two things. From there:
+ we can replace the loop for a map (including the two actions into a single map body) we can split the loop into two loops  Take the case of two loops, doing one thing each.</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
         
         
 
@@ -142,7 +178,6 @@
     </p>
 </header>
 
-
         
           <p>Amazon DynamoDB Transactions: How it Works Explains how transactions work in DynamoDB
 Tags: dynamodb, aws, help, transaction, serializable
@@ -150,19 +185,15 @@ Id: 7fb09cd4-2639-11e9-9377-0242ac110002 Read: Fri, 01 Feb 2019 15:53:20 +0000
 Jepsen: Aerospike I&rsquo;ve read this analysis of Aerospike, that explains what kind of database it is, what CAP properties satisfies
 Tags: cap, cap-theorem, jepsen, aphyr, aerospike, database, acid, ap, cp, consistency, availability, partitioning, paxos
 Id: bd7151c6-2639-11e9-a38e-0242ac110002 Read: Fri, 01 Feb 2019 15:55:04 +0000</p>
-
           
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2019/02/01/self-study-february-2019/" rel="full-article">Read On &rarr;</a>
-              </footer>
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2019/02/01/self-study-february-2019/" rel="full-article">Read On &rarr;</a>
+            </footer>
           
-
         
-
-    </article>
-    
-    <article>
-
+      </article>
+      
+      <article>
         
         
 
@@ -182,24 +213,19 @@ Id: bd7151c6-2639-11e9-a38e-0242ac110002 Read: Fri, 01 Feb 2019 15:55:04 +0000</
     </p>
 </header>
 
-
         
           <p>Work cycles I&rsquo;ve read this Work Cycle framework to be more productive with your daily routine.
 Suggests an alternative to Pomodoro technique, in which you are to write down the contents of the goal, then split in small chunks (periods) of time to complete the individual tasks, then debrief at the end of the period and at the end of the cycle.
 An analogy could be a double-loop Pomodoro technique for tasks.</p>
-
           
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2019/01/01/self-study-january-2019/" rel="full-article">Read On &rarr;</a>
-              </footer>
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2019/01/01/self-study-january-2019/" rel="full-article">Read On &rarr;</a>
+            </footer>
           
-
         
-
-    </article>
-    
-    <article>
-
+      </article>
+      
+      <article>
         
         
 
@@ -219,24 +245,19 @@ An analogy could be a double-loop Pomodoro technique for tasks.</p>
     </p>
 </header>
 
-
         
           <p>Read this quarter:
 Note: re+read means I&rsquo;m re-reading this book. The (+) stands for one-or-more times, as in the regexes.
  Como ganar amigos e influir sobre las personas; Carnegie (+) Oliver Twist; Dickens Building evolutionary architecture; Ford, Parsons Selfie: How We Became So Self-Obsessed and What It’s Doing To Us; Storr. Just chapter 1: The dying self Sota la cistella; Gasol  Como ganar amigos e influir sobre las personas; Carnegie (+) I&rsquo;ve re-read this classic book (How to win friends and influence people), by Carnegie.</p>
-
           
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2018/12/31/books-read-2018q4/" rel="full-article">Read On &rarr;</a>
-              </footer>
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2018/12/31/books-read-2018q4/" rel="full-article">Read On &rarr;</a>
+            </footer>
           
-
         
-
-    </article>
-    
-    <article>
-
+      </article>
+      
+      <article>
         
         
 
@@ -256,26 +277,21 @@ Note: re+read means I&rsquo;m re-reading this book. The (+) stands for one-or-mo
     </p>
 </header>
 
-
         
           <p>One year nomad - a review Tags: nomad, felix-krause, digital-nomad, remote, life
 Id: 7784a1da-fc82-11e8-a2cc-0242ac110002 Read: Mon, 10 Dec 2018 13:49:51 +0000
 The Reason Many Ultrarich People Aren’t Satisfied With Their Wealth How the rich are motivated to earn more money
  really rich people are often motivated to acquire more money by the thrill that comes with multiplying one’s fortune by making investments, buying up businesses
-Those two ways of putting money to use—as a way of covering expenses or as a way of building a bigger fortune—</p>
-
+  Those two ways of putting money to use—as a way of covering expenses or as a way of building a bigger fortune—</p>
           
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2018/12/01/self-study-december-2018/" rel="full-article">Read On &rarr;</a>
-              </footer>
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2018/12/01/self-study-december-2018/" rel="full-article">Read On &rarr;</a>
+            </footer>
           
-
         
-
-    </article>
-    
-    <article>
-
+      </article>
+      
+      <article>
         
         
 
@@ -295,62 +311,23 @@ Those two ways of putting money to use—as a way of covering expenses or as a w
     </p>
 </header>
 
-
         
           <p>Read this quarter:
 Note: re+read means I&rsquo;m re-reading this book. The (+) stands for one-or-more times, as in the regexes.
  Ética a Nicómaco; Aristóteles Book of Transformation; Dalai Lama  Ética a Nicómaco; Aristóteles I&rsquo;ve read this book on philosophy and ethics. This book contains an analysis of the relationship between the personality, intelligence and happiness.
 Tries to describe what &lsquo;virtues&rsquo; are, that they belong in a continuum of acts, aand the good term is always in the middle.</p>
-
           
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2018/09/30/books-read-2018q3/" rel="full-article">Read On &rarr;</a>
-              </footer>
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2018/09/30/books-read-2018q3/" rel="full-article">Read On &rarr;</a>
+            </footer>
           
-
         
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
-    </h1>
-    <p >Jul 13, 2018
-         - 13 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/07/13/writing-safe-bash-scripts/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/sh/">sh</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/script/">script</a><a class="label" href="https://alvarogarcia7.github.io/categories/one-off/">one-off</a><a class="label" href="https://alvarogarcia7.github.io/categories/maintenance/">maintenance</a><a class="label" href="https://alvarogarcia7.github.io/categories/solid/">solid</a><a class="label" href="https://alvarogarcia7.github.io/categories/single-responsibility-principle/">single-responsibility-principle</a><a class="label" href="https://alvarogarcia7.github.io/categories/perl/">perl</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/make/">make</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a>
-        
-    </p>
-</header>
+      </article>
+      
+      
+      
 
 
-        
-          <p>After writing more and more bash scripts for a client, I&rsquo;ve decided to write down my thoughts about it.
-This assumes you have some knowledge about bash, as it is not intended as a beginner&rsquo;s tutorial.
-Why bash scripts?  Bash is present in almost every unix/linux-based stack, now some Windows as well. An exception is the &lsquo;alpine&rsquo; docker images, which have a smaller, lighter shell (more on that later) Everything that you can automate, you can do from bash.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2018/07/13/writing-safe-bash-scripts/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    
-    
 
 
 
@@ -440,10 +417,6 @@ Why bash scripts?  Bash is present in almost every unix/linux-based stack, now s
     
         <a href="/page/35/" class="label-pagination">35</a>
     
-        <a href="/page/36/" class="label-pagination">36</a>
-    
-        <a href="/page/37/" class="label-pagination">37</a>
-    
 
     
     
@@ -452,16 +425,14 @@ Why bash scripts?  Bash is present in almost every unix/linux-based stack, now s
 
     
     
-        <a href="/page/37/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
 
   
-
-  </div>
-
-  
+    </div>
+    
 
 <aside class="sidebar thirds">
   <section class="first odd">
@@ -473,9 +444,9 @@ Why bash scripts?  Bash is present in almost every unix/linux-based stack, now s
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -512,43 +483,43 @@ Why bash scripts?  Bash is present in almost every unix/linux-based stack, now s
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -557,24 +528,27 @@ Why bash scripts?  Bash is present in almost every unix/linux-based stack, now s
 
 </aside>
     
- </div>
+  </div>
 </div>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    
+    
+    
 
-</footer>
-
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
    
+

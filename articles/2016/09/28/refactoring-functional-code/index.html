@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Refactoring functional code</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -146,16 +146,13 @@
           
           
           <p>With my pairing mate we have refactored this piece of functional code.</p>
-
 <p>Original code:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">filterTokens</span> <span class="p">(</span><span class="nx">rawTokens</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">filterTokens</span> <span class="p">(</span><span class="nx">rawTokens</span><span class="p">)</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">cleanedTokens</span> <span class="o">=</span> <span class="nx">rawTokens</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">token</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nx">token</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="nx">token</span><span class="p">)</span>
   <span class="k">return</span> <span class="nx">cleanedTokens</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">token</span> <span class="p">=&gt;</span> <span class="nx">token</span> <span class="o">!==</span> <span class="s1">&#39;&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">stopWordsArray</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div>
-
-<p>Refactored code:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">filterTokens</span> <span class="p">(</span><span class="nx">rawTokens</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div><p>Refactored code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">filterTokens</span> <span class="p">(</span><span class="nx">rawTokens</span><span class="p">)</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">cleanedTokens</span> <span class="o">=</span> <span class="nx">rawTokens</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">token</span> <span class="p">=&gt;</span> <span class="nx">startsWithADash</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">?</span> <span class="nx">removeDashFrom</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">:</span> <span class="nx">token</span><span class="p">)</span>
   <span class="kr">const</span> <span class="nx">processedTokens</span> <span class="o">=</span> <span class="nx">cleanedTokens</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">token</span> <span class="p">=&gt;</span> <span class="nx">isNotEmpty</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">isNotAStopWord</span><span class="p">(</span><span class="nx">token</span><span class="p">))</span>
   <span class="k">return</span> <span class="nx">processedTokens</span>
@@ -176,12 +173,8 @@
     <span class="k">return</span> <span class="nx">token</span> <span class="o">!==</span> <span class="s1">&#39;&#39;</span>
   <span class="p">}</span>
  <span class="p">}</span>
-</code></pre></div>
-
-<p>These two codes do the same, but the second reads better, given that each small concept (e.g., <code>cleanedTokens</code>) or operation (e.g., <code>removeDashFrom</code>) has a name. Even the returned value, usually <code>result</code>, has an appropiate name. The machine will optimize that variable assignment to a variable but the human reader will dig deeper only if required.</p>
-
+</code></pre></div><p>These two codes do the same, but the second reads better, given that each small concept (e.g., <code>cleanedTokens</code>) or operation (e.g., <code>removeDashFrom</code>) has a name. Even the returned value, usually <code>result</code>, has an appropiate name. The machine will optimize that variable assignment to a variable but the human reader will dig deeper only if required.</p>
 <p>Writing functional code should not be an excuse to forget about clean code. The two are independent variables.</p>
-
 <p>We have found that the second reads better than the first one, but we have reached this conclusion because we have similar values and practices.</p>
 
         </div>
@@ -213,27 +206,6 @@
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -250,9 +222,9 @@
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -289,43 +261,43 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -337,21 +309,24 @@
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

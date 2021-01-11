@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>What legacy code is about</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,20 +145,14 @@
           
           
           
-          <p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers" target="_blank">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers" target="_blank">Michael Feathers</a> describes:</p>
-
+          <p>In his book <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052/ref=sr_1_1?ie=UTF8&amp;qid=1429647115&amp;sr=8-1&amp;keywords=legacy+code+feathers">Working effectively with legacy code</a>, <a href="https://twitter.com/mfeathers">Michael Feathers</a> describes:</p>
 <blockquote>
 <p>[&hellip;] legacy code as code without tests. It is a good working definition, and it points to a solution [&hellip;]</p>
-
 <p>M Feathers, in the preface of Working effectively with legacy code</p>
 </blockquote>
-
 <p>I really like this definition. It is objective and measurable. But this is also a downside. Let&rsquo;s take any concurrent code, for example: you can achieve 100% coverage on a single thread and the program could have defects when executed in parallel. But this might be an outlier, as concurrency is difficult to test. Let&rsquo;s take another example.</p>
-
 <p>Let&rsquo;s a imagine a non-concurrent (i.e., single thread) code composed by a single class (no collaborators; just one responsibility; it is &ldquo;Clean Code&rdquo;, as defined per R.C. Martin&rsquo;s book) that has some happy paths as well as some error-handling cases. As usual. The original code writer has decided to test only the happy paths. They deployed it to production, as the product was ready. You inherit this code.</p>
-
 <p>After the system is deployed to production, you start receiving defect reports on the happy paths (the tested part). The first one, you cross it off as an one-time thing. Then the second and third come. You take a deeper look and start seeing some inconsistencies in the tests, some tests that actually do not test anything interesting:</p>
-
 <ul>
 <li>some test the test framework</li>
 <li>some the language</li>
@@ -166,23 +160,15 @@
 <li>some functionalities are tested (not all happy paths)</li>
 <li>there&rsquo;s actually a defect converted into a specification (test) (??)</li>
 </ul>
-
 <p>Now, I ask myself this question: when did I start considering this code as legacy? When I saw the bug reports in production (several in a row) or when I saw the poor suite of tests?</p>
-
 <p>I do think this codebase is legacy, no matter when I realized about it. But my first instinct would be to consider it legacy from the moment I received the bug reports, as I lost the trust in that code.</p>
-
 <p>Because for me, <strong>legacy code is about trust, not tests</strong>. You can have tests but no trust; you can have trust but no tests (the latter is more difficult in non-trivial codebases.)</p>
-
 <p>This is why I would like to update the definition:</p>
-
 <blockquote>
 <p>Legacy code is code without tests that provide trust to all your stakeholders</p>
 </blockquote>
-
 <p>The last part is very important, because the definition is no longer objective but depends from person to person. If the codebase doesn&rsquo;t have tests, it is definitely legacy. But even if it has them, would you consider the given example a legacy or non-legacy code?</p>
-
 <p>These stakeholders include everyone affected or affecting the product: owners, developer team (in the scrum, wide sense), users, clients, &hellip;</p>
-
 <p>Full disclosure: I&rsquo;ve written plenty of legacy code. Code which I thought was good but really wasn&rsquo;t. Even with tests, even with TDD, even with Clean Code. This has made me change my mind about what legacy code is all about.</p>
 
         </div>
@@ -214,27 +200,6 @@
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -251,9 +216,9 @@
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -290,43 +255,43 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -338,21 +303,24 @@
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

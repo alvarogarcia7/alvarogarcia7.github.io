@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Validating CSV data in clojure</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,89 +145,61 @@
           
           
           
-          
-
-<p>At a client, we have CSVs of data that can be simplified to this <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">def</span> <span class="nv">data</span> <span class="nv">[</span>
-           <span class="nv">[</span><span class="s">&quot;total&quot;</span> <span class="mi">6</span> <span class="mi">8</span> <span class="nv">13]</span>
-           <span class="nv">[</span><span class="s">&quot;0&quot;</span>     <span class="mi">1</span> <span class="mi">2</span> <span class="nv">3]</span>
-           <span class="nv">[</span><span class="s">&quot;0&quot;</span>     <span class="mi">2</span> <span class="mi">0</span> <span class="nv">4]</span>
-           <span class="nv">[</span><span class="s">&quot;0&quot;</span>     <span class="mi">3</span> <span class="mi">0</span> <span class="nv">6]</span>
+          <p>At a client, we have CSVs of data that can be simplified to this <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">def</span> <span class="nv">data</span> <span class="nv">[</span>
+           <span class="nv">[</span><span class="s">&#34;total&#34;</span> <span class="mi">6</span> <span class="mi">8</span> <span class="nv">13]</span>
+           <span class="nv">[</span><span class="s">&#34;0&#34;</span>     <span class="mi">1</span> <span class="mi">2</span> <span class="nv">3]</span>
+           <span class="nv">[</span><span class="s">&#34;0&#34;</span>     <span class="mi">2</span> <span class="mi">0</span> <span class="nv">4]</span>
+           <span class="nv">[</span><span class="s">&#34;0&#34;</span>     <span class="mi">3</span> <span class="mi">0</span> <span class="nv">6]</span>
           <span class="nv">]</span><span class="p">)</span>
-</code></pre></div>
-
-<p>In this case, some of the row named <code>total</code> is the sum of the rest of the rows, but only for some columns (second and fourth). We do not want to get rid of the columns, as they need to be printed at the end.</p>
-
+</code></pre></div><p>In this case, some of the row named <code>total</code> is the sum of the rest of the rows, but only for some columns (second and fourth). We do not want to get rid of the columns, as they need to be printed at the end.</p>
 <p>This is what we need to validate:</p>
-
 <p><code>sum (rest [1]) = total [1]</code></p>
-
 <p><code>sum (rest [3]) = total [3]</code></p>
-
-<p>this could be written as a one-off program but a better alternative for us was to write a program and let users decide what columns to validate. In the future, power users will write their own validations <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>, thus creating an environment where users are no longer dependent on programmers as coupling business users to programmers does not scale.</p>
-
-<!--
-TODO
-expand on this idea for another post:
-
-thus creating an environment where users are no longer dependent on programmers as coupling business users to programmers does not scale. 
-
-teach someone to fish vs fish for them
-
--->
-
+<p>this could be written as a one-off program but a better alternative for us was to write a program and let users decide what columns to validate. In the future, power users will write their own validations <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, thus creating an environment where users are no longer dependent on programmers as coupling business users to programmers does not scale.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h2 id="implementation">Implementation</h2>
-
-<p>The full <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj" target="_blank">source code is here</a></p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="p">(</span><span class="nv">defn</span> <span class="nv">sum-eq-total</span> <span class="nv">[selector</span> <span class="nv">dataset]</span>
+<p>The full <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj">source code is here</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">sum-eq-total</span> <span class="nv">[selector</span> <span class="nv">dataset]</span>
   <span class="p">(</span><span class="nv">letfn</span> <span class="nv">[</span><span class="p">(</span><span class="nv">total-and-rest</span> <span class="nv">[coll]</span>
-             <span class="nv">[</span><span class="p">(</span><span class="nb">first</span> <span class="nv">coll</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest</span> <span class="nv">coll</span><span class="p">)</span><span class="nv">]</span><span class="p">)</span><span class="nv">]</span>
+             <span class="nv">[</span><span class="p">(</span><span class="nf">first</span> <span class="nv">coll</span><span class="p">)</span> <span class="p">(</span><span class="nf">rest</span> <span class="nv">coll</span><span class="p">)</span><span class="nv">]</span><span class="p">)</span><span class="nv">]</span>
   <span class="p">(</span><span class="k">let</span> <span class="nv">[[total</span> <span class="nv">rest-dataset]</span> <span class="p">(</span><span class="nv">total-and-rest</span> <span class="nv">dataset</span><span class="p">)</span>
         <span class="nv">selected-total</span> <span class="p">(</span><span class="nv">selector</span> <span class="nv">total</span><span class="p">)</span>
-        <span class="nv">selected-column</span> <span class="p">(</span><span class="nb">map</span> <span class="nv">selector</span> <span class="nv">rest-dataset</span><span class="p">)</span>
-        <span class="nv">sum-of-column</span> <span class="p">(</span><span class="nb">reduce</span> <span class="nb">+</span> <span class="nv">selected-column</span><span class="p">)</span><span class="nv">]</span>
-        <span class="p">(</span><span class="nb">=</span> <span class="nv">selected-total</span> <span class="nv">sum-of-column</span><span class="p">))))</span>
+        <span class="nv">selected-column</span> <span class="p">(</span><span class="nf">map</span> <span class="nv">selector</span> <span class="nv">rest-dataset</span><span class="p">)</span>
+        <span class="nv">sum-of-column</span> <span class="p">(</span><span class="nf">reduce</span> <span class="nf">+</span> <span class="nv">selected-column</span><span class="p">)</span><span class="nv">]</span>
+        <span class="p">(</span><span class="nf">=</span> <span class="nv">selected-total</span> <span class="nv">sum-of-column</span><span class="p">))))</span>
 
 <span class="p">(</span><span class="nv">defn</span> <span class="nv">validate-columns</span> <span class="nv">[indices</span> <span class="nv">data]</span>
-  <span class="p">(</span><span class="k">let</span> <span class="nv">[generate-selector</span> <span class="o">#(</span><span class="nv">fn</span> <span class="nv">[dataset]</span> <span class="p">(</span><span class="nb">nth</span> <span class="nv">dataset</span> <span class="nv">%</span><span class="p">))</span>
-         <span class="nv">selectors</span> <span class="p">(</span><span class="nb">map</span> <span class="nv">generate-selector</span> <span class="nv">indices</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="nv">[generate-selector</span> <span class="o">#(</span><span class="nv">fn</span> <span class="nv">[dataset]</span> <span class="p">(</span><span class="nf">nth</span> <span class="nv">dataset</span> <span class="nv">%</span><span class="p">))</span>
+         <span class="nv">selectors</span> <span class="p">(</span><span class="nf">map</span> <span class="nv">generate-selector</span> <span class="nv">indices</span><span class="p">)</span>
          <span class="nv">check-selector</span> <span class="o">#(</span><span class="nv">sum-eq-total</span> <span class="nv">%</span> <span class="nv">data</span><span class="p">)</span><span class="nv">]</span>
-         <span class="p">(</span><span class="nb">map</span> <span class="nv">check-selector</span> <span class="nv">selectors</span><span class="p">)))</span>
-</code></pre></div>
-
-<p>We define the domain concept of <code>selector</code> for pointing to a dataset column</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">generate-selector</span> <span class="o">#(</span><span class="nv">fn</span> <span class="nv">[dataset]</span> <span class="p">(</span><span class="nb">nth</span> <span class="nv">dataset</span> <span class="nv">%</span><span class="p">))</span>
-</code></pre></div>
-
-<p>This expression creates selectors based on a given index. It is a lambda that returns a function, thus being a HOF</p>
-
+         <span class="p">(</span><span class="nf">map</span> <span class="nv">check-selector</span> <span class="nv">selectors</span><span class="p">)))</span>
+</code></pre></div><p>We define the domain concept of <code>selector</code> for pointing to a dataset column</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="nv">generate-selector</span> <span class="o">#(</span><span class="nv">fn</span> <span class="nv">[dataset]</span> <span class="p">(</span><span class="nf">nth</span> <span class="nv">dataset</span> <span class="nv">%</span><span class="p">))</span>
+</code></pre></div><p>This expression creates selectors based on a given index. It is a lambda that returns a function, thus being a HOF</p>
 <p>Users can use the application in this fashion:</p>
-<div class="highlight"><pre><code class="language-lisp" data-lang="lisp"><span></span><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">validate-columns</span> <span class="nv">[1</span> <span class="nv">3]</span> <span class="nv">data</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="nv">simple.core=&gt;</span> <span class="p">(</span><span class="nv">validate-columns</span> <span class="nv">[1</span> <span class="nv">3]</span> <span class="nv">data</span><span class="p">)</span>
 <span class="p">(</span><span class="nv">true</span> <span class="nv">true</span><span class="p">)</span>
-</code></pre></div>
-
-<p>The full <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj" target="_blank">source code is here</a></p>
-
+</code></pre></div><p>The full <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/check-data-with-hofs.clj">source code is here</a></p>
 <h2 id="conclusion">Conclusion</h2>
-
-<p>Working on the REPL for this problem has been a very good idea, but working in a spreadsheet software has been even better. Even faster feedback cycle <sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">3</a></sup>.</p>
-
+<p>Working on the REPL for this problem has been a very good idea, but working in a spreadsheet software has been even better. Even faster feedback cycle <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
 <p>The inclusion of the HOF for validating the data has paid its cost (good RoI)</p>
-
 <p>Do not limit what your users can do, let them decide but do not complicate things unnecessarily. Know when to stop adding features and limit work to prevent YAGNI.</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">for more information and a spike on reading CSV data in clojure, <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/src/simple/check-media-csv.clj" target="_blank">this spike</a> may be useful
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">for the time being, there are no power users and no need to enable these custom validators. Doing it now would be YAGNI
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
-<li id="fn:3">in the case here, the data and business rules are so simple that there is no need for this software.
- <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>for more information and a spike on reading CSV data in clojure, <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/src/simple/check-media-csv.clj">this spike</a> may be useful <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>for the time being, there are no power users and no need to enable these custom validators. Doing it now would be YAGNI <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>in the case here, the data and business rules are so simple that there is no need for this software. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
         
@@ -258,27 +230,6 @@ teach someone to fish vs fish for them
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -295,9 +246,9 @@ teach someone to fish vs fish for them
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -334,43 +285,43 @@ teach someone to fish vs fish for them
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -382,21 +333,24 @@ teach someone to fish vs fish for them
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

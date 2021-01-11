@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Tip: Propagate the failure in bash</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,53 +145,35 @@
           
           
           
-          
-
-<p>In bash, the usual behavior is to return the last status code:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>bash-3.1$ tr
+          <p>In bash, the usual behavior is to return the last status code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">bash-3.1$ tr
 tr: two strings must be given when translating
 bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
 <span class="m">1</span>
-</code></pre></div>
-
-<p>But this also applies to pipes:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>bash-3.1$ tr<span class="p">|</span>tee <span class="m">1</span>.txt
+</code></pre></div><p>But this also applies to pipes:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">bash-3.1$ tr<span class="p">|</span>tee 1.txt
 tr: two strings must be given when translating
 bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
 <span class="m">0</span>
-</code></pre></div>
-
-<p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>bash-3.1$ <span class="nb">set</span> -o pipefail
-bash-3.1$ tr<span class="p">|</span>tee <span class="m">1</span>.txt
+</code></pre></div><p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">bash-3.1$ <span class="nb">set</span> -o pipefail
+bash-3.1$ tr<span class="p">|</span>tee 1.txt
 tr: two strings must be given when translating
 bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
 <span class="m">1</span>
-</code></pre></div>
-
-<p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
-
+</code></pre></div><p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
 <h2 id="set-builtin-reference">Set Builtin Reference</h2>
-
-<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin" target="_blank">Set Builtin</a>:</p>
-
-<h3 id="e">-e</h3>
-
+<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a>:</p>
+<h3 id="-e">-e</h3>
 <blockquote>
 <p>-e</p>
-
 <p>Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;&amp; or || list except the command following the final &amp;&amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.</p>
-
 <p>This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.</p>
-
 <p>If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.</p>
 </blockquote>
-
-<h3 id="o-pipefail">-o pipefail</h3>
-
+<h3 id="-o-pipefail">-o pipefail</h3>
 <blockquote>
 <p>-o pipefail</p>
-
 <p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p>
 </blockquote>
 
@@ -224,27 +206,6 @@ bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -261,9 +222,9 @@ bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -300,43 +261,43 @@ bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -348,21 +309,24 @@ bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

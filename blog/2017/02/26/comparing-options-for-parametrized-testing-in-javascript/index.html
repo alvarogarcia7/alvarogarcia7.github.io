@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Comparing options for parametrized testing in javascript</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,18 +145,12 @@
           
           
           
-          
-
-<p>We explore how to use parametrized tests (<a href="https://github.com/junit-team/junit4/wiki/Parameterized-tests" target="_blank">example in java</a>, <a href="https://jeremybytes.blogspot.co.uk/2014/10/parameterized-tests-with-nunit.html" target="_blank">example in c#</a>)</p>
-
+          <p>We explore how to use parametrized tests (<a href="https://github.com/junit-team/junit4/wiki/Parameterized-tests">example in java</a>, <a href="https://jeremybytes.blogspot.co.uk/2014/10/parameterized-tests-with-nunit.html">example in c#</a>)</p>
 <p>The tests are written using <code>mocha</code> syntax: <code>describe</code>, <code>it</code>. Using <code>chai</code> for expectations: <code>assert</code>.</p>
-
 <p>Note: the example used below (adding to an array) is simple enough to be understood by everybody, without having to explain the domain. The real tests can have a more complicated environment or domain. This is just an example.</p>
-
 <h2 id="using-a-custom-syntax">Using a custom syntax</h2>
-
 <p>This is just an example of some possible syntax, not using any (currently) existing framework.</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
   <span class="nx">newTestCase</span><span class="p">({</span><span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span>
                <span class="nx">input</span><span class="o">:</span> <span class="p">[],</span>
                <span class="nx">parameter</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -171,46 +165,38 @@
     <span class="nx">expect</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">testCase</span><span class="p">.</span><span class="nx">expected</span><span class="p">)</span>
   <span class="p">})</span>
 <span class="p">})</span>
-</code></pre></div>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th>Pros</th>
 <th>Cons</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>flexible</td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td>verbose</td>
 </tr>
-
 <tr>
 <td></td>
 <td>too close to the the real test syntax?</td>
 </tr>
-
 <tr>
 <td></td>
 <td>how to explain that the <code>it</code> will execute all test cases?</td>
 </tr>
-
 <tr>
 <td></td>
 <td>magic variable <code>testCase</code>: linting, editor complaining about it</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="using-an-in-place-executor">Using an in-place executor</h2>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
   <span class="kr">const</span> <span class="nx">runs</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span>
                <span class="nx">input</span><span class="o">:</span> <span class="p">[],</span>
                <span class="nx">parameter</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -227,51 +213,42 @@
     <span class="p">})</span>
   <span class="p">}</span>
 <span class="p">})</span>
-</code></pre></div>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th>Pros</th>
 <th>Cons</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>flexible</td>
 <td></td>
 </tr>
-
 <tr>
 <td>flexible to use any <code>testCase</code> variable name (e.g., <code>testCase</code>, <code>tC</code>, <code>run</code>)</td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td>verbose</td>
 </tr>
-
 <tr>
 <td>using the real test syntax</td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td>duplicate the test runner in every case</td>
 </tr>
-
 <tr>
 <td></td>
 <td>test-related features mixed with business/domain tests</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="using-it-damp">Using <code>it</code>, DAMP</h2>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
   <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="kr">const</span> <span class="nx">input</span><span class="o">=</span> <span class="p">[];</span>
     <span class="kr">const</span> <span class="nx">parameter</span><span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -288,42 +265,37 @@
     <span class="nx">expect</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
   <span class="p">});</span>
 <span class="p">});</span>
-</code></pre></div>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th>Pros</th>
 <th>Cons</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td></td>
 <td>one test per case</td>
 </tr>
-
 <tr>
 <td>the test is self-contained (DAMP)</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="using-it-dry">Using <code>it</code>, DRY</h2>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
   <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="kr">const</span> <span class="nx">input</span><span class="o">=</span> <span class="p">[];</span>
     <span class="kr">const</span> <span class="nx">parameter</span><span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
     <span class="kr">const</span> <span class="nx">expected</span><span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-    <span class="c1">// use explaining variables</span>
-    <span class="nx">pushingToMatches</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">,</span> <span class="nx">expected</span><span class="p">);</span>
+    <span class="c1">// use explaining variables
+</span><span class="c1"></span>    <span class="nx">pushingToMatches</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">,</span> <span class="nx">expected</span><span class="p">);</span>
   <span class="p">});</span>
 
   <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to a non-empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// not using explaining variables</span>
-    <span class="nx">pushingToMatches</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span>
+    <span class="c1">// not using explaining variables
+</span><span class="c1"></span>    <span class="nx">pushingToMatches</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span>
   <span class="p">});</span>
 
   <span class="kd">function</span> <span class="nx">pushingToMatches</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">,</span> <span class="nx">expected</span><span class="p">)</span> <span class="p">{</span>
@@ -331,52 +303,45 @@
     <span class="nx">expect</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th>Pros</th>
 <th>Cons</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td></td>
 <td>one test per case</td>
 </tr>
-
 <tr>
 <td>no repeated code</td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td>the testing method <code>pushingToMatches</code> requires access to all test inputs and outputs</td>
 </tr>
-
 <tr>
 <td></td>
 <td>the testing method <code>pushingToMatches</code> breaks the SRP: act and assert</td>
 </tr>
 </tbody>
 </table>
-
-<h2 id="using-it-dry-fluent">Using <code>it</code>, DRY+Fluent</h2>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+<h2 id="using-it-dryfluent">Using <code>it</code>, DRY+Fluent</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;adding to a list&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
   <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to an empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="kr">const</span> <span class="nx">input</span><span class="o">=</span> <span class="p">[];</span>
     <span class="kr">const</span> <span class="nx">parameter</span><span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
     <span class="kr">const</span> <span class="nx">expected</span><span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-    <span class="c1">// use explaining variables</span>
-    <span class="nx">pushingTo</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">).</span><span class="nx">matches</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
+    <span class="c1">// use explaining variables
+</span><span class="c1"></span>    <span class="nx">pushingTo</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">).</span><span class="nx">matches</span><span class="p">(</span><span class="nx">expected</span><span class="p">);</span>
   <span class="p">});</span>
 
   <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;to a non-empty list&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// not using explaining variables</span>
-    <span class="nx">pushingTo</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]).</span><span class="nx">matches</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span>
+    <span class="c1">// not using explaining variables
+</span><span class="c1"></span>    <span class="nx">pushingTo</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]).</span><span class="nx">matches</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span>
   <span class="p">});</span>
 
   <span class="kd">function</span> <span class="nx">pushingTo</span><span class="p">(</span><span class="nx">parameter</span><span class="p">,</span> <span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
@@ -384,54 +349,44 @@
     <span class="k">return</span> <span class="p">{</span><span class="nx">matches</span><span class="o">:</span> <span class="nx">expected</span> <span class="p">=&gt;</span> <span class="nx">expect</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">deep</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">expected</span><span class="p">)};</span>
   <span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div>
-
-<table>
+</code></pre></div><table>
 <thead>
 <tr>
 <th>Pros</th>
 <th>Cons</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td></td>
 <td>one test per case</td>
 </tr>
-
 <tr>
 <td>no repeated code</td>
 <td></td>
 </tr>
-
 <tr>
 <td>readable</td>
 <td></td>
 </tr>
-
 <tr>
 <td></td>
 <td>verbose, one test per case, when this could be expressed in some other way</td>
 </tr>
-
 <tr>
 <td></td>
 <td>the testing method <code>pushingTo</code> creates space for the difference in act and assert</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="sources">Sources</h2>
-
 <ul>
-<li><a href="https://rjzaworski.com/2013/01/parameterized-testing-in-javascript" target="_blank">https://rjzaworski.com/2013/01/parameterized-testing-in-javascript</a></li>
-<li><a href="http://www.adequatelygood.com/Writing-Testable-JavaScript.html" target="_blank">http://www.adequatelygood.com/Writing-Testable-JavaScript.html</a></li>
-<li>Example in java: <a href="https://github.com/junit-team/junit4/wiki/Parameterized-tests" target="_blank">here</a></li>
-<li>Example in C#: <a href="https://jeremybytes.blogspot.co.uk/2014/10/parameterized-tests-with-nunit.html" target="_blank">here</a></li>
+<li><a href="https://rjzaworski.com/2013/01/parameterized-testing-in-javascript">https://rjzaworski.com/2013/01/parameterized-testing-in-javascript</a></li>
+<li><a href="http://www.adequatelygood.com/Writing-Testable-JavaScript.html">http://www.adequatelygood.com/Writing-Testable-JavaScript.html</a></li>
+<li>Example in java: <a href="https://github.com/junit-team/junit4/wiki/Parameterized-tests">here</a></li>
+<li>Example in C#: <a href="https://jeremybytes.blogspot.co.uk/2014/10/parameterized-tests-with-nunit.html">here</a></li>
 </ul>
-
-<p>(This post is a modified version of the session available <a href="https://github.com/alvarogarcia7/javascript-simple-sessions/blob/master/parametrized-testing/ideas.md" target="_blank">here</a>)</p>
+<p>(This post is a modified version of the session available <a href="https://github.com/alvarogarcia7/javascript-simple-sessions/blob/master/parametrized-testing/ideas.md">here</a>)</p>
 
         </div>
         
@@ -462,27 +417,6 @@
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -499,9 +433,9 @@
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -538,43 +472,43 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -586,21 +520,24 @@
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

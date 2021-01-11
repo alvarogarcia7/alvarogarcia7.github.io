@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>The long way through Software Craftsmanship</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
-  
-  
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="The long way through Software Craftsmanship" />
 
-  <link href="https://alvarogarcia7.github.io/index.xml" rel="alternate" type="application/rss+xml" title="The long way through Software Craftsmanship" />
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -116,155 +116,16 @@
 </nav>
 
 
+
+
+  
+
 <div id="main">
- <div id="content">
-  <div class="blog-index">
-    
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/">Recognizing dependencies</a>
-    </h1>
-    <p >Aug 8, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/object/">object</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>From the Chapter 3, Managing Dependencies, from the book Practical Object-Oriented Design in Ruby, by Sandi Metz:
- An object has a dependency when it knows:
- The name of another class. [&hellip;] The name of a message that it intends to send to someone other than self. [&hellip;] The arguments that a message requires. [&hellip;] The order of those arguments. [&hellip;]   If an object knows any of these facts about another object, it has dependencies to the other.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/08/08/recognizing-dependencies/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple return values in a Mockito Stub</a>
-    </h1>
-    <p >Aug 7, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/mockito/">mockito</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/stub/">stub</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.
-package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; import static org.hamcrest.Matchers.is; import static org.mockito.Mockito.spy; import static org.mockito.Mockito.when; import org.junit.Test; import org.mockito.Spy; public class DifferentReturnValues { @Spy private Spike1 spike1 = new Spike1(); @Test public void spike1() { spike1 = spy(spike1); when(spike1.getBool()).thenReturn(false, true); assertThat(spike1.getBool(), is(false)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); } private class Spike1 { public boolean getBool() { return true; } } }  The key line is:</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/">Brown-bag session and Dojo: Beginning Clojure</a>
-    </h1>
-    <p >Aug 5, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/dojo/">dojo</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitator/">facilitator</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitation/">facilitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure-for-java-developer/">clojure-for-java-developer</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository/">repository</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>At a client, today I&rsquo;ve facilitated a brown-bag session introducing the Clojure language to a group of java programmers.
-I&rsquo;ve started hands-on, live coding on a REPL. To make things easier, I&rsquo;ve created a maven project that imports the clojure jar and lets you obtain dependencies from clojars. The repo is here. This repo wouldn&rsquo;t have been possible without the clojure maven plugin, written by Mark Derricutt.
-I&rsquo;ve more or less followed this guide</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/08/05/brown-bag-session-and-dojo-beginning-clojure/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/03/resources-for-java-9-beta/">Resources for Java 9 (beta)</a>
-    </h1>
-    <p >Aug 3, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/03/resources-for-java-9-beta/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/java-9/">java-9</a><a class="label" href="https://alvarogarcia7.github.io/categories/resource/">resource</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/tutorial/">tutorial</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>I&rsquo;ve found this list of links for Java 9, while in beta, useful:
- Contents of the new version Java REPL workshop, with useful commands and questions &amp; answers for installing the REPL REPL tutorial PDF Another getting started guide, by JClarity Yet another getting started guide, by Arun Gupta Information on the REPL project, (codenamed Kulla)  </p>
-
-          
-
-        
-
-    </article>
-    
-    <article>
-
+  <div id="content">
+    <div class="blog-index">
+      
+      
+      <article>
         
         
 
@@ -284,26 +145,21 @@ I&rsquo;ve more or less followed this guide</p>
     </p>
 </header>
 
-
         
           <p>Humble Object I&rsquo;ve read the Humble Object list of patterns, by Gerard Meszaros, including:
  humble dialog humble executable humble transaction controller humble container adapter  Tags: pattern, gerard-meszaros
 How you know I&rsquo;ve reread this small essay by Paul Graham on storing information in our heads, based on the context. On the importance of rereading, to add more contexts to the initial one.
 Tags: paul-graham, reread, read
 Protected Variation: The Importance of Being Closed I&rsquo;ve read this article by Craig Larman in the magazine IEEE Software &gt; Design.</p>
-
           
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/08/02/self-study-in-august-2015/" rel="full-article">Read On &rarr;</a>
-              </footer>
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/08/02/self-study-in-august-2015/" rel="full-article">Read On &rarr;</a>
+            </footer>
           
-
         
-
-    </article>
-    
-    <article>
-
+      </article>
+      
+      <article>
         
         
 
@@ -323,24 +179,140 @@ Protected Variation: The Importance of Being Closed I&rsquo;ve read this article
     </p>
 </header>
 
-
         
           <p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.
 This is how most of them look like:
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;groupId&gt;com.gmaur.legacycode&lt;/groupId&gt; &lt;artifactId&gt;legacyutils&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.hamcrest&lt;/groupId&gt; &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt; &lt;version&gt;1.3&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;4.11&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.mockito&lt;/groupId&gt; &lt;artifactId&gt;mockito-all&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;version&gt;2.0.2-beta&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.</p>
-
+&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;groupId&gt;com.gmaur.legacycode&lt;/groupId&gt; &lt;artifactId&gt;legacyutils&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.hamcrest&lt;/groupId&gt; &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt; &lt;version&gt;1.3&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;4.11&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.mockito&lt;/groupId&gt; &lt;artifactId&gt;mockito-all&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;version&gt;2.0.2-beta&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt; &lt;version&gt;2.</p>
           
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/" rel="full-article">Read On &rarr;</a>
-              </footer>
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/" rel="full-article">Read On &rarr;</a>
+            </footer>
           
-
+        
+      </article>
+      
+      <article>
+        
         
 
-    </article>
-    
-    
-    
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate values in Constants</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/duplicate/">duplicate</a><a class="label" href="https://alvarogarcia7.github.io/categories/gmaur/">gmaur</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a>
+        
+    </p>
+</header>
+
+        
+          <p>Imagine having this java class:
+private static class RepeatedConstants { public static final String A = &#34;A&#34;; public static final String A_1 = A; public static final String A_2 = &#34;A&#34;; public static final Integer _3 = 3; public static final Integer THREE = 3; } I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly.</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the same Import Order in IntelliJ IDEA as Eclipse&#39;s</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/intellij/">intellij</a><a class="label" href="https://alvarogarcia7.github.io/categories/eclipse/">eclipse</a><a class="label" href="https://alvarogarcia7.github.io/categories/ide/">ide</a><a class="label" href="https://alvarogarcia7.github.io/categories/editor/">editor</a><a class="label" href="https://alvarogarcia7.github.io/categories/import/">import</a>
+        
+    </p>
+</header>
+
+        
+          <p>Organize IntelliJ IDEA&rsquo;s import as Eclipse ones:
+While working at a client, where everyone is using eclipse, while I&rsquo;m using IntelliJ IDEA, there are subtle formatting differences. One of them is in the order of the imports.
+To solve it, see this link</p>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/">Exploring Testing with Java 8 Lambdas</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 4 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/draft/">draft</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a><a class="label" href="https://alvarogarcia7.github.io/categories/exploration/">exploration</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a>
+        
+    </p>
+</header>
+
+        
+          <p>At a client, we were testing a simple feature, but the resulting tests had much subtle repetition:
+(source code is here)
+@Test public void log_when_sending_greeting_letters() { sut.send(mock(GreetingLetter.class)); verify(logger).sentGreetingLetter(); } @Test public void log_when_sending_love_letters() { sut.send(mock(LoveLetter.class)); verify(logger).sentLoveLetter(); } and the production code:
+public class MailSender { private final EventLogger eventLogger; public MailSender (final EventLogger eventLogger) { this.eventLogger = eventLogger; } public void send (final GreetingLetter letter) { // more business logic 	eventLogger.</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/07/30/exploring-testing-with-java-8-lambdas/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/27/craftsmanship-analogy/">Craftsmanship analogy</a>
+    </h1>
+    <p >Jul 27, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/27/craftsmanship-analogy/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/sarah-mei/">sarah-mei</a><a class="label" href="https://alvarogarcia7.github.io/categories/stage/">stage</a>
+        
+    </p>
+</header>
+
+        
+          <p>I&rsquo;ve found this set of tweets about the craftsmanship analogy by Sarah Mei:</p>
+          
+        
+      </article>
+      
+      
+      
+
+
 
 
 
@@ -430,10 +402,6 @@ This is how most of them look like:
     
         <a href="/page/35/" class="label-pagination">35</a>
     
-        <a href="/page/36/" class="label-pagination">36</a>
-    
-        <a href="/page/37/" class="label-pagination">37</a>
-    
 
     
     
@@ -442,16 +410,14 @@ This is how most of them look like:
 
     
     
-        <a href="/page/37/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
 
   
-
-  </div>
-
-  
+    </div>
+    
 
 <aside class="sidebar thirds">
   <section class="first odd">
@@ -463,9 +429,9 @@ This is how most of them look like:
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -502,43 +468,43 @@ This is how most of them look like:
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -547,24 +513,27 @@ This is how most of them look like:
 
 </aside>
     
- </div>
+  </div>
 </div>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    
+    
+    
 
-</footer>
-
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
    
+

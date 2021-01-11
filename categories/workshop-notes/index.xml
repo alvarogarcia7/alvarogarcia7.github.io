@@ -1,55 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>The long way through Software Craftsmanship</title>
-    <link>https://alvarogarcia7.github.io/categories/workshop-notes/index.xml</link>
-    <description>Recent content on The long way through Software Craftsmanship</description>
+    <title>workshop-notes on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/workshop-notes/</link>
+    <description>Recent content in workshop-notes on The long way through Software Craftsmanship</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://alvarogarcia7.github.io/categories/workshop-notes/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 28 Jul 2016 19:28:19 +0000</lastBuildDate><atom:link href="https://alvarogarcia7.github.io/categories/workshop-notes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AWS Kinesis Zombieland</title>
       <link>https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/</link>
       <pubDate>Thu, 28 Jul 2016 19:28:19 +0000</pubDate>
       
       <guid>https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/</guid>
-      <description>
-
-&lt;p&gt;I attended a workshop on AWS Kinesis, called &lt;a href=&#34;http://capside.com/event/aws-kinesis-zombieland/&#34; target=&#34;_blank&#34;&gt;AWS Kinesis Zombieland&lt;/a&gt; by &lt;a href=&#34;https://twitter.com/ciberado&#34; target=&#34;_blank&#34;&gt;Javi Moreno&lt;/a&gt; at &lt;a href=&#34;http://capside.com/&#34; target=&#34;_blank&#34;&gt;capside&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
-
-&lt;p&gt;AWS Kinesis Zombieland&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;muy importante escoger bien la clave de particionado (id de shard)&lt;/li&gt;
-&lt;li&gt;KPL librería de kinesis que te permite hacer batching, timeout, &amp;hellip;
-
-&lt;ul&gt;
-&lt;li&gt;la otra se llama KCL.&lt;/li&gt;
-&lt;li&gt;KCL permite mantener estado&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;cuando te pidan una app de big data, pregunta para qué lo quieren, lo mismo que con cualquier proyecto de software&lt;/li&gt;
-&lt;li&gt;latitud = Y, longitud = x&lt;/li&gt;
-&lt;li&gt;el canal se llama stream, la capacidad se llama shard
-
-&lt;ul&gt;
-&lt;li&gt;el shard sólo permite 5 lecturas por segundo, 2MB/s&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;usar el shard como buffer&lt;/li&gt;
-&lt;li&gt;usar la clave de particionado como algoritmo de agregación&lt;/li&gt;
-&lt;li&gt;cada vez que tienes una tabla en dynamodb, tienes que poner una alerta de throughput&lt;/li&gt;
-&lt;li&gt;nota: lo que no puedes hacer es guardarlos todos y luego procesarlo. no tienes potencia para todo eso&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Preguntas:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;¿cómo se calcula el id del shard?
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>I attended a workshop on AWS Kinesis, called AWS Kinesis Zombieland by Javi Moreno at capside.
+Notes AWS Kinesis Zombieland
+ muy importante escoger bien la clave de particionado (id de shard) KPL librería de kinesis que te permite hacer batching, timeout, &amp;hellip;  la otra se llama KCL. KCL permite mantener estado   cuando te pidan una app de big data, pregunta para qué lo quieren, lo mismo que con cualquier proyecto de software latitud = Y, longitud = x el canal se llama stream, la capacidad se llama shard  el shard sólo permite 5 lecturas por segundo, 2MB/s   usar el shard como buffer usar la clave de particionado como algoritmo de agregación cada vez que tienes una tabla en dynamodb, tienes que poner una alerta de throughput nota: lo que no puedes hacer es guardarlos todos y luego procesarlo.</description>
     </item>
     
   </channel>

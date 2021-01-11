@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Two persons involved in a git commit, in github</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,21 +145,14 @@
           
           
           
-          
-
-<h2 id="on-git">On git</h2>
-
+          <h2 id="on-git">On git</h2>
 <p>You can have multiple persons involved in a single git commit: an author and a committer.</p>
-
-<p>The difference is explained by <a href="https://groups.google.com/forum/#!topic/repo-discuss/6aH9rH8nUdo" target="_blank">Manuel Doninger</a> <sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>:</p>
-
+<p>The difference is explained by <a href="https://groups.google.com/forum/#!topic/repo-discuss/6aH9rH8nUdo">Manuel Doninger</a> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
 <blockquote>
 <p>The author is the one who did the code change.
 The committer is the person who committed that change to a repository.</p>
 </blockquote>
-
 <p>an example, by the same author:</p>
-
 <blockquote>
 <p>Example: I&rsquo;m not a committer in the EGit project, so i have no rights
 to push directly to the EGit repository at Eclipse. But i contribute
@@ -168,57 +161,36 @@ change gets reviewed by the EGit team, and submitted, the committer
 field contains the name and email of the person who submitted the
 change</p>
 </blockquote>
-
 <h2 id="on-github">On github</h2>
-
 <p>This is represented in github with this format:</p>
-
 <p><img src="/uploads/commit-with-two-persons.png
-" alt="two persons involved" /></p>
-
+" alt="two persons involved"></p>
 <p>One of them is &ldquo;sharplet&rdquo; and the other one is &ldquo;gfontenot&rdquo;. Both are github users that match a github-registered mail.</p>
-
 <p>On a shallow inspection, the commit does not reveal anything special:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
 commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
 Author: XXXX &lt;xxxx@example.com&gt;
-Date:   Wed Dec <span class="m">2</span> <span class="m">14</span>:44:52 <span class="m">2015</span> +1100
+Date:   Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100
 
     Clarify specs by defining • as the composition operator
-</code></pre></div>
-
-<p>but looking a bit closer<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>,</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s2">&quot;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&quot;</span> <span class="p">|</span> less
-17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> <span class="m">14</span>:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> <span class="m">14</span>:44:52 +1100, <span class="m">3</span> months ago, <span class="m">1449027892</span>, <span class="m">2015</span>-12-02 <span class="m">14</span>:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> <span class="m">09</span>:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> <span class="m">09</span>:30:28 -0800, <span class="m">9</span> weeks ago, <span class="m">1450200628</span>, <span class="m">2015</span>-12-15 <span class="m">09</span>:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
-</code></pre></div>
-
-<p>or, just the emails:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s1">&#39;%ae %ce&#39;</span>
+</code></pre></div><p>but looking a bit closer<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>,</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s2">&#34;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&#34;</span> <span class="p">|</span> less
+17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> 14:44:52 +1100, <span class="m">3</span> months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> 09:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> 09:30:28 -0800, <span class="m">9</span> weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
+</code></pre></div><p>or, just the emails:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s1">&#39;%ae %ce&#39;</span>
 xxxx@example.com yyyy@example.com
-</code></pre></div>
-
-<h2 id="usage">Usage</h2>
-
+</code></pre></div><h2 id="usage">Usage</h2>
 <p>For a single commit:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span> git commit -m <span class="s2">&quot;...&quot;</span>
-</code></pre></div>
-
-<p>For a session:</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span> git commit -m <span class="s2">&#34;...&#34;</span>
+</code></pre></div><p>For a session:</p>
 <pre><code>export GIT_COMMITTER_NAME='John Doe'
 export GIT_COMMITTER_EMAIL='john@example.com'
-</code></pre>
-
-<p>Taken from <a href="http://stackoverflow.com/a/23108169/1181094" target="_blank">this StackOverflow answer</a></p>
-
+</code></pre><p>Taken from [this StackOverflow answer][how-to-use-it]</p>
 <p>This can be useful for a pairing session or for some kinds of git history rewrite.</p>
-
 <p>Update 2016-10: We have this script to make it easier to change.</p>
-
 <p>Use <code>pair_with</code> to pair with someone and <code>solo</code> to work on your own.</p>
-
 <p>Place this on your <code>~/.bashrc</code> or <code>~/.zshrc</code> or similar.</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">function</span> solo <span class="o">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> solo <span class="o">{</span>
   <span class="nb">unset</span> GIT_COMMITTER_NAME
   <span class="nb">unset</span> GIT_COMMITTER_EMAIL
 <span class="o">}</span>
@@ -229,24 +201,25 @@ export GIT_COMMITTER_EMAIL='john@example.com'
 <span class="o">}</span>
 
 <span class="k">function</span> pair_with_john <span class="o">{</span>
-    pair_with_ <span class="s2">&quot;John Doe&quot;</span> <span class="s2">&quot;jd@example.com&quot;</span>
+    pair_with_ <span class="s2">&#34;John Doe&#34;</span> <span class="s2">&#34;jd@example.com&#34;</span>
 <span class="o">}</span>
 
 ...
-</code></pre></div>
-
-<p>Update 2, 2016-10: This script also helps with managing the variables: <a href="https://github.com/git-duet/git-duet" target="_blank">git-duet</a>. Thanks <a href="https://twitter.com/dhatanian" target="_blank">David Hatanian</a> for the tip</p>
-<div class="footnotes">
-
-<hr />
-
+</code></pre></div><p>Update 2, 2016-10: This script also helps with managing the variables: [git-duet][git-duet]. Thanks [David Hatanian][dhatanian] for the tip</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">also explained in <a href="http://stackoverflow.com/questions/6755824/what-is-the-difference-between-author-and-committer-in-git" target="_blank">this StackOverflow post</a>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">this list has been generated from the available arguments at the <a href="https://git-scm.com/docs/git-log" target="_blank">&ldquo;pretty formats&rdquo; at the git-log page</a>
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>also explained in <a href="http://stackoverflow.com/questions/6755824/what-is-the-difference-between-author-and-committer-in-git">this StackOverflow post</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>this list has been generated from the available arguments at the <a href="https://git-scm.com/docs/git-log">&ldquo;pretty formats&rdquo; at the git-log page</a>
+[how-to-use-it]: <a href="http://stackoverflow.com/a/23108169/1181094">http://stackoverflow.com/a/23108169/1181094</a>
+[git-duet]: <a href="https://github.com/git-duet/git-duet">https://github.com/git-duet/git-duet</a>
+[dhatanian]: <a href="https://twitter.com/dhatanian">https://twitter.com/dhatanian</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
         
@@ -277,27 +250,6 @@ export GIT_COMMITTER_EMAIL='john@example.com'
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -314,9 +266,9 @@ export GIT_COMMITTER_EMAIL='john@example.com'
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -353,43 +305,43 @@ export GIT_COMMITTER_EMAIL='john@example.com'
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -401,21 +353,24 @@ export GIT_COMMITTER_EMAIL='john@example.com'
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

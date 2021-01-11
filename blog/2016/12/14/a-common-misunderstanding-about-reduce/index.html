@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>A common misunderstanding about `reduce`</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,52 +145,35 @@
           
           
           
-          
-
-<h3 id="misconception">Misconception</h3>
-
-<p>I&rsquo;ve read in several places that <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank"><code>reduce</code></a> reduces an array<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> of values to a single one. The main characteristic of this function is not to reduce to a &lsquo;smaller element&rsquo; / &lsquo;single element&rsquo;, but to have access to the accumulated results and the elements, one by one. Quoting Mozilla Developer Network&rsquo;s (MDN) Javascript reference:</p>
-
+          <h3 id="misconception">Misconception</h3>
+<p>I&rsquo;ve read in several places that <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce"><code>reduce</code></a> reduces an array<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> of values to a single one. The main characteristic of this function is not to reduce to a &lsquo;smaller element&rsquo; / &lsquo;single element&rsquo;, but to have access to the accumulated results and the elements, one by one. Quoting Mozilla Developer Network&rsquo;s (MDN) Javascript reference:</p>
 <blockquote>
 <p>The reduce() method applies a function against an accumulator and each value of the array (from left-to-right) to reduce it to a single value.</p>
-
-<p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank">Array.prototype.reduce()</a> at MDN</p>
+<p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">Array.prototype.reduce()</a> at MDN</p>
 </blockquote>
-
 <h3 id="examples">Examples</h3>
-
 <p>Note: the examples in this article are in Javascript.</p>
-
 <p>This is a simple example of such function:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span> <span class="p">};</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span> <span class="p">};</span>
 <span class="kc">undefined</span>
 <span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">sum</span><span class="p">)</span>
 <span class="mi">6</span>
-</code></pre></div>
-
-<p><code>reduce</code> can reduce a collection of elements to a single one. But this is not its defining characteristic. Let&rsquo;s see another example:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">append</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">accumulator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">accumulator</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span> <span class="k">return</span> <span class="nx">accumulator</span> <span class="p">};</span>
+</code></pre></div><p><code>reduce</code> can reduce a collection of elements to a single one. But this is not its defining characteristic. Let&rsquo;s see another example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">append</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">accumulator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">accumulator</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span> <span class="k">return</span> <span class="nx">accumulator</span> <span class="p">};</span>
 <span class="kc">undefined</span>
 <span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">append</span><span class="p">,</span> <span class="p">[])</span>
 <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
-</code></pre></div>
-
-<p>Note: this is a special case, where the elements are not altered by the <code>reduce</code>. Can be seen as the identity element for <code>reduce</code>.</p>
-
+</code></pre></div><p>Note: this is a special case, where the elements are not altered by the <code>reduce</code>. Can be seen as the identity element for <code>reduce</code>.</p>
 <p>This same behaviour can be reproduced with a <code>map</code>:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">identity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="p">;</span> <span class="p">};</span>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">identity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="p">;</span> <span class="p">};</span>
 <span class="kc">undefined</span>
 <span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">identity</span><span class="p">)</span>
 <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
-</code></pre></div>
-
-<p>An example that requires a <code>reduce</code> (and not a <code>map</code>) is <a href="https://clojuredocs.org/clojure.core/frequencies" target="_blank"><code>frequencies</code></a>. This function calculates the frequency of the elements in the collection:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="nx">frequencies</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div><p>An example that requires a <code>reduce</code> (and not a <code>map</code>) is <a href="https://clojuredocs.org/clojure.core/frequencies"><code>frequencies</code></a>. This function calculates the frequency of the elements in the collection:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&gt;</span> <span class="nx">frequencies</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="p">{</span> <span class="s1">&#39;1&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
-</code></pre></div>
-
-<p>Why not a <code>map</code>? Because you need to cumulate the results.</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">accumulator</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span> 
+</code></pre></div><p>Why not a <code>map</code>? Because you need to cumulate the results.</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&gt;</span> <span class="kd">let</span> <span class="nx">frequency</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">accumulator</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span> 
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">])</span> <span class="p">{</span>
     <span class="nx">accumulator</span><span class="p">[</span><span class="nx">element</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="p">}</span> 
@@ -202,18 +185,15 @@
   <span class="k">return</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">frequency</span><span class="p">,</span> <span class="p">{});</span>
 <span class="p">}</span>
 <span class="kc">undefined</span>
-</code></pre></div>
-
-<p>Identity element: <a href="https://en.wikipedia.org/wiki/Identity_element" target="_blank">https://en.wikipedia.org/wiki/Identity_element</a></p>
-<div class="footnotes">
-
-<hr />
-
+</code></pre></div><p>Identity element: <a href="https://en.wikipedia.org/wiki/Identity_element">https://en.wikipedia.org/wiki/Identity_element</a></p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">In fact, any type in the <code>Foldable</code> class in Haskell. The <code>reduce</code> function in Javascript is in the <code>Array</code> prototype (only). In Clojure, a set, a map, an array, a list can be <code>reduce</code>d.
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>In fact, any type in the <code>Foldable</code> class in Haskell. The <code>reduce</code> function in Javascript is in the <code>Array</code> prototype (only). In Clojure, a set, a map, an array, a list can be <code>reduce</code>d. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
         
@@ -244,27 +224,6 @@
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -281,9 +240,9 @@
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -320,43 +279,43 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -368,21 +327,24 @@
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

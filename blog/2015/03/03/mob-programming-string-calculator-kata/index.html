@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Mob programming String calculator kata</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,46 +145,35 @@
           
           
           
-          
-
-<p>Last Friday we did a kata<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> using a projector the string calculator <sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup> using pair programming, TDD and some mob-programming for the last refactoring.</p>
-
-<p>We used a projector (beamer) so everyone could see it. I tried to take really small baby steps but the adding part was done in ~6 cycles<sup class="footnote-ref" id="fnref:4"><a rel="footnote" href="#fn:4">3</a></sup></p>
-
-<p>We&rsquo;ve all learnt about shotcuts, live user templates for the IDE <sup class="footnote-ref" id="fnref:3"><a rel="footnote" href="#fn:3">4</a></sup>, TDD methodology, other ways of tackling the problem, how to refactor as a group, clean code, etc</p>
-
+          <p>Last Friday we did a kata<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> using a projector the string calculator <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> using pair programming, TDD and some mob-programming for the last refactoring.</p>
+<p>We used a projector (beamer) so everyone could see it. I tried to take really small baby steps but the adding part was done in ~6 cycles<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>We&rsquo;ve all learnt about shotcuts, live user templates for the IDE <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, TDD methodology, other ways of tackling the problem, how to refactor as a group, clean code, etc</p>
 <p>These sessions are necessary to share some knowledge among the teammates and have another chance of doing code review, releasing some pressure from daily practices or bad abstractions / designs (that will be taken care of in the future)</p>
-
 <p>We&rsquo;ve had such a great time, learning together, that would be a candidate for a weekly interaction.</p>
-
-<p><a href="http://en.wikipedia.org/wiki/Mob_programming" target="_blank">Mob programming</a> is such an eye opening practice. It forces you to reconsider your previous dogma and to understand the others&rsquo; positions. Wikipedia reads &ldquo;early use of phrase [&hellip;] was made in &lsquo;Extreme Programming Perspectives&rsquo;&rdquo; but this practice is practiced by some, such as <a href="https://twitter.com/carlosble" target="_blank">Carlos Blé</a>, <a href="https://twitter.com/sandromancuso" target="_blank">Sandro Mancuso</a> among others; also at the <a href="http://www.softwarecraftsmanshipbarcelona.org/" target="_blank">Software Craftsmanship Barcelona</a> <a href="https://twitter.com/hashtag/scbcn2013?src=hash" target="_blank">2013</a> and <a href="https://twitter.com/hashtag/SCBCN14?src=hash" target="_blank">2014</a> and the <a href="https://twitter.com/hashtag/socracan?src=hash" target="_blank">SoCra Canaries 2015</a></p>
-
+<p><a href="http://en.wikipedia.org/wiki/Mob_programming">Mob programming</a> is such an eye opening practice. It forces you to reconsider your previous dogma and to understand the others' positions. Wikipedia reads &ldquo;early use of phrase [&hellip;] was made in &lsquo;Extreme Programming Perspectives&rsquo;&rdquo; but this practice is practiced by some, such as <a href="https://twitter.com/carlosble">Carlos Blé</a>, <a href="https://twitter.com/sandromancuso">Sandro Mancuso</a> among others; also at the <a href="http://www.softwarecraftsmanshipbarcelona.org/">Software Craftsmanship Barcelona</a> <a href="https://twitter.com/hashtag/scbcn2013?src=hash">2013</a> and <a href="https://twitter.com/hashtag/SCBCN14?src=hash">2014</a> and the <a href="https://twitter.com/hashtag/socracan?src=hash">SoCra Canaries 2015</a></p>
 <h2 id="one-goal">One goal</h2>
-
 <p>Our goal for this session was to practice TDD and baby steps, so the team can improve its ability on these skills.</p>
-
 <p>In any case, my objective for the katas (or deliberate practice) is not to get there as fast as we can but to improve our automated routines. This can affect our daily performance, as it becomes natural. It is not about the getting to the destination but enjoying the path along the way. In this manner, you are not so hurried up about a slow train but enjoy the views across the window.</p>
-
 <p>It was good that QA people in the team came to the session. He even participated with some tips / implementations during the refactors. Always fruitful to discuss (and learn) mixed skills (QA / dev) from the other side of the wall</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>I still haven&rsquo;t mastered the recipe (algorithm) for knowing when it is a scaffold and when it&rsquo;s time to refactor using &ldquo;replace algorithm&rdquo;. For know, I just use the three (3) rule and a bit of gut feeling on the side. The bad thing is that this can not be easily taught to someone else. Just learnt by osmosis and practice.</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">matching none of the styles explained in <a href="http://johannesbrodwall.com/2011/12/18/how-to-start-a-coding-dojo/" target="_blank">here</a>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">This is a very good beginner&rsquo;s kata, created by <a href="https://twitter.com/royosherove" target="_blank">Roy Osherove</a>. Can be found <a href="http://osherove.com/tdd-kata-1/" target="_blank">here</a>
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
-<li id="fn:4">One piece of feedback I received is that I talk too much while coding, as these 6 cycles took us about 45 minutes, total
- <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
-<li id="fn:3">There are some for <a href="https://www.jetbrains.com/idea/help/live-templates.html" target="_blank">IntelliJ IDEA</a>, <a href="http://stackoverflow.com/questions/4022367/what-is-the-eclipse-equivalent-of-intellij-live-templates" target="_blank">Eclipse</a> too
- <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>matching none of the styles explained in <a href="http://johannesbrodwall.com/2011/12/18/how-to-start-a-coding-dojo/">here</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>This is a very good beginner&rsquo;s kata, created by <a href="https://twitter.com/royosherove">Roy Osherove</a>. Can be found <a href="http://osherove.com/tdd-kata-1/">here</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>One piece of feedback I received is that I talk too much while coding, as these 6 cycles took us about 45 minutes, total <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>There are some for <a href="https://www.jetbrains.com/idea/help/live-templates.html">IntelliJ IDEA</a>, <a href="http://stackoverflow.com/questions/4022367/what-is-the-eclipse-equivalent-of-intellij-live-templates">Eclipse</a> too <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
         
@@ -215,27 +204,6 @@
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -252,9 +220,9 @@
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -291,43 +259,43 @@
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -339,21 +307,24 @@
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 

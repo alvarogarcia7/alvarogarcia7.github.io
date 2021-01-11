@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
   
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
   
-  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
 
   
   <title>Convert a project from npm to yarn</title>
 
   
   
-  <link rel="stylesheet" href="https://alvarogarcia7.github.io/css/hugo-octopress.css">
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
 
   
   
 
   
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
 
   
   <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
 
   
   
-  
 
-  
-
-  <meta name="description" content="">
+  <meta name="description" content="" />
   <meta name="keywords" content="">
-
   <meta name="author" content="Alvaro Garcia">
 
   
-  <meta name="generator" content="Hugo 0.17" />
+  <meta name="generator" content="Hugo 0.76.5" />
 
   
   
 
+  
+  
 </head>
 <body>
 
 
-<header role="banner"><hgroup>
+<header role="banner">
+<hgroup>
   
   <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
     <h2></h2>
@@ -145,55 +145,36 @@
           
           
           
-          
-
-<p>At a  client, we&rsquo;re converting all projects (i.e., sites, services, libraries) from <code>npm</code> to <code>yarn</code>. Mostly for the speed (as it uses the internal cache).</p>
-
+          <p>At a  client, we&rsquo;re converting all projects (i.e., sites, services, libraries) from <code>npm</code> to <code>yarn</code>. Mostly for the speed (as it uses the internal cache).</p>
 <h2 id="step-by-step-guide">Step by step guide</h2>
-
 <ol>
 <li>Install yarn in your local environment
-
-<ul>
-<li><a href="https://yarnpkg.com/lang/en/docs/install/" target="_blank">https://yarnpkg.com/lang/en/docs/install/</a></li>
-</ul></li>
+* <a href="https://yarnpkg.com/lang/en/docs/install/">https://yarnpkg.com/lang/en/docs/install/</a></li>
 <li>Run <code>yarn install</code>
-
-<ul>
-<li>This will create a <code>yarn.lock</code> file</li>
-<li>Add that file to the repo: <code>git add yarn.lock</code></li>
-</ul></li>
+* This will create a <code>yarn.lock</code> file
+* Add that file to the repo: <code>git add yarn.lock</code></li>
 <li>Modify Dockerfile
-
-<ul>
-<li>Install yarn  (in the Dockerfile). Idea: shortcut this execution with <code>yarn --version</code> in case it is installed</li>
-<li>Configure the PATH variable (ENV PATH &hellip;)</li>
-<li><code>ADD yarn.lock</code></li>
-<li>Replace <code>npm install</code> with <code>yarn install</code></li>
-</ul></li>
+* Install yarn  (in the Dockerfile). Idea: shortcut this execution with <code>yarn --version</code> in case it is installed
+* Configure the PATH variable (ENV PATH &hellip;)
+* <code>ADD yarn.lock</code>
+* Replace <code>npm install</code> with <code>yarn install</code></li>
 <li>Modify pipeline
-
-<ul>
-<li>See example (below)</li>
-<li><code>install_yarn</code>. Idea: shortcut this execution with <code>yarn --version</code> in case it is installed</li>
-<li>Replace <code>npm install</code> with <code>yarn install</code></li>
-</ul></li>
+* See example (below)
+* <code>install_yarn</code>. Idea: shortcut this execution with <code>yarn --version</code> in case it is installed
+* Replace <code>npm install</code> with <code>yarn install</code></li>
 <li>Test it</li>
 </ol>
-
 <h2 id="jenkins">Jenkins</h2>
-
 <p>Build step: execute shell</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">function</span> install_yarn <span class="o">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> install_yarn <span class="o">{</span>
   yarn --version <span class="o">||</span> curl -o- -L https://yarnpkg.com/install.sh <span class="p">|</span> bash
-  <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.yarn/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+  <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.yarn/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>
 <span class="o">}</span>
 
 install_yarn
 
 yarn install
 </code></pre></div>
-
         </div>
         
 
@@ -223,27 +204,6 @@ yarn install
     
   </p>
   
-    
-      <div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    
-    
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'thelongwaythroughsoftwarecraftsmanship';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    
-  
 </footer>
 
       </article>
@@ -260,9 +220,9 @@ yarn install
     <p>
       
         This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
-        <br>
-        <br>
-         You can find me on:
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
       
     </p>
   </section>
@@ -299,43 +259,43 @@ yarn install
       <ul id="recent_posts">
         
           <li class="post">
+            <a href="/categories/2020/">2020</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/book/">book</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/09/30/books-read-2020q9/">Books read in 2019Q2</a>
+            <a href="/categories/">Categories</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+            <a href="/categories/q4/">Q4</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+            <a href="/categories/reading/">reading</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+            <a href="/categories/reading-club/">reading-club</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+            <a href="/categories/self-study/">self-study</a>
           </li>
         
           <li class="post">
-            <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/07/01/self-study-july-2019/">Self-Study in July 2019</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/2019/06/30/books-read-2019q2/">Books read in 2019Q2</a>
+            <a href="/">The long way through Software Craftsmanship</a>
           </li>
         
       </ul>
@@ -347,21 +307,24 @@ yarn install
   </div>
 </div>
 
-<footer role="contentinfo">
-  <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
-  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
-</p>
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</footer>
+    
+    
+    
 
-
-<script>
-  var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-</body>
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
 </html>
 
