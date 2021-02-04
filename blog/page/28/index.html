@@ -129,6 +129,55 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/">Annotations and Aspects in Java</a>
+    </h1>
+    <p >Apr 21, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/04/21/annotations-and-aspects-in-java/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/aspect/">aspect</a><a class="label" href="https://alvarogarcia7.github.io/categories/aspectj/">aspectj</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/annotation/">annotation</a><a class="label" href="https://alvarogarcia7.github.io/categories/snippet/">snippet</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I&rsquo;ve written a sample project with an annotation and an aspect to intercept it and decorate it.</p>
+<p>The code provides a way of doing <code>try|catch</code>, specifying an exception to be caught.</p>
+<p>The source code is available <a href="https://github.com/alvarogarcia7/annotation-aspect-java">here</a></p>
+<h2 id="in-the-process">In the process</h2>
+<p>This has taken me approximately one hour to prepare the spike and half more to refactor and massage a bit.</p>
+<p>If you want to see the raw details, the refactor has been committed step by step (the spike hasn&rsquo;t). The unmassaged code can be found <a href="https://github.com/alvarogarcia7/annotation-aspect-java/tree/d5e61ca56a38b1611c9acaa61a2e169b14d19d1e">here</a>. The massaged version is at the <a href="https://github.com/alvarogarcia7/annotation-aspect-java/">tip of the arrow</a></p>
+<h2 id="more-information">More information</h2>
+<p>Regarding <code>annotations</code> (like @Override):</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/annotations/">This official article</a> on annotations is useful.</li>
+<li><a href="http://www.vogella.com/tutorials/JavaAnnotations/article.html">This article</a> by Lars Vogel guides you step by step.</li>
+<li><a href="http://tutorials.jenkov.com/java/annotations.html">This article</a> by Jakov Jenkov is very nice.</li>
+<li><a href="http://crunchify.com/understanding-java-annotation-annotation-examples/">This article</a> helps you to understand what an annotation is and what to use it for.</li>
+</ul>
+<p>Regarding <code>aspect</code> (based on AspectJ):</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/14714092/spring-3-2-aop-intercepting-methods-by-annotation">This question</a> has been my main source of information / inspiration for the spring + aspectj configuration</li>
+</ul>
+<h2 id="conclusions">Conclusions</h2>
+<p>One of the drawbacks that I find to common examples or tutorials is that they&rsquo;re not complete. They show you part of the information, but not the whole. While this helps most of the readers, there are library incompatibilities, defects, specific versions, etc. This is why I like to post the whole solution, including <code>pom.xml</code> (dependencies) and tests.</p>
+<p>Having less documentation for developers can be acceptable if you have tests / more tests; of course, as long as other developers can follow your thought while developing.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/">Logging is a feature</a>
     </h1>
     <p >Apr 19, 2015
@@ -484,74 +533,6 @@ x: 5 y: 7 point: {:x 5, :y 7}
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a new TDD phase</a>
-    </h1>
-    <p >Apr 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/redesign/">redesign</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
-<h2 id="concept">Concept</h2>
-<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, it is a phase that might appear after refactor.</p>
-<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
-<h2 id="how-i-do-redesign">How I do redesign</h2>
-<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
-<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
-<h2 id="other-thoughts">Other thoughts</h2>
-<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
-<blockquote>
-<p>to change the design of (something)</p>
-</blockquote>
-<p>or</p>
-<blockquote>
-<p>to revise in appearance, function, or content</p>
-</blockquote>
-<p>an example:</p>
-<blockquote>
-<p>The book&rsquo;s cover has been redesigned for the new edition.</p>
-</blockquote>
-<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
-<blockquote>
-<p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p>
-</blockquote>
-<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
-<h2 id="other-references">Other references</h2>
-<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
-<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
-<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-
-        
-
-    </article>
-    
     
     
 
@@ -717,6 +698,26 @@ You can find me on:
           </li>
         
           <li class="post">
+            <a href="/categories/2021/">2021</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/acquisition-of-skill/">acquisition-of-skill</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/analogy/">analogy</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/andre-schweighofer/">andre-schweighofer</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/aquiles-carattino/">aquiles-carattino</a>
+          </li>
+        
+          <li class="post">
             <a href="/blog/">Blogs</a>
           </li>
         
@@ -725,31 +726,11 @@ You can find me on:
           </li>
         
           <li class="post">
-            <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
+            <a href="/categories/book-writing/">book-writing</a>
           </li>
         
           <li class="post">
-            <a href="/categories/">Categories</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/q4/">Q4</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/reading/">reading</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/reading-club/">reading-club</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/self-study/">self-study</a>
-          </li>
-        
-          <li class="post">
-            <a href="/">The long way through Software Craftsmanship</a>
+            <a href="/categories/career/">career</a>
           </li>
         
       </ul>
