@@ -129,6 +129,109 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two persons involved in a git commit, in github</a>
+    </h1>
+    <p >Feb 14, 2016
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/how-to/">how-to</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/committer/">committer</a><a class="label" href="https://alvarogarcia7.github.io/categories/author/">author</a>
+        
+    </p>
+</header>
+
+
+        
+        <h2 id="on-git">On git</h2>
+<p>You can have multiple persons involved in a single git commit: an author and a committer.</p>
+<p>The difference is explained by <a href="https://groups.google.com/forum/#!topic/repo-discuss/6aH9rH8nUdo">Manuel Doninger</a> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
+<blockquote>
+<p>The author is the one who did the code change.
+The committer is the person who committed that change to a repository.</p>
+</blockquote>
+<p>an example, by the same author:</p>
+<blockquote>
+<p>Example: I&rsquo;m not a committer in the EGit project, so i have no rights
+to push directly to the EGit repository at Eclipse. But i contribute
+to EGit, so my changes have the author set to my name and email. If my
+change gets reviewed by the EGit team, and submitted, the committer
+field contains the name and email of the person who submitted the
+change</p>
+</blockquote>
+<h2 id="on-github">On github</h2>
+<p>This is represented in github with this format:</p>
+<p><img src="/uploads/commit-with-two-persons.png
+" alt="two persons involved"></p>
+<p>One of them is &ldquo;sharplet&rdquo; and the other one is &ldquo;gfontenot&rdquo;. Both are github users that match a github-registered mail.</p>
+<p>On a shallow inspection, the commit does not reveal anything special:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
+commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
+Author: XXXX &lt;xxxx@example.com&gt;
+Date:   Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100
+
+    Clarify specs by defining • as the composition operator
+</code></pre></div><p>but looking a bit closer<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>,</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s2">&#34;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&#34;</span> <span class="p">|</span> less
+17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> 14:44:52 +1100, <span class="m">3</span> months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> 09:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> 09:30:28 -0800, <span class="m">9</span> weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
+</code></pre></div><p>or, just the emails:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s1">&#39;%ae %ce&#39;</span>
+xxxx@example.com yyyy@example.com
+</code></pre></div><h2 id="usage">Usage</h2>
+<p>For a single commit:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span> git commit -m <span class="s2">&#34;...&#34;</span>
+</code></pre></div><p>For a session:</p>
+<pre><code>export GIT_COMMITTER_NAME='John Doe'
+export GIT_COMMITTER_EMAIL='john@example.com'
+</code></pre><p>Taken from [this StackOverflow answer][how-to-use-it]</p>
+<p>This can be useful for a pairing session or for some kinds of git history rewrite.</p>
+<p>Update 2016-10: We have this script to make it easier to change.</p>
+<p>Use <code>pair_with</code> to pair with someone and <code>solo</code> to work on your own.</p>
+<p>Place this on your <code>~/.bashrc</code> or <code>~/.zshrc</code> or similar.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> solo <span class="o">{</span>
+  <span class="nb">unset</span> GIT_COMMITTER_NAME
+  <span class="nb">unset</span> GIT_COMMITTER_EMAIL
+<span class="o">}</span>
+
+<span class="k">function</span> pair_with_ <span class="o">{</span>
+  <span class="nb">export</span> <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="nv">$1</span>
+  <span class="nb">export</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="nv">$2</span>
+<span class="o">}</span>
+
+<span class="k">function</span> pair_with_john <span class="o">{</span>
+    pair_with_ <span class="s2">&#34;John Doe&#34;</span> <span class="s2">&#34;jd@example.com&#34;</span>
+<span class="o">}</span>
+
+...
+</code></pre></div><p>Update 2, 2016-10: This script also helps with managing the variables: [git-duet][git-duet]. Thanks [David Hatanian][dhatanian] for the tip</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>also explained in <a href="http://stackoverflow.com/questions/6755824/what-is-the-difference-between-author-and-committer-in-git">this StackOverflow post</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>this list has been generated from the available arguments at the <a href="https://git-scm.com/docs/git-log">&ldquo;pretty formats&rdquo; at the git-log page</a>
+[how-to-use-it]: <a href="http://stackoverflow.com/a/23108169/1181094">http://stackoverflow.com/a/23108169/1181094</a>
+[git-duet]: <a href="https://github.com/git-duet/git-duet">https://github.com/git-duet/git-duet</a>
+[dhatanian]: <a href="https://twitter.com/dhatanian">https://twitter.com/dhatanian</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/02/01/self-study-in-february-2016/">Self-Study in February 2016</a>
     </h1>
     <p >Feb 1, 2016
@@ -917,50 +1020,6 @@ see how services connect to each other based on logs instead of based on documen
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: automate the blog publishing</a>
-    </h1>
-    <p >Dec 2, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/blog/">blog</a><a class="label" href="https://alvarogarcia7.github.io/categories/travis/">travis</a><a class="label" href="https://alvarogarcia7.github.io/categories/ci/">ci</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>I&rsquo;ve automated the generation of the blog using <a href="https://travis-ci.org/">Travis CI</a>. Using this new way, each commit generates a new version of the pages.</p>
-<p>These resources have been very useful:</p>
-<ul>
-<li><a href="http://darvin.github.io/2013/01/13/Prose_Octopress_TravisIO">Prose.io + Octopress + Travis-CI + GitHub Pages = ♥</a>. First post (in this set) that explains how this automation is possible</li>
-<li><a href="https://harimenon.com/blog/2013/01/27/auto-deploying-to-my-octopress-blog/">Auto-deploying to My Octopress Blog With Travis-CI</a>. Explains how to generate your key, encript it with travis</li>
-<li><a href="http://blog.yasuoza.com/2014/01/13/octopress-plus-github-pages-plus-travis/">Octopress + GitHub Pages + Travis</a>: The most useful page, explains step by step what to do for mac and linux.</li>
-<li><a href="https://disqus.com/home/discussion/codez/octopressprosegithubtravis_ci_coders_blog_human_not_octopus/">Octopress+Prose+Github+Travis CI = coders' blog - Human, not octopus</a>.Altough the page is not available anymore, this discussion explains why it is safe to store your private key in the file <code>.travis.yml</code>.</li>
-</ul>
-<p><a href="https://github.com/floydpink?tab=repositories">An example</a> of the resulting repository, by <a href="https://github.com/floydpink">Hari Menon</a>.</p>
-<h2 id="my-own-modifications">My own modifications</h2>
-<p>The full diff for making this change is <a href="https://github.com/alvarogarcia7/blog_source/compare/8414267a1e8e1f0ef588602121f32da3f6eb9f9e...9f60c76d6d9faca8cff8bce2f0a00bf8f2eafb30">here</a>. Disregard the changes in:</p>
-<ul>
-<li><code>partial/1444939871_diff.txt</code></li>
-<li><code>partial/1444939871_msg.txt</code></li>
-<li><code>source/_posts/2015-12-02-self-study-in-december-2015.markdown</code></li>
-</ul>
-
-        
-
-    </article>
-    
     
     
 
@@ -1122,11 +1181,35 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
-            <a href="/categories/2020/">2020</a>
+            <a href="/categories/2021/">2021</a>
           </li>
         
           <li class="post">
-            <a href="/categories/2021/">2021</a>
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/">Categories</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/live-article/">live-article</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/mma/">mma</a>
+          </li>
+        
+          <li class="post">
+            <a href="/">The long way through Software Craftsmanship</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/2020/">2020</a>
           </li>
         
           <li class="post">
@@ -1135,30 +1218,6 @@ You can find me on:
         
           <li class="post">
             <a href="/categories/analogy/">analogy</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/andre-schweighofer/">andre-schweighofer</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/aquiles-carattino/">aquiles-carattino</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/">Blogs</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/book/">book</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/book-writing/">book-writing</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/career/">career</a>
           </li>
         
       </ul>

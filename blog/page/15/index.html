@@ -129,6 +129,76 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/">Faster site generation with a native Octopress 2</a>
+    </h1>
+    <p >Apr 17, 2016
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/native-octopress/">native-octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/rakefile/">rakefile</a><a class="label" href="https://alvarogarcia7.github.io/categories/reinventing-the-wheel/">reinventing-the-wheel</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Note: this article is an answer to <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a previous one</a>, about the same topic: a tool for a faster site generation while developing / writing articles, using octopress 2.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles:</p>
+<p>Isolate a post:</p>
+<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># usage rake isolate[my-post]</span>
+<span class="n">desc</span> <span class="s2">&#34;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&#34;</span>
+<span class="n">task</span> <span class="ss">:isolate</span><span class="p">,</span> <span class="ss">:filename</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+  <span class="n">stash_dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">&#34;</span>
+  <span class="no">FileUtils</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span> <span class="k">unless</span> <span class="no">File</span><span class="o">.</span><span class="n">exist?</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span>
+  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/*.*&#34;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+    <span class="nb">system</span> <span class="s2">&#34;git update-index --assume-unchanged </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">&#34;</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">stash_dir</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div><p>Integrate with the rest of the posts:</p>
+<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">desc</span> <span class="s2">&#34;Move all stashed posts back into the posts directory, ready for site generation.&#34;</span>
+<span class="n">task</span> <span class="ss">:integrate</span> <span class="k">do</span>
+  <span class="n">posts_dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/&#34;</span>
+  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">/*.*&#34;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">posts_dir</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">reverse</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&#34;</span>
+    <span class="nb">system</span> <span class="s2">&#34;git update-index --no-assume-unchanged </span><span class="si">#{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">&#34;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div><h2 id="usage">Usage</h2>
+<p>(at the folder where the Rakefile is located)</p>
+<ul>
+<li>isolate the selected file. Specify the pattern to keep.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rake isolate<span class="o">[</span><span class="s2">&#34;draft&#34;</span><span class="o">]</span>
+</code></pre></div><ul>
+<li>write the new content</li>
+<li>commit to git</li>
+<li>integrate with the rest of the files</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rake integrate
+</code></pre></div><ul>
+<li>git push</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>When I needed this tool, to speed up my feedback cycle, I didn&rsquo;t find any that did this job, so I created <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a small tool for this same purpose</a>. Unfortunately, there was one, so close to my nose that I could not find it. I was reinventing the wheel.</p>
+<p>It is better to switch to a tool that has been tested by more users, that has received the community&rsquo;s approval than a custom-made tool.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2016/04/01/self-study/">Self-Study in April 2016</a>
     </h1>
     <p >Apr 1, 2016
@@ -664,109 +734,6 @@ modifiers can manipulate the block so that we can theme or style that particular
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/">Two persons involved in a git commit, in github</a>
-    </h1>
-    <p >Feb 14, 2016
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/02/14/two-persons-involved-in-a-git-commit/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/how-to/">how-to</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/committer/">committer</a><a class="label" href="https://alvarogarcia7.github.io/categories/author/">author</a>
-        
-    </p>
-</header>
-
-
-        
-        <h2 id="on-git">On git</h2>
-<p>You can have multiple persons involved in a single git commit: an author and a committer.</p>
-<p>The difference is explained by <a href="https://groups.google.com/forum/#!topic/repo-discuss/6aH9rH8nUdo">Manuel Doninger</a> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
-<blockquote>
-<p>The author is the one who did the code change.
-The committer is the person who committed that change to a repository.</p>
-</blockquote>
-<p>an example, by the same author:</p>
-<blockquote>
-<p>Example: I&rsquo;m not a committer in the EGit project, so i have no rights
-to push directly to the EGit repository at Eclipse. But i contribute
-to EGit, so my changes have the author set to my name and email. If my
-change gets reviewed by the EGit team, and submitted, the committer
-field contains the name and email of the person who submitted the
-change</p>
-</blockquote>
-<h2 id="on-github">On github</h2>
-<p>This is represented in github with this format:</p>
-<p><img src="/uploads/commit-with-two-persons.png
-" alt="two persons involved"></p>
-<p>One of them is &ldquo;sharplet&rdquo; and the other one is &ldquo;gfontenot&rdquo;. Both are github users that match a github-registered mail.</p>
-<p>On a shallow inspection, the commit does not reveal anything special:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --full-diff
-commit 17a96dba38479de78cdb3b3aae1c802f4d54f485
-Author: XXXX &lt;xxxx@example.com&gt;
-Date:   Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100
-
-    Clarify specs by defining • as the composition operator
-</code></pre></div><p>but looking a bit closer<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>,</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s2">&#34;%H, %h, %T, %t, %P, %p, %an, %aN, %ae, %aE, %ad, %aD, %ar, %at, %ai, %cn, %cN, %ce, %cE, %cd, %cD, %cr, %ct, %ci, %cI, %d, %D, %e, %s, %f, %b, %B&#34;</span> <span class="p">|</span> less
-17a96dba38479de78cdb3b3aae1c802f4d54f485, 17a96db, 6bc2a33e3a069b78b9fd36124f5ed039a125303e, 6bc2a33, 29488bc0be27c5c03b6af7d115c7d45645382a7a, 29488bc, XXXX, XXXX, xxxx@example.com, xxxx@example.com, Wed Dec <span class="m">2</span> 14:44:52 <span class="m">2015</span> +1100, Wed, <span class="m">2</span> Dec <span class="m">2015</span> 14:44:52 +1100, <span class="m">3</span> months ago, 1449027892, 2015-12-02 14:44:52 +1100, YYYY, YYYY, yyyy@example.com, yyyy@example.com, Tue Dec <span class="m">15</span> 09:30:28 <span class="m">2015</span> -0800, Tue, <span class="m">15</span> Dec <span class="m">2015</span> 09:30:28 -0800, <span class="m">9</span> weeks ago, 1450200628, 2015-12-15 09:30:28 -0800, %cI, , %D, , Clarify specs by defining • as the composition operator, Clarify-specs-by-defining-as-the-composition-operator, , Clarify specs by defining • as the composition operator
-</code></pre></div><p>or, just the emails:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ g log 17a96dba38479de78cdb3b3aae1c802f4d54f485 -n1 --dense --full-diff --format<span class="o">=</span><span class="s1">&#39;%ae %ce&#39;</span>
-xxxx@example.com yyyy@example.com
-</code></pre></div><h2 id="usage">Usage</h2>
-<p>For a single commit:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span> git commit -m <span class="s2">&#34;...&#34;</span>
-</code></pre></div><p>For a session:</p>
-<pre><code>export GIT_COMMITTER_NAME='John Doe'
-export GIT_COMMITTER_EMAIL='john@example.com'
-</code></pre><p>Taken from [this StackOverflow answer][how-to-use-it]</p>
-<p>This can be useful for a pairing session or for some kinds of git history rewrite.</p>
-<p>Update 2016-10: We have this script to make it easier to change.</p>
-<p>Use <code>pair_with</code> to pair with someone and <code>solo</code> to work on your own.</p>
-<p>Place this on your <code>~/.bashrc</code> or <code>~/.zshrc</code> or similar.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> solo <span class="o">{</span>
-  <span class="nb">unset</span> GIT_COMMITTER_NAME
-  <span class="nb">unset</span> GIT_COMMITTER_EMAIL
-<span class="o">}</span>
-
-<span class="k">function</span> pair_with_ <span class="o">{</span>
-  <span class="nb">export</span> <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="nv">$1</span>
-  <span class="nb">export</span> <span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="nv">$2</span>
-<span class="o">}</span>
-
-<span class="k">function</span> pair_with_john <span class="o">{</span>
-    pair_with_ <span class="s2">&#34;John Doe&#34;</span> <span class="s2">&#34;jd@example.com&#34;</span>
-<span class="o">}</span>
-
-...
-</code></pre></div><p>Update 2, 2016-10: This script also helps with managing the variables: [git-duet][git-duet]. Thanks [David Hatanian][dhatanian] for the tip</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>also explained in <a href="http://stackoverflow.com/questions/6755824/what-is-the-difference-between-author-and-committer-in-git">this StackOverflow post</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>this list has been generated from the available arguments at the <a href="https://git-scm.com/docs/git-log">&ldquo;pretty formats&rdquo; at the git-log page</a>
-[how-to-use-it]: <a href="http://stackoverflow.com/a/23108169/1181094">http://stackoverflow.com/a/23108169/1181094</a>
-[git-duet]: <a href="https://github.com/git-duet/git-duet">https://github.com/git-duet/git-duet</a>
-[dhatanian]: <a href="https://twitter.com/dhatanian">https://twitter.com/dhatanian</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-
-        
-
-    </article>
-    
     
     
 
@@ -928,11 +895,35 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
-            <a href="/categories/2020/">2020</a>
+            <a href="/categories/2021/">2021</a>
           </li>
         
           <li class="post">
-            <a href="/categories/2021/">2021</a>
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/">Categories</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/live-article/">live-article</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/mma/">mma</a>
+          </li>
+        
+          <li class="post">
+            <a href="/">The long way through Software Craftsmanship</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/2020/">2020</a>
           </li>
         
           <li class="post">
@@ -941,30 +932,6 @@ You can find me on:
         
           <li class="post">
             <a href="/categories/analogy/">analogy</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/andre-schweighofer/">andre-schweighofer</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/aquiles-carattino/">aquiles-carattino</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/">Blogs</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/book/">book</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/book-writing/">book-writing</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/career/">career</a>
           </li>
         
       </ul>

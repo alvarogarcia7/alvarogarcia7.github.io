@@ -129,6 +129,50 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: automate the blog publishing</a>
+    </h1>
+    <p >Dec 2, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/blog/">blog</a><a class="label" href="https://alvarogarcia7.github.io/categories/travis/">travis</a><a class="label" href="https://alvarogarcia7.github.io/categories/ci/">ci</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I&rsquo;ve automated the generation of the blog using <a href="https://travis-ci.org/">Travis CI</a>. Using this new way, each commit generates a new version of the pages.</p>
+<p>These resources have been very useful:</p>
+<ul>
+<li><a href="http://darvin.github.io/2013/01/13/Prose_Octopress_TravisIO">Prose.io + Octopress + Travis-CI + GitHub Pages = ♥</a>. First post (in this set) that explains how this automation is possible</li>
+<li><a href="https://harimenon.com/blog/2013/01/27/auto-deploying-to-my-octopress-blog/">Auto-deploying to My Octopress Blog With Travis-CI</a>. Explains how to generate your key, encript it with travis</li>
+<li><a href="http://blog.yasuoza.com/2014/01/13/octopress-plus-github-pages-plus-travis/">Octopress + GitHub Pages + Travis</a>: The most useful page, explains step by step what to do for mac and linux.</li>
+<li><a href="https://disqus.com/home/discussion/codez/octopressprosegithubtravis_ci_coders_blog_human_not_octopus/">Octopress+Prose+Github+Travis CI = coders' blog - Human, not octopus</a>.Altough the page is not available anymore, this discussion explains why it is safe to store your private key in the file <code>.travis.yml</code>.</li>
+</ul>
+<p><a href="https://github.com/floydpink?tab=repositories">An example</a> of the resulting repository, by <a href="https://github.com/floydpink">Hari Menon</a>.</p>
+<h2 id="my-own-modifications">My own modifications</h2>
+<p>The full diff for making this change is <a href="https://github.com/alvarogarcia7/blog_source/compare/8414267a1e8e1f0ef588602121f32da3f6eb9f9e...9f60c76d6d9faca8cff8bce2f0a00bf8f2eafb30">here</a>. Disregard the changes in:</p>
+<ul>
+<li><code>partial/1444939871_diff.txt</code></li>
+<li><code>partial/1444939871_msg.txt</code></li>
+<li><code>source/_posts/2015-12-02-self-study-in-december-2015.markdown</code></li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/12/02/self-study-in-december-2015/">Self-Study in December 2015</a>
     </h1>
     <p >Dec 2, 2015
@@ -1014,37 +1058,6 @@ git push pipeline  2&gt;<span class="p">&amp;</span><span class="m">1</span> &gt
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas/">Java Tips &amp; Gotchas</a>
-    </h1>
-    <p >Oct 7, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/10/07/java-tips-gotchas/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/gotcha/">gotcha</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/character-encoding/">character-encoding</a><a class="label" href="https://alvarogarcia7.github.io/categories/utf8/">utf8</a><a class="label" href="https://alvarogarcia7.github.io/categories/java-tool-options/">java-tool-options</a><a class="label" href="https://alvarogarcia7.github.io/categories/file-encoding/">file-encoding</a>
-        
-    </p>
-</header>
-
-
-        
-        <h2 id="jvm-default-encoding-as-utf-8">JVM default encoding as UTF-8</h2>
-<p>Make the JVM use UTF-8 character encoding by default</p>
-<p>Set up the system property <code>JAVA_TOOL_OPTIONS</code> to <code>-Dfile.encoding=UTF8</code></p>
-
-        
-
-    </article>
-    
     
     
 
@@ -1206,11 +1219,35 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
-            <a href="/categories/2020/">2020</a>
+            <a href="/categories/2021/">2021</a>
           </li>
         
           <li class="post">
-            <a href="/categories/2021/">2021</a>
+            <a href="/blog/">Blogs</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/">Categories</a>
+          </li>
+        
+          <li class="post">
+            <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/live-article/">live-article</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/mma/">mma</a>
+          </li>
+        
+          <li class="post">
+            <a href="/">The long way through Software Craftsmanship</a>
+          </li>
+        
+          <li class="post">
+            <a href="/categories/2020/">2020</a>
           </li>
         
           <li class="post">
@@ -1219,30 +1256,6 @@ You can find me on:
         
           <li class="post">
             <a href="/categories/analogy/">analogy</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/andre-schweighofer/">andre-schweighofer</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/aquiles-carattino/">aquiles-carattino</a>
-          </li>
-        
-          <li class="post">
-            <a href="/blog/">Blogs</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/book/">book</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/book-writing/">book-writing</a>
-          </li>
-        
-          <li class="post">
-            <a href="/categories/career/">career</a>
           </li>
         
       </ul>
