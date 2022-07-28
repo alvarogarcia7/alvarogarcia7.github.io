@@ -161,6 +161,9 @@
 <p>When you create meaningful increments (e.g., a milestone), when you decide that you should save your progress, you can commit as well. The downside is that the automatic commits will pollute your log, and the diff will not represent the full delta. For that, you can create a marker (i.e., one that does not have any diff - use the <code>allow-empty</code> parameter). That kind of commit is like a <a href="https://en.wikipedia.org/wiki/Marker_interface_pattern">Marker Interface Pattern</a>, to pinpoint a specific delta:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git commit -am <span class="s2">&#34;Marker: Completed the ....&#34;</span> --allow-empty
 </code></pre></div><p>When you want to see all the changes, <code>git diff</code> between two commits (e.g., Markers) or you can rebase with squash (<code>git rebase --interactive</code>) into another branch (so you keep this history).</p>
+<h2 id="alternative">Alternative</h2>
+<p>(Updated 2022-07-27) Another alternative for this kind of work is to rely on JetBrains' &lsquo;Local History&rsquo; feature. This is some kind of internal backlog of changes, that keeps what has changed, when. Imagine a git repo, in which you can select changes in a specific folder, file, etc. The system also registers when you executed the tests (red or green), as noted <a href="https://www.jetbrains.com/help/idea/local-history.html#label-local-history-revisions">here</a>.</p>
+<p>JetBrains publishes a site for Local History <a href="https://www.jetbrains.com/help/idea/local-history.html">here</a>.</p>
 <h2 id="summary">Summary</h2>
 <p>Summary:</p>
 <ul>
@@ -342,7 +345,7 @@ You can find me on:
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2021 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+      <p>Copyright &copy; 2022 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
