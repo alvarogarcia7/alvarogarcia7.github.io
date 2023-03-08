@@ -129,7 +129,7 @@
          Writing safe(r) bash scripts 
     </h1>
     <p >Jul 13, 2018
-         - 13 minute read 
+         - 14 minute read 
          - <a href="https://alvarogarcia7.github.io/blog/2018/07/13/writing-safe-bash-scripts/#disqus_thread">Comments</a>
 
         
@@ -395,6 +395,15 @@ In sh1.sh line 34:
   if [[ -z $(which imagemagick) ]]; then
              ^-- SC2230: which is non-standard. Use builtin 'command -v' instead.
 </code></pre><p>Note: I use the tool with docker (see <a href="https://github.com/alvarogarcia7/shellcheck-docker">here</a>, <a href="https://github.com/koalaman/shellcheck#installing">official docker image</a>)</p>
+<h3 id="overriding-functions--inheritance">Overriding functions / Inheritance</h3>
+<p>The bash functions can override existing bash functions.</p>
+<p>This means that you can achieve some kind of inheritance (without Object-Oriented Programming) in bash.</p>
+<p>I use this pattern by:</p>
+<ul>
+<li>Having a file that contains the functions but no main (such as a library)</li>
+<li>Having another file that contains the main plus any specialization of the functions</li>
+</ul>
+<p>This allows to use the &lsquo;Template Method&rsquo; pattern.</p>
 <h2 id="how-i-write-my-scripts">How I write my scripts</h2>
 <p>Usually, I design my scripts:</p>
 <ul>
@@ -677,7 +686,7 @@ You can find me on:
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2022 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+      <p>Copyright &copy; 2023 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
