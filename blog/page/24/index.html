@@ -129,6 +129,75 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate with index in clojure</a>
+    </h1>
+    <p >Jul 4, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/iterate/">iterate</a><a class="label" href="https://alvarogarcia7.github.io/categories/language-comparison/">language-comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Scenario: iterate a sequence (<code>seq</code>) with its index</p>
+<p>The lines have an implicit line number (starting by 1, in most editors):</p>
+<pre><code>[1] line1
+[2] line2
+[3] hello
+</code></pre><p>When you read it from file to a variable, it is converted to:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="s">&#34;line1&#34;</span> <span class="s">&#34;line2&#34;</span> <span class="s">&#34;hello&#34;</span><span class="p">)</span>
+</code></pre></div><p>This implicit line number value is not present, therefore you need to assign them one.</p>
+<p>In ruby, you have this construct:</p>
+<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;A&#34;</span><span class="p">,</span> <span class="s2">&#34;B&#34;</span><span class="p">,</span> <span class="s2">&#34;C&#34;</span><span class="o">]</span>
+<span class="n">array</span><span class="o">.</span><span class="n">each_with_index</span> <span class="p">{</span><span class="o">|</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">val</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">}</span>
+</code></pre></div><p><a href="http://stackoverflow.com/questions/310634/what-is-the-right-way-to-iterate-through-an-array-in-ruby/310638#310638">Source</a></p>
+<p>In clojure, there is a similar function:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">map-indexed</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[idx</span> <span class="nv">itm]</span> <span class="nv">[idx</span> <span class="nv">itm]</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">:f</span> <span class="ss">:o</span><span class="p">))</span>
+<span class="c1">; ([0 &#34;line1&#34;] [1 &#34;line2&#34;] [2 &#34;hello&#34;])</span>
+</code></pre></div><p>If you want to shift the collection to the right so it starts with 1 (for the REPL):</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">def</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;line1&#34;</span> <span class="s">&#34;line2&#34;</span> <span class="s">&#34;hello&#34;</span><span class="p">))</span>
+<span class="c1">; (&#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)</span>
+
+<span class="p">(</span><span class="nv">defn</span> <span class="nv">shift-one</span> <span class="nv">[lines]</span> 
+  <span class="p">(</span><span class="nc">cons</span> <span class="s">&#34;&#34;</span> <span class="nv">lines</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">def</span> <span class="nv">lines</span> <span class="p">(</span><span class="nv">shift-one</span> <span class="nv">lines</span><span class="p">))</span>
+<span class="nv">lines</span>
+<span class="c1">; (&#34;&#34; &#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)</span>
+
+<span class="p">(</span><span class="nv">map-indexed</span> <span class="p">(</span><span class="nv">fn</span> <span class="nv">[idx</span> <span class="nv">itm]</span> <span class="nv">[idx</span> <span class="nv">itm]</span><span class="p">)</span>
+  <span class="nv">lines</span><span class="p">)</span>  
+<span class="c1">; ([0 &#34;&#34;] [1 &#34;line1&#34;] [2 &#34;line2&#34;] [3 &#34;hello&#34;])</span>
+</code></pre></div><p><a href="https://clojuredocs.org/clojure.core/map-indexed">Source</a>, especially <a href="https://clojuredocs.org/clojure.core/map-indexed#example-542692cdc026201cdc326d25">this one</a></p>
+<p>But if you only need to get the lines at certain indexes, it is also possible to get the values directly, using <code>map</code> on the sequence of desired indexes:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="nv">lines</span>
+<span class="c1">; (&#34;&#34; &#34;line1&#34; &#34;line2&#34; &#34;hello&#34;)</span>
+
+<span class="p">(</span><span class="nv">defn</span> <span class="nv">get-all</span> <span class="nv">[lines</span> <span class="nv">indexes]</span>
+  <span class="p">(</span><span class="nf">map</span> <span class="o">#(</span><span class="nf">nth</span> <span class="nv">lines</span> <span class="nv">%</span><span class="p">)</span> <span class="nv">indexes</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">get-all</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+<span class="c1">; (&#34;line1&#34; &#34;line2&#34;)</span>
+
+<span class="p">(</span><span class="nv">get-all</span> <span class="nv">lines</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1">; (&#34;line1&#34; &#34;line1&#34;)</span>
+</code></pre></div><p>Note: the original source code for this post is <a href="https://github.com/alvarogarcia7/clojure-simple-sessions/blob/master/test/simple/iterate-with-index.clj">here</a></p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/01/brownbag-session-refactoring-legacy-code/">Brown-bag session: refactoring legacy code</a>
     </h1>
     <p >Jul 1, 2015
@@ -605,45 +674,6 @@
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker/">Brown-bag session: docker</a>
-    </h1>
-    <p >Jun 16, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Today we have done a brown bag session about Docker. One of the team members explained to us the latest news, topics and how tos, including:</p>
-<ul>
-<li>the difference between a container and an image</li>
-<li>diffing image contents</li>
-<li>AUFS (Another Union FS)</li>
-<li>persistent vs non-persistent (volatile) filesystems</li>
-<li>running CMD and other commands on the instance</li>
-<li>problems of running with permission = root (or its group)</li>
-<li>downsides of it</li>
-<li>how to compare it with a virtual machine</li>
-</ul>
-
-        
-
-    </article>
-    
     
     
 
@@ -737,6 +767,8 @@
     
         <a href="/blog/page/35/" class="label-pagination">35</a>
     
+        <a href="/blog/page/36/" class="label-pagination">36</a>
+    
 
     
     
@@ -745,7 +777,7 @@
 
     
     
-        <a href="/blog/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -845,6 +877,10 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
           </li>
         
@@ -878,10 +914,6 @@ You can find me on:
         
           <li class="post">
               <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
           </li>
         
       </ul>
