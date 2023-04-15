@@ -131,38 +131,6 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and/">Clojure and the macro and</a>
-    </h1>
-    <p >Dec 8, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro/">macro</a><a class="label" href="https://alvarogarcia7.github.io/categories/and/">and</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/function/">function</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro-vs-function/">macro-vs-function</a>
-        
-    </p>
-</header>
-
-        
-          <p>While on the REPL, I tried this:
-simple.core=&gt; (reduce and true [true]) CompilerException java.lang.RuntimeException: Can&#39;t take value of a macro: #&#39;clojure.core/and, compiling:(form-init7116694665186998245.clj:1:1) Reading the clojuredocs for and, you can find this:
- Note add is a macro, so you cannot apply it. For example, there is a vector of some Boolean values [true true false true], which you want to test to see if they are all true. The code below will not work:</p>
-          
-            <footer>
-              <a href="https://alvarogarcia7.github.io/blog/2015/12/08/clojure-and-the-macro-and/" rel="full-article">Read On &rarr;</a>
-            </footer>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/12/02/tip-automate-the-blog-publishing/">Tip: automate the blog publishing</a>
     </h1>
     <p >Dec 2, 2015
@@ -317,6 +285,37 @@ def call_all_methods(object, *args) # remove methods that modify the PRY environ
         
       </article>
       
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/">Tool: Building a local pipeline</a>
+    </h1>
+    <p >Oct 10, 2015
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tool/">polish-your-tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/building-pipeline/">building-pipeline</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipeline/">pipeline</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/working-directory/">working-directory</a><a class="label" href="https://alvarogarcia7.github.io/categories/trap/">trap</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/git-hook/">git-hook</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipes-and-filters/">pipes-and-filters</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository/">repository</a><a class="label" href="https://alvarogarcia7.github.io/categories/signal-trapping/">signal-trapping</a><a class="label" href="https://alvarogarcia7.github.io/categories/trigger/">trigger</a><a class="label" href="https://alvarogarcia7.github.io/categories/growl/">growl</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a>
+        
+    </p>
+</header>
+
+        
+          <p>Motivation At a client, one of the projects has a long building process and the tests are mostly slow, so I use a local building pipeline, an example of the Pipes and Filters pattern.
+This allows for executing manually only the fast unit tests, then automatically (no user intervention, no time spent) executing the rest of them before pushing. In case the latter fails, it is possible to do git push -f to the pipeline without corrupting the central repository (origin) history, possibly disturbing others.</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/10/10/tool_building_local_pipeline/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
       
       
 
@@ -410,8 +409,6 @@ def call_all_methods(object, *args) # remove methods that modify the PRY environ
     
         <a href="/page/35/" class="label-pagination">35</a>
     
-        <a href="/page/36/" class="label-pagination">36</a>
-    
 
     
     
@@ -420,7 +417,7 @@ def call_all_methods(object, *args) # remove methods that modify the PRY environ
 
     
     
-        <a href="/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -518,10 +515,6 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
-              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
               <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
           </li>
         
@@ -555,6 +548,10 @@ You can find me on:
         
           <li class="post">
               <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
           </li>
         
       </ul>

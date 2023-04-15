@@ -129,59 +129,6 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting clojure code in octopress</a>
-    </h1>
-    <p >Apr 14, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/blogging/">blogging</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/lisp/">lisp</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Inserting this code in the blog:</p>
-<pre><code>```clojure
-(defn all-access[k]
-	(let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-<p>the octopress processor throws the error:</p>
-<pre><code>Error: Pygments can't parse unknown language: clojure
-Error: Run jekyll build --trace for more information.
-</code></pre>
-<p>A solution would be to include it as lisp code:</p>
-<pre><code>```lisp
-(defn all-access[k]
-	(let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-<p>this is an example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-	<span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-		<span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-		<span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</code></pre></div>
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a refactor in Clojure</a>
     </h1>
     <p >Apr 14, 2015
@@ -561,6 +508,65 @@ A: Testing. Test for the purpose of testing, not TDD
 
     </article>
     
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/03/31/tdd-microexercise-tire-pressure/">TDD microexercise: Tire pressure</a>
+    </h1>
+    <p >Mar 31, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/03/31/tdd-microexercise-tire-pressure/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/microexercise/">microexercise</a><a class="label" href="https://alvarogarcia7.github.io/categories/prepared-kata/">prepared-kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/session/">session</a><a class="label" href="https://alvarogarcia7.github.io/categories/scbcn/">scbcn</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Yesterday, <a href="http://twitter.com/@trikitrok">Manuel Rivero</a> and I facilitated a <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/events/221463037/">workshop</a> using the <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises/Java/TirePressureMonitoringSystem">tire pressure</a> TDD microexercise. (More microexercises can be found in <a href="/categories/microexercise
+/">this category</a>, also <a href="https://github.com/lucaminudel/TDDwithMockObjectsAndDesignPrinciples/tree/master/TDDMicroExercises">here</a>)</p>
+<p>We scheduled the session as follows:</p>
+<ul>
+<li>10 minutes introduction to the exercise</li>
+<li>10 minutes to download the code and take a first look</li>
+<li>10 minutes explanation about the exercise, what the problem is, etc</li>
+<li>30 minutes for the attendees to explore the solution (on their own)</li>
+<li>10 minutes for commenting the explored solutions, comments about it</li>
+<li>40 minutes of prepared kata format</li>
+<li>10 minutes of final explanations, questions and answers (Q&amp;A)</li>
+</ul>
+<p>Total: 120 minutes or two hours, approximately</p>
+<p>We decided that one would be mostly at the keyboard and the other mostly explaining. This allows for the speaker to introduce some concepts while the driver is performing a larger refactor / step.</p>
+<p>Some of our own feedback:</p>
+<ul>
+<li>Have the kata prepared, clear all your doubts before doing it live</li>
+<li>Be very specific about the goal of the kata: the narrower the focus, the more we will learn</li>
+<li>If necessary, exercise your shortcuts / practices one last time</li>
+<li>Set up the font as big as needed. Even remove some whitelines (present in your usual code) so more text can fit in the screen.</li>
+<li>It was very useful for us to have a small script of what we would perform: what was the idea, where to stop to explain things, etc</li>
+<li>A prepared kata is a show (like a movie), so the dialogs between the performing pair are important. Do not be afraid to tell the reasons why you did this last refactor.</li>
+<li>Answer the questions as you go, do not wait until the end of the session</li>
+</ul>
+<p>Some feedback we received:</p>
+<ul>
+<li>It would have been useful to do a recap at the end of the session, to refresh the most important concepts</li>
+<li>In general the session was good, they were satisfied with the techniques shown there</li>
+<li>The exercise was concise and small, perfect for two hours' time</li>
+</ul>
+<p>Many thanks to all the attendees and to Manuel: I learnt a lot from the session and renewed my energies to keep doing these workshop sessions. Also thanks to Luca Minudel for writing these awesome exercises.</p>
+
+        
+
+    </article>
+    
     
     
 
@@ -654,8 +660,6 @@ A: Testing. Test for the purpose of testing, not TDD
     
         <a href="/blog/page/35/" class="label-pagination">35</a>
     
-        <a href="/blog/page/36/" class="label-pagination">36</a>
-    
 
     
     
@@ -664,7 +668,7 @@ A: Testing. Test for the purpose of testing, not TDD
 
     
     
-        <a href="/blog/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -764,10 +768,6 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
-              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
               <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
           </li>
         
@@ -801,6 +801,10 @@ You can find me on:
         
           <li class="post">
               <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
           </li>
         
       </ul>

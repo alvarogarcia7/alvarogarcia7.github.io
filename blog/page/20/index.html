@@ -129,45 +129,6 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/">Coding dojo: Goldbach Conjecture</a>
-    </h1>
-    <p >Aug 17, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/barcelona-software-craftsmanship/">barcelona-software-craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding-dojo/">coding-dojo</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/goldbach/">goldbach</a><a class="label" href="https://alvarogarcia7.github.io/categories/conjecture/">conjecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/goldbach-conjecture/">goldbach-conjecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitation/">facilitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitator/">facilitator</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>At the <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship meetup</a>, today I&rsquo;ve facilitated a coding dojo on the <a href="https://en.wikipedia.org/wiki/Goldbach%27s_conjecture">Goldbach Conjecture</a>. The problem was prepared by <a href="https://twitter.com/trikitrok">Manuel Rivero</a>.</p>
-<p>The meetup event is <a href="http://www.meetup.com/es/Barcelona-Software-Craftsmanship/events/224169573/">here</a> and there are plenty of solutions prepared by the pairs:</p>
-<ul>
-<li><a href="https://github.com/Duber/GoldbachConjectureKataInJava">Java</a></li>
-<li><a href="https://github.com/raullorca/GoldbachConjectureKata">C#</a></li>
-<li><a href="https://github.com/alvarogarcia7/goldbach-conjecture-kata-haskell">Haskell</a></li>
-<li><a href="https://github.com/celtric/goldbach-conjecture-kata-php">PHP</a></li>
-<li><a href="https://github.com/celtric/goldbach-conjecture-kata-java">Java</a></li>
-<li><a href="https://github.com/juanangosto/GoldbachsConjecture">PHP</a></li>
-<li><a href="https://github.com/rojoangel/12moths-12katas/tree/master/7-goldbach-conjecture-kata">Haskell</a></li>
-</ul>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/">Searching on a suite of failing tests</a>
     </h1>
     <p >Aug 13, 2015
@@ -436,6 +397,106 @@ Chapter 3, Managing Dependencies, Introduction</p>
 
     </article>
     
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple return values in a Mockito Stub</a>
+    </h1>
+    <p >Aug 7, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/mockito/">mockito</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/stub/">stub</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.spike</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.hamcrest.MatcherAssert.assertThat</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.hamcrest.Matchers.is</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.mockito.Mockito.spy</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.mockito.Mockito.when</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.Spy</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DifferentReturnValues</span> <span class="o">{</span>
+
+	<span class="nd">@Spy</span>
+	<span class="kd">private</span> <span class="n">Spike1</span> <span class="n">spike1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Spike1</span><span class="o">();</span>
+
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+		<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+		<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	<span class="o">}</span>
+
+
+	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">Spike1</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getBool</span><span class="o">()</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>The key line is:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</code></pre></div><p>this makes the stubbed function to return multiple values:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+</code></pre></div><p>The last value is repeated after the last defined value:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div><p>If you want to loop over the values, you can implement it with the <code>doAnswer</code> method:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">spike1</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">spike1</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span><span class="n">spike1</span><span class="o">);</span>
+	<span class="n">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">()).</span><span class="na">thenReturn</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+
+	<span class="kd">final</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="kc">true</span><span class="o">};</span>
+
+	<span class="n">doAnswer</span><span class="o">(</span><span class="n">invocation</span> <span class="o">-&gt;</span> <span class="o">{</span>
+		<span class="n">value</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">value</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+		<span class="k">return</span> <span class="n">value</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+	<span class="o">}).</span><span class="na">when</span><span class="o">(</span><span class="n">spike1</span><span class="o">).</span><span class="na">getBool</span><span class="o">();</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+	<span class="n">assertThat</span><span class="o">(</span><span class="n">spike1</span><span class="o">.</span><span class="na">getBool</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="kc">true</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div>
+        
+
+    </article>
+    
     
     
 
@@ -529,8 +590,6 @@ Chapter 3, Managing Dependencies, Introduction</p>
     
         <a href="/blog/page/35/" class="label-pagination">35</a>
     
-        <a href="/blog/page/36/" class="label-pagination">36</a>
-    
 
     
     
@@ -539,7 +598,7 @@ Chapter 3, Managing Dependencies, Introduction</p>
 
     
     
-        <a href="/blog/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/35/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -639,10 +698,6 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
-              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
               <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
           </li>
         
@@ -676,6 +731,10 @@ You can find me on:
         
           <li class="post">
               <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/09/30/books-read-2019q3/">Books read in 2019Q3</a>
           </li>
         
       </ul>
