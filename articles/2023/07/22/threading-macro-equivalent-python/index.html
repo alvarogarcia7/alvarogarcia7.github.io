@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>The Threading Macro (clojure) equivalent in Python</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="">
+  <meta name="author" content="Alvaro Garcia">
+
+  
+  <meta name="generator" content="Hugo 0.82.0" />
+
+  
+  
+
+  
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/" target="_blank" title="Breadcrumbs">Breadcrumbs</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/articles/" target="_blank" title="Articles">Articles</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/talks" target="_blank" title="Talks / Events">Talks / Events</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/categories/" target="_blank" title="Categories">Categories</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/archives/" target="_blank" title="Archives">Archives</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/about/" target="_blank" title="About">About</a></li>
+    
+  
+</ul>
+
+
+<ul class="subscription">
+  <a href="index.xml" target="_blank" type="application/rss+xml" title="RSS"><i class="fa fa-rss-square fa-lg"></i></a>
+
+  
+  
+
+</ul>
+
+<script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = form_.getElementsByTagName("input")[0];
+        var siteURL = form_.getElementsByTagName("input")[1];
+        input.value = siteURL.value + " " + input.value;
+    }
+</script>
+
+
+<form action="https://www.google.com/search" method="get" target="_blank" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+  	<input class="search" type="text" name="q" results="0" placeholder="Search"/>
+    <input type="hidden" value="site:https://alvarogarcia7.github.io/" />
+  </fieldset>
+</form>
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+         The Threading Macro (clojure) equivalent in Python 
+    </h1>
+    <p >Jul 22, 2023
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/articles/2023/07/22/threading-macro-equivalent-python/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/equivalence/">equivalence</a><a class="label" href="https://alvarogarcia7.github.io/categories/threading-macro/">threading-macro</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/lisp/">lisp</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro/">macro</a><a class="label" href="https://alvarogarcia7.github.io/categories/python/">python</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/language-equivalence/">language-equivalence</a>
+        
+    </p>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          <h2 id="introduction">Introduction</h2>
+<p>In any programming language, it is common to compose functions by pipelining functions: <code>h = g ∘ f</code> such that <code>h(x) = g(f(x))</code>.</p>
+<p>The function <code>f</code> is applied first, then <code>g</code>, then the following. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>For me, it would be more comfortable and easy to understand to write it <code>f COMPOSE_THEN g</code>, indicating that this function composition is not the usual, but a different operation.</p>
+<h2 id="introduction-in-clojure">Introduction in Clojure</h2>
+<p>This function composition can be written in Clojure by pipelining or chaining functions:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">calculate</span> <span class="nv">[]</span>
+   <span class="p">(</span><span class="nf">reduce</span> <span class="nf">+</span> <span class="p">(</span><span class="nf">map</span> <span class="o">#(</span><span class="nf">*</span> <span class="nv">%</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nv">filter</span> <span class="nv">odd?</span> <span class="p">(</span><span class="nv">range</span> <span class="mi">10</span><span class="p">)))))</span>
+</code></pre></div><p>Fig 1: Example taken from Clojure&rsquo;s <a href="https://clojure.org/guides/threading_macros">threading macros</a>. Notice the <code>(range 10)</code> is written at the right-most, while the functions are at the left of it.</p>
+<p>The <a href="https://clojure.org/guides/threading_macros">threading macros</a> are also a magnificent way to chain or pipeline operations: take a value and put it through the following functions:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">calculate*</span> <span class="nv">[]</span>
+   <span class="p">(</span><span class="nv">-&gt;&gt;</span> <span class="p">(</span><span class="nv">range</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">filter</span> <span class="nv">odd?</span><span class="p">)</span>
+        <span class="p">(</span><span class="nf">map</span> <span class="o">#(</span><span class="nf">*</span> <span class="nv">%</span> <span class="nv">%</span><span class="p">))</span>
+        <span class="p">(</span><span class="nf">reduce</span> <span class="nf">+</span> <span class="p">)))</span>
+</code></pre></div><p>Fig 2: when using threading macros. Notice the <code>(range 10)</code> is written at the beginning, while the functions are to the right of it. This is a more natural way of reading code (left to right).</p>
+<h2 id="python">Python</h2>
+<p>In python, I haven&rsquo;t found any equivalent <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> to these threading macros, but it is possible to create an equivalent <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">chain</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="o">*</span><span class="n">funcs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">funcs</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</code></pre></div><p>and to use it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">chain</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+      <span class="k">lambda</span> <span class="n">ele</span><span class="p">:</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ele</span><span class="p">),</span>
+      <span class="k">lambda</span> <span class="n">ele</span><span class="p">:</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">ele</span><span class="p">),</span>
+      <span class="nb">sum</span>
+      <span class="p">)</span>
+</code></pre></div><p>The upside is that you can now chain functions, while the parameter is at the beginning.</p>
+<p>The obvious downside is you need to create lambda functions for each of the functions.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>The notation <code>g ∘ f</code> is read as &ldquo;g of f &ldquo;, &ldquo;g after f &quot; (&hellip;). From <a href="https://en.wikipedia.org/wiki/Function_composition">wikipedia: Function Composition</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>In the python 3 SDK or the Standard Library. There might be alternatives, but I haven&rsquo;t researched them: <code>funcy</code>, <code>funcoperators</code>, or <code>toolz</code>. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>This <a href="https://stackoverflow.com/questions/16739290/composing-functions-in-python">Stack Overflow thread</a> is related to function composition <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Alvaro Garcia</span></span>
+    
+    <time>Jul 22, 2023</time>
+  </p>
+
+  
+  <div class="sharing">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="alvarobiz" data-hashtags="blog">Tweet this article</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+     
+  </div>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://alvarogarcia7.github.io/articles/2021/09/11/worthless-projects/" title="The value of worthless projects">The value of worthless projects</a>
+    
+
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>About this blog</h1>
+    
+
+    <p>
+      
+        This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" href="https://github.com/alvarogarcia7/" title="https://github.com/alvarogarcia7/"><i class="fa fa-github fa-3x"></i></a>
+      
+      <a target="_blank" href="https://twitter.com/@alvarobiz/" title="https://twitter.com/@alvarobiz/"><i class="fa fa-twitter fa-3x"></i></a>
+       
+      <a target="_blank" href="https://es.linkedin.com/in/alvarogarcia7" title="https://es.linkedin.com/in/alvarogarcia7"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+    <section class="even">
+      <h1>Recent Articles</h1>
+      <ul id="recent_articles">
+        
+          <li class="post">
+              <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2021/09/11/worthless-projects/">The value of worthless projects</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2021/05/02/native-c-library-android/">Using a Native C Library in Android</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/05/29/keeping-intermediate-history-work-git/">Automatically keeping the intermediate history of your work using git</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2016/10/05/support-for-out-of-hours-on-call-support/">Support for out of hours on-call support</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2014/12/15/the-joys-of-the-craft-as-article/">The Joys of the Craft as Article</a>
+          </li>
+        
+      </ul>
+      <h1>Recent Blogs</h1>
+      <ul id="recent_posts">
+        
+          <li class="post">
+              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2021/01/01/self-study-january-2021/">Self-Study in January 2021</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2020/09/30/books-read-2020q3/">Books read in 2020Q3</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2020/02/01/self-study-february-2020/">Self-Study in February 2020</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
+          </li>
+        
+      </ul>
+    </section>
+  
+
+</aside>
+
+  </div>
+</div>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2023 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+    
+
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
+</html>
+

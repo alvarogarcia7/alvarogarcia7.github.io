@@ -129,6 +129,44 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
+    </h1>
+    <p >Jul 22, 2023
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/articles/2023/07/22/threading-macro-equivalent-python/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/equivalence/">equivalence</a><a class="label" href="https://alvarogarcia7.github.io/categories/threading-macro/">threading-macro</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/lisp/">lisp</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro/">macro</a><a class="label" href="https://alvarogarcia7.github.io/categories/python/">python</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/language-equivalence/">language-equivalence</a>
+        
+    </p>
+</header>
+
+
+        
+          <p>Introduction In any programming language, it is common to compose functions by pipelining functions: h = g ∘ f such that h(x) = g(f(x)).
+The function f is applied first, then g, then the following. 1
+For me, it would be more comfortable and easy to understand to write it f COMPOSE_THEN g, indicating that this function composition is not the usual, but a different operation.
+Introduction in Clojure This function composition can be written in Clojure by pipelining or chaining functions:</p>
+
+          
+              <footer>
+                  <a href="https://alvarogarcia7.github.io/articles/2023/07/22/threading-macro-equivalent-python/" rel="full-article">Read On &rarr;</a>
+              </footer>
+          
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/articles/2021/09/11/worthless-projects/">The value of worthless projects</a>
     </h1>
     <p >Sep 11, 2021
@@ -306,44 +344,6 @@ Why bash scripts?  Bash is present in almost every unix/linux-based stack, now s
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
-    </h1>
-    <p >Jul 4, 2018
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/07/04/questioning-existing-choices/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/questioning/">questioning</a><a class="label" href="https://alvarogarcia7.github.io/categories/choice/">choice</a><a class="label" href="https://alvarogarcia7.github.io/categories/pragmatism/">pragmatism</a><a class="label" href="https://alvarogarcia7.github.io/categories/versioning/">versioning</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/solution/">solution</a><a class="label" href="https://alvarogarcia7.github.io/categories/if-it-aint-broke-dont-fix-it/">if-it-aint-broke-dont-fix-it</a>
-        
-    </p>
-</header>
-
-
-        
-          <p>Context For a client, we have worked on a service that works with files (containing sensitive data) that get corrupted very often.
-The use case is generally:
- Two/Three file opens per day One modification per 10 file opens One corruption per 100 file opens  Initial solution The initial solution was just to copy the file (file.txt) before opening, after closing. This results in two files (YYY-MM-DDTHH-mm-ss_before_file.txt, YYY-MM-DDTHH-mm-ss_after_file.txt).
-As this solution quickly became unmaintainable, the client developed a solution to hash the contents of the file and to remove the duplicated files.</p>
-
-          
-              <footer>
-                  <a href="https://alvarogarcia7.github.io/blog/2018/07/04/questioning-existing-choices/" rel="full-article">Read On &rarr;</a>
-              </footer>
-          
-
-        
-
-    </article>
-    
     
     
 
@@ -434,6 +434,10 @@ You can find me on:
     <section class="even">
       <h1>Recent Articles</h1>
       <ul id="recent_articles">
+        
+          <li class="post">
+              <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
+          </li>
         
           <li class="post">
               <a href="/articles/2021/09/11/worthless-projects/">The value of worthless projects</a>
