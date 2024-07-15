@@ -131,6 +131,66 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: committing to the repo file by file</a>
+    </h1>
+    <p >Jul 8, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
+        
+    </p>
+</header>
+
+        
+          <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.
+This is why I have some scripts to commit all the changes, even with the same message. This is one of them:
+for f in $(git status -s |grep &#34;^M&#34;|awk &#39;{print $2}&#39;); do git add $f git commit -m &#34;generic commit for all files&#34; done </p>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental concepts on programming languages</a>
+    </h1>
+    <p >Jul 6, 2015
+         - 8 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/christopher-strachey/">christopher-strachey</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a><a class="label" href="https://alvarogarcia7.github.io/categories/1967/">1967</a><a class="label" href="https://alvarogarcia7.github.io/categories/course/">course</a><a class="label" href="https://alvarogarcia7.github.io/categories/fundamental-concepts/">fundamental-concepts</a><a class="label" href="https://alvarogarcia7.github.io/categories/paper/">paper</a><a class="label" href="https://alvarogarcia7.github.io/categories/lecture/">lecture</a>
+        
+    </p>
+</header>
+
+        
+          <p>Note: all quotes on this post come from this paper: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.
+Contents This paper starts slow, from the mathematical and philosophical point of view, until it gets to the basic concepts on the fundamental concepts:
+ Assignment command L-Value and R-Value Definitions Names Numerals Conceptual models: an explanation about the relationship between the code, the memory store and the abstract concepts  Later, it gets more in depth to the conceptual constructs, where most of the content is explained and contains:</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/04/iterate-with-index-in-clojure/">Iterate with index in clojure</a>
     </h1>
     <p >Jul 4, 2015
@@ -248,73 +308,6 @@ Building Automated REST APIs with Python Investigating QA automation for REST AP
           
             <footer>
               <a href="https://alvarogarcia7.github.io/blog/2015/06/30/books-read-in-2015q2/" rel="full-article">Read On &rarr;</a>
-            </footer>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/">Practical Object-Oriented Design in Ruby: Chapter 1</a>
-    </h1>
-    <p >Jun 29, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-feathers/">michael-feathers</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/ood/">ood</a><a class="label" href="https://alvarogarcia7.github.io/categories/edward-berard/">edward-berard</a><a class="label" href="https://alvarogarcia7.github.io/categories/design-metrics/">design-metrics</a><a class="label" href="https://alvarogarcia7.github.io/categories/churn/">churn</a>
-        
-    </p>
-</header>
-
-        
-          <p>We&rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.
-These are the concepts and links brought up during the discussion:
- Walking on water and developing software from a specification are easy if both are frozen.
-Edward V Berard, source is Wikiquote
- Two cited papers on metrics for design:
- A metrics suite for object oriented design by Chidamber and Kemerer A validation of object-oriented design metrics as quality indicators by Basili, Briand and Melo  The video for the &lsquo;churn&rsquo; as a measure:</p>
-          
-            <footer>
-              <a href="https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/" rel="full-article">Read On &rarr;</a>
-            </footer>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag session: Refactoring legacy code</a>
-    </h1>
-    <p >Jun 23, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a>
-        
-    </p>
-</header>
-
-        
-          <p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.
-The contents of the session:
- Briefly exposing the problem to the team, me taking the role of the Product Owner (PO) Ask the dev team to add an easy feature Do it without tests, as it was so simple that they thought they could do it (using mob programming) Ask if they were satisfied by the patch / fix.</p>
-          
-            <footer>
-              <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/" rel="full-article">Read On &rarr;</a>
             </footer>
           
         
@@ -525,7 +518,15 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
           </li>
         
           <li class="post">
@@ -556,14 +557,6 @@ You can find me on:
               <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
           </li>
         
-          <li class="post">
-              <a href="/blog/2020/02/01/self-study-february-2020/">Self-Study in February 2020</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
-          </li>
-        
       </ul>
     </section>
   
@@ -573,7 +566,7 @@ You can find me on:
   </div>
 </div>
     <footer role="contentinfo">
-      <p>Copyright &copy; 2023 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+      <p>Copyright &copy; 2024 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>

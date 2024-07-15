@@ -129,6 +129,127 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster site generation for Octopress 2</a>
+    </h1>
+    <p >Jul 13, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See <a href="../../../../2016/04/17/faster-site-generation-native-octopress/">here</a></p>
+<p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
+<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
+<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
+<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cp -R blog_source blog_post_factory
+</code></pre></div><p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> blog_post_factory/source/_posts
+git update-index --assume-unchanged <span class="k">$(</span>ls *markdown<span class="k">)</span>
+</code></pre></div><p>Delete all existing markdown files</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rm *markdown
+</code></pre></div><p>Check that git doesn&rsquo;t realize about the difference:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git status
+
+<span class="c1"># On branch source</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</code></pre></div><p>Create a new post:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rake new_post<span class="o">[</span><span class="s2">&#34;Faster site generation for Octopress 2&#34;</span><span class="o">]</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># On branch source</span>
+<span class="c1"># Untracked files:</span>
+<span class="c1">#   (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)</span>
+<span class="c1">#</span>
+<span class="c1">#	2015-07-13-faster-site-generation-for-octopress-2.markdown</span>
+nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&#34;git add&#34;</span> to track<span class="o">)</span>
+</code></pre></div><p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
+<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rake generate <span class="o">&amp;&amp;</span> rake deploy
+</code></pre></div><p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
+<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
+<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">desc</span> <span class="s2">&#34;Cleans all *.markdown files for a faster site generation&#34;</span>
+<span class="n">task</span> <span class="ss">:ignore</span> <span class="k">do</span>
+  <span class="n">cd</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">&#34;</span>
+  <span class="nb">system</span> <span class="s2">&#34;git update-index --assume-unchanged $(ls *.markdown)&#34;</span>
+  <span class="nb">system</span> <span class="s2">&#34;rm $(ls *.markdown)&#34;</span>
+<span class="k">end</span>
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
+<pre><code>Regenerating: 1 file(s) changed at 2015-07-13 08:03:29 ...done in 0.617269045 seconds.
+</code></pre>
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/">What defines a dependency</a>
+    </h1>
+    <p >Jul 13, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/fragment/">fragment</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/listener/">listener</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-stereotype/">object-stereotype</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java">fragment</a>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">register</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">userName</span><span class="o">)</span>  <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">registeredUsers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="n">userName</span><span class="o">));</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">AlreadyRegisteredUserException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">userName</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
+<p>He suggested that:</p>
+<ul>
+<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
+<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
+</ul>
+<p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
+<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java">fragment</a>)</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span> <span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">,</span> <span class="kd">final</span> <span class="n">RegistryResultListener</span> <span class="n">resultListener</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">contains</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">users</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+    <span class="n">resultListener</span><span class="o">.</span><span class="na">successfullyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div><p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
+<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
     </h1>
     <p >Jul 13, 2015
@@ -323,298 +444,6 @@ DocumentControllerTest
   git checkout -- *<span class="nv">$i</span>*
 <span class="k">done</span>
 </code></pre></div>
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/">Tip: committing to the repo file by file</a>
-    </h1>
-    <p >Jul 8, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/tip-committing-to-the-repo-file-by-file/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/polish-your-tools/">polish-your-tools</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>I was prefer committing to the repo with commits that are as small as possible as long as it makes sense. It makes it much easier to rever the changes.</p>
-<p>This is why I have some scripts to commit all the changes, even with the same message. This is one of them:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">for</span> f in <span class="k">$(</span>git status -s <span class="p">|</span>grep <span class="s2">&#34;^M&#34;</span><span class="p">|</span>awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
-  git add <span class="nv">$f</span>
-  git commit -m <span class="s2">&#34;generic commit for all files&#34;</span>
-<span class="k">done</span>
-</code></pre></div>
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/">Paper: Fundamental concepts on programming languages</a>
-    </h1>
-    <p >Jul 6, 2015
-         - 8 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/06/paper-fundamental-concepts-on-programming-languages/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/christopher-strachey/">christopher-strachey</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a><a class="label" href="https://alvarogarcia7.github.io/categories/1967/">1967</a><a class="label" href="https://alvarogarcia7.github.io/categories/course/">course</a><a class="label" href="https://alvarogarcia7.github.io/categories/fundamental-concepts/">fundamental-concepts</a><a class="label" href="https://alvarogarcia7.github.io/categories/paper/">paper</a><a class="label" href="https://alvarogarcia7.github.io/categories/lecture/">lecture</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Note: all quotes on this post come from <a href="http://www.cs.cmu.edu/~crary/819-f09/Strachey67.pdf">this paper</a>: Strachey, C. Fundamental Concepts in Programming Languages. Published in Higher-Order and Symbolic Computation, 13, 11–49, 2000.</p>
-<h2 id="contents">Contents</h2>
-<p>This paper starts slow, from the mathematical and philosophical point of view, until it gets to the basic concepts on the fundamental concepts:</p>
-<ul>
-<li>Assignment command</li>
-<li>L-Value and R-Value</li>
-<li>Definitions</li>
-<li>Names</li>
-<li>Numerals</li>
-<li>Conceptual models: an explanation about the relationship between the code, the memory store and the abstract concepts</li>
-</ul>
-<p>Later, it gets more in depth to the conceptual constructs, where most of the content is explained and contains:</p>
-<ul>
-<li>Expressions and commands</li>
-<li>Expressions and evaluations</li>
-<li>Commands and sequencing</li>
-<li>Definition of functions and routines</li>
-<li>Functions and routines as data items</li>
-<li>Types and polymorphism</li>
-<li>Compound data structures</li>
-</ul>
-<p>Finally, as closing notes, it explains some implementation details (such as Load-Update Pairs), tools as Macrogenerators (nowadays called macros) and formal semantics</p>
-<h2 id="notes--highlights">Notes / highlights</h2>
-<h3 id="l-values-and-r-values">L-Values and R-Values</h3>
-<blockquote>
-<p>L-value for the address-like object appropriate on the left of the assignment, and R-value for the contents-like object appropriate for the right</p>
-<p>2.1, Assignment commands in page 14</p>
-</blockquote>
-<blockquote>
-<p>An L-value represents an area of the store of the computer. [&hellip;] Two essential features [&hellip;] it has content &ndash;i.e., an associated R-value&ndash; and that it is in general possible to change this content</p>
-<p>2.2, L-values and R-Values in pages 14-15</p>
-</blockquote>
-<h3 id="referential-transparency">Referential transparency</h3>
-<p>Explained in 3.2.1, Values:</p>
-<blockquote>
-<p>In essence, this means that if we wish to find the value of an expression with contains a sub-expression, the only thing we need to know about the sub-expression is its value.</p>
-</blockquote>
-<p>Also cites Quine <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> on this matter.</p>
-<blockquote>
-<p>We tend to assume automatically that the symbol <code>x</code> in an expression such as <code>3x**2 + 2x + 17</code> stands for the same thing (or has the same value) on each occasion it occurs. This is the most important consequence of referential transparency</p>
-<p>3.3.1 Variables, page 22</p>
-</blockquote>
-<blockquote>
-<p>If we consider L-values as well as R-Values, however, we can preserve referential transparency as far as L-values are concerned. Thi is because L-values, being generalised addresses, are not altered by assignment command</p>
-<p>3.3.1 Variables, page 22</p>
-</blockquote>
-<h3 id="types-of-variables-bound-free">Types of variables: bound, free</h3>
-<p>Explains the types of variables, based on their belonging to an environment or not: bound variable and free variable. Page 20</p>
-<h3 id="evaluating-vs-applying">Evaluating vs applying</h3>
-<blockquote>
-<p>Distinction between evaluating an operator and applying it to its operands
-3.2.4, Evaluation, page 20</p>
-</blockquote>
-<p>This also introduces the concept of currification / currying:</p>
-<blockquote>
-<p>[&hellip;] for reducing operators with several operands to the successive application of single operands operators
-3.2.4, Evaluation, page 21</p>
-</blockquote>
-<p>An example is given.</p>
-<h3 id="conditional-expressions-vs-conditional-commands">Conditional expressions vs conditional commands</h3>
-<p>Introduces the concept of conditional expression, akin to the ternary operator (example in java):</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">1</span> <span class="o">?</span> <span class="n">1</span> <span class="o">:</span> <span class="n">2</span><span class="o">;</span>
-</code></pre></div><p>this is equivalent to (example in java):</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
-<span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div><p>and the conditional command (example in java):</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">f</span><span class="o">();</span>
-	<span class="n">h</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-	<span class="n">g</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div><p>The conditional expression is also known as &ldquo;functional if&rdquo;</p>
-<h2 id="parameter-calling-modes">Parameter calling modes</h2>
-<p>Explains call by value and call by reference, equivalent to calling by R-Value or L-Value, respectively</p>
-<p>3.4.2, Parameter calling mode</p>
-<h3 id="functions-and-routines">Functions and routines</h3>
-<blockquote>
-<p>Functions and routines are as different in their nature as expressions and commands. It
-is unfortunate, therefore, that most programming languages manage to confuse them very
-successfully</p>
-<p>3.4.5 Functions and routines, page 30</p>
-</blockquote>
-<blockquote>
-<p>The problem arises because we naturally expect referential transparency of R-values in
-expressions, particularly those on the right of assignment commands</p>
-<p>3.4.5 Functions and routines, page 30</p>
-</blockquote>
-<blockquote>
-<p>Any departure of R-value referential transparency in a R-value context should
-either be eliminated by decomposing the expression into several commands and simpler
-expressions, or, if this turns out to be difficult, the subject of a comment</p>
-<p>3.4.5 Functions and routines, page 30</p>
-</blockquote>
-<h3 id="constancy-and-fixity">Constancy and fixity</h3>
-<p>&ldquo;Protection by freezing&rdquo;</p>
-<blockquote>
-<p>Constancy is thus an attribute of an L-value, and
-is, moreover, an invariant attribute. Thus when we create a new L-value, and in particular
-when we define a new quantity, we must decide whether it is a constant or a variable.</p>
-<p>3.4.6 Constants and variables, page 30</p>
-</blockquote>
-<blockquote>
-<p>[&hellip;] fixed function. This is defined as a function which
-either has no free variables, or if it has, whose free variables are all both constant and fixed.</p>
-<p>3.4.7, Fixed and free, page 31</p>
-</blockquote>
-<blockquote>
-<p>Note that fixity is a property of the λ-expression&ndash;i.e., a property of the R-value, while
-constancy is a property of the L-value.</p>
-<p>3.4.7, Fixed and free, page 31</p>
-</blockquote>
-<p>In general:</p>
-<ul>
-<li>Constancy is an attribute of the L-Value</li>
-<li>Fixity is an attribute of the R-Value</li>
-</ul>
-<p>Both for functions and objects.</p>
-<h3 id="first-and-second-class-objects">First and second class objects</h3>
-<blockquote>
-<p>A procedure, on the other hand, may only appear in another procedure call either
-as the operator (the most common case) or as one of the actual parameters. There are no
-other expressions involving procedures or whose results are procedures. Thus in a sense
-procedures in ALGOL are second class citizens—they always have to appear in person
-and can never be represented by a variable or expression</p>
-<p>3.5.1, First and second class objects, page 32</p>
-</blockquote>
-<blockquote>
-<p>Historically this second class status of procedures in ALGOL is probably a consequence
-of the view of functions taken by many mathematicians: that they are constants whose
-name one can always recognise.</p>
-<p>3.5.1, First and second class objects, page 33</p>
-</blockquote>
-<blockquote>
-<p>[&hellip;] it is remarkably difficult to stop looking on functions as second class objects</p>
-<p>3.5.1, First and second class objects, page 33</p>
-</blockquote>
-<blockquote>
-<p>and in particular, of functions which have functions as a result</p>
-<p>3.5.1, First and second class objects, page 33</p>
-</blockquote>
-<h3 id="closure">Closure</h3>
-<blockquote>
-<p>Thus the R-value of a function contains two parts—a rule for evaluating the expression,
-and an environment which supplies its free variables. An R-value of this sort will be called
-a closure.</p>
-<p>3.5.2, Representation of functions, page 34</p>
-</blockquote>
-<h3 id="types">Types</h3>
-<p>There is information on types: latent vs manifest, how to determine it</p>
-<blockquote>
-<p>We call attributes which can be determined at compile time in this way manifest; attributes
-that can only be determined by running the program are known as latent</p>
-<p>3.6.2, Manifest and latent, page 36</p>
-</blockquote>
-<h3 id="polymorphism">Polymorphism</h3>
-<p>Ad-hoc vs parametric polymorphism</p>
-<blockquote>
-<p>In ad hoc polymorphism there is no single systematic way of determining the type of the
-result from the type of the arguments. There may be several rules of limited extent which
-reduce the number of cases, but these are themselves ad hoc both in scope and content</p>
-<p>3.6.4, Polymorphism, page 37</p>
-</blockquote>
-<blockquote>
-<p>Parametric polymorphism:</p>
-<p>(α ⇒ β, α list) ⇒ β list</p>
-<p>3.6.4, Polymorphism, page 37</p>
-</blockquote>
-<h3 id="collections">Collections</h3>
-<blockquote>
-<ul>
-<li><strong>List</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
-<li><strong>Ntuple</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
-<li><strong>Set</strong>: An ordered sequence of objects all of the same type. The number is dynamically variable.</li>
-<li><strong>Bag or Coll</strong>: It consists of an unordered collection of objects all of which are of the same type and differs from a set in that repetitions are allowed</li>
-</ul>
-<p>3.7.7, Other forms of structure, page 45</p>
-</blockquote>
-<p>Also talks about &ldquo;rings&rdquo; (3.7.7, Other forms of structure, page 45)</p>
-<h3 id="macros">Macros</h3>
-<blockquote>
-<p>macrogenerators deal with the symbols which represent
-the variables, values and other objects of concern to a program so that all their manipulation
-is performed before the final compiling</p>
-<p>4.2, Macrogenerators, page 47</p>
-</blockquote>
-<blockquote>
-<p>Macrogeneration seems to be particularly valuable when a semantic extension of the
-language is required</p>
-<p>4.2, Macrogenerators, page 47</p>
-</blockquote>
-<blockquote>
-<p>I believe, a proper aim for programming language designers to try to make the use of
-macrogenerators wholly unnecessary</p>
-<p>4.2, Macrogenerators, page 47</p>
-</blockquote>
-<h3 id="funny-comments">funny comments</h3>
-<blockquote>
-<p>One important characteristic of mathematics is our habit of using names for things</p>
-<p>3.3.1 Variables, page 22</p>
-</blockquote>
-<blockquote>
-<p>if this turns out to be difficult, the subject of a comment</p>
-<p>3.4.5 Functions and routines, page 30</p>
-</blockquote>
-<blockquote>
-<p><strong>Bag or Coll</strong> This is a new sort of collection for which there is, as yet, no generally accepted name.</p>
-<p>3.7.7, Other forms of structure, page 45</p>
-</blockquote>
-<h2 id="review">Review</h2>
-<p>This has been a very interesting paper, on the foundational concepts. A more formal approach to the assignment operator, L-Values and R-Values and functions.</p>
-<p>The part about types is very interesting, explained in simple terms and with examples.</p>
-<p>Some of the examples are in CPL, that although an old language, it is still comprehensible. The examples or equivalences in lambda calculus are more difficult to understand (I had to read an introduction to it<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, just to grab the basics)</p>
-<p>Some concepts are a bit outdated, such as the missing object orientation (or its features) or the assembly code, but in general the contents resist the time.</p>
-<p>Many of the concepts in programming are around L-Values and R-Values and this paper has made me realize this. Also that even if we are users of these systems, I didn&rsquo;t know many formalities behind it (assignment operator, rewriting, types, type inference, polymorphism modes, polymorphism without inheritance, etc).</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>Quine, W.V. Word and Object. New York Technology Press and Wiley, 1960 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p><a href="../../../../2015/07/01/self-study-in-july-2015">introduction to lambda calculus</a>, search for &ldquo;A Tutorial Introduction to the Lambda Calculus&rdquo; <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-
         
 
     </article>
@@ -826,7 +655,15 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
           </li>
         
           <li class="post">
@@ -857,14 +694,6 @@ You can find me on:
               <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
           </li>
         
-          <li class="post">
-              <a href="/blog/2020/02/01/self-study-february-2020/">Self-Study in February 2020</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
-          </li>
-        
       </ul>
     </section>
   
@@ -875,7 +704,7 @@ You can find me on:
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2023 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+      <p>Copyright &copy; 2024 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>

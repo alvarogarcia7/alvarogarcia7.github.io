@@ -131,6 +131,69 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/">Packing your own maven dependencies</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/maven/">maven</a><a class="label" href="https://alvarogarcia7.github.io/categories/protip/">protip</a><a class="label" href="https://alvarogarcia7.github.io/categories/jitpack/">jitpack</a>
+        
+    </p>
+</header>
+
+        
+          <p>Lately, I&rsquo;ve found myself repeating always the same dependencies for my pet projects and katas. Usually, I prefer maven to hold my java dependencies, organized in a java project.
+This is how most of them look like:
+&lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;groupId&gt;com.gmaur.legacycode&lt;/groupId&gt; &lt;artifactId&gt;legacyutils&lt;/artifactId&gt; &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.hamcrest&lt;/groupId&gt; &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt; &lt;version&gt;1.3&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;4.11&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.mockito&lt;/groupId&gt; &lt;artifactId&gt;mockito-all&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;version&gt;2.0.2-beta&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt; &lt;version&gt;2.</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/07/30/packing-your-own-maven-dependencies/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/">Tool to Find Duplicate values in Constants</a>
+    </h1>
+    <p >Jul 30, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/sample/">sample</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/duplicate/">duplicate</a><a class="label" href="https://alvarogarcia7.github.io/categories/gmaur/">gmaur</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a>
+        
+    </p>
+</header>
+
+        
+          <p>Imagine having this java class:
+private static class RepeatedConstants { public static final String A = &#34;A&#34;; public static final String A_1 = A; public static final String A_2 = &#34;A&#34;; public static final Integer _3 = 3; public static final Integer THREE = 3; } I wanted to remove the repeated values in the constants, in an automatic way, because the file was big (&gt; 4000 constants). A way of doing this is basing the differences on the values, directly.</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tool-to-find-duplicate-values-in-constants/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/07/30/tip-use-the-same-import-order-in-intellij-idea-as-eclipses/">Tip: Use the same Import Order in IntelliJ IDEA as Eclipse&#39;s</a>
     </h1>
     <p >Jul 30, 2015
@@ -236,71 +299,6 @@ public class MailSender { private final EventLogger eventLogger; public MailSend
           <p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.
 These are the concepts and links brought up during the discussion:
  The craftsmanship analogy, as exposed in these tweets Difference between function and method What vs How (also present in the GOOS)  </p>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster site generation for Octopress 2</a>
-    </h1>
-    <p >Jul 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
-        
-    </p>
-</header>
-
-        
-          <p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See here
-After a while, the generation of the static site using Octopress 2 was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.
-Inspired by their new features in Octopress 3, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
-          
-            <footer>
-              <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/" rel="full-article">Read On &rarr;</a>
-            </footer>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/">What defines a dependency</a>
-    </h1>
-    <p >Jul 13, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/fragment/">fragment</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/listener/">listener</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-stereotype/">object-stereotype</a>
-        
-    </p>
-</header>
-
-        
-          <p>A friend and I were arguing about this code (fragment):
-public void register (final String userName) { try { registeredUsers.add(new User(userName)); } catch (AlreadyRegisteredUserException e) { resultListener.alreadyRegistered(userName); } } I would have said that resultListener is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).
-He suggested that:
- being injected through the constructor is usually what happens with dependencies, but does not make it one (i.</p>
-          
-            <footer>
-              <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/" rel="full-article">Read On &rarr;</a>
-            </footer>
           
         
       </article>
@@ -510,7 +508,15 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
           </li>
         
           <li class="post">
@@ -541,14 +547,6 @@ You can find me on:
               <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
           </li>
         
-          <li class="post">
-              <a href="/blog/2020/02/01/self-study-february-2020/">Self-Study in February 2020</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
-          </li>
-        
       </ul>
     </section>
   
@@ -558,7 +556,7 @@ You can find me on:
   </div>
 </div>
     <footer role="contentinfo">
-      <p>Copyright &copy; 2023 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+      <p>Copyright &copy; 2024 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>

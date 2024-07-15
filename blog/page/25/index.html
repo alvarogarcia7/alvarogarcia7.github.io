@@ -129,6 +129,112 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/">Practical Object-Oriented Design in Ruby: Chapter 1</a>
+    </h1>
+    <p >Jun 29, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/29/practical-object-oriented-design-in-ruby-chapter-1/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-feathers/">michael-feathers</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/ood/">ood</a><a class="label" href="https://alvarogarcia7.github.io/categories/edward-berard/">edward-berard</a><a class="label" href="https://alvarogarcia7.github.io/categories/design-metrics/">design-metrics</a><a class="label" href="https://alvarogarcia7.github.io/categories/churn/">churn</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>We&rsquo;ve read the first chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
+<p>These are the concepts and links brought up during the discussion:</p>
+<blockquote>
+<p>Walking on water and developing software from a specification are easy if both are frozen.</p>
+<p>Edward V Berard, source is <a href="https://en.wikiquote.org/wiki/Edward_V._Berard">Wikiquote</a></p>
+</blockquote>
+<p>Two cited papers on metrics for design:</p>
+<ul>
+<li><a href="http://www.pitt.edu/~ckemerer/CK%20research%20papers/MetricForOOD_ChidamberKemerer94.pdf">A metrics suite for object oriented design</a> by Chidamber and Kemerer</li>
+<li><a href="http://www.cs.umd.edu/~basili/publications/technical/T102.pdf">A validation of object-oriented design metrics as quality indicators</a> by Basili, Briand and Melo</li>
+</ul>
+<p>The video for the &lsquo;churn&rsquo; as a measure:</p>
+<ul>
+<li><a href="http://www.ustream.tv/recorded/61483799">The Hidden Dimension Of Refactoring</a> by Michael Feathers</li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/">Brown-bag session: Refactoring legacy code</a>
+    </h1>
+    <p >Jun 23, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/23/brown-bag-session-refactoring-legacy-code/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Today I have facilitated a brown bag session about refactoring legacy code applications, as this is the case with one of the applications we maintain and add new features to.</p>
+<p>The contents of the session:</p>
+<ul>
+<li>Briefly exposing the problem to the team, me taking the role of the Product Owner (PO)</li>
+<li>Ask the dev team to add an easy feature</li>
+<li>Do it without tests, as it was so simple that they thought they could do it (using mob programming)</li>
+<li>Ask if they were satisfied by the patch / fix. Answer was yes.</li>
+<li>Point out that there are regressions in the few lines of the patch</li>
+<li>Repeat the session, starting with adding tests to guarantee the behavior is preserved  (using mob programming)</li>
+<li>Explain the technique of the golden master</li>
+<li>Some more programming, until they start to see the light at the end of the tunnel</li>
+<li>Small retrospective, including:
+<ul>
+<li>asking them their feelings when dealing with legacy code. The contents of this is pretty similar to the concepts that appear in the retrospectives, when talking about the legacy project / submodule.</li>
+<li>what could I improve as facilitator or for the structure of the session</li>
+</ul>
+</li>
+</ul>
+<p>The repo can be found <a href="https://github.com/alvarogarcia7/trivia-kata-spike">here</a>.</p>
+<p>I prepared a small script:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">while</span> <span class="nb">test</span> true<span class="p">;</span> <span class="k">do</span>
+  git add --all<span class="p">;</span>
+  git commit --all -m <span class="s2">&#34;save process - uknown state&#34;</span><span class="p">;</span>
+  sleep 120<span class="p">;</span>
+<span class="k">done</span><span class="p">;</span>
+</code></pre></div><p>that saves the process and the progress, without disturbing the attendees. This allows you to follow the progress without any distraction. This idea was taken from a similar one from  <a href="http://twitter.com/@xav1uzz">Xavi Gost</a> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>This same idea was also cited by someone else, if I recall correctly by Sandro Mancuso, saying that it would be a good idea to have a background git repository while working. IntelliJ IDEA already does something similar (and saves the events, e.g., when the tests are run, either red or green)</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Cannot find the source, it was about having a script to commit automatically each time you run the tests; if it was red while refactoring, it would do git checkout (to revert); Was related to the noFlopSquad <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/06/16/brown-bag-session-docker/">Brown-bag session: docker</a>
     </h1>
     <p >Jun 16, 2015
@@ -384,67 +490,6 @@ on professionalism and the programmer culture, by Garann Means</p>
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/02/internal-training-bpm-tool-and-process/">Internal training: BPM: Process and tools for developers</a>
-    </h1>
-    <p >Jun 2, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/02/internal-training-bpm-tool-and-process/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal/">internal</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal-training/">internal-training</a><a class="label" href="https://alvarogarcia7.github.io/categories/bpm/">bpm</a><a class="label" href="https://alvarogarcia7.github.io/categories/activiti/">activiti</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>At a client, I&rsquo;ve presented today an internal training on &ldquo;BPM: Process and tools for developers&rdquo;</p>
-<p>In it, we have introduced the BPM concept and the main ideas in Activiti BPM.</p>
-<p>Also techniques for hotswapping processes, tips and how-tos.</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/">Category: Poodr</a>
-    </h1>
-    <p >Jun 1, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/category/">category</a><a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.poodr.com/">Practical Object-Oriented Design in Ruby</a>&rsquo;, by Sandi Metz</p>
-<p>Note: This has been created a posteriori with a previous date</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -652,7 +697,15 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
           </li>
         
           <li class="post">
@@ -683,14 +736,6 @@ You can find me on:
               <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
           </li>
         
-          <li class="post">
-              <a href="/blog/2020/02/01/self-study-february-2020/">Self-Study in February 2020</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2019/12/30/books-read-2019q4/">Books read in 2019Q4</a>
-          </li>
-        
       </ul>
     </section>
   
@@ -701,7 +746,7 @@ You can find me on:
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2023 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+      <p>Copyright &copy; 2024 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
