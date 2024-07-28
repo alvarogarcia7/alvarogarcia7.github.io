@@ -135,7 +135,7 @@
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/search/">search</a><a class="label" href="https://alvarogarcia7.github.io/categories/naive-search/">naive-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/binary-search/">binary-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/dichotomous-search/">dichotomous-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/context/">context</a><a class="label" href="https://alvarogarcia7.github.io/categories/end-to-end-test/">end-to-end-test</a><a class="label" href="https://alvarogarcia7.github.io/categories/test-dependency/">test-dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/antipattern/">antipattern</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/search/">search</a><a class="label" href="https://alvarogarcia7.github.io/categories/naive-search/">naive-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/binary-search/">binary-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/dichotomous-search/">dichotomous-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/dichotomic-search/">dichotomic-search</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/context/">context</a><a class="label" href="https://alvarogarcia7.github.io/categories/end-to-end-test/">end-to-end-test</a><a class="label" href="https://alvarogarcia7.github.io/categories/test-dependency/">test-dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/antipattern/">antipattern</a>
         
     </p>
 </header>
@@ -155,9 +155,12 @@
 <p>where:</p>
 <ul>
 <li><code>i</code> are green tests</li>
-<li><code>F</code> is first failing test
-* when executed in isolation, is green
-* when executed in the sequence, is red</li>
+<li><code>F</code> is first failing test:
+<ul>
+<li>when executed in isolation, is green</li>
+<li>when executed in the sequence, is red</li>
+</ul>
+</li>
 <li><code>j</code> are tests after the failed test.</li>
 </ul>
 <p>In this case, the order is important, as the failed test suite (presumably) comes from a shared state set by a previous test.</p>
@@ -176,7 +179,7 @@
 <p>For the second step, <code>O(n * n-1 * 3)</code>. Reduces to <code>O(n^2)</code></p>
 <p>For the third step, <code>O(n * n-1 * n-2 * 4)</code>. Reduces to <code>O(n^3)</code></p>
 <p>For the nth step, it costs <code>O(n * n-1 * n-2 * ... * n-(n-1) * (n+1))</code>. Reduces to <code>O(n^n)</code>. Which is polynomical but not feasible for medium-sized <code>n</code> (in an automatic fashion) or small <code>n</code> (in a manual fashion)</p>
-<h2 id="dichotomous-search">Dichotomous search</h2>
+<h2 id="dichotomic-search">Dichotomic search</h2>
 <p>(This is also known as <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary search</a>)</p>
 <p>Inspired by <code>git-bisect</code>, I decided to treat the sequence <code>i1, ..., in</code> as the source for the dicotomical search, applying the subsequences to <code>F</code>.</p>
 <p>The first step, it takes <code>O(n/2 * n/2)</code> = <code>O(n^2)</code> to execute half the tests</p>
@@ -191,7 +194,7 @@
 <p>After finding the minimum sequence and solving the issue, this support branch was discarded</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>In the real scenario, with around 100 tests, searching manually in the naïve way would not have been possible. It would have cost 100 steps, as the minimum set that produces <code>F</code> had size 2 (so only one step was necessary).</p>
-<p>Applying the dichotomous search, in 8-10 steps I had finished, with the guarantee that no matter how many tests produced the <code>F</code> I would have found it in a reasonable amount of time.</p>
+<p>Applying the dichotomic search, in 8-10 steps I had finished, with the guarantee that no matter how many tests produced the <code>F</code> I would have found it in a reasonable amount of time.</p>
 <h2 id="comments">Comments</h2>
 <p>Finally, the root cause for the failing test <code>F</code> was the OrientDB InMemory implementation with Spring context, as the former does not allow two instances at the same time in the same JVM.</p>
 <p>It was solved using <code>@DirtiesContext</code> in both cases of the minimum sequence that forms <code>F</code>, so no matter which order the executor decides, the context will always be clean for the next execution.</p>

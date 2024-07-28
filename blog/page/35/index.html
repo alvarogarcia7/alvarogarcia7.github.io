@@ -178,7 +178,7 @@
 
         
         <p>I&rsquo;ve just seen this talk: <a href="https://www.youtube.com/watch?v=PCEHRFHKZSk">Is TDD dead? Of course not! But what´s all the fuzz about then?</a> by <a href="https://twitter.com/emilybache">Emily Bache</a></p>
-<p>###My notes</p>
+<h3 id="my-notes">My notes</h3>
 <ul>
 <li>
 <p>deliberate vs accidental learning (around minute 19)</p>
@@ -222,7 +222,7 @@
 </ul>
 </li>
 </ul>
-<p>###Her conclusions</p>
+<h3 id="her-conclusions">Her conclusions</h3>
 <ul>
 <li>Watch out the fundamentalism</li>
 <li>TDD might take you to too many layers of indirection</li>
@@ -331,25 +331,19 @@
 
         
         <p>In this lexical scope, TDD by example is referring to this book<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, available <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">on Amazon</a></p>
-<p>###The TDD cycle</p>
+<h3 id="the-tdd-cycle">The TDD cycle</h3>
 <p>Altough <a href="https://twitter.com/KentBeck">Kent Beck</a> in his book Test-Driven Development by example explains in &ldquo;Part I: the money example&rdquo;<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> that one should</p>
 <blockquote>
 <p>quickly add a test;</p>
-</blockquote>
-<blockquote>
 <p>run all the tests and see the new one fail [&hellip;]</p>
-</blockquote>
-<blockquote>
 <p><!-- raw HTML omitted -->Kent Beck <!-- raw HTML omitted --></p>
 </blockquote>
 <p>Implying that the TDD cycle starts with the red. Later on he explains that the cycle continues with green and refactor and back to red.</p>
 <p>But I&rsquo;ve been hearing for a while that there&rsquo;re some useful refactors to be done before introducing new code. Rings in my head but the only example I have is Xavi Gost&rsquo;s &ldquo;La economía del refactoring<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>&rdquo;</p>
-<p>###Refactoring
-Let&rsquo;s take a look at the definition of refactor (found <a href="http://www.refactoring.com/">here</a>):</p>
+<h3 id="refactoring">Refactoring</h3>
+<p>Let&rsquo;s take a look at the definition of refactor (found <a href="http://www.refactoring.com/">here</a>):</p>
 <blockquote>
 <p>[Refactoring] is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.</p>
-</blockquote>
-<blockquote>
 <p><!-- raw HTML omitted -->Martin Fowler<!-- raw HTML omitted --></p>
 </blockquote>
 <p>I&rsquo;ve found some info on <a href="http://stackoverflow.com/questions/1355101/test-code-refactor-when-should-we-start-a-refactoring">stackoverflow</a> about the subject. The currently <a href="http://stackoverflow.com/a/1355782">accepted answer</a> points out some interesting comments:</p>
@@ -367,14 +361,14 @@ Let&rsquo;s take a look at the definition of refactor (found <a href="http://www
 <p>No está justificado hacer cambios fuera de la rebanada.</p>
 </blockquote>
 <p>Roughly translated to &ldquo;It&rsquo;s not justified to change outside the bread slice&rdquo;, as Xavi was referring to software as sliced bread instead of layers, vertical rather than horizontal</p>
-<p>###Should you do it?</p>
+<h3 id="should-you-do-it">Should you do it?</h3>
 <ul>
 <li>Doing it would be a good thing, as long as you know in advance what will be affected by the next feature.</li>
 <li>It can allow for less refactoring at the end of the cycle. This is not about duplication but refactoring to patterns. There might be a gain in refactoring to a pattern before introducing another feature. An example might be adding a new strategy when it&rsquo;s currently coded as if-then-else</li>
 <li>The last responsible moment might be before or after introducing the feature. You decide.</li>
 <li>Work less as there&rsquo;s no need for adding new cases to old structures and then simplifying</li>
 </ul>
-<p>###Should you not do it?</p>
+<h3 id="should-you-not-do-it">Should you not do it?</h3>
 <ul>
 <li>Foreseeing the future is difficult, therefore you might end with unused development, as it is speculating</li>
 <li>Related to the last point, you might end refactoring in the wrong places. There&rsquo;s no current business value to it.</li>
@@ -393,7 +387,7 @@ Let&rsquo;s take a look at the definition of refactor (found <a href="http://www
 <li>You know your domain, pitfalls and team well</li>
 <li>You want to test this hypothesis and post an answer</li>
 </ol>
-<p>###Sources</p>
+<h3 id="sources">Sources</h3>
 <ul>
 <li><a href="http://cas2014.agile-spain.org/sessions/sesion-1h-la-economia-del-refactoring-una-vision-desde-la-gestion-economica-del-proyecto-xavier-gost/">La economía del refactoring</a>, <a href="https://twitter.com/xav1uzz">Xavi Gost</a></li>
 <li><a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">Test-Driven Development by example</a>, <a href="https://twitter.com/KentBeck">Kent Beck</a></li>

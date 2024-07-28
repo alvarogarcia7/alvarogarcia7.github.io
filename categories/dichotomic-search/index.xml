@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dichotomic-search on The long way through Software Craftsmanship</title>
+    <link>https://alvarogarcia7.github.io/categories/dichotomic-search/</link>
+    <description>Recent content in dichotomic-search on The long way through Software Craftsmanship</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Aug 2015 16:45:19 +0000</lastBuildDate><atom:link href="https://alvarogarcia7.github.io/categories/dichotomic-search/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Searching on a suite of failing tests</title>
+      <link>https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/</link>
+      <pubDate>Thu, 13 Aug 2015 16:45:19 +0000</pubDate>
+      
+      <guid>https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/</guid>
+      <description>Motivation Today, at a client, in the green phase, we had a test suite which was failing: the whole suite fails but the test cases, individually, succeed.
+So my first impression was that something was being shared between tests. Also confirmed because the failing class was an EndToEnd test, in which we load the whole spring context
+A quick glance was not revealing anything interesting, so I decided to find which is the minimum suite (as opposed as to the whole suite) that makes the new testcase fail, expecting to narrow the search for possible causes.</description>
+    </item>
+    
+  </channel>
+</rss>
