@@ -131,6 +131,38 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/11/02/functional-implementation-patterns/">Functional Implementation Patterns</a>
+    </h1>
+    <p >Nov 2, 2015
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/11/02/functional-implementation-patterns/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - 
+        
+    </p>
+</header>
+
+        
+          <p>Collection of HOFs Select Attribute class Array def select_attribute attr self.map { |unit| unit[attr] } end end usage:
+[71] pry(main)&gt; [ {:element =&gt; 1, :even? =&gt; false}, {:element =&gt; 2, :even? =&gt; true}, {:element =&gt; 3, :even? =&gt; false}] .select_attribute :even? =&gt; [false, true, false] Collection of patterns Decorating a collection Introduction You want to materialize properties from a collection
+Alternative names  Intermediary Functional decorator Collection Annotation (from Wallingford&rsquo;s Roundabout, especially Interface procedure)  Example [62] pry(main)&gt; [1,2,3] .</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/11/02/functional-implementation-patterns/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/11/02/self-study-in-november-2015/">Self-Study in November 2015</a>
     </h1>
     <p >Nov 2, 2015
@@ -274,39 +306,6 @@ Set up the system property JAVA_TOOL_OPTIONS to -Dfile.encoding=UTF8</p>
           
             <footer>
               <a href="https://alvarogarcia7.github.io/blog/2015/10/05/tip-differences-in-maven-test-execution/" rel="full-article">Read On &rarr;</a>
-            </footer>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the failure in bash</a>
-    </h1>
-    <p >Oct 2, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipe/">pipe</a><a class="label" href="https://alvarogarcia7.github.io/categories/failure/">failure</a><a class="label" href="https://alvarogarcia7.github.io/categories/exit-code/">exit-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/exit-status/">exit-status</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature-toggle/">feature-toggle</a>
-        
-    </p>
-</header>
-
-        
-          <p>In bash, the usual behavior is to return the last status code:
-bash-3.1$ tr tr: two strings must be given when translating bash-3.1$ echo $? 1 But this also applies to pipes:
-bash-3.1$ tr|tee 1.txt tr: two strings must be given when translating bash-3.1$ echo $? 0 Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: set -o pipefail
-bash-3.1$ set -o pipefail bash-3.</p>
-          
-            <footer>
-              <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/" rel="full-article">Read On &rarr;</a>
             </footer>
           
         
@@ -517,6 +516,10 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
           </li>
         
@@ -550,10 +553,6 @@ You can find me on:
         
           <li class="post">
               <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
           </li>
         
       </ul>

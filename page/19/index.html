@@ -131,6 +131,39 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the failure in bash</a>
+    </h1>
+    <p >Oct 2, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipe/">pipe</a><a class="label" href="https://alvarogarcia7.github.io/categories/failure/">failure</a><a class="label" href="https://alvarogarcia7.github.io/categories/exit-code/">exit-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/exit-status/">exit-status</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature-toggle/">feature-toggle</a>
+        
+    </p>
+</header>
+
+        
+          <p>In bash, the usual behavior is to return the last status code:
+bash-3.1$ tr tr: two strings must be given when translating bash-3.1$ echo $? 1 But this also applies to pipes:
+bash-3.1$ tr|tee 1.txt tr: two strings must be given when translating bash-3.1$ echo $? 0 Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: set -o pipefail
+bash-3.1$ set -o pipefail bash-3.</p>
+          
+            <footer>
+              <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/" rel="full-article">Read On &rarr;</a>
+            </footer>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/">Self-Study in October 2015</a>
     </h1>
     <p >Oct 1, 2015
@@ -282,35 +315,6 @@ In this case, what I usually do &ndash;as long as the programming session is mor
             <footer>
               <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/" rel="full-article">Read On &rarr;</a>
             </footer>
-          
-        
-      </article>
-      
-      <article>
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/">Brown-bag session: eXtreme Programming</a>
-    </h1>
-    <p >Sep 2, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/extreme-programming/">extreme-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/xp/">xp</a>
-        
-    </p>
-</header>
-
-        
-          <p>At a client, today I&rsquo;ve introduced the eXtreme Programmig methodology, with its values, principles, practices in a brown-bag session.
-It has been an informal session, without slides, but we have used this video by the Kleer guys (in Spanish).
-The video gives a high-level overview of what XP is. We also needed to cover the daily practices (e.g., TDD, pair programming, whole team)
-After that, we&rsquo;ve done a questions&amp;answers round to solve the teammates' doubts</p>
           
         
       </article>
@@ -520,6 +524,10 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
           </li>
         
@@ -553,10 +561,6 @@ You can find me on:
         
           <li class="post">
               <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
           </li>
         
       </ul>

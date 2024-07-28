@@ -129,6 +129,125 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/">Refactoring: split loop &#43; loop/map equivalence</a>
+    </h1>
+    <p >Feb 6, 2019
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/split-loop/">split-loop</a><a class="label" href="https://alvarogarcia7.github.io/categories/split-loop-refactoring/">split-loop-refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/loop-map-equivalence/">loop-map-equivalence</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/kotlin/">kotlin</a><a class="label" href="https://alvarogarcia7.github.io/categories/multiparadigm/">multiparadigm</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/fp/">fp</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-programming/">object-oriented-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented/">object-oriented</a><a class="label" href="https://alvarogarcia7.github.io/categories/oo/">oo</a><a class="label" href="https://alvarogarcia7.github.io/categories/oop/">oop</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>We can combine the <a href="https://refactoring.com/catalog/splitLoop.html">&ldquo;Split loop&rdquo; refactoring</a> technique plus the &ldquo;Loop / Map equivalence&rdquo; when refactoring.</p>
+<p>Given that it does not matter in which order we apply these operations, we can say that they have the <a href="https://en.wikipedia.org/wiki/Associative_property">associative property</a></p>
+<h2 id="chart-of-the-operations">Chart of the operations</h2>
+<p>Take the case of a loop doing two things. From there:</p>
+<ul>
+<li>we can replace the loop for a map (including the two actions into a single map body)</li>
+<li>we can split the loop into two loops</li>
+</ul>
+<p>Take the case of two loops, doing one thing each. From there:</p>
+<ul>
+<li>we can replace a loop for a map</li>
+<li>we can replace both loops for maps</li>
+</ul>
+<p>Take a map doing two things. From there:</p>
+<ul>
+<li>we can split the map, into two maps, doing one thing each.</li>
+</ul>
+<p>(We&rsquo;re not specifying the inverse operations)</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><img src="/uploads/state-diagram-loop-map-split-map-equivalence.png
+" alt="State diagram of the operations"></p>
+<h2 id="example">Example</h2>
+<p>We want to print all substrings of a given string:</p>
+<p>(State1: This uses a single loop, performing two actions)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>From State1, we replace the loop for a map:</p>
+<p>(State2: This uses a map, with two operations)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">).</span><span class="n">map</span> <span class="p">{</span>
+        <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>From State1, Refactor to split the loop:</p>
+<p>(State3: This uses two loops, performing one action each)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
+  <span class="k">val</span> <span class="py">substrings</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;()</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">substrings</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="n">substrings</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Collapse the first loop into a map:</p>
+<p>(This uses a map and a loop)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+                     <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">})</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>Extract the method to give it a name:</p>
+<p>(This uses a map, a loop, and a method to explain the logic)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="n">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> 
+  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div><p>Alternatively, use the method, with a map:</p>
+<p>(This uses an explaining method, with a map)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> 
+  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div><p>Alternatively, from State3, we can also replace the loop for two <code>map</code>s:</p>
+<p>(State4: This uses two maps)</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
+  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="links">Links</h2>
+<ul>
+<li><a href="https://refactoring.com/catalog/splitLoop.html">Split Loop refactoring</a>, by Martin Fowler</li>
+</ul>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
     </h1>
     <p >Feb 1, 2019
@@ -658,100 +777,6 @@ Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
 
     </article>
     
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/07/01/self-study-july-2018/">Self-Study in July 2018</a>
-    </h1>
-    <p >Jul 1, 2018
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/07/01/self-study-july-2018/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/july/">july</a><a class="label" href="https://alvarogarcia7.github.io/categories/2018/">2018</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/aws/">aws</a><a class="label" href="https://alvarogarcia7.github.io/categories/bar/">bar</a><a class="label" href="https://alvarogarcia7.github.io/categories/bonilista/">bonilista</a><a class="label" href="https://alvarogarcia7.github.io/categories/burn-out/">burn-out</a><a class="label" href="https://alvarogarcia7.github.io/categories/burnout/">burnout</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/career-management/">career-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/chesterton-fence/">chesterton-fence</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/cloud-scale/">cloud-scale</a><a class="label" href="https://alvarogarcia7.github.io/categories/collaborator/">collaborator</a><a class="label" href="https://alvarogarcia7.github.io/categories/consulting/">consulting</a><a class="label" href="https://alvarogarcia7.github.io/categories/contractor/">contractor</a><a class="label" href="https://alvarogarcia7.github.io/categories/database/">database</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-bonilla/">david-bonilla</a><a class="label" href="https://alvarogarcia7.github.io/categories/delivery/">delivery</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/development/">development</a><a class="label" href="https://alvarogarcia7.github.io/categories/discovery/">discovery</a><a class="label" href="https://alvarogarcia7.github.io/categories/dummy/">dummy</a><a class="label" href="https://alvarogarcia7.github.io/categories/exactly-once-delivery/">exactly-once-delivery</a><a class="label" href="https://alvarogarcia7.github.io/categories/facebook/">facebook</a><a class="label" href="https://alvarogarcia7.github.io/categories/fix/">fix</a><a class="label" href="https://alvarogarcia7.github.io/categories/gerard-meszaros/">gerard-meszaros</a><a class="label" href="https://alvarogarcia7.github.io/categories/go/">go</a><a class="label" href="https://alvarogarcia7.github.io/categories/golang/">golang</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/growing-object-oriented-software/">growing-object-oriented-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/hacker-news/">hacker-news</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/health/">health</a><a class="label" href="https://alvarogarcia7.github.io/categories/history/">history</a><a class="label" href="https://alvarogarcia7.github.io/categories/hype/">hype</a><a class="label" href="https://alvarogarcia7.github.io/categories/kafka/">kafka</a><a class="label" href="https://alvarogarcia7.github.io/categories/keith-lee/">keith-lee</a><a class="label" href="https://alvarogarcia7.github.io/categories/ksuid/">ksuid</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/lewis-menelaws/">lewis-menelaws</a><a class="label" href="https://alvarogarcia7.github.io/categories/listicle/">listicle</a><a class="label" href="https://alvarogarcia7.github.io/categories/lucas-di-cioccio/">lucas-di-cioccio</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/message/">message</a><a class="label" href="https://alvarogarcia7.github.io/categories/message-delivery/">message-delivery</a><a class="label" href="https://alvarogarcia7.github.io/categories/mock/">mock</a><a class="label" href="https://alvarogarcia7.github.io/categories/monad/">monad</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/oaoo/">oaoo</a><a class="label" href="https://alvarogarcia7.github.io/categories/onboarding/">onboarding</a><a class="label" href="https://alvarogarcia7.github.io/categories/once-and-only-once/">once-and-only-once</a><a class="label" href="https://alvarogarcia7.github.io/categories/part/">part</a><a class="label" href="https://alvarogarcia7.github.io/categories/people/">people</a><a class="label" href="https://alvarogarcia7.github.io/categories/policy/">policy</a><a class="label" href="https://alvarogarcia7.github.io/categories/process/">process</a><a class="label" href="https://alvarogarcia7.github.io/categories/productive-haskell-bar/">productive-haskell-bar</a><a class="label" href="https://alvarogarcia7.github.io/categories/productivity/">productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/project-management/">project-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/pyramid/">pyramid</a><a class="label" href="https://alvarogarcia7.github.io/categories/relationship/">relationship</a><a class="label" href="https://alvarogarcia7.github.io/categories/rick-branson/">rick-branson</a><a class="label" href="https://alvarogarcia7.github.io/categories/rocksdb/">rocksdb</a><a class="label" href="https://alvarogarcia7.github.io/categories/sabbatical/">sabbatical</a><a class="label" href="https://alvarogarcia7.github.io/categories/segment/">segment</a><a class="label" href="https://alvarogarcia7.github.io/categories/slack-time/">slack-time</a><a class="label" href="https://alvarogarcia7.github.io/categories/steve-freeman/">steve-freeman</a><a class="label" href="https://alvarogarcia7.github.io/categories/stub/">stub</a><a class="label" href="https://alvarogarcia7.github.io/categories/test-double/">test-double</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/topic/">topic</a><a class="label" href="https://alvarogarcia7.github.io/categories/uuid/">uuid</a><a class="label" href="https://alvarogarcia7.github.io/categories/vertical-slice/">vertical-slice</a><a class="label" href="https://alvarogarcia7.github.io/categories/xunit/">xunit</a><a class="label" href="https://alvarogarcia7.github.io/categories/xunit-pattern/">xunit-pattern</a><a class="label" href="https://alvarogarcia7.github.io/categories/xunitpatterns/">xunitpatterns</a>
-        
-    </p>
-</header>
-
-
-        
-        <h2 id="the-haskell-pyramidhttpspatrickmncomsoftwarethe-haskell-pyramid"><a href="https://patrickmn.com/software/the-haskell-pyramid/">The Haskell Pyramid</a></h2>
-<p>I&rsquo;ve read this article on how the productivity for Haskell is achieved: not using the topics discussed on social networks (monads, functors, laws, lenses, etc) but using more basic tools</p>
-<p>Tags: haskell, productivity, lucas-di-cioccio, learning, development, tool, monad, hype, pyramid, productive-haskell-bar, bar</p>
-<p>Id: 454f53fc-7dd6-11e8-8208-0242ac110003
-Read: Mon, 02 Jul 2018 08:59:47 +0000</p>
-<h2 id="el-verde-más-verdehttpsmailchimpbonillawareverde-mas-verdee68e22b460d"><a href="https://mailchi.mp/bonillaware/verde-mas-verde?e=68e22b460d">El verde más verde</a></h2>
-<p>I&rsquo;ve read this article on how to structure creative projects (e.g., UX, programming) by professionals, as told by David Bonilla.</p>
-<p>Tags: david-bonilla, bonilista, project-management, slack-time, sabbatical, vertical-slice</p>
-<p>Id: ef00176e-7ddc-11e8-a33b-0242ac110003
-Read: Mon, 02 Jul 2018 09:47:29 +0000</p>
-<h2 id="how-to-fix-burnout-as-a-developerhttpsdevtolewismenelawshow-to-fix-burnout-as-a-developer--4opl"><a href="https://dev.to/lewismenelaws/how-to-fix-burnout-as-a-developer--4opl">How to Fix Burnout as a Developer</a></h2>
-<p>I&rsquo;ve read this article on burnout and how to fix it:
-Stop working so much.
-Prioritize your health.
-Try something new.
-Patience is key.
-Talk to your loved ones.</p>
-<p>Tags: lewis-menelaws, burnout, burn-out, productivity, listicle, career, psychology, management, time-management, career-management, health</p>
-<p>Id: 40d68542-7dff-11e8-89f2-0242ac110003
-Read: Mon, 02 Jul 2018 13:53:09 +0000</p>
-<h2 id="ask-hn-what-is-the-first-thing-you-implement-at-a-new-companyhttpsnewsycombinatorcomitemid17353854"><a href="https://news.ycombinator.com/item?id=17353854">Ask HN: What is the first thing you implement at a new company?</a></h2>
-<p>I&rsquo;ve read this article on the first things that people do when joining a new client.
-Mentions the Chesterton&rsquo;s fence: You don’t want to change something until you understand why it’s there in the first place.</p>
-<p>Tags: chesterton-fence, hacker-news, contractor, client, onboarding, fix</p>
-<p>Id: 9003a91a-7dff-11e8-a366-0242ac110003
-Read: Mon, 02 Jul 2018 13:55:22 +0000</p>
-<h2 id="the-fallacy-of-chestertons-fencehttpsabovethelawcom201401the-fallacy-of-chestertons-fence"><a href="https://abovethelaw.com/2014/01/the-fallacy-of-chestertons-fence/">The Fallacy Of Chesterton&rsquo;s Fence</a></h2>
-<p>I&rsquo;ve read this article on the Chesterton&rsquo;s fence.</p>
-<blockquote>
-<p>don’t ever take a fence down until you know the reason why it was put up</p>
-</blockquote>
-<p>The author explains that the walls (or contracts, or clauses, or practices) were put in place to cover for a specific need. Do not assume that this need does not exist now, before understanding what the need was in the first place.</p>
-<p>Tags: chesterton-fence, keith-lee, consulting, tip, analogy, discovery, process, people</p>
-<p>Id: 736e269e-7e00-11e8-ac4a-0242ac110003
-Read: Mon, 02 Jul 2018 14:01:43 +0000</p>
-<h2 id="a-brief-history-of-the-uuidhttpssegmentcombloga-brief-history-of-the-uuid"><a href="https://segment.com/blog/a-brief-history-of-the-uuid/">A brief history of the UUID</a></h2>
-<p>A brief history of UUID: of how it was developed, why, and a new library in go called ksuid
-Explains the origins of networked computers (as opposed to personal computers without any networking) in the 1980s.
-Also explains the origins of the UUID, some algorithms for generating them.</p>
-<p>Tags: ksuid, uuid, golang, go, rick-branson, history</p>
-<p>Id: c20e6ac4-8fe5-11e8-b54e-0242ac110003
-Read: Wed, 25 Jul 2018 08:36:00 +0000</p>
-<h2 id="delivering-billions-of-messages-exactly-oncehttpssegmentcomblogexactly-once-delivery"><a href="https://segment.com/blog/exactly-once-delivery/">Delivering billions of messages exactly once</a></h2>
-<p>Explains how this company (segment) has solved the problem of delivering the messages once and only once (OAOO), using RocksDB, Kafka, UUIDs. Deployed to AWS, lowers the cost of the previous system (memcached-based).
-Impressive numbers: 1.5 TB worth of keys stored on disk in RocksDB
-a 4-week window of de-duplication before aging out old keys
-approximately 60B keys stored inside our RocksDB instances
-200B messages passed through the dedupe system
-Also explains in depth how RocksDB works</p>
-<p>Tags: rocksdb, facebook, database, once-and-only-once, oaoo, message, exactly-once-delivery, delivery, message-delivery, kafka, uuid, client, aws, segment, topic, cloud-scale</p>
-<p>Id: 962c0c26-8fe6-11e8-bf2c-0242ac110003
-Read: Wed, 25 Jul 2018 08:41:55 +0000</p>
-<h2 id="object-collaboration-stereotypeshttpwwwmockobjectscom200610different-kinds-of-collaboratorshtml"><a href="http://www.mockobjects.com/2006/10/different-kinds-of-collaborators.html">Object Collaboration Stereotypes</a></h2>
-<p>This post describes the relationships between two objects:
-Dependencies are services that the object needs from its environment so that it can fulfil its responsibilities.
-Notifications are other parts of the system that need to know when the object changes state or performs an action.
-Policies are objects that tweak or adapt the object&rsquo;s behaviour to the needs of the system.
-Parts are components in the implementation that are not controlled from outside the object after being set.</p>
-<p>Tags: dependency, notification, policy, part, collaborator, relationship, steve-freeman, goos, growing-object-oriented-software</p>
-<p>Id: f7e738c8-8fe6-11e8-89be-0242ac110003
-Read: Wed, 25 Jul 2018 08:44:39 +0000</p>
-<h2 id="mocks-fakes-stubs-and-dummieshttpxunitpatternscommocks20fakes20stubs20and20dummieshtml"><a href="http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html">Mocks, Fakes, Stubs and Dummies</a></h2>
-<p>Bibliography for mocks, stubs, fakes, dummies, spies.</p>
-<p>Tags: mock, stub, test-double, dummy, xunit, xunit-pattern, gerard-meszaros, xunitpatterns</p>
-<p>Id: ea7281ee-9012-11e8-bd95-0242ac110003
-Read: Wed, 25 Jul 2018 13:59:15 +0000</p>
-
-        
-
-    </article>
-    
     
     
 
@@ -959,6 +984,10 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
           </li>
         
@@ -992,10 +1021,6 @@ You can find me on:
         
           <li class="post">
               <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/03/31/books-read-2020q1/">Books read in 2020Q1</a>
           </li>
         
       </ul>
