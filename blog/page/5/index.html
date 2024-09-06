@@ -129,113 +129,23 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/">Refactoring: split loop &#43; loop/map equivalence</a>
+        <a href="https://alvarogarcia7.github.io/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
     </h1>
-    <p >Feb 6, 2019
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2019/02/06/refactoring-split-loop-map-equivalence/#disqus_thread">Comments</a>
+    <p >Apr 10, 2021
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2021/04/10/live-article-mma-2021/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/split-loop/">split-loop</a><a class="label" href="https://alvarogarcia7.github.io/categories/split-loop-refactoring/">split-loop-refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/loop-map-equivalence/">loop-map-equivalence</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/kotlin/">kotlin</a><a class="label" href="https://alvarogarcia7.github.io/categories/multiparadigm/">multiparadigm</a><a class="label" href="https://alvarogarcia7.github.io/categories/functional-programming/">functional-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/fp/">fp</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-programming/">object-oriented-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented/">object-oriented</a><a class="label" href="https://alvarogarcia7.github.io/categories/oo/">oo</a><a class="label" href="https://alvarogarcia7.github.io/categories/oop/">oop</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/mma/">mma</a><a class="label" href="https://alvarogarcia7.github.io/categories/2021/">2021</a><a class="label" href="https://alvarogarcia7.github.io/categories/live-article/">live-article</a>
         
     </p>
 </header>
 
 
         
-        <p>We can combine the <a href="https://refactoring.com/catalog/splitLoop.html">&ldquo;Split loop&rdquo; refactoring</a> technique plus the &ldquo;Loop / Map equivalence&rdquo; when refactoring.</p>
-<p>Given that it does not matter in which order we apply these operations, we can say that they have the <a href="https://en.wikipedia.org/wiki/Associative_property">associative property</a></p>
-<h2 id="chart-of-the-operations">Chart of the operations</h2>
-<p>Take the case of a loop doing two things. From there:</p>
-<ul>
-<li>we can replace the loop for a map (including the two actions into a single map body)</li>
-<li>we can split the loop into two loops</li>
-</ul>
-<p>Take the case of two loops, doing one thing each. From there:</p>
-<ul>
-<li>we can replace a loop for a map</li>
-<li>we can replace both loops for maps</li>
-</ul>
-<p>Take a map doing two things. From there:</p>
-<ul>
-<li>we can split the map, into two maps, doing one thing each.</li>
-</ul>
-<p>(We&rsquo;re not specifying the inverse operations)</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><img src="/uploads/state-diagram-loop-map-split-map-equivalence.png
-" alt="State diagram of the operations"></p>
-<h2 id="example">Example</h2>
-<p>We want to print all substrings of a given string:</p>
-<p>(State1: This uses a single loop, performing two actions)</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
-  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><p>From State1, we replace the loop for a map:</p>
-<p>(State2: This uses a map, with two operations)</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">).</span><span class="n">map</span> <span class="p">{</span>
-        <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span>
-        <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><p>From State1, Refactor to split the loop:</p>
-<p>(State3: This uses two loops, performing one action each)</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
-  <span class="k">val</span> <span class="py">substrings</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;()</span>
-  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">substring</span> <span class="p">=</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="n">substrings</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
-  <span class="p">}</span>
-  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="n">substrings</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><p>Collapse the first loop into a map:</p>
-<p>(This uses a map and a loop)</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-                     <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">})</span> <span class="p">{</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><p>Extract the method to give it a name:</p>
-<p>(This uses a map, a loop, and a method to explain the logic)</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">(</span><span class="n">substring</span> <span class="k">in</span> <span class="n">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">))</span> <span class="p">{</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">substring</span><span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> 
-  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
-</code></pre></div><p>Alternatively, use the method, with a map:</p>
-<p>(This uses an explaining method, with a map)</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">fun</span> <span class="nf">allSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">=</span> 
-  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
-</code></pre></div><p>Alternatively, from State3, we can also replace the loop for two <code>map</code>s:</p>
-<p>(State4: This uses two maps)</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printAllSubstrings</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">String</span><span class="p">){</span>
-  <span class="m">0.</span><span class="n">rangeTo</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">string</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
-    <span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h2 id="links">Links</h2>
-<ul>
-<li><a href="https://refactoring.com/catalog/splitLoop.html">Split Loop refactoring</a>, by Martin Fowler</li>
-</ul>
+        <p>This is an article written, live, from the MMA in 2021.</p>
 
         
 
@@ -248,424 +158,98 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2019/02/01/self-study-february-2019/">Self-Study in February 2019</a>
+        <a href="https://alvarogarcia7.github.io/blog/2021/01/01/self-study-january-2021/">Self-Study in January 2021</a>
     </h1>
-    <p >Feb 1, 2019
+    <p >Jan 1, 2021
          - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2019/02/01/self-study-february-2019/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2021/01/01/self-study-january-2021/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/february/">february</a><a class="label" href="https://alvarogarcia7.github.io/categories/2019/">2019</a><a class="label" href="https://alvarogarcia7.github.io/categories/acid/">acid</a><a class="label" href="https://alvarogarcia7.github.io/categories/aerospike/">aerospike</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/ap/">ap</a><a class="label" href="https://alvarogarcia7.github.io/categories/aphyr/">aphyr</a><a class="label" href="https://alvarogarcia7.github.io/categories/atul-adya/">atul-adya</a><a class="label" href="https://alvarogarcia7.github.io/categories/availability/">availability</a><a class="label" href="https://alvarogarcia7.github.io/categories/awk/">awk</a><a class="label" href="https://alvarogarcia7.github.io/categories/aws/">aws</a><a class="label" href="https://alvarogarcia7.github.io/categories/bloat/">bloat</a><a class="label" href="https://alvarogarcia7.github.io/categories/brad-appleton/">brad-appleton</a><a class="label" href="https://alvarogarcia7.github.io/categories/cap/">cap</a><a class="label" href="https://alvarogarcia7.github.io/categories/cap-theorem/">cap-theorem</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit/">commit</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit-conf/">commit-conf</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/consistency/">consistency</a><a class="label" href="https://alvarogarcia7.github.io/categories/consistency-level/">consistency-level</a><a class="label" href="https://alvarogarcia7.github.io/categories/cp/">cp</a><a class="label" href="https://alvarogarcia7.github.io/categories/database/">database</a><a class="label" href="https://alvarogarcia7.github.io/categories/dirty-read/">dirty-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/disenchantment/">disenchantment</a><a class="label" href="https://alvarogarcia7.github.io/categories/documentation/">documentation</a><a class="label" href="https://alvarogarcia7.github.io/categories/dynamodb/">dynamodb</a><a class="label" href="https://alvarogarcia7.github.io/categories/executable-documentation/">executable-documentation</a><a class="label" href="https://alvarogarcia7.github.io/categories/extreme-programming/">extreme-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/feedback/">feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/fuzzy-read/">fuzzy-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/good-feedback/">good-feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/help/">help</a><a class="label" href="https://alvarogarcia7.github.io/categories/honest-feedback/">honest-feedback</a><a class="label" href="https://alvarogarcia7.github.io/categories/isolation/">isolation</a><a class="label" href="https://alvarogarcia7.github.io/categories/jepsen/">jepsen</a><a class="label" href="https://alvarogarcia7.github.io/categories/jesuslc/">jesuslc</a><a class="label" href="https://alvarogarcia7.github.io/categories/laura-lacarra/">laura-lacarra</a><a class="label" href="https://alvarogarcia7.github.io/categories/lean/">lean</a><a class="label" href="https://alvarogarcia7.github.io/categories/lean-software/">lean-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/liskov/">liskov</a><a class="label" href="https://alvarogarcia7.github.io/categories/makefile/">makefile</a><a class="label" href="https://alvarogarcia7.github.io/categories/microsoft/">microsoft</a><a class="label" href="https://alvarogarcia7.github.io/categories/neil-green/">neil-green</a><a class="label" href="https://alvarogarcia7.github.io/categories/nikita-prokopov/">nikita-prokopov</a><a class="label" href="https://alvarogarcia7.github.io/categories/non-repeatable/">non-repeatable</a><a class="label" href="https://alvarogarcia7.github.io/categories/partitioning/">partitioning</a><a class="label" href="https://alvarogarcia7.github.io/categories/paxos/">paxos</a><a class="label" href="https://alvarogarcia7.github.io/categories/people/">people</a><a class="label" href="https://alvarogarcia7.github.io/categories/people-management/">people-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/personality-type/">personality-type</a><a class="label" href="https://alvarogarcia7.github.io/categories/phantom/">phantom</a><a class="label" href="https://alvarogarcia7.github.io/categories/phantom-read/">phantom-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/practice/">practice</a><a class="label" href="https://alvarogarcia7.github.io/categories/principle/">principle</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/rant/">rant</a><a class="label" href="https://alvarogarcia7.github.io/categories/read-committed/">read-committed</a><a class="label" href="https://alvarogarcia7.github.io/categories/read-uncommitted/">read-uncommitted</a><a class="label" href="https://alvarogarcia7.github.io/categories/repeatable-read/">repeatable-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/serializability/">serializability</a><a class="label" href="https://alvarogarcia7.github.io/categories/serializable/">serializable</a><a class="label" href="https://alvarogarcia7.github.io/categories/slide/">slide</a><a class="label" href="https://alvarogarcia7.github.io/categories/slideshare/">slideshare</a><a class="label" href="https://alvarogarcia7.github.io/categories/software/">software</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/speed/">speed</a><a class="label" href="https://alvarogarcia7.github.io/categories/sql-database/">sql-database</a><a class="label" href="https://alvarogarcia7.github.io/categories/stronger-serializable/">stronger-serializable</a><a class="label" href="https://alvarogarcia7.github.io/categories/tonsky/">tonsky</a><a class="label" href="https://alvarogarcia7.github.io/categories/transaction/">transaction</a><a class="label" href="https://alvarogarcia7.github.io/categories/trick/">trick</a><a class="label" href="https://alvarogarcia7.github.io/categories/value/">value</a><a class="label" href="https://alvarogarcia7.github.io/categories/xp/">xp</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/january/">january</a><a class="label" href="https://alvarogarcia7.github.io/categories/2021/">2021</a><a class="label" href="https://alvarogarcia7.github.io/categories/2020/">2020</a><a class="label" href="https://alvarogarcia7.github.io/categories/acquisition-of-skill/">acquisition-of-skill</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/andre-schweighofer/">andre-schweighofer</a><a class="label" href="https://alvarogarcia7.github.io/categories/aquiles-carattino/">aquiles-carattino</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-writing/">book-writing</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/career-management/">career-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/chris-patti/">chris-patti</a><a class="label" href="https://alvarogarcia7.github.io/categories/constraint-optimization-programming/">constraint-optimization-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/constraint-sastifaction-programming/">constraint-sastifaction-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/cop/">cop</a><a class="label" href="https://alvarogarcia7.github.io/categories/csp/">csp</a><a class="label" href="https://alvarogarcia7.github.io/categories/distinction/">distinction</a><a class="label" href="https://alvarogarcia7.github.io/categories/document/">document</a><a class="label" href="https://alvarogarcia7.github.io/categories/dreyfus-model/">dreyfus-model</a><a class="label" href="https://alvarogarcia7.github.io/categories/eisvogel/">eisvogel</a><a class="label" href="https://alvarogarcia7.github.io/categories/end-of-year/">end-of-year</a><a class="label" href="https://alvarogarcia7.github.io/categories/feoh/">feoh</a><a class="label" href="https://alvarogarcia7.github.io/categories/focus/">focus</a><a class="label" href="https://alvarogarcia7.github.io/categories/goals/">goals</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/hacker-news/">hacker-news</a><a class="label" href="https://alvarogarcia7.github.io/categories/joel-goldberg/">joel-goldberg</a><a class="label" href="https://alvarogarcia7.github.io/categories/journeyman/">journeyman</a><a class="label" href="https://alvarogarcia7.github.io/categories/kim-marriott/">kim-marriott</a><a class="label" href="https://alvarogarcia7.github.io/categories/latex/">latex</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/logrocket/">logrocket</a><a class="label" href="https://alvarogarcia7.github.io/categories/markdown/">markdown</a><a class="label" href="https://alvarogarcia7.github.io/categories/maximize/">maximize</a><a class="label" href="https://alvarogarcia7.github.io/categories/media-server/">media-server</a><a class="label" href="https://alvarogarcia7.github.io/categories/milp/">milp</a><a class="label" href="https://alvarogarcia7.github.io/categories/minizinc/">minizinc</a><a class="label" href="https://alvarogarcia7.github.io/categories/mixed-integer-linear-programming/">mixed-integer-linear-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/n-queens/">n-queens</a><a class="label" href="https://alvarogarcia7.github.io/categories/new-shiny/">new-shiny</a><a class="label" href="https://alvarogarcia7.github.io/categories/np-hard/">np-hard</a><a class="label" href="https://alvarogarcia7.github.io/categories/nsa/">nsa</a><a class="label" href="https://alvarogarcia7.github.io/categories/pandoc/">pandoc</a><a class="label" href="https://alvarogarcia7.github.io/categories/paradox/">paradox</a><a class="label" href="https://alvarogarcia7.github.io/categories/pbt/">pbt</a><a class="label" href="https://alvarogarcia7.github.io/categories/perfect/">perfect</a><a class="label" href="https://alvarogarcia7.github.io/categories/pest/">pest</a><a class="label" href="https://alvarogarcia7.github.io/categories/peter-principle/">peter-principle</a><a class="label" href="https://alvarogarcia7.github.io/categories/peter-stuckey/">peter-stuckey</a><a class="label" href="https://alvarogarcia7.github.io/categories/property-based-testing/">property-based-testing</a><a class="label" href="https://alvarogarcia7.github.io/categories/publishing/">publishing</a><a class="label" href="https://alvarogarcia7.github.io/categories/real-thing/">real-thing</a><a class="label" href="https://alvarogarcia7.github.io/categories/recommendation/">recommendation</a><a class="label" href="https://alvarogarcia7.github.io/categories/reflection/">reflection</a><a class="label" href="https://alvarogarcia7.github.io/categories/retrospective/">retrospective</a><a class="label" href="https://alvarogarcia7.github.io/categories/rust/">rust</a><a class="label" href="https://alvarogarcia7.github.io/categories/scott-young/">scott-young</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/sentence-parser/">sentence-parser</a><a class="label" href="https://alvarogarcia7.github.io/categories/simplicity/">simplicity</a><a class="label" href="https://alvarogarcia7.github.io/categories/software/">software</a><a class="label" href="https://alvarogarcia7.github.io/categories/ssl/">ssl</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-work/">team-work</a><a class="label" href="https://alvarogarcia7.github.io/categories/technical-debt/">technical-debt</a><a class="label" href="https://alvarogarcia7.github.io/categories/template/">template</a><a class="label" href="https://alvarogarcia7.github.io/categories/tls/">tls</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/tutorial/">tutorial</a><a class="label" href="https://alvarogarcia7.github.io/categories/ultralearning/">ultralearning</a><a class="label" href="https://alvarogarcia7.github.io/categories/vgaltes/">vgaltes</a><a class="label" href="https://alvarogarcia7.github.io/categories/vicen%c3%a7-garcia-altes/">vicenç-garcia-altes</a><a class="label" href="https://alvarogarcia7.github.io/categories/working-software/">working-software</a><a class="label" href="https://alvarogarcia7.github.io/categories/zach-mitchell/">zach-mitchell</a>
         
     </p>
 </header>
 
 
         
-        <h2 id="amazon-dynamodb-transactions-how-it-workshttpsdocsawsamazoncomamazondynamodblatestdeveloperguidetransaction-apishtml"><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html">Amazon DynamoDB Transactions: How it Works</a></h2>
-<p>Explains how transactions work in DynamoDB</p>
-<p>Tags: dynamodb, aws, help, transaction, serializable</p>
-<p>Id: 7fb09cd4-2639-11e9-9377-0242ac110002
-Read: Fri, 01 Feb 2019 15:53:20 +0000</p>
-<h2 id="jepsen-aerospikehttpsaphyrcomposts324-call-me-maybe-aerospike"><a href="https://aphyr.com/posts/324-call-me-maybe-aerospike">Jepsen: Aerospike</a></h2>
-<p>I&rsquo;ve read this analysis of Aerospike, that explains what kind of database it is, what CAP properties satisfies</p>
-<p>Tags: cap, cap-theorem, jepsen, aphyr, aerospike, database, acid, ap, cp, consistency, availability, partitioning, paxos</p>
-<p>Id: bd7151c6-2639-11e9-a38e-0242ac110002
-Read: Fri, 01 Feb 2019 15:55:04 +0000</p>
-<h2 id="a-critique-of-ansi-sql-isolation-levelshttpswwwmicrosoftcomen-usresearchwp-contentuploads201602tr-95-51pdf"><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf">A Critique of ANSI SQL Isolation Levels</a></h2>
-<p>I&rsquo;ve read this paper that explains the ANSI SQL isolation levels</p>
-<p>Tags: non-repeatable, fuzzy-read, dirty-read, phantom, phantom-read, isolation, serializability, consistency, consistency, consistency-level, read-uncommitted, read-committed, repeatable-read, serializable, microsoft</p>
-<p>Id: 01292b8c-263a-11e9-a7fe-0242ac110002
-Read: Fri, 01 Feb 2019 15:56:58 +0000</p>
-<h2 id="weak-consistency-a-generalized-theory-and-optimistic-implementations-for-distributed-transactionshttppmgcsailmitedupapersadya-phdpdf"><a href="http://pmg.csail.mit.edu/papers/adya-phd.pdf">Weak Consistency: A Generalized Theory and Optimistic Implementations for Distributed Transactions</a></h2>
-<p>An extended paper on ACID properties for SQL databases</p>
-<p>Tags: liskov, atul-adya, stronger-serializable, consistency, consistency-level, isolation, database, sql-database, acid, transaction</p>
-<p>Id: 4a1c6f7a-263a-11e9-8e08-0242ac110002
-Read: Fri, 01 Feb 2019 15:59:00 +0000</p>
-<h2 id="no-todo-el-mundo-sabe-o-debe-dar-feedbackhttpssoftwareyotrasdesvirtudescom20181126no-todo-el-mundo-sabe-o-debe-dar-feedback"><a href="https://softwareyotrasdesvirtudes.com/2018/11/26/no-todo-el-mundo-sabe-o-debe-dar-feedback/">No todo el mundo sabe o debe dar feedback</a></h2>
-<p>The author explains why some feedback is dangerous: either the way of giving it, or the message, or both.</p>
-<p>In this case, she&rsquo;s talking about the Commit Conf, but this is applicable to any situation</p>
-<p>Para dar un buen feedback es importante:</p>
-<ul>
-<li>Primero: agradecer el esfuerzo por la charla.</li>
-<li>Segundo: resaltar algo positivo de ella.  Seguro que algo cumple.</li>
-<li>Tercero: decir cómo mejorarías un aspecto</li>
-<li>Último: volver a dar las gracias o decir una frase buena que motive.</li>
-</ul>
-<p>Dar un mal feedback es muy fácil:</p>
-<ul>
-<li>Primero: no leerte la descripción ni el nivel de la charla</li>
-<li>Segundo: te cabreas porque no es lo esperado y dudabas entre esa y otra charla</li>
-<li>Tercero: dices lo que no te ha gustado sin rodeos.</li>
-<li>Cuarto: además asumes cosas que no ha hecho y las escribes. Igual que yo he hecho en el Primero y Segundo.</li>
-<li>Quinto: si además dices algo faltoso gana puntos.</li>
-<li>Sexto: Utilizas esa tónica destructiva en todos.</li>
-</ul>
-<p>Tags: laura-lacarra, commit, commit-conf, feedback, good-feedback, honest-feedback, spanish</p>
-<p>Id: 20d8145e-3a92-11e9-8023-0242ac110003
-Read: Wed, 27 Feb 2019 13:18:10 +0000</p>
-<h2 id="how-to-deal-with-difficult-people-on-software-projectshttpspeopleneilonsoftware"><a href="https://people.neilon.software/">How to Deal with Difficult People on Software Projects</a></h2>
-<p>I&rsquo;ve read this guide on dealing with difficult people.</p>
-<p>There are many (48) personality types, including these types:</p>
-<ul>
-<li>Product Managers</li>
-<li>Designers</li>
-<li>Project Managers</li>
-<li>Development Managers</li>
-<li>Developers</li>
-<li>Quality Assurance</li>
-</ul>
-<p>Tags: people, people-management, personality-type, guide, neil-green</p>
-<p>Id: 95554892-3a92-11e9-9bbf-0242ac110003
-Read: Wed, 27 Feb 2019 13:21:25 +0000</p>
-<h2 id="software-disenchantmenthttptonskymeblogdisenchantment"><a href="http://tonsky.me/blog/disenchantment/">Software disenchantment</a></h2>
-<p>I&rsquo;ve read this article about somebody disenchanted with the current state of the art of software: slow, bloated, not better than 10 years ago, or faster.</p>
-<p>Tags: nikita-prokopov, bloat, rant, disenchantment, tonsky, comparison, speed, software</p>
-<p>Id: 0078d58a-3a93-11e9-8f23-0242ac110003
-Read: Wed, 27 Feb 2019 13:24:25 +0000</p>
-<h2 id="the-values-and-principles-of-agile-software-developmenthttpswwwslidesharenetbradappthe-values-and-principles-of-agile-software-development"><a href="https://www.slideshare.net/bradapp/the-values-and-principles-of-agile-software-development">The Values and Principles of Agile Software Development</a></h2>
-<p>I&rsquo;ve read the slides of this presentation by Brad Appleton, on Values, Principles, and Practices in an Agile environment.</p>
-<p>Plenty of good quotes</p>
-<p>Tags: brad-appleton, slideshare, slide, agile, practice, principle, value, xp, extreme-programming, quote, lean-software, lean</p>
-<p>Id: 42cdde80-3a93-11e9-814c-0242ac110003
-Read: Wed, 27 Feb 2019 13:26:16 +0000</p>
-<h2 id="makefiles-como-dejar-de-memorizar-comandos-en-docker--developer-vagohttpsjesuslccom20180421makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago"><a href="https://jesuslc.com/2018/04/21/makefiles-como-dejar-de-memorizar-comandos-en-docker-developer-vago/">Makefiles como dejar de memorizar comandos en docker – Developer Vago</a></h2>
-<p>I&rsquo;ve discovered a new technique for Makefiles:\n\nUsing a common format (a DSL, in fact) to document the goal, then a new goal &lsquo;help&rsquo; to print that documentation.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">.PHONY: <span class="nb">help</span>
-help: <span class="c1">## Print this help.</span>
-  @grep -E <span class="s1">&#39;^[a-zA-Z_-]+:.*?## .*$$&#39;</span> <span class="k">$(</span>MAKEFILE_LIST<span class="k">)</span> <span class="p">|</span> awk <span class="s1">&#39;BEGIN {FS = \&#34;:.*?## \&#34;}; {printf \&#34;\033[36m%-20s\033[0m %s\n\&#34;, $$1, $$2}&#39;</span>
-</code></pre></div><p>when you run <code>make help</code>, then</p>
-<pre><code>Print this help.
-</code></pre><p>Tags: makefile, jesuslc, documentation, executable-documentation, awk, trick, help</p>
-<p>Id: d6a4b78c-3a93-11e9-88d7-0242ac110003
-Read: Wed, 27 Feb 2019 13:30:24 +0000</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2019/01/01/self-study-january-2019/">Self-Study in January 2019</a>
-    </h1>
-    <p >Jan 1, 2019
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2019/01/01/self-study-january-2019/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/january/">january</a><a class="label" href="https://alvarogarcia7.github.io/categories/2019/">2019</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/cycle/">cycle</a><a class="label" href="https://alvarogarcia7.github.io/categories/ebook/">ebook</a><a class="label" href="https://alvarogarcia7.github.io/categories/framework/">framework</a><a class="label" href="https://alvarogarcia7.github.io/categories/getting-things-done/">getting-things-done</a><a class="label" href="https://alvarogarcia7.github.io/categories/gtd/">gtd</a><a class="label" href="https://alvarogarcia7.github.io/categories/library/">library</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/mental-framework/">mental-framework</a><a class="label" href="https://alvarogarcia7.github.io/categories/personal-productivity/">personal-productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/pomodoro/">pomodoro</a><a class="label" href="https://alvarogarcia7.github.io/categories/pomodoro-technique/">pomodoro-technique</a><a class="label" href="https://alvarogarcia7.github.io/categories/productivity/">productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/search/">search</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/work-cycle/">work-cycle</a>
-        
-    </p>
-</header>
-
-
-        
-        <h2 id="work-cycleshttpsdocsgooglecomdocumentd1dkldpcwvzn_z2tokwc80yomidueo6x58dt4debkc84qedit"><a href="https://docs.google.com/document/d/1DKLDpCwvzn_z2tokwC80yOmidueO6x58dt4DEbkc84Q/edit#">Work cycles</a></h2>
-<p>I&rsquo;ve read this Work Cycle framework to be more productive with your daily routine.</p>
-<p>Suggests an alternative to Pomodoro technique, in which you are to write down the contents of the goal, then split in small chunks (periods) of time to complete the individual tasks, then debrief at the end of the period and at the end of the cycle.</p>
-<p>An analogy could be a double-loop Pomodoro technique for tasks.</p>
-<p>Tags: pomodoro, pomodoro-technique, framework, management, productivity, personal-productivity, gtd, getting-things-done, work-cycle, cycle, time-management, mental-framework</p>
-<p>Id: f280c496-0df2-11e9-bf65-0242ac110002
-Read: Tue, 01 Jan 2019 18:27:51 +0000</p>
-<h2 id="world-cathttpswwwworldcatorgsearch"><a href="https://www.worldcat.org/search">World Cat</a></h2>
-<p>Site to find books in public libraries</p>
-<p>Tags: book, search, library, ebook</p>
-<p>Id: 15ca63e4-0df8-11e9-b145-0242ac110002
-Read: Tue, 01 Jan 2019 19:04:38 +0000</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/12/31/books-read-2018q4/">Books read in 2018Q4</a>
-    </h1>
-    <p >Dec 31, 2018
-         - 9 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/12/31/books-read-2018q4/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2018/">2018</a><a class="label" href="https://alvarogarcia7.github.io/categories/q4/">Q4</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>Read this quarter:</p>
-<p>Note: re+read means I&rsquo;m re-reading this book. The (+) stands for one-or-more times, as in the regexes.</p>
-<ul>
-<li>Como ganar amigos e influir sobre las personas; Carnegie (+)</li>
-<li>Oliver Twist; Dickens</li>
-<li>Building evolutionary architecture; Ford, Parsons</li>
-<li>Selfie: How We Became So Self-Obsessed and What It’s Doing To Us; Storr. Just chapter 1: The dying self</li>
-<li>Sota la cistella; Gasol</li>
-</ul>
-<h2 id="como-ganar-amigos-e-influir-sobre-las-personas-carnegie-">Como ganar amigos e influir sobre las personas; Carnegie (+)</h2>
-<p>I&rsquo;ve re-read this classic book (How to win friends and influence people), by Carnegie.</p>
-<p>Explains a few tricks on communication and leadership, such as:</p>
-<ul>
-<li>
+        <h2 id="perfect-media-serverhttpsnewsycombinatorcomitemid25619137"><a href="https://news.ycombinator.com/item?id=25619137">Perfect Media Server</a></h2>
+<p>Hacker News discussion on a media server, half open source (?).</p>
+<p>Tags: hacker-news, media-server, perfect, tool, software</p>
+<p>Id: c37b0f2a-4dc5-11eb-8048-0242ac110002
+Read: Sun, 03 Jan 2021 13:15:34 +0000</p>
+<h2 id="how-your-startup-can-survive-technical-debthttpsandreschweighofercomtechhow-your-startup-can-survive-technical-debt"><a href="https://andreschweighofer.com/tech/how-your-startup-can-survive-technical-debt/">How your startup can survive technical debt</a></h2>
+<p>Mentions the paradox of success: you need debt to start quickly, yet too quickly leaves no time to pay debt. Hence your prototype turns into an MVP, and that is your first piecce of technical debt.</p>
+<p>Tags: andre-schweighofer, technical-debt, analogy, working-software, paradox</p>
+<p>Id: dfd6d710-4dc7-11eb-b0a9-0242ac110002
+Read: Sun, 03 Jan 2021 13:30:41 +0000</p>
+<h2 id="what-ive-learned-in-45-years-in-the-software-industryhttpswwwbti360comwhat-ive-learned-in-45-years-in-the-software-industry"><a href="https://www.bti360.com/what-ive-learned-in-45-years-in-the-software-industry/">What I’ve Learned in 45 Years in the Software Industry</a></h2>
+<p>Some thoughts from a person in the software industry, 45 years in.</p>
 <blockquote>
-<p>The most important name to somebody is their own</p>
+<p>Focus on the fundamentals: teamwork, trust, communication, seek consensus, automated testing, Clean, understandable, and navigable code and design</p>
 </blockquote>
-</li>
-</ul>
-<!-- raw HTML omitted -->
-<h2 id="oliver-twist-dickens">Oliver Twist; Dickens</h2>
-<p>I&rsquo;ve read this classic novel by Dickens, to try to understand the character of Oliver Twist, his adventures and misadventures.</p>
-<p>I was interested in grokking how it compares to &lsquo;El Lazarillo de Tormes&rsquo;, a previous Spanish novel.</p>
-<h2 id="building-evolutionary-architecture-ford-parsons">Building evolutionary architecture; Ford, Parsons</h2>
-<p>I&rsquo;ve read this book on software architecture. On how a previous definition of architecture (&lsquo;Architecture is what needs to be defined upfront and/or is difficult to change&rsquo;) is no longer valid and we should strive to approach &lsquo;evolutionary architecture&rsquo;,  where -ilities (features) of the system are easier to change, where architecture changes to accommodate business requirements and where systems are designed with -ilities (features) in mind.</p>
-<h2 id="selfie-how-we-became-so-self-obsessed-and-what-its-doing-to-us-storr">Selfie: How We Became So Self-Obsessed and What It’s Doing To Us; Storr</h2>
-<p>I&rsquo;ve just read the chapter 1: The dying self</p>
-<p>I&rsquo;ve read this chapter relating the perfectionism with suicide.</p>
-<p>Explains many stories of attempted or committed suicides, giving some insight into them and trying to define a pattern</p>
-<p>I got interested in it by reading this article: Improving Ourselves to Death (from newyorker.com)</p>
-<h2 id="sota-la-cistella-gasol">Sota la cistella; Gasol</h2>
-<p>I&rsquo;ve read this book by pau Gasol on his experiences playing basketball professionally, with regards to leadership, motivation, career management, etc</p>
-<p>One takeaway is &lsquo;the important thing is not to reach there, but to stay there&rsquo;.</p>
-<p>He explains part of his professional successes, and failures as well. How some failures allowed him to progress further in his career, how he reached levels that he only dreamed in the past, how important it is to have a goal and work towards it.</p>
-<!-- raw HTML omitted -->
-<p>backlog (partially sorted):</p>
+<p>Tags: reflection, team-work, career-management, peter-principle, simplicity, joel-goldberg</p>
+<p>Id: 8f34ebda-5317-11eb-a356-0242ac110002
+Read: Sun, 10 Jan 2021 07:43:41 +0000</p>
+<h2 id="retrospectiva-2020httpsvgaltescompostretrospectiva-2020"><a href="https://vgaltes.com/post/retrospectiva-2020/">Retrospectiva 2020</a></h2>
+<p>Vicenç reflects on his 2020, both laboral and professional, while working at Voxel from the UK.</p>
+<p>Lower in salary rates, twice (first as reducing rates from a previous engagement, then lowering rates for the pandemic).</p>
+<p>Explains his goals for the upcoming year.</p>
+<p>Tags: vgaltes, vicenç-garcia-altes, retrospective, end-of-year, 2020, goals</p>
+<p>Id: b7809eea-533a-11eb-99a9-0242ac110002
+Read: Sun, 10 Jan 2021 11:55:21 +0000</p>
+<h2 id="how-to-write-a-programming-bookhttpswwwaquicarattinocombloghow-write-programming-book"><a href="https://www.aquicarattino.com/blog/how-write-programming-book/">How to write a programming book</a></h2>
+<p>Tags: book, book-writing, aquiles-carattino</p>
+<p>Id: b19e2f4c-5349-11eb-9a89-0242ac110002
+Read: Sun, 10 Jan 2021 13:42:34 +0000</p>
+<h2 id="do-the-real-thinghttpswwwscotthyoungcomblog20200504do-the-real-thing"><a href="https://www.scotthyoung.com/blog/2020/05/04/do-the-real-thing/">Do the Real Thing</a></h2>
+<blockquote>
+<p>Fake activity is great for making yourself feel better, but lousy for actual results.</p>
+</blockquote>
+<blockquote>
+<p>Rules for Doing the Real Thing</p>
+<ol>
+<li>Nothing is often better than something.</li>
+<li>The hard way is the easy way.</li>
+<li>If you’re not sure what the real thing is, just ask.</li>
+</ol>
+</blockquote>
+<p>Tags: ultralearning, scott-young, real-thing, distinction, focus, career</p>
+<p>Id: b3b254f6-534a-11eb-b65b-0242ac110002
+Read: Sun, 10 Jan 2021 13:49:47 +0000</p>
+<h2 id="the-eternal-novice-traphttpswwwfeohorgthe-eternal-novice-traphtml"><a href="https://www.feoh.org/the-eternal-novice-trap.html">The Eternal Novice Trap</a></h2>
+<blockquote>
 <ul>
-<li>unsorted V</li>
-<li>The Machine That Changed the World: The Story of Lean Production</li>
-<li>Haskell Programming</li>
-<li>Software Architecture in Practice</li>
-<li>The five disfunctions of a team: a leadership fable; Lencioni</li>
-<li>lucha por la desigualdad, la; Pontón; non-technical</li>
-<li>psicología del dinero, la; Hammond; non-technical</li>
-<li>Invirtiendo a largo plazo; García Paramés; non-technical, finance</li>
-<li>Well-Grounded Java Developer, the; own-it</li>
-<li>Learn You a Haskell for Great Good!; own-it</li>
-<li>camino al 18J, el; Payne; non-technical</li>
-<li>Cartas desde la revolución bolchevique; Sadoul; non-technical</li>
-<li>Java Performance: The Definitive Guide</li>
-<li>Why programmers work at night</li>
-<li>Shogun: The Life of Tokugawa Ieyasu; Sadler; non-technical</li>
-<li>Scrum and XP from the trenches, 2nd edition;</li>
-<li>Els jueus i Catalunya; Villatoro; non-technical</li>
-<li>El problema de los tres cuerpos; Liu; non-technical</li>
-<li>Amazon Web Services in Action; own-it</li>
-<li>Clojure Programming - Practical Lisp for the Java World</li>
-<li>Mature optimization</li>
-<li>XUnit Test Patterns</li>
-<li>Let Over Lambda</li>
-<li>The Haskell Road to Logic, Math and Programming</li>
-<li>Types and Programming Languages</li>
-<li>Fundamentals of Object-oriented Design in UML</li>
-<li>Clojure for the brave and true</li>
-<li>How to Solve It: A New Aspect of Mathematical Method</li>
-<li>Conceptual Mathematics: A First Introduction to Categories</li>
-<li>Understanding Computation: From Simple Machines to Impossible Programs</li>
-<li>Programming in Haskell</li>
-<li>Programming Languages: Application and Interpretation</li>
-<li>Doing Math with Python</li>
-<li>Perfect Software: And Other Illusions about Testing</li>
-<li>Computability and Complexity - From a Programming Perspective</li>
-<li>Thinking Forth: a language and philosophy for solving problems</li>
-<li>Concepts, Techniques, and Models of Computer Programming</li>
-<li>Bridging the Communication Gap; Adzic</li>
-<li>Specification by Example; Adzic</li>
-<li>Cucumber book, the; Adzic</li>
-<li>Software Architecture for Developers; Brown</li>
-<li>Object Design: Roles, Responsibilities, and Collaborations</li>
-<li>RESTful Web APIs</li>
-<li>RESTful Web Services Cookbook</li>
-<li>Building Maintainable Software</li>
-<li>Serverless - Patterns of Modern Application Design Using Microservices (Amazon Web Services Edition)</li>
-<li>A Pattern Language; Alexander</li>
-<li>Types and Programming Languages, TAPL; Pierce; own-it</li>
-<li>Speed Reading Book: Read More, Learn More, Achieve More, the; Buzan</li>
-<li>Cómo crear mapas mentales (Crecimiento personal); Buzan</li>
-<li>First things first; Covey</li>
-<li>What&rsquo;s best next; Perman</li>
-<li>problems of philosophy, the; Russell</li>
-<li>Requiem for the American dream; Chomsky</li>
-<li>sun also rises, the; Hemingway</li>
-<li>travels, the; Polo; non-technical</li>
-<li>Homo Deus: A Brief History of Tomorrow; Harari; non-technical</li>
-<li>Books by Aristotle; non-technical</li>
-<li>Books by Plato; non-technical</li>
-<li>Books by Descartes; non-technical</li>
-<li>The idea of culture; Eagleton; non-technical</li>
-<li>Hereditary Intelligence; Galton; non-technical</li>
-<li>Lean Software Development: An Agile Toolkit; Poppendieck (+)</li>
-<li>Chaos Monkeys: Obscene Fortune and Random Failure; Garcia Martinez</li>
-<li>Implementing Lean Software Development: From Concept to Cash; Poppendieck</li>
-<li>Joel on Software; Spolsky</li>
-<li>Death March; Yourdon</li>
-<li>Psychology of Computer Programming, The; Weinberg</li>
-<li>Introduction to General Systems Thinking; Weinberg</li>
-<li>Lao Tzu : Tao Te Ching : A Book About the Way and the Power of the Way; Tzu, Le Guin; non-technical</li>
-<li>Gay Science, the; Nietzsche; non-technical</li>
-<li>Being Geek; Lopp</li>
-<li>Finance for Freelancers; Retallick; non-technical, finance</li>
-<li>Object-oriented software engineering: a use case driven approach; Jacobson</li>
-<li>Patterns of Enterprise Application Architecture; Fowler; own-it</li>
-<li>Romeo y Julieta; Shakespeare; non-technical</li>
-<li>Computer Systems: A Programmer’s Perspective; Bryant, O&rsquo;Hallaron</li>
-<li>My Journey to Lhasa: The Classic Story of the Only Western Woman Who Succeeded in Entering the Forbidden City; David-Néel; non-technical</li>
-<li>Cathedral and the bazaar, the ; Raymond</li>
-<li>Coding dojo handbook, the; Bache; own-it</li>
-<li>Making software; Oram and Wilson; own-it</li>
-<li>Code complete; McConnell; own-it</li>
-<li>Soft skills; Sonmez; own-it</li>
-<li>DSLs in action; Ghosh; own-it</li>
-<li>Purely functional data structures; Okasaki; own-it</li>
-<li>Working effectively with unit tests; Fields (+); own-it</li>
-<li>First Nazi, the; Ludendorff; non-technical</li>
-<li>Greatest story ever told &hellip; so far; Krauss; non-technical</li>
-<li>Master algorithm, the; Domingos; non-technical</li>
-<li>Invention of Science, the; Wootton; non-technical</li>
-<li>Tesla: Inventor of the electrical age; Bernard Carlson; non-technical</li>
-<li>Psychology in minutes; Weeks; non-technical</li>
-<li>Alan Turing: The Enigma; Hodges; non-technical</li>
-<li>How to think more about sex; de Botton; non-technical</li>
-<li>Piccolo manuale di persuasione; Taylor; non-technical</li>
-<li>arte de la guerra, el; Sun Tzu; non-technical, own-it</li>
-<li>Piccolo manuale di leadership Confuciana; Adair; non-technical</li>
-<li>How to Stop Worrying and Start Living; Carnegie; non-technical</li>
-<li>Uomo - Guida allo stile; Roetzel; non-technical</li>
-<li>Unwritten Laws of Engineering: Revised and Updated Edition; King</li>
-<li>Test-Driven JavaScript Development (Developer&rsquo;s Library); Johansen</li>
-<li>Test Driven Development: By Example; Beck</li>
-<li>Arquitectura Java JPA Domain Driven Design; Alvárez, Peláez</li>
-<li>End of loyalty, the; Wartzman; non-technical</li>
-<li>Basic Economics; Sowell; non-technical</li>
-<li>Introduction to Economic Analysis; McAfee; non-technical</li>
-<li>Patterns of Software; Gabriel</li>
-<li>Coders at work; Seibel</li>
-<li>Clean architecture; Martin</li>
-<li>How to Be a Stoic: Using Ancient Philosophy to Live a Modern Life; Pigliucci; non-technical</li>
-<li>Introduction to Object-Oriented Programming, an; Budd</li>
-<li>Gafas de la felicidad, las; Santandreu; non-technical</li>
-<li>Ser feliz en Alaska; Santandreu; own-it, non-technical</li>
-<li>Mochila para el universo, una; Punset; non-technical</li>
-<li>Gods themselves, the; Asimov; non-technical</li>
-<li>Panamá papers, the; Obermayer, Obermaier; non-technical</li>
-<li>Originals; Grant; non-technical</li>
-<li>Optimism over despair; Chomsky; non-technical</li>
-<li>SCIENCE OF BREATH: A Practical Guide; Ballentine, Hymes; non-technical</li>
-<li>Yoga Explained: A New Step-by-step Approach to Understanding and Practising Yoga; Mehta,‎ Arjunwadkar; non-technical</li>
-<li>Wanderlust: A Modern Yogi&rsquo;s Guide to Discovering Your Best Self; Krasno; non-technical</li>
-<li>How to Think About Money; Clements; non-technical, finance</li>
-<li>By Way of Deception; Ostrovsky; non-technical</li>
-<li>Printemps des sayanim, le; Cohen; own-it, non-technical</li>
-<li>Deep work; Newport; non-technical, own-it</li>
-<li>Hooked: How to Build Habit-Forming Products; Eyal, Hoover; non-technical</li>
-<li>Irresistible: The Rise of Addictive Technology and the Business of Keeping Us Hooked; Alter; non-technical</li>
-<li>The Attention Merchants: The Epic Scramble to Get Inside Our Heads; Wu; non-technical</li>
-<li>Willpower: Why Self-Control is The Secret to Success; Baumeister, Tierney; non-technical</li>
-<li>Principles of Psychology, the; James; own-it, non-technical</li>
-<li>Our mutual friend; Dickens; non-technical</li>
-<li>Crucial Conversations: Tools for Talking When Stakes Are High, Second Edition; Patterson, Grenny, McMillan, Switzler; non-technical</li>
-<li>Amusing Ourselves to Death - Public Discourse in the Age of Show Business; Postman; non-technical</li>
-<li>Mastery; Greene; non-technical, own-it</li>
-<li>Silence in the age of noise; Kagge; non-technical</li>
-<li>Functional programming simplified; Alexander; own-it</li>
-<li>Your money or your life; Dominguez, Robin; non-technical, finance</li>
-<li>Batalla del Ebro, la; Reverte; non-technical</li>
-<li>Historia de la guerra civil española; Rojo; non-technical</li>
-<li>Lucha por el poder, la; Evans; non-technical</li>
-<li>Revolución rusa, la; Pipes; non-technical</li>
-<li>Holocausto, el; Rees; non-technical</li>
-<li>Martín Lutero, renegado y Profeta; Roper; non-technical</li>
-<li>Siglo de la revolución, el ; Fontana; non-technical</li>
-<li>Història de la revolución rusa; Trotsky; non-technical</li>
-<li>Dispossessed, the; Le Guin; non-technical</li>
-<li>Left hand of darkness; Le Guin; non-technical</li>
-<li>Lathe of heaven; Le Guin; non-technical</li>
-<li><a href="https://www.amazon.com/Schopenhauer-Cure-Novel-Irvin-Yalom/dp/0060938102/">https://www.amazon.com/Schopenhauer-Cure-Novel-Irvin-Yalom/dp/0060938102/</a></li>
-<li><a href="https://www.amazon.com/How-Schopenhauer-Through-Mid-Life-Crisis-ebook/dp/B00QXNB5PC/">https://www.amazon.com/How-Schopenhauer-Through-Mid-Life-Crisis-ebook/dp/B00QXNB5PC/</a></li>
-<li>Books in general &ndash; Epstein</li>
-<li>Affluent society, the; Galbraith; non-technical, finance</li>
-<li>Philosophy of the Buddha; Bahm; non-technical</li>
-<li>Tribe of mentors; guillem, non-technical, own-it</li>
-<li>5 dysfunctions of a team; non-technical</li>
-<li>Ziglar&rsquo;s Top Performance; non-technical</li>
-<li>Pragmatic Programmer (+)</li>
-<li>High Output Management; Grove; non-technical</li>
-<li>First Break All the Rules; non-technical, guillem</li>
-<li>Managing for happiness; Appelo; non-technical</li>
-<li>Meditations; Marcus Aurelius; non-technical, own-it</li>
-<li>How to be a stoic - Pugliucci; non-technical</li>
-<li>Why budism is true; Wright; non-technical</li>
-<li>7 hábitos de la gente altamente productiva</li>
-<li>art of readable code; guillem</li>
-<li>Domain modeling made functional; guillem</li>
-<li>Sketchbook handbook; guillem, own-it</li>
-<li>Agile samurai, the; guillem</li>
-<li>Miracle of Mindfulness, the; Hanh; non-technical, own-it</li>
-<li>No mud, no lotus: The Art of Transforming Suffering; Hahn; non-technical</li>
-<li>Lean Architecture: for Agile Software Development; Coplien, Bjørnvig</li>
-<li>Agile IT Organization Design: For Digital Transformation and Continuous Delivery; Sriram Narayan</li>
-<li>Philosophy of Software Design, a; Ousterhout</li>
-<li>Hope in the Dark; Solnit</li>
-<li>Agile!: The Good, the Hype and the Ugly; Meyer</li>
+<li>Do learn new programming languages and paradigms, but learn them from a place of confidence and mastery with your primary tool of choice.</li>
+<li>Don’t fall for the trap of perpetually chasing after the bright shiny thing that’s hot right now. Recognize that what’s new isn’t necessarily better. Take what will meaningfully help you advance your career and let the rest flow by. There’ll always be more tomorrow.</li>
+<li>Do keep having fun! You’ll learn more quickly and retain more if you’re finding enjoyment in what you do. Sometimes it means looking at things a little differently, but often that open mindedness can pay off.</li>
 </ul>
-<p>unfinished (unsorted):</p>
-<ul>
-<li>Working Effectively with Legacy Code (+); Feathers; own-it</li>
-<li>Nonviolent communication (+); Rosenberg; own-it, non-technical</li>
-<li>Introduction to Buddhism: Teachings, History and Practices, an; Harvey; non-technical, own-it</li>
-<li>Effective Java; Bloch; own-it</li>
-<li>Functional Programming Patterns in Scala and Clojure; own-it</li>
-<li>Release It! - Design and Deploy Production-Ready Software; own-it</li>
-<li>Refactoring (+); Fowler; own-it</li>
-<li>Leprechauns of Software Engineering (+), the; Bossavit; own-it</li>
-<li>Domain-Driven Design: Tackling Complexity in the Heart of Software; Vernon (+); own-it</li>
-<li>Pragmatic Thinking and Learning: Refactor Your Wetware; own-it</li>
-<li>Readings in Database Systems, 5th Edition; own-it</li>
-<li>Structure and Interpretation of Computer Programs (SICP); Abelson, Sussmann, Sussmann; own-it</li>
-<li>La Sociedad De Coste Marginal Cero (Estado y Sociedad); Rifkin; non-technical</li>
-<li>Odisea; Homero; non-technical</li>
-<li>Switch: How to Change Things When Change Is Hard; Heath, Heath; own-it, non-technical</li>
-<li>Como leer un libro; Adler, van Doren; non-technical, own-it</li>
-</ul>
-<p>next (2):</p>
-<ul>
-<li>Who rules the world?; Chomsky; non-technical</li>
-<li>Mundo nuevo, ahora, un; Tolle; own-it, non-technical</li>
-<li>Continuous Delivery; Humble, Farley; own-it</li>
-<li>Hombre multiorgásmico, el; Chía, Arava; own-it, non-technical</li>
-</ul>
-<p>wip (2):</p>
-<ul>
-<li>Thinking fast and slow; Kahneman; non-technical</li>
-<li>Java Concurrency in Practice (JCIP); Goetz</li>
-<li>Hombre en busca del sentido, el; Frankl; own-it, non-technical</li>
-</ul>
-<p>done:</p>
-<ul>
-<li>Como ganar amigos e influir sobre las personas; Carnegie (+); own-it, guillem</li>
-<li>Oliver Twist; Dickens; own-it, non-technical</li>
-<li>Building evolutionary architecture; Ford, Parsons; own-it</li>
-<li>Selfie: How We Became So Self-Obsessed and What It’s Doing To Us; Storr. Just chapter 1: The dying self; own-it, non-technical</li>
-<li>Sota la cistella; Gasol; own-it, non-technical</li>
-</ul>
-<p>rejected:</p>
-<ul>
-<li>Stanger in a strange land; Heinlein; own-it, non-technical</li>
-</ul>
+</blockquote>
+<p>Tags: chris-patti, new-shiny, career-management, feoh, journeyman, dreyfus-model, acquisition-of-skill, learning</p>
+<p>Id: 8679135c-534b-11eb-815f-0242ac110002
+Read: Sun, 10 Jan 2021 13:55:40 +0000</p>
+<h2 id="eisvogel-pandoc-latex-templatehttpsgithubcomwandmalfarbepandoc-latex-template"><a href="https://github.com/Wandmalfarbe/pandoc-latex-template">Eisvogel: pandoc latex template</a></h2>
+<p>This is a tool / template to translate markdown files to PDF/LaTeX.
+This can create a cover page, code listings</p>
+<p>Tags: latex, tool, eisvogel, pandoc, template, document, publishing, book, markdown</p>
+<p>Id: ede18e32-5965-11eb-bb25-0242ac110002
+Read: Mon, 18 Jan 2021 08:19:48 +0000</p>
+<h2 id="a-minizinc-tutorialhttpswwwminizincorgtutorialminizinc-tutepdf"><a href="https://www.minizinc.org/tutorial/minizinc-tute.pdf">A MiniZinc Tutorial</a></h2>
+<p>A MiniZinc Tutorial, explaining the language, the runner, the IDE</p>
+<p>Tags: minizinc, csp, constraint-sastifaction-programming, maximize, n-queens, np-hard, kim-marriott, peter-stuckey, cop, constraint-optimization-programming, milp, mixed-integer-linear-programming</p>
+<p>Id: 2f6217dc-5966-11eb-824f-0242ac110002
+Read: Mon, 18 Jan 2021 08:21:38 +0000</p>
+<h2 id="property-based-testing-in-rust-with-proptesthttpsbloglogrocketcomproperty-based-testing-in-rust-with-proptest"><a href="https://blog.logrocket.com/property-based-testing-in-rust-with-proptest/">Property-based testing in Rust with Proptest</a></h2>
+<p>A guide on how to do property-based testing in rust</p>
+<p>Tags: property-based-testing, rust, guide, tutorial, zach-mitchell, logrocket, pbt, pest, sentence-parser</p>
+<p>Id: 8101544a-5966-11eb-8133-0242ac110002
+Read: Mon, 18 Jan 2021 08:23:55 +0000</p>
+<h2 id="nsa-urges-system-administrators-to-replace-obsolete-tls-protocolshttpswwwzdnetcomarticlensa-urges-system-administrators-to-replace-obsolete-tls-protocols"><a href="https://www.zdnet.com/article/nsa-urges-system-administrators-to-replace-obsolete-tls-protocols/">NSA urges system administrators to replace obsolete TLS protocols</a></h2>
+<p>NSA is urging to drop SSL2.0, 3.0, TLS 1.0, 1.1. Prefer TLS1.2, 1.3.</p>
+<p>Tags: ssl, tls, nsa, security, recommendation</p>
+<p>Id: c5c1038c-5bdc-11eb-a789-0242ac110003
+Read: Thu, 21 Jan 2021 11:35:33 +0000</p>
 
         
 
@@ -678,51 +262,73 @@ Read: Tue, 01 Jan 2019 19:04:38 +0000</p>
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/12/01/self-study-december-2018/">Self-Study in December 2018</a>
+        <a href="https://alvarogarcia7.github.io/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
     </h1>
-    <p >Dec 1, 2018
+    <p >Dec 30, 2020
          - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/12/01/self-study-december-2018/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2020/12/30/books-read-2020q4/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/december/">december</a><a class="label" href="https://alvarogarcia7.github.io/categories/2018/">2018</a><a class="label" href="https://alvarogarcia7.github.io/categories/bot/">bot</a><a class="label" href="https://alvarogarcia7.github.io/categories/digital-nomad/">digital-nomad</a><a class="label" href="https://alvarogarcia7.github.io/categories/documentation/">documentation</a><a class="label" href="https://alvarogarcia7.github.io/categories/elite/">elite</a><a class="label" href="https://alvarogarcia7.github.io/categories/etsy/">etsy</a><a class="label" href="https://alvarogarcia7.github.io/categories/experiment/">experiment</a><a class="label" href="https://alvarogarcia7.github.io/categories/felix-krause/">felix-krause</a><a class="label" href="https://alvarogarcia7.github.io/categories/fyi/">fyi</a><a class="label" href="https://alvarogarcia7.github.io/categories/how-doc/">how-doc</a><a class="label" href="https://alvarogarcia7.github.io/categories/immutable-documentation/">immutable-documentation</a><a class="label" href="https://alvarogarcia7.github.io/categories/infobot/">infobot</a><a class="label" href="https://alvarogarcia7.github.io/categories/life/">life</a><a class="label" href="https://alvarogarcia7.github.io/categories/longform/">longform</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/money/">money</a><a class="label" href="https://alvarogarcia7.github.io/categories/motivation/">motivation</a><a class="label" href="https://alvarogarcia7.github.io/categories/nomad/">nomad</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote/">remote</a><a class="label" href="https://alvarogarcia7.github.io/categories/rich/">rich</a><a class="label" href="https://alvarogarcia7.github.io/categories/slack/">slack</a><a class="label" href="https://alvarogarcia7.github.io/categories/slack-integration/">slack-integration</a><a class="label" href="https://alvarogarcia7.github.io/categories/the-atlantic/">the-atlantic</a><a class="label" href="https://alvarogarcia7.github.io/categories/ultrarich/">ultrarich</a><a class="label" href="https://alvarogarcia7.github.io/categories/wealth/">wealth</a><a class="label" href="https://alvarogarcia7.github.io/categories/wealth-management/">wealth-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/what-doc/">what-doc</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2020/">2020</a><a class="label" href="https://alvarogarcia7.github.io/categories/q4/">Q4</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a>
         
     </p>
 </header>
 
 
         
-        <h2 id="one-year-nomad---a-reviewhttpskrausefxcomblogone-year-nomad"><a href="https://krausefx.com/blog/one-year-nomad">One year nomad - a review</a></h2>
-<p>Tags: nomad, felix-krause, digital-nomad, remote, life</p>
-<p>Id: 7784a1da-fc82-11e8-a2cc-0242ac110002
-Read: Mon, 10 Dec 2018 13:49:51 +0000</p>
-<h2 id="the-reason-many-ultrarich-people-arent-satisfied-with-their-wealthhttpswwwtheatlanticcomfamilyarchive201812rich-people-happy-money577231"><a href="https://www.theatlantic.com/family/archive/2018/12/rich-people-happy-money/577231/">The Reason Many Ultrarich People Aren’t Satisfied With Their Wealth</a></h2>
-<p>How the rich are motivated to earn more money</p>
+        <p>Read this quarter:</p>
+<ul>
+<li>12 rules for life; Peterson; own-it, non-technical, philosophy</li>
+</ul>
+<h2 id="12-rules-for-life">12 rules for life</h2>
+<p>The book contains some rules, some principles to remove doubt and uncertainty from life.</p>
+<p>There are plenty of mentions to the Bible, although I consider the book to the secular in its contents.</p>
+<p>There are few personal stories on the book (e.g., about his daughter Mikhaila Peterson), which makes it readable and enjoyable. The philosophy behind it is sometimes not-politically-correct.</p>
+<p>For each of the rules, he has a setup of &ldquo;introduction - main - conclusion&rdquo;.</p>
+<p>From wikipedia <a href="https://en.wikipedia.org/wiki/12_Rules_for_Life">0</a>:</p>
 <blockquote>
-<p>really rich people are often motivated to acquire more money by the thrill that comes with multiplying one’s fortune by making investments, buying up businesses</p>
+<p>The book is divided into chapters with each title representing one of the following twelve specific rules for life as explained through an essay.</p>
+<ol>
+<li>
+<p>&ldquo;Stand up straight with your shoulders back&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Treat yourself like you are someone you are responsible for helping&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Make friends with people who want the best for you&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Compare yourself with who you were yesterday, not with who someone else is today&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Do not let your children do anything that makes you dislike them&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Set your house in perfect order before you criticize the world&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Pursue what is meaningful (not what is expedient)&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Tell the truth — or, at least, don’t lie&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Assume that the person you are listening to might know something you don’t&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Be precise in your speech&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Do not bother children when they are skate-boarding&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;Pet a cat when you encounter one on the street&rdquo;</p>
+</li>
+</ol>
 </blockquote>
-<blockquote>
-<p>Those two ways of putting money to use—as a way of covering expenses or as a way of building a bigger fortune—</p>
-</blockquote>
-<blockquote>
-<p>Every billionaire I’ve spoken to, and I’ve spoken to quite a number of them, is extremely excited by each additional increment of money they make</p>
-</blockquote>
-<blockquote>
-<p>Do I have enough to buy this expensive thing I want? but rather Do I have as much or more than these people I’m comparing myself with?</p>
-</blockquote>
-<blockquote>
-<p>feeling wealthy is about comparison with others in your reference group. So the question is not what individuals want to buy, but what they feel they must buy in order to keep up their status</p>
-</blockquote>
-<p>Tags: rich, wealth, the-atlantic, longform, management, wealth-management, motivation, elite, ultrarich, money</p>
-<p>Id: e5650e1c-0081-11e9-a127-0242ac110002
-Read: Sat, 15 Dec 2018 15:55:51 +0000</p>
-<h2 id="etsys-experiment-with-immutable-documentationhttpscodeascraftcom20181010etsys-experiment-with-immutable-documentation"><a href="https://codeascraft.com/2018/10/10/etsys-experiment-with-immutable-documentation/">Etsy’s experiment with immutable documentation</a></h2>
-<p>Trading freshness for completeness in documentation</p>
-<p>Tags: how-doc, what-doc, fyi, documentation, etsy, experiment, immutable-documentation, infobot, bot, slack, slack-integration</p>
-<p>Id: 6ef4bf24-0082-11e9-a076-0242ac110002
-Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
 
         
 
@@ -735,16 +341,16 @@ Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2018/09/30/books-read-2018q3/">Books read in 2018Q3</a>
+        <a href="https://alvarogarcia7.github.io/blog/2020/09/30/books-read-2020q3/">Books read in 2020Q3</a>
     </h1>
-    <p >Sep 30, 2018
+    <p >Sep 30, 2020
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2018/09/30/books-read-2018q3/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2020/09/30/books-read-2020q3/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2018/">2018</a><a class="label" href="https://alvarogarcia7.github.io/categories/q3/">Q3</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/codurance/">codurance</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2020/">2020</a><a class="label" href="https://alvarogarcia7.github.io/categories/q3/">Q3</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a>
         
     </p>
 </header>
@@ -752,26 +358,123 @@ Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
 
         
         <p>Read this quarter:</p>
-<p>Note: re+read means I&rsquo;m re-reading this book. The (+) stands for one-or-more times, as in the regexes.</p>
 <ul>
-<li>Ética a Nicómaco; Aristóteles</li>
-<li>Book of Transformation; Dalai Lama</li>
+<li>Bushido, the soul of Japan; Nitobe; own-it, non-technical, philosophy</li>
 </ul>
-<h2 id="ética-a-nicómaco-aristóteles">Ética a Nicómaco; Aristóteles</h2>
-<p>I&rsquo;ve read this book on philosophy and ethics. This book contains an analysis of the relationship between the personality, intelligence and happiness.</p>
-<p>Tries to describe what &lsquo;virtues&rsquo; are, that they belong in a continuum of acts, aand the good term is always in the middle. Example: between cowardliness and temerity, there is braveness. The two extremes, and the middle or virtue, respectively.</p>
-<p>This book describes the meaning of life, according to Aristotle; how to lead your life, as well.</p>
-<p>Note: this book was a gift from some friends. To people from Payments, thank you so much</p>
-<h2 id="book-of-transformation-dalai-lama">Book of transformation; Dalai Lama</h2>
-<p>I&rsquo;ve read this book based on teaching from the Dalai Lama, on the importance of love, compassion, balanced attitudes, and positive thinking.</p>
-<p>Contains the eight verses on transforming the mind, a lo-jong text, written in the 11th century by Langri Thangpa.</p>
-<p>Contains four parts:</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
+    </h1>
+    <p >Jun 30, 2020
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2020/06/30/books-read-2020q2/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2020/">2020</a><a class="label" href="https://alvarogarcia7.github.io/categories/q2/">Q2</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Read this quarter:</p>
 <ul>
-<li>The basis of transformation</li>
-<li>Transforming though altruism</li>
-<li>Transformation through insight</li>
-<li>The eight verses of transforming the mind</li>
+<li>Skunk Works; Rich; own-it, non-technical</li>
 </ul>
+<h2 id="skunk-works">Skunk Works</h2>
+<p>This book describes Ben R. Rich&rsquo;s adventure of creating the F-117A, the stealth plane with a triangular shape.</p>
+<p>Describes how he won a bet against legendary plane designer Clarence &lsquo;Kelly&rsquo; Johnson. How he got the 25 cents from his old mentor and friend.</p>
+<p>Later, the book reviews Kelly&rsquo;s history as the manager of Skunk Works, how it works, the principles (Kelly&rsquo;s 14 rules), etc.</p>
+<p>Later on, he retrospects on his own career, and the principles on which Skunk Works has thrived on.</p>
+<hr>
+<h2 id="kellys-14-rules--practices">Kelly&rsquo;s 14 Rules &amp; Practices</h2>
+<p>By Kelly Johnson</p>
+<ol>
+<li>
+<p>The Skunk Works® manager must be delegated practically complete control of his program in all aspects. He should report to a division president or higher.</p>
+</li>
+<li>
+<p>Strong but small project offices must be provided both by the military and industry.</p>
+</li>
+<li>
+<p>The number of people having any connection with the project must be restricted in an almost vicious manner. Use a small number of good people (10% to 25% compared to the so-called normal systems).</p>
+</li>
+<li>
+<p>A very simple drawing and drawing release system with great flexibility for making changes must be provided.</p>
+</li>
+<li>
+<p>There must be a minimum number of reports required, but important work must be recorded thoroughly.</p>
+</li>
+<li>
+<p>There must be a monthly cost review covering not only what has been spent and committed but also projected costs to the conclusion of the program.</p>
+</li>
+<li>
+<p>The contractor must be delegated and must assume more than normal responsibility to get good vendor bids for subcontract on the project. Commercial bid procedures are very often better than military ones.</p>
+</li>
+<li>
+<p>The inspection system as currently used by the Skunk Works, which has been approved by both the Air Force and Navy, meets the intent of existing military requirements and should be used on new projects. Push more basic inspection responsibility back to subcontractors and vendors. Don&rsquo;t duplicate so much inspection.</p>
+</li>
+<li>
+<p>The contractor must be delegated the authority to test his final product in flight. He can and must test it in the initial stages. If he doesn&rsquo;t, he rapidly loses his competency to design other vehicles.</p>
+</li>
+<li>
+<p>The specifications applying to the hardware must be agreed to well in advance of contracting. The Skunk Works practice of having a specification section stating clearly which important military specification items will not knowingly be complied with and reasons therefore is highly recommended.</p>
+</li>
+<li>
+<p>Funding a program must be timely so that the contractor doesn&rsquo;t have to keep running to the bank to support government projects.</p>
+</li>
+<li>
+<p>There must be mutual trust between the military project organization and the contractor, the very close cooperation and liaison on a day-to-day basis. This cuts down misunderstanding and correspondence to an absolute minimum.</p>
+</li>
+<li>
+<p>Access by outsiders to the project and its personnel must be strictly controlled by appropriate security measures.</p>
+</li>
+<li>
+<p>Because only a few people will be used in engineering and most other areas, ways must be provided to reward good performance by pay not based on the number of personnel supervised.</p>
+</li>
+</ol>
+<p>Source: <a href="https://www.lockheedmartin.com/en-us/who-we-are/business-areas/aeronautics/skunkworks/kelly-14-rules.html">https://www.lockheedmartin.com/en-us/who-we-are/business-areas/aeronautics/skunkworks/kelly-14-rules.html</a></p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
+    </h1>
+    <p >Apr 4, 2020
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2020/04/04/live-article-mma-2020/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/mma/">mma</a><a class="label" href="https://alvarogarcia7.github.io/categories/2020/">2020</a><a class="label" href="https://alvarogarcia7.github.io/categories/live-article/">live-article</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>This is an article written, live, from the MMA in 2020.</p>
 
         
 
@@ -872,6 +575,12 @@ Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
     
         <a href="/blog/page/36/" class="label-pagination">36</a>
     
+        <a href="/blog/page/37/" class="label-pagination">37</a>
+    
+        <a href="/blog/page/38/" class="label-pagination">38</a>
+    
+        <a href="/blog/page/39/" class="label-pagination">39</a>
+    
 
     
     
@@ -880,7 +589,7 @@ Read: Sat, 15 Dec 2018 15:59:41 +0000</p>
 
     
     
-        <a href="/blog/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/39/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -940,6 +649,10 @@ You can find me on:
       <ul id="recent_articles">
         
           <li class="post">
+              <a href="/articles/2024/08/31/building-private-tools-open/">Building private tools in the open</a>
+          </li>
+        
+          <li class="post">
               <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
           </li>
         
@@ -975,16 +688,20 @@ You can find me on:
               <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
           </li>
         
-          <li class="post">
-              <a href="/articles/2014/12/15/the-joys-of-the-craft-as-article/">The Joys of the Craft as Article</a>
-          </li>
-        
       </ul>
       <h1>Recent Blogs</h1>
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/01/self-study-july-2024/">Self-Study in July 2024</a>
           </li>
         
           <li class="post">
@@ -992,35 +709,27 @@ You can find me on:
           </li>
         
           <li class="post">
+              <a href="/blog/2024/05/01/self-study-may-2024/">Self-Study in May 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/04/01/self-study-april-2024/">Self-Study in April 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/09/01/self-study-september-2023/">Self-Study in September 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/08/01/self-study-august-2023/">Self-Study in August 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/01/01/self-study-january-2021/">Self-Study in January 2021</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/09/30/books-read-2020q3/">Books read in 2020Q3</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
       </ul>

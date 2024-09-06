@@ -129,53 +129,64 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/">Tip: Propagate the failure in bash</a>
+        <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/">Faster site generation with a native Octopress 2</a>
     </h1>
-    <p >Oct 2, 2015
+    <p >Apr 17, 2016
          - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/10/02/tip-propagate-the-failure-in-bash/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2016/04/17/faster-site-generation-native-octopress/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/bash/">bash</a><a class="label" href="https://alvarogarcia7.github.io/categories/pipe/">pipe</a><a class="label" href="https://alvarogarcia7.github.io/categories/failure/">failure</a><a class="label" href="https://alvarogarcia7.github.io/categories/exit-code/">exit-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/exit-status/">exit-status</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature-toggle/">feature-toggle</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/native-octopress/">native-octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/rakefile/">rakefile</a><a class="label" href="https://alvarogarcia7.github.io/categories/reinventing-the-wheel/">reinventing-the-wheel</a>
         
     </p>
 </header>
 
 
         
-        <p>In bash, the usual behavior is to return the last status code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">bash-3.1$ tr
-tr: two strings must be given when translating
-bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">1</span>
-</code></pre></div><p>But this also applies to pipes:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">bash-3.1$ tr<span class="p">|</span>tee 1.txt
-tr: two strings must be given when translating
-bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">0</span>
-</code></pre></div><p>Should you want to pass the non-zero (error) status code to the next operation, use this feature toggle: <code>set -o pipefail</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">bash-3.1$ <span class="nb">set</span> -o pipefail
-bash-3.1$ tr<span class="p">|</span>tee 1.txt
-tr: two strings must be given when translating
-bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">1</span>
-</code></pre></div><p>This might be useful if you stop on a non-zero status (<code>set -e</code>).</p>
-<h2 id="set-builtin-reference">Set Builtin Reference</h2>
-<p>Reference from the <a href="https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin">Set Builtin</a>:</p>
-<h3 id="-e">-e</h3>
-<blockquote>
-<p>-e</p>
-<p>Exit immediately if a pipeline (see Pipelines), which may consist of a single simple command (see Simple Commands), a list (see Lists), or a compound command (see Compound Commands) returns a non-zero status. The shell does not exit if the command that fails is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of any command executed in a &amp;&amp; or || list except the command following the final &amp;&amp; or ||, any command in a pipeline but the last, or if the command’s return status is being inverted with !. If a compound command other than a subshell returns a non-zero status because a command failed while -e was being ignored, the shell does not exit. A trap on ERR, if set, is executed before the shell exits.</p>
-<p>This option applies to the shell environment and each subshell environment separately (see Command Execution Environment), and may cause subshells to exit before executing all the commands in the subshell.</p>
-<p>If a compound command or shell function executes in a context where -e is being ignored, none of the commands executed within the compound command or function body will be affected by the -e setting, even if -e is set and a command returns a failure status. If a compound command or shell function sets -e while executing in a context where -e is ignored, that setting will not have any effect until the compound command or the command containing the function call completes.</p>
-</blockquote>
-<h3 id="-o-pipefail">-o pipefail</h3>
-<blockquote>
-<p>-o pipefail</p>
-<p>If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully. This option is disabled by default.</p>
-</blockquote>
+        <p>Note: this article is an answer to <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a previous one</a>, about the same topic: a tool for a faster site generation while developing / writing articles, using octopress 2.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Octopress 2 packs, out of the box, some tasks to speed up the site generation while you&rsquo;re writing articles:</p>
+<p>Isolate a post:</p>
+<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># usage rake isolate[my-post]</span>
+<span class="n">desc</span> <span class="s2">&#34;Move all other posts than the one currently being worked on to a temporary stash location (stash) so regenerating the site happens much more quickly.&#34;</span>
+<span class="n">task</span> <span class="ss">:isolate</span><span class="p">,</span> <span class="ss">:filename</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+  <span class="n">stash_dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">&#34;</span>
+  <span class="no">FileUtils</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span> <span class="k">unless</span> <span class="no">File</span><span class="o">.</span><span class="n">exist?</span><span class="p">(</span><span class="n">stash_dir</span><span class="p">)</span>
+  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/*.*&#34;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+    <span class="nb">system</span> <span class="s2">&#34;git update-index --assume-unchanged </span><span class="si">#{</span><span class="n">post</span><span class="si">}</span><span class="s2">&#34;</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">stash_dir</span> <span class="k">unless</span> <span class="n">post</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div><p>Integrate with the rest of the posts:</p>
+<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">desc</span> <span class="s2">&#34;Move all stashed posts back into the posts directory, ready for site generation.&#34;</span>
+<span class="n">task</span> <span class="ss">:integrate</span> <span class="k">do</span>
+  <span class="n">posts_dir</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/&#34;</span>
+  <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">stash_dir</span><span class="si">}</span><span class="s2">/*.*&#34;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+    <span class="no">FileUtils</span><span class="o">.</span><span class="n">mv</span> <span class="n">post</span><span class="p">,</span> <span class="n">posts_dir</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">reverse</span><span class="o">.</span><span class="n">first</span><span class="si">}</span><span class="s2">&#34;</span>
+    <span class="nb">system</span> <span class="s2">&#34;git update-index --no-assume-unchanged </span><span class="si">#{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">&#34;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div><h2 id="usage">Usage</h2>
+<p>(at the folder where the Rakefile is located)</p>
+<ul>
+<li>isolate the selected file. Specify the pattern to keep.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rake isolate<span class="o">[</span><span class="s2">&#34;draft&#34;</span><span class="o">]</span>
+</code></pre></div><ul>
+<li>write the new content</li>
+<li>commit to git</li>
+<li>integrate with the rest of the files</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rake integrate
+</code></pre></div><ul>
+<li>git push</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>When I needed this tool, to speed up my feedback cycle, I didn&rsquo;t find any that did this job, so I created <a href="../../../../2015/07/13/faster-site-generation-for-octopress-2/">a small tool for this same purpose</a>. Unfortunately, there was one, so close to my nose that I could not find it. I was reinventing the wheel.</p>
+<p>It is better to switch to a tool that has been tested by more users, that has received the community&rsquo;s approval than a custom-made tool.</p>
 
         
 
@@ -188,129 +199,171 @@ bash-3.1$ <span class="nb">echo</span> <span class="nv">$?</span>
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/">Self-Study in October 2015</a>
+        <a href="https://alvarogarcia7.github.io/blog/2016/04/01/self-study/">Self-Study in April 2016</a>
     </h1>
-    <p >Oct 1, 2015
-         - 5 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/10/01/self-study-in-october-2015/#disqus_thread">Comments</a>
+    <p >Apr 1, 2016
+         - 8 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/04/01/self-study/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/october/">october</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/1986/">1986</a><a class="label" href="https://alvarogarcia7.github.io/categories/abstract-syntax-tree/">abstract-syntax-tree</a><a class="label" href="https://alvarogarcia7.github.io/categories/acid/">acid</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile-academy/">agile-academy</a><a class="label" href="https://alvarogarcia7.github.io/categories/alex-smith/">alex-smith</a><a class="label" href="https://alvarogarcia7.github.io/categories/andrew-stewart/">andrew-stewart</a><a class="label" href="https://alvarogarcia7.github.io/categories/arrayblockingqueue/">arrayblockingqueue</a><a class="label" href="https://alvarogarcia7.github.io/categories/ast/">ast</a><a class="label" href="https://alvarogarcia7.github.io/categories/backlog/">backlog</a><a class="label" href="https://alvarogarcia7.github.io/categories/benchmark/">benchmark</a><a class="label" href="https://alvarogarcia7.github.io/categories/brett-l.-schuchert/">brett-l.-schuchert</a><a class="label" href="https://alvarogarcia7.github.io/categories/classloader/">classloader</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/codedata/">code=data</a><a class="label" href="https://alvarogarcia7.github.io/categories/commitment/">commitment</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/concurrency/">concurrency</a><a class="label" href="https://alvarogarcia7.github.io/categories/concurrentlinkedqueue/">concurrentlinkedqueue</a><a class="label" href="https://alvarogarcia7.github.io/categories/contention/">contention</a><a class="label" href="https://alvarogarcia7.github.io/categories/cost-reduction/">cost-reduction</a><a class="label" href="https://alvarogarcia7.github.io/categories/data-structure/">data-structure</a><a class="label" href="https://alvarogarcia7.github.io/categories/datacode/">data=code</a><a class="label" href="https://alvarogarcia7.github.io/categories/dave-farley/">dave-farley</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency-inversion-principle/">dependency-inversion-principle</a><a class="label" href="https://alvarogarcia7.github.io/categories/design-principle/">design-principle</a><a class="label" href="https://alvarogarcia7.github.io/categories/dip/">dip</a><a class="label" href="https://alvarogarcia7.github.io/categories/disruptor/">disruptor</a><a class="label" href="https://alvarogarcia7.github.io/categories/document-store/">document-store</a><a class="label" href="https://alvarogarcia7.github.io/categories/dom/">dom</a><a class="label" href="https://alvarogarcia7.github.io/categories/domain-specific-language/">domain-specific-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/doug-lea/">doug-lea</a><a class="label" href="https://alvarogarcia7.github.io/categories/downside/">downside</a><a class="label" href="https://alvarogarcia7.github.io/categories/elm/">elm</a><a class="label" href="https://alvarogarcia7.github.io/categories/evan-czaplicki/">evan-czaplicki</a><a class="label" href="https://alvarogarcia7.github.io/categories/example/">example</a><a class="label" href="https://alvarogarcia7.github.io/categories/extreme-programming/">extreme-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/framework/">framework</a><a class="label" href="https://alvarogarcia7.github.io/categories/function/">function</a><a class="label" href="https://alvarogarcia7.github.io/categories/gregory-brown/">gregory-brown</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/hirotaka-takeuchi/">hirotaka-takeuchi</a><a class="label" href="https://alvarogarcia7.github.io/categories/homoiconicity/">homoiconicity</a><a class="label" href="https://alvarogarcia7.github.io/categories/ikujiro-nonaka/">ikujiro-nonaka</a><a class="label" href="https://alvarogarcia7.github.io/categories/introduction/">introduction</a><a class="label" href="https://alvarogarcia7.github.io/categories/james-donelan/">james-donelan</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/jevgeny-kabanov/">jevgeny-kabanov</a><a class="label" href="https://alvarogarcia7.github.io/categories/json/">json</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda-calculus/">lambda-calculus</a><a class="label" href="https://alvarogarcia7.github.io/categories/lean-startup/">lean-startup</a><a class="label" href="https://alvarogarcia7.github.io/categories/lmax/">lmax</a><a class="label" href="https://alvarogarcia7.github.io/categories/low-cost/">low-cost</a><a class="label" href="https://alvarogarcia7.github.io/categories/low-level-optimization/">low-level-optimization</a><a class="label" href="https://alvarogarcia7.github.io/categories/macro/">macro</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/martin-thompson/">martin-thompson</a><a class="label" href="https://alvarogarcia7.github.io/categories/matt-might/">matt-might</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-barker/">michael-barker</a><a class="label" href="https://alvarogarcia7.github.io/categories/mongodb/">mongodb</a><a class="label" href="https://alvarogarcia7.github.io/categories/mvp/">mvp</a><a class="label" href="https://alvarogarcia7.github.io/categories/nikolaos-raptis/">nikolaos-raptis</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented/">object-oriented</a><a class="label" href="https://alvarogarcia7.github.io/categories/optimization/">optimization</a><a class="label" href="https://alvarogarcia7.github.io/categories/pair-programming/">pair-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/paper/">paper</a><a class="label" href="https://alvarogarcia7.github.io/categories/parallelism/">parallelism</a><a class="label" href="https://alvarogarcia7.github.io/categories/patricia-gee/">patricia-gee</a><a class="label" href="https://alvarogarcia7.github.io/categories/pet-project/">pet-project</a><a class="label" href="https://alvarogarcia7.github.io/categories/postgresql/">postgresql</a><a class="label" href="https://alvarogarcia7.github.io/categories/principle/">principle</a><a class="label" href="https://alvarogarcia7.github.io/categories/priority/">priority</a><a class="label" href="https://alvarogarcia7.github.io/categories/product-development/">product-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/proof/">proof</a><a class="label" href="https://alvarogarcia7.github.io/categories/proof-of-concept/">proof-of-concept</a><a class="label" href="https://alvarogarcia7.github.io/categories/racket/">racket</a><a class="label" href="https://alvarogarcia7.github.io/categories/ring-buffer/">ring-buffer</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-martin/">robert-martin</a><a class="label" href="https://alvarogarcia7.github.io/categories/script/">script</a><a class="label" href="https://alvarogarcia7.github.io/categories/scrum/">scrum</a><a class="label" href="https://alvarogarcia7.github.io/categories/side-project/">side-project</a><a class="label" href="https://alvarogarcia7.github.io/categories/software-quality/">software-quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/solid/">solid</a><a class="label" href="https://alvarogarcia7.github.io/categories/speed/">speed</a><a class="label" href="https://alvarogarcia7.github.io/categories/sprint/">sprint</a><a class="label" href="https://alvarogarcia7.github.io/categories/star-videos/">star-videos</a><a class="label" href="https://alvarogarcia7.github.io/categories/stephen-wolfram/">stephen-wolfram</a><a class="label" href="https://alvarogarcia7.github.io/categories/sven-slootweg/">sven-slootweg</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/trisha-gee/">trisha-gee</a><a class="label" href="https://alvarogarcia7.github.io/categories/turing-machine/">turing-machine</a><a class="label" href="https://alvarogarcia7.github.io/categories/universal-turing-machine/">universal-turing-machine</a><a class="label" href="https://alvarogarcia7.github.io/categories/video/">video</a><a class="label" href="https://alvarogarcia7.github.io/categories/virtual-dom/">virtual-dom</a><a class="label" href="https://alvarogarcia7.github.io/categories/white-paper/">white-paper</a><a class="label" href="https://alvarogarcia7.github.io/categories/xp/">xp</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/april/">april</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/action/">action</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/alan-scherger/">alan-scherger</a><a class="label" href="https://alvarogarcia7.github.io/categories/alberto-mena/">alberto-mena</a><a class="label" href="https://alvarogarcia7.github.io/categories/analysis/">analysis</a><a class="label" href="https://alvarogarcia7.github.io/categories/anders-ericsson/">anders-ericsson</a><a class="label" href="https://alvarogarcia7.github.io/categories/angel-medinilla/">angel-medinilla</a><a class="label" href="https://alvarogarcia7.github.io/categories/announcement/">announcement</a><a class="label" href="https://alvarogarcia7.github.io/categories/apple/">apple</a><a class="label" href="https://alvarogarcia7.github.io/categories/application/">application</a><a class="label" href="https://alvarogarcia7.github.io/categories/attack/">attack</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/autonomy/">autonomy</a><a class="label" href="https://alvarogarcia7.github.io/categories/avdi-grimm/">avdi-grimm</a><a class="label" href="https://alvarogarcia7.github.io/categories/bonilista/">bonilista</a><a class="label" href="https://alvarogarcia7.github.io/categories/bootcamp/">bootcamp</a><a class="label" href="https://alvarogarcia7.github.io/categories/breach/">breach</a><a class="label" href="https://alvarogarcia7.github.io/categories/brian-knapp/">brian-knapp</a><a class="label" href="https://alvarogarcia7.github.io/categories/bruce-schneier/">bruce-schneier</a><a class="label" href="https://alvarogarcia7.github.io/categories/brute-force/">brute-force</a><a class="label" href="https://alvarogarcia7.github.io/categories/buck-heroux/">buck-heroux</a><a class="label" href="https://alvarogarcia7.github.io/categories/bug/">bug</a><a class="label" href="https://alvarogarcia7.github.io/categories/bug-count/">bug-count</a><a class="label" href="https://alvarogarcia7.github.io/categories/burnout/">burnout</a><a class="label" href="https://alvarogarcia7.github.io/categories/business/">business</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/change/">change</a><a class="label" href="https://alvarogarcia7.github.io/categories/code-retreat/">code-retreat</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding/">coding</a><a class="label" href="https://alvarogarcia7.github.io/categories/comment/">comment</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/continuous-learning/">continuous-learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/contractor/">contractor</a><a class="label" href="https://alvarogarcia7.github.io/categories/corbett-barr/">corbett-barr</a><a class="label" href="https://alvarogarcia7.github.io/categories/corporateculture/">corporateculture</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/dan-luu/">dan-luu</a><a class="label" href="https://alvarogarcia7.github.io/categories/dan-pink/">dan-pink</a><a class="label" href="https://alvarogarcia7.github.io/categories/dave-gerhardt/">dave-gerhardt</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-bonilla/">david-bonilla</a><a class="label" href="https://alvarogarcia7.github.io/categories/defect/">defect</a><a class="label" href="https://alvarogarcia7.github.io/categories/defect-count/">defect-count</a><a class="label" href="https://alvarogarcia7.github.io/categories/definition/">definition</a><a class="label" href="https://alvarogarcia7.github.io/categories/deliberate-practice/">deliberate-practice</a><a class="label" href="https://alvarogarcia7.github.io/categories/deployment/">deployment</a><a class="label" href="https://alvarogarcia7.github.io/categories/design/">design</a><a class="label" href="https://alvarogarcia7.github.io/categories/dev-bootcamp/">dev-bootcamp</a><a class="label" href="https://alvarogarcia7.github.io/categories/developer/">developer</a><a class="label" href="https://alvarogarcia7.github.io/categories/developer-bootcamp/">developer-bootcamp</a><a class="label" href="https://alvarogarcia7.github.io/categories/developer-quality/">developer-quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/development/">development</a><a class="label" href="https://alvarogarcia7.github.io/categories/devops/">devops</a><a class="label" href="https://alvarogarcia7.github.io/categories/dillon-forrest/">dillon-forrest</a><a class="label" href="https://alvarogarcia7.github.io/categories/domain/">domain</a><a class="label" href="https://alvarogarcia7.github.io/categories/drift/">drift</a><a class="label" href="https://alvarogarcia7.github.io/categories/dynamically-typed/">dynamically-typed</a><a class="label" href="https://alvarogarcia7.github.io/categories/employee/">employee</a><a class="label" href="https://alvarogarcia7.github.io/categories/entrepreneurship/">entrepreneurship</a><a class="label" href="https://alvarogarcia7.github.io/categories/expert/">expert</a><a class="label" href="https://alvarogarcia7.github.io/categories/exploit/">exploit</a><a class="label" href="https://alvarogarcia7.github.io/categories/fbi/">fbi</a><a class="label" href="https://alvarogarcia7.github.io/categories/file/">file</a><a class="label" href="https://alvarogarcia7.github.io/categories/filesystem/">filesystem</a><a class="label" href="https://alvarogarcia7.github.io/categories/firsthand/">firsthand</a><a class="label" href="https://alvarogarcia7.github.io/categories/francho-joven/">francho-joven</a><a class="label" href="https://alvarogarcia7.github.io/categories/franklin-chen/">franklin-chen</a><a class="label" href="https://alvarogarcia7.github.io/categories/garbage-collection/">garbage-collection</a><a class="label" href="https://alvarogarcia7.github.io/categories/gc/">gc</a><a class="label" href="https://alvarogarcia7.github.io/categories/gdcr/">gdcr</a><a class="label" href="https://alvarogarcia7.github.io/categories/genius/">genius</a><a class="label" href="https://alvarogarcia7.github.io/categories/geofence/">geofence</a><a class="label" href="https://alvarogarcia7.github.io/categories/geofencing/">geofencing</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/github-pages/">github-pages</a><a class="label" href="https://alvarogarcia7.github.io/categories/go/">go</a><a class="label" href="https://alvarogarcia7.github.io/categories/go-memory-model/">go-memory-model</a><a class="label" href="https://alvarogarcia7.github.io/categories/golang/">golang</a><a class="label" href="https://alvarogarcia7.github.io/categories/growth-trajectory/">growth-trajectory</a><a class="label" href="https://alvarogarcia7.github.io/categories/hacking/">hacking</a><a class="label" href="https://alvarogarcia7.github.io/categories/hakyll/">hakyll</a><a class="label" href="https://alvarogarcia7.github.io/categories/holiday/">holiday</a><a class="label" href="https://alvarogarcia7.github.io/categories/home-office/">home-office</a><a class="label" href="https://alvarogarcia7.github.io/categories/hugo/">hugo</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/improvement/">improvement</a><a class="label" href="https://alvarogarcia7.github.io/categories/incremental-generation/">incremental-generation</a><a class="label" href="https://alvarogarcia7.github.io/categories/infographic/">infographic</a><a class="label" href="https://alvarogarcia7.github.io/categories/innovation/">innovation</a><a class="label" href="https://alvarogarcia7.github.io/categories/intelligence/">intelligence</a><a class="label" href="https://alvarogarcia7.github.io/categories/jacob-shriar/">jacob-shriar</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/jekyll/">jekyll</a><a class="label" href="https://alvarogarcia7.github.io/categories/jekyll-3/">jekyll-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/jim-bird/">jim-bird</a><a class="label" href="https://alvarogarcia7.github.io/categories/job/">job</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-vs-career/">job-vs-career</a><a class="label" href="https://alvarogarcia7.github.io/categories/jon-yau/">jon-yau</a><a class="label" href="https://alvarogarcia7.github.io/categories/jooq/">jooq</a><a class="label" href="https://alvarogarcia7.github.io/categories/juergen-hoeller/">juergen-hoeller</a><a class="label" href="https://alvarogarcia7.github.io/categories/jvm/">jvm</a><a class="label" href="https://alvarogarcia7.github.io/categories/kai-wei/">kai-wei</a><a class="label" href="https://alvarogarcia7.github.io/categories/kaizen/">kaizen</a><a class="label" href="https://alvarogarcia7.github.io/categories/kent-beck/">kent-beck</a><a class="label" href="https://alvarogarcia7.github.io/categories/kerrick-long/">kerrick-long</a><a class="label" href="https://alvarogarcia7.github.io/categories/king/">king</a><a class="label" href="https://alvarogarcia7.github.io/categories/kotlin/">kotlin</a><a class="label" href="https://alvarogarcia7.github.io/categories/laboratory/">laboratory</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/law/">law</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/list/">list</a><a class="label" href="https://alvarogarcia7.github.io/categories/long-life-learning/">long-life-learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/lukas-eder/">lukas-eder</a><a class="label" href="https://alvarogarcia7.github.io/categories/malcolm-gladwell/">malcolm-gladwell</a><a class="label" href="https://alvarogarcia7.github.io/categories/mark-maunder/">mark-maunder</a><a class="label" href="https://alvarogarcia7.github.io/categories/martin-fowler/">martin-fowler</a><a class="label" href="https://alvarogarcia7.github.io/categories/mastery/">mastery</a><a class="label" href="https://alvarogarcia7.github.io/categories/mastery-autonomy-purpose/">mastery-autonomy-purpose</a><a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/meta-read/">meta-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-ibarra/">michael-ibarra</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-williams/">michael-williams</a><a class="label" href="https://alvarogarcia7.github.io/categories/microservice/">microservice</a><a class="label" href="https://alvarogarcia7.github.io/categories/mind/">mind</a><a class="label" href="https://alvarogarcia7.github.io/categories/mossack-fonseca/">mossack-fonseca</a><a class="label" href="https://alvarogarcia7.github.io/categories/mossack-fonseca-breach/">mossack-fonseca-breach</a><a class="label" href="https://alvarogarcia7.github.io/categories/motivation/">motivation</a><a class="label" href="https://alvarogarcia7.github.io/categories/myth/">myth</a><a class="label" href="https://alvarogarcia7.github.io/categories/netflix/">netflix</a><a class="label" href="https://alvarogarcia7.github.io/categories/nguyen-dinh-quan/">nguyen-dinh-quan</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/office/">office</a><a class="label" href="https://alvarogarcia7.github.io/categories/oracle/">oracle</a><a class="label" href="https://alvarogarcia7.github.io/categories/passion/">passion</a><a class="label" href="https://alvarogarcia7.github.io/categories/per-malmen/">per-malmen</a><a class="label" href="https://alvarogarcia7.github.io/categories/pep/">pep</a><a class="label" href="https://alvarogarcia7.github.io/categories/pep-20/">pep-20</a><a class="label" href="https://alvarogarcia7.github.io/categories/performance/">performance</a><a class="label" href="https://alvarogarcia7.github.io/categories/personal-development/">personal-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/phil-haack/">phil-haack</a><a class="label" href="https://alvarogarcia7.github.io/categories/plugin/">plugin</a><a class="label" href="https://alvarogarcia7.github.io/categories/policy/">policy</a><a class="label" href="https://alvarogarcia7.github.io/categories/practice/">practice</a><a class="label" href="https://alvarogarcia7.github.io/categories/procrastination/">procrastination</a><a class="label" href="https://alvarogarcia7.github.io/categories/procrastinator/">procrastinator</a><a class="label" href="https://alvarogarcia7.github.io/categories/productivity/">productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/professional-development/">professional-development</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming/">programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/purpose/">purpose</a><a class="label" href="https://alvarogarcia7.github.io/categories/python/">python</a><a class="label" href="https://alvarogarcia7.github.io/categories/quadtree/">quadtree</a><a class="label" href="https://alvarogarcia7.github.io/categories/quality/">quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/reaction/">reaction</a><a class="label" href="https://alvarogarcia7.github.io/categories/reactive-programming/">reactive-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/read-on-read/">read-on-read</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/release/">release</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote/">remote</a><a class="label" href="https://alvarogarcia7.github.io/categories/resilience/">resilience</a><a class="label" href="https://alvarogarcia7.github.io/categories/revolution-slider/">revolution-slider</a><a class="label" href="https://alvarogarcia7.github.io/categories/risk-appetite/">risk-appetite</a><a class="label" href="https://alvarogarcia7.github.io/categories/roman-coedo/">roman-coedo</a><a class="label" href="https://alvarogarcia7.github.io/categories/rps/">rps</a><a class="label" href="https://alvarogarcia7.github.io/categories/rtree/">rtree</a><a class="label" href="https://alvarogarcia7.github.io/categories/s2/">s2</a><a class="label" href="https://alvarogarcia7.github.io/categories/s3/">s3</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandjar-kozubaev/">sandjar-kozubaev</a><a class="label" href="https://alvarogarcia7.github.io/categories/scratch-refactoring/">scratch-refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-investment/">self-investment</a><a class="label" href="https://alvarogarcia7.github.io/categories/side-project/">side-project</a><a class="label" href="https://alvarogarcia7.github.io/categories/social-media/">social-media</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/speed/">speed</a><a class="label" href="https://alvarogarcia7.github.io/categories/spring/">spring</a><a class="label" href="https://alvarogarcia7.github.io/categories/ssg/">ssg</a><a class="label" href="https://alvarogarcia7.github.io/categories/startup/">startup</a><a class="label" href="https://alvarogarcia7.github.io/categories/static-site-generator/">static-site-generator</a><a class="label" href="https://alvarogarcia7.github.io/categories/statically-typed/">statically-typed</a><a class="label" href="https://alvarogarcia7.github.io/categories/stockphoto/">stockphoto</a><a class="label" href="https://alvarogarcia7.github.io/categories/story/">story</a><a class="label" href="https://alvarogarcia7.github.io/categories/strategy/">strategy</a><a class="label" href="https://alvarogarcia7.github.io/categories/student/">student</a><a class="label" href="https://alvarogarcia7.github.io/categories/subcategory/">subcategory</a><a class="label" href="https://alvarogarcia7.github.io/categories/success/">success</a><a class="label" href="https://alvarogarcia7.github.io/categories/susanna-berg/">susanna-berg</a><a class="label" href="https://alvarogarcia7.github.io/categories/swizec-teller/">swizec-teller</a><a class="label" href="https://alvarogarcia7.github.io/categories/talent/">talent</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-management/">team-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/ted/">ted</a><a class="label" href="https://alvarogarcia7.github.io/categories/ted-talk/">ted-talk</a><a class="label" href="https://alvarogarcia7.github.io/categories/tim-urban/">tim-urban</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip-and-trick/">tip-and-trick</a><a class="label" href="https://alvarogarcia7.github.io/categories/tom-johnson/">tom-johnson</a><a class="label" href="https://alvarogarcia7.github.io/categories/travis/">travis</a><a class="label" href="https://alvarogarcia7.github.io/categories/tweak/">tweak</a><a class="label" href="https://alvarogarcia7.github.io/categories/uber/">uber</a><a class="label" href="https://alvarogarcia7.github.io/categories/unlimited-vacation/">unlimited-vacation</a><a class="label" href="https://alvarogarcia7.github.io/categories/vacation/">vacation</a><a class="label" href="https://alvarogarcia7.github.io/categories/video/">video</a><a class="label" href="https://alvarogarcia7.github.io/categories/vulnerability/">vulnerability</a><a class="label" href="https://alvarogarcia7.github.io/categories/webapp/">webapp</a><a class="label" href="https://alvarogarcia7.github.io/categories/webcast/">webcast</a><a class="label" href="https://alvarogarcia7.github.io/categories/wordpress/">wordpress</a><a class="label" href="https://alvarogarcia7.github.io/categories/work/">work</a><a class="label" href="https://alvarogarcia7.github.io/categories/zaragoza/">zaragoza</a><a class="label" href="https://alvarogarcia7.github.io/categories/zen/">zen</a>
         
     </p>
 </header>
 
 
         
-        <h2 id="blazing-fast-html-virtual-dom-in-elm">Blazing Fast HTML: Virtual DOM in Elm</h2>
-<p>I&rsquo;ve read <a href="http://elm-lang.org/blog/blazing-fast-html">this article</a> explaining how Elm works in relation to the virtual DOM. By Evan Czaplicki.</p>
-<p>Tags: elm, dom, virtual-dom, comparison, speed, haskell, evan-czaplicki</p>
-<h2 id="why-you-should-never-ever-ever-use-mongodb">Why you should never, ever, ever use MongoDB</h2>
-<p>I&rsquo;ve read <a href="http://cryto.net/~joepie91/blog/2015/07/19/why-you-should-never-ever-ever-use-mongodb/">this article</a> stating the downsides of using MongoDB. Written by Sven Slootweg</p>
-<p>Tags: mongodb, downside, sven-slootweg, json, document-store, postgresql, acid</p>
-<h2 id="do-you-really-get-classloaders">Do you really get classloaders?</h2>
-<p>I&rsquo;ve watched <a href="http://zeroturnaround.com/rebellabs/rebel-labs-tutorial-do-you-really-get-classloaders/">this video</a> by Jevgeny Kabanov on classloaders: what they are, how they work nad some tips to solve common issues.</p>
-<p>My notes:</p>
+        <h2 id="deliberate-practice-what-it-is-and-why-you-need-it">Deliberate Practice: What It Is and Why You Need It</h2>
+<p>I&rsquo;ve read this article by Corbett Barr on what is deliberate practice and why it is needed to become an expert in a given domain field.</p>
+<p>The four essential components:</p>
 <ul>
-<li>the classloading is lazy: the resources are not loaded until they are mentioned</li>
-<li>every classloader has a parent</li>
-<li>every class has a classloader associated with it</li>
-<li>every object has a class associated with it</li>
-<li>classloading delegation: the parent is consulted before loading a class. if it has it, it will load it. If not, I will delegate it</li>
+<li>Motivation</li>
+<li>Tailored (practice)</li>
+<li>Feedback</li>
+<li>Repetion</li>
 </ul>
-<p>There is also <a href="http://www.javaworld.com/article/2074396/core-java/javaone-2011--do-you-really-get-classloaders-.html">this article</a> on the same video</p>
-<p>Tags: jevgeny-kabanov, classloader, java,</p>
-<h2 id="truth-table">Truth table</h2>
-<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Truth_table">the wikipedia article</a> about the truth table and the 16 possible binary boolean operators:</p>
+<p>Tags: corbett-barr, deliberate-practice, expert, practice, anders-ericsson, talent, professional-development, career</p>
+<h2 id="10-features-i-wish-java-would-steal-from-the-kotlin-language">10 Features I Wish Java Would Steal From the Kotlin Language</h2>
+<p>I&rsquo;ve read <a href="http://blog.jooq.org/2016/03/31/10-features-i-wish-java-would-steal-from-the-kotlin-language/">this list of features</a> that the Kotlin Language has that would be an improvement for the Java language. By Lukas Eder</p>
+<p>Tags: list, lukas-eder, kotlin, java, comparison, language, jooq</p>
+<h2 id="how-we-built-uber-engineerings-highest-query-per-second-service-using-go">How we built Uber engineering&rsquo;s highest query per second service using Go</h2>
+<p>I&rsquo;ve read <a href="https://eng.uber.com/go-geofence/">this post</a> by Kai Wei on a microservice they&rsquo;ve built using Go.</p>
+<p>Explains the reasons for choosing that algorithm for geofencing, the performance they&rsquo;re achieving, and the architecture.</p>
+<p>Tags: uber, go, microservice, performance, geofence, geofencing, rps, go-memory-model, kai-wei</p>
+<h2 id="unwinding-ubers-most-efficient-service">Unwinding Uber&rsquo;s Most Efficient Service</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@buckhx/unwinding-uber-s-most-efficient-service-406413c5871d">this article</a> by Buck Heroux commenting on the decisions of Uber for building the geofencing microservice (above read).</p>
+<p>Explains the different alternatives for algorithms in this problem space and has implemented them in go. Provides a benchmark for comparing those, including a profiling session.</p>
+<p>Tags: s2, quadtree, rtree, brute-force, geofence, geofencing, uber, comment, buck-heroux, go, read-on-read, meta-read</p>
+<h2 id="lawful-hacking-and-continuing-vulnerabilities">Lawful Hacking and Continuing Vulnerabilities</h2>
+<p>I&rsquo;ve read <a href="https://www.schneier.com/blog/archives/2016/03/lawful_hacking_.html">this article</a> by Bruce Schneier on the stance the FBI is taking in regards to vulnerabilities discovered in Apple&rsquo;s devices.</p>
+<p>Tags: bruce-schneier, apple, security, fbi, vulnerability, exploit, law, hacking</p>
+<h2 id="a-side-project-helped-jumpstart-my-career--life-learning">A Side Project Helped Jumpstart My Career — Life Learning</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/life-learning/a-side-project-helped-jumpstart-my-career-7cd6f8e9b07f">this article</a> by Dave Gerhardt on how making a side project happen affected his life and his skills.</p>
+<p>Some of the reasons for doing it include:</p>
 <ul>
-<li>Contradiction</li>
-<li>NOR</li>
-<li>Converse nonimplication</li>
-<li>Negation (of p)</li>
-<li>Material nonimplication</li>
-<li>Negation (of q)</li>
-<li>XOR (exclusive disjunction)</li>
-<li>NAND</li>
-<li>AND (conjunction)</li>
-<li>XNOR (biconditional)</li>
-<li>Projection (of p)</li>
-<li>Implication</li>
-<li>Projection (of q)</li>
-<li>Converse implication</li>
-<li>OR (disjunction)</li>
-<li>Tautology</li>
+<li>It forces you to figure stuff out</li>
+<li>The only way to learn is by doing</li>
+<li>It gets your brain working on something other than your job</li>
+<li>You have to create your own network</li>
+<li>You are the CEO</li>
 </ul>
-<h2 id="7-lines-of-code-3-minutes-implement-a-programming-language-from-scratch">7 lines of code, 3 minutes: Implement a programming language from scratch</h2>
-<p>I&rsquo;ve read <a href="http://matt.might.net/articles/implementing-a-programming-language/">this article</a> by Matt Might about the benefits of implementing a language (from scratch but on top of another existing language used as framework). Chooses lambda calculus as the desired DSL</p>
-<p>Tags: matt-might, lambda-calculus, racket, domain-specific-language</p>
-<h2 id="turing-completeness">Turing completeness</h2>
-<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Turing_completeness">this wikipedia article</a> (both main and discussion) about this subject.</p>
-<p>It has sounded strange to me the reference to S-expressions:</p>
+<p>Tags: long-life-learning, continuous-learning, side-project, dave-gerhardt, drift, professional-development, personal-development, business, career</p>
+<h2 id="fun-jekyll-tricks">Fun Jekyll Tricks</h2>
+<p>I&rsquo;ve read <a href="http://www.madebymarket.com/blog/dev/fun-jekyll-tricks.html">this article</a> by Brian Knapp where he explains some tips and tricks of jekyll (in which octopress is based on): speed, deployment, subcategories inside the blog, _data, _includes.</p>
+<p>Tags: brian-knapp, jekyll, octopress, tip-and-trick, improvement, subcategory, meta, automation, deployment</p>
+<h2 id="la-ola-que-llega">La ola que llega</h2>
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=374c664073e1a1fa3deca53b4&amp;id=f8a8ee92cc">this bonilista</a> by David Bonilla, where he explains (in Spanish) the &lsquo;contractor&rsquo; phenomenon arriving to Spain, 2-3 years after being in other countries and the effects that this could have both for workers and companies.</p>
+<p>Tags: bonilista, david-bonilla, contractor</p>
+<h2 id="10-razones-por-las-que-este-sábado-deberías-ir-a-un-code-retreat">10 razones por las que este sábado deberías ir a un code retreat</h2>
+<p>I&rsquo;ve read <a href="http://francho.org/2015/11/10/10-razones-para-ir-a-un-coderetreat/">this list</a> of reasons for attending a code retreat, by Francho Joven, who I met in the Global Day Of Code Retreat (GDCR) &lsquo;15 in Zaragoza</p>
+<p>Tags: francho-joven, list, zaragoza, code-retreat, gdcr</p>
+<h2 id="meaningful-work-through-passion-not-genius">Meaningful Work through Passion, not Genius</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=pIYUMwxKFzo">this talk</a> on the importance of hard work and how it can be mistaken as genious. By Malcolm Gladwell</p>
+<p>Tags: malcolm-gladwell, passion, genius, work, time-management, productivity, career, mastery-autonomy-purpose</p>
+<h2 id="how-to-ask-your-wife-for-permission-to-spend-250000-on-a-domain-name">How to ask your wife for permission to spend $250,000 on a domain name</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@Stockphoto.com/how-to-ask-your-wife-for-permission-to-spend-250-000-on-a-domain-name-c27a3c2852e1">this article</a> by Jon Yau on how they started StockPhoto.com, buying a $250,000 domain name.</p>
+<p>Tags: startup, domain, stockphoto, jon-yau</p>
+<h2 id="sorry-developer-bootcamps-i-was-wrong">Sorry, developer bootcamps: I was wrong</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@dillonforrest/sorry-developer-bootcamps-i-was-wrong-ea37fcc5572c">this article</a> by Dillon Forrest on the topic of developer bootcamps. Explains why developers should not be threatened by recent graduates of these programs and describes how people pursuing these programs usually are:</p>
+<ul>
+<li>Intelligence</li>
+<li>Risk appetite</li>
+<li>Resilience</li>
+<li>Self-investment</li>
+<li>Entrepreneurship</li>
+<li>Growth trajectory</li>
+</ul>
+<p>Tags: bootcamp, developer-bootcamp, dev-bootcamp, dillon-forrest, intelligence, risk-appetite, resilience, self-investment, entrepreneurship, growth-trajectory</p>
+<h2 id="the-jvm-and-java-garbage-collection">The JVM and Java Garbage Collection</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=DoJr5QQYsl8">this webcast</a> about how the JVM garbage collection works. By Michael W Williams</p>
+<p>Tags: michael-williams, oracle, webcast, jvm, garbage-collection, gc,</p>
+<h2 id="files-are-hard">Files Are Hard</h2>
+<p>I&rsquo;ve read <a href="http://danluu.com/file-consistency/">this article</a> on why software that writes on files is difficult, based on the different filesystems that are below, and the operating system. Written by Dan Luu.</p>
+<p>Uses software product to find bugs in filesystems</p>
+<p>Tags: filesystem, file, dan-luu, analysis</p>
+<h2 id="contrata-a-un-fracasado-con-ilusión-inquebrantable">Contrata a un fracasado con ilusión inquebrantable</h2>
+<p>I&rsquo;ve read <a href="http://www.contunegocio.es/tecnologia/contrata-a-un-fracasado-con-ilusion-inquebrantable/">this article</a> by Alberto Mena (in Spanish) on what are the qualities that define a good programmer:</p>
+<ul>
+<li>humility</li>
+<li>failure</li>
+<li>illusion</li>
+<li>hard work</li>
+</ul>
+<p>Tags: alberto-mena, spanish, team-management, success, developer, quality, developer-quality</p>
+<h2 id="dont-react">Don&rsquo;t react</h2>
+<p>I&rsquo;ve read <a href="http://journal.avdi.org/2016/04/14/dont-react/">this article</a> by Avdi Grimm on how the action vs reaction attitude. Why to prefer the former.</p>
+<p>Tags: action, reaction, social-media, avdi-grimm, productivity</p>
+<h2 id="ftp-is-so-90s-lets-deploy-via-git-instead">FTP is so 90&rsquo;s. Let&rsquo;s deploy via Git instead!</h2>
+<p>I&rsquo;ve read <a href="https://coderwall.com/p/xczkaq/ftp-is-so-90-s-let-s-deploy-via-git-instead">this guide</a> on how to deploy using git. By Kerrick Long</p>
+<p>Tags: kerrick-long, git, deployment, webapp, application, devops</p>
+<h2 id="job-vs-career-10-key-differences-you-need-to-understand">Job vs Career: 10 Key Differences You Need To Understand</h2>
+<p>I&rsquo;ve read <a href="https://www.officevibe.com/blog/job-vs-career">the infographic and the article</a> by Jacob Shriar on what differentiates a job from a career</p>
+<p>Tags: jacob-shriar, infographic, job-vs-career, comparison, job, career</p>
+<h2 id="the-secret-to-employee-motivation">The Secret To Employee Motivation</h2>
+<p>I&rsquo;ve read <a href="https://www.officevibe.com/blog/secret-employee-motivation-infographic">the infographic and the article</a> by Jacob Shriar on what motivates employess: mastery, autonomy and purpose. A direct reference to Dan Pink&rsquo;s &ldquo;The puzzle of motivation&rdquo; TED talk.</p>
+<p>Tags: jacob-shriar, motivation, employee, infographic, mastery, autonomy, purpose</p>
+<h2 id="the-puzzle-of-motivation">The puzzle of motivation</h2>
+<p>I&rsquo;ve watched <a href="https://www.ted.com/talks/dan_pink_on_motivation">this TED talk</a> by Dan Pink on what motivates us: intrinsic vs extrinsic motivation.</p>
+<p>Also about the gap that exists between what science knows and what businesses propose.</p>
+<p>Tags: ted, ted-talk, video, dan-pink, mastery, autonomy, purpose</p>
+<h2 id="applying-a-ceiling-to-the-bug-count">Applying a ceiling to the bug count</h2>
+<p>I&rsquo;ve read <a href="https://techblog.king.com/applying-a-ceiling-to-the-bug-count/">this interview</a>, written by Susanna Berg, on how King has reduced the amount of bugs in their backlog using an agile technique, measuring and setting a limit.</p>
+<p>Tags: susanna-berg, king, agile, bug, bug-count, defect, defect-count, per-malmen</p>
+<h2 id="coming-up-in-2016-spring-framework-43--50">Coming up in 2016: Spring Framework 4.3 &amp; 5.0</h2>
+<p>I&rsquo;ve read <a href="https://spring.io/blog/2015/08/03/coming-up-in-2016-spring-framework-4-3-5-0">this announcement</a> of Spring&rsquo;s new release, 5.0, which will require java 8 and will turn most of the features into the reactive programming paradigm. By Juergen Hoeller.</p>
+<p>Tags: juergen-hoeller, spring, reactive-programming, release, announcement</p>
+<h2 id="why-offices-are-where-work-goes-to-die">Why offices are where work goes to die</h2>
+<p>I&rsquo;ve read <a href="http://swizec.com/blog/why-offices-are-where-work-goes-to-die/swizec/6695">this article</a> by Swizec Teller explaining the downsides of working in an office as compared to working remotely.</p>
+<p>Tags: swizec-teller, remote, home-office, office, comparison, time-management</p>
+<h2 id="the-myth-of-the-passionate-developer">The Myth of the Passionate Developer</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@bm2yogi/the-myth-of-the-passionate-developer-76a41d457304">this article</a> by Michael Ibarra on what are the implications of being a passionate developer, how it affects your tasks and what are the factors to a job.</p>
+<p>Tags: michael-ibarra, passion, development, job, motivation, myth</p>
+<h2 id="mossack-fonseca-breach--wordpress-revolution-slider-plugin-possible-cause">Mossack Fonseca Breach – WordPress Revolution Slider Plugin Possible Cause</h2>
+<p>I&rsquo;ve read <a href="https://www.wordfence.com/blog/2016/04/mossack-fonseca-breach-vulnerable-slider-revolution/">this article</a> by Mark Maunder, which describes an hypothesis on how the Mossack Fonseca breach could have happened. Also describes and shows how to breach a Wordpress installation with a vulnerable Revolution Slider plugin.</p>
+<p>Tags: mark-maunder, security, breach, mossack-fonseca-breach, mossack-fonseca, hypothesis, attack, plugin, revolution-slider, wordpress</p>
+<h2 id="tim-urban-inside-the-mind-of-a-master-procrastinator">Tim Urban: Inside the mind of a master procrastinator</h2>
+<p>I&rsquo;ve watched <a href="https://www.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator">this TED talk</a> from Tim Urban on how the procrastinator&rsquo;s mind works, exemplified by his own career.</p>
+<p>Tags: procrastinator, procrastination, mind, time-management, tim-urban</p>
+<h2 id="pep-20----the-zen-of-python">PEP 20 &ndash; The Zen of Python</h2>
+<p>I&rsquo;ve read <a href="https://www.python.org/dev/peps/pep-0020/">the PEP20</a>, the zen of python, with special attention to this:</p>
 <blockquote>
-<p>Data languages
-The notion of Turing-completeness does not apply to languages such as XML, HTML, JSON, YAML and S-expressions because they are typically used to represent structured data, not describe computation [&hellip;]</p>
+<p>Explicit is better than implicit.</p>
 </blockquote>
-<p>If data (S-expression) is represented as the same format as code (e.g., Lisp&rsquo;s S-expression) and the latter is used to represent a computation, shouldn&rsquo;t be &ldquo;data languages that also are used as computation languages&rdquo; excluded from that list?</p>
-<p>As a side note, Lisp is Turing Complete (see <a href="https://en.wikipedia.org/wiki/Turing_completeness#Examples">Turing Complete#Examples</a>)</p>
-<h2 id="the-prize-is-won-the-simplest-universal-turing-machine-is-proved">The Prize Is Won; The Simplest Universal Turing Machine Is Proved</h2>
-<p>I&rsquo;ve read <a href="http://blog.wolfram.com/2007/10/24/the-prize-is-won-the-simplest-universal-turing-machine-is-proved/?year=2007&amp;monthnum=10">this article</a> by Stephen Wolfram about the proof of a Turing Machine 2,3 being universal by Alex Smith.</p>
-<p>Tags: stephen-wolfram, turing-machine, universal-turing-machine, proof, paper, alex-smith</p>
-<h2 id="making-a-successful-commitment-in-each-sprint">Making a successful commitment in each Sprint</h2>
-<p>I&rsquo;ve read <a href="http://succeeding-with-agile.blogspot.com/2015/07/making-successful-commitment-in-each.html">this article</a> by Nikolaos Raptis on committing to work in each sprint.</p>
-<p>Tags: nikolaos-raptis, sprint, agile, commitment</p>
-<h2 id="no-increment-operator--in-ruby">No increment operator (++) in Ruby?</h2>
-<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/3717519/no-increment-operator-in-ruby">this stackoverflow</a> question about the lack of post-increment operator (i++) in Ruby:</p>
-<blockquote>
-<p>++ and &ndash; are NOT reserved operator in Ruby.</p>
-<p>Mailing list from <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/2710">Yukihiro Matsumoto aka matz</a></p>
-</blockquote>
-<h2 id="code-is-data-data-is-code">Code is Data, Data is Code</h2>
-<p>I&rsquo;ve read <a href="http://blogs.mulesoft.com/dev/news-dev/code-is-data-data-is-code/">this article</a> by James Donelan on the equivalence of code and data in homoiconic languages, including Clojure.</p>
-<p>The article talks about homoiconicity, manually creating Abstract Syntax Trees (AST) out of data and the macro environment. Also, compares the difference between macros and functions.</p>
-<p>Tags: code=data, data=code, james-donelan, clojure, homoiconicity, abstract-syntax-tree, ast, macro, function</p>
-<h2 id="agile-in-practice-test-driven-development">Agile in Practice: Test Driven Development</h2>
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=uGaNkTahrIw">this video</a> introducing TDD by the Agile Academy. Explains its motivations and the basic cyclical fashion.</p>
-<p>Tags: agile-academy, video, tdd, introduction</p>
-<h2 id="agile-in-practice-pair-programming">Agile in Practice: Pair Programming</h2>
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=ET3Q6zNK3Io">this video</a> by Agile Academy on practicing pair programming. Explains the destination and how to get there.</p>
-<p>Tags: agile-academy, pair-programming, video, introduction</p>
-<h2 id="a-low-cost-approach-to-working-on-side-projects">A low cost approach to working on side projects</h2>
-<p>I&rsquo;ve read <a href="https://practicingruby.com/articles/low-cost-approach-to-side-projects">this article</a> by Gregory Brown on how to apply the MVP and Lean Startup principles to side projects (a.k.a. pet projects). Try to start with a brainstorming session of all the features you want your product to have, then prioritise, picking the most important ones.</p>
-<p>Most projects' needs can be solved with a minimal version, in the form of a script that took half an hour to develop.</p>
-<p>Tags: gregory-brown, mvp, lean-startup, script, proof-of-concept, priority, backlog, side-project, pet-project, low-cost, cost-reduction</p>
-<h2 id="extreme-programming">Extreme Programming</h2>
-<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=kFM2Vcu-BRo">this video</a> by STAR Videos on the basic principles behind Extreme Programming and how to use it to improve software quality</p>
-<p>Tags: star-videos, extreme-programming, xp, software-quality</p>
-<h2 id="disruptor-high-performance-alternative-to-bounded-queues-for-exchanging-data-between-concurrent-threads">Disruptor: High performance alternative to bounded queues for exchanging data between concurrent threads</h2>
-<p>I&rsquo;ve read <a href="http://lmax-exchange.github.io/disruptor/files/Disruptor-1.0.pdf">this white paper</a> describing the disruptor framework: a way of exchanging data between concurrent threads.</p>
-<p>It uses a ring buffer and other techniques to eliminate write contention, reduce read contention and produces good results. It was developed for a financial exchange environment but it&rsquo;s general purpose.</p>
-<p>Tags: martin-thompson, dave-farley, michael-barker, patricia-gee, andrew-stewart, trisha-gee, disruptor, contention, framework, concurrency, parallelism, white-paper, comparison, arrayblockingqueue, concurrentlinkedqueue, doug-lea, benchmark, lmax, low-level-optimization, optimization</p>
-<h2 id="dissecting-the-disruptor-whats-so-special-about-a-ring-buffer">Dissecting the Disruptor: What&rsquo;s so special about a ring buffer?</h2>
-<p>I&rsquo;ve read <a href="http://mechanitis.blogspot.com.es/2011/06/dissecting-disruptor-whats-so-special.html">this article</a> about the ring buffer data structure. A FIFO data structure where elements get overwritten to reduce pressure on the garbage collector. Every message gets sent to every consumer.</p>
-<p>Tags: patricia-gee, trisha-gee, disruptor, ring-buffer, data-structure</p>
-<h2 id="the-dependency-inversion-principle">The Dependency Inversion Principle</h2>
-<p>I&rsquo;ve read <a href="http://www.objectmentor.com/resources/articles/dip.pdf">this paper</a> about the Dependency Inversion Principle (DIP) written Robert C. Martin.</p>
-<p>It explains the theory, philosophy behind it. Also, creates an example with a copy buffer and different output locations</p>
-<p>Tags: robert-martin, dependency-inversion-principle, dip, example, comparison, object-oriented, principle, solid, design-principle</p>
-<h2 id="dip-in-the-wild">DIP in the Wild</h2>
-<p>I&rsquo;ve read <a href="http://martinfowler.com/articles/dipInTheWild.html">this article</a> about the Dependency Inversion Principle (DIP) written by Brett L. Schuchert.</p>
-<p>It is explained non-canonical representations of this principle, how in other cases he has solved it and conclusions of using it day to day.</p>
-<p>Tags: brett-l.-schuchert, dependency-inversion-principle, dip, example, object-oriented, solid, design-principle</p>
-<h2 id="the-new-new-product-development-game">The New New Product Development Game</h2>
-<p>I&rsquo;ve read <a href="https://hbr.org/1986/01/the-new-new-product-development-game">this paper</a> about the holistic approach to product development, considered seminal for Scrum and other Agile methodologies. Written by Hirotaka Takeuchi and Ikujiro Nonaka</p>
-<p>In it, they describe how teams are distributed, the responsibilities for each one, and the degrees of freedom.</p>
-<p>Cites the six basic characteristics:</p>
-<ul>
-<li>built-in instability</li>
-<li>self-organizing project teams</li>
-<li>overlapping development phases</li>
-<li>multilearning</li>
-<li>subtle control</li>
-<li>organizational transfer of learning</li>
-</ul>
-<p>Tags: hirotaka-takeuchi, ikujiro-nonaka, scrum, agile, product-development, management, 1986</p>
+<p>Tags: pep-20, pep, python, zen</p>
+<h2 id="why-i-switched-from-octopress-2-to-hugo">Why I switched from Octopress 2 to Hugo</h2>
+<p>I&rsquo;ve read <a href="http://conscientiousprogrammer.com/blog/2015/05/31/why-i-switched-from-octopress-2-to-hugo/">this article</a> by Franklin Chen on the change he made on the static site generator (SSG) he used. He considered hakyll, octopress, jekyll, hugo. Was decided between hakyll and hugo for their speed but, finally, decided to use hugo for their bigger community.</p>
+<p>Tags: franklin-chen, comparison, ssg, static-site-generator, hakyll, octopress, jekyll, hugo, change, speed, statically-typed, dynamically-typed, golang, performance</p>
+<h2 id="why-incremental-regeneration-in-jekyll-30-is-such-a-big-deal">Why incremental regeneration in Jekyll 3.0 is such a big deal</h2>
+<p>I&rsquo;ve read <a href="http://idratherbewriting.com/2015/11/04/jekyll-30-released-incremental-regeneration-rocks/">this article</a> by Tom Johnson on one of the new features that jekyll 3.0 brings: incremental generation. How this can speed up the generation</p>
+<p>Tags: tom-johnson, incremental-generation, speed, performance, octopress-2, octopress-3, jekyll-3</p>
+<h2 id="hugo-s3-travis-ci-oh-boy">Hugo, S3, Travis CI, oh boy!</h2>
+<p>I&rsquo;ve read <a href="http://continuousfailure.com/post/s3_blog/">this guide</a> by Alan Scherger on how to set up a specific stack for developing and deploying a static site blog.</p>
+<p>Tags: alan-scherger, static-site-generator, ssg, travis, hugo, s3</p>
+<h2 id="deploy-your-blog-to-github-pages-automatically-using-hugo-and-travis">Deploy your blog to github pages automatically using Hugo and Travis</h2>
+<p>I&rsquo;ve read <a href="http://rcoedo.com/post/hugo-static-site-generator/">this article</a> by Roman Coedo on how to deploy a hugo blog to github pages, using travis.</p>
+<p>Tags: roman-coedo, travis, hugo, github, github-pages, ssg, static-site-generator</p>
+<h2 id="improve-octopress-with-advanced-tweaks--tips">Improve Octopress with Advanced Tweaks &amp; Tips</h2>
+<p>I&rsquo;ve read <a href="https://www.narga.net/improve-octopress-advanced-tweaks-tips/">this list</a> of tips on how to improve the octopress (2) installation. By Nguyễn Đình Quân.</p>
+<p>Tags: nguyen-dinh-quan, octopress-2, tip, tweak</p>
+<h2 id="laboratorios">Laboratorios</h2>
+<p>I&rsquo;ve read <a href="http://www.presionblogosferica.com/2014/11/12/laboratorios/">this article</a> by Ángel Medinilla, about laboratories to use a percentage of company time to investigate, innovate, learn and improve.</p>
+<p>Tags: angel-medinilla, team-management, time-management, innovation, strategy, improvement, kaizen, laboratory, craftsmanship, spanish</p>
+<h2 id="what-refactoring-is-and-what-it-isnt">What Refactoring is, and what it isn’t</h2>
+<p>I&rsquo;ve read <a href="http://swreflections.blogspot.com/2012/04/what-refactoring-is-and-what-it-isnt.html">this article</a> by Jim Bird, where he splits some practices into refactoring and not refactoring. Draws the line between these two different activities.</p>
+<p>Also cites scratch refactoring.</p>
+<p>Tags: jim-bird, scratch-refactoring, refactoring, martin-fowler, kent-beck, definition, quote, design</p>
+<h2 id="pitfalls-of-unlimited-vacations">Pitfalls of Unlimited Vacations</h2>
+<p>I&rsquo;ve read <a href="http://haacked.com/archive/2016/02/18/unlimited-vaction-pitfalls/">this article</a> by Phil Haack on the github, travis and netflix policies about unlimited vacations and the effects they have on the employees.</p>
+<p>Also about minimum vacation periods, (paternity) paid leave.</p>
+<p>Tags: phil-haack, unlimited-vacation, holiday, vacation, team-management, burnout, github, travis, netflix, policy</p>
+<h2 id="cultura-corporativa">Cultura Corporativa</h2>
+<p>I&rsquo;ve read <a href="http://www.presionblogosferica.com/2011/02/06/cultura-corporativa/">this article</a> by Ángel Medinilla about the corporate culture, and how &ldquo;hanging a highly interchangeable sentence on a wall&rdquo; does not represent it.</p>
+<p>Tags: angel-medinilla, corporate culture, spanish</p>
+<h2 id="what-its-really-like-to-learn-to-code">What It’s Really Like to Learn to Code</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@sandjar/what-it-s-really-like-to-learn-to-code-53f6d9156a32">this article</a> that explains firsthand how it is to learn programming for a novice student,even with a strong financial background and having completed a university degree. By Sandjar Kozubaev</p>
+<p>Tags: sandjar-kozubaev, learning, programming, student, firsthand, coding, story</p>
 
         
 
@@ -323,16 +376,16 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/30/books-read-in-2015q3/">Books read in 2015Q3</a>
+        <a href="https://alvarogarcia7.github.io/blog/2016/03/31/books-read-in-2016q1/">Books read in 2016Q1</a>
     </h1>
-    <p >Sep 30, 2015
+    <p >Mar 31, 2016
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/30/books-read-in-2015q3/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2016/03/31/books-read-in-2016q1/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/q3/">Q3</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/q1/">Q1</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
         
     </p>
 </header>
@@ -341,30 +394,32 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
         
         <p>Books I&rsquo;ve read this quarter<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
 <ul>
-<li><a href="http://www.amazon.co.uk/Craftsman-Richard-Sennett/dp/0141022094">The Craftsman</a> by Richard Sennett. Posts under the tag <a href="/categories/the-craftsman
-/">the-craftsman</a></li>
-<li><a href="http://www.amazon.co.uk/Software-Craftsmanship-Imperative-McBreen-Aug-2001/dp/B00L6JZAT0">Software Craftsmanship: The New Imperative</a> by Pete McBreen. Posts under the tag <a href="/categories/software-craftsmanship-book
-/">software-craftsmanship-book</a></li>
-<li><a href="https://leanpub.com/lisphackers">Lisp Hackers</a> by Vsevolod Dyomkin</li>
-<li><a href="https://pragprog.com/book/cfcar2/the-passionate-programmer">The Passionate Programmer: Creating a Remarkable Career in Software Development</a> by Chad Fowler.</li>
+<li><a href="http://www.amazon.es/cosas-sabes-siempre-olvidas-Pr%C3%A1cticos/dp/8408104314">101 cosas que ya sabes, pero siempre olvidas</a> by Ernie J. Zelinski; in Spanish</li>
+<li><a href="http://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs</a> by Abelson, Sussman, and Sussman, with the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/categories/sicp
+/">sicp</a>. Only chapters 1 and 2.</li>
 </ul>
 <p>Books started, not yet finished (WIP):</p>
 <ul>
-<li><a href="http://haskellbook.com/">Haskell Programming</a>, By Chris Allen and Julie Moronuki. This book is still in progress and I&rsquo;m reviewing it</li>
-<li><a href="https://pragprog.com/book/mbfpp/functional-programming-patterns-in-scala-and-clojure">Functional Programming Patterns in Scala and Clojure</a> by Michael Bevilacqua-Linn</li>
-<li><a href="https://pragprog.com/book/ahptl/pragmatic-thinking-and-learning">Pragmatic Thinking and Learning: Refactor Your Wetware</a> by Andy Hunt</li>
+<li>Building microservices, by Sam Newman, with the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/categories/building-microservices
+/">building-microservices</a></li>
+<li><a href="https://leanpub.com/nightowls">Why programmers work at night</a> by Swizec Teller</li>
+<li><a href="http://www.redbook.io/">Readings in Database Systems, 5th Edition</a> by Peter Bailis, Joseph M. Hellerstein, Michael Stonebraker, editors</li>
 </ul>
 <p>Books I want to finish:</p>
 <p>Books that have entered the queue:</p>
 <ul>
-<li><a href="http://www.braveclojure.com/#toc">Clojure for the brave and true</a></li>
-<li><a href="http://press.princeton.edu/titles/669.html">How to Solve It: A New Aspect of Mathematical Method</a> by George Pólya</li>
-<li><a href="http://www.amazon.com/Conceptual-Mathematics-First-Introduction-Categories/dp/052171916X">Conceptual Mathematics: A First Introduction to Categories</a> by Lawvere and Schanuel</li>
-<li><a href="http://computationbook.com/">Understanding Computation: From Simple Machines to Impossible Programs</a> by Tom Stuart</li>
-<li><a href="http://www.cambridge.org/wm-ecommerce-web/academic/landingPage/PIHMOOC">Programming in Haskell</a> by Graham Hutton</li>
+<li><a href="http://shop.oreilly.com/product/0636920028468.do">RESTful Web APIs</a> by Leonard Richardson, Mike Amundsen, Sam Ruby</li>
+<li><a href="http://shop.oreilly.com/product/9780596801694.do">RESTful Web Services Cookbook</a> by Subbu Allamaraju</li>
+<li><a href="https://www.sig.eu/en/building-maintainable-software">Building Maintainable Software</a> by Joost Visser</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<p>Learning paths that have entered the queue:</p>
+<ul>
+<li><a href="http://shop.oreilly.com/category/learning-path/software-architecture-fundamentals.do">Software Architecture Fundamentals</a></li>
+<li><a href="http://shop.oreilly.com/category/learning-path/html5-fundamentals.do">HTML5 Fundamentals</a></li>
+<li><a href="http://shop.oreilly.com/category/learning-path/designing-web-apis.do">Designing Web APIs</a></li>
+<li><a href="http://shop.oreilly.com/category/learning-path/dive-deeper-php-programming.do">Dive Deeper into PHP Programming</a></li>
+<li><a href="http://shop.oreilly.com/category/learning-path/intro-modern-front-end-web.do">Introduction to the Modern Front-End Web</a></li>
+</ul>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -385,38 +440,181 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/23/brown-bag-session-clojures-data-and-code/">Brown Bag Session: Clojure&#39;s Data and Code</a>
+        <a href="https://alvarogarcia7.github.io/blog/2016/03/02/self-study-in-march-2016/">Self-Study in March 2016</a>
     </h1>
-    <p >Sep 23, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/23/brown-bag-session-clojures-data-and-code/#disqus_thread">Comments</a>
+    <p >Mar 2, 2016
+         - 7 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2016/03/02/self-study-in-march-2016/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag/">brown-bag</a><a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/homoiconicity/">homoiconicity</a><a class="label" href="https://alvarogarcia7.github.io/categories/prepared-kata/">prepared-kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/lisp/">lisp</a><a class="label" href="https://alvarogarcia7.github.io/categories/codedata/">code=data</a><a class="label" href="https://alvarogarcia7.github.io/categories/datacode/">data=code</a><a class="label" href="https://alvarogarcia7.github.io/categories/feedback/">feedback</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/march/">march</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/abstract-data-structure/">abstract-data-structure</a><a class="label" href="https://alvarogarcia7.github.io/categories/adoption/">adoption</a><a class="label" href="https://alvarogarcia7.github.io/categories/adt/">adt</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/ambition/">ambition</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/analysis/">analysis</a><a class="label" href="https://alvarogarcia7.github.io/categories/automation/">automation</a><a class="label" href="https://alvarogarcia7.github.io/categories/becodeweek/">becodeweek</a><a class="label" href="https://alvarogarcia7.github.io/categories/bem/">bem</a><a class="label" href="https://alvarogarcia7.github.io/categories/ben-orenstein/">ben-orenstein</a><a class="label" href="https://alvarogarcia7.github.io/categories/benedict-fritz/">benedict-fritz</a><a class="label" href="https://alvarogarcia7.github.io/categories/blog/">blog</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-comparison/">book-comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-review/">book-review</a><a class="label" href="https://alvarogarcia7.github.io/categories/burnout/">burnout</a><a class="label" href="https://alvarogarcia7.github.io/categories/capacity/">capacity</a><a class="label" href="https://alvarogarcia7.github.io/categories/christopher-bui/">christopher-bui</a><a class="label" href="https://alvarogarcia7.github.io/categories/clean-code/">clean-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/codecation/">codecation</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding/">coding</a><a class="label" href="https://alvarogarcia7.github.io/categories/codurance/">codurance</a><a class="label" href="https://alvarogarcia7.github.io/categories/cohesion/">cohesion</a><a class="label" href="https://alvarogarcia7.github.io/categories/coman-hamilton/">coman-hamilton</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/continuation-style/">continuation-style</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsman/">craftsman</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/css/">css</a><a class="label" href="https://alvarogarcia7.github.io/categories/css-architecture/">css-architecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/css-methodology/">css-methodology</a><a class="label" href="https://alvarogarcia7.github.io/categories/culture/">culture</a><a class="label" href="https://alvarogarcia7.github.io/categories/daniel-irvine/">daniel-irvine</a><a class="label" href="https://alvarogarcia7.github.io/categories/death-march/">death-march</a><a class="label" href="https://alvarogarcia7.github.io/categories/deductive-learning/">deductive-learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/deep-work/">deep-work</a><a class="label" href="https://alvarogarcia7.github.io/categories/deliberate-practice/">deliberate-practice</a><a class="label" href="https://alvarogarcia7.github.io/categories/deploy/">deploy</a><a class="label" href="https://alvarogarcia7.github.io/categories/design/">design</a><a class="label" href="https://alvarogarcia7.github.io/categories/design-level-cohesion/">design-level-cohesion</a><a class="label" href="https://alvarogarcia7.github.io/categories/design-problem/">design-problem</a><a class="label" href="https://alvarogarcia7.github.io/categories/desk-surfing/">desk-surfing</a><a class="label" href="https://alvarogarcia7.github.io/categories/detail/">detail</a><a class="label" href="https://alvarogarcia7.github.io/categories/devops/">devops</a><a class="label" href="https://alvarogarcia7.github.io/categories/dlc-cohesion/">dlc-cohesion</a><a class="label" href="https://alvarogarcia7.github.io/categories/domain-specific-language/">domain-specific-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/dsl/">dsl</a><a class="label" href="https://alvarogarcia7.github.io/categories/duncan-stuart/">duncan-stuart</a><a class="label" href="https://alvarogarcia7.github.io/categories/edward-yourdon/">edward-yourdon</a><a class="label" href="https://alvarogarcia7.github.io/categories/essay/">essay</a><a class="label" href="https://alvarogarcia7.github.io/categories/estj/">estj</a><a class="label" href="https://alvarogarcia7.github.io/categories/etsy/">etsy</a><a class="label" href="https://alvarogarcia7.github.io/categories/exclusive-or/">exclusive-or</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience/">experience</a><a class="label" href="https://alvarogarcia7.github.io/categories/experience-report/">experience-report</a><a class="label" href="https://alvarogarcia7.github.io/categories/feminism/">feminism</a><a class="label" href="https://alvarogarcia7.github.io/categories/fibonacci/">fibonacci</a><a class="label" href="https://alvarogarcia7.github.io/categories/fragile-test-problem/">fragile-test-problem</a><a class="label" href="https://alvarogarcia7.github.io/categories/fullstack/">fullstack</a><a class="label" href="https://alvarogarcia7.github.io/categories/garbage-collection/">garbage-collection</a><a class="label" href="https://alvarogarcia7.github.io/categories/giving-up-tdd/">giving-up-tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/group-belonging/">group-belonging</a><a class="label" href="https://alvarogarcia7.github.io/categories/heinz-kabutz/">heinz-kabutz</a><a class="label" href="https://alvarogarcia7.github.io/categories/hire/">hire</a><a class="label" href="https://alvarogarcia7.github.io/categories/holiday/">holiday</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/iain-tait/">iain-tait</a><a class="label" href="https://alvarogarcia7.github.io/categories/ian-sommerville/">ian-sommerville</a><a class="label" href="https://alvarogarcia7.github.io/categories/implementation-patterns/">implementation-patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/improvement/">improvement</a><a class="label" href="https://alvarogarcia7.github.io/categories/in-company/">in-company</a><a class="label" href="https://alvarogarcia7.github.io/categories/inductive-learning/">inductive-learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/internalizing/">internalizing</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview/">interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/intp/">intp</a><a class="label" href="https://alvarogarcia7.github.io/categories/introduction/">introduction</a><a class="label" href="https://alvarogarcia7.github.io/categories/ivan-fraixedes/">ivan-fraixedes</a><a class="label" href="https://alvarogarcia7.github.io/categories/jamis-buck/">jamis-buck</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/jaxenter/">jaxenter</a><a class="label" href="https://alvarogarcia7.github.io/categories/jemima-kiss/">jemima-kiss</a><a class="label" href="https://alvarogarcia7.github.io/categories/jessica-livingston/">jessica-livingston</a><a class="label" href="https://alvarogarcia7.github.io/categories/job/">job</a><a class="label" href="https://alvarogarcia7.github.io/categories/joe-richardson/">joe-richardson</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-allspaw/">john-allspaw</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-rawls/">john-rawls</a><a class="label" href="https://alvarogarcia7.github.io/categories/joseandres/">joseandres</a><a class="label" href="https://alvarogarcia7.github.io/categories/label/">label</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a><a class="label" href="https://alvarogarcia7.github.io/categories/larry-constantine/">larry-constantine</a><a class="label" href="https://alvarogarcia7.github.io/categories/law/">law</a><a class="label" href="https://alvarogarcia7.github.io/categories/law-of-ruthless-prioritization/">law-of-ruthless-prioritization</a><a class="label" href="https://alvarogarcia7.github.io/categories/laziness/">laziness</a><a class="label" href="https://alvarogarcia7.github.io/categories/learn-to-program/">learn-to-program</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning-cycle/">learning-cycle</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning-process/">learning-process</a><a class="label" href="https://alvarogarcia7.github.io/categories/list/">list</a><a class="label" href="https://alvarogarcia7.github.io/categories/machine-learning/">machine-learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/magic-bullet-problem/">magic-bullet-problem</a><a class="label" href="https://alvarogarcia7.github.io/categories/magical-thinking/">magical-thinking</a><a class="label" href="https://alvarogarcia7.github.io/categories/management/">management</a><a class="label" href="https://alvarogarcia7.github.io/categories/martin-fowler/">martin-fowler</a><a class="label" href="https://alvarogarcia7.github.io/categories/maturity-level/">maturity-level</a><a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/metaphor/">metaphor</a><a class="label" href="https://alvarogarcia7.github.io/categories/motivation/">motivation</a><a class="label" href="https://alvarogarcia7.github.io/categories/myers-briggs-type/">myers-briggs-type</a><a class="label" href="https://alvarogarcia7.github.io/categories/non-strictness/">non-strictness</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/office-culture/">office-culture</a><a class="label" href="https://alvarogarcia7.github.io/categories/onboarding/">onboarding</a><a class="label" href="https://alvarogarcia7.github.io/categories/paul-graham/">paul-graham</a><a class="label" href="https://alvarogarcia7.github.io/categories/perfection/">perfection</a><a class="label" href="https://alvarogarcia7.github.io/categories/personal/">personal</a><a class="label" href="https://alvarogarcia7.github.io/categories/pet-project/">pet-project</a><a class="label" href="https://alvarogarcia7.github.io/categories/plai/">plai</a><a class="label" href="https://alvarogarcia7.github.io/categories/pomodoro/">pomodoro</a><a class="label" href="https://alvarogarcia7.github.io/categories/problem/">problem</a><a class="label" href="https://alvarogarcia7.github.io/categories/process/">process</a><a class="label" href="https://alvarogarcia7.github.io/categories/process-theory/">process-theory</a><a class="label" href="https://alvarogarcia7.github.io/categories/product-management/">product-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/product-strategy/">product-strategy</a><a class="label" href="https://alvarogarcia7.github.io/categories/productivity/">productivity</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/psychology/">psychology</a><a class="label" href="https://alvarogarcia7.github.io/categories/q-and-a/">q-and-a</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/reactive-programming/">reactive-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/red-black-tree/">red-black-tree</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/response/">response</a><a class="label" href="https://alvarogarcia7.github.io/categories/rich-mironov/">rich-mironov</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-martin/">robert-martin</a><a class="label" href="https://alvarogarcia7.github.io/categories/robin-rendle/">robin-rendle</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandro-mancuso/">sandro-mancuso</a><a class="label" href="https://alvarogarcia7.github.io/categories/sarah-tavel/">sarah-tavel</a><a class="label" href="https://alvarogarcia7.github.io/categories/sass/">sass</a><a class="label" href="https://alvarogarcia7.github.io/categories/scheme/">scheme</a><a class="label" href="https://alvarogarcia7.github.io/categories/shallow-work/">shallow-work</a><a class="label" href="https://alvarogarcia7.github.io/categories/shipping/">shipping</a><a class="label" href="https://alvarogarcia7.github.io/categories/shriram-krishnamurthi/">shriram-krishnamurthi</a><a class="label" href="https://alvarogarcia7.github.io/categories/simplification/">simplification</a><a class="label" href="https://alvarogarcia7.github.io/categories/slack/">slack</a><a class="label" href="https://alvarogarcia7.github.io/categories/smc-cohesion/">smc-cohesion</a><a class="label" href="https://alvarogarcia7.github.io/categories/software-design/">software-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/software-economics/">software-economics</a><a class="label" href="https://alvarogarcia7.github.io/categories/spam/">spam</a><a class="label" href="https://alvarogarcia7.github.io/categories/spammer/">spammer</a><a class="label" href="https://alvarogarcia7.github.io/categories/story/">story</a><a class="label" href="https://alvarogarcia7.github.io/categories/strictness/">strictness</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/teaching/">teaching</a><a class="label" href="https://alvarogarcia7.github.io/categories/team/">team</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-management/">team-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/teammate/">teammate</a><a class="label" href="https://alvarogarcia7.github.io/categories/teamwork/">teamwork</a><a class="label" href="https://alvarogarcia7.github.io/categories/technique/">technique</a><a class="label" href="https://alvarogarcia7.github.io/categories/testable-design-problem/">testable-design-problem</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip-and-trick/">tip-and-trick</a><a class="label" href="https://alvarogarcia7.github.io/categories/tnstaafl/">tnstaafl</a><a class="label" href="https://alvarogarcia7.github.io/categories/type-soundness/">type-soundness</a><a class="label" href="https://alvarogarcia7.github.io/categories/uncle-bob/">uncle-bob</a><a class="label" href="https://alvarogarcia7.github.io/categories/user-experience/">user-experience</a><a class="label" href="https://alvarogarcia7.github.io/categories/vacation/">vacation</a><a class="label" href="https://alvarogarcia7.github.io/categories/veil-of-ignorance/">veil-of-ignorance</a><a class="label" href="https://alvarogarcia7.github.io/categories/vincent-partington/">vincent-partington</a><a class="label" href="https://alvarogarcia7.github.io/categories/vlog/">vlog</a><a class="label" href="https://alvarogarcia7.github.io/categories/warfare/">warfare</a><a class="label" href="https://alvarogarcia7.github.io/categories/wolfgang-goerlich/">wolfgang-goerlich</a><a class="label" href="https://alvarogarcia7.github.io/categories/work/">work</a><a class="label" href="https://alvarogarcia7.github.io/categories/y-combinator/">y-combinator</a><a class="label" href="https://alvarogarcia7.github.io/categories/yc/">yc</a><a class="label" href="https://alvarogarcia7.github.io/categories/yeray-darias/">yeray-darias</a>
         
     </p>
 </header>
 
 
         
-        <p>Today, at a client, I&rsquo;ve facilitated the brown-bag session on Clojure, introducing Lisp&rsquo;s <a href="https://en.wikipedia.org/wiki/Homoiconicity">homoiconicity</a>.</p>
-<h2 id="session-structure">Session Structure</h2>
-<p>The session was designed as a kata, first introducing participants in the problem, letting some time to read the initial version and to think about possible solutions.</p>
-<p>Then, I structured the rest of the time as a prepared kata, where I was explaining in the beamer our current problems (day-to-day tasks) and possible solutions in Clojure.</p>
-<p>Among them:</p>
+        <h2 id="learning-programming-isnt-that-hard-deep-work-is-hard">Learning Programming Isn’t That Hard, Deep Work Is Hard</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@benedictfritz/learning-programming-isn-t-that-hard-deep-work-is-hard-40a4cf3104f4">this article</a> by Benedict Fritz on two types of work (i.e., deep and shallow) and how programming is of the deep type. He links the difficulty of learning to program to the difficulty of practicing deep work.</p>
+<p>Tags: analogy, benedict-fritz, deep-work, shallow-work, learn-to-program, psychology</p>
+<h2 id="becodeweek-by-yeray-darias">BeCodeWeek by Yeray Darias</h2>
+<p>I&rsquo;ve read <a href="http://developerscookbook.blogspot.com.es/search/label/desk-surfing">this category of posts</a> by Yeray Darias about his BeCodeWeek, a desk-surfing experience at BeCode.</p>
+<p>Publishes one entry per day detailing his activities: working for an open-source library, discussions, etc</p>
+<p>Tags: becodeweek, yeray-darias, desk-surfing, experience, experience-report, analysis</p>
+<h2 id="becodeweek-by-yeray-darias-1">BeCodeWeek by Yeray Darias</h2>
+<p>I&rsquo;ve read <a href="http://developerscookbook.blogspot.com.es/search/label/desk-surfing">this category of posts</a> by Yeray Darias about his BeCodeWeek, a desk-surfing experience at BeCode.</p>
+<p>Publishes one entry per day detailing his activities: working for an open-source library, discussions, etc</p>
+<p>Tags: becodeweek, yeray-darias, desk-surfing, experience, experience-report, analysis</p>
+<h2 id="tracer-bullets">Tracer Bullets</h2>
+<p>I&rsquo;ve read <a href="http://c2.com/cgi/wiki?TracerBullets">this page</a> about tracer bullets, an analogy from the military warfare to a software project.</p>
+<p>Serves the purpose of adjusting the aim of the cannon to better reach the target.</p>
+<p>Tags: analogy, metaphor, warfare, management</p>
+<h2 id="cohesion---the-cornerstone-of-software-design">Cohesion - the cornerstone of software design</h2>
+<p>I&rsquo;ve read <a href="http://codurance.com/2016/03/03/cohesion-cornerstone-software-design/">this article</a> by Sandro Mancuso on the topic of cohesion. Describes the 7 types of cohesion, as described in Structured Design<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, from worst to best:</p>
 <ul>
-<li>Configuration and extensibility: allowing for flexibility, define at configuration time new features without recompiling or modifying the system.</li>
-<li>Persisting and restoring certain state: this is a problem that could easily be solved persisting data in Lisp</li>
+<li>Coincidental cohesion</li>
+<li>Logical cohesion</li>
+<li>Temporal cohesion</li>
+<li>Procedural cohesion</li>
+<li>Communicational/informational cohesion</li>
+<li>Sequential cohesion</li>
+<li>Functional cohesion</li>
 </ul>
-<p>I explained, in private to those who asked, about <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a> and its dialects <a href="https://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a>, <a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a> and <a href="https://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a>.</p>
-<h2 id="feedback">Feedback</h2>
+<p>and about Design-Level Cohesion:</p>
 <ul>
-<li>They liked the effort of investigating new languages to solve problems we have in our current stack</li>
-<li>They liked introducing the language features with a back-story to better understand the concepts</li>
-<li>They suggested to improve the level of the session: as the group as a whole is still starting with Clojure, leaving them on their own with code is too much. They asked for more guidance</li>
+<li>Coincidental relation (R1)</li>
+<li>Conditional relation (R2)</li>
+<li>Iterative relation (R3)</li>
+<li>Communication relation (R4)</li>
+<li>Sequential relation (R5)</li>
+<li>Functional (R6)</li>
 </ul>
+<p>Tags: cohesion, codurance, edward-yourdon, larry-constantine, list, sandro-mancuso, software-design, design-level-cohesion, smc-cohesion, dlc-cohesion</p>
+<h2 id="etsy-cto-qa-we-need-software-engineers-not-developers">Etsy CTO Q&amp;A: We Need Software Engineers, Not Developers</h2>
+<p>I&rsquo;ve read <a href="http://thenewstack.io/etsy-cto-qa-need-software-engineers-not-developers/">this interview</a> with John Allspaw, where they explain the onboarding experience for new hires at Etsy, the DevOps philosophy and the need for engineering skills, more than developer skills. This can be exemplified in the need to know more, defining the boundaries of your job and finding the right tool for the job.</p>
+<p>Tags: devops, interview, q-and-a, john-allspaw, etsy, onboarding, hire, team-management, deploy</p>
+<h2 id="frequency-reduces-difficulty">Frequency Reduces Difficulty</h2>
+<p>I&rsquo;ve read <a href="http://martinfowler.com/bliki/FrequencyReducesDifficulty.html">this article</a> by Martin Fowler on why we should repeat things that are difficult for us:</p>
+<ul>
+<li>Perfectioning the technique</li>
+<li>Internalizing the details</li>
+<li>Easing its automation</li>
+</ul>
+<p>Tags: martin-fowler, automation, process, perfection, internalizing, technique, detail, process-theory, agile</p>
+<h2 id="lambdas-are-confusing">Lambdas are confusing</h2>
+<p>I&rsquo;ve watched this video where Coman Hamilton from JAXenter interviews Dr. Heinz Kabutz about Java&rsquo;s lambda syntax. Cites the problem with exceptions, generics, method overloading.</p>
+<p>Tags: java, lambda, coman-hamilton, jaxenter, heinz-kabutz, problem</p>
+<p><a href="https://www.youtube.com/watch?v=WcHom1eVhi4&amp;feature=youtu.be">https://www.youtube.com/watch?v=WcHom1eVhi4&amp;feature=youtu.be</a></p>
+<h2 id="el-full-stack-developer-en-2016">El full-stack developer en 2016</h2>
+<p>I&rsquo;ve read <a href="http://www.developerdepueblo.com/development/full-stack-developer-2016/">this article</a> by Jose Ignacio Andrés about the job descriptions of 2016.</p>
+<blockquote>
+<p>El principal valor de un full-stack es poder simplificar el trabajo a los demás miembros del equipo.</p>
+</blockquote>
+<p>My translation:</p>
+<blockquote>
+<p>The main value of a full-stack developer is to be able to simplify other teammates' work</p>
+</blockquote>
+<p>Tags: teamwork, teammate, fullstack, simplification, work, team-management, jose andres</p>
+<h2 id="i-am-a-software-craftsman">I am a software craftsman</h2>
+<p>I&rsquo;ve read <a href="http://www.dirv.me/i-am-a-software-craftsman/index.html">this article</a> by Daniel Irvine about calling yourself a craftsman or not. He says that if you adhere to their values, you should.</p>
+<p>Tags: craftsmanship, label, daniel-irvine, craftsman, group-belonging</p>
+<h2 id="teaching-programming-languages-in-a-post-linnaean-age">Teaching Programming Languages in a Post-Linnaean Age</h2>
+<p>I&rsquo;ve read <a href="http://cs.brown.edu/~sk/Publications/Papers/Published/sk-teach-pl-post-linnaean/paper.pdf">this paper</a> by Shriram Krishnamurthi where he explains the need for books like <a href="http://www.plai.org/">PLAI</a>:</p>
+<ul>
+<li>lack of paradigms in new languages, and its separation (or lack of)</li>
+<li>design of languages cheaper and cheaper these days</li>
+<li>rigor level in publications</li>
+<li>inductive and deductive learning</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<p><code>post-Linnaean</code> refers to the <a href="https://en.wikipedia.org/wiki/Carl_Linnaeus">Carl Linnaeus</a>:</p>
+<blockquote>
+<p>He is known as the father of modern taxonomy</p>
+</blockquote>
+<p>Tags: inductive-learning, deductive-learning, dsl, domain-specific-language, type-soundness, continuation-style, garbage-collection, reactive-programming, scheme, plai, teaching, programming-language, shriram-krishnamurthi</p>
+<h2 id="lazy-ruby">Lazy Ruby</h2>
+<p>I&rsquo;ve read <a href="http://sonnym.github.io/2014/04/05/lazy-ruby/">this article</a> by sonnym about using ruby&rsquo;s lazy (non-strict) features, detailing an example with Fibonacci&rsquo;s sequence.</p>
+<p>Tags: laziness, strictness, non-strictness, ruby, fibonacci, comparison</p>
+<h2 id="jessica-livingston">Jessica Livingston</h2>
+<p>I&rsquo;ve read <a href="http://paulgraham.com/jessica.html">this essay</a> by Paul Graham about his co-founder at the Y-combinator: Jessica Livingston. She was considered the Social Radar at YC</p>
+<p>The essay also talks about the non-existent separation between working hours and not and about her implication and personality.</p>
+<p>Tags: jessica-livingston, paul-graham, y-combinator, feminism, yc, essay</p>
+<h2 id="four-laws-of-software-economics-part-1">Four Laws Of Software Economics (Part 1)</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@RichMironov/four-laws-of-software-economics-part-1-e162aa0ea9e5">this article</a> by Rich Mironov on why the development team will never be big enough (because of economics, because there are more things to be done than time to do them, so we have to prioritize them) and about the communication problems between the dev team and the client(s).</p>
+<p>Also talks about the general personality of clients and devs and task prioritization</p>
+<p>Tags: exclusive-or, magical-thinking, tnstaafl, management, agile, team, capacity, death-march, estj, intp, software-economics, product-strategy, law-of-ruthless-prioritization, law, rich-mironov, slack, myers-briggs-type</p>
+<h2 id="you-should-take-a-codecation">You Should Take A Codecation</h2>
+<p>I&rsquo;ve read <a href="https://robots.thoughtbot.com/you-should-take-a-codecation">this article</a> by Ben Orenstein explaining what is a codecation and what he&rsquo;s done in the two codecations he&rsquo;s taken.</p>
+<p>Tags: codecation, ben-orenstein, vacation, holiday, coding, shipping, in-company</p>
+<h2 id="giving-up-on-tdd">Giving Up on TDD</h2>
+<p>I&rsquo;ve read <a href="http://iansommerville.com/systems-software-and-technology/giving-up-on-test-first-development/">this article</a> by Ian Sommerville about the problems he&rsquo;s found while doing TDD, mainly about design, but also about being conservative in the amount of tests you allow yourself to break while refactoring.</p>
+<p>Tags: tdd, ian-sommerville, refactoring, problem, design-problem, design, giving-up-tdd</p>
+<h2 id="giving-up-on-tdd---answer">Giving Up on TDD - answer</h2>
+<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2016/03/19/GivingUpOnTDD.html">this article</a> by Robert C. Martin on the common issues for people adopting TDD:</p>
+<ul>
+<li>The Fragile Test Problem</li>
+<li>The Design Problem</li>
+<li>The Testable Design Problem</li>
+<li>The Magic Bullet Problem</li>
+</ul>
+<p>This article is an answer to another by Ian Sommerville.</p>
+<p>Tags: tdd, uncle-bob, robert-martin, adoption, ian-sommerville, fragile-test-problem, giving-up-tdd, design-problem, testable-design-problem, magic-bullet-problem</p>
+<h2 id="seek-out-jobs-with-fast-learning-cycles">Seek out jobs with fast learning cycles</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@sarahtavel/seek-out-jobs-with-fast-learning-cycles-f923c8d8a4be#.7bxx65a4x">this article</a> by Sarah Tavel on learning on the job and how fast these learning cycles can happen at companies at different stages of maturity.</p>
+<blockquote>
+<p>So if you’re thinking of changing jobs, or taking your first, my advice: find a place with a fast learning cycle, and a steep learning curve.</p>
+</blockquote>
+<p>Tags: learning, job, hypothesis, sarah-tavel, learning-cycle, maturity-level, learning-process, product-management</p>
+<h2 id="clean-code-vs-implementation-patterns">Clean Code Vs. Implementation Patterns</h2>
+<p>I&rsquo;ve read <a href="http://blog.xebia.com/clean-code-vs-implementation-patterns/">this comparison</a> of Clean Code vs Implementation Pattern books, by Vincent Partington.</p>
+<p>In it, the author explains the differences in style in both books, and how they compare to others.</p>
+<p>Tags: clean-code, implementation-patterns, comparison, book-review, book-comparison, vincent-partington</p>
+<h2 id="stuck-in-traffic-vlog-103---new-spammer-techniques">Stuck in Traffic vlog #103 - New Spammer Techniques</h2>
+<p>I&rsquo;ve seen <a href="https://www.peerlyst.com/posts/stuck-in-traffic-vlog-103-new-spammer-techniques-j-wolfgang-goerlich">this vlog entry</a> on machines fighting machines (exemplified with the spam producing and filtering) and how some spammers are trying more direct techniques focusing on higher-value targets, sometimes even handcrafting messages and modifying them every few units.</p>
+<p>Tags: wolfgang-goerlich, spam, vlog, spammer, machine-learning</p>
+<h2 id="becoming-a-finisher">Becoming A Finisher</h2>
+<p>I&rsquo;ve read <a href="http://christopherdbui.com/becoming-a-finisher/">this article</a> by Christopher Bui where he explains that projects that are too ambitious stall your productivity and make you lose your focus.</p>
+<p>Tags: christopher-bui, pomodoro, time-management, productivity, motivation, ambition, paul-graham, quote</p>
+<h2 id="hanging-around-with-red-black-tree-implementations-the-beginnings">Hanging around with red-black tree implementations: the beginnings</h2>
+<p>I&rsquo;ve read <a href="http://blog.fraixed.es/post/hanging-around-red-black-trees-implementations/">this article</a> by Ivan Fraixedes where he details the progress of implementing a red-black tree, and also his motivation for doing it.</p>
+<p>Tags: ivan-fraixedes, red-black-tree, abstract-data-structure, adt, deliberate-practice, pet-project</p>
+<h2 id="some-tools-for-faster-blogging-in-octopress">Some Tools for Faster Blogging in Octopress</h2>
+<p>I&rsquo;ve read <a href="http://dgmstuart.github.io/blog/2015/03/27/some-tools-for-faster-blogging-in-octopress/">this article</a> for tips and tricks on how to blog faster with octopress. Written by Duncan Stuart.</p>
+<p>Tags: duncan-stuart, blog, improvement, meta, octopress, tip-and-trick</p>
+<h2 id="the-veil-of-ignorance">The veil of ignorance</h2>
+<p>I&rsquo;ve read <a href="http://mrmrs.io/writing/2016/03/23/the-veil-of-ignorance/">this article</a> by Adam Morse on how not being on the top of the skills performance can affect your design and your user experience. Also, references the concept of &ldquo;The Veil of Ignorance&rdquo;, a concept by John Rawls.</p>
+<p>Tags: john-rawls, veil-of-ignorance, user-experience, design</p>
+<h2 id="to-smile-again----recovering-from-the-paralysis-of-burnout">To Smile Again &ndash; Recovering from the paralysis of burnout</h2>
+<p>I&rsquo;ve read <a href="https://m.signalvnoise.com/to-smile-again-ae0ba9f2198c">this article</a> by Jamis Buck on his story of burnout, what symptoms had on him and how he got out of it.</p>
+<p>Tags: burnout, jamis-buck, psychology, productivity, personal, story, analogy</p>
+<h2 id="beyond-email-could-startup-slack-change-the-way-you-work">Beyond email: could startup Slack change the way you work?</h2>
+<p>I&rsquo;ve read <a href="http://www.theguardian.com/technology/2016/mar/25/slack-butterfield-emoji-chat-nasa-harvard-silicon-valley">this article</a> on Slack&rsquo;s office culture, with their diversity, policies and values after a high people growth in a short period of time. By Jemima Kiss</p>
+<p>Tags: culture, office-culture, slack, jemima-kiss</p>
+<h2 id="slack-work-this-way">Slack: Work This Way</h2>
+<p>I&rsquo;ve read <a href="https://medium.com/@iaintait/slack-work-this-way-9221284472dd">this article</a>, a response to my above read, about the office culture at Slack.</p>
+<p>Tags: iain-tait, response, slack, office-culture</p>
+<h2 id="bem-101">BEM 101</h2>
+<p>I&rsquo;ve read <a href="https://css-tricks.com/bem-101/">this introduction</a> to a CSS style called Block, Element, Modifier methodology (BEM).</p>
+<p>In it,</p>
+<blockquote>
+<ul>
+<li>a block is a top-level abstraction of a new component</li>
+<li>Child items, or elements, can be placed inside and these are denoted by two underscores following the name of the block [&hellip;].
+modifiers can manipulate the block so that we can theme or style that particular component without inflicting changes on a completely unrelated module. This is done by appending two hyphens to the name of the block [&hellip;].</li>
+</ul>
+</blockquote>
+<p>By Joe Richardson, Robin Rendle et al.</p>
+<p>Tags: joe-richardson, robin-rendle, bem, css, css-methodology, introduction, css-architecture, sass</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Structured Design: Fundamentals of a Discipline of Computer Program and Systems Design by Yourdon and Constantine. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
 
         
 
@@ -429,43 +627,37 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories/">Navigating the GitHub repositories</a>
+        <a href="https://alvarogarcia7.github.io/blog/2016/03/02/using-tortoise-credentials-from-cli/">Tip: using tortoise credentials in git CLI</a>
     </h1>
-    <p >Sep 8, 2015
+    <p >Mar 2, 2016
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2016/03/02/using-tortoise-credentials-from-cli/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository/">repository</a><a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/navigate/">navigate</a><a class="label" href="https://alvarogarcia7.github.io/categories/simple-session/">simple-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository-search/">repository-search</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/how-to/">how-to</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/cli/">cli</a><a class="label" href="https://alvarogarcia7.github.io/categories/tortoisegit/">tortoisegit</a>
         
     </p>
 </header>
 
 
         
-        <p>I&rsquo;ve reorganized my github repositories, especially the katas and the <code>simple sessions</code>.</p>
-<h2 id="katas">Katas</h2>
-<p>All of them can be found in <a href="https://github.com/search?utf8=%E2%9C%93&amp;q=user%3Aalvarogarcia7+kata&amp;type=Repositories&amp;ref=searchresults">this search</a></p>
-<p>Separated by language:</p>
+        <h2 id="tortoisegit-part">TortoiseGit part</h2>
 <ul>
-<li><a href="https://github.com/search?l=Java&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Java</a></li>
-<li><a href="https://github.com/search?l=Clojure&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Clojure</a></li>
-<li><a href="https://github.com/search?l=JavaScript&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Javascript</a></li>
-<li><a href="https://github.com/search?l=Haskell&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Haskell</a></li>
-<li><a href="https://github.com/search?l=ruby&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Ruby</a></li>
+<li>Go to a repo</li>
+<li>right button, Settings</li>
+<li>Git -&gt; Credential</li>
+<li>Add a creadential</li>
+<li>Config type: global</li>
+<li>Helper: wincred</li>
 </ul>
-<p>To the best of my knowledge, all repositories follow a similar pattern:</p>
-<ul>
-<li>Contain the keyword &lsquo;kata&rsquo;</li>
-<li>Contain the language</li>
-<li>Contain a description of the exercise</li>
-</ul>
-<p>An example: <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-haskell">palindromes-searcher-kata-haskell</a></p>
-<h2 id="simple-sessions">Simple sessions</h2>
-<p>A simple session is a lapse of time working with the language to solve a problem, but not big enough to deserve a repository of its own. Usually, the simple sessions are performed in languages that have a REPL, tool that eases this need</p>
-<p>They can be found in <a href="https://github.com/search?q=user%3Aalvarogarcia7+simple-sessions">this search</a></p>
+<p>Sync once using your HTTPS password</p>
+<h2 id="cli-part">CLI part</h2>
+<p>Open the <code>$REPO/.git/config</code> and add</p>
+<pre><code>[credential]
+	helper = wincred
+</code></pre><p>Remote git operations should not ask for credentials anymore</p>
 
         
 
@@ -478,60 +670,65 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/">A basic working environment</a>
+        <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/">Kata formulation: Find the comments</a>
     </h1>
-    <p >Sep 8, 2015
+    <p >Mar 1, 2016
          - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2016/03/01/kata-formulation-find-comments/#disqus_thread">Comments</a>
 
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/formulation/">formulation</a><a class="label" href="https://alvarogarcia7.github.io/categories/php/">php</a><a class="label" href="https://alvarogarcia7.github.io/categories/comment/">comment</a><a class="label" href="https://alvarogarcia7.github.io/categories/exercise/">exercise</a>
         
     </p>
 </header>
 
 
         
-        <p>Sometimes, when working out of somebody&rsquo;s else computer, I won&rsquo;t have my preferred IDE installed.</p>
-<p>In this case, what I usually do &ndash;as long as the programming session is more than 5 TDD cycles&ndash;, is to configure my own environment. It includes:</p>
+        <p>Little Johnny is inspecting a PHP source code that contains comments. These comments contains words that he doesn&rsquo;t understand, as it written in another language.</p>
+<h2 id="rules-and-constraints">Rules and constraints</h2>
+<p>The source code in the PHP files does not need to be correct.</p>
+<p>A comment (a subset of PHP comments) is defined as:</p>
 <ul>
-<li>text editor: $EDITOR is enough</li>
-<li>test runner. A simple bash script executing the tests will suffice</li>
-<li>git terminal: to commit, see differences, revert, etc</li>
-<li>[optional] REPL if the language has it</li>
-</ul>
-<p>If the system already has it, I will use <code>screen</code> to cycle around the sessions.</p>
-<h2 id="a-simple-test-runner">A simple test runner</h2>
-<p>More in depth, the test runner will be similar to this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">while</span> <span class="o">[</span> <span class="nb">true</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
-    clear<span class="p">;</span>
-    date<span class="p">;</span>
-    runhaskell Spec.hs<span class="p">;</span>
-    <span class="nb">read</span> i<span class="p">;</span>
-<span class="k">done</span>
-</code></pre></div><p>This script will:</p>
+<li>A line containing C-style comment delimiter, except when it is within a string
 <ul>
-<li>clear the screen (for better readability)</li>
-<li>print the date</li>
-<li>execute the tests</li>
-<li>read from the console, effectively waiting for the user to interact (an enter is enough)</li>
+<li><code>// hello C-style</code> is a valid comment</li>
+<li><code>echo &quot;//&quot;;</code> is not a comment</li>
+<li><code>echo '//';</code> is not a comment</li>
 </ul>
-<p>The date is useful for both detecting the pace of the cycles and for scrolling up and down in the terminal.</p>
-<p>If this date is much too necessary, it might indicate the presence of the TDD antipattern &ldquo;El Bocazas&rdquo; / &ldquo;A mouthful&rdquo;, present in <a href="http://www.carlosble.com/downloads/disenoAgilConTdd_ebook.pdf">Diseño Ágil con TDD</a>. I use when the output of the test runner is extensive (such as <code>runhaskell</code>).</p>
-<p>If the test runner output is too verbose, a possible step forward is to silence output in when every test is green (fragment):</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">output</span><span class="o">=</span><span class="k">$(</span>runhaskell Spec.hs<span class="k">)</span><span class="p">;</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&#34;OK&#34;</span><span class="p">;</span>
-<span class="k">else</span>
-    <span class="nb">echo</span> <span class="nv">$output</span><span class="p">;</span>
-<span class="k">fi</span>
-</code></pre></div><h2 id="other-test-runners">Other test runners</h2>
-<p>As a side note, other test runners are quieter than others:</p>
+</li>
+<li>A line containing Perl-style comment delimiter, except when it is within a string
 <ul>
-<li><code>py.test</code> will output the name of the file and &ldquo;E&rdquo; for error and &ldquo;.&rdquo; for OK</li>
-<li><code>clojure.test</code> will output the name of the file and a total of tests and assertions. <a href="http://jakemccrary.com/blog/2015/04/25/quieter-clojure-dot-test-output/">Here</a> to make it quieter</li>
-<li><code>HSpec</code> will output one line per <code>describe</code> and <code>it</code>. Inspired by RSpec</li>
-<li><code>Jasmine</code> will output one line per <code>describe</code> and <code>it</code>, as HSpec, as both of them are inspired by RSpec.</li>
-<li><code>Junit</code> and derivatives will produce the name of the file and total of tests and assertions. Also, on demand, a file containing test results so it can be interpreted by the IDE.</li>
+<li><code># hello Perl-style</code> is a valid comment</li>
+<li><code>echo &quot;#&quot;;</code> is not a comment</li>
+<li><code>echo '#';</code> is not a comment</li>
 </ul>
+</li>
+<li>There are no multi-line comments
+<ul>
+<li><code>/* ... */</code> is not a comment</li>
+</ul>
+</li>
+</ul>
+<p>You can do this kata in any language you want. In any case it is not allowed to use a PHP parser. This task must be done manually.</p>
+<h2 id="how-to-start">How to start</h2>
+<ul>
+<li>Clone/fork (any stars are welcome) <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments">this repo</a></li>
+<li>Run the tests. <a href="https://github.com/alvarogarcia7/cli-app-base-clojure/blob/master/README.md#tests">See this</a> for help</li>
+<li>They should be red.</li>
+<li>Go to production code and fix it</li>
+<li>Have fun (happy kata and happy koding!)</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<p>Please do not read ahead, just read the current assignment, do it, then read the next one:</p>
+<ol>
+<li>Can you help Little Johnny fetch all those comments?</li>
+<li>These messages have not been audited yet and we want to publish the code, so it is better to remove the comments. Can you do it?</li>
+</ol>
+<h2 id="optional-requirement">Optional requirement</h2>
+<p>As an optional task, when the problem is finished (you can attack in your preferred order), there must be an executable jar with some parameters to process the current folder with the &lsquo;working modes&rsquo; specified above.</p>
+<p>(This formulation is also present at the <a href="https://github.com/alvarogarcia7/kata-formulation-find-comments/blob/master/README.md">repository</a> )</p>
 
         
 
@@ -632,6 +829,12 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
     
         <a href="/blog/page/36/" class="label-pagination">36</a>
     
+        <a href="/blog/page/37/" class="label-pagination">37</a>
+    
+        <a href="/blog/page/38/" class="label-pagination">38</a>
+    
+        <a href="/blog/page/39/" class="label-pagination">39</a>
+    
 
     
     
@@ -640,7 +843,7 @@ The notion of Turing-completeness does not apply to languages such as XML, HTML,
 
     
     
-        <a href="/blog/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/39/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -700,6 +903,10 @@ You can find me on:
       <ul id="recent_articles">
         
           <li class="post">
+              <a href="/articles/2024/08/31/building-private-tools-open/">Building private tools in the open</a>
+          </li>
+        
+          <li class="post">
               <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
           </li>
         
@@ -735,16 +942,20 @@ You can find me on:
               <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
           </li>
         
-          <li class="post">
-              <a href="/articles/2014/12/15/the-joys-of-the-craft-as-article/">The Joys of the Craft as Article</a>
-          </li>
-        
       </ul>
       <h1>Recent Blogs</h1>
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/01/self-study-july-2024/">Self-Study in July 2024</a>
           </li>
         
           <li class="post">
@@ -752,35 +963,27 @@ You can find me on:
           </li>
         
           <li class="post">
+              <a href="/blog/2024/05/01/self-study-may-2024/">Self-Study in May 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/04/01/self-study-april-2024/">Self-Study in April 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/09/01/self-study-september-2023/">Self-Study in September 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/08/01/self-study-august-2023/">Self-Study in August 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/01/01/self-study-january-2021/">Self-Study in January 2021</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/09/30/books-read-2020q3/">Books read in 2020Q3</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
       </ul>

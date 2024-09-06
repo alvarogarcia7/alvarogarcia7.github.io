@@ -129,28 +129,108 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/">Practical Object-Oriented Design in Ruby: Chapter 4</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories/">Navigating the GitHub repositories</a>
     </h1>
-    <p >Jul 26, 2015
+    <p >Sep 8, 2015
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/26/practical-object-oriented-design-in-ruby-chapter-4/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/navigating-the-github-repositories/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/ood/">ood</a><a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository/">repository</a><a class="label" href="https://alvarogarcia7.github.io/categories/kata/">kata</a><a class="label" href="https://alvarogarcia7.github.io/categories/navigate/">navigate</a><a class="label" href="https://alvarogarcia7.github.io/categories/simple-session/">simple-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository-search/">repository-search</a>
         
     </p>
 </header>
 
 
         
-        <p>We&rsquo;ve read the fourth chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
-<p>These are the concepts and links brought up during the discussion:</p>
+        <p>I&rsquo;ve reorganized my github repositories, especially the katas and the <code>simple sessions</code>.</p>
+<h2 id="katas">Katas</h2>
+<p>All of them can be found in <a href="https://github.com/search?utf8=%E2%9C%93&amp;q=user%3Aalvarogarcia7+kata&amp;type=Repositories&amp;ref=searchresults">this search</a></p>
+<p>Separated by language:</p>
 <ul>
-<li>The craftsmanship analogy, as exposed in <a href="https://twitter.com/sarahmei/status/625089415812022272">these tweets</a></li>
-<li>Difference between function and method</li>
-<li>What vs How (also present in the GOOS)</li>
+<li><a href="https://github.com/search?l=Java&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Java</a></li>
+<li><a href="https://github.com/search?l=Clojure&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Clojure</a></li>
+<li><a href="https://github.com/search?l=JavaScript&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Javascript</a></li>
+<li><a href="https://github.com/search?l=Haskell&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Haskell</a></li>
+<li><a href="https://github.com/search?l=ruby&amp;q=kata+user%3Aalvarogarcia7&amp;ref=searchresults&amp;type=Repositories&amp;utf8=%E2%9C%93">Ruby</a></li>
+</ul>
+<p>To the best of my knowledge, all repositories follow a similar pattern:</p>
+<ul>
+<li>Contain the keyword &lsquo;kata&rsquo;</li>
+<li>Contain the language</li>
+<li>Contain a description of the exercise</li>
+</ul>
+<p>An example: <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-haskell">palindromes-searcher-kata-haskell</a></p>
+<h2 id="simple-sessions">Simple sessions</h2>
+<p>A simple session is a lapse of time working with the language to solve a problem, but not big enough to deserve a repository of its own. Usually, the simple sessions are performed in languages that have a REPL, tool that eases this need</p>
+<p>They can be found in <a href="https://github.com/search?q=user%3Aalvarogarcia7+simple-sessions">this search</a></p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/">A basic working environment</a>
+    </h1>
+    <p >Sep 8, 2015
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/09/08/a-basic-working-environment/#disqus_thread">Comments</a>
+
+        
+    </p>
+</header>
+
+
+        
+        <p>Sometimes, when working out of somebody&rsquo;s else computer, I won&rsquo;t have my preferred IDE installed.</p>
+<p>In this case, what I usually do &ndash;as long as the programming session is more than 5 TDD cycles&ndash;, is to configure my own environment. It includes:</p>
+<ul>
+<li>text editor: $EDITOR is enough</li>
+<li>test runner. A simple bash script executing the tests will suffice</li>
+<li>git terminal: to commit, see differences, revert, etc</li>
+<li>[optional] REPL if the language has it</li>
+</ul>
+<p>If the system already has it, I will use <code>screen</code> to cycle around the sessions.</p>
+<h2 id="a-simple-test-runner">A simple test runner</h2>
+<p>More in depth, the test runner will be similar to this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">while</span> <span class="o">[</span> <span class="nb">true</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
+    clear<span class="p">;</span>
+    date<span class="p">;</span>
+    runhaskell Spec.hs<span class="p">;</span>
+    <span class="nb">read</span> i<span class="p">;</span>
+<span class="k">done</span>
+</code></pre></div><p>This script will:</p>
+<ul>
+<li>clear the screen (for better readability)</li>
+<li>print the date</li>
+<li>execute the tests</li>
+<li>read from the console, effectively waiting for the user to interact (an enter is enough)</li>
+</ul>
+<p>The date is useful for both detecting the pace of the cycles and for scrolling up and down in the terminal.</p>
+<p>If this date is much too necessary, it might indicate the presence of the TDD antipattern &ldquo;El Bocazas&rdquo; / &ldquo;A mouthful&rdquo;, present in <a href="http://www.carlosble.com/downloads/disenoAgilConTdd_ebook.pdf">Diseño Ágil con TDD</a>. I use when the output of the test runner is extensive (such as <code>runhaskell</code>).</p>
+<p>If the test runner output is too verbose, a possible step forward is to silence output in when every test is green (fragment):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">output</span><span class="o">=</span><span class="k">$(</span>runhaskell Spec.hs<span class="k">)</span><span class="p">;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;OK&#34;</span><span class="p">;</span>
+<span class="k">else</span>
+    <span class="nb">echo</span> <span class="nv">$output</span><span class="p">;</span>
+<span class="k">fi</span>
+</code></pre></div><h2 id="other-test-runners">Other test runners</h2>
+<p>As a side note, other test runners are quieter than others:</p>
+<ul>
+<li><code>py.test</code> will output the name of the file and &ldquo;E&rdquo; for error and &ldquo;.&rdquo; for OK</li>
+<li><code>clojure.test</code> will output the name of the file and a total of tests and assertions. <a href="http://jakemccrary.com/blog/2015/04/25/quieter-clojure-dot-test-output/">Here</a> to make it quieter</li>
+<li><code>HSpec</code> will output one line per <code>describe</code> and <code>it</code>. Inspired by RSpec</li>
+<li><code>Jasmine</code> will output one line per <code>describe</code> and <code>it</code>, as HSpec, as both of them are inspired by RSpec.</li>
+<li><code>Junit</code> and derivatives will produce the name of the file and total of tests and assertions. Also, on demand, a file containing test results so it can be interpreted by the IDE.</li>
 </ul>
 
         
@@ -164,115 +244,26 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/">Faster site generation for Octopress 2</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/">Brown-bag session: eXtreme Programming</a>
     </h1>
-    <p >Jul 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/faster-site-generation-for-octopress-2/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-2/">octopress-2</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress-3/">octopress-3</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>2016-04 update: I&rsquo;ve discovered that the original Rakefile does a similar job. See <a href="../../../../2016/04/17/faster-site-generation-native-octopress/">here</a></p>
-<p>After a while, the generation of the static site using <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">Octopress 2</a> was starting to be slow (around 2 minutes for 85 posts) for the kind of fast feedback cycle I was expecting.</p>
-<p>Inspired by their new features in <a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/">Octopress 3</a>, one of them being faster site generation, I decided to retrofit my installation with the same feature.</p>
-<p>Octopress 3 now has a different structure of posts and drafts. You can specify you only want to publish to your local preview your current draft instead of all of them, therefore being it faster. When you finish editing, all the posts are recovered and publishing to production uploads all of them</p>
-<p>For Octopress 2, you can do something similar in a manual way. Create a copy of your working environment:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cp -R blog_source blog_post_factory
-</code></pre></div><p>Git ignore all existing markdown files in the folder <code>source/_posts</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> blog_post_factory/source/_posts
-git update-index --assume-unchanged <span class="k">$(</span>ls *markdown<span class="k">)</span>
-</code></pre></div><p>Delete all existing markdown files</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rm *markdown
-</code></pre></div><p>Check that git doesn&rsquo;t realize about the difference:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git status
-
-<span class="c1"># On branch source</span>
-nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
-</code></pre></div><p>Create a new post:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rake new_post<span class="o">[</span><span class="s2">&#34;Faster site generation for Octopress 2&#34;</span><span class="o">]</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># On branch source</span>
-<span class="c1"># Untracked files:</span>
-<span class="c1">#   (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)</span>
-<span class="c1">#</span>
-<span class="c1">#	2015-07-13-faster-site-generation-for-octopress-2.markdown</span>
-nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&#34;git add&#34;</span> to track<span class="o">)</span>
-</code></pre></div><p>Edit as much as needed, reviewing changes in local. Push to the remote repository.</p>
-<p>In the original (<code>blog_source</code>) folder, pull, then generate:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rake generate <span class="o">&amp;&amp;</span> rake deploy
-</code></pre></div><p>[Optional: change the remote URL for the cloned repository, so the git push is faster.]</p>
-<p>After each new post, you have to ignore old files again. I&rsquo;ve created a new task in the <code>Rakefile</code> for this purpose:</p>
-<div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">desc</span> <span class="s2">&#34;Cleans all *.markdown files for a faster site generation&#34;</span>
-<span class="n">task</span> <span class="ss">:ignore</span> <span class="k">do</span>
-  <span class="n">cd</span> <span class="s2">&#34;</span><span class="si">#{</span><span class="n">source_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">posts_dir</span><span class="si">}</span><span class="s2">&#34;</span>
-  <span class="nb">system</span> <span class="s2">&#34;git update-index --assume-unchanged $(ls *.markdown)&#34;</span>
-  <span class="nb">system</span> <span class="s2">&#34;rm $(ls *.markdown)&#34;</span>
-<span class="k">end</span>
-</code></pre></div><h2 id="conclusion">Conclusion</h2>
-<p>I&rsquo;ve reduced the amount of time to generate files from 2 minutes for 85 files to ~0.62 seconds for 1 file.</p>
-<pre><code>Regenerating: 1 file(s) changed at 2015-07-13 08:03:29 ...done in 0.617269045 seconds.
-</code></pre>
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/">What defines a dependency</a>
-    </h1>
-    <p >Jul 13, 2015
+    <p >Sep 2, 2015
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/what-defines-a-dependency/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/09/02/brownbag-session-xtreme-programming/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/fragment/">fragment</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/listener/">listener</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-stereotype/">object-stereotype</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/extreme-programming/">extreme-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/xp/">xp</a>
         
     </p>
 </header>
 
 
         
-        <p>A friend and I were arguing about this code (<a href="https://github.com/alvarogarcia7/cos/blob/7bf866bdfb9006d73a0124e00152e55c520d98a4/src/main/java/users/Registry.java">fragment</a>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">register</span> <span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">userName</span><span class="o">)</span>  <span class="o">{</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="n">registeredUsers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="n">userName</span><span class="o">));</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">AlreadyRegisteredUserException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">userName</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div><p>I would have said that <code>resultListener</code> is a dependency as, first, it was injected by the constructor, second, it is necessary for the execution (negative case).</p>
-<p>He suggested that:</p>
-<ul>
-<li>being injected through  the constructor is usually what happens with dependencies, but does not make it one (i.e., something can be injected by the constructor and not be a dependency)</li>
-<li>what defines a dependency is related to the business: if this behavior is mandatory for the business, then it is a dependency.</li>
-</ul>
-<p>As a conclusion, <code>resultListener</code> would be a notification, as business does not require it.</p>
-<p>On a later commit, we decided to inject it to <code>registeredUsers</code> (<a href="https://github.com/alvarogarcia7/cos/blob/c89bec1a2de388165676f095c2218afeb1321374/src/main/java/users/InMemoryRegisteredUsers.java">fragment</a>)</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span> <span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">,</span> <span class="kd">final</span> <span class="n">RegistryResultListener</span> <span class="n">resultListener</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">contains</span><span class="o">(</span><span class="n">user</span><span class="o">))</span> <span class="o">{</span>
-        <span class="n">resultListener</span><span class="o">.</span><span class="na">alreadyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
-        <span class="k">return</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">users</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-    <span class="n">resultListener</span><span class="o">.</span><span class="na">successfullyRegistered</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>
-<span class="o">}</span>
-</code></pre></div><p>Note: for cases when no one needs to be informed about the users being registered or not, a null-object pattern will suffice, as there is no check for null reference in the parameter <code>resultListener</code>.</p>
-<p>Note: more information on object stereotypes can be found <a href="../../../../2015/07/13/object-peer-stereotypes/">here</a></p>
+        <p>At a client, today I&rsquo;ve introduced the eXtreme Programmig methodology, with its values, principles, practices in a brown-bag session.</p>
+<p>It has been an informal session, without slides, but we have used <a href="https://www.youtube.com/watch?v=4nN6Gh79Yg8">this video</a> by the Kleer guys (in Spanish).</p>
+<p>The video gives a high-level overview of what XP is. We also needed to cover the daily practices (e.g., TDD, pair programming, whole team)</p>
+<p>After that, we&rsquo;ve done a questions&amp;answers round to solve the teammates' doubts</p>
 
         
 
@@ -285,31 +276,183 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/">Object Peer Stereotypes</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/09/01/self-study-in-september-2015/">Self-Study in September 2015</a>
     </h1>
-    <p >Jul 13, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/13/object-peer-stereotypes/#disqus_thread">Comments</a>
+    <p >Sep 1, 2015
+         - 9 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/09/01/self-study-in-september-2015/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/goos/">goos</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-peer-stereotype/">object-peer-stereotype</a><a class="label" href="https://alvarogarcia7.github.io/categories/dependency/">dependency</a><a class="label" href="https://alvarogarcia7.github.io/categories/notification/">notification</a><a class="label" href="https://alvarogarcia7.github.io/categories/adjustment/">adjustment</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/september/">september</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/1958/">1958</a><a class="label" href="https://alvarogarcia7.github.io/categories/30-second/">30-second</a><a class="label" href="https://alvarogarcia7.github.io/categories/algebraic-data-type/">algebraic-data-type</a><a class="label" href="https://alvarogarcia7.github.io/categories/alonzo-church/">alonzo-church</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/analysis/">analysis</a><a class="label" href="https://alvarogarcia7.github.io/categories/andrea-manna/">andrea-manna</a><a class="label" href="https://alvarogarcia7.github.io/categories/anonymous-function/">anonymous-function</a><a class="label" href="https://alvarogarcia7.github.io/categories/arm-length-recursion/">arm-length-recursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/article/">article</a><a class="label" href="https://alvarogarcia7.github.io/categories/artificial-intelligence/">artificial-intelligence</a><a class="label" href="https://alvarogarcia7.github.io/categories/assumption/">assumption</a><a class="label" href="https://alvarogarcia7.github.io/categories/aws/">aws</a><a class="label" href="https://alvarogarcia7.github.io/categories/base-case/">base-case</a><a class="label" href="https://alvarogarcia7.github.io/categories/beginner/">beginner</a><a class="label" href="https://alvarogarcia7.github.io/categories/ben-whaley/">ben-whaley</a><a class="label" href="https://alvarogarcia7.github.io/categories/big-data/">big-data</a><a class="label" href="https://alvarogarcia7.github.io/categories/blue-hat/">blue-hat</a><a class="label" href="https://alvarogarcia7.github.io/categories/boolean/">boolean</a><a class="label" href="https://alvarogarcia7.github.io/categories/boolean-parameter/">boolean-parameter</a><a class="label" href="https://alvarogarcia7.github.io/categories/bootcamp/">bootcamp</a><a class="label" href="https://alvarogarcia7.github.io/categories/brain/">brain</a><a class="label" href="https://alvarogarcia7.github.io/categories/browser/">browser</a><a class="label" href="https://alvarogarcia7.github.io/categories/c-plus-plus/">c-plus-plus</a><a class="label" href="https://alvarogarcia7.github.io/categories/c-sharp/">c-sharp</a><a class="label" href="https://alvarogarcia7.github.io/categories/cfa2/">cfa2</a><a class="label" href="https://alvarogarcia7.github.io/categories/charlie-amber/">charlie-amber</a><a class="label" href="https://alvarogarcia7.github.io/categories/class/">class</a><a class="label" href="https://alvarogarcia7.github.io/categories/class-invariant/">class-invariant</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojurescript/">clojurescript</a><a class="label" href="https://alvarogarcia7.github.io/categories/closure/">closure</a><a class="label" href="https://alvarogarcia7.github.io/categories/cobol/">cobol</a><a class="label" href="https://alvarogarcia7.github.io/categories/cody/">cody</a><a class="label" href="https://alvarogarcia7.github.io/categories/coinduction/">coinduction</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/connor-mendenhall/">connor-mendenhall</a><a class="label" href="https://alvarogarcia7.github.io/categories/context-free-grammar/">context-free-grammar</a><a class="label" href="https://alvarogarcia7.github.io/categories/conversion/">conversion</a><a class="label" href="https://alvarogarcia7.github.io/categories/corecursion/">corecursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/coupling/">coupling</a><a class="label" href="https://alvarogarcia7.github.io/categories/currying/">currying</a><a class="label" href="https://alvarogarcia7.github.io/categories/dariusz-pasciak/">dariusz-pasciak</a><a class="label" href="https://alvarogarcia7.github.io/categories/data-structure/">data-structure</a><a class="label" href="https://alvarogarcia7.github.io/categories/data-type/">data-type</a><a class="label" href="https://alvarogarcia7.github.io/categories/design-by-contract/">design-by-contract</a><a class="label" href="https://alvarogarcia7.github.io/categories/developer/">developer</a><a class="label" href="https://alvarogarcia7.github.io/categories/dialogue/">dialogue</a><a class="label" href="https://alvarogarcia7.github.io/categories/dimitrios-vardoulakis/">dimitrios-vardoulakis</a><a class="label" href="https://alvarogarcia7.github.io/categories/direct-recursion/">direct-recursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/duck-typing/">duck-typing</a><a class="label" href="https://alvarogarcia7.github.io/categories/eiffel/">eiffel</a><a class="label" href="https://alvarogarcia7.github.io/categories/elevator-test/">elevator-test</a><a class="label" href="https://alvarogarcia7.github.io/categories/entropy/">entropy</a><a class="label" href="https://alvarogarcia7.github.io/categories/eric-lippert/">eric-lippert</a><a class="label" href="https://alvarogarcia7.github.io/categories/extreme-programming/">extreme-programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature/">feature</a><a class="label" href="https://alvarogarcia7.github.io/categories/fmap/">fmap</a><a class="label" href="https://alvarogarcia7.github.io/categories/formal-language-theory/">formal-language-theory</a><a class="label" href="https://alvarogarcia7.github.io/categories/frank-rosenblatt/">frank-rosenblatt</a><a class="label" href="https://alvarogarcia7.github.io/categories/freezer/">freezer</a><a class="label" href="https://alvarogarcia7.github.io/categories/functor/">functor</a><a class="label" href="https://alvarogarcia7.github.io/categories/garbage-collection/">garbage-collection</a><a class="label" href="https://alvarogarcia7.github.io/categories/generative-recursion/">generative-recursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/gerardo-rossel/">gerardo-rossel</a><a class="label" href="https://alvarogarcia7.github.io/categories/google/">google</a><a class="label" href="https://alvarogarcia7.github.io/categories/habit/">habit</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/hawk-host/">hawk-host</a><a class="label" href="https://alvarogarcia7.github.io/categories/henry-baker/">henry-baker</a><a class="label" href="https://alvarogarcia7.github.io/categories/higher-order-function/">higher-order-function</a><a class="label" href="https://alvarogarcia7.github.io/categories/hiring/">hiring</a><a class="label" href="https://alvarogarcia7.github.io/categories/hoare-triplet/">hoare-triplet</a><a class="label" href="https://alvarogarcia7.github.io/categories/how-to/">how-to</a><a class="label" href="https://alvarogarcia7.github.io/categories/idea/">idea</a><a class="label" href="https://alvarogarcia7.github.io/categories/indirect-recursion/">indirect-recursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/induction/">induction</a><a class="label" href="https://alvarogarcia7.github.io/categories/information/">information</a><a class="label" href="https://alvarogarcia7.github.io/categories/instant-gratification-monkey/">instant-gratification-monkey</a><a class="label" href="https://alvarogarcia7.github.io/categories/iterative-function/">iterative-function</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-fried/">jason-fried</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-liszka/">jason-liszka</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript-type-inference/">javascript-type-inference</a><a class="label" href="https://alvarogarcia7.github.io/categories/jay-fields/">jay-fields</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeff-atwood/">jeff-atwood</a><a class="label" href="https://alvarogarcia7.github.io/categories/jim-duey/">jim-duey</a><a class="label" href="https://alvarogarcia7.github.io/categories/jordan-medlock/">jordan-medlock</a><a class="label" href="https://alvarogarcia7.github.io/categories/judd-keppel/">judd-keppel</a><a class="label" href="https://alvarogarcia7.github.io/categories/kleer/">kleer</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda-calculus/">lambda-calculus</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda-expression/">lambda-expression</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/lisp/">lisp</a><a class="label" href="https://alvarogarcia7.github.io/categories/log4j/">log4j</a><a class="label" href="https://alvarogarcia7.github.io/categories/logging/">logging</a><a class="label" href="https://alvarogarcia7.github.io/categories/loose-coupling/">loose-coupling</a><a class="label" href="https://alvarogarcia7.github.io/categories/machine-learning/">machine-learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/macrostate/">macrostate</a><a class="label" href="https://alvarogarcia7.github.io/categories/map/">map</a><a class="label" href="https://alvarogarcia7.github.io/categories/martin-fowler/">martin-fowler</a><a class="label" href="https://alvarogarcia7.github.io/categories/martin-salias/">martin-salias</a><a class="label" href="https://alvarogarcia7.github.io/categories/master/">master</a><a class="label" href="https://alvarogarcia7.github.io/categories/marvin-minsky/">marvin-minsky</a><a class="label" href="https://alvarogarcia7.github.io/categories/maxwell-boltzmann/">maxwell-boltzmann</a><a class="label" href="https://alvarogarcia7.github.io/categories/median-age/">median-age</a><a class="label" href="https://alvarogarcia7.github.io/categories/method-invariant/">method-invariant</a><a class="label" href="https://alvarogarcia7.github.io/categories/microservice/">microservice</a><a class="label" href="https://alvarogarcia7.github.io/categories/microsoft-bob/">microsoft-bob</a><a class="label" href="https://alvarogarcia7.github.io/categories/microstate/">microstate</a><a class="label" href="https://alvarogarcia7.github.io/categories/misunderstanding/">misunderstanding</a><a class="label" href="https://alvarogarcia7.github.io/categories/mutual-recursion/">mutual-recursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/nba/">nba</a><a class="label" href="https://alvarogarcia7.github.io/categories/norman-ramsey/">norman-ramsey</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-orientation/">object-orientation</a><a class="label" href="https://alvarogarcia7.github.io/categories/oven/">oven</a><a class="label" href="https://alvarogarcia7.github.io/categories/panic-monster/">panic-monster</a><a class="label" href="https://alvarogarcia7.github.io/categories/paul-graham/">paul-graham</a><a class="label" href="https://alvarogarcia7.github.io/categories/peceptron/">peceptron</a><a class="label" href="https://alvarogarcia7.github.io/categories/perl/">perl</a><a class="label" href="https://alvarogarcia7.github.io/categories/peter-norvig/">peter-norvig</a><a class="label" href="https://alvarogarcia7.github.io/categories/peteris-krumins/">peteris-krumins</a><a class="label" href="https://alvarogarcia7.github.io/categories/phil-calcado/">phil-calcado</a><a class="label" href="https://alvarogarcia7.github.io/categories/postcondition/">postcondition</a><a class="label" href="https://alvarogarcia7.github.io/categories/precondition/">precondition</a><a class="label" href="https://alvarogarcia7.github.io/categories/procrastination/">procrastination</a><a class="label" href="https://alvarogarcia7.github.io/categories/product/">product</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming/">programming</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-contest/">programming-contest</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-language/">programming-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/programming-skill/">programming-skill</a><a class="label" href="https://alvarogarcia7.github.io/categories/prolog/">prolog</a><a class="label" href="https://alvarogarcia7.github.io/categories/pull/">pull</a><a class="label" href="https://alvarogarcia7.github.io/categories/push/">push</a><a class="label" href="https://alvarogarcia7.github.io/categories/quality/">quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/queue/">queue</a><a class="label" href="https://alvarogarcia7.github.io/categories/rational-part/">rational-part</a><a class="label" href="https://alvarogarcia7.github.io/categories/recursion/">recursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/recursive-case/">recursive-case</a><a class="label" href="https://alvarogarcia7.github.io/categories/recursive-function/">recursive-function</a><a class="label" href="https://alvarogarcia7.github.io/categories/recursive-regular-expression/">recursive-regular-expression</a><a class="label" href="https://alvarogarcia7.github.io/categories/red-hat/">red-hat</a><a class="label" href="https://alvarogarcia7.github.io/categories/regular-expression/">regular-expression</a><a class="label" href="https://alvarogarcia7.github.io/categories/reorganization/">reorganization</a><a class="label" href="https://alvarogarcia7.github.io/categories/repl/">repl</a><a class="label" href="https://alvarogarcia7.github.io/categories/retirement/">retirement</a><a class="label" href="https://alvarogarcia7.github.io/categories/ritika-trikha/">ritika-trikha</a><a class="label" href="https://alvarogarcia7.github.io/categories/robyn-scott/">robyn-scott</a><a class="label" href="https://alvarogarcia7.github.io/categories/service/">service</a><a class="label" href="https://alvarogarcia7.github.io/categories/seymour-papert/">seymour-papert</a><a class="label" href="https://alvarogarcia7.github.io/categories/shannon/">shannon</a><a class="label" href="https://alvarogarcia7.github.io/categories/simulated-annealing/">simulated-annealing</a><a class="label" href="https://alvarogarcia7.github.io/categories/six-thinking-hats/">six-thinking-hats</a><a class="label" href="https://alvarogarcia7.github.io/categories/sl4j/">sl4j</a><a class="label" href="https://alvarogarcia7.github.io/categories/soundcloud/">soundcloud</a><a class="label" href="https://alvarogarcia7.github.io/categories/srp/">srp</a><a class="label" href="https://alvarogarcia7.github.io/categories/stack-overflow/">stack-overflow</a><a class="label" href="https://alvarogarcia7.github.io/categories/stacktrace/">stacktrace</a><a class="label" href="https://alvarogarcia7.github.io/categories/standard-ml/">standard-ml</a><a class="label" href="https://alvarogarcia7.github.io/categories/startup/">startup</a><a class="label" href="https://alvarogarcia7.github.io/categories/statistics/">statistics</a><a class="label" href="https://alvarogarcia7.github.io/categories/story/">story</a><a class="label" href="https://alvarogarcia7.github.io/categories/strength/">strength</a><a class="label" href="https://alvarogarcia7.github.io/categories/strongly-typed/">strongly-typed</a><a class="label" href="https://alvarogarcia7.github.io/categories/structural-recursion/">structural-recursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/student/">student</a><a class="label" href="https://alvarogarcia7.github.io/categories/tail-call-optimization/">tail-call-optimization</a><a class="label" href="https://alvarogarcia7.github.io/categories/tail-recursion/">tail-recursion</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-split/">team-split</a><a class="label" href="https://alvarogarcia7.github.io/categories/tech-lead/">tech-lead</a><a class="label" href="https://alvarogarcia7.github.io/categories/thermodynamics/">thermodynamics</a><a class="label" href="https://alvarogarcia7.github.io/categories/think/">think</a><a class="label" href="https://alvarogarcia7.github.io/categories/thinking-hat/">thinking-hat</a><a class="label" href="https://alvarogarcia7.github.io/categories/tim-urban/">tim-urban</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/tmux/">tmux</a><a class="label" href="https://alvarogarcia7.github.io/categories/tomasz-nurkiewicz/">tomasz-nurkiewicz</a><a class="label" href="https://alvarogarcia7.github.io/categories/trust/">trust</a><a class="label" href="https://alvarogarcia7.github.io/categories/type-class/">type-class</a><a class="label" href="https://alvarogarcia7.github.io/categories/type-inference/">type-inference</a><a class="label" href="https://alvarogarcia7.github.io/categories/type-inference-algorithm/">type-inference-algorithm</a><a class="label" href="https://alvarogarcia7.github.io/categories/type-system/">type-system</a><a class="label" href="https://alvarogarcia7.github.io/categories/unam-mx/">unam-mx</a><a class="label" href="https://alvarogarcia7.github.io/categories/upload/">upload</a><a class="label" href="https://alvarogarcia7.github.io/categories/value-stream-mapping/">value-stream-mapping</a><a class="label" href="https://alvarogarcia7.github.io/categories/video/">video</a><a class="label" href="https://alvarogarcia7.github.io/categories/vision/">vision</a><a class="label" href="https://alvarogarcia7.github.io/categories/weakly-typed/">weakly-typed</a><a class="label" href="https://alvarogarcia7.github.io/categories/weakness/">weakness</a><a class="label" href="https://alvarogarcia7.github.io/categories/weapon/">weapon</a><a class="label" href="https://alvarogarcia7.github.io/categories/wikipedia/">wikipedia</a><a class="label" href="https://alvarogarcia7.github.io/categories/william-matheson/">william-matheson</a><a class="label" href="https://alvarogarcia7.github.io/categories/xp/">xp</a><a class="label" href="https://alvarogarcia7.github.io/categories/yagni/">yagni</a><a class="label" href="https://alvarogarcia7.github.io/categories/zen/">zen</a>
         
     </p>
 </header>
 
 
         
-        <blockquote>
-<p>We categorize an object&rsquo;s peers (loosely) into three types of relationship. An object might have:</p>
+        <h2 id="the-30-second-habit-with-a-lifelong-impact">The 30 second habit with a lifelong impact</h2>
+<p>I&rsquo;ve read <a href="https://blog.growth.supply/the-30-second-habit-with-a-lifelong-impact-2c3f948ead98">this article</a> list of patterns, by Robyn Scott, in which it is explained why to compress information in a few ideas, investing 30 seconds to condense the article.</p>
+<p>Tags: 30-second, habit, robyn-scott</p>
+<h2 id="the-strengths-and-weaknesses-of-extreme-programming">The Strengths and Weaknesses of Extreme Programming</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=LkhLZ7_KZ5w">this video</a> explaining the strengths and weaknesses of extreme programming. By William Matheson</p>
+<p>Tags: extreme-programming, xp, william-matheson, video, strength, weakness</p>
+<h2 id="poster-de-extreme-programming">Poster de Extreme Programming</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=4nN6Gh79Yg8">this video</a> introducing eXtreme Programming. By Martín Salías</p>
+<p>Tags: martin-salias, kleer, extreme-programming, xp</p>
+<h2 id="good-tech-lead-bad-tech-lead">Good Tech Lead, Bad Tech Lead</h2>
+<p>I&rsquo;ve read <a href="https://blog.growth.supply/good-tech-lead-bad-tech-lead-948b2b806d86">this comparison</a> of good and bad traits in tech leads. By Jason Liszka.</p>
+<p>Explains the differences between good and bad tech leads, even though many of these qualities are shared by plain team members</p>
+<p>Tags: jason-liszka, tech-lead, comparison</p>
+<h2 id="why-procrastinators-procrastinate">Why Procrastinators Procrastinate</h2>
+<p>I&rsquo;ve read <a href="http://waitbutwhy.com/2013/10/why-procrastinators-procrastinate.html">this article</a> by Tim Urban on procrastination: this article compares the procrastinator and the non-procrastinator brain with pictures, introducing the Rational part, the Instant Gratification Monkey and the Panic Monster. Shows some reasons why.</p>
+<p>There is more on part 2: <a href="http://waitbutwhy.com/2013/11/how-to-beat-procrastination.html">How to beat procrastination</a></p>
+<p>Tags: tim-urban, procrastination, rational-part, instant-gratification-monkey, panic-monster, brain, comparison</p>
+<h2 id="algebraic-data-type">Algebraic data type</h2>
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">this wikipedia page</a>, that explains what this is, a few examples and the theory behind it.</p>
+<p>Tags: wikipedia, data-type, algebraic-data-type</p>
+<h2 id="recursion">Recursion</h2>
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">this wikipedia page</a>, that explains the recursion basic concepts, such as:</p>
 <ul>
-<li>Dependencies: Services that the object requires from its peers so it can perform its responsibilities. The object cannot function without these services. It should not be possible to create the object without them. For example, a graphics package will need something like a screen or canvas to draw on&ndash;it doesn&rsquo;t make sense without one.</li>
-<li>Notifications: Peers that need to be kept up to date with the object&rsquo;s activity. The object will notify interested peers whenever it changes state or performs a significant action. Notifications are &ldquo;fire and forget&rdquo;; the object neither knows nor cares which peers are listening. Notifications are so useful because they decouple objects from each other. For example, in a user interface system, a button component promises to notify any registered listeners when it&rsquo;s clicked, but does not know what those listeners will do. Similarly, the listeners expect to be called but know nothing of the way the user interface dispatches its events.</li>
-<li>Adjustments: Peers that adjust the object&rsquo;s behavior to the wider needs of the system. This includes policy objects that make decisions on the object&rsquo;s behalf (the Strategy pattern in [Gamma94]) and component parts of the object if it&rsquo;s a composite. For example, a Swing JTable will ask a TableCellRenderer to draw a cell&rsquo;s value, perhaps as RGB (Red, Green, Blue) values for a color. If we change the renderer, the table will change its presentation, now displaying the HSB (Hue, Saturation, Brightness) values.</li>
+<li>induction, coinduction</li>
+<li>recursion, corecursion</li>
+<li>implementation details in iterative vs recursive programs:
+<ul>
+<li>shortcutting recursion (i.e., arm-length&rsquo;s recursion)</li>
+<li>wrapper function</li>
+<li>tail-call optimization, related to tail-recursive functions</li>
 </ul>
-</blockquote>
-<p>Source is Growing Object-Oriented Software, Guided by Tests &gt; Chapter 6, Object-Oriented Style &gt; Object Peer Stereotypes, page 52</p>
+</li>
+<li>recursion and its relation to data structures</li>
+<li>base case / recursive case and removing the need of the base one in corecursion or in non-strict languages</li>
+<li>types of recursion:
+<ul>
+<li>direct, indirect, mutual</li>
+<li>generative, structural</li>
+</ul>
+</li>
+</ul>
+<p>Tags: recursion, corecursion, induction, coinduction, tail-call-optimization, tail-recursion, direct-recursion, indirect-recursion, mutual-recursion, generative-recursion, structural-recursion, arm-length-recursion, iterative-function, recursive-function, base-case, recursive-case, wikipedia, data-structure</p>
+<h2 id="anonymous-function">Anonymous function</h2>
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Anonymous_function">this wikipedia page</a>, that describes what is a lambda expression or an anonymous function. How it can be used (e.g., currying, higher-order function, closures) and gives examples in many languages.</p>
+<p>Cites its invention (Church, 1936, lambda-calculus) and its first implementation (Lisp, 1958)</p>
+<p>Tags: alonzo-church, anonymous-function, lambda-expression, closure, lambda-calculus, lisp, currying, higher-order-function, wikipedia</p>
+<h2 id="closure">Closure</h2>
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">this wikipedia page</a>, that explains the concept of closures and the usual confusion between closure and lambda. Also some applications.</p>
+<p>Discusses closures as a way of deferring execution and implementing object-oriented (OO) systems</p>
+<p>Tags: wikipedia, closure, object-orientation, lambda-expression</p>
+<h2 id="zen-story-the-master-archer">Zen Story: The Master Archer</h2>
+<p>I&rsquo;ve read <a href="http://www.thedailyzen.org/2015/06/23/zen-story-the-master-archer/">this story</a> by Charlie Ambler about perfectionism and deep study, exemplified by the general that retires to study archery and the child who draws targets around the arrows.</p>
+<p>Tags: charlie-amber, master, student, zen, story</p>
+<h2 id="loosely-coupled">Loosely Coupled</h2>
+<p>I&rsquo;ve read <a href="http://blog.bwhaley.com/loosely-coupled">this article</a> by Ben Whaley about how to loosely couple services introducing a queue and the difference in patterns between push and pull communication.</p>
+<p>Tags: ben-whaley, push, pull, coupling, loose-coupling, service, queue, aws</p>
+<h2 id="being-good-at-programming-competitions-correlates-negatively-with-being-good-on-the-job">Being good at programming competitions correlates negatively with being good on the job</h2>
+<p>I&rsquo;ve watched the small video and the discussion about programmers' talent at <a href="http://www.catonmat.net/blog/programming-competitions-work-performance/">this page</a>. By Peteris Krumins.</p>
+<p>The original video explains that being good at a programming contest correlates negatively with skill at a programming job, even if the company hires them.</p>
+<p>The discussion explains the analogy with height and the NBA and concludes that this parameter should be preponderated with less importance than others.</p>
+<p>Tags: google, peter-norvig, nba, analogy, programming-contest, programming-skill, peteris-krumins</p>
+<h2 id="on-functors">On Functors</h2>
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/on-functors/">this comparison</a> by Peteris Krumins of what the functors are in different languages:</p>
+<ul>
+<li>C++: function objects</li>
+<li>Standard ML: generic implementation of interfaces. They allow to compose structures</li>
+<li>Haskell: structure containing zero or more objects that can be converted to another structure containing the other objects. It&rsquo;s an homomorphism between two categories.</li>
+<li>Prolog: built-in predicate for self-inspection and the atom at the start of the structure</li>
+</ul>
+<p>Tags: peteris-krumins, comparison, haskell, c-plus-plus, standard-ml, prolog, functor</p>
+<h2 id="recursive-regular-expressions">Recursive Regular Expressions</h2>
+<p>I&rsquo;ve read <a href="http://www.catonmat.net/blog/recursive-regular-expressions/">this article</a> on recursive regular expressions by Peteris Krumins.</p>
+<p>In it, he lightly describes how a regular expression relates to a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-Free Grammar</a> and the language support for Perl to include recursive regular expressions. Based on the examples (e.g., <code>0^n1^n</code>), it really clicked to me that this could be expressed as a recursive function, with its base case and the recursive one. Also that it &ldquo;depends on solutions to smaller instances of the same problem&rdquo; (<a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">wikipedia</a>)</p>
+<p>Tags: peteris-krumins, regular-expression, recursion, recursive-regular-expression, perl, context-free-grammar, formal-language-theory</p>
+<h2 id="in-functional-programming-what-is-a-functor">In Functional Programming, what is a functor?</h2>
+<p>I&rsquo;ve read <a href="http://stackoverflow.com/questions/2030863/in-functional-programming-what-is-a-functor/2031421#2031421">this answer</a>, by Norman Ramsey, on what is a functor.</p>
+<p>He explains in simple words what the concept is and how a type can belong to the class functor. Examples in haskell.</p>
+<p>Tags: norman-ramsey, functor, stack-overflow, haskell, type-class, class, map, fmap</p>
+<h2 id="functors">Functors</h2>
+<p>I&rsquo;ve read <a href="http://www.clojure.net/2013/01/19/Functors/">this article</a> by Jim Duey explaining functors in Clojure. He introduces a couple of notes of Haskell but all of the examples are in Clojure. Explains functors, a subset of it called applicatives, and the two libraries he has created.</p>
+<p>Tags: jim-duey, functor, clojure, haskell</p>
+<h2 id="10-tips-for-proper-application-logging">10 Tips for Proper Application Logging</h2>
+<p>I&rsquo;ve read <a href="http://www.javacodegeeks.com/2011/01/10-tips-proper-application-logging.html">this article</a> by Tomasz Nurkiewicz about tips on logging:</p>
+<ul>
+<li>reduce side effects</li>
+<li>use categories and levels</li>
+<li>connection with external systems</li>
+<li>handling exceptions</li>
+<li>automatically / manually reading logging files</li>
+</ul>
+<p>Tags: tomasz-nurkiewicz, logging, sl4j, log4j, tip</p>
+<h2 id="what-is-duck-typing">What is &ldquo;duck typing&rdquo;?</h2>
+<p>I&rsquo;ve read <a href="http://ericlippert.com/2014/01/02/what-is-duck-typing/">this article</a> by Eric Lippert about duck typing</p>
+<p>Tags: duck-typing, eric-lippert, type-system, c-sharp</p>
+<h2 id="yagni">Yagni</h2>
+<p>I&rsquo;ve reread <a href="http://martinfowler.com/bliki/Yagni.html">this article</a> by Martin Fowler on the cost of developing features that are not needed</p>
+<p>Tags: martin-fowler, yagni, article, misunderstanding</p>
+<h2 id="learn-haskell">Learn Haskell</h2>
+<p>I&rsquo;ve seen <a href="https://www.youtube.com/watch?v=JJlI5FPTbgE">this video</a> by Jordan Medlock on learning haskell, explaining the basics and how to use the REPL</p>
+<p>Tags: haskell, repl, jordan-medlock, beginner, video</p>
+<h2 id="learn-haskell-1">Learn Haskell</h2>
+<p>I&rsquo;ve seen <a href="https://www.youtube.com/watch?v=JJlI5FPTbgE">this video</a> by Jordan Medlock on learning haskell, explaining the basics and how to use the REPL</p>
+<p>Tags: haskell, repl, jordan-medlock, beginner, video</p>
+<h2 id="tmux---the-terminal-multiplexer">TMUX - The Terminal Multiplexer</h2>
+<p>I&rsquo;ve read these two parts: (<a href="http://blog.hawkhost.com/2010/06/28/tmux-the-terminal-multiplexer/">one</a>, <a href="http://blog.hawkhost.com/2010/07/02/tmux-%E2%80%93-the-terminal-multiplexer-part-2">two</a>) of an introduction guide to <code>tmux</code> (the unix terminal multiplexer) by Cody from Hawk Host.</p>
+<p>In it, he explains the basics of tmux and the main differences with <code>screen</code></p>
+<p>Tags: cody, hawk-host, tmux, how-to</p>
+<h2 id="thermodynamics-and-garbage-collection">Thermodynamics and Garbage Collection</h2>
+<p>I&rsquo;ve read <a href="http://www.pipeline.com/~hbaker1/ThermoGC.html">this paper</a> by Henry G. Baker that explains the analogy of the garbage collection (&ldquo;a freezer&rdquo;) and thermodynamics, where the state mutator (th program, also an oven) modifies the garbage heap and introduces / extracts entropy into the system.</p>
+<p>Comparison between entropy and lack of information, using the theories from Shannon, Maxwell-Boltzmann. There&rsquo;s a reference to the knapsack problem and to simulated annealing.</p>
+<p>There&rsquo;s also a gentle introduction to thermodynamics in layman terms: heat, temperature, microstates, macrostates, reversability, etc.</p>
+<p>In this paper it is also reflected (in macro vs micro states) that the sum all parts is simpler than the single ones (i.e., Information Hiding)</p>
+<p>Tags: henry-baker, thermodynamics, microstate, macrostate, analogy, simulated-annealing, garbage-collection, shannon, information, maxwell-boltzmann, freezer, oven, entropy</p>
+<h2 id="how-we-ended-up-with-microservices">How we ended up with microservices</h2>
+<p>I&rsquo;ve read <a href="http://philcalcado.com/2015/09/08/how_we_ended_up_with_microservices.html">this article</a>, by Phil Calçado, where he talks about his stay at SoundCloud:</p>
+<ul>
+<li>the value stream map: from X days to Y</li>
+<li>reorganizing teams into service teams</li>
+<li>conway&rsquo;s law and teams being responsible for support. Also, being given full authority</li>
+</ul>
+<p>Tags: phil-calcado, soundcloud, microservice, team-split, value-stream-mapping, conversion, reorganization</p>
+<h2 id="lisp-is-still-a-secret-weapon">Lisp is still a secret weapon</h2>
+<p>I&rsquo;ve read <a href="http://kep.io/is-lisp-still-a-secret-weapon/">this article</a> by Judd Keppel where he explains it is a good idea that Clojure / ClojureScript continues to be a secret, not known among developers. Cites the article &lsquo;Beating the averages&rsquo; by Paul Graham and the amount of available packages in npm, maven central, etc</p>
+<p>Tags: paul-graham, judd-keppel, clojure, clojurescript, weapon, developer</p>
+<h2 id="perceptron">Perceptron</h2>
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/Perceptron">this wikipedia</a> article that explains the single-layer and multi-layer perceptron. First designed to be a machine (hardware), but later an algorithm for supervised machine learning. Worked by Minsky &amp; Papert and invented by Frank Rosenblatt in 1958.</p>
+<p>Tags: peceptron, artificial-intelligence, machine-learning, frank-rosenblatt, 1958, marvin-minsky, seymour-papert</p>
+<h2 id="is-c-a-strongly-typed-or-a-weakly-typed-language">Is C# a strongly typed or a weakly typed language?</h2>
+<p>I&rsquo;ve read <a href="http://ericlippert.com/2012/10/15/is-c-a-strongly-typed-or-a-weakly-typed-language/">this article</a>, in the form of a dialogue between Eric Lippert and himself about the C# language and its type system.</p>
+<p>Tags: type-system, c-sharp, eric-lippert, dialogue, strongly-typed, weakly-typed, language</p>
+<h2 id="diseño-por-contratos-construyendo-software-confiable">Diseño por contratos: construyendo software confiable</h2>
+<p>I&rsquo;ve read <a href="http://www.revista.unam.mx/vol.4/num5/art11/sep_art11.pdf">this paper</a> that explains design by contract, based on the Hoare triplet, pre-post condition, method and class invariant. With examples in Eiffel, Java about a package sender company. Also explains pre/post with inheritance. By Gerardo Rossel and Andrea Manna. In Spanish.</p>
+<p>Tags: gerardo-rossel, andrea-manna, design-by-contract, unam-mx, eiffel, java, precondition, postcondition, trust, quality, hoare-triplet, method-invariant, class-invariant</p>
+<h2 id="the-inevitable-return-of-cobol">The Inevitable Return of COBOL</h2>
+<p>I&rsquo;ve read <a href="http://blog.hackerrank.com/the-inevitable-return-of-cobol/">this article</a> that explains the current state of COBOL in programming and systems. Written by Ritika Trikha</p>
+<p>Tags: ritika-trikha, cobol, programming-language, retirement, median-age</p>
+<h2 id="the-risky-eclipse-of-statisticians">The Risky Eclipse of Statisticians</h2>
+<p>I&rsquo;ve read <a href="http://blog.hackerrank.com/the-risky-eclipse-of-statisticians/">this article</a> where Ritika Trikha explains the current situation regarding Big Data and the statiscian jobs. How Big Data is in demand but the latter are not and what effects this might have.</p>
+<p>Tags: ritika-trikha, bootcamp, programming, hiring, big-data, analysis, statistics</p>
+<h2 id="give-it-five-minutes">Give it five minutes</h2>
+<p>I&rsquo;ve read <a href="https://signalvnoise.com/posts/3124-give-it-five-minutes">this article</a> by Jason Fried where he explains why we should give ideas time to sink in and marinate, before dismissing them. Ideas are so fragile that it is better to let them live for a while before dismissing them. This also applies for thoughts (other people&rsquo;s or your own).</p>
+<p>Tags: jason-fried, idea, think, startup, blue-hat, thinking-hat,  six-thinking-hats, red-hat</p>
+<h2 id="reading-clojure-stacktraces">Reading Clojure Stacktraces</h2>
+<p>I&rsquo;ve read <a href="http://blog.jayfields.com/2012/06/reading-clojure-stacktraces.html">this article</a> by Jay Fields on reading clojure stacktraces. Very similar to &ldquo;Clojure Stack Traces for the Uninitiated&rdquo;</p>
+<p>Tags: jay-fields, clojure, stacktrace</p>
+<h2 id="clojure-stack-traces-for-the-uninitiated">Clojure Stack Traces for the Uninitiated</h2>
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/connor-mendenhall/2014/09/12/clojure-stacktraces.html">this article</a> on how to interpret clojure stacktraces. Written by Connor Mendenhall</p>
+<p>Tags: connor-mendenhall, clojure, stacktrace</p>
+<h2 id="javascript-type-inference">JavaScript type inference</h2>
+<p>I&rsquo;ve found (and played) with <a href="http://www.ccs.neu.edu/home/dimvar/jstypes.html">this JavaScript type inference engine</a>. Written in Javascript (and available online). Written by Dimitrios Vardoulakis.</p>
+<p>Tags: javascript-type-inference, type-inference, type-inference-algorithm, dimitrios-vardoulakis, cfa2</p>
+<h2 id="alternatives-to-boolean-parameters">Alternatives to boolean parameters</h2>
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/dariusz-pasciak/2015/05/28/alternatives-to-boolean-parameters.html">this article</a> explaining alternatives to sending a boolean parameter to decide on the contents of the function. Written by Dariusz Pasciak</p>
+<p>As I heard some time ago, if a function receives a boolean to decide on what to do, it will for sure have more than one responsibility: one for the false value and one for the true value.</p>
+<p>Tags: dariusz-pasciak, boolean, srp, boolean-parameter</p>
+<h2 id="why-are-web-uploads-so-painful">Why Are Web Uploads So Painful?</h2>
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/why-are-web-uploads-so-painful/">this article</a> on web uploads being painful. By Jeff Atwood. The screenshots feel old (2007) and some of the problems have already been solved.</p>
+<p>Tags: jeff-atwood, article, upload, browser</p>
+<h2 id="can-your-team-pass-the-elevator-test">Can Your Team Pass The Elevator Test?</h2>
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/can-your-team-pass-the-elevator-test/">this article</a> on the elevator test by Jeff Atwood.</p>
+<p>Tags: jeff-atwood, article, elevator-test, assumption, microsoft-bob, vision, product, feature</p>
 
         
 
@@ -322,30 +465,25 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/">Practical Object-Oriented Design in Ruby: Chapter 2</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/19/coding-dojo-palindromes/">Coding dojo: Palindromes</a>
     </h1>
-    <p >Jul 12, 2015
+    <p >Aug 19, 2015
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/12/practical-object-oriented-design-in-ruby-chapter-2/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/19/coding-dojo-palindromes/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/reading-club/">reading-club</a><a class="label" href="https://alvarogarcia7.github.io/categories/aprendices/">aprendices</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/martin-fowler/">martin-fowler</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/bliki/">bliki</a><a class="label" href="https://alvarogarcia7.github.io/categories/kent-beck/">kent-beck</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding-dojo/">coding-dojo</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/palindrome/">palindrome</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitation/">facilitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitator/">facilitator</a>
         
     </p>
 </header>
 
 
         
-        <p>We&rsquo;ve read the second chapter from the Practical Object-Oriented Design in Ruby, by Sandi Metz.</p>
-<p>These are the concepts and links brought up during the discussion:</p>
-<ul>
-<li><a href="http://martinfowler.com/bliki/DataClump.html">Data Clump</a> at the bliki</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/WaMWtp1Uetp">Refactoring with Loops and Collection Pipelines</a>, indirect link to the article by Martin Fowler</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/6J9PPQpUjwY">When Worse Is Better: Incrementally Escaping Local Maxima</a>, indirect link to the article by Kent Beck</li>
-<li><a href="https://plus.google.com/117817370205182982732/posts/Sk7DfYFPt5j">Getting It Right by Betting on Wrong</a>, indirect link to an article by Sandi Metz</li>
-</ul>
+        <p>At a client, today I&rsquo;ve facilitated a coding dojo on palindrome searching.</p>
+<p>I&rsquo;ve prepared a <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-java">github repository</a> for the java solutions. In this repository, the tag <a href="https://github.com/alvarogarcia7/palindromes-searcher-kata-java/tree/start-here"><code>start-here</code></a> has the prepared pom with dependencies.</p>
+<p>We have paired to work on the kata but none of my teammate&rsquo;s solutions are available (at the moment), but mine is at the <code>master</code> branch.</p>
 
         
 
@@ -358,45 +496,33 @@ nothing added to commit but untracked files present <span class="o">(</span>use 
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/">Quote: Organizing Code to Allow for Easy Changes</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/">Coding dojo: Goldbach Conjecture</a>
     </h1>
-    <p >Jul 8, 2015
-         - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/07/08/quote-organizing-code-to-allow-for-easy-changes/#disqus_thread">Comments</a>
+    <p >Aug 17, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a><a class="label" href="https://alvarogarcia7.github.io/categories/true-code/">true-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/change-code/">change-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/easy-change/">easy-change</a><a class="label" href="https://alvarogarcia7.github.io/categories/transparent/">transparent</a><a class="label" href="https://alvarogarcia7.github.io/categories/reasonable/">reasonable</a><a class="label" href="https://alvarogarcia7.github.io/categories/usable/">usable</a><a class="label" href="https://alvarogarcia7.github.io/categories/exemplary/">exemplary</a><a class="label" href="https://alvarogarcia7.github.io/categories/design/">design</a><a class="label" href="https://alvarogarcia7.github.io/categories/ood/">ood</a><a class="label" href="https://alvarogarcia7.github.io/categories/oo/">oo</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented-design/">object-oriented-design</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-oriented/">object-oriented</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/barcelona-software-craftsmanship/">barcelona-software-craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding-dojo/">coding-dojo</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/goldbach/">goldbach</a><a class="label" href="https://alvarogarcia7.github.io/categories/conjecture/">conjecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/goldbach-conjecture/">goldbach-conjecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitation/">facilitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitator/">facilitator</a>
         
     </p>
 </header>
 
 
         
-        <h2 id="organizing-code-to-allow-for-easy-changes">Organizing Code to Allow for Easy Changes</h2>
-<blockquote>
-<p>Asserting that code should be easy to change is akin to stating that children should be polite; the statement is impossible to disagree with yet it in no way helps a parent raise an agreeable child. The idea of easy is too broad; you need concrete definitions of easiness and specific criteria by which to judge code.
-If you define easy to change as</p>
+        <p>At the <a href="http://www.meetup.com/Barcelona-Software-Craftsmanship/">Barcelona Software Craftsmanship meetup</a>, today I&rsquo;ve facilitated a coding dojo on the <a href="https://en.wikipedia.org/wiki/Goldbach%27s_conjecture">Goldbach Conjecture</a>. The problem was prepared by <a href="https://twitter.com/trikitrok">Manuel Rivero</a>.</p>
+<p>The meetup event is <a href="http://www.meetup.com/es/Barcelona-Software-Craftsmanship/events/224169573/">here</a> and there are plenty of solutions prepared by the pairs:</p>
 <ul>
-<li>Changes have no unexpected side effects</li>
-<li>Small changes in requirements require correspondingly small changes in code</li>
-<li>Existing code is easy to reuse</li>
-<li>The easiest way to make a change is to add code that in itself is easy to change</li>
+<li><a href="https://github.com/Duber/GoldbachConjectureKataInJava">Java</a></li>
+<li><a href="https://github.com/raullorca/GoldbachConjectureKata">C#</a></li>
+<li><a href="https://github.com/alvarogarcia7/goldbach-conjecture-kata-haskell">Haskell</a></li>
+<li><a href="https://github.com/celtric/goldbach-conjecture-kata-php">PHP</a></li>
+<li><a href="https://github.com/celtric/goldbach-conjecture-kata-java">Java</a></li>
+<li><a href="https://github.com/juanangosto/GoldbachsConjecture">PHP</a></li>
+<li><a href="https://github.com/rojoangel/12moths-12katas/tree/master/7-goldbach-conjecture-kata">Haskell</a></li>
 </ul>
-<p>Then the code you write should have the following qualities. Code should be:</p>
-<ul>
-<li><strong>Transparent</strong> The consequences of change should be obvious in the code that is changing and in distant code that relies upon it</li>
-<li><strong>Reasonable</strong> The cost of any change should be proportional to the benefits the change achieves</li>
-<li><strong>Usable</strong> Existing code should be usable in new and unexpected contexts</li>
-<li><strong>Exemplary</strong> The code itself should encourage those who change it to perpetuate
-these qualities</li>
-</ul>
-<p>Code that is Transparent, Reasonable, Usable, and Exemplary (TRUE) not only meets today’s needs but can also be changed to meet the needs of the future. The first step in creating code that is TRUE is to ensure that each class has a single, well-defined responsibility.</p>
-<p>Practical Object Oriented Design in Ruby, by Sandi Metz</p>
-</blockquote>
-<p>This can be found the in POODR &gt; Chapter 2. Designing Classes with a Single Responsibility &gt; Organizing Code to Allow for Easy Changes</p>
-<p>Note: Bold is mine</p>
 
         
 
@@ -497,6 +623,12 @@ these qualities</li>
     
         <a href="/blog/page/36/" class="label-pagination">36</a>
     
+        <a href="/blog/page/37/" class="label-pagination">37</a>
+    
+        <a href="/blog/page/38/" class="label-pagination">38</a>
+    
+        <a href="/blog/page/39/" class="label-pagination">39</a>
+    
 
     
     
@@ -505,7 +637,7 @@ these qualities</li>
 
     
     
-        <a href="/blog/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/39/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -565,6 +697,10 @@ You can find me on:
       <ul id="recent_articles">
         
           <li class="post">
+              <a href="/articles/2024/08/31/building-private-tools-open/">Building private tools in the open</a>
+          </li>
+        
+          <li class="post">
               <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
           </li>
         
@@ -600,16 +736,20 @@ You can find me on:
               <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
           </li>
         
-          <li class="post">
-              <a href="/articles/2014/12/15/the-joys-of-the-craft-as-article/">The Joys of the Craft as Article</a>
-          </li>
-        
       </ul>
       <h1>Recent Blogs</h1>
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/01/self-study-july-2024/">Self-Study in July 2024</a>
           </li>
         
           <li class="post">
@@ -617,35 +757,27 @@ You can find me on:
           </li>
         
           <li class="post">
+              <a href="/blog/2024/05/01/self-study-may-2024/">Self-Study in May 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/04/01/self-study-april-2024/">Self-Study in April 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/09/01/self-study-september-2023/">Self-Study in September 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/08/01/self-study-august-2023/">Self-Study in August 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/01/01/self-study-january-2021/">Self-Study in January 2021</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/09/30/books-read-2020q3/">Books read in 2020Q3</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
       </ul>

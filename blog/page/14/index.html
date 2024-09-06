@@ -129,49 +129,44 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/">AWS Kinesis Zombieland</a>
+        <a href="https://alvarogarcia7.github.io/blog/2017/05/13/senior-software-engineer-chapter-3/">The Senior Software Engineer, Chapter 3</a>
     </h1>
-    <p >Jul 28, 2016
+    <p >May 13, 2017
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/07/28/aws-kinesis-zombieland/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2017/05/13/senior-software-engineer-chapter-3/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/aws-kinesis/">aws-kinesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/aws/">aws</a><a class="label" href="https://alvarogarcia7.github.io/categories/ciberado/">ciberado</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop/">workshop</a><a class="label" href="https://alvarogarcia7.github.io/categories/workshop-notes/">workshop-notes</a><a class="label" href="https://alvarogarcia7.github.io/categories/notes/">notes</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/senior-software-engineer/">senior-software-engineer</a><a class="label" href="https://alvarogarcia7.github.io/categories/right-thing/">right-thing</a><a class="label" href="https://alvarogarcia7.github.io/categories/thing-right/">thing-right</a>
         
     </p>
 </header>
 
 
         
-        <p>I attended a workshop on AWS Kinesis, called <a href="http://capside.com/event/aws-kinesis-zombieland/">AWS Kinesis Zombieland</a> by <a href="https://twitter.com/ciberado">Javi Moreno</a> at <a href="http://capside.com/">capside</a>.</p>
-<h2 id="notes">Notes</h2>
-<p>AWS Kinesis Zombieland</p>
+        <h1 id="chapter-3-fix-bugs-efficiently-and-cleanly">Chapter 3: Fix bugs efficiently and cleanly</h1>
+<p>In the beginning, you will be given tasks that require no in-depth domain knowledge</p>
+<h3 id="process">Process</h3>
+<blockquote>
+<p>A process allows you to focus on the right thing at th right time (p. 14)</p>
+<p>It will make your productivity and quality more predictable, which, in turn, will help you estimate and keep more of your promises about your work (paraphrased from p. 14)</p>
+</blockquote>
+<h3 id="tdd">TDD</h3>
+<p>Explains some benefits about TDD:</p>
+<blockquote>
 <ul>
-<li>muy importante escoger bien la clave de particionado (id de shard)</li>
-<li>KPL librería de kinesis que te permite hacer batching, timeout, &hellip;
-<ul>
-<li>la otra se llama KCL.</li>
-<li>KCL permite mantener estado</li>
+<li>Thinking before coding</li>
+<li>Separating the &lsquo;getting it to work&rsquo; from &lsquo;getting it right&rsquo;</li>
 </ul>
-</li>
-<li>cuando te pidan una app de big data, pregunta para qué lo quieren, lo mismo que con cualquier proyecto de software</li>
-<li>latitud = Y, longitud = x</li>
-<li>el canal se llama stream, la capacidad se llama shard
-<ul>
-<li>el shard sólo permite 5 lecturas por segundo, 2MB/s</li>
-</ul>
-</li>
-<li>usar el shard como buffer</li>
-<li>usar la clave de particionado como algoritmo de agregación</li>
-<li>cada vez que tienes una tabla en dynamodb, tienes que poner una alerta de throughput</li>
-<li>nota: lo que no puedes hacer es guardarlos todos y luego procesarlo. no tienes potencia para todo eso</li>
-</ul>
-<p>Preguntas:</p>
-<ul>
-<li>¿cómo se calcula el id del shard?</li>
-</ul>
+<p>(p. 15)</p>
+</blockquote>
+<p>The latter can be interpreted as &lsquo;building the thing right&rsquo; vs &lsquo;building the right thing&rsquo;: a red test can be seen as question, a green test as an answer. If the question is defined in business terms, you are building the right thing. When refactoring, you are turning the right thing (no matter how it was built) into the thing right</p>
+<blockquote>
+<p>[&hellip;] senior software engineers don&rsquo;t ask permission to do their job, they just do it</p>
+<p>(p. 20)</p>
+</blockquote>
+<!-- raw HTML omitted -->
 
         
 
@@ -184,155 +179,179 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/07/04/self-study-in-july-2016/">Self-Study in July 2016</a>
+        <a href="https://alvarogarcia7.github.io/blog/2017/05/07/notes-agile-open-space-barcelona/">Notes from the Agile Barcelona Open Space</a>
     </h1>
-    <p >Jul 4, 2016
-         - 8 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/07/04/self-study-in-july-2016/#disqus_thread">Comments</a>
+    <p >May 7, 2017
+         - 3 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/05/07/notes-agile-open-space-barcelona/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/july/">july</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/10x/">10x</a><a class="label" href="https://alvarogarcia7.github.io/categories/2fa/">2fa</a><a class="label" href="https://alvarogarcia7.github.io/categories/agent/">agent</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/alexander-yakushev/">alexander-yakushev</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/android/">android</a><a class="label" href="https://alvarogarcia7.github.io/categories/answer/">answer</a><a class="label" href="https://alvarogarcia7.github.io/categories/assembler/">assembler</a><a class="label" href="https://alvarogarcia7.github.io/categories/asynchronous/">asynchronous</a><a class="label" href="https://alvarogarcia7.github.io/categories/ats/">ats</a><a class="label" href="https://alvarogarcia7.github.io/categories/authentication/">authentication</a><a class="label" href="https://alvarogarcia7.github.io/categories/baas/">baas</a><a class="label" href="https://alvarogarcia7.github.io/categories/backend-as-a-service/">backend-as-a-service</a><a class="label" href="https://alvarogarcia7.github.io/categories/basecamp/">basecamp</a><a class="label" href="https://alvarogarcia7.github.io/categories/beginner/">beginner</a><a class="label" href="https://alvarogarcia7.github.io/categories/ben-halpern/">ben-halpern</a><a class="label" href="https://alvarogarcia7.github.io/categories/big-company/">big-company</a><a class="label" href="https://alvarogarcia7.github.io/categories/bill-sourour/">bill-sourour</a><a class="label" href="https://alvarogarcia7.github.io/categories/binary/">binary</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-editing/">book-editing</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-publishing/">book-publishing</a><a class="label" href="https://alvarogarcia7.github.io/categories/book-writing/">book-writing</a><a class="label" href="https://alvarogarcia7.github.io/categories/bus/">bus</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/career-security/">career-security</a><a class="label" href="https://alvarogarcia7.github.io/categories/carin-meier/">carin-meier</a><a class="label" href="https://alvarogarcia7.github.io/categories/cate-huston/">cate-huston</a><a class="label" href="https://alvarogarcia7.github.io/categories/clean-code/">clean-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure-gazette/">clojure-gazette</a><a class="label" href="https://alvarogarcia7.github.io/categories/communication/">communication</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/compensating-action/">compensating-action</a><a class="label" href="https://alvarogarcia7.github.io/categories/computer/">computer</a><a class="label" href="https://alvarogarcia7.github.io/categories/conversation-pattern/">conversation-pattern</a><a class="label" href="https://alvarogarcia7.github.io/categories/copy-paste/">copy-paste</a><a class="label" href="https://alvarogarcia7.github.io/categories/correlation-id/">correlation-id</a><a class="label" href="https://alvarogarcia7.github.io/categories/cv/">cv</a><a class="label" href="https://alvarogarcia7.github.io/categories/dan-kim/">dan-kim</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-dill/">david-dill</a><a class="label" href="https://alvarogarcia7.github.io/categories/debugger/">debugger</a><a class="label" href="https://alvarogarcia7.github.io/categories/developer/">developer</a><a class="label" href="https://alvarogarcia7.github.io/categories/dhh/">dhh</a><a class="label" href="https://alvarogarcia7.github.io/categories/economy/">economy</a><a class="label" href="https://alvarogarcia7.github.io/categories/efficiency/">efficiency</a><a class="label" href="https://alvarogarcia7.github.io/categories/elton-minetto/">elton-minetto</a><a class="label" href="https://alvarogarcia7.github.io/categories/employee/">employee</a><a class="label" href="https://alvarogarcia7.github.io/categories/employer/">employer</a><a class="label" href="https://alvarogarcia7.github.io/categories/end-of-the-internet/">end-of-the-internet</a><a class="label" href="https://alvarogarcia7.github.io/categories/english/">english</a><a class="label" href="https://alvarogarcia7.github.io/categories/eric-elliot/">eric-elliot</a><a class="label" href="https://alvarogarcia7.github.io/categories/event/">event</a><a class="label" href="https://alvarogarcia7.github.io/categories/event-loop/">event-loop</a><a class="label" href="https://alvarogarcia7.github.io/categories/evolving-article/">evolving-article</a><a class="label" href="https://alvarogarcia7.github.io/categories/exception-handling/">exception-handling</a><a class="label" href="https://alvarogarcia7.github.io/categories/faas/">faas</a><a class="label" href="https://alvarogarcia7.github.io/categories/function-as-a-service/">function-as-a-service</a><a class="label" href="https://alvarogarcia7.github.io/categories/giovanni-asproni/">giovanni-asproni</a><a class="label" href="https://alvarogarcia7.github.io/categories/github/">github</a><a class="label" href="https://alvarogarcia7.github.io/categories/google-summer-of-code/">google-summer-of-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/gregor-hohpe/">gregor-hohpe</a><a class="label" href="https://alvarogarcia7.github.io/categories/gsoc/">gsoc</a><a class="label" href="https://alvarogarcia7.github.io/categories/guide/">guide</a><a class="label" href="https://alvarogarcia7.github.io/categories/guideline/">guideline</a><a class="label" href="https://alvarogarcia7.github.io/categories/hackintosh/">hackintosh</a><a class="label" href="https://alvarogarcia7.github.io/categories/hiring/">hiring</a><a class="label" href="https://alvarogarcia7.github.io/categories/ignacio-segura/">ignacio-segura</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview/">interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/investment/">investment</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-gorman/">jason-gorman</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-zimdars/">jason-zimdars</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeff-hall/">jeff-hall</a><a class="label" href="https://alvarogarcia7.github.io/categories/job/">job</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-interview/">job-interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-market/">job-market</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-offer/">job-offer</a><a class="label" href="https://alvarogarcia7.github.io/categories/job-security/">job-security</a><a class="label" href="https://alvarogarcia7.github.io/categories/jurgen-appelo/">jurgen-appelo</a><a class="label" href="https://alvarogarcia7.github.io/categories/ken-mazaika/">ken-mazaika</a><a class="label" href="https://alvarogarcia7.github.io/categories/kotlin/">kotlin</a><a class="label" href="https://alvarogarcia7.github.io/categories/lambda/">lambda</a><a class="label" href="https://alvarogarcia7.github.io/categories/language/">language</a><a class="label" href="https://alvarogarcia7.github.io/categories/law/">law</a><a class="label" href="https://alvarogarcia7.github.io/categories/learn-coding/">learn-coding</a><a class="label" href="https://alvarogarcia7.github.io/categories/limitation/">limitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/list/">list</a><a class="label" href="https://alvarogarcia7.github.io/categories/love-of-language/">love-of-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/mac/">mac</a><a class="label" href="https://alvarogarcia7.github.io/categories/macintosh/">macintosh</a><a class="label" href="https://alvarogarcia7.github.io/categories/masha-diminsky/">masha-diminsky</a><a class="label" href="https://alvarogarcia7.github.io/categories/mbass/">mbass</a><a class="label" href="https://alvarogarcia7.github.io/categories/mfa/">mfa</a><a class="label" href="https://alvarogarcia7.github.io/categories/mike-roberts/">mike-roberts</a><a class="label" href="https://alvarogarcia7.github.io/categories/mike-rundle/">mike-rundle</a><a class="label" href="https://alvarogarcia7.github.io/categories/mobile-backend-as-a-service/">mobile-backend-as-a-service</a><a class="label" href="https://alvarogarcia7.github.io/categories/molly-wilson/">molly-wilson</a><a class="label" href="https://alvarogarcia7.github.io/categories/monotasking/">monotasking</a><a class="label" href="https://alvarogarcia7.github.io/categories/multi-factor-authentication/">multi-factor-authentication</a><a class="label" href="https://alvarogarcia7.github.io/categories/multitasking/">multitasking</a><a class="label" href="https://alvarogarcia7.github.io/categories/native/">native</a><a class="label" href="https://alvarogarcia7.github.io/categories/nodejs/">nodejs</a><a class="label" href="https://alvarogarcia7.github.io/categories/non-native/">non-native</a><a class="label" href="https://alvarogarcia7.github.io/categories/object-calisthenics/">object-calisthenics</a><a class="label" href="https://alvarogarcia7.github.io/categories/ofa/">ofa</a><a class="label" href="https://alvarogarcia7.github.io/categories/office/">office</a><a class="label" href="https://alvarogarcia7.github.io/categories/one-factor-authentication/">one-factor-authentication</a><a class="label" href="https://alvarogarcia7.github.io/categories/online-voting/">online-voting</a><a class="label" href="https://alvarogarcia7.github.io/categories/pandoc/">pandoc</a><a class="label" href="https://alvarogarcia7.github.io/categories/paradox/">paradox</a><a class="label" href="https://alvarogarcia7.github.io/categories/pci-guru/">pci-guru</a><a class="label" href="https://alvarogarcia7.github.io/categories/php/">php</a><a class="label" href="https://alvarogarcia7.github.io/categories/policy/">policy</a><a class="label" href="https://alvarogarcia7.github.io/categories/portuguese/">portuguese</a><a class="label" href="https://alvarogarcia7.github.io/categories/product/">product</a><a class="label" href="https://alvarogarcia7.github.io/categories/professional-career/">professional-career</a><a class="label" href="https://alvarogarcia7.github.io/categories/quincy-larson/">quincy-larson</a><a class="label" href="https://alvarogarcia7.github.io/categories/recruiter/">recruiter</a><a class="label" href="https://alvarogarcia7.github.io/categories/recruitment/">recruitment</a><a class="label" href="https://alvarogarcia7.github.io/categories/related-to-article/">related-to-article</a><a class="label" href="https://alvarogarcia7.github.io/categories/resume/">resume</a><a class="label" href="https://alvarogarcia7.github.io/categories/retry/">retry</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-martin/">robert-martin</a><a class="label" href="https://alvarogarcia7.github.io/categories/ruby/">ruby</a><a class="label" href="https://alvarogarcia7.github.io/categories/scaled-agile/">scaled-agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/security/">security</a><a class="label" href="https://alvarogarcia7.github.io/categories/serverless/">serverless</a><a class="label" href="https://alvarogarcia7.github.io/categories/small-company/">small-company</a><a class="label" href="https://alvarogarcia7.github.io/categories/spanish/">spanish</a><a class="label" href="https://alvarogarcia7.github.io/categories/startup/">startup</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/time-management/">time-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip-and-trick/">tip-and-trick</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/two-factor-authentication/">two-factor-authentication</a><a class="label" href="https://alvarogarcia7.github.io/categories/unbeateable-programmer/">unbeateable-programmer</a><a class="label" href="https://alvarogarcia7.github.io/categories/uncle-bob/">uncle-bob</a><a class="label" href="https://alvarogarcia7.github.io/categories/unitasking/">unitasking</a><a class="label" href="https://alvarogarcia7.github.io/categories/unstoppable-programmer/">unstoppable-programmer</a><a class="label" href="https://alvarogarcia7.github.io/categories/verena-von-pfetten/">verena-von-pfetten</a><a class="label" href="https://alvarogarcia7.github.io/categories/web/">web</a><a class="label" href="https://alvarogarcia7.github.io/categories/working-environment/">working-environment</a><a class="label" href="https://alvarogarcia7.github.io/categories/write-off/">write-off</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/open-space/">open-space</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile/">agile</a><a class="label" href="https://alvarogarcia7.github.io/categories/agile-barcelona/">agile-barcelona</a><a class="label" href="https://alvarogarcia7.github.io/categories/meetup/">meetup</a><a class="label" href="https://alvarogarcia7.github.io/categories/we-were-there/">we-were-there</a><a class="label" href="https://alvarogarcia7.github.io/categories/notes/">notes</a><a class="label" href="https://alvarogarcia7.github.io/categories/black-hole/">black-hole</a><a class="label" href="https://alvarogarcia7.github.io/categories/conclusion/">conclusion</a>
         
     </p>
 </header>
 
 
         
-        <h2 id="until-the-end-of-the-internet">Until the End of the Internet</h2>
-<p>I&rsquo;ve read <a href="https://m.signalvnoise.com/until-the-end-of-the-internet-405d55fde60f">this article</a> by Jason Zimdars explaining the &ldquo;end of the internet&rdquo; policy at Basecamp: they will make everything possible to keep the services running for existing customer until the end or until the last customer uses it.</p>
-<p>Tags: policy, end-of-the-internet, jason-zimdars, basecamp, product</p>
-<h2 id="how-agile-principles-can-fund-your-start-up">How Agile Principles Can Fund Your Start-Up</h2>
-<p>I&rsquo;ve read <a href="https://dzone.com/articles/how-agile-principles-can-fund-your-start-up">this article</a> by Jurgen Appelo explaining how the agile values can help you negotiate funding for your startup: instead of negotiating with each investor, agree on a formula and invest in many small rounds, instead of a big one. This works both ways: for buying and for selling.</p>
-<p>Suggests using a base plus the amount of sales in the last year * a percentage.</p>
-<p>Tags:  jurgen-appelo, investment, startup, agile</p>
-<h2 id="how-i-fell-in-love-with-a-programming-language">How I fell in love with a programming language</h2>
-<p>I&rsquo;ve read <a href="https://m.signalvnoise.com/how-i-fell-in-love-with-a-programming-language-8933d5e749ed">this article</a> by Dan Kim on the feelings of love and comfort he feels when he&rsquo;s programming in Kotlin, for Android. Tells the story of DHH and the love of Ruby as a similar one.</p>
-<p>Tags: dan-kim, dhh, ruby, love-of-language, kotlin, android</p>
-<h2 id="book-writing-for-the-busy-programmer">Book writing for the busy programmer</h2>
-<p>I&rsquo;ve read <a href="http://gigasquidsoftware.com/blog/2016/06/19/book-writing-for-the-busy-programmer/">this article</a> by Carin Meier on what tools she found useful for writing, editing and publishing a science fiction book she was writing for her daughter.</p>
-<p>Tags: tool, pandoc, carin-meier, book, book-writing, book-editing, book-publishing</p>
-<h2 id="one--two--and-three-factor-authentication">one-, two-, and three-factor authentication</h2>
-<p>I&rsquo;ve read <a href="https://pciguru.wordpress.com/2010/05/01/one-two-and-three-factor-authentication/">this article</a> by Jeff Hall, that explains the factors in multi-factor authentication.</p>
-<p>Tags: jeff-hall, ofa, 2fa, mfa, one-factor-authentication, two-factor-authentication, multi-factor-authentication, pci-guru, security, authentication</p>
-<h2 id="scaling-agile-a-law-and-two-paradoxes">Scaling Agile: A Law And Two Paradoxes</h2>
-<p>I&rsquo;ve read <a href="http://asprotunity.com/blog/scaling-agile-a-law-and-two-paradoxes/">this article</a> by Giovanni Asproni about agile.</p>
+        <p>Yesterday I attended an Agile Barcelona open space at Netmind</p>
+<h2 id="format">Format</h2>
+<p>On arrival, attendees where welcomed by an Agile Coffee.</p>
+<!-- raw HTML omitted -->
+<p>At 10:00, the introduction started: a warm welcome to everyone, including first-time attendees to an open space, explaining what it is, the few rules and laws and making sure everyone had fun. Some time later, the marketplace happened and everyone presented their sessions. A curious thing to see was the effect of a session that everyone wanted to attend (dubbed a &lsquo;black hole&rsquo;). Nobody dared to plan another session in parallel to that.</p>
+<p>As the day went by, the sessions were happening. By lunch time, everyone self organized to have lunch. I had the opportunity to catch up with <a href="https://twitter.com/Jordi_Falguera">Jordi Falguera</a> and <a href="https://twitter.com/torinoxx">Victor Fairén</a>. It was a very enjoyable conversation. It had been a long time since we didn&rsquo;t meet. Hello to both from here :)</p>
+<p>On the evening, two more slots for sessions, followed by a cross-pollination session.</p>
+<p>After that, some left and some went for a closing beer.</p>
+<h2 id="sessions">Sessions</h2>
+<p>This does not cover all sessions, including the one I facilitated, but the ones I liked the most</p>
+<h3 id="la-formula-de-la-cocacola">La formula de la cocacola</h3>
+<!-- raw HTML omitted -->
+<p>In this session, <a href="https://twitter.com/jaumejornet/">Jaume Jornet</a> and <a href="https://twitter.com/pavleras">Pablo Domingo</a> explained flow efficiency and resource efficiency to us, using simple terms and compelling stories, without using any specific jargon. Explaining the efficiencies using games (with volunteers).</p>
+<p>They mention that this format works very well with C-level employees and other executives.</p>
+<h3 id="teaching-from-the-back-of-the-room">Teaching from the back of the room</h3>
+<!-- raw HTML omitted -->
+<p>In this session, Miquel Rodríguez explained a few concepts he learnt in a training by Sarah Bowman &ldquo;Training from the back of the room&rdquo;.</p>
+<p>He explained the six concepts for training to be effective:</p>
+<ul>
+<li>Movement trumps sitting</li>
+<li>Images trumps words</li>
+<li>Talking trumps listening</li>
+<li>Writing trumps reading</li>
+<li>Shorter trumps longer</li>
+<li>Different trumps same</li>
+</ul>
+<p>And the four Cs (or phases in a training):</p>
+<ul>
+<li>Connection</li>
+<li>Concepts</li>
+<li>Concrete practice</li>
+<li>Conclusion</li>
+</ul>
+<p>A few pointers for further reading:</p>
+<ul>
+<li><a href="https://www.amazon.com/Training-Back-Room-Aside-Learn/dp/0787996629">Training from the back of the room</a>, by Sarah Bowman</li>
+<li><a href="https://www.amazon.com/Using-Brain-Science-Training-Stick/dp/096568511X/">Using brain science to make training stick</a>, by Sarah Bowman</li>
+<li><a href="https://www.amazon.com/Neuroci%C3%A8ncia-educadors-David-Bueno-Torrens/dp/8494529013/">Neurociencia per educadors</a>, by David Bueno (Catalan)</li>
+</ul>
+<p>I really liked this session, as it helps us deliver more effective trainings, both in formal session as in more ad-hoc / informal ones.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>These open-space events leave me full of energy, after having shared thoughts and happiness with the rest of the community.</p>
+<p>A big thank you to the organizers (the community of Agile Barcelona), the facilitator (Andres Mumenthaler) and Netmind, for hosting the event</p>
+<p>PS: This post is categorized as &lsquo;We were there&rsquo;, in reference to the awesome &lsquo;Estuvimos allí&rsquo; posts that Carlos Blé (and Codesai) write about events. Also &lsquo;Notes&rsquo; for the ones that Eduardo Ferro writes about events he attends</p>
+<!-- raw HTML omitted -->
+<p>Fulgencio Jara as graphic reporter from my session :)</p>
+<!-- raw HTML omitted -->
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/05/01/self-study-in-may-2017/">Self-Study in May 2017</a>
+    </h1>
+    <p >May 1, 2017
+         - 4 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/05/01/self-study-in-may-2017/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/may/">may</a><a class="label" href="https://alvarogarcia7.github.io/categories/2017/">2017</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/ad/">ad</a><a class="label" href="https://alvarogarcia7.github.io/categories/adblock/">adblock</a><a class="label" href="https://alvarogarcia7.github.io/categories/advertisement/">advertisement</a><a class="label" href="https://alvarogarcia7.github.io/categories/belief/">belief</a><a class="label" href="https://alvarogarcia7.github.io/categories/blog/">blog</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/chapter/">chapter</a><a class="label" href="https://alvarogarcia7.github.io/categories/clean-architecture/">clean-architecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/comic/">comic</a><a class="label" href="https://alvarogarcia7.github.io/categories/communication/">communication</a><a class="label" href="https://alvarogarcia7.github.io/categories/comparison/">comparison</a><a class="label" href="https://alvarogarcia7.github.io/categories/computer-vision/">computer-vision</a><a class="label" href="https://alvarogarcia7.github.io/categories/css/">css</a><a class="label" href="https://alvarogarcia7.github.io/categories/definition/">definition</a><a class="label" href="https://alvarogarcia7.github.io/categories/guild/">guild</a><a class="label" href="https://alvarogarcia7.github.io/categories/happiness/">happiness</a><a class="label" href="https://alvarogarcia7.github.io/categories/henrik-kniberg/">henrik-kniberg</a><a class="label" href="https://alvarogarcia7.github.io/categories/history/">history</a><a class="label" href="https://alvarogarcia7.github.io/categories/html/">html</a><a class="label" href="https://alvarogarcia7.github.io/categories/ian-malpass/">ian-malpass</a><a class="label" href="https://alvarogarcia7.github.io/categories/jason-koebler/">jason-koebler</a><a class="label" href="https://alvarogarcia7.github.io/categories/javier-garzas/">javier-garzas</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-sonmez/">john-sonmez</a><a class="label" href="https://alvarogarcia7.github.io/categories/language-programmer/">language-programmer</a><a class="label" href="https://alvarogarcia7.github.io/categories/lauren-moon/">lauren-moon</a><a class="label" href="https://alvarogarcia7.github.io/categories/leadership/">leadership</a><a class="label" href="https://alvarogarcia7.github.io/categories/listicle/">listicle</a><a class="label" href="https://alvarogarcia7.github.io/categories/matthew-inman/">matthew-inman</a><a class="label" href="https://alvarogarcia7.github.io/categories/model-view-controller/">model-view-controller</a><a class="label" href="https://alvarogarcia7.github.io/categories/model-view-presenter/">model-view-presenter</a><a class="label" href="https://alvarogarcia7.github.io/categories/mosaic/">mosaic</a><a class="label" href="https://alvarogarcia7.github.io/categories/mvc/">mvc</a><a class="label" href="https://alvarogarcia7.github.io/categories/mvp/">mvp</a><a class="label" href="https://alvarogarcia7.github.io/categories/oatmeal/">oatmeal</a><a class="label" href="https://alvarogarcia7.github.io/categories/people/">people</a><a class="label" href="https://alvarogarcia7.github.io/categories/personal/">personal</a><a class="label" href="https://alvarogarcia7.github.io/categories/plugin/">plugin</a><a class="label" href="https://alvarogarcia7.github.io/categories/programmer/">programmer</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote/">remote</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote-work/">remote-work</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-martin/">robert-martin</a><a class="label" href="https://alvarogarcia7.github.io/categories/royalty/">royalty</a><a class="label" href="https://alvarogarcia7.github.io/categories/sabbatical/">sabbatical</a><a class="label" href="https://alvarogarcia7.github.io/categories/sharky-laguana/">sharky-laguana</a><a class="label" href="https://alvarogarcia7.github.io/categories/simon-lancaster/">simon-lancaster</a><a class="label" href="https://alvarogarcia7.github.io/categories/speech/">speech</a><a class="label" href="https://alvarogarcia7.github.io/categories/spotify/">spotify</a><a class="label" href="https://alvarogarcia7.github.io/categories/squad/">squad</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-management/">team-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/ted/">ted</a><a class="label" href="https://alvarogarcia7.github.io/categories/tedx/">tedx</a><a class="label" href="https://alvarogarcia7.github.io/categories/trello/">trello</a><a class="label" href="https://alvarogarcia7.github.io/categories/tribe/">tribe</a><a class="label" href="https://alvarogarcia7.github.io/categories/ublock/">ublock</a><a class="label" href="https://alvarogarcia7.github.io/categories/uncle-bob/">uncle-bob</a><a class="label" href="https://alvarogarcia7.github.io/categories/video/">video</a><a class="label" href="https://alvarogarcia7.github.io/categories/violawww/">violawww</a><a class="label" href="https://alvarogarcia7.github.io/categories/zack-bloom/">zack-bloom</a>
+        
+    </p>
+</header>
+
+
+        
+        <h2 id="the-real-reason-why-the-spotify-model-is-broken">The real reason why the Spotify model is broken</h2>
+<p>I&rsquo;ve read <a href="http://kernelmag.dailydot.com/issue-sections/staff-editorials/12136/spotify-royalty-payment-model/">this article</a> by Sharky Laguana, comparing several royalty models for spotify</p>
+<p>Tags: sharky-laguana, spotify, comparison, royalty</p>
+<h2 id="day-3-of-7-badass-developer-gets-a-rude-awakening">[Day 3 of 7] &ldquo;Badass&rdquo; developer gets a RUDE awakening</h2>
+<p>I&rsquo;ve read this email that John Sonmez sends, about being a programmer vs a language programmer. Some quotes:</p>
 <blockquote>
-<p>Fundamental law of scaling: Scaling up amplifies the bad and makes the good more difficult.</p>
-<p>First paradox of scaling: Most projects are scaled up because they don’t fulfill the prerequisites for scaling.</p>
-<p>Second paradox of scaling: Projects fulfilling the prerequisites for scaling have a lesser need to scale.</p>
-<p><!-- raw HTML omitted -->Giovanni Asproni<!-- raw HTML omitted --></p>
+<p>Someone who could tear apart complex, confusing puzzles and engineer elegant, reliable solutions&hellip; whether those challenges were software, hardware or &ldquo;wetware.&rdquo;</p>
+<p>In other words, they wanted a professional problem solver who could jump in and deliver what the company needed, to meet THEIR customers' demands.</p>
+<p>I started looking for ways that I could add value to my employer outside of the code I wrote.</p>
+<p>I developed my &ldquo;soft skills&rdquo;—my ability to communicate, learn quickly, and pass my knowledge on to others.</p>
 </blockquote>
-<p>Also goes on to explain ten prerequisites for scaling.</p>
-<p>Tags: scaled-agile, agile, giovanni-asproni, paradox, law</p>
-<h2 id="carta-abierta-a-ese-empresario-que-no-encuentra-talento">Carta abierta a ese empresario que no encuentra talento</h2>
-<p>I&rsquo;ve read <a href="https://medium.com/espanol/carta-abierta-a-ese-empresario-que-no-encuentra-talento-669e28e4a89b">this article</a> by Ignacio Segura reacting to a previous article about job offer and demand. Ignacio explains how the job market can be modeled and how workers have found ways of selling their time to the best price.</p>
-<p>Tags: ignacio-segura, analogy, job-offer, job, job-market, economy, spanish</p>
-<h2 id="david-dill-why-online-voting-is-a-danger-to-democracy">David Dill: Why Online Voting Is a Danger to Democracy</h2>
-<p>I&rsquo;ve read <a href="https://engineering.stanford.edu/news/david-dill-why-online-voting-danger-democracy">this interview</a> to David Dill on why the online voting is not a good idea and we should stick to paper as the golden rule for voting processes.</p>
-<p>Explains how difficult is to convince people of the technical limitations and the massive incentive it would be to hack into election systems / services.</p>
-<p>Tags: interview, david-dill, online-voting, limitation</p>
-<h2 id="clojure-gazette---tdd-in-clojure-on-android">Clojure Gazette - TDD in Clojure on Android</h2>
-<p>I&rsquo;ve read <a href="http://us4.campaign-archive2.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=7023cf0a33">this interview</a> to Alexander Yakushev, about his Google Summer of Code and the project he is currently working on: Clojure-android</p>
-<p>Tags: interview, clojure-gazette, alexander-yakushev, google-summer-of-code, gsoc, clojure, tdd, android</p>
-<h2 id="what-will-github-be-in-5-years">What Will GitHub Be in 5 years?</h2>
-<p>I&rsquo;ve read <a href="https://dev.to/ben/what-will-github-be-in-5-years">this article</a> that describes the current state of Github business and the possible solutions in the upcoming five years. By Ben Halpern</p>
-<p>Tags: ben-halpern, github, economy, startup, investment</p>
-<h2 id="serverless-architectures">Serverless Architectures</h2>
-<p>I&rsquo;ve read <a href="http://martinfowler.com/articles/serverless.html">this evolving article</a> by Mike Roberts on what is and is not Serverless: [mobile] backend as a service or function as a service.</p>
-<p>Converts some n-tier applications into serverless ones, expliciting that this is only a way of doing it, not necessarily the way he would do it</p>
-<p>Tags: faas, baas, mbass, function-as-a-service, backend-as-a-service, mobile-backend-as-a-service, serverless, evolving-article, mike-roberts, lambda</p>
-<h2 id="big-co-vs-small-co--job-vs-career-stability">Big co. vs small co. &amp; job vs. career stability</h2>
-<p>I&rsquo;ve read <a href="http://www.catehuston.com/blog/2016/06/02/job-vs-career-stability/">this article</a> by Cate Huston on the career and job stability that big companies and small companies can offer:</p>
-<blockquote>
-<p>Job security means that you know you will keep getting a paycheck from $company. Career security means that you know you can get another job, and develop yourself and your career in the way that is meaningful to you.</p>
-</blockquote>
-<p>Tags: job-security, cate-huston, big-company, small-company, career-security, career, professional-career</p>
-<h2 id="copy-paste-code">Copy. Paste. Code?</h2>
-<p>I&rsquo;ve read <a href="https://blog.devmastery.com/copy-paste-code-6ed9bb841cd4">this article</a> by Bill Sourour on the different point of view of solving questions in coding many years ago compared to nowadays.</p>
-<p>Also explores the concept of copy pasting code without understanding it, explaining that the endgame is writing good code that works and is easy to change.</p>
-<p>Tags: copy-paste, bill-sourour, clean-code, comparison</p>
-<h2 id="why-so-many-developers-hate-recruiters">Why so many developers hate recruiters</h2>
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/the-tech-recruiter-red-pill-967dd492560c">this article</a> by Quincy Larson on how recruiters for the IT sector work and how to work with them for your best possible outcome.</p>
-<p>Tags: career, professional-career, recruitment, recruiter, agent, hiring, quincy-larson</p>
-<h2 id="every-time-someone-posts-one-of-these-coding-is-over-essays-on-medium-they-undo-a-good-chunk-of">Every time someone posts one of these “coding is over” essays on Medium, they undo a good chunk of…</h2>
-<p>I&rsquo;ve read <a href="https://medium.com/@quincylarson/every-time-someone-posts-one-of-these-coding-is-over-essay-on-medium-they-undo-a-good-chunk-of-b7989849390b">this article</a> by Quincy Larson on why we should not tell others about their choosing of learning programming, and every time we do, some doors close.</p>
-<p>Tags: answer, learn-coding, related-to-article, quincy-larson</p>
-<h2 id="29-behaviors-that-will-make-you-an-unstoppable-programmer">29 Behaviors That Will Make You An Unstoppable Programmer</h2>
-<p>I&rsquo;ve read <a href="https://medium.com/@kenmazaika/29-behaviors-that-will-make-you-an-unstoppable-programmer-8778941d80f7">this list</a> of tricks to become a be a better programmer. By Ken Mazaika</p>
+<p>Tags: john-sonmez, programmer, language-programmer, quote</p>
+<h2 id="6-rules-to-live-by-when-you-work-in-an-office-but-have-remote-team-members">6 Rules To Live By When You Work In An Office But Have Remote Team Members</h2>
+<p>I&rsquo;ve read <a href="http://blog.trello.com/6-mistakes-when-you-work-in-office-but-have-remote-team-members">this article</a> by Lauren Moon about how trello works remotely:</p>
+<ul>
+<li>Value Individuals Over Infrastructure</li>
+<li>Avoid Impromptu Meetings At Someone’s Desk</li>
+<li>If One Person Is On A Video Call, EVERYONE Is On A Video Call</li>
+<li>Communication Is Asynchronous. Deal With It.</li>
+<li>Socializing Is Not Around A Watercooler</li>
+<li>The Tools You’re Using Matter. A Lot.</li>
+</ul>
+<p>Tags: remote, remote-work, lauren-moon, listicle, trello, team-management</p>
+<h2 id="princetons-ad-blocking-superweapon-may-put-an-end-to-the-ad-blocking-arms-race">Princeton’s Ad-Blocking Superweapon May Put an End to the Ad-Blocking Arms Race</h2>
+<p>I&rsquo;ve read <a href="https://motherboard.vice.com/en_us/article/princetons-ad-blocking-superweapon-may-put-an-end-to-the-ad-blocking-arms-race">this article</a> by Jason Koebler on the tool a university has written and published, that using computer vision, is able to detect sponsored content in native form.</p>
+<p>Tags: jason-koebler, computer-vision, ad, advertisement, ublock, adblock</p>
+<h2 id="on-sabbaticals">On Sabbaticals</h2>
+<p>I&rsquo;ve read <a href="http://indecorous.com/sabbaticals/">this article</a> about sabbaticals by Ian Malpass. In it, he explains why we need sabbaticals, how to take them, and some details about them.</p>
+<p>Some principles:</p>
 <blockquote>
 <ol>
-<li>Use Google very aggressively.</li>
-<li>Maintain an obnoxious amount of stick-to-itiveness.</li>
-<li>Acknowledge that micro-decisions matter.</li>
-<li>Acknowledge that most major decisions don’t matter that much.</li>
-<li>Always use the right tool for the job.</li>
-<li>Understand that code is cheap.</li>
-<li>Evaluate technologies based on all their merits.</li>
-<li>Say “I don’t know.”</li>
-<li>Always analyze the clues found in error messages.</li>
-<li>Know the difference between a premature optimization and a show-stopping optimization that NEEDS to happen.</li>
-<li>Take responsibility for your mistakes.</li>
-<li>Become a power-user of your development tools.</li>
-<li>Know how to use Vim (at least a little bit).</li>
-<li>Never accept freelance work in an unfamiliar technology.</li>
-<li>Don’t count the number of hours.</li>
-<li>Absorb massive criticism with ease.</li>
-<li>Pair program with people with more experience.</li>
-<li>Always code review your own work first.</li>
-<li>Recognize that the hard part of freelancing isn’t writing the code. It’s everything else.</li>
-<li>Identify and resolve bigger issues.</li>
-<li>Dive into large open source projects to bring your features to life.</li>
-<li>Skip a lot of meetings.</li>
-<li>Know when it’s time to give back.</li>
-<li>Be capable of writing bad code.</li>
-<li>Let other people know that you’re working late without being a jerk.</li>
-<li>Act as a leader, not a boss.</li>
-<li>Go play foosball.</li>
-<li>Learn under pressure.</li>
-<li>“Move fast and break things.”</li>
+<li>If you think you can’t take a sabbatical, you need to take your sabbatical.</li>
+<li>Day-to-day work pushes us to think tactically; sabbaticals push us to think strategically. Both are valuable.</li>
+<li>Do the work to gain confidence that you can be away, and then trust that that the mechanisms you put in place are good.</li>
+<li>Just because your team can function without you, doesn’t mean they want to.</li>
+<li>There is rarely a good time to leave work for an extended period of time - don’t let this stop you.</li>
+<li>Allow room for serendipity, the unexpected, and exploration.</li>
+<li>Plan for your return before you leave, to avoid worry.</li>
+<li>The sabbatical process doesn’t end after six weeks.</li>
+<li>You don’t have to be unhappy or frustrated in your work to go on sabbatical.</li>
 </ol>
 </blockquote>
-<p>Tags: ken-mazaika, list, unbeateable-programmer, unstoppable-programmer, efficiency, 10x, tip-and-trick</p>
-<h2 id="como-melhorar-seus-códigos-usando-object-calisthenics-portuguese">Como melhorar seus códigos usando Object Calisthenics (Portuguese)</h2>
-<p>I&rsquo;ve read <a href="https://medium.com/coderockr-way/como-melhorar-seus-c%C3%B3digos-usando-object-calisthenics-444daf3e2e06">this article</a> about object calisthenics, with an example in PHP. By Elton Minetto</p>
-<p>Tags: object-calisthenics, elton-minetto, php, portuguese</p>
-<h2 id="read-this-story-without-distraction-can-you">Read This Story Without Distraction (Can You?)</h2>
-<p>I&rsquo;ve read <a href="http://www.nytimes.com/2016/05/01/fashion/monotasking-drop-everything-and-read-this-story.html?action=click&amp;contentCollection=Fashion%20%26%20Style&amp;module=RelatedCoverage&amp;region=Marginalia&amp;pgtype=article">this article</a> by Verena von Pfetten on the effects on multitasking in our daily lives. Also comments on the movement of monotasking or unitasking, which is the opposite of multitasking: doing one thing at a time.</p>
-<p>Underlines the benefits of monotasking and how this is related to mindfulness and psychological benefits.</p>
-<p>Tags: multitasking, monotasking, unitasking, verena-von-pfetten, time-management</p>
-<h2 id="debuggers-are-a-wasteful-timesink">Debuggers are a wasteful Timesink</h2>
-<p>I&rsquo;ve read <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=23476">this article</a> by Robert C. Martin on why we shouldn&rsquo;t use debuggers</p>
-<p>Tags: uncle-bob, robert-martin, debugger, tdd</p>
-<h2 id="taming-the-steamroller-how-to-communicate-compassionately-with-non-native-english-speakers">Taming the steamroller: how to communicate compassionately with non-native English speakers</h2>
-<p>I&rsquo;ve read <a href="https://medium.com/@mollyclare/taming-the-steamroller-how-to-communicate-compassionately-with-non-native-english-speakers-d95d8d1845a0">this article</a> by Molly Clare Wilson on tips on how native English speakers can simplify their communication so it is easier for non-native speakers to understand them. Provides guidelines for situations involving &lsquo;speaking and presenting&rsquo;, &lsquo;meetings&rsquo;, written form &lsquo;email, text, chat&rsquo; and about correction each others English.</p>
-<p>Tags: molly-wilson, english, communication, native, non-native, guideline</p>
-<h2 id="blue-no-yellow">Blue. No! Yellow!</h2>
-<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2016/05/21/BlueNoYellow.html">this interview</a> with Robert C. Martin on the productivity increases that different languages provide to the programmer. He says that no language can provide an effect as big as binary to assembler and that we&rsquo;re currently searching the Holy Grail.</p>
-<p>Tags: robert-martin, uncle-bob, language, comparison, assembler, binary, clojure</p>
-<h2 id="its-time-development-teams-chose-their-own-working-environments">It&rsquo;s Time Development Teams Chose Their Own Working Environments</h2>
-<p>I&rsquo;ve read <a href="http://codemanship.co.uk/parlezuml/blog/?postid=1383">this article</a> by Jason Gorman on how takes the decision of working environments and why having other options are financially available. How developers should be in charge of their own working environments.</p>
-<p>Tags: office, working-environment, jason-gorman</p>
-<h2 id="building-my-1200-hackintosh">Building My $1,200 Hackintosh</h2>
-<p>I&rsquo;ve read <a href="https://medium.com/swlh/building-my-1-200-hackintosh-49a1a186241e">this guide</a> on how to build a powerful hackintosh. By Mike Rundle</p>
-<p>Tags: mike-rundle, hackintosh, macintosh, mac, computer</p>
-<h2 id="the-practical-guide-to-becoming-a-professional-web-developer">The Practical Guide to Becoming a Professional Web Developer</h2>
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/the-practical-guide-to-becoming-a-professional-web-developer-2f255bc25c90">this article</a> by Bill Sourour on how to become a web developer. Explains all kind of resources, from learning javascript, deciding on being a frontend of backend developer, which language to choose, how to find a job, getting experience.</p>
-<p>Tags: bill-sourour, guide, career, beginner, developer, web, professional-career</p>
-<h2 id="why-hiring-is-so-hard-in-tech">Why Hiring is So Hard in Tech</h2>
-<p>I&rsquo;ve read <a href="https://medium.com/javascript-scene/why-hiring-is-so-hard-in-tech-c462c3230017">this article</a> by Eric Elliot on how to tackle job interviews, both from the side of the employer and the employee.</p>
-<p>Tags: eric-elliot, job-interview, employee, employer, cv, career, professional-career</p>
-<h2 id="learn-nodejs-with-brigadier-fluffykins-part-ii-events-eventemitter-and-the-event-loop">Learn Node.js with Brigadier Fluffykins Part II: Events, EventEmitter and the Event Loop</h2>
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/learn-node-js-with-brigadier-fluffykins-part-ii-events-eventemitter-the-event-loop-6d4c139694fb">this article</a> by Masha Diminsky on the architecture of javascript and nodejs. Explains the event-driven architecture, the events and the event loop.</p>
-<p>Tags: masha-diminsky, bus, nodejs, javascript, bus, event-loop, event</p>
-<h2 id="you-in-6-seconds-how-to-write-a-résumé-that-employers-will-actually-read">You in 6 seconds: how to write a résumé that employers will actually read</h2>
-<p>I&rsquo;ve read <a href="https://medium.freecodecamp.com/you-in-6-seconds-how-to-write-a-r%C3%A9sum%C3%A9-that-employers-will-actually-read-fd7757740802">this article</a> that suggests how to customize your cv for maximum engagement from interviewers / head hunters and to make the most of the 6 seconds they (allegedly) spend looking at your cv. Also explains some techniques for preparing the interview, about the cover letter, etc.</p>
-<p>Tags: quincy-larson, cv, resume, career, professional-career, ats</p>
-<h2 id="starbucks-does-not-use-two-phase-commit">Starbucks Does Not Use Two-Phase Commit</h2>
-<p>I&rsquo;ve read <a href="http://www.enterpriseintegrationpatterns.com/ramblings/18_starbucks.html">this article</a> by Gregor Hohpe explaining how Starbucks is modeled in terms of asynchronous interactions and the actions for exception handling: write-off, retry, compensating action.</p>
-<p>Also mentions Conversation pattern and Correlation ID.</p>
-<p>Tags: gregor-hohpe, conversation-pattern, correlation-id, analogy, asynchronous, exception-handling, write-off, retry, compensating-action</p>
+<p>Tags: sabbatical, ian-malpass, team-management, career</p>
+<h2 id="hasta-pronto">Hasta pronto…</h2>
+<p>I&rsquo;ve read <a href="http://www.javiergarzas.com/2016/07/hasta-pronto.html">this article</a> by Javier Garzás, where he explains that he&rsquo;ll stop blogging for a while and why</p>
+<p>Tags: javier-garzas, blog, personal</p>
+<h2 id="the-principles-of-clean-architecture">The principles of Clean Architecture</h2>
+<p>I&rsquo;ve watched this video about the clean architecture (with a client&rsquo;s lunch and learn initiative). By Uncle Bob (Robert C. Martin)</p>
+<p>A quote:</p>
+<blockquote>
+<p>the plugin is vulnerable to the plugged-in system, at the source code level</p>
+<p>Separate the detail from the general things</p>
+</blockquote>
+<p>Tags: clean-architecture, uncle-bob, robert-martin, video, mvp, model-view-presenter, model-view-controller, mvc, quote, plugin</p>
+<h2 id="the-languages-which-almost-became-css">The Languages Which Almost Became CSS</h2>
+<p>I&rsquo;ve read <a href="https://eager.io/blog/the-languages-which-almost-were-css/">this article</a> by Zack Bloom on the origins of CSS and the languages to add representation to HTML pages / markup.</p>
+<p>Describes the origins of these languages (e.g., RPP, PWP, CHSS, PSL, FOSI, DSSSL) and how the acceptance of CSS came to be:</p>
+<blockquote>
+<p>it was the technology which was easiest for a beginner to pick up which won, rather than those which were most powerful for an expert.</p>
+<p><!-- raw HTML omitted --> Zack Bloom<!-- raw HTML omitted --></p>
+</blockquote>
+<p>Tags: css, html, history, zack-bloom, mosaic, violawww</p>
+<h2 id="youre-not-going-to-believe-what-im-about-to-tell-you">You&rsquo;re not going to believe what I&rsquo;m about to tell you</h2>
+<p>I&rsquo;ve read <a href="http://theoatmeal.com/comics/believe">this comic</a> by Matthew Inman about how we process information from outside, especially when it conflicts with our beliefs</p>
+<p>Tags: matthew-inman, comic, oatmeal, belief</p>
+<h2 id="how-to-be-perfectly-unhappy">How to be perfectly unhappy</h2>
+<p>I&rsquo;ve read <a href="http://theoatmeal.com/comics/unhappy">this comic</a> by Matthew Inman about the definition of happiness and how it affects the author</p>
+<p>Tags: matthew-inman, oatmeal, happiness, comic, definition</p>
+<h2 id="spotify-engineering-culture---part-1">Spotify Engineering Culture - part 1</h2>
+<p>I&rsquo;ve watched <a href="https://vimeo.com/85490944">this video</a> about the Spotify engineering culture: team organization, the terms they introduce and some general culture about them.</p>
+<p>Tags: team-management, people, spotify, henrik-kniberg, squad, chapter, guild, tribe</p>
+<h2 id="speak-like-a-leader">Speak like a leader</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=bGBamfWasNQ">this TEDx Talk</a> by Simon Lancaster in which he explains the importance of rhetoric in our speech. Explains 6 techniques for achieving better communication:</p>
+<ul>
+<li>Three breathless sentences: &ldquo;Mangia Bene, Ridi Spesso, ama molto&rdquo;, &ldquo;Ein Volk, ein Reich, ein Fuhrer&rdquo;</li>
+<li>Three repetitive sentences</li>
+<li>Three balancing statements: if we hear the statements as balanced, we imagine that the underlaying thinking is balanced</li>
+<li>Metaphor</li>
+<li>Exaggeration</li>
+<li>Rhyme</li>
+</ul>
+<p>Tags: simon-lancaster, tedx, ted, quote, speech, leadership, communication</p>
 
         
 
@@ -345,16 +364,59 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/06/30/books-read-in-2016q2/">Books read in 2016Q2</a>
+        <a href="https://alvarogarcia7.github.io/blog/2017/04/01/self-study-in-april-2017/">Self-Study in April 2017</a>
     </h1>
-    <p >Jun 30, 2016
+    <p >Apr 1, 2017
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/06/30/books-read-in-2016q2/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2017/04/01/self-study-in-april-2017/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2016/">2016</a><a class="label" href="https://alvarogarcia7.github.io/categories/q2/">Q2</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/building-microservices/">building-microservices</a><a class="label" href="https://alvarogarcia7.github.io/categories/release-it/">release-it</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/april/">april</a><a class="label" href="https://alvarogarcia7.github.io/categories/2017/">2017</a><a class="label" href="https://alvarogarcia7.github.io/categories/read/">read</a><a class="label" href="https://alvarogarcia7.github.io/categories/austin-gunter/">austin-gunter</a><a class="label" href="https://alvarogarcia7.github.io/categories/blunder/">blunder</a><a class="label" href="https://alvarogarcia7.github.io/categories/boo-boo/">boo-boo</a><a class="label" href="https://alvarogarcia7.github.io/categories/boredness/">boredness</a><a class="label" href="https://alvarogarcia7.github.io/categories/career/">career</a><a class="label" href="https://alvarogarcia7.github.io/categories/conference/">conference</a><a class="label" href="https://alvarogarcia7.github.io/categories/definition/">definition</a><a class="label" href="https://alvarogarcia7.github.io/categories/derick-bailey/">derick-bailey</a><a class="label" href="https://alvarogarcia7.github.io/categories/docker/">docker</a><a class="label" href="https://alvarogarcia7.github.io/categories/failure/">failure</a><a class="label" href="https://alvarogarcia7.github.io/categories/fault/">fault</a><a class="label" href="https://alvarogarcia7.github.io/categories/gerald-weinberg/">gerald-weinberg</a><a class="label" href="https://alvarogarcia7.github.io/categories/interview/">interview</a><a class="label" href="https://alvarogarcia7.github.io/categories/manager/">manager</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-lopp/">michael-lopp</a><a class="label" href="https://alvarogarcia7.github.io/categories/microservice/">microservice</a><a class="label" href="https://alvarogarcia7.github.io/categories/microservice-practitioners/">microservice-practitioners</a><a class="label" href="https://alvarogarcia7.github.io/categories/myth/">myth</a><a class="label" href="https://alvarogarcia7.github.io/categories/organize-a-conference/">organize-a-conference</a><a class="label" href="https://alvarogarcia7.github.io/categories/people/">people</a><a class="label" href="https://alvarogarcia7.github.io/categories/podcast/">podcast</a><a class="label" href="https://alvarogarcia7.github.io/categories/project-mercury/">project-mercury</a><a class="label" href="https://alvarogarcia7.github.io/categories/quality/">quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/richard-li/">richard-li</a><a class="label" href="https://alvarogarcia7.github.io/categories/software-engineering-daily/">software-engineering-daily</a><a class="label" href="https://alvarogarcia7.github.io/categories/software-quality/">software-quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/team-management/">team-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/tech-lead/">tech-lead</a>
+        
+    </p>
+</header>
+
+
+        
+        <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="10-myths-about-docker-that-stop-developers-cold">10 Myths About Docker That Stop Developers Cold</h2>
+<p>I&rsquo;ve read <a href="https://dev.to/derickbailey/10-myths-about-docker-that-stop-developers-cold">this listicle</a> of docker myths. By Derick Bailey</p>
+<p>Tags: derick-bailey, docker, myth</p>
+<h2 id="bored-people-quit">Bored People Quit</h2>
+<p>I&rsquo;ve read <a href="http://randsinrepose.com/archives/bored-people-quit/">this article</a> by Michael Lopp on what are some mechanisms why bored people quit.</p>
+<p>Some interesting quotes:</p>
+<blockquote>
+<p>My gig is the care and feeding of engineers, and their productivity is my productivity. If they all leave, I have exactly no job.</p>
+<p>My job isn’t just building product; I also build people.</p>
+</blockquote>
+<p>Tags: michael-lopp, boredness, team-management, people, career, tech-lead, quote</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2017/03/31/books-read-in-2017q1/">Books read in 2017Q1</a>
+    </h1>
+    <p >Mar 31, 2017
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/03/31/books-read-in-2017q1/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/2017/">2017</a><a class="label" href="https://alvarogarcia7.github.io/categories/q1/">Q1</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a><a class="label" href="https://alvarogarcia7.github.io/categories/codurance/">codurance</a>
         
     </p>
 </header>
@@ -362,34 +424,14 @@
 
         
         <p>Books I&rsquo;ve read this quarter<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
-<ul>
-<li><a href="https://www.amazon.com/Extreme-Programming-Explained-Embrace-Change/dp/0321278658">Extreme Programming Explained: Embrace Change, 2nd Edition</a> by Kent Beck and Cynthia Andres, again.</li>
-<li><a href="http://shop.oreilly.com/product/0636920033158.do">Building Microservices, Designing Fine-Grained Systems</a>, by Sam Newman, with the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/categories/building-microservices">building-microservices</a></li>
-<li><a href="http://www.reinventingorganizations.com/">Reinventing Organizations</a> by Frederic Laloux. Blog posts under the tag <a href="/categories/reinventing-organizations
-/">reinventing-organizations</a></li>
-</ul>
-<p>Non-technical:</p>
-<ul>
-<li><a href="http://www.llibres.cat/llibres-de-narrativa-en-catala/211579-lacabadora.html">L&rsquo;acabadora</a>, by Michela Murgia</li>
-<li><a href="https://www.amazon.com/Disrupted-My-Misadventure-Start-Up-Bubble/dp/0316306088">Disrupted: My Misadventure in the Start-Up Bubble</a> by Dan Lyons</li>
-</ul>
 <p>Books started, not yet finished (WIP):</p>
-<ul>
-<li><a href="http://www.amazon.com/exec/obidos/ASIN/0321125215">Domain-Driven Design: Tackling Complexity in the Heart of Software</a> by Eric Evans, again.</li>
-<li><a href="https://www.manning.com/books/amazon-web-services-in-action">Amazon Web Services in Action</a> by Michael Wittig and Andreas Wittig</li>
-<li><a href="https://pragprog.com/book/mnee/release-it">Release It! - Design and Deploy Production-Ready Software</a>, by Michael T. Nygard, with the &lsquo;<a href="https://twitter.com/@deaprendices">@deAprendices</a>&rsquo;s reading club&rsquo;. Blog posts under the tag <a href="/categories/release-it
-/">release-it</a></li>
-<li><a href="http://shop.oreilly.com/product/0636920013754.do">Clojure Programming - Practical Lisp for the Java World</a> by Chas Emerick, Brian Carper, Christophe Grand</li>
-</ul>
 <p>Books I want to finish. Usually come from another quarter:</p>
 <ul>
-<li><a href="https://leanpub.com/nightowls">Why programmers work at night</a> by Swizec Teller</li>
-<li><a href="http://www.redbook.io/">Readings in Database Systems, 5th Edition</a> by Peter Bailis, Joseph M. Hellerstein, Michael Stonebraker, editors</li>
+<li><a href="https://www.manning.com/books/functional-programming-in-scala">Functional Programming in Scala</a>, by Chiusano and Bjarnason. Doing the exercises with the <a href="https://twitter.com/@codurance">codurance</a> team</li>
+<li>Gödel, Escher, Bach: An Eternal Golden Braid, Hofstadter</li>
 </ul>
 <p>Books that have entered the queue:</p>
-<ul>
-<li><a href="https://leanpub.com/serverless">Serverless - Patterns of Modern Application Design Using Microservices (Amazon Web Services Edition)</a> by Obie Fernandez</li>
-</ul>
+<p>Non-technical that have entered the queue:</p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <section class="footnotes" role="doc-endnotes">
@@ -412,133 +454,42 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/06/26/stability-terms-from-release-it-a-quote/">Stability terms from &#34;Release it!&#34;, a quote</a>
+        <a href="https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/">On the Make, Buy or Rent decision: Stateful vs Stateless components</a>
     </h1>
-    <p >Jun 26, 2016
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/06/26/stability-terms-from-release-it-a-quote/#disqus_thread">Comments</a>
+    <p >Mar 16, 2017
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2017/03/16/on-the-make-buy-or-rent-decision-stateful-vs-stateless-components/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/release-it/">release-it</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-nygard/">michael-nygard</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/lessons-learned/">lessons-learned</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateful/">stateful</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateful-component/">stateful-component</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateless/">stateless</a><a class="label" href="https://alvarogarcia7.github.io/categories/stateless-component/">stateless-component</a><a class="label" href="https://alvarogarcia7.github.io/categories/separation/">separation</a><a class="label" href="https://alvarogarcia7.github.io/categories/resource-management/">resource-management</a><a class="label" href="https://alvarogarcia7.github.io/categories/make-buy-rent/">make-buy-rent</a><a class="label" href="https://alvarogarcia7.github.io/categories/phil-simon/">phil-simon</a><a class="label" href="https://alvarogarcia7.github.io/categories/it-manager/">it-manager</a><a class="label" href="https://alvarogarcia7.github.io/categories/total-cost-ownership/">total-cost-ownership</a><a class="label" href="https://alvarogarcia7.github.io/categories/tco/">tco</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/decision/">decision</a>
         
     </p>
 </header>
 
 
         
-        <p>In <a href="https://pragprog.com/book/mnee/release-it"><strong>Release It!</strong></a>, terms related to stability:</p>
-<ul>
-<li>transaction: is an abstract unit of work processed by the system</li>
-<li>mixed workload: is a combination of different transaction types processed by a system.</li>
-<li>system: the complete, interdependent set of hardware, applications, and services required to process transactions for users</li>
-<li>stability: resilient system keeps processing transactions, even when there are transient impulses, persistent stresses, or component failures disrupting normal processing</li>
-<li>stress (to the system): is a force applied to the system over an extended period.</li>
-<li>impulse: is a rapid shock to the system.</li>
-<li>a material changes shape when stress is applied. This change in shape is called the strain.</li>
-<li>The original trigger and the way the crack spreads to the rest of the system, together with the result of the damage, failure mode.</li>
-<li>crumple zones: areas designed to protect passengers by failing first. called crackstoppers</li>
-</ul>
-<p>All of these are quotes from the book.</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/06/10/role-software-consultant/">The role of a software consultant</a>
-    </h1>
-    <p >Jun 10, 2016
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/06/10/role-software-consultant/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/reinventing-organizations/">reinventing-organizations</a><a class="label" href="https://alvarogarcia7.github.io/categories/frederic-laloux/">frederic-laloux</a><a class="label" href="https://alvarogarcia7.github.io/categories/teal-organization/">teal-organization</a><a class="label" href="https://alvarogarcia7.github.io/categories/consultant/">consultant</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>A quote from <a href="http://www.reinventingorganizations.com">Reinventing Organizations</a>,
-about roles, job descriptions and job titles in Chapter 2.2:
-Self-management (structures), page 90:</p>
+        <p>From the <a href="http://www.ittoday.info/Articles/Make_Buy_or_Rent.htm">Make, Buy or Rent</a> article:</p>
 <blockquote>
-<p>[In] Teal Organizations [&hellip;] people are not made to fit pre-defined jobs;
-their job emerge from a multitude of roles and responsibilities they pick
-up based on their interests, talents, and the needs of the organization.</p>
-<ul>
-<li>Frederic Laloux, Reinventing Organizations</li>
-</ul>
+<p>[&hellip;] [T]he three main system options for organizations seeking to upgrade their systems [are :]</p>
 </blockquote>
-<p>In my opinion, this is the role of the software consultant when working with a client:
-even if the customer has asked for help in some parts of their activity, a senior-enough
-consultant can discover other areas where they can add value, even if that new
-work doesn&rsquo;t have much in common with the initial request (this change should
-be approved by the people that will be affected).</p>
-<p>This is also a thought that <a href="https://twitter.com/@mashooq">Mash</a> and <a href="https://twitter.com/@sandromancuso">Sandro</a> were discussing lately.</p>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2016/06/10/unwritten-principles-coaching/">Unwritten principles for coaching, a quote</a>
-    </h1>
-    <p >Jun 10, 2016
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2016/06/10/unwritten-principles-coaching/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/reinventing-organizations/">reinventing-organizations</a><a class="label" href="https://alvarogarcia7.github.io/categories/frederic-laloux/">frederic-laloux</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>A quote from <a href="http://www.reinventingorganizations.com">Reinventing Organizations</a>,
-about a few unwritten principles for coaching, in Chapter 2.2:
-Self-management (structures), page 70:</p>
-<blockquote>
 <ul>
-<li>It’s okay for teams to struggle. From struggle comes learning. And
-teams that have gone through difficult moments build resilience
-and a deep sense of community. The coach’s role therefore is not
-to prevent foreseeable problems, but to support teams in solving
-them (and later help them reflect on how they’ve grown in the
-process).</li>
-<li>The coach’s role is to let teams make their own choices, even if she
-believes she knows a better solution.</li>
-<li>The coach supports the team mostly by asking insightful questions
-and mirroring what she sees. She helps teams frame issues and
-solutions in light of [the company’s] purpose and its holistic approach
-to care.</li>
-<li>The starting point is always to look for enthusiasm, strengths, and
-existing capabilities within the team. The coach projects trust that
-the team has all it takes to solve the problems it faces.</li>
+<li>Make</li>
+<li>Buy</li>
+<li>Rent</li>
 </ul>
+<p>IT managers have different criteria for deciding which components to assign in each category.</p>
+<h2 id="another-criteria-for-deciding">Another criteria for deciding</h2>
+<p>At a client, they have taken the decision to split their core IT systems in to the three options: make, buy, rent.</p>
 <ul>
-<li>Frederic Laloux, Reinventing Organizations</li>
+<li>The business logic to handle the core business is &lsquo;make&rsquo;. These systems are completely stateless</li>
+<li>The persistance (or storage) for the core business is &lsquo;rent&rsquo;. These systems, by definition, are stateful</li>
+<li>Other parts of the system are &lsquo;buy&rsquo;. Not important for this article</li>
 </ul>
-</blockquote>
+<p>The key concept for this separation is moving the responsibility for uptime and complex data management to a provider. The provider can take better care of those procedures and use economies of scale to provide a better service that we could do in-house (&lsquo;make&rsquo;) (e.g., high availability, reliability and SLAs) at the cost of paying a price for that.
+This idea simplifies our components (e.g., services), making them stateless. Even if they cache any internal information, it is a &lsquo;Read Through Cache&rsquo;, meaning that in case the data is not available in the cache, the service will transparently fetch it from the underlying storage system.</p>
+<p>This idea for separating components simplifies both development, testing and maintainance, therefore reducing the Total Cost of Ownership (TCO) of our services.</p>
 
         
 
@@ -639,6 +590,12 @@ the team has all it takes to solve the problems it faces.</li>
     
         <a href="/blog/page/36/" class="label-pagination">36</a>
     
+        <a href="/blog/page/37/" class="label-pagination">37</a>
+    
+        <a href="/blog/page/38/" class="label-pagination">38</a>
+    
+        <a href="/blog/page/39/" class="label-pagination">39</a>
+    
 
     
     
@@ -647,7 +604,7 @@ the team has all it takes to solve the problems it faces.</li>
 
     
     
-        <a href="/blog/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/39/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -707,6 +664,10 @@ You can find me on:
       <ul id="recent_articles">
         
           <li class="post">
+              <a href="/articles/2024/08/31/building-private-tools-open/">Building private tools in the open</a>
+          </li>
+        
+          <li class="post">
               <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
           </li>
         
@@ -742,16 +703,20 @@ You can find me on:
               <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
           </li>
         
-          <li class="post">
-              <a href="/articles/2014/12/15/the-joys-of-the-craft-as-article/">The Joys of the Craft as Article</a>
-          </li>
-        
       </ul>
       <h1>Recent Blogs</h1>
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/01/self-study-july-2024/">Self-Study in July 2024</a>
           </li>
         
           <li class="post">
@@ -759,35 +724,27 @@ You can find me on:
           </li>
         
           <li class="post">
+              <a href="/blog/2024/05/01/self-study-may-2024/">Self-Study in May 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/04/01/self-study-april-2024/">Self-Study in April 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/09/01/self-study-september-2023/">Self-Study in September 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/08/01/self-study-august-2023/">Self-Study in August 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/01/01/self-study-january-2021/">Self-Study in January 2021</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/09/30/books-read-2020q3/">Books read in 2020Q3</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
       </ul>

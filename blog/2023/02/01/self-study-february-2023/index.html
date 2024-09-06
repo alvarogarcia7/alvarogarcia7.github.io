@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Self-Study in February 2023</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="">
+  <meta name="author" content="Alvaro Garcia">
+
+  
+  <meta name="generator" content="Hugo 0.82.0" />
+
+  
+  
+
+  
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/" target="_blank" title="Breadcrumbs">Breadcrumbs</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/articles/" target="_blank" title="Articles">Articles</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/talks" target="_blank" title="Talks / Events">Talks / Events</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/categories/" target="_blank" title="Categories">Categories</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/archives/" target="_blank" title="Archives">Archives</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/about/" target="_blank" title="About">About</a></li>
+    
+  
+</ul>
+
+
+<ul class="subscription">
+  <a href="index.xml" target="_blank" type="application/rss+xml" title="RSS"><i class="fa fa-rss-square fa-lg"></i></a>
+
+  
+  
+
+</ul>
+
+<script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = form_.getElementsByTagName("input")[0];
+        var siteURL = form_.getElementsByTagName("input")[1];
+        input.value = siteURL.value + " " + input.value;
+    }
+</script>
+
+
+<form action="https://www.google.com/search" method="get" target="_blank" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+  	<input class="search" type="text" name="q" results="0" placeholder="Search"/>
+    <input type="hidden" value="site:https://alvarogarcia7.github.io/" />
+  </fieldset>
+</form>
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+         Self-Study in February 2023 
+    </h1>
+    <p >Feb 1, 2023
+         - 2 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2023/02/01/self-study-february-2023/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/2023/">2023</a><a class="label" href="https://alvarogarcia7.github.io/categories/february/">february</a><a class="label" href="https://alvarogarcia7.github.io/categories/addresssanitizer/">addresssanitizer</a><a class="label" href="https://alvarogarcia7.github.io/categories/afl/">afl</a><a class="label" href="https://alvarogarcia7.github.io/categories/asan/">asan</a><a class="label" href="https://alvarogarcia7.github.io/categories/bare-metal/">bare-metal</a><a class="label" href="https://alvarogarcia7.github.io/categories/bound-check/">bound-check</a><a class="label" href="https://alvarogarcia7.github.io/categories/c/">c</a><a class="label" href="https://alvarogarcia7.github.io/categories/c-language/">c-language</a><a class="label" href="https://alvarogarcia7.github.io/categories/cbmc/">cbmc</a><a class="label" href="https://alvarogarcia7.github.io/categories/checker/">checker</a><a class="label" href="https://alvarogarcia7.github.io/categories/clang/">clang</a><a class="label" href="https://alvarogarcia7.github.io/categories/crashdump/">crashdump</a><a class="label" href="https://alvarogarcia7.github.io/categories/dr-memory/">dr-memory</a><a class="label" href="https://alvarogarcia7.github.io/categories/firmware/">firmware</a><a class="label" href="https://alvarogarcia7.github.io/categories/fuzzing/">fuzzing</a><a class="label" href="https://alvarogarcia7.github.io/categories/gperftools/">gperftools</a><a class="label" href="https://alvarogarcia7.github.io/categories/hacker-news/">hacker-news</a><a class="label" href="https://alvarogarcia7.github.io/categories/heap/">heap</a><a class="label" href="https://alvarogarcia7.github.io/categories/imported/">imported</a><a class="label" href="https://alvarogarcia7.github.io/categories/llvm/">llvm</a><a class="label" href="https://alvarogarcia7.github.io/categories/memcheck/">memcheck</a><a class="label" href="https://alvarogarcia7.github.io/categories/memory-sanitizer/">memory-sanitizer</a><a class="label" href="https://alvarogarcia7.github.io/categories/memsan/">memsan</a><a class="label" href="https://alvarogarcia7.github.io/categories/nubix/">nubix</a><a class="label" href="https://alvarogarcia7.github.io/categories/reini-urban/">reini-urban</a><a class="label" href="https://alvarogarcia7.github.io/categories/san/">san</a><a class="label" href="https://alvarogarcia7.github.io/categories/sat-solver/">sat-solver</a><a class="label" href="https://alvarogarcia7.github.io/categories/stack/">stack</a><a class="label" href="https://alvarogarcia7.github.io/categories/static-analysis/">static-analysis</a><a class="label" href="https://alvarogarcia7.github.io/categories/testing/">testing</a><a class="label" href="https://alvarogarcia7.github.io/categories/testing-pyramid/">testing-pyramid</a><a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/ubsan/">ubsan</a><a class="label" href="https://alvarogarcia7.github.io/categories/valgrind/">valgrind</a>
+        
+    </p>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          <h2 id="cbmc-the-c-bounded-model-checker"><a href="">CBMC: The C Bounded Model Checker</a></h2>
+<p>CBMC on GitHub:
+<a href="https://github.com/diffblue/cbmc">https://github.com/diffblue/cbmc</a>
+Some usage examples:
+<a href="https://haslab.github.io/MFES/2122/CBMCexamples-handout.pdf">https://haslab.github.io/MFES/2122/CBMCexamples-handout.pdf</a></p>
+<p><a href="https://news.ycombinator.com/item?id=34703004">https://news.ycombinator.com/item?id=34703004</a></p>
+<p>Tags: cbmc, c, c-language, bound-check, sat-solver, tool, static-analysis, checker, imported, hacker-news</p>
+<p>Id: bbe38520-a846-11ed-957a-0242ac110002
+Read: Wed Feb  8 01:46:40 2023</p>
+<h2 id="testing-baremetal-firmware-at-nubixhttpsblognubixdeindexphp20220406testing-baremetal-firmware-at-nubix"><a href="https://blog.nubix.de/index.php/2022/04/06/testing-baremetal-firmware-at-nubix/">TESTING BAREMETAL FIRMWARE AT NUBIX</a></h2>
+<p>Extensive guide on how to test firmware. Lots of tools, good recommendations</p>
+<p>Tags: bare-metal, firmware, testing, nubix, reini-urban, tool, crashdump, testing-pyramid, addresssanitizer, valgrind, memcheck, dr-memory, gperftools, cbmc, clang, c-language, c, heap, stack, fuzzing, afl, llvm, asan, ubsan, memory-sanitizer, memsan, san</p>
+<p>Id: 21676b28-a847-11ed-9bb0-0242ac110002
+Read: Thu, 09 Feb 2023 06:58:17 +0000</p>
+<h2 id="leonardo-noted-link-between-gravity-and-acceleration-centuries-before-einstein"><a href="">Leonardo noted link between gravity and acceleration centuries before Einstein</a></h2>
+<p><a href="https://news.ycombinator.com/item?id=34764318">https://news.ycombinator.com/item?id=34764318</a></p>
+<p>Tags: imported, hacker-news</p>
+<p>Id: 2df54898-c1a5-11ed-b307-0242ac110004
+Read: Sun Feb 12 16:50:04 2023</p>
+<h2 id="ask-hn-what-is-your-system-for-learning-new-things"><a href="">Ask HN: What is your system for learning new things?</a></h2>
+<p><a href="https://news.ycombinator.com/item?id=34771415">https://news.ycombinator.com/item?id=34771415</a></p>
+<p>Tags: imported, hacker-news</p>
+<p>Id: 178b0f06-c1a1-11ed-8c43-0242ac110004
+Read: Mon Feb 13 08:41:06 2023</p>
+<h2 id="modern-spas-without-bundlers-cdns-or-nodejs"><a href="">Modern SPAs without bundlers, CDNs, or Node.js</a></h2>
+<p><a href="https://news.ycombinator.com/item?id=34829039">https://news.ycombinator.com/item?id=34829039</a></p>
+<p>Tags: imported, hacker-news</p>
+<p>Id: 2b9ba696-c1a5-11ed-9b25-0242ac110004
+Read: Fri Feb 17 00:41:32 2023</p>
+<h2 id="lesser-known-tricks-quirks-and-features-of-c"><a href="">Lesser known tricks, quirks and features of C</a></h2>
+<p><a href="https://news.ycombinator.com/item?id=34855331">https://news.ycombinator.com/item?id=34855331</a></p>
+<p>Tags: imported, hacker-news</p>
+<p>Id: 34f89942-c1a5-11ed-9393-0242ac110004
+Read: Sun Feb 19 07:27:49 2023</p>
+<h2 id="writing-an-engineering-strategy"><a href="">Writing an engineering strategy</a></h2>
+<p><a href="https://news.ycombinator.com/item?id=34859979">https://news.ycombinator.com/item?id=34859979</a></p>
+<p>Tags: imported, hacker-news</p>
+<p>Id: 3047e6d2-c1a5-11ed-a78a-0242ac110004
+Read: Sun Feb 19 17:53:48 2023</p>
+<h2 id="c-rusted-the-advantages-of-rust-in-c-without-the-disadvantages"><a href="">C-rusted: The advantages of Rust, in C, without the disadvantages</a></h2>
+<p><a href="https://news.ycombinator.com/item?id=34863784">https://news.ycombinator.com/item?id=34863784</a></p>
+<p>Tags: imported, hacker-news</p>
+<p>Id: 32a62146-c1a5-11ed-a013-0242ac110004
+Read: Mon Feb 20 01:12:27 2023</p>
+<h2 id="the-usability-of-advanced-type-systems-rust-as-a-case-study"><a href="">The usability of advanced type systems: Rust as a case study</a></h2>
+<p><a href="https://news.ycombinator.com/item?id=34890787">https://news.ycombinator.com/item?id=34890787</a></p>
+<p>Tags: imported, hacker-news</p>
+<p>Id: 3746398e-c1a5-11ed-b7d4-0242ac110004
+Read: Wed Feb 22 02:27:16 2023</p>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Alvaro Garcia</span></span>
+    
+    <time>Feb 1, 2023</time>
+  </p>
+
+  
+  <div class="sharing">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="alvarobiz" data-hashtags="blog">Tweet this article</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+     
+  </div>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://alvarogarcia7.github.io/blog/2023/01/01/self-study-january-2023/" title="Self-Study in January 2023">Self-Study in January 2023</a>
+    
+
+    
+      <a class="basic-alignment right" href="https://alvarogarcia7.github.io/blog/2023/03/01/self-study-march-2023/" title="Self-Study in March 2023">Self-Study in March 2023</a>
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>About this blog</h1>
+    
+
+    <p>
+      
+        This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" href="https://github.com/alvarogarcia7/" title="https://github.com/alvarogarcia7/"><i class="fa fa-github fa-3x"></i></a>
+      
+      <a target="_blank" href="https://twitter.com/@alvarobiz/" title="https://twitter.com/@alvarobiz/"><i class="fa fa-twitter fa-3x"></i></a>
+       
+      <a target="_blank" href="https://es.linkedin.com/in/alvarogarcia7" title="https://es.linkedin.com/in/alvarogarcia7"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+    <section class="even">
+      <h1>Recent Articles</h1>
+      <ul id="recent_articles">
+        
+          <li class="post">
+              <a href="/articles/2024/08/31/building-private-tools-open/">Building private tools in the open</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2021/09/11/worthless-projects/">The value of worthless projects</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2021/05/02/native-c-library-android/">Using a Native C Library in Android</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/05/29/keeping-intermediate-history-work-git/">Automatically keeping the intermediate history of your work using git</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2016/10/05/support-for-out-of-hours-on-call-support/">Support for out of hours on-call support</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
+          </li>
+        
+      </ul>
+      <h1>Recent Blogs</h1>
+      <ul id="recent_posts">
+        
+          <li class="post">
+              <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/01/self-study-july-2024/">Self-Study in July 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/05/01/self-study-may-2024/">Self-Study in May 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/04/01/self-study-april-2024/">Self-Study in April 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/09/01/self-study-september-2023/">Self-Study in September 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/08/01/self-study-august-2023/">Self-Study in August 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
+          </li>
+        
+      </ul>
+    </section>
+  
+
+</aside>
+
+  </div>
+</div>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2024 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+    
+
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
+</html>
+

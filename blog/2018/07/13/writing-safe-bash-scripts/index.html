@@ -178,23 +178,23 @@ DESCRIPTION
 trap command signal
 </code></pre><p>Taken from <a href="https://bash.cyberciti.biz/guide/Trap_statement">here</a></p>
 <p>An example:</p>
-<pre><code>function finish {
-  # Your cleanup code here
-}
-trap finish EXIT
-trap finish SIGQUIT
-</code></pre><p>More information, and this example from <a href="http://redsymbol.net/articles/bash-exit-traps/">here</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> finish <span class="o">{</span>
+  <span class="c1"># Your cleanup code here</span>
+<span class="o">}</span>
+<span class="nb">trap</span> finish EXIT
+<span class="nb">trap</span> finish SIGQUIT
+</code></pre></div><p>More information, and this example from <a href="http://redsymbol.net/articles/bash-exit-traps/">here</a></p>
 <h3 id="do-not-hardcode-the-shell-location">Do not hardcode the shell location</h3>
 <p>This is more common with perl than with bash, as most bash installs are placed at <code>/bin/bash</code>.</p>
 <p>You can use <code>/usr/bin/env bash</code> / <code>/usr/bin/env sh</code> to spawn a shell.</p>
 <p>Usage:</p>
-<pre><code>#!/usr/bin/env bash
-
-#rest of commands
-</code></pre><h3 id="options-for-executing--header">Options for executing / Header</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/usr/bin/env bash
+</span><span class="cp"></span>
+<span class="c1">#rest of commands</span>
+</code></pre></div><h3 id="options-for-executing--header">Options for executing / Header</h3>
 <p>add these options:</p>
-<pre><code>set -euxo pipefail
-</code></pre><p>These can be added anywhere, but I usually add them after the shebang (the beginning of the script)</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -euxo pipefail
+</code></pre></div><p>These can be added anywhere, but I usually add them after the shebang (the beginning of the script)</p>
 <p>Reference: <a href="https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin">The set built-in</a></p>
 <p>Another reference: the inspiration for these options comes from <a href="https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/">here</a></p>
 <p>a brief note:</p>
@@ -210,10 +210,10 @@ trap finish SIGQUIT
 </li>
 </ul>
 <p>If you want to use a try&hellip;catch pattern, disable <code>-e</code> temporarily:</p>
-<pre><code>set +e # 1
-ls NON_EXISTING_FILE # 2
-set -e # 3
-</code></pre><ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> +e <span class="c1"># 1</span>
+ls NON_EXISTING_FILE <span class="c1"># 2</span>
+<span class="nb">set</span> -e <span class="c1"># 3</span>
+</code></pre></div><ul>
 <li>1: Disable error-checking. Note this is a plus (+) sign</li>
 <li>2: a command that could fail. As the error checking is disabled, the execution continues even if 2 throws an error. Therefore, the exception is swallowed.</li>
 <li>3: Enable error-checking again</li>
@@ -222,97 +222,97 @@ set -e # 3
 <h4 id="enable-tracing--debugging-mode">Enable tracing / debugging mode</h4>
 <p>I usually make my bash scripts as simple as possible (see Limitations), but even then, they fail often while building them.</p>
 <p>For that reason, you can enable the &lsquo;debug&rsquo; option permanently:</p>
-<pre><code># Inside the script
-set -x
-</code></pre><p>Or just for one invocation:</p>
-<pre><code># When invoking the script
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Inside the script</span>
+<span class="nb">set</span> -x
+</code></pre></div><p>Or just for one invocation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># When invoking the script</span>
 bash -x myscript.sh
-</code></pre><p>Note: your script will get the parameters in the same fashion as if executing <code>./myscript.sh</code>:</p>
-<pre><code>$ cat myscript.sh
-echo $1
-$ ./myscript.sh 1
-1
-$ bash -x myscript.sh 1
-+ echo 1
-1
-</code></pre><h4 id="dry-run-while-building-the-script">Dry-run while building the script</h4>
+</code></pre></div><p>Note: your script will get the parameters in the same fashion as if executing <code>./myscript.sh</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat myscript.sh
+<span class="nb">echo</span> <span class="nv">$1</span>
+$ ./myscript.sh <span class="m">1</span>
+<span class="m">1</span>
+$ bash -x myscript.sh <span class="m">1</span>
++ <span class="nb">echo</span> <span class="m">1</span>
+<span class="m">1</span>
+</code></pre></div><h4 id="dry-run-while-building-the-script">Dry-run while building the script</h4>
 <p>A common pattern I use while building scripts is to prepare the command but do not execute it yet:</p>
-<pre><code>...
-# prepare options, decide what to do
-echo COMMAND_WITH_SIDE_EFFECTS
-</code></pre><p>When I am sure that this is the desired command, usually after trying it manually on the console, I can remove the <code>echo</code>:</p>
-<pre><code>...
-# prepare options, decide what to do
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">...
+<span class="c1"># prepare options, decide what to do</span>
+<span class="nb">echo</span> COMMAND_WITH_SIDE_EFFECTS
+</code></pre></div><p>When I am sure that this is the desired command, usually after trying it manually on the console, I can remove the <code>echo</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">...
+<span class="c1"># prepare options, decide what to do</span>
 COMMAND_WITH_SIDE_EFFECTS
-</code></pre><h4 id="dry-run-as-another-switch">Dry-run as another switch</h4>
+</code></pre></div><h4 id="dry-run-as-another-switch">Dry-run as another switch</h4>
 <p>You can use the previous pattern but as a feature of your script:</p>
 <ul>
 <li>Accept &lsquo;-n / &ndash;dry-run&rsquo; (or similar)</li>
 <li>When the switch is enabled, it prepends <code>echo </code> to your final command</li>
 </ul>
-<pre><code>COMMAND=&quot;rm -rf ./.git&quot;
-if [ $DRY_RUN ]; then
-  COMMAND=&quot;echo $COMMAND&quot;
-fi
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">COMMAND</span><span class="o">=</span><span class="s2">&#34;rm -rf ./.git&#34;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$DRY_RUN</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nv">COMMAND</span><span class="o">=</span><span class="s2">&#34;echo </span><span class="nv">$COMMAND</span><span class="s2">&#34;</span>
+<span class="k">fi</span>
 
-$COMMAND
-</code></pre><h3 id="verbosity-levels-and-other-modes">Verbosity levels and other modes</h3>
+<span class="nv">$COMMAND</span>
+</code></pre></div><h3 id="verbosity-levels-and-other-modes">Verbosity levels and other modes</h3>
 <p>When some scripts grow in size and are not a script but an application, being more or less verbose is useful.</p>
 <p>See <code>curl</code> as an example:</p>
-<pre><code>$ curl localhost:8080
-curl: (7) Failed to connect to localhost port 8080: Connection refused
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ curl localhost:8080
+curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to localhost port 8080: Connection refused
 $ curl -vvv localhost:8080
 * Rebuilt URL to: localhost:8080/
 *   Trying ::1...
-* connect to ::1 port 8080 failed: Connection refused
+* connect to ::1 port <span class="m">8080</span> failed: Connection refused
 *   Trying fe80::1...
-* connect to fe80::1 port 8080 failed: Connection refused
+* connect to fe80::1 port <span class="m">8080</span> failed: Connection refused
 *   Trying 127.0.0.1...
-* connect to 127.0.0.1 port 8080 failed: Connection refused
+* connect to 127.0.0.1 port <span class="m">8080</span> failed: Connection refused
 * Failed to connect to localhost port 8080: Connection refused
-* Closing connection 0
-</code></pre><p>Same with quiet mode, a mode to reduce verbosity.</p>
+* Closing connection <span class="m">0</span>
+</code></pre></div><p>Same with quiet mode, a mode to reduce verbosity.</p>
 <p>Same with &lsquo;raw&rsquo; mode, a mode to only print the raw output, maybe for consumption from another script.</p>
 <h3 id="using-quotes">Using quotes</h3>
 <p>Imagine a script that prints the first, second, and third received parameter, then all of them:</p>
-<pre><code>$ cat myscript.sh
-echo &quot;first=$1 second=$2 third=$3; all=$@&quot;
-</code></pre><p>The normal invocation:</p>
-<pre><code>$ ./myscript.sh 1 2 3
-first=1 second=2 third=3; all=1 2 3
-</code></pre><p>(everything works as expected)</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat myscript.sh
+<span class="nb">echo</span> <span class="s2">&#34;first=</span><span class="nv">$1</span><span class="s2"> second=</span><span class="nv">$2</span><span class="s2"> third=</span><span class="nv">$3</span><span class="s2">; all=</span><span class="nv">$@</span><span class="s2">&#34;</span>
+</code></pre></div><p>The normal invocation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ./myscript.sh <span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
+<span class="nv">first</span><span class="o">=</span><span class="m">1</span> <span class="nv">second</span><span class="o">=</span><span class="m">2</span> <span class="nv">third</span><span class="o">=</span>3<span class="p">;</span> <span class="nv">all</span><span class="o">=</span><span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
+</code></pre></div><p>(everything works as expected)</p>
 <p>now let&rsquo;s try strings (with spaces)</p>
-<pre><code>$ ./myscript.sh hello world
-first=hello second=world third=; all=hello world
-</code></pre><p>Ok, bash uses spaces to delimit words. Now that we know this, lets be careful.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ./myscript.sh hello world
+<span class="nv">first</span><span class="o">=</span>hello <span class="nv">second</span><span class="o">=</span>world <span class="nv">third</span><span class="o">=</span><span class="p">;</span> <span class="nv">all</span><span class="o">=</span>hello world
+</code></pre></div><p>Ok, bash uses spaces to delimit words. Now that we know this, lets be careful.</p>
 <p>We want to process some files (with spaces):</p>
-<pre><code>$ ls file*
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ls file*
 file 1.txt file 2.txt
-$ ./myscript.sh $(ls file*)
-first=file second=1.txt third=file; all=file 1.txt file 2.txt
-</code></pre><p>A defect appeared: I want &ldquo;file 1.txt&rdquo; to be a parameter, not two.</p>
+$ ./myscript.sh <span class="k">$(</span>ls file*<span class="k">)</span>
+<span class="nv">first</span><span class="o">=</span>file <span class="nv">second</span><span class="o">=</span>1.txt <span class="nv">third</span><span class="o">=</span>file<span class="p">;</span> <span class="nv">all</span><span class="o">=</span>file 1.txt file 2.txt
+</code></pre></div><p>A defect appeared: I want &ldquo;file 1.txt&rdquo; to be a parameter, not two.</p>
 <p>Let&rsquo;s imagine a script checking whether a file exists:</p>
-<pre><code>$ cat file_exists.sh
-if [ -e $1 ]; then # -e is for file exists; see `man test`
-  echo &quot;file $1 exists&quot;
-else
-  echo &quot;file $1 does not exist&quot;
-fi
-</code></pre><pre><code>$ ls file*
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat file_exists.sh
+<span class="k">if</span> <span class="o">[</span> -e <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="c1"># -e is for file exists; see `man test`</span>
+  <span class="nb">echo</span> <span class="s2">&#34;file </span><span class="nv">$1</span><span class="s2"> exists&#34;</span>
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s2">&#34;file </span><span class="nv">$1</span><span class="s2"> does not exist&#34;</span>
+<span class="k">fi</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ls file*
 file 1.txt     file 2.txt     file_exists.sh
-$ ./file_exists.sh &quot;file 1.txt&quot;
-./file_exists.sh: line 1: [: file: binary operator expected
+$ ./file_exists.sh <span class="s2">&#34;file 1.txt&#34;</span>
+./file_exists.sh: line 1: <span class="o">[</span>: file: binary operator expected
 file file 1.txt does not exist
-</code></pre><p>Let&rsquo;s add quotes to the test to make it work with spaces:</p>
-<pre><code>$ cat file_exists.sh
-if [ -e &quot;$1&quot; ]; then # note the quotes
-  echo &quot;file $1 exists&quot;
-else
-  echo &quot;file $1 does not exist&quot;
-fi
-$ ./file_exists.sh &quot;file 1.txt&quot;
+</code></pre></div><p>Let&rsquo;s add quotes to the test to make it work with spaces:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat file_exists.sh
+<span class="k">if</span> <span class="o">[</span> -e <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="c1"># note the quotes</span>
+  <span class="nb">echo</span> <span class="s2">&#34;file </span><span class="nv">$1</span><span class="s2"> exists&#34;</span>
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s2">&#34;file </span><span class="nv">$1</span><span class="s2"> does not exist&#34;</span>
+<span class="k">fi</span>
+$ ./file_exists.sh <span class="s2">&#34;file 1.txt&#34;</span>
 file file 1.txt exists
-</code></pre><p>In general, be careful with spaces, as they mark the end of the string / parameter. Be proactive with quoting. From the <a href="https://google.github.io/styleguide/shell.xml">google bash guide</a>:</p>
+</code></pre></div><p>In general, be careful with spaces, as they mark the end of the string / parameter. Be proactive with quoting. From the <a href="https://google.github.io/styleguide/shell.xml">google bash guide</a>:</p>
 <ul>
 <li>Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required.</li>
 <li>Prefer quoting strings that are &ldquo;words&rdquo; (as opposed to command options or path names).</li>
@@ -332,37 +332,37 @@ file file 1.txt exists
 <h3 id="single-responsibility-principle-srp">Single Responsibility Principle (SRP)</h3>
 <p>I like to design my scripts by separating concerns or responsibilities.</p>
 <p>One typical example: process many files at once:</p>
-<pre><code>$ cat s1.sh
-#!/usr/bin/env bash
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat s1.sh
+<span class="c1">#!/usr/bin/env bash</span>
 
-function find_files {
-   while IFS= read -r -d '' file; do
-       files+=( &quot;$file&quot; )
-   done &lt; &lt;(find . -maxdepth 1 -type f -iname &quot;file*.txt&quot; -print0)
-}
+<span class="k">function</span> find_files <span class="o">{</span>
+   <span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -r -d <span class="s1">&#39;&#39;</span> file<span class="p">;</span> <span class="k">do</span>
+       <span class="nv">files</span><span class="o">+=(</span> <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> <span class="o">)</span>
+   <span class="k">done</span> &lt; &lt;<span class="o">(</span>find . -maxdepth <span class="m">1</span> -type f -iname <span class="s2">&#34;file*.txt&#34;</span> -print0<span class="o">)</span>
+<span class="o">}</span>
 
-function process_file {
-  file=&quot;$1&quot;
-  echo &quot;Will write to file $file&quot;
-}
+<span class="k">function</span> process_file <span class="o">{</span>
+  <span class="nv">file</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+  <span class="nb">echo</span> <span class="s2">&#34;Will write to file </span><span class="nv">$file</span><span class="s2">&#34;</span>
+<span class="o">}</span>
 
-function main {
-  declare -a files # this is a global variable inside the script
+<span class="k">function</span> main <span class="o">{</span>
+  <span class="nb">declare</span> -a files <span class="c1"># this is a global variable inside the script</span>
   find_files
-  for file in &quot;${files[@]}&quot;; do
-    process_file &quot;$file&quot;
-  done
-}
+  <span class="k">for</span> file in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">files</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+    process_file <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span>
+  <span class="k">done</span>
+<span class="o">}</span>
 
 main
-</code></pre><p>The main benefit is that iterating the files is something that usually does not fail (just copy paste the script), while the main work is done in <code>process_file</code>. The two functions have different pace of change, therefore two responsibilities. The latter, I can test manually (on the REPL) until it works, then copy-paste the script (see &lsquo;How I write my scripts&rsquo;).</p>
+</code></pre></div><p>The main benefit is that iterating the files is something that usually does not fail (just copy paste the script), while the main work is done in <code>process_file</code>. The two functions have different pace of change, therefore two responsibilities. The latter, I can test manually (on the REPL) until it works, then copy-paste the script (see &lsquo;How I write my scripts&rsquo;).</p>
 <p>Its execution:</p>
-<pre><code>$ ls file*
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ls file*
 file1.txt file2.txt
 $ ./s1.sh
 Will write to file ./file1.txt
 Will write to file ./file2.txt
-</code></pre><p>For more information on return values and functions in bash, see <a href="https://www.linuxjournal.com/content/return-values-bash-functions">this article</a></p>
+</code></pre></div><p>For more information on return values and functions in bash, see <a href="https://www.linuxjournal.com/content/return-values-bash-functions">this article</a></p>
 <h3 id="hot-swap--reload">Hot-swap / reload</h3>
 <p>Files in bash are read every time you invoke them. So if you separate the <code>process_file</code> function to another file, you can change the contents of it while the long-running main script is working.</p>
 <h3 id="be-extra-careful-with-rm">Be extra careful with <code>rm</code></h3>
@@ -370,31 +370,31 @@ Will write to file ./file2.txt
 <p>Removing files is a sharp-edged tool, such as <code>DELETE</code> in SQL. This is why we <code>SELECT</code> the same data set before deleting. Why we <code>ls</code> files before <code>rm</code>ing them.</p>
 <p>Some operating systems now protect <code>#rm -rf /</code> with another flag, but the mistake of <code>#rm -rf $VARIABLE/*</code> where <code>$VARIABLE</code> is empty is common enough.</p>
 <p>To avoid the above mistake,</p>
-<pre><code>#!/usr/env/bin bash
-set -euxo pipefail
-cd $VARIABLE #this will fail if $VARIABLE is unbound
-rm -rf ./* # notice the dot (.) before the star
-cd - #go back to the previous folder
-</code></pre><p>This will only delete files from the current directory down (<code>./</code>), yet another level of protection.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/usr/env/bin bash
+</span><span class="cp"></span><span class="nb">set</span> -euxo pipefail
+<span class="nb">cd</span> <span class="nv">$VARIABLE</span> <span class="c1">#this will fail if $VARIABLE is unbound</span>
+rm -rf ./* <span class="c1"># notice the dot (.) before the star</span>
+<span class="nb">cd</span> - <span class="c1">#go back to the previous folder</span>
+</code></pre></div><p>This will only delete files from the current directory down (<code>./</code>), yet another level of protection.</p>
 <h3 id="static-code-analysis">Static code analysis</h3>
 <p>Shell files can also be analyzed statically, (i.e., <a href="https://en.wikipedia.org/wiki/Lint_(software)">lint</a>). A tool for that is <a href="https://www.shellcheck.net/">ShellCheck</a>.</p>
 <p>Shellcheck helps you locate possible errors, bugs, stylistic errors and suspicious constructs in your scripts.</p>
 <p>The tool is large enough to warrant another article, but the basic usage is straightforward: run the linter with the shell script as input.</p>
 <p>Some example run:</p>
-<pre><code>$ shellcheck sh1.sh
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ shellcheck sh1.sh
 In sh1.sh line 22:
-  destination=${date}-$(basename $file)
+  <span class="nv">destination</span><span class="o">=</span><span class="si">${</span><span class="nv">date</span><span class="si">}</span>-<span class="k">$(</span>basename <span class="nv">$file</span><span class="k">)</span>
                                  ^-- SC2086: Double quote to prevent globbing and word splitting.
 
 In sh1.sh line 25:
-  git add $file
+  git add <span class="nv">$file</span>
           ^-- SC2086: Double quote to prevent globbing and word splitting.
 
 
 In sh1.sh line 34:
-  if [[ -z $(which imagemagick) ]]; then
-             ^-- SC2230: which is non-standard. Use builtin 'command -v' instead.
-</code></pre><p>Note: I use the tool with docker (see <a href="https://github.com/alvarogarcia7/shellcheck-docker">here</a>, <a href="https://github.com/koalaman/shellcheck#installing">official docker image</a>)</p>
+  <span class="k">if</span> <span class="o">[[</span> -z <span class="k">$(</span>which imagemagick<span class="k">)</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+             ^-- SC2230: which is non-standard. Use <span class="nb">builtin</span> <span class="s1">&#39;command -v&#39;</span> instead.
+</code></pre></div><p>Note: I use the tool with docker (see <a href="https://github.com/alvarogarcia7/shellcheck-docker">here</a>, <a href="https://github.com/koalaman/shellcheck#installing">official docker image</a>)</p>
 <h3 id="overriding-functions--inheritance">Overriding functions / Inheritance</h3>
 <p>The bash functions can override existing bash functions.</p>
 <p>This means that you can achieve some kind of inheritance (without Object-Oriented Programming) in bash.</p>
@@ -414,26 +414,26 @@ In sh1.sh line 34:
 <p>This is a full example with code to plumb the candidate to the function.</p>
 <p>I want to remove all the existing files in a directory that are greater in size than 30 KB. (I know this can be done with <code>find -exec</code> or <code>ls | xargs rm</code>, this is just an example for arbitrary logic).</p>
 <p>First, on the REPL, find all the files:</p>
-<pre><code>$ ls -lh file*
--rw-r--r--  1 user  group     0B Jul 13 00:50 file1.txt
--rw-r--r--  1 user  group     0B Jul 13 00:50 file2.txt
--rw-r--r--  1 user  group   531K Jul 13 00:07 file3.txt
-</code></pre><p>Find files greater than the desired size:</p>
-<pre><code>$ find . -maxdepth 1 -type f -iname &quot;file*.txt&quot; -size +30k -print0
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ls -lh file*
+-rw-r--r--  <span class="m">1</span> user  group     0B Jul <span class="m">13</span> 00:50 file1.txt
+-rw-r--r--  <span class="m">1</span> user  group     0B Jul <span class="m">13</span> 00:50 file2.txt
+-rw-r--r--  <span class="m">1</span> user  group   531K Jul <span class="m">13</span> 00:07 file3.txt
+</code></pre></div><p>Find files greater than the desired size:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ find . -maxdepth <span class="m">1</span> -type f -iname <span class="s2">&#34;file*.txt&#34;</span> -size +30k -print0
 ./file3.txt%
-</code></pre><p>now, only need to delete the file:</p>
-<pre><code>function process_file {
-  file=&quot;$1&quot;
-  echo &quot;rm $file&quot; # 1
-}
-</code></pre><p>Note: #1 - Notice the <code>echo</code> command to protect the real execution</p>
+</code></pre></div><p>now, only need to delete the file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> process_file <span class="o">{</span>
+  <span class="nv">file</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+  <span class="nb">echo</span> <span class="s2">&#34;rm </span><span class="nv">$file</span><span class="s2">&#34;</span> <span class="c1"># 1</span>
+<span class="o">}</span>
+</code></pre></div><p>Note: #1 - Notice the <code>echo</code> command to protect the real execution</p>
 <p>First, I make sure that the plumbing code is all correct before executing commands with side effects (e.g., rm). If you are working with delicate data, you can consider working in a docker container.</p>
 <p>Then, remove the &ldquo;temporary dry-run mode&rdquo;:</p>
-<pre><code>function process_file {
-  file=&quot;$1&quot;
-  rm $file
-}
-</code></pre><p>The full script:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="k">function</span> process_file <span class="o">{</span>
+  <span class="nv">file</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+  rm <span class="nv">$file</span>
+<span class="o">}</span>
+</code></pre></div><p>The full script:</p>
 <pre><code>$ cat s2.sh
 #!/usr/bin/env bash
 
@@ -466,28 +466,28 @@ main
 <li>(with vim) turn the selected candidates into invocations.</li>
 </ul>
 <p>First, on the REPL, find all the files:</p>
-<pre><code>$ ls -lh file*
--rw-r--r--  1 user  group     0B Jul 13 00:50 file1.txt
--rw-r--r--  1 user  group     0B Jul 13 00:50 file2.txt
--rw-r--r--  1 user  group   531K Jul 13 00:07 file3.txt
--rw-r--r--  1 user  group   531K Jul 13 00:07 file_SUPER_IMPORTANT_DO_NOT_DELETE.txt
-</code></pre><p>Find files greater than the desired size:</p>
-<pre><code>$ find . -maxdepth 1 -type f -iname &quot;file*.txt&quot; -size +30k &gt; candidates.txt
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ls -lh file*
+-rw-r--r--  <span class="m">1</span> user  group     0B Jul <span class="m">13</span> 00:50 file1.txt
+-rw-r--r--  <span class="m">1</span> user  group     0B Jul <span class="m">13</span> 00:50 file2.txt
+-rw-r--r--  <span class="m">1</span> user  group   531K Jul <span class="m">13</span> 00:07 file3.txt
+-rw-r--r--  <span class="m">1</span> user  group   531K Jul <span class="m">13</span> 00:07 file_SUPER_IMPORTANT_DO_NOT_DELETE.txt
+</code></pre></div><p>Find files greater than the desired size:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ find . -maxdepth <span class="m">1</span> -type f -iname <span class="s2">&#34;file*.txt&#34;</span> -size +30k &gt; candidates.txt
 $ cat candidates.txt
 ./file3.txt
 ./file_SUPER_IMPORTANT_DO_NOT_DELETE.txt
-</code></pre><p>Then, open vim to review, as a way of checking the valid candidates. This is the same process that <code>git rebase --interactive</code> offers: a CLI command to rebase based on your editor.</p>
+</code></pre></div><p>Then, open vim to review, as a way of checking the valid candidates. This is the same process that <code>git rebase --interactive</code> offers: a CLI command to rebase based on your editor.</p>
 <p>I realize that the file <code>file_SUPER_IMPORTANT_DO_NOT_DELETE.txt</code> should not be deleted. So I remove that, manually.</p>
 <p>Now,</p>
-<pre><code>$ cat candidates.txt
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat candidates.txt
 ./file3.txt
-</code></pre><p>then I prefer to edit the file manually than to create a script. Remember, this is a one-off effort. And programs need to be maintained. One-off scripts are to be thrown away, so no maintenance effort.</p>
+</code></pre></div><p>then I prefer to edit the file manually than to create a script. Remember, this is a one-off effort. And programs need to be maintained. One-off scripts are to be thrown away, so no maintenance effort.</p>
 <p>Hint: the vim command <code>%s/^/rm /</code> will insert at the beginning of the line the command <code>rm </code> that we need. The command <code>%s/$/;/</code> will append a semicolon at the end of the line. It&rsquo;s not needed for this example, but as a reminder. This replacement can also be done with <code>sed</code>/<code>awk</code>.</p>
-<pre><code>$ cat candidates.txt
-rm ./file3.txt;
-</code></pre><p>Now, just execute this file:</p>
-<pre><code>bash candidates.txt
-</code></pre><p>And your files are processed. Gone, in this case.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cat candidates.txt
+rm ./file3.txt<span class="p">;</span>
+</code></pre></div><p>Now, just execute this file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">bash candidates.txt
+</code></pre></div><p>And your files are processed. Gone, in this case.</p>
 <h2 id="limitations">Limitations</h2>
 <p>Every tool (and metaphor) has its limits. Know when to use a tool and when to change tools.</p>
 <h3 id="when-is-bash-enough">When is bash enough</h3>
@@ -502,10 +502,10 @@ rm ./file3.txt;
 <p>Ruby works well for programs (no longer scripts) that need to be tested.</p>
 <h4 id="parameter-autocompletion">Parameter autocompletion</h4>
 <p>For my build scripts, I enjoy hitting <code>&lt;tab&gt;</code> for auto-completion of the goals. Bash does not offer that out of the box (but can be performed using <a href="https://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion">programmable completion</a>). Make, on the other hand, offers goal autocompletion out of the box:</p>
-<pre><code>.PHONY: build
-build:
-    ./gradlew build
-</code></pre><p>Now, I can <code>make b&lt;TAB&gt;</code> and it will suggest <code>make build</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-makefile" data-lang="makefile"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span>
+<span class="nf">build</span><span class="o">:</span>
+	./gradlew build
+</code></pre></div><p>Now, I can <code>make b&lt;TAB&gt;</code> and it will suggest <code>make build</code></p>
 <h2 id="other-resources">Other resources</h2>
 <ul>
 <li><a href="https://www.shellcheck.net/">ShellCheck</a> helps you check your shell scripts, using static analysis tools: ShellCheck is a GPLv3 tool that gives warnings and suggestions for bash/sh shell scripts.</li>
@@ -597,6 +597,10 @@ You can find me on:
       <ul id="recent_articles">
         
           <li class="post">
+              <a href="/articles/2024/08/31/building-private-tools-open/">Building private tools in the open</a>
+          </li>
+        
+          <li class="post">
               <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
           </li>
         
@@ -632,16 +636,20 @@ You can find me on:
               <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
           </li>
         
-          <li class="post">
-              <a href="/articles/2014/12/15/the-joys-of-the-craft-as-article/">The Joys of the Craft as Article</a>
-          </li>
-        
       </ul>
       <h1>Recent Blogs</h1>
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/01/self-study-july-2024/">Self-Study in July 2024</a>
           </li>
         
           <li class="post">
@@ -649,35 +657,27 @@ You can find me on:
           </li>
         
           <li class="post">
+              <a href="/blog/2024/05/01/self-study-may-2024/">Self-Study in May 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/04/01/self-study-april-2024/">Self-Study in April 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/09/01/self-study-september-2023/">Self-Study in September 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/08/01/self-study-august-2023/">Self-Study in August 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/01/01/self-study-january-2021/">Self-Study in January 2021</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/09/30/books-read-2020q3/">Books read in 2020Q3</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
       </ul>

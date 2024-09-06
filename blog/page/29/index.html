@@ -129,247 +129,55 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/">Logging is a feature</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects/">Types of defects</a>
     </h1>
-    <p >Apr 19, 2015
-         - 3 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/19/logging-is-a-feature/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/logging/">logging</a><a class="label" href="https://alvarogarcia7.github.io/categories/log/">log</a><a class="label" href="https://alvarogarcia7.github.io/categories/feature/">feature</a><a class="label" href="https://alvarogarcia7.github.io/categories/hypothesis/">hypothesis</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/challenge/">challenge</a><a class="label" href="https://alvarogarcia7.github.io/categories/splunk/">splunk</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>At a client, we&rsquo;re facing this challenge: we cannot access production logs, as we don&rsquo;t have access to production environments. The solution we&rsquo;ve chose is to implement the logging component as a layer on top of <a href="http://www.splunk.com/">Splunk</a>.</p>
-<p>This formatter layer &ndash;per component&ndash; accesses a generic layer &ndash;for the whole company&ndash; that accesses splunk. In this manner, it is very easy to reuse the splunk connection and configuration and inject mocks. Also helps with the local environment: you always log to console (even if in production you don&rsquo;t have access to it) and can disable this in local, not needing a local splunk installation.</p>
-<p>Strategies for dealing with this:</p>
-<ul>
-<li>functional logger: no shared state
-<ul>
-<li>can only log information available in this scope: parameters, attributes, static information</li>
-</ul>
-</li>
-<li>stateful logger: information is added to the threadContext and logged whenever necessary
-<ul>
-<li>can log information in this scope plus any of the previous invokings.</li>
-<li>the problem is precisely sharing state: you have to control all the possible parents to know where this data comes from. A piece of information may come from any source.</li>
-<li>Lose the reference of who is invoking you, as there is no customization for this. (only using implementation)</li>
-<li>Speak two different languages: one for logging and one for business logic</li>
-</ul>
-</li>
-<li>mixed: mix and match the best of both worlds.
-<ul>
-<li>The problem with the shared state can be solved if no data is overwritten and any information is stored in a map where the key is the fully qualified (FQ) method name (or FQ class name + FQ method name)</li>
-</ul>
-</li>
-</ul>
-<p>The GOOS book explains this very well on the 20th chapter, first half &ldquo;logging is a feature&rdquo;. If we log as described in chapters 19 and 20, some of the problems are reduced:</p>
-<ul>
-<li>multiple levels of abstraction</li>
-<li>indirect control over logging. decide in a single place whether to log exceptions of each kind or not</li>
-<li>remove &ldquo;implementation details&rdquo; such as &ldquo;log.isDebugEnabled&rdquo;</li>
-<li>remove performance issues: no need to build strings for logging every time, only need to pass objects. inside the logging layer, if the logger is enabled for that level, then spend the time building strings and print them</li>
-</ul>
-<p>We should remember that:</p>
-<ul>
-<li>Whenever logging becomes useful data (for the stakeholders) it no longer is a debug information and needs to be tested (automatically). In my opinion, it is not enough to test it daily when debugging, as these stakeholders rely on the data. Also, humans are not good detecting small differences, while machines excel at it.</li>
-<li>Why treat the logging feature different from any other? It is an investment, like any other, and as such should work properly</li>
-</ul>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/">Talk: Simplicity matters</a>
-    </h1>
-    <p >Apr 18, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/18/talk-simplicity-matters/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/rich-hickey/">rich-hickey</a><a class="label" href="https://alvarogarcia7.github.io/categories/talk/">talk</a><a class="label" href="https://alvarogarcia7.github.io/categories/keynote/">keynote</a><a class="label" href="https://alvarogarcia7.github.io/categories/rails-conf/">rails-conf</a>
-        
-    </p>
-</header>
-
-
-        
-        <p>I&rsquo;ve seen this video by <a href="http://twitter.com/@richhickey">Rich Hickey</a>: &ldquo;<a href="https://www.youtube.com/watch?v=rI8tNMsozo0">Simplicity matters</a>&rdquo;, taken from <a href="http://twitter.com/@trikitrok">Manuel Rivero</a>&rsquo;s google plus' <a href="https://plus.google.com/u/0/117817370205182982732/posts/W6Gd9v67BgS?cfem=1">site</a></p>
-<p>here are my notes:</p>
-<ul>
-<li>the software is the elephant</li>
-<li>do more, do it differently, do it better</li>
-<li>complexity of the elephant is going to dominate what you can do</li>
-<li>your ability to reason about your program is critical</li>
-<li>design is about pulling things apart</li>
-<li>become familiar by learning, trying</li>
-<li>&ldquo;We can be creating the exact same programs out of significantly simpler components&rdquo;. Rich Hickey</li>
-</ul>
-<p>Complexity vs simplicity:</p>
-<table>
-<thead>
-<tr>
-<th>Complexity</th>
-<th>Simplicity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>state, objects</td>
-<td>values</td>
-</tr>
-<tr>
-<td>methods</td>
-<td>functions, namespaces</td>
-</tr>
-<tr>
-<td>variables</td>
-<td>managed refs</td>
-</tr>
-<tr>
-<td>inheritance, switch, matching</td>
-<td>polymorphism à la carte</td>
-</tr>
-<tr>
-<td>syntax</td>
-<td>data</td>
-</tr>
-<tr>
-<td>imperative loops, fold</td>
-<td>set functions</td>
-</tr>
-<tr>
-<td>actors</td>
-<td>queues</td>
-</tr>
-<tr>
-<td>ORM</td>
-<td>declarative data manipulation</td>
-</tr>
-<tr>
-<td>conditionals</td>
-<td>rules</td>
-</tr>
-<tr>
-<td>inconsistency</td>
-<td>consistency</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>he does not agree on &ldquo;simplicity&rdquo; on the agile manifesto</li>
-<li>simplicity is not about you. simplicity is a lot of hard work
-<ul>
-<li>clicked with paul graham&rsquo;s <a href="http://www.paulgraham.com/avg.html">LISP startup</a></li>
-</ul>
-</li>
-<li>simplicity is not an objective</li>
-</ul>
-<p>Order is all over the place:</p>
-<table>
-<thead>
-<tr>
-<th>Complex</th>
-<th>Simple</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>positional arguments</td>
-<td>named arguments or map</td>
-</tr>
-<tr>
-<td>syntax</td>
-<td>data</td>
-</tr>
-<tr>
-<td>product types</td>
-<td>associate records</td>
-</tr>
-<tr>
-<td>imperative programs</td>
-<td>declarative programs</td>
-</tr>
-<tr>
-<td>prolog</td>
-<td>datalog</td>
-</tr>
-<tr>
-<td>call chains</td>
-<td>queues</td>
-</tr>
-<tr>
-<td>XML</td>
-<td>JSON, Clojure literals</td>
-</tr>
-</tbody>
-</table>
-
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/17/the-guardian-of-the-source/">The Guardian of the Source</a>
-    </h1>
-    <p >Apr 17, 2015
+    <p >Jun 14, 2015
          - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/17/the-guardian-of-the-source/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/14/types-of-defects/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/craftsmanship/">craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/guardian/">guardian</a><a class="label" href="https://alvarogarcia7.github.io/categories/source/">source</a><a class="label" href="https://alvarogarcia7.github.io/categories/value/">value</a><a class="label" href="https://alvarogarcia7.github.io/categories/added-value/">added-value</a><a class="label" href="https://alvarogarcia7.github.io/categories/pull-request/">pull-request</a><a class="label" href="https://alvarogarcia7.github.io/categories/client/">client</a><a class="label" href="https://alvarogarcia7.github.io/categories/guardian-of-the-source/">guardian-of-the-source</a><a class="label" href="https://alvarogarcia7.github.io/categories/collaboration/">collaboration</a><a class="label" href="https://alvarogarcia7.github.io/categories/analogy/">analogy</a><a class="label" href="https://alvarogarcia7.github.io/categories/socra/">socra</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandro-mancuso/">sandro-mancuso</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/ethos/">ethos</a><a class="label" href="https://alvarogarcia7.github.io/categories/typos/">typos</a><a class="label" href="https://alvarogarcia7.github.io/categories/writos/">writos</a><a class="label" href="https://alvarogarcia7.github.io/categories/thinkos/">thinkos</a><a class="label" href="https://alvarogarcia7.github.io/categories/types-of-defects/">types-of-defects</a><a class="label" href="https://alvarogarcia7.github.io/categories/categorization/">categorization</a><a class="label" href="https://alvarogarcia7.github.io/categories/slashdot/">slashdot</a><a class="label" href="https://alvarogarcia7.github.io/categories/quote/">quote</a><a class="label" href="https://alvarogarcia7.github.io/categories/leprechaun/">leprechaun</a>
         
     </p>
 </header>
 
 
         
-        <p>Overheard today at the office, while they were discussing the approval of a pull request:</p>
+        <p>Some time ago, while researching types of defects and the cost of fixing them<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, I stumbled upon this:</p>
 <blockquote>
-<p>[Pull request reviewer] - I&rsquo;m sorry, can&rsquo;t approve this: I don&rsquo;t really agree with this design. Isn&rsquo;t there an alternative for this?</p>
-<p>[Pull request author] - [redacted], of course you don&rsquo;t, you&rsquo;re the guardian of the source</p>
-<p>[PR reviewer] - Well, sometimes I&rsquo;m a bit picky about introducing bad code into our codebase.</p>
+<p>Years ago I worked with a bunch of economists in the US Federal Government - they categorized &lsquo;bugs&rsquo; in their memos into three types:</p>
+<ul>
+<li>
+<p>Typos: Simple misspellings of words. Infrequent, easy to detect, easy to fix.</p>
+</li>
+<li>
+<p>Writos: Incoherent sentences. More frequent, hard to detect, harder to fix.</p>
+</li>
+<li>
+<p>Thinkos: Conceptually bonkers. Very frequent, subtle and hard to detect; almost impossible to fix.</p>
+</li>
+</ul>
+<p>Most &lsquo;late&rsquo; bugs that I&rsquo;ve seen in software projects belong in the last category - a lack of design or the failure to make a working mock-up leads to &lsquo;thinkos&rsquo; which are only obvious when the application is nearly completed. These are expensive to fix.</p>
+<p>Source: <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more</a></p>
 </blockquote>
-<p>This has made me think about Gandalf blocking the path of Balrog Demon, shouting &ldquo;[you shall not pass][you-shall-not-pass-meme]&rdquo; while on top of the bridge.</p>
-<p>This is part of the objectives of doing a pull request before merging code: stop the bad code<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> before it is merged to the codebase.</p>
-<p>Later, as you start having [broken windows][broken-window-theory] in your codebase, it is easier that you start introducing more. Exactly about this is the [broken windows theory][broken-window-theory].</p>
-<p>On the other hand, if you try to block that bad code before it is merged, it is cheaper to remove it: nothing depends on it, you introduce no repetition, etc<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This also connects with the idea present in [Software Craftsmanship, now called The Software Craftsman][socra], about preserving value for investors and treat software as an investment (with positive ROI) rather than a sunk cost.</p>
-<p>It is being picky and, to the most of our possibilities, do not letting any defects nor bad code into the codebase. A hedge fund manager would not let any toxic or dubious asset into the managed funds. This would be counterproductive in the long run (maybe even in the short one) and would be not doing their job correctly. Why is it that some developers suggest or accept these toxic assets?</p>
-<p>So, at least for me, would be an honor to be called the &ldquo;Guardian of the Source&rdquo; by someone I respect, as long as this is a serious proposition (i.e., not a joke of some kind).</p>
+<p>I would also add a new category to this:</p>
+<ul>
+<li>Ethos: Morally wrong, although possibly legal. These may take different forms: vary from a company to the next one,
+from society to society, etc. Even harder to fix than &lsquo;thinkos&rsquo;,
+as there is a reason (mainly economic) to keep them in place.</li>
+</ul>
+<p>On a technical note,
+these are not usually well-known artifacts in the company, therefore not everyone
+should know about them. Only a few developers know the correct reasons behind them and
+the rest might be sold a fake reason, so the latter cannot fix these &lsquo;ethos&rsquo;, as they
+assume they are present for a good reason</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>Bad code can be expressed in many ways: long methods, bad naming, breaking design principles (e.g., SOLID, KISS, DRY - OAOO), code with defects, no tests or no coverage, etc. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>A source is <a href="http://c2.com/cgi/wiki?DiscoverDefectsEarly">Discover defects early</a>. Another is <a href="http://developers.slashdot.org/story/03/10/21/0141215/software-defects---do-late-bugs-really-cost-more">this paper</a> that cites the ratio of fixing it later to 5:1 (five times more expensive).
-[broken-window-theory]: <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">http://en.wikipedia.org/wiki/Broken_windows_theory</a>
-[socra]: <a href="http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501">http://www.amazon.com/The-Software-Craftsman-Professionalism-Pragmatism/dp/0134052501</a>
-[you-shall-not-pass-meme]: <a href="http://knowyourmeme.com/memes/you-shall-not-pass">http://knowyourmeme.com/memes/you-shall-not-pass</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>This is also a chapter in the book <a href="https://leanpub.com/leprechauns">The Leprechauns of Software Engineering</a> by Laurent Bossavit: &lsquo;Chapter 10: The cost of defects: an illustrated history&rsquo; <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -385,100 +193,25 @@
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress/">Inserting clojure code in octopress</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/11/brownbag-session-refactoring/">Brown-bag session: Refactoring</a>
     </h1>
-    <p >Apr 14, 2015
+    <p >Jun 11, 2015
          - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/14/inserting-clojure-code-in-octopress/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/11/brownbag-session-refactoring/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/octopress/">octopress</a><a class="label" href="https://alvarogarcia7.github.io/categories/blogging/">blogging</a><a class="label" href="https://alvarogarcia7.github.io/categories/code/">code</a><a class="label" href="https://alvarogarcia7.github.io/categories/lisp/">lisp</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a>
         
     </p>
 </header>
 
 
         
-        <p>Inserting this code in the blog:</p>
-<pre><code>```clojure
-(defn all-access[k]
-	(let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-<p>the octopress processor throws the error:</p>
-<pre><code>Error: Pygments can't parse unknown language: clojure
-Error: Run jekyll build --trace for more information.
-</code></pre>
-<p>A solution would be to include it as lisp code:</p>
-<pre><code>```lisp
-(defn all-access[k]
-	(let [{:keys [a b] :as k}]
-        (do a)
-        (do (:b k))))
-```
-</code></pre>
-<p>this is an example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-	<span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-		<span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-		<span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</code></pre></div>
-        
-
-    </article>
-    
-    <article>
-
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/">Destructuring as a refactor in Clojure</a>
-    </h1>
-    <p >Apr 14, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/14/destructuring-as-a-refactor-in-clojure/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactor/">refactor</a><a class="label" href="https://alvarogarcia7.github.io/categories/destructuring/">destructuring</a><a class="label" href="https://alvarogarcia7.github.io/categories/parallel-change/">parallel-change</a>
-        
-    </p>
-</header>
-
-
-        
-        <p><a href="https://twitter.com/@trikitrok">Manuel</a> has taught us today about the default value while destructuring:</p>
-<blockquote>
-<p>The following example illustrates the use of an :as directive to bind a local with the entire map.</p>
-</blockquote>
-<pre><code>user=&gt; (def point {:x 5 :y 7})
-#'user/point
-
-(let [{:keys [x y] :as the-point} point]
-         (println &quot;x:&quot; x &quot;y:&quot; y &quot;point:&quot; the-point))
-
-x: 5 y: 7 point: {:x 5, :y 7}
-</code></pre><blockquote>
-<p>We&rsquo;ve now seen the :as directive used for both vectors and maps. In both cases the local is always assigned to the entire expression that is being destructured.</p>
-</blockquote>
-<p><a href="http://blog.jayfields.com/2010/07/clojure-destructuring.html">Source</a></p>
-<p>This has been used for a method like this one:</p>
-<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">k</span><span class="p">))</span>
-  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">)))</span>
-</code></pre></div><p>this has been refactored to this</p>
-<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">defn</span> <span class="nv">all-access[k]</span>
-  <span class="p">(</span><span class="k">let</span> <span class="nv">[{:keys</span> <span class="nv">[a</span> <span class="nv">b]</span> <span class="ss">:as</span> <span class="nv">k}]</span>
-	  <span class="p">(</span><span class="nb">do</span> <span class="nv">a</span><span class="p">)</span>
-	  <span class="p">(</span><span class="nb">do</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">k</span><span class="p">))))</span>
-</code></pre></div><p>the best thing about this is I can introduce the keys to the array while keeping the original map (<code>k</code>) and, when I&rsquo;m ready, to change some of the accesses to <code>k</code> to its destructured variables.</p>
+        <p>At a client, today we&rsquo;ve done a brown-bag session on refactoring: we&rsquo;ve gone through
+and a live demo, including refactoring a core piece of our code.</p>
+<p>We&rsquo;ve done some mob programming to help identify some smells and how to fix them.</p>
 
         
 
@@ -491,62 +224,282 @@ x: 5 y: 7 point: {:x 5, :y 7}
 
 <header>
     <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/">Redesign as a new TDD phase</a>
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015/">Self-study in June 2015</a>
     </h1>
-    <p >Apr 13, 2015
+    <p >Jun 3, 2015
+         - 5 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/03/self-study-in-june-2015/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/self-study-aggregation/">self-study-aggregation</a><a class="label" href="https://alvarogarcia7.github.io/categories/june/">june</a><a class="label" href="https://alvarogarcia7.github.io/categories/2015/">2015</a><a class="label" href="https://alvarogarcia7.github.io/categories/monitoring/">monitoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/cqrs/">cqrs</a><a class="label" href="https://alvarogarcia7.github.io/categories/by-example/">by-example</a><a class="label" href="https://alvarogarcia7.github.io/categories/article/">article</a><a class="label" href="https://alvarogarcia7.github.io/categories/microservice/">microservice</a><a class="label" href="https://alvarogarcia7.github.io/categories/architecture/">architecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/balance/">balance</a><a class="label" href="https://alvarogarcia7.github.io/categories/remote-work/">remote-work</a><a class="label" href="https://alvarogarcia7.github.io/categories/nino-martincevic/">nino-martincevic</a><a class="label" href="https://alvarogarcia7.github.io/categories/robert-c-martin/">robert-c-martin</a><a class="label" href="https://alvarogarcia7.github.io/categories/julien-kirch/">julien-kirch</a><a class="label" href="https://alvarogarcia7.github.io/categories/cedrick-lunven/">cedrick-lunven</a><a class="label" href="https://alvarogarcia7.github.io/categories/michael-erasmus/">michael-erasmus</a><a class="label" href="https://alvarogarcia7.github.io/categories/gregory-brown/">gregory-brown</a><a class="label" href="https://alvarogarcia7.github.io/categories/abdelmonaim-remani/">abdelmonaim-remani</a><a class="label" href="https://alvarogarcia7.github.io/categories/bazaar/">bazaar</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/perils/">perils</a><a class="label" href="https://alvarogarcia7.github.io/categories/education/">education</a><a class="label" href="https://alvarogarcia7.github.io/categories/learning/">learning</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-bonilla/">david-bonilla</a><a class="label" href="https://alvarogarcia7.github.io/categories/bonilista/">bonilista</a><a class="label" href="https://alvarogarcia7.github.io/categories/rui-figueredo/">rui-figueredo</a><a class="label" href="https://alvarogarcia7.github.io/categories/scientific-method/">scientific-method</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/bdd/">bdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/metaprogramming/">metaprogramming</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/apprenticeship/">apprenticeship</a><a class="label" href="https://alvarogarcia7.github.io/categories/ronny-ancorini/">ronny-ancorini</a><a class="label" href="https://alvarogarcia7.github.io/categories/peter-bell/">peter-bell</a><a class="label" href="https://alvarogarcia7.github.io/categories/refactoring/">refactoring</a><a class="label" href="https://alvarogarcia7.github.io/categories/legacy-code/">legacy-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/antipatterns/">antipatterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/big-ball-of-mud/">big-ball-of-mud</a><a class="label" href="https://alvarogarcia7.github.io/categories/patterns/">patterns</a><a class="label" href="https://alvarogarcia7.github.io/categories/brian-foote/">brian-foote</a><a class="label" href="https://alvarogarcia7.github.io/categories/joseph-yoder/">joseph-yoder</a><a class="label" href="https://alvarogarcia7.github.io/categories/r%c3%bcdiger-m%c3%b6ller/">rüdiger-möller</a><a class="label" href="https://alvarogarcia7.github.io/categories/concurrency/">concurrency</a><a class="label" href="https://alvarogarcia7.github.io/categories/parallelism/">parallelism</a><a class="label" href="https://alvarogarcia7.github.io/categories/jvm/">jvm</a><a class="label" href="https://alvarogarcia7.github.io/categories/jmm/">jmm</a><a class="label" href="https://alvarogarcia7.github.io/categories/java-memory-model/">java-memory-model</a><a class="label" href="https://alvarogarcia7.github.io/categories/deadlock/">deadlock</a><a class="label" href="https://alvarogarcia7.github.io/categories/actor/">actor</a><a class="label" href="https://alvarogarcia7.github.io/categories/csp/">csp</a><a class="label" href="https://alvarogarcia7.github.io/categories/disruptor/">disruptor</a><a class="label" href="https://alvarogarcia7.github.io/categories/akka/">akka</a><a class="label" href="https://alvarogarcia7.github.io/categories/abstraktor/">abstraktor</a><a class="label" href="https://alvarogarcia7.github.io/categories/alberto-bacchelli/">alberto-bacchelli</a><a class="label" href="https://alvarogarcia7.github.io/categories/christian-bird/">christian-bird</a><a class="label" href="https://alvarogarcia7.github.io/categories/wikipedia/">wikipedia</a><a class="label" href="https://alvarogarcia7.github.io/categories/5-whys/">5-whys</a><a class="label" href="https://alvarogarcia7.github.io/categories/jessica-kerr/">jessica-kerr</a><a class="label" href="https://alvarogarcia7.github.io/categories/quality/">quality</a><a class="label" href="https://alvarogarcia7.github.io/categories/beautiful-code/">beautiful-code</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeremy-ashkenas/">jeremy-ashkenas</a><a class="label" href="https://alvarogarcia7.github.io/categories/david-desandro/">david-deSandro</a><a class="label" href="https://alvarogarcia7.github.io/categories/transpiler/">transpiler</a><a class="label" href="https://alvarogarcia7.github.io/categories/physics/">physics</a><a class="label" href="https://alvarogarcia7.github.io/categories/mobile-device/">mobile-device</a><a class="label" href="https://alvarogarcia7.github.io/categories/code-genius/">code-genius</a><a class="label" href="https://alvarogarcia7.github.io/categories/jenn-schiffer/">jenn-schiffer</a><a class="label" href="https://alvarogarcia7.github.io/categories/bresenham/">bresenham</a><a class="label" href="https://alvarogarcia7.github.io/categories/line-algorithm/">line-algorithm</a><a class="label" href="https://alvarogarcia7.github.io/categories/algorithm/">algorithm</a><a class="label" href="https://alvarogarcia7.github.io/categories/john-crepezzi/">john-crepezzi</a><a class="label" href="https://alvarogarcia7.github.io/categories/javascript/">javascript</a><a class="label" href="https://alvarogarcia7.github.io/categories/minified/">minified</a><a class="label" href="https://alvarogarcia7.github.io/categories/minify/">minify</a><a class="label" href="https://alvarogarcia7.github.io/categories/uglify/">uglify</a><a class="label" href="https://alvarogarcia7.github.io/categories/compress/">compress</a><a class="label" href="https://alvarogarcia7.github.io/categories/debug/">debug</a><a class="label" href="https://alvarogarcia7.github.io/categories/dev-tool/">dev-tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/chrome/">chrome</a><a class="label" href="https://alvarogarcia7.github.io/categories/rebecca-wirfs-brock/">rebecca-wirfs-brock</a><a class="label" href="https://alvarogarcia7.github.io/categories/carlos-ble/">carlos-ble</a><a class="label" href="https://alvarogarcia7.github.io/categories/antirez/">antirez</a><a class="label" href="https://alvarogarcia7.github.io/categories/git/">git</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit-message/">commit-message</a><a class="label" href="https://alvarogarcia7.github.io/categories/commit/">commit</a><a class="label" href="https://alvarogarcia7.github.io/categories/garbage-collection/">garbage-collection</a><a class="label" href="https://alvarogarcia7.github.io/categories/g1-algorithm/">g1-algorithm</a><a class="label" href="https://alvarogarcia7.github.io/categories/cms-algorithm/">cms-algorithm</a><a class="label" href="https://alvarogarcia7.github.io/categories/python/">python</a><a class="label" href="https://alvarogarcia7.github.io/categories/switch-case/">switch-case</a><a class="label" href="https://alvarogarcia7.github.io/categories/daniel-roy-greenfeld/">daniel-roy-greenfeld</a><a class="label" href="https://alvarogarcia7.github.io/categories/max-ogden/">max-ogden</a><a class="label" href="https://alvarogarcia7.github.io/categories/joseph-moniz/">joseph-moniz</a><a class="label" href="https://alvarogarcia7.github.io/categories/clojure/">clojure</a><a class="label" href="https://alvarogarcia7.github.io/categories/carin-meier/">carin-meier</a><a class="label" href="https://alvarogarcia7.github.io/categories/chemical-computing/">chemical-computing</a><a class="label" href="https://alvarogarcia7.github.io/categories/abstract-computing/">abstract-computing</a><a class="label" href="https://alvarogarcia7.github.io/categories/haskell/">haskell</a><a class="label" href="https://alvarogarcia7.github.io/categories/lens/">lens</a><a class="label" href="https://alvarogarcia7.github.io/categories/lenses/">lenses</a><a class="label" href="https://alvarogarcia7.github.io/categories/gabriel-gonzalez/">gabriel-gonzalez</a><a class="label" href="https://alvarogarcia7.github.io/categories/garann-means/">garann-means</a><a class="label" href="https://alvarogarcia7.github.io/categories/professionalism/">professionalism</a><a class="label" href="https://alvarogarcia7.github.io/categories/culture/">culture</a><a class="label" href="https://alvarogarcia7.github.io/categories/jeff-atwood/">jeff-atwood</a><a class="label" href="https://alvarogarcia7.github.io/categories/reading/">reading</a><a class="label" href="https://alvarogarcia7.github.io/categories/self-study/">self-study</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>Update: I&rsquo;ve grouped all small posts related to the self-study from June 2015
+into a single post</p>
+<h2 id="le-monitoring-de-flux-par-lexemple">Le monitoring de flux par l’exemple</h2>
+<p>I&rsquo;ve read <a href="http://blog.octo.com/le-monitoring-de-flux-par-lexemple/">this article</a> about monitoring, in the way of &ldquo;by example&rdquo;, by Cédrick Lunven and Julien Kirch (French)</p>
+<h2 id="the-first-micro-service-architecture">The First Micro-service Architecture</h2>
+<p>I&rsquo;ve read <a href="http://blog.cleancoder.com/uncle-bob/2015/05/28/TheFirstMicroserviceArchitecture.html">this article</a> about microservices and how they were implemented many years ago by Robert C. Martin</p>
+<h2 id="how-i-learned-to-balance-my-life-with-remote-work">How I Learned to Balance My Life With Remote Work</h2>
+<p>I&rsquo;ve read <a href="https://open.bufferapp.com/remote-work/?utm_content=bufferaa5a2&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about balancing life and work, either physical or remote by Michael Erasmus</p>
+<h2 id="demystified-cqrs">Demystified CQRS</h2>
+<p>I&rsquo;ve read <a href="https://blog.codecentric.de/en/2015/05/demystified-cqrs/?utm_content=buffer35b18&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">this article</a> about CQRS by Nino Martincevic</p>
+<h2 id="the-perils-of-programmer-education-in-the-bazaar">The perils of programmer education in the bazaar</h2>
+<p>I&rsquo;ve read <a href="http://blog.practicingruby.com/2015/06/04/the-perils-of-programmer-education-in-the-bazaar/">this article</a> by Gregory Brown</p>
+<h2 id="6-useful-and-lesser-known-git-commands">6 useful and lesser-known git commands</h2>
+<p>I&rsquo;ve read <a href="http://blog.joncairns.com/2015/05/6-useful-and-lesser-known-git-commands/">this article</a> about git commands (log, checkout, stash, cherry-pick, annotate) by Jon Cairns</p>
+<h2 id="is-your-scrum-standup-slowing-you-down">Is Your Scrum Standup Slowing You Down?</h2>
+<p>I&rsquo;ve read <a href="http://www.sitepoint.com/scrum-standup-slowing-down/">this article</a> by M. David Green</p>
+<h2 id="me-duele-indra">Me duele Indra</h2>
+<p>I&rsquo;ve read <a href="http://us2.campaign-archive2.com/?u=374c664073e1a1fa3deca53b4&amp;id=67ce79e01b">this Bonilista</a> (Spanish) by David Bonilla</p>
+<h2 id="tdd-bdd-add-every-other-method-that-promises-software-quality-here-and-the-tea-tasting-lady">TDD, BDD, [add every other method that promises software quality here] and the tea tasting lady</h2>
+<p>I&rsquo;ve read <a href="https://blinkingcaret.wordpress.com/2012/10/02/tdd-bdd-add-every-other-method-that-promises-software-quality-here-and-the-tea-tasting-lady/">this article</a> by Rui Figueiredo about the scientific method, TDD / BDD and how to scientifically detect if the &lsquo;how&rsquo; affects the result. In this case, exemplified by how to prepare your tea</p>
+<h2 id="the-art-of-metaprogramming-in-java">The Art of Metaprogramming in Java</h2>
+<p>I&rsquo;ve read <a href="http://www.slideshare.net/PolymathicCoder/the-art-of-metaprogramming-in-java">these slides</a> by Abdelmonaim Remani</p>
+<h2 id="when-tdd-does-not-work">When TDD does not work</h2>
+<p>I&rsquo;ve read <a href="https://blog.8thlight.com/uncle-bob/2014/04/30/When-tdd-does-not-work.html">this article</a> by Uncle Bob on situations where TDD might not be appropiate, especially around the borders</p>
+<h2 id="mi-primera-semana-como-aprendiz">Mi primera semana como aprendiz</h2>
+<p>I&rsquo;ve read <a href="http://ronnyancorini.es/blog/index.php/2015/06/08/mi-primera-semana-como-aprendiz/">Ronny Ancorini&rsquo;s experiences</a> in his first week as apprentince with Carlos Blé &amp; Associates (Spanish)</p>
+<h2 id="refactoring-without-good-tests">Refactoring without good tests</h2>
+<p>I&rsquo;ve read <a href="http://blog.codeclimate.com/blog/2013/12/05/refactoring-without-good-tests/">this article</a> by Peter Bell on how to deal with a legacy codebase, what are the effects of not having tests and how to deal with. How to add tests to a codebase that is not ready for it.</p>
+<h2 id="big-ball-of-mud">Big Ball of Mud</h2>
+<p>I&rsquo;ve read <a href="http://www.laputan.org/mud/">this paper</a>, containing a collection of patterns and antipatterns (disguised as notes) by Brian Foote and Joseph Yoder</p>
+<h2 id="comparision-of-different-concurrency-models-actors-csp-disruptor-and-threads-sic">Comparision of different concurrency models: Actors, CSP, Disruptor and Threads [sic]</h2>
+<p>I&rsquo;ve read <a href="http://java-is-the-new-c.blogspot.com.es/2014/01/comparision-of-different-concurrency.html">this comparison of concurrency models</a> by Rüdiger Möller</p>
+<h2 id="5-whys">5 Whys</h2>
+<p>I&rsquo;ve read <a href="https://en.wikipedia.org/wiki/5_Whys">this wikipedia</a> article on the technique called &ldquo;5 Whys&rdquo;</p>
+<h2 id="expectations-outcomes-and-challenges-of-modern-code-review">Expectations, Outcomes, and Challenges of Modern Code Review</h2>
+<p>I&rsquo;ve read <a href="http://research.microsoft.com/apps/pubs/default.aspx?id=180283">this paper</a>, <a href="http://research.microsoft.com/pubs/180283/ICSE%202013-codereview.pdf">direct link</a>, by Alberto Bacchelli and Christian Bird on code review at Microsoft.</p>
+<p>They explain how they do it, the exact methodology they are using and why they do it.</p>
+<p>The main reasons to code review are:</p>
+<ul>
+<li>finding defects</li>
+<li>code improvement</li>
+<li>alternative solutions</li>
+<li>knowledge transfer</li>
+<li>team awareness and transparency</li>
+<li>also:
+<ul>
+<li>improve development process</li>
+<li>avoid build breaks</li>
+<li>share code ownership</li>
+<li>track rationale</li>
+<li>team assessment</li>
+</ul>
+</li>
+</ul>
+<h2 id="the-quality-wheel">The quality wheel</h2>
+<p>I&rsquo;ve read <a href="http://blog.jessitron.com/2015/04/the-quality-wheel.html">this article</a> by Jessica Kerr about the qualities of beautiful code</p>
+<h2 id="5-minute-physics">5 Minute Physics</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=n6FKT-KafRk">this video</a> on interactions with the mobile devices and related to physics by David DeSandro</p>
+<h2 id="rise-of-the-transpilers">Rise of the Transpilers</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=DspYurD75Ns">this video</a> on the rise of the transpilers and coffeescript by Jeremy Ashkenas</p>
+<h2 id="drawing-lines-with-bresenhams-line-algorithm">Drawing Lines with Bresenham&rsquo;s Line Algorithm</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=zytBpLlSHms">this video</a> about how to apply the Bresenham&rsquo;s algorithm to draw lines (implemented in pseudo-code and javascript) by Jenn Schiffer</p>
+<h2 id="working-with-minified-javascript">Working with Minified JavaScript</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=SuFNR7-XjKI">this video</a> by John Crepezzi on how to mix javascript files (clients and yours), how to decompile javascript in chrome, dev &amp; debug tools</p>
+<h2 id="how-we-ran-our-legacy-code-retreat">How we ran our Legacy Code Retreat</h2>
+<p>I&rsquo;ve read <a href="https://pboop.wordpress.com/2012/02/19/how-we-ran-our-legacy-code-retreat/">this article</a> by Andreas Leidig, looking for inspiration on running a legacy code retreat / brown-bag session. The experience report <a href="../../../../2015/06/23/brown-bag-session-refactoring-legacy-code/">is here</a></p>
+<h2 id="shift-left-testing-earlier-in-development">Shift Left: Testing Earlier in Development</h2>
+<p>I&rsquo;ve read <a href="http://wirfs-brock.com/blog/2015/06/18/shift-left">this article</a> by Rebecca Wirfs-Brock</p>
+<h2 id="polymorphic-equality">Polymorphic Equality</h2>
+<p>I&rsquo;ve read <a href="http://www.carlosble.com/2015/06/polymorphic-equality/">this article</a> on implementing polymorphic equality on C#, by Carlos Blé</p>
+<h2 id="commit-messages-are-not-titles">Commit messages are not titles</h2>
+<p>I&rsquo;ve read <a href="http://antirez.com/news/90">this article</a> on git commit messages and how to use them, by antirez</p>
+<h2 id="oracle-considers-g1-garbage-collector-for-java-9">Oracle Considers G1 Garbage Collector for Java 9</h2>
+<p>I&rsquo;ve read this <a href="https://adtmag.com/articles/2015/06/22/oracle-java-9.aspx">press article</a> on the G1 and CMS collector, by John K. Waters</p>
+<h2 id="what-tech-newbies-need">What Tech Newbies Need</h2>
+<p>I&rsquo;ve read <a href="https://storify.com/jesslynnrose/what-tech-newbies-need">this set of tweets</a>, grouped by Jessica Rose about the most helpful things beginners can do to improve their programming skills.</p>
+<h2 id="javascript-for-cats">JavaScript For Cats</h2>
+<p>I&rsquo;ve read <a href="http://jsforcats.com/">this introductory guide</a> to javascript by <a href="https://twitter.com/maxogden">Max Ogden</a></p>
+<h2 id="why-doesnt-python-have-switchcase">Why Doesn&rsquo;t Python Have Switch/Case?</h2>
+<p>I&rsquo;ve read <a href="http://www.pydanny.com/why-doesnt-python-have-switch-case.html">this article</a> on the switch case in the python language by Daniel Roy Greenfeld</p>
+<h2 id="joseph-monizs-notes-on-clojure">[Joseph Moniz&rsquo;s] Notes on Clojure</h2>
+<p>I&rsquo;ve read Joseph Moniz&rsquo;s <a href="http://blog.plasmaconduit.com/notes-on-clojure/">Notes on Clojure</a>.</p>
+<h2 id="chemical-computing-with-clojure">Chemical Computing with Clojure</h2>
+<p>I&rsquo;ve read <a href="http://gigasquidsoftware.com/chemical-computing/index.html">an article</a> on performing abstract computations with chemicals, written in Clojure by Carin Meier</p>
+<h2 id="lenses">Lenses</h2>
+<p>I&rsquo;ve read <a href="http://www.haskellforall.com/2012/01/haskell-for-mainstream-programmers_28.html">this tutorial</a> on writing lenses for haskell, a way of importing imperative getters / setters to a Data. Written by Gabriel Gonzalez.</p>
+<p>On another note, the first part, about writing getters and setters in the naive way, is also explained in Learn you a Haskell &gt; Chapter 8 Making Our Own Types and Typeclasses &gt; Record syntax</p>
+<h2 id="microservices-in-haskell">Microservices in Haskell</h2>
+<p>I&rsquo;ve read <a href="https://github.com/AlexanderAA/haskell-microservices/blob/gh-pages/haskell-microservices.md">these notes</a> on implementing a microservice in haskell, by <a href="https://github.com/AlexanderAA">AlexanderAA</a></p>
+<h2 id="overcoming-resistance-to-change---isnt-it-obvious">Overcoming Resistance to Change - Isn&rsquo;t It Obvious?</h2>
+<p>I&rsquo;ve watched <a href="https://www.youtube.com/watch?v=hcz1aZ60k7w">this video</a> in the channel of The World with Theory of Constraints</p>
+<h2 id="bacon-is-bad-for-you">Bacon is bad for you</h2>
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/bacon-is-bad-for-you">these slides</a>
+on professionalism and the programmer culture, by Garann Means</p>
+<h2 id="code-is-a-job">Code is a job</h2>
+<p>I&rsquo;ve read <a href="https://speakerdeck.com/garann/code-is-a-job">these slides</a>, that are the continuation of &ldquo;Bacon is bad for you&rdquo;, by the same author, Garann Means</p>
+<h2 id="the-great-newline-schism">The Great Newline Schism</h2>
+<p>I&rsquo;ve read <a href="http://blog.codinghorror.com/the-great-newline-schism/">this article</a> by Jeff Atwood on the difference in newline character(s)</p>
+<h2 id="top-ten-reasons-why-i-wont-use-your-open-source-project">Top ten reasons why I won’t use your open source project</h2>
+<p>I&rsquo;ve read <a href="https://changelog.com/top-ten-reasons-why-i-wont-use-your-open-source-project/">this article</a> on what&rsquo;s necessary for an open-source project to be usable by others. Written by Adam Stacoviak</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/02/internal-training-bpm-tool-and-process/">Internal training: BPM: Process and tools for developers</a>
+    </h1>
+    <p >Jun 2, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/02/internal-training-bpm-tool-and-process/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal/">internal</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal-training/">internal-training</a><a class="label" href="https://alvarogarcia7.github.io/categories/bpm/">bpm</a><a class="label" href="https://alvarogarcia7.github.io/categories/activiti/">activiti</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>At a client, I&rsquo;ve presented today an internal training on &ldquo;BPM: Process and tools for developers&rdquo;</p>
+<p>In it, we have introduced the BPM concept and the main ideas in Activiti BPM.</p>
+<p>Also techniques for hotswapping processes, tips and how-tos.</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/">Category: Poodr</a>
+    </h1>
+    <p >Jun 1, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/06/01/category-poodr/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/poodr/">poodr</a><a class="label" href="https://alvarogarcia7.github.io/categories/book/">book</a><a class="label" href="https://alvarogarcia7.github.io/categories/category/">category</a><a class="label" href="https://alvarogarcia7.github.io/categories/meta/">meta</a><a class="label" href="https://alvarogarcia7.github.io/categories/sandi-metz/">sandi-metz</a>
+        
+    </p>
+</header>
+
+
+        
+        <p>This category is mainly dedicated to anything related or included in the book &lsquo;<a href="http://www.poodr.com/">Practical Object-Oriented Design in Ruby</a>&rsquo;, by Sandi Metz</p>
+<p>Note: This has been created a posteriori with a previous date</p>
+
+        
+
+    </article>
+    
+    <article>
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test/">Internal training: QA &amp;amp; how to test</a>
+    </h1>
+    <p >May 18, 2015
          - 2 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/04/13/redesign-as-a-new-tdd-phase/#disqus_thread">Comments</a>
+         - <a href="https://alvarogarcia7.github.io/blog/2015/05/18/internal-training-qa-and-how-to-test/#disqus_thread">Comments</a>
 
         
         
         
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/redesign/">redesign</a><a class="label" href="https://alvarogarcia7.github.io/categories/tdd/">tdd</a><a class="label" href="https://alvarogarcia7.github.io/categories/theory/">theory</a>
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/training/">training</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal/">internal</a><a class="label" href="https://alvarogarcia7.github.io/categories/internal-training/">internal-training</a><a class="label" href="https://alvarogarcia7.github.io/categories/quality-assurance/">quality-assurance</a><a class="label" href="https://alvarogarcia7.github.io/categories/qa/">qa</a><a class="label" href="https://alvarogarcia7.github.io/categories/brown-bag-session/">brown-bag-session</a>
         
     </p>
 </header>
 
 
         
-        <p>In the last TDD workshop (experience report <a href="../../../../2015/04/12/jason-gorman-tdd-intensive-workshop">here</a>), a conversation with <a href="http://twitter.com/@garymcleanhall">Gary McLean Hall</a> introduced to me this new concept of &ldquo;Redesign&rdquo; as a TDD phase.</p>
-<h2 id="concept">Concept</h2>
-<p>As Gary introduced it to me<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, it is a phase that might appear after refactor.</p>
-<p>It is about changing the outside design without changing the expected behavior. I thought this was also included in the refactor phase.</p>
-<h2 id="how-i-do-redesign">How I do redesign</h2>
-<p>I usually do this &ldquo;changing of the outside design&rdquo; by applying a series of refactors <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> to the production code but not changing the test code; using a bridge / adapter to get to the new API from the old one. Later you can inline the scaffold and use the new API directly.</p>
-<p>The same for the test code: when you want to change design in the test code, do not modify production code (a.k.a. model code).</p>
-<h2 id="other-thoughts">Other thoughts</h2>
-<p>Merriam-Webster defines &ldquo;<a href="http://www.merriam-webster.com/dictionary/redesign">redesign</a>&rdquo; as</p>
-<blockquote>
-<p>to change the design of (something)</p>
-</blockquote>
-<p>or</p>
-<blockquote>
-<p>to revise in appearance, function, or content</p>
-</blockquote>
-<p>an example:</p>
-<blockquote>
-<p>The book&rsquo;s cover has been redesigned for the new edition.</p>
-</blockquote>
-<p>The Refactoring book (by Martin Fowler) describes &ldquo;refactoring&rdquo; as</p>
-<blockquote>
-<p>Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure</p>
-</blockquote>
-<p>Taken literally, the public API is not internal but external structure, so changing it, should belong to a phase that is not refactor (see definition), nor red (no failing tests), not green (making it pass). Maybe this phase is &ldquo;redesign&rdquo; or we have to take the refactoring phase less literally so it includes redesign. Any thoughts?</p>
-<h2 id="other-references">Other references</h2>
-<p>I&rsquo;ve searched for redesign and refactor and <a href="https://practicingruby.com/articles/refactoring-is-not-redesign">this blog post</a> came up. They cite redesign as a way of rewriting</p>
-<p><a href="http://stackoverflow.com/a/80758/1181094">This answer</a> and the <a href="http://stackoverflow.com/a/80758/1181094">original question</a> in StackOverflow is interesting</p>
-<p>Redesign also appears cited in <a href="http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html">this blog post</a></p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>Excuse me if you explained it differently and I understand it wrong; you can always open a pull request to fix it <a href="https://github.com/alvarogarcia7/blog_source/tree/source/source/_posts">here</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>thanks for the clarifying refactor vs refactoring <a href="http://blog.4mm.co.uk/2012/12/11/pet-peeve-726.html">here</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
+        <p>At a client, we&rsquo;ve done today an internal training on &ldquo;QA &amp; how to test&rdquo;. In it, the most skilled person with the QA role in the dev team has explained to us some techniques and concepts for testing</p>
+<h2 id="my-notes">My notes</h2>
+<p>Verification vs validation: building the product right vs building the right product.</p>
+<h3 id="principles">Principles</h3>
+<p>Extracted from <a href="http://www.istqb.org/">ISTQB</a>:</p>
+<ul>
+<li>testing shows presence of defects</li>
+<li>exhaustive testing is impossible</li>
+<li>early testing is better than later testing</li>
+<li>defect clustering: areas with bigger defect ratio or more critical, etc should be tested more thoroughly</li>
+<li>pesticide paradox</li>
+<li>testing is context-dependent</li>
+<li>absence of errors fallacy: the absence of defects does not imply perfect software. There are also problems with validation.</li>
+</ul>
+<h3 id="techniques">Techniques</h3>
+<h4 id="people-based">People-based</h4>
+<ul>
+<li>bug bashes: e.g., time-constrained</li>
+<li>subject-matter expert testing</li>
+<li>eat your own dogfood</li>
+<li>others</li>
+</ul>
+<h4 id="activity-based">Activity-based</h4>
+<ul>
+<li>regression</li>
+<li>scripted (manual)</li>
+<li>smoke</li>
+<li>exploratory</li>
+<li>installation</li>
+<li>load</li>
+<li>long sequence</li>
+<li>performance</li>
+</ul>
+<h4 id="coverage-based">Coverage-based</h4>
+<ul>
+<li>menu tour: exploration based on menus (especially on websites)</li>
+<li>functional and system testing</li>
+<li>integration</li>
+<li>logic</li>
+<li>state-based</li>
+</ul>
+<h4 id="requirements-based">Requirements-based</h4>
+<ul>
+<li>Equivalence partitioning: examples in the same set are considered equivalent</li>
+<li>Boundary based: there are interesting examples around and on the boundaries</li>
+<li>Decision tables: truth table</li>
+<li>State transition tables: state diagram</li>
+</ul>
+<h4 id="risk-based">Risk-based</h4>
+<ul>
+<li>make a prioritized list: probability and impact</li>
+<li>perform testing exploring each risk</li>
+<li>after a risk disappears, another opens. Adjust your test effort to stay focused on the current crop</li>
+</ul>
+<h4 id="use-case-tests">Use case tests</h4>
+<ul>
+<li>use case: a common case that represents one of your customer&rsquo;s cases</li>
+<li>use busines language</li>
+</ul>
+<h4 id="structure-based">Structure-based</h4>
+<ul>
+<li>test coverage is different than code coverage</li>
+<li>test coverage is based on decision tables</li>
+</ul>
+<h4 id="defining-testing-priorities">Defining testing priorities</h4>
+<ul>
+<li>customer and contractual requirements</li>
+<li>regulatory</li>
+<li>experience-based</li>
+<li>&ldquo;Best representative&rdquo;</li>
+</ul>
 
         
 
@@ -647,6 +600,12 @@ x: 5 y: 7 point: {:x 5, :y 7}
     
         <a href="/blog/page/36/" class="label-pagination">36</a>
     
+        <a href="/blog/page/37/" class="label-pagination">37</a>
+    
+        <a href="/blog/page/38/" class="label-pagination">38</a>
+    
+        <a href="/blog/page/39/" class="label-pagination">39</a>
+    
 
     
     
@@ -655,7 +614,7 @@ x: 5 y: 7 point: {:x 5, :y 7}
 
     
     
-        <a href="/blog/page/36/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/blog/page/39/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -715,6 +674,10 @@ You can find me on:
       <ul id="recent_articles">
         
           <li class="post">
+              <a href="/articles/2024/08/31/building-private-tools-open/">Building private tools in the open</a>
+          </li>
+        
+          <li class="post">
               <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
           </li>
         
@@ -750,16 +713,20 @@ You can find me on:
               <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
           </li>
         
-          <li class="post">
-              <a href="/articles/2014/12/15/the-joys-of-the-craft-as-article/">The Joys of the Craft as Article</a>
-          </li>
-        
       </ul>
       <h1>Recent Blogs</h1>
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/01/self-study-july-2024/">Self-Study in July 2024</a>
           </li>
         
           <li class="post">
@@ -767,35 +734,27 @@ You can find me on:
           </li>
         
           <li class="post">
+              <a href="/blog/2024/05/01/self-study-may-2024/">Self-Study in May 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/04/01/self-study-april-2024/">Self-Study in April 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/09/01/self-study-september-2023/">Self-Study in September 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/08/01/self-study-august-2023/">Self-Study in August 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2022/06/18/connecting-cython-python-c/">Connecting from Python to C, using Cython</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/04/10/live-article-mma-2021/">Live test from the MMA</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2021/01/01/self-study-january-2021/">Self-Study in January 2021</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/12/30/books-read-2020q4/">Books read in 2020Q4</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/09/30/books-read-2020q3/">Books read in 2020Q3</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/06/30/books-read-2020q2/">Books read in 2020Q2</a>
-          </li>
-        
-          <li class="post">
-              <a href="/blog/2020/04/04/live-article-mma-2020/">Live test from the MMA</a>
           </li>
         
       </ul>

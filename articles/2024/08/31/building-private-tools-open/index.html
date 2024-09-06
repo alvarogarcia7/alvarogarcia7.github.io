@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Building private tools in the open</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://alvarogarcia7.github.io/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="">
+  <meta name="author" content="Alvaro Garcia">
+
+  
+  <meta name="generator" content="Hugo 0.82.0" />
+
+  
+  
+
+  
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://alvarogarcia7.github.io/">The long way through Software Craftsmanship</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/" target="_blank" title="Breadcrumbs">Breadcrumbs</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/articles/" target="_blank" title="Articles">Articles</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/talks" target="_blank" title="Talks / Events">Talks / Events</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/categories/" target="_blank" title="Categories">Categories</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/archives/" target="_blank" title="Archives">Archives</a></li>
+    
+  
+    
+      <li><a href="https://alvarogarcia7.github.io/blog/about/" target="_blank" title="About">About</a></li>
+    
+  
+</ul>
+
+
+<ul class="subscription">
+  <a href="index.xml" target="_blank" type="application/rss+xml" title="RSS"><i class="fa fa-rss-square fa-lg"></i></a>
+
+  
+  
+
+</ul>
+
+<script type="text/javascript">
+    function addCustomSite(form_) {
+        var input = form_.getElementsByTagName("input")[0];
+        var siteURL = form_.getElementsByTagName("input")[1];
+        input.value = siteURL.value + " " + input.value;
+    }
+</script>
+
+
+<form action="https://www.google.com/search" method="get" target="_blank" onsubmit="javascript: addCustomSite(this);">
+  <fieldset role="search">
+  	<input class="search" type="text" name="q" results="0" placeholder="Search"/>
+    <input type="hidden" value="site:https://alvarogarcia7.github.io/" />
+  </fieldset>
+</form>
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+    <h1 class="entry-title">
+         Building private tools in the open 
+    </h1>
+    <p >Aug 31, 2024
+         - 5 minute read 
+         - <a href="https://alvarogarcia7.github.io/articles/2024/08/31/building-private-tools-open/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/tool/">tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/private-tool/">private-tool</a><a class="label" href="https://alvarogarcia7.github.io/categories/separation/">separation</a><a class="label" href="https://alvarogarcia7.github.io/categories/version/">version</a><a class="label" href="https://alvarogarcia7.github.io/categories/rebase/">rebase</a><a class="label" href="https://alvarogarcia7.github.io/categories/repository-pattern/">repository-pattern</a><a class="label" href="https://alvarogarcia7.github.io/categories/rewrite-history/">rewrite-history</a>
+        
+    </p>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          <h2 id="introduction">Introduction</h2>
+<p>It is very common to develop private tools in private: private git repositories, private servers, private data, private
+everything.</p>
+<p>But what if you want to obtain the benefits of developing in the open while keeping your privacy?</p>
+<h2 id="context-and-applicability">Context and Applicability</h2>
+<p>We have been developing tools like this. It works well, you just have to be careful on what gets committed where.</p>
+<h2 id="how-to">How to</h2>
+<p>Split the tool in two parts: the public part and the private part. This refers both to data and behavior (code).</p>
+<p>Each one is called a version: public version and private version.</p>
+<h3 id="data">Data</h3>
+<p>If the data has the same shape (between public and private versions), you can use the same repository to access it.</p>
+<h4 id="repository-pattern-to-access-data">Repository pattern to access data</h4>
+<p>Use the repository pattern to access data. This is the same as for Production/Preproduction/Development environments.
+Each has a different database, but the code is the same.</p>
+<p>A small explanation of the Repository pattern:</p>
+<blockquote>
+<ul>
+<li>The Repository Design Pattern is a software design pattern that acts as an intermediary layer between an
+application’s
+&gt; business logic and data storage.</li>
+<li>Its primary purpose is to provide a structured and standardized way to access, manage, and manipulate data while
+&gt; abstracting the underlying details of data storage technologies.</li>
+<li>This pattern promotes a clear separation of concerns, making software more maintainable, testable, and adaptable to
+&gt; changes in data sources, without entangling the core application logic with data access intricacies.</li>
+<li>In essence, the Repository Design Pattern is a blueprint for organizing and simplifying data access, enhancing the
+&gt; efficiency and flexibility of software systems.</li>
+</ul>
+<p><a href="https://www.geeksforgeeks.org/repository-design-pattern/">https://www.geeksforgeeks.org/repository-design-pattern/</a></p>
+</blockquote>
+<h4 id="same-repository-to-access-both-versions-of-data">Same repository to access both versions of data</h4>
+<p>Given that the shape of the data is the same, you can use the same repository to access both versions of the data.</p>
+<p>The only difference is the data itself. Hence, you cannot reference titles, ids, categories, or any other information
+that is private.</p>
+<p>A suggestion is to come up with a washed version of the data, where you replace the private information with a
+placeholder. Keep the same shape:</p>
+<ul>
+<li><code>int</code>s are still <code>int</code>s, <code>str</code>s are still <code>str</code>s</li>
+<li>length of data is similar</li>
+<li>no need to keep the same volume of data. It can get expensive to keep all that test data. A representative sample is
+enough.</li>
+</ul>
+<h3 id="behavior">Behavior</h3>
+<h4 id="common-interface-to-access-both">common interface to access both</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># file ./private/data.py</span>
+<span class="k">def</span> <span class="nf">data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="p">[]</span>
+</code></pre></div><h4 id="import-by-name-from-cli">Import by name (from CLI)</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">importlib.util</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">ModuleType</span>
+
+
+<span class="k">def</span> <span class="nf">import_module_by_name</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModuleType</span><span class="p">:</span>
+    <span class="n">module_name</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_file_location</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Cannot find module named {module_name}&#34;</span><span class="p">)</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">module</span>
+    <span class="n">spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="k">return</span> <span class="n">module</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">path_to_validation_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">import_module_by_name</span><span class="p">(</span><span class="n">path_to_validation_data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Cannot find module named {path_to_validation_data}&#34;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></div><p>and you can execute it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python3 main.py ./private/data.py  
+</code></pre></div><p>Here, <code>./private/data.py</code> is the private version of the data. You can have a public version of the data, as well.</p>
+<p>Another example can be seen <a href="https://github.com/alvarogarcia7/freemind-exporter-formatter/blob/master/main.py#L26">here</a></p>
+<h2 id="tips-and-tricks">Tips and tricks</h2>
+<ol>
+<li>Do not push the open version to a public repository until you&rsquo;re ready. Once published, you cannot take it back <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</li>
+<li>If you commit private information by mistake, rewrite the git history so that it never shows up in the history (
+e.g., <code>git rebase</code>)</li>
+<li>Create a script that checks for private information in the code and data. Run it before committing (e.g. git hook).
+You can store it in the private repository (because it has access to the private data). <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+<li>Keep the public version in one folder, and the private version in another folder. Each folder is a different repo.</li>
+</ol>
+<h2 id="pros-and-cons">Pros and Cons</h2>
+<h3 id="advantages">Advantages</h3>
+<p>Take advantage of developing in the open, while keeping your information private:</p>
+<ol>
+<li>Free resources in the public repository: CI/CD, code reviews, etc.</li>
+<li>Testing in the open: let other people test your project, get early feedback on the project</li>
+<li>Collaboration: let other people contribute to your project</li>
+<li>Open source: let other people see how you work, how you solve problems; contribute to the community</li>
+</ol>
+<h3 id="downsides">Downsides</h3>
+<ol>
+<li>Leaking about having such a tool
+<ol>
+<li>By posting the link below, you are leaking that you have a tool to work with such information.</li>
+</ol>
+</li>
+<li>Leaking about using that technology
+<ol>
+<li>By posting the link below, you are leaking that you are using Python to work with such information.</li>
+</ol>
+</li>
+<li>Risk of committing private data to a public repository
+<ol>
+<li>As an example, we can see an export of private data in a public repository <a href="https://github.com/tarioch/beancounttools/issues/83#issue-1562630990">here</a>.</li>
+<li>The user is saying their balance is 7881.98 CHF. This is private information.</li>
+</ol>
+</li>
+</ol>
+<h2 id="examples">Examples</h2>
+<h3 id="tariochbctools">tariochbctools</h3>
+<blockquote>
+<p>Honestly I keep the tests a bit limited in here (I have some real data based tests for some of the importers in my
+personal repo).</p>
+<p><a href="https://github.com/tarioch/beancounttools/pull/115#issuecomment-2263858194">TarioCH</a></p>
+</blockquote>
+<h2 id="conclusion">Conclusion</h2>
+<ol>
+<li>Separate the public and private information in two different versions</li>
+<li>Take advantage of developing in the open, while keeping your information private</li>
+</ol>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>There are scanners that look for secrets in public repositories. Once they find it, they notify the owner of the
+repository (<a href="https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning">example</a>).
+If you have secret information in a public repository, you have to assume that it has been compromised. In the case of
+keys, you have to revoke them.
+In the case of sensitive information, you have to assume that it has been leaked. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>A good tip here is this one: execute the checker only if the file is present.
+e.g., <code>[ -f ./private/checker.sh ] &amp;&amp; ./private/checker.sh</code> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Alvaro Garcia</span></span>
+    
+    <time>Aug 31, 2024</time>
+  </p>
+
+  
+  <div class="sharing">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="alvarobiz" data-hashtags="blog">Tweet this article</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+     
+  </div>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://alvarogarcia7.github.io/articles/2023/07/22/threading-macro-equivalent-python/" title="The Threading Macro (clojure) equivalent in Python">The Threading Macro (clojure) equivalent in Python</a>
+    
+
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>About this blog</h1>
+    
+
+    <p>
+      
+        This blog contains two sections: <a href="/blog/">breadcrumbs</a> (my learnings) and <a href="/articles/">articles</a> (might be useful for others).
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+You can find me on:
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" href="https://github.com/alvarogarcia7/" title="https://github.com/alvarogarcia7/"><i class="fa fa-github fa-3x"></i></a>
+      
+      <a target="_blank" href="https://twitter.com/@alvarobiz/" title="https://twitter.com/@alvarobiz/"><i class="fa fa-twitter fa-3x"></i></a>
+       
+      <a target="_blank" href="https://es.linkedin.com/in/alvarogarcia7" title="https://es.linkedin.com/in/alvarogarcia7"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+    <section class="even">
+      <h1>Recent Articles</h1>
+      <ul id="recent_articles">
+        
+          <li class="post">
+              <a href="/articles/2024/08/31/building-private-tools-open/">Building private tools in the open</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2023/07/22/threading-macro-equivalent-python/">The Threading Macro (clojure) equivalent in Python</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2021/09/11/worthless-projects/">The value of worthless projects</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2021/05/02/native-c-library-android/">Using a Native C Library in Android</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/11/04/private-leaked-information-saas/">On private but leaked information in a SaaS</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2019/05/29/keeping-intermediate-history-work-git/">Automatically keeping the intermediate history of your work using git</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2018/07/13/writing-safe-bash-scripts/">Writing safe(r) bash scripts</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2018/07/04/questioning-existing-choices/">Questioning the existing choices</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2016/10/05/support-for-out-of-hours-on-call-support/">Support for out of hours on-call support</a>
+          </li>
+        
+          <li class="post">
+              <a href="/articles/2016/09/28/refactoring-functional-code/">Refactoring functional code</a>
+          </li>
+        
+      </ul>
+      <h1>Recent Blogs</h1>
+      <ul id="recent_posts">
+        
+          <li class="post">
+              <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/28/python-3-boilerplate/">Python 3 Boilerplate for Non-Productive environments (e.g., Kata, Study)</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/07/01/self-study-july-2024/">Self-Study in July 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/06/01/self-study-june-2024/">Self-Study in June 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/05/01/self-study-may-2024/">Self-Study in May 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2024/04/01/self-study-april-2024/">Self-Study in April 2024</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/09/01/self-study-september-2023/">Self-Study in September 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/08/01/self-study-august-2023/">Self-Study in August 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
+          </li>
+        
+          <li class="post">
+              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
+          </li>
+        
+      </ul>
+    </section>
+  
+
+</aside>
+
+  </div>
+</div>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2024 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+    
+
+    
+      <script>
+        var _gaq=[['_setAccount','UA-41008374-3'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+    
+  </body>
+</html>
+
