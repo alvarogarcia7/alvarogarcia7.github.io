@@ -151,6 +151,12 @@ everything.</p>
 <p>But what if you want to obtain the benefits of developing in the open while keeping your privacy?</p>
 <h2 id="context-and-applicability">Context and Applicability</h2>
 <p>We have been developing tools like this. It works well, you just have to be careful on what gets committed where.</p>
+<p>Alternatives:</p>
+<ol>
+<li>Keep all development hidden (e.g., private repositories, private cloud)</li>
+<li>Hide the data using <a href="https://github.com/AGWA/git-crypt">git-crypt</a> in the public version</li>
+<li>Merge the public and private versions into one using submodules</li>
+</ol>
 <h2 id="how-to">How to</h2>
 <p>Split the tool in two parts: the public part and the private part. This refers both to data and behavior (code).</p>
 <p>Each one is called a version: public version and private version.</p>
@@ -187,7 +193,7 @@ placeholder. Keep the same shape:</p>
 enough.</li>
 </ul>
 <h3 id="behavior">Behavior</h3>
-<h4 id="common-interface-to-access-both">common interface to access both</h4>
+<h4 id="keep-a-common-interface-to-access-both">Keep a common interface to access both</h4>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># file ./private/data.py</span>
 <span class="k">def</span> <span class="nf">data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
     <span class="k">return</span> <span class="p">[]</span>
