@@ -131,6 +131,34 @@
 
 <header>
     <h1 class="entry-title">
+        <a href="https://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/">Coding dojo: Goldbach Conjecture</a>
+    </h1>
+    <p >Aug 17, 2015
+         - 1 minute read 
+         - <a href="https://alvarogarcia7.github.io/blog/2015/08/17/coding-dojo-goldbach-conjecture/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://alvarogarcia7.github.io/categories/barcelona-software-craftsmanship/">barcelona-software-craftsmanship</a><a class="label" href="https://alvarogarcia7.github.io/categories/coding-dojo/">coding-dojo</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a><a class="label" href="https://alvarogarcia7.github.io/categories/goldbach/">goldbach</a><a class="label" href="https://alvarogarcia7.github.io/categories/conjecture/">conjecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/goldbach-conjecture/">goldbach-conjecture</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitation/">facilitation</a><a class="label" href="https://alvarogarcia7.github.io/categories/facilitator/">facilitator</a>
+        
+    </p>
+</header>
+
+        
+          <p>At the Barcelona Software Craftsmanship meetup, today I&rsquo;ve facilitated a coding dojo on the Goldbach Conjecture. The problem was prepared by Manuel Rivero.
+The meetup event is here and there are plenty of solutions prepared by the pairs:
+ Java C# Haskell PHP Java PHP Haskell  </p>
+          
+        
+      </article>
+      
+      <article>
+        
+        
+
+<header>
+    <h1 class="entry-title">
         <a href="https://alvarogarcia7.github.io/blog/2015/08/13/searching-on-a-suite-of-failing-tests/">Searching on a suite of failing tests</a>
     </h1>
     <p >Aug 13, 2015
@@ -281,37 +309,6 @@ Investigating a little bit on this in clojure, I&rsquo;ve found this function:
         
       </article>
       
-      <article>
-        
-        
-
-<header>
-    <h1 class="entry-title">
-        <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/">Multiple return values in a Mockito Stub</a>
-    </h1>
-    <p >Aug 7, 2015
-         - 1 minute read 
-         - <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/#disqus_thread">Comments</a>
-
-        
-        
-        
-            - <a class="label" href="https://alvarogarcia7.github.io/categories/mockito/">mockito</a><a class="label" href="https://alvarogarcia7.github.io/categories/tip/">tip</a><a class="label" href="https://alvarogarcia7.github.io/categories/stub/">stub</a><a class="label" href="https://alvarogarcia7.github.io/categories/java/">java</a>
-        
-    </p>
-</header>
-
-        
-          <p>I&rsquo;ve been asked today how to return multiple return values from a Mockito Spy, effectively using the spy as a Stub, as well.
-package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; import static org.hamcrest.Matchers.is; import static org.mockito.Mockito.spy; import static org.mockito.Mockito.when; import org.junit.Test; import org.mockito.Spy; public class DifferentReturnValues { @Spy private Spike1 spike1 = new Spike1(); @Test public void spike1() { spike1 = spy(spike1); when(spike1.getBool()).thenReturn(false, true); assertThat(spike1.getBool(), is(false)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); assertThat(spike1.getBool(), is(true)); } private class Spike1 { public boolean getBool() { return true; } } } The key line is:</p>
-          
-            <footer>
-              <a href="https://alvarogarcia7.github.io/blog/2015/08/07/multiple-values-in-a-mockito-stub/" rel="full-article">Read On &rarr;</a>
-            </footer>
-          
-        
-      </article>
-      
       
       
 
@@ -413,6 +410,8 @@ package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; 
     
         <a href="/page/39/" class="label-pagination">39</a>
     
+        <a href="/page/40/" class="label-pagination">40</a>
+    
 
     
     
@@ -421,7 +420,7 @@ package com.example.spike; import static org.hamcrest.MatcherAssert.assertThat; 
 
     
     
-        <a href="/page/39/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+        <a href="/page/40/" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
     
 
 </div>
@@ -523,6 +522,10 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/09/01/self-study-september-2024/">Self-Study in September 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
           </li>
         
@@ -558,10 +561,6 @@ You can find me on:
               <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
           </li>
         
-          <li class="post">
-              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
       </ul>
     </section>
   
@@ -571,7 +570,7 @@ You can find me on:
   </div>
 </div>
     <footer role="contentinfo">
-      <p>Copyright &copy; 2024 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+      <p>Copyright &copy; 2026 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>

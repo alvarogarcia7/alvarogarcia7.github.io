@@ -192,8 +192,11 @@ trap command signal
 </span><span class="cp"></span>
 <span class="c1">#rest of commands</span>
 </code></pre></div><h3 id="options-for-executing--header">Options for executing / Header</h3>
+<h4 id="basic-options">Basic options</h4>
 <p>add these options:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -euxo pipefail
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -ufeo pipefail
+<span class="nb">set</span> -x
+<span class="c1"># Normally, x is removed once the script is finished</span>
 </code></pre></div><p>These can be added anywhere, but I usually add them after the shebang (the beginning of the script)</p>
 <p>Reference: <a href="https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin">The set built-in</a></p>
 <p>Another reference: the inspiration for these options comes from <a href="https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/">here</a></p>
@@ -201,6 +204,7 @@ trap command signal
 <ul>
 <li><code>set -e</code> stops the execution if a command fails (this is the default behavior in <code>make</code>)</li>
 <li><code>set -u</code>: Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’ as an error when performing parameter expansion. An error message will be written to the standard error, and a non-interactive shell will exit.</li>
+<li><code>set -f</code>: disable globbing. Disable file name generation (globbing) <a href="https://linuxcommand.org/lc3_man_pages/seth.html">source</a>.</li>
 <li><code>set -x</code>: debug. Trace the commands on the console</li>
 <li><code>set -o pipefail</code>: make the pipe command fail if any of the commands in the pipe fail.
 <ul>
@@ -212,11 +216,47 @@ trap command signal
 <p>If you want to use a try&hellip;catch pattern, disable <code>-e</code> temporarily:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> +e <span class="c1"># 1</span>
 ls NON_EXISTING_FILE <span class="c1"># 2</span>
-<span class="nb">set</span> -e <span class="c1"># 3</span>
+<span class="nv">error_code</span><span class="o">=</span><span class="nv">$?</span> <span class="c1"># 3</span>
+<span class="nb">set</span> -e <span class="c1"># 4</span>
 </code></pre></div><ul>
 <li>1: Disable error-checking. Note this is a plus (+) sign</li>
 <li>2: a command that could fail. As the error checking is disabled, the execution continues even if 2 throws an error. Therefore, the exception is swallowed.</li>
-<li>3: Enable error-checking again</li>
+<li>3: capture the previous return code. This must be done immediately after the previous execution. Cannot perform <code>set -e</code> before, as that would override the return code.</li>
+<li>4: Enable error-checking again</li>
+</ul>
+<h4 id="advanced-options">Advanced Options</h4>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -ufeo pipefail <span class="c1"># 0</span>
+
+<span class="nv">OLD_IFS</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$IFS</span><span class="s2">&#34;</span> <span class="c1"># 1</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n\t&#39;</span>
+<span class="k">function</span> finish <span class="o">{</span> <span class="c1"># 2</span>
+  <span class="nv">IFS</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$OLD_IFS</span><span class="s2">&#34;</span>
+<span class="o">}</span>
+<span class="nb">trap</span> finish EXIT <span class="c1"># 3</span>
+
+<span class="k">function</span> error_ <span class="o">{</span> <span class="c1"># 4</span>
+  <span class="nb">local</span> <span class="nv">program_name</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+  <span class="nb">local</span> <span class="nv">error_code</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$2</span><span class="s2">&#34;</span>
+  <span class="nb">local</span> <span class="nv">line_no</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$3</span><span class="s2">&#34;</span>
+  <span class="nb">local</span> <span class="nv">bash_command</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$4</span><span class="s2">&#34;</span>
+
+  <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$program_name</span><span class="s2">: Error on line &#34;</span><span class="nv">$line_no</span><span class="s2">&#34;: </span><span class="nv">$bash_command</span><span class="s2">&#34;</span>
+  <span class="nb">echo</span> <span class="s2">&#34;Return code: </span><span class="nv">$error_code</span><span class="s2">&#34;</span>
+  <span class="nb">echo</span> <span class="s2">&#34;Full line: &#39;</span><span class="k">$(</span>sed -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">line_no</span><span class="si">}</span><span class="s2">p&#34;</span> <span class="nv">$program_name</span><span class="k">)</span><span class="s2">&#39;&#34;</span>
+  <span class="nb">exit</span> <span class="nv">$error_code</span>
+<span class="o">}</span>
+
+<span class="nb">trap</span> <span class="s1">&#39;s=$?; error_ $0 $s $LINENO $BASH_COMMAND&#39;</span> ERR <span class="c1"># 5</span>
+
+<span class="nb">shopt</span> -s globstar <span class="c1"># 6</span>
+</code></pre></div><ul>
+<li>0: Same as the basic options</li>
+<li>1: Keep a copy of IFS, for replacing it later</li>
+<li>2: Function to revert IFS</li>
+<li>3: <code>trap</code> (hook) this behavior on <code>EXIT</code> (source)[https://man7.org/linux/man-pages/man1/trap.1p.html]</li>
+<li>4: function to debug the failing bash script</li>
+<li>5: <code>trap</code> on <code>ERR</code>: inject return code (<code>s=$?</code>), line number, bash command.</li>
+<li>6: set option globstar (source)[https://linuxcommand.org/lc3_man_pages/shopth.html]</li>
 </ul>
 <h3 id="debugging">Debugging</h3>
 <h4 id="enable-tracing--debugging-mode">Enable tracing / debugging mode</h4>
@@ -641,6 +681,10 @@ You can find me on:
       <ul id="recent_posts">
         
           <li class="post">
+              <a href="/blog/2024/09/01/self-study-september-2024/">Self-Study in September 2024</a>
+          </li>
+        
+          <li class="post">
               <a href="/blog/2024/08/01/self-study-august-2024/">Self-Study in August 2024</a>
           </li>
         
@@ -676,10 +720,6 @@ You can find me on:
               <a href="/blog/2023/05/01/self-study-may-2023/">Self-Study in May 2023</a>
           </li>
         
-          <li class="post">
-              <a href="/blog/2023/04/15/live-article-mma-2023/">Live test from the MMA</a>
-          </li>
-        
       </ul>
     </section>
   
@@ -690,7 +730,7 @@ You can find me on:
 </div>
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2024 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
+      <p>Copyright &copy; 2026 Alvaro Garcia - <a href="https://alvarogarcia7.github.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
